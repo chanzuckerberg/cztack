@@ -12,7 +12,3 @@ jobs:
   include:
     - stage: check
       script: echo
-
-script:
-notifications:
-    slack: chanzuckerbergteam:joJMPVlMODhdD31qDpjxfduh
