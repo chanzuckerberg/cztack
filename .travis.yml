@@ -1,0 +1,14 @@
+sudo: required
+dist: trusty
+language: generic
+services:
+  - docker
+install:
+  - pip install awscli --upgrade --user
+  - aws --version
+# before_script:
+
+jobs:
+  include:
+    - stage: check
+      script: echo
