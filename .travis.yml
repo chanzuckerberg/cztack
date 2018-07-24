@@ -6,9 +6,8 @@ services:
 install:
   - pip install awscli --upgrade --user
   - aws --version
-# before_script:
 
 jobs:
   include:
     - stage: check
-      script: echo
+      script: make lint

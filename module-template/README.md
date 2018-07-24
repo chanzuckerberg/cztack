@@ -1,0 +1,5 @@
+# Module template
+
+<!-- START -->
+
+<!-- END -->
