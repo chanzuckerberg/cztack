@@ -18,7 +18,7 @@ docs:
 
 check-docs:
 	@for m in $(MODULES); do \
-		pushd $$m; \
+		cd $$m; \
 		../scripts/update-readme.sh check || exit $$?; \
-		popd; \
+		cd ..; \
 	done;

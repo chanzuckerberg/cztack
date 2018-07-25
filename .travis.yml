@@ -8,12 +8,9 @@ install:
   - mv terraform ~/bin/
   - chmod +x ~/bin/terraform
 
-env:
-  - SHELL: /bin/bash
-
 jobs:
   include:
     - stage: check
       script: make lint
     - stage: check
-      script: SHELL=/bin/bash make check-docs
+      script: make check-docs
