@@ -1,3 +1,3 @@
-variable "source_account" {
+variable "source_account_id" {
   type = "string"
 }

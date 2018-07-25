@@ -7,7 +7,7 @@ resource "aws_iam_role" "readonly" {
   "Statement": {
     "Effect": "Allow",
     "Principal": {
-      "AWS": "arn:aws:iam::${var.source_account}:root"
+      "AWS": "arn:aws:iam::${var.source_account_id}:root"
     },
     "Action": "sts:AssumeRole"
   }
