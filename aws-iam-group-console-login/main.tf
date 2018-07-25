@@ -1,6 +1,6 @@
 resource "aws_iam_group" "login" {
-  name = "${var.name}"
-  path = "${var.path}"
+  name = "${var.group_name}"
+  path = "${var.iam_path}"
 }
 
 # This policy was based on one published by AWS (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_users-self-manage-mfa-and-creds.html)
@@ -13,7 +13,7 @@ resource "aws_iam_group" "login" {
 # reduce operational burden.
 resource "aws_iam_policy" "self-iam" {
   name        = "self-iam"
-  path        = "${var.path}"
+  path        = "${var.iam_path}"
   description = ""
 
   policy = <<POLICY
