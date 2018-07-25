@@ -16,6 +16,9 @@ case "$CMD" in
     check)
         diff $TMP2 README.md >/dev/null
     ;;
+    *)
+        echo "unknown command"
+        exit -1
 esac
 
 exit $?

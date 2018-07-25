@@ -14,3 +14,5 @@ jobs:
   include:
     - stage: check
       script: make lint
+    - stage: check
+      script: make check-docs

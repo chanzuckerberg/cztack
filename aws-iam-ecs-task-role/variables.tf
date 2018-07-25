@@ -1,7 +1,7 @@
 variable "project" {
   type = "string"
 
-  description = "High-level project, should be unique across CZI"
+  description = "High-level project, should be unique across the organization."
 }
 
 variable "env" {

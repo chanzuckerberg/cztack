@@ -1,4 +1,23 @@
 # AWS IAM policy  to allow cloudwatch logs
+
+This will create a policy that allows writing to cloudwatch logs and attach it to the supplied role.
+
+## Example
+
+```hcl
+module "policy" {
+  source = "github.com/chanzuckerberg/cztack/aws-iam-policy-cwlogs?ref=master" # FIXME
+
+
+  iam_path            = "…"
+  target_accounts = [...]
+  target_role     = "..."
+
+  depends_on = […]
+}
+```
+
+
 <!-- START -->
 
 ## Inputs
