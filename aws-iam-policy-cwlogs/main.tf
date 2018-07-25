@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "logs-policy" {
-  name_prefix = "${replace(format("%.102s", replace("tf-LOGSInPol-${var.role_name}-", "_", "-")), "/\\s/", "-")}"
+  name_prefix = "${var.role_name}-logs-policy"
   description = "A terraform created policy for cloudwatch logs"
   path        = "${var.iam_path}"
 
