@@ -16,4 +16,4 @@ jobs:
     - stage: check
       script: make lint
     - stage: check
-      script: make check-docs
+      script: SHELL=/bin/bash make check-docs
