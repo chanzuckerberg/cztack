@@ -18,7 +18,6 @@ docs:
 
 check-docs:
 	@for m in $(MODULES); do \
-		echo $$m; \
 		pushd $$m; \
 		../scripts/update-readme.sh check || exit $$?; \
 		popd; \
