@@ -1,9 +1,11 @@
-variable "name" {
-  type    = "string"
-  default = "console-login"
+variable "group_name" {
+  type        = "string"
+  default     = "console-login"
+  description = "Name of the group to be created."
 }
 
-variable "path" {
-  type    = "string"
-  default = "/"
+variable "iam_path" {
+  type        = "string"
+  default     = "/"
+  description = "IAM path under which resources will be created."
 }

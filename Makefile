@@ -12,6 +12,13 @@ lint:
 docs:
 	@for m in $(MODULES); do \
 		pushd $$m; \
-		../scripts/update-readme.sh; \
+		../scripts/update-readme.sh update; \
 		popd; \
-	done; \
+	done;
+
+check-docs:
+	@for m in $(MODULES); do \
+		cd $$m; \
+		../scripts/update-readme.sh check || exit $$?; \
+		cd ..; \
+	done;

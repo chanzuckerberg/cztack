@@ -3,19 +3,21 @@ variable "target_accounts" {
   description = "List of accounts in which this role should be assume-able."
 }
 
-variable "path" {
-  type    = "string"
-  default = "/"
+variable "iam_path" {
+  type        = "string"
+  default     = "/"
+  description = "The IAM path under which the group and policies will be created. Useful for avoiding naming conflicts."
 }
 
 variable "group_name" {
-  type = "string"
+  type        = "string"
+  description = "The name of the group this module will create."
 }
 
 variable "users" {
   type        = "list"
   default     = []
-  description = "List of users who should be added to this group."
+  description = "List of user's names who should be added to this group."
 }
 
 variable "target_role" {

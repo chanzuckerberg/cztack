@@ -1,3 +1,3 @@
-output "name" {
+output "role_name" {
   value = "${aws_iam_role.readonly.name}"
 }
