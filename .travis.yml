@@ -7,6 +7,9 @@ install:
   - unzip terraform.zip
   - mv terraform ~/bin/
   - chmod +x ~/bin/terraform
+  - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.3.0/terraform-docs_linux_amd64
+  - mv terraform-docs ~/bin/terraform-docs
+  - chmod +x ~/bin/terraform-docs
 
 jobs:
   include:
