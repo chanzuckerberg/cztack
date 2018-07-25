@@ -8,6 +8,9 @@ install:
   - mv terraform ~/bin/
   - chmod +x ~/bin/terraform
 
+env:
+  - SHELL: /bin/bash
+
 jobs:
   include:
     - stage: check
