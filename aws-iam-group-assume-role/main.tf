@@ -4,7 +4,7 @@ locals {
 
 resource "aws_iam_group" "assume-role" {
   name = "${var.group_name}"
-  path = "${var.path}"
+  path = "${var.iam_path}"
 }
 
 resource "aws_iam_group_membership" "assume-role" {
@@ -15,7 +15,7 @@ resource "aws_iam_group_membership" "assume-role" {
 
 resource "aws_iam_policy" "assume-role" {
   name        = "${var.group_name}"
-  path        = "${var.path}"
+  path        = "${var.iam_path}"
   description = ""
 
   policy = <<POLICY
