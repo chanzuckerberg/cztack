@@ -8,6 +8,12 @@ TODO
 
 ## Modules
 
+### AWS Default VPC security
+
+This will name, tag, and optionall lock down AWS default VPCs.
+
+[Read More](aws-default-vpc-security/README.md)
+
 ### AWS IAM ECS Task Role
 
 This creates a role for use with an ECS task, you bring your own policy and we create the role for you.
