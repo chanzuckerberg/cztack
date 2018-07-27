@@ -6,5 +6,10 @@ variable "source_account_id" {
 variable "role_name" {
   type        = "string"
   description = "The name of this role."
-  default     = "/"
+  default     = "security-audit"
+}
+
+variable "iam_path" {
+  type    = "string"
+  default = "/"
 }

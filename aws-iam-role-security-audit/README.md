@@ -19,7 +19,8 @@ module "group" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| role_name | The name of this role. | string | `/` | no |
+| iam_path |  | string | `/` | no |
+| role_name | The name of this role. | string | `security-audit` | no |
 | source_account_id | The AWS account from which this role should be assumeable. | string | - | yes |
 
 <!-- END -->
