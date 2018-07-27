@@ -4,10 +4,14 @@ all:
 	@echo $(MODULES)
 
 fmt:
-	terraform fmt
+	@for m in $(MODULES); do \
+		terraform fmt $m; \
+	done
 
 lint:
-	terraform fmt -check
+	@for m in $(MODULES); do \
+		terraform fmt -check $m; \
+	done
 
 docs:
 	@for m in $(MODULES); do \
