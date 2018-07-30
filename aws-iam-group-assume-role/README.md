@@ -4,7 +4,7 @@ This module will create a group which has the right to assume a particular IAM r
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-group-assume-role?ref=master" # FIXME
+  source = "github.com/chanzuckerberg/cztack/aws-iam-group-assume-role?ref=v0.11.0"
 
   group_name      = "…"
   path            = "…"

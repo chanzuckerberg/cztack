@@ -6,7 +6,7 @@ This module will name, tag and optionally lock down traffic to AWS Default VPCs.
 
 ```hcl
 module "default-vpc" {
-  source = "github.com/chanzuckerberg/cztack/aws-default-vpc-lockdown?ref=master # TODO
+  source = "github.com/chanzuckerberg/cztack/aws-default-vpc-lockdown?ref=master"
   
   default_sg_lockdown = true
 }
@@ -22,7 +22,7 @@ provider "aws"{
 }
 
 module "default-vpc" {
-  source = "github.com/chanzuckerberg/cztack/aws-default-vpc-lockdown?ref=master # TODO
+  source = "github.com/chanzuckerberg/cztack/aws-default-vpc-lockdown?ref=master"
 
   default_sg_lockdown = true
 
