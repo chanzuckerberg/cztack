@@ -6,7 +6,7 @@ This will create a policy that allows writing to cloudwatch logs and attach it t
 
 ```hcl
 module "policy" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-policy-cwlogs?ref=master" # FIXME
+  source = "github.com/chanzuckerberg/cztack/aws-iam-policy-cwlogs?ref=v0.11.0"
 
 
   iam_path            = "…"

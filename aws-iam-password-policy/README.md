@@ -6,7 +6,7 @@ This module is useful for setting a password policy on AWS IAM.
 
 ```hcl
 module "password-policy" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-password-policy?ref=master" # FIXME
+  source = "github.com/chanzuckerberg/cztack/aws-iam-password-policy?ref=v0.11.0"
 }
 ```
 

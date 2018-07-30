@@ -6,7 +6,7 @@ This will create a role for attaching to an ECS task, using `policy`.
 
 ```hcl
 module "ecs-role" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-ecs-task-role?ref=master" # FIXME
+  source = "github.com/chanzuckerberg/cztack/aws-iam-ecs-task-role?ref=v0.11.0"
   
   policy = "..."
 
