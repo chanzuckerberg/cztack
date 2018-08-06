@@ -27,3 +27,6 @@ check-docs:
 		../scripts/update-readme.sh check || exit $$?; \
 		cd ..; \
 	done;
+
+test:
+	GOCACHE=off AWS_PROFILE=czi-si go test ./...
