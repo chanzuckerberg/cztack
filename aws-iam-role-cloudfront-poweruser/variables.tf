@@ -8,5 +8,11 @@ variable "role_name" {
 
 variable "s3_bucket_prefix" {
   type        = "string"
-  description = "Limits role permissions to buckets with specific prefix. Empty string for all buckets"
+  description = "Limits role permissions to buckets with specific prefix. Empty string for all buckets."
+  default     = ""
+}
+
+variable "iam_path" {
+  type = "string"
+  default = "/"
 }
