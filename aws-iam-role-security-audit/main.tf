@@ -1,5 +1,6 @@
 resource "aws_iam_role" "security-audit" {
   name = "${var.role_name}"
+  path = "${var.iam_path}"
 
   assume_role_policy = <<EOF
 {

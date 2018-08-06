@@ -1,5 +1,6 @@
 resource "aws_iam_role" "readonly" {
-  name = "readonly"
+  name = "${var.role_name}"
+  path = "${var.iam_path}"
 
   assume_role_policy = <<EOF
 {
@@ -21,8 +22,8 @@ resource "aws_iam_role_policy_attachment" "readonly" {
 }
 
 resource "aws_iam_policy" "secrets" {
-  name = "chamber-read"
-  path = "/"
+  name = "${var.role_name}-chamber-read"
+  path = "${var.iam_path}"
 
   policy = <<EOF
 {
@@ -41,4 +42,8 @@ resource "aws_iam_policy" "secrets" {
     ]
 }
 EOF
+
+  lifecycle {
+    ignore_changes = ["name"]
+  }
 }
