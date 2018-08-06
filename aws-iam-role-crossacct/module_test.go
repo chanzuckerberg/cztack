@@ -10,7 +10,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// An example of how to test the simple Terraform module in examples/terraform-basic-example using Terratest.
 func TestAWSIAMRoleCrossAcct(t *testing.T) {
 	t.Parallel()
 
