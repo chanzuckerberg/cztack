@@ -24,7 +24,7 @@ resource "aws_iam_policy" "ec2" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "ssm",
+      "Sid": "ec2",
       "Action": [
         "ec2:*"
       ],
