@@ -22,6 +22,8 @@ output "role_name" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| iam_path |  | string | `/` | no |
+| role_name |  | string | `readonly` | no |
 | source_account_id | The AWS account from which this role should be assumeable. | string | - | yes |
 
 ## Outputs
