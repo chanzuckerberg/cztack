@@ -18,6 +18,7 @@ EOF
 resource "aws_iam_policy" "ec2" {
   name        = "${var.role_name}-ec2"
   description = "Provides full access to the ec2 api"
+  path        = "${var.iam_path}"
 
   policy = <<EOF
 {
