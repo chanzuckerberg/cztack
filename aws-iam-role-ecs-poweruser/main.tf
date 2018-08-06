@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "ecr-poweruser" {
 
 resource "aws_iam_policy" "secrets" {
   name        = "${var.role_name}-secrets"
-  path = "${var.iam_path}"
+  path        = "${var.iam_path}"
   description = "Provide access to the parameters of service ${var.role_name}"
 
   policy = <<EOF

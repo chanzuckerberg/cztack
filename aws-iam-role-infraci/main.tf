@@ -1,5 +1,6 @@
 resource "aws_iam_role" "infraci" {
-  name = "infraci"
+  name = "${var.role_name}"
+  path = "${var.iam_path}"
 
   assume_role_policy = <<EOF
 {
@@ -21,8 +22,8 @@ resource "aws_iam_role_policy_attachment" "infraci" {
 }
 
 resource "aws_iam_policy" "secrets" {
-  name = "secrets-reader"
-  path = "/"
+  name = "${var.role_name}-secrets-reader"
+  path = "${var.iam_path}"
 
   policy = <<EOF
 {
@@ -60,6 +61,10 @@ resource "aws_iam_policy" "secrets" {
     ]
 }
 EOF
+
+  lifecycle {
+    ignore_changes = ["name"]
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "secrets" {

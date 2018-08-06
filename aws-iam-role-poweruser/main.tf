@@ -1,5 +1,6 @@
 resource "aws_iam_role" "poweruser" {
   name = "${var.role_name}"
+  path = "${var.iam_path}"
 
   assume_role_policy = <<EOF
 {
@@ -68,6 +69,7 @@ data "aws_iam_policy_document" "misc" {
 
 resource "aws_iam_policy" "misc" {
   name        = "${var.role_name}-misc"
+  path        = "${var.iam_path}"
   description = "Extra permissions we're granting that PowerUserAccess lacks"
   policy      = "${data.aws_iam_policy_document.misc.json}"
 }

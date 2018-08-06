@@ -13,6 +13,6 @@ variable "s3_bucket_prefix" {
 }
 
 variable "iam_path" {
-  type = "string"
+  type    = "string"
   default = "/"
 }

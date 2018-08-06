@@ -8,6 +8,6 @@ variable "source_account_id" {
 }
 
 variable "iam_path" {
-  type = "string"
+  type    = "string"
   default = "/"
 }

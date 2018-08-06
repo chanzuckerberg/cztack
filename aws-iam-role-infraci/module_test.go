@@ -1,6 +1,7 @@
 package role_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-sdk-go/service/sts"
@@ -10,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAWSIAMRolePowerUser(t *testing.T) {
+func TestAWSIAMRoleInfraCI(t *testing.T) {
 	t.Parallel()
 
 	region := "us-west-1"
@@ -29,6 +30,7 @@ func TestAWSIAMRolePowerUser(t *testing.T) {
 		Vars: map[string]interface{}{
 			"role_name":         random.UniqueId(),
 			"source_account_id": curAcct,
+			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 		EnvVars: map[string]string{
 			"AWS_DEFAULT_REGION": region,

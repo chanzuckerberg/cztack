@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAWSIAMRolePowerUser(t *testing.T) {
+func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
 	t.Parallel()
 
 	region := "us-west-1"

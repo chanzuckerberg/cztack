@@ -28,5 +28,5 @@ check-docs:
 		cd ..; \
 	done;
 
-test:
+test: fmt
 	GOCACHE=off AWS_PROFILE=czi-si go test ./...
