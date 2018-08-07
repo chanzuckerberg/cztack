@@ -1,39 +1,32 @@
 package test
 
-import (
-	"testing"
+// TODO this won't work because you can't pass JSON in as a var (it gets interpretted as HCL) https://github.com/gruntwork-io/terratest/issues/121
 
-	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
-)
+// package test
 
-// An example of how to test the simple Terraform module in examples/terraform-basic-example using Terratest.
-func TestTerraformBasicExample(t *testing.T) {
-	t.Parallel()
+// import (
+// 	"testing"
 
-	expectedText := "foo"
+// 	"github.com/gruntwork-io/terratest/modules/random"
+// 	"github.com/gruntwork-io/terratest/modules/terraform"
+// )
 
-	terraformOptions := &terraform.Options{
-		// The path to where our Terraform code is located
-		TerraformDir: "../examples/terraform-basic-example",
+// func TestTerraformBasicExample(t *testing.T) {
+// 	t.Parallel()
 
-		// Variables to pass to our Terraform code using -var options
-		Vars: map[string]interface{}{
-			"example": expectedText,
-		},
+// 	terraformOptions := &terraform.Options{
+// 		TerraformDir: ".",
 
-		NoColor: true,
-	}
+// 		Vars: map[string]interface{}{
+// 			"project": random.UniqueId(),
+// 			"env":     random.UniqueId(),
+// 			"service": random.UniqueId(),
+// 			"owner":   random.UniqueId(),
+// 			"policy":  "",
+// 		},
+// 	}
 
-	// At the end of the test, run `terraform destroy` to clean up any resources that were created
-	defer terraform.Destroy(t, terraformOptions)
+// 	defer terraform.Destroy(t, terraformOptions)
 
-	// This will run `terraform init` and `terraform apply` and fail the test if there are any errors
-	terraform.InitAndApply(t, terraformOptions)
-
-	// Run `terraform output` to get the value of an output variable
-	actualText := terraform.Output(t, terraformOptions, "example")
-
-	// Verify we're getting back the variable we expect
-	assert.Equal(t, expectedText, actualText)
-}
+// 	terraform.InitAndApply(t, terraformOptions)
+// }
