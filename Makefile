@@ -1,4 +1,4 @@
-MODULES=$(filter-out vendor/ module-template/ scripts/,$(sort $(dir $(wildcard */))))
+MODULES=$(filter-out vendor/ module-template/ scripts/ testutil/,$(sort $(dir $(wildcard */))))
 
 all:
 	@echo $(MODULES)

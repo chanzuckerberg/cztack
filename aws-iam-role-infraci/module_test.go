@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/service/sts"
-	"github.com/gruntwork-io/terratest/modules/aws"
+	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
@@ -15,14 +14,7 @@ func TestAWSIAMRoleInfraCI(t *testing.T) {
 	t.Parallel()
 
 	region := "us-west-1"
-	session, err := aws.NewAuthenticatedSession(region)
-	assert.Nil(t, err)
-	stsClient := sts.New(session)
-
-	caller, err := stsClient.GetCallerIdentity(&sts.GetCallerIdentityInput{})
-	assert.Nil(t, err)
-	curAcct := *caller.Account
-	assert.NotNil(t, curAcct)
+	curAcct := testutil.AWSCurrentAccountId(t)
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: ".",
@@ -39,7 +31,7 @@ func TestAWSIAMRoleInfraCI(t *testing.T) {
 
 	defer terraform.Destroy(t, terraformOptions)
 
-	_, err = terraform.InitAndApplyE(t, terraformOptions)
+	_, err := terraform.InitAndApplyE(t, terraformOptions)
 
 	assert.Nil(t, err)
 }

@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/service/sts"
-	"github.com/gruntwork-io/terratest/modules/aws"
+	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
@@ -15,14 +14,7 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 	t.Parallel()
 
 	region := "us-west-1"
-	session, err := aws.NewAuthenticatedSession(region)
-	assert.Nil(t, err)
-	stsClient := sts.New(session)
-
-	caller, err := stsClient.GetCallerIdentity(&sts.GetCallerIdentityInput{})
-	assert.Nil(t, err)
-	curAcct := *caller.Account
-	assert.NotNil(t, curAcct)
+	curAcct := testutil.AWSCurrentAccountId(t)
 
 	setupTerraformOptions := &terraform.Options{
 		TerraformDir: "../aws-iam-role-crossacct",
@@ -39,7 +31,7 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 
 	defer terraform.Destroy(t, setupTerraformOptions)
 
-	_, err = terraform.InitAndApplyE(t, setupTerraformOptions)
+	_, err := terraform.InitAndApplyE(t, setupTerraformOptions)
 	assert.Nil(t, err)
 
 	roleName := terraform.Output(t, setupTerraformOptions, "role_name")
@@ -60,10 +52,4 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 	_, err = terraform.InitAndApplyE(t, terraformOptions)
 
 	assert.Nil(t, err)
-
-	// Run `terraform output` to get the value of an output variable
-	// terraform.Output(t, terraformOptions, "example")
-
-	// Verify we're getting back the variable we expect
-	// assert.Equal(t, expectedText, actualText)
 }
