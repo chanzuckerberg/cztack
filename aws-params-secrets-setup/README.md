@@ -7,4 +7,10 @@ Currently that just means creating an KMS key for encrypting the parameters stor
 
 <!-- START -->
 
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| alias_name | Chamber is hard coded to use a KMS alias with the name 'parameter_store_key'. | string | `parameter_store_key` | no |
+
 <!-- END -->
