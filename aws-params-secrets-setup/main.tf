@@ -8,6 +8,6 @@ resource "aws_kms_key" "parameter_store" {
 # "parameter_store_alias" when writing; this is how we enforce
 # encryption and access control for specific keys
 resource "aws_kms_alias" "parameter_store_alias" {
-  name          = "alias/parameter_store_key"
+  name          = "alias/${var.alias_name}"
   target_key_id = "${aws_kms_key.parameter_store.id}"
 }

@@ -17,12 +17,12 @@ variable "parameter_store_key_alias" {
   type        = "string"
 }
 
-variable "account_id" {
-  type        = "string"
-  description = "The account id for the policy."
-}
-
 variable "iam_path" {
   type    = "string"
   default = "/"
+}
+
+variable "role_name" {
+  description = "Name of the role to assign the policy to."
+  type        = "string"
 }

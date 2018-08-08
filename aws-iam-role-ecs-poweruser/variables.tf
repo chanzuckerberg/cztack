@@ -5,3 +5,8 @@ variable "source_account_id" {
 variable "role_name" {
   type = "string"
 }
+
+variable "iam_path" {
+  type    = "string"
+  default = "/"
+}
