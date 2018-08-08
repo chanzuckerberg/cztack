@@ -1,4 +1,6 @@
-language: bash
+language: go
+go:
+  - "1.10.3"
 sudo: false
 dist: trusty
 cache: pip
