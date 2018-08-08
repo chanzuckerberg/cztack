@@ -1,32 +1,38 @@
 language: go
 go:
-  - "1.10.3"
+- 1.10.3
 sudo: false
 dist: trusty
 cache: pip
 install:
-  - wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
-  - unzip terraform.zip
-  - mv terraform ~/bin/
-  - chmod +x ~/bin/terraform
-  - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.3.0/terraform-docs_linux_amd64
-  - mv terraform-docs ~/bin/terraform-docs
-  - chmod +x ~/bin/terraform-docs
-  - pip install awscli --upgrade --user
-
+- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
+- unzip terraform.zip
+- mv terraform ~/bin/
+- chmod +x ~/bin/terraform
+- wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.3.0/terraform-docs_linux_amd64
+- mv terraform-docs ~/bin/terraform-docs
+- chmod +x ~/bin/terraform-docs
+- pip install awscli --upgrade --user
 jobs:
   include:
-    - stage: check
-      script: make lint
-    - stage: check
-      script: make check-docs
-    - stage: check
-      before_script:
-        - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile ci-1
-        - aws configure set aws_secret_access_key $CI1_AWS_SECRET_ACCESS_KEY --profile ci-1
-        - aws --profile ci-1 sts get-caller-identity
-
-        - aws configure set aws_access_key_id     $CI2_AWS_ACCESS_KEY_ID     --profile ci-2
-        - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile ci-2
-        - aws --profile ci-2 sts get-caller-identity
-      script: make test
+  - stage: check
+    script: make lint
+  - stage: check
+    script: make check-docs
+  - stage: check
+    before_script:
+    - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile
+      ci-1
+    - aws configure set aws_secret_access_key $CI1_AWS_SECRET_ACCESS_KEY --profile
+      ci-1
+    - aws --profile ci-1 sts get-caller-identity
+    # - aws configure set aws_access_key_id     $CI2_AWS_ACCESS_KEY_ID     --profile
+    #   ci-2
+    # - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile
+    #   ci-2
+    # - aws --profile ci-2 sts get-caller-identity
+    script: make test
+env:
+  global:
+  - secure: H6toE/cJTjXbp9QEONjA2wvWxIPIzPiX3VRY0r5C6YTYEMeujR/w8XW/HMrUFgK7DrD6td5vgpDVeoC84SmQ/KIyU/jEOJsjktxcsMK4Y/5Pbi5p9iK24ps7LUFLDGtYAnYiSOWd3lTDr1vRp/N1Es8VaSqyyRJwi5NwBFGjA0YoxiriIYe7WRCz9HRTiUSQ3PKZPJBLznqUrClvwVq9kZyI7zwyNmDYOrbXzKRPJfPCxHlWE/RsglXu0tSmuL6qxXVIhqp7ijRwJcCSMqpXYyYXPIHAm3b4dyXLSCzI3j+HwZqoTtnZFROMYrhVrgPlcntOe/NWMDu3UurE3ePEG6ghP/E5VD6xgcyiFDYvQV5f4ERPhmfurmOewESJdrtNQhepGutTaUX/gEzdu8rTaxc1fWFmOkscQOWCiPThqowdBP2kQtcrv660Z1PmtNuHmGyBS8j0hkkuyfWjX6YMf+egXpJSDT5kaEw+l6mn9yqL752hUdehKiBEroWqiv9eszFkFqPtBvNZO9vi+bRLeraq9lZJRHjS/T6LosfrLnXAo1X3Uqx79ruNFqLccADlsSqVMsSnyyIyv2d4uXvYTgPrqra1vbu7TQgjuMvwHXiLGt+h/ZLm8HFvSCFNAwzz3Ca+LxTN0TNpEHGmiqj0FoTfyuENvbAMkL4wyU7RprA=
+  - secure: hqVsbSEMU78f48VHpaNO/v3WkjF46LFIVlTEVZukS8NPPccYKLgiguerdfFYHAnqzDScZRn6r9/BhpNf3sMeaOsFpzZ3qiw0VOlDjQcpN/IafP+3w1j2xCCPUz+FLlDmrnn/iKM2YAkvKm56EV3XIM3NZmbO1SKfoCR0gfqWUysIF5AAr+9u9jZUT+jDabzLfmOyf8TPihbFvwvl0ptGr/ZRU1c0zExg2XFC7UHf6z/xYwkvSM6xX8pFX5QYbfmise6WBDLv0w/NH2WGI8OJr90SkSJMoUcnnmLuByUeQcg2ITcOuClhdUAQl9tCuM+q1OqTJc/hHXHMxqIfobUf8UmTiIzv4zxNJ5QCOvG0EpDEEqvhn80dC+ja/FYSulktWqdR0g/8hrSBa7b+qIg0IjS76fkSqP9gjJS4Nm/1iw6KlTcXLVx4tUlMTlQjkg5BxLf6OAUVSG88GNx6p4jaEW9XAzoM39YUWHOZsWWIkBBO961fVXlztsvU9N8I4sfUJ6z9S4FCrO6AJQCoyvXqd2dXExik1aXBGF2pa4OV4+eR+xeh7UJalb3coVafiJbXmqSjOu2s5awvSR2ieyt255233oA68g7gHKyXNVmwx032qiA5uktC5WpXpuf+dXC68p5Yy6I7f6KMp0urmwDq8XVbQ9FUlNPunY5RpLKIvlo=
