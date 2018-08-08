@@ -10,7 +10,7 @@ import (
 )
 
 func TestAWSIAMGroupConsoleLogin(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
 	region := "us-west-1"
 

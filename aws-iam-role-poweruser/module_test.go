@@ -10,7 +10,7 @@ import (
 )
 
 func TestAWSIAMRolePowerUser(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
 	region := "us-west-1"
 	curAcct := testutil.AWSCurrentAccountId(t)
