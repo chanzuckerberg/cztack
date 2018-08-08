@@ -21,11 +21,9 @@ jobs:
     script: make check-docs
   - stage: check
     before_script:
-    - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile
-      ci-1
-    - aws configure set aws_secret_access_key $CI1_AWS_SECRET_ACCESS_KEY --profile
-      ci-1
-    - aws --profile ci-1 sts get-caller-identity
+    - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile cztack-ci-1
+    - aws configure set aws_secret_access_key $CI1_AWS_SECRET_ACCESS_KEY --profile cztack-ci-1
+    - aws --profile cztack-ci-1 sts get-caller-identity
     # - aws configure set aws_access_key_id     $CI2_AWS_ACCESS_KEY_ID     --profile
     #   ci-2
     # - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile
