@@ -1,7 +1,7 @@
 language: bash
 sudo: false
 dist: trusty
-
+cache: pip
 install:
   - wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
   - unzip terraform.zip
@@ -10,6 +10,7 @@ install:
   - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.3.0/terraform-docs_linux_amd64
   - mv terraform-docs ~/bin/terraform-docs
   - chmod +x ~/bin/terraform-docs
+  - pip install awscli --upgrade --user
 
 jobs:
   include:
@@ -17,3 +18,5 @@ jobs:
       script: make lint
     - stage: check
       script: make check-docs
+    - stage: check
+      script: make test
