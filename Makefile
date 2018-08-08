@@ -1,4 +1,5 @@
 MODULES=$(filter-out vendor/ module-template/ scripts/ testutil/,$(sort $(dir $(wildcard */))))
+TEST :=./...
 
 all:
 	@echo $(MODULES)
@@ -29,4 +30,4 @@ check-docs:
 	done;
 
 test: fmt
-	GOCACHE=off AWS_PROFILE=cztack-ci-1 go test ./...
+	GOCACHE=off AWS_PROFILE=cztack-ci-1 go test $(TEST)

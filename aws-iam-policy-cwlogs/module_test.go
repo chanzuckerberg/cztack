@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
@@ -15,12 +17,12 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 
 	region := "us-west-1"
 	curAcct := testutil.AWSCurrentAccountId(t)
-
+	inputRoleName := random.UniqueId()
 	setupTerraformOptions := &terraform.Options{
 		TerraformDir: "../aws-iam-role-crossacct",
 
 		Vars: map[string]interface{}{
-			"role_name":         random.UniqueId(),
+			"role_name":         inputRoleName,
 			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 			"source_account_id": curAcct,
 		},
@@ -31,15 +33,25 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 
 	defer terraform.Destroy(t, setupTerraformOptions)
 
-	_, err := terraform.InitAndApplyE(t, setupTerraformOptions)
-	assert.Nil(t, err)
+	terraform.InitAndApply(t, setupTerraformOptions)
 
-	roleName := terraform.Output(t, setupTerraformOptions, "role_name")
+	// This block added because the InitAndApply below would sometimes fail due.
+	// to an apparently nonexistent role. Probably something to do with IAM
+	// eventual consistency.
+	iamClient := aws.NewIamClient(t, region)
+	res, err := iamClient.GetRole(&iam.GetRoleInput{
+		RoleName: &inputRoleName,
+	})
+	assert.Nil(t, err)
+	assert.Equal(t, inputRoleName, *res.Role.RoleName)
+
+	outputRoleName := terraform.Output(t, setupTerraformOptions, "role_name")
+
 	terraformOptions := &terraform.Options{
 		TerraformDir: ".",
 
 		Vars: map[string]interface{}{
-			"role_name": roleName,
+			"role_name": outputRoleName,
 			"iam_path":  fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 		EnvVars: map[string]string{
@@ -49,7 +61,5 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 
 	defer terraform.Destroy(t, terraformOptions)
 
-	_, err = terraform.InitAndApplyE(t, terraformOptions)
-
-	assert.Nil(t, err)
+	terraform.InitAndApply(t, terraformOptions)
 }

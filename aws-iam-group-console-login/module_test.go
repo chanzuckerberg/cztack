@@ -18,7 +18,6 @@ func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 
 		TerraformDir: ".",
 
-		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
 			"group_name": random.UniqueId(),
 			"iam_path":   fmt.Sprintf("/%s/", random.UniqueId()),
