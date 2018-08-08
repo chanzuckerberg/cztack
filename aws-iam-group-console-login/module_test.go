@@ -4,15 +4,13 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 	// t.Parallel()
-
-	region := "us-west-1"
 
 	terraformOptions := &terraform.Options{
 
@@ -24,12 +22,10 @@ func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 		},
 
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": region,
+			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		}}
 
-	defer terraform.Destroy(t, terraformOptions)
+	defer testutil.Cleanup(t, terraformOptions)
 
-	_, err := terraform.InitAndApplyE(t, terraformOptions)
-
-	assert.Nil(t, err)
+	testutil.Run(t, terraformOptions)
 }

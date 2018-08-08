@@ -12,7 +12,6 @@ import (
 func TestAWSIAMPolicyCwlogs(t *testing.T) {
 	// t.Parallel()
 
-	region := "us-west-1"
 	roleName := testutil.CreateRole(t)
 	defer testutil.DeleteRole(t, roleName)
 
@@ -24,11 +23,11 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 			"iam_path":  fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": region,
+			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		},
 	}
 
-	defer terraform.Destroy(t, terraformOptions)
+	defer testutil.Cleanup(t, terraformOptions)
 
-	terraform.InitAndApply(t, terraformOptions)
+	testutil.Run(t, terraformOptions)
 }

@@ -7,13 +7,11 @@ import (
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestAWSIAMRoleCloudfrontPoweruser(t *testing.T) {
 	// t.Parallel()
 
-	region := "us-west-1"
 	curAcct := testutil.AWSCurrentAccountId(t)
 
 	terraformOptions := &terraform.Options{
@@ -25,13 +23,9 @@ func TestAWSIAMRoleCloudfrontPoweruser(t *testing.T) {
 			"source_account_id": curAcct,
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": region,
+			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		},
 	}
 
-	defer terraform.Destroy(t, terraformOptions)
-
-	_, err := terraform.InitAndApplyE(t, terraformOptions)
-
-	assert.Nil(t, err)
+	defer testutil.Cleanup(t, terraformOptions)
 }
