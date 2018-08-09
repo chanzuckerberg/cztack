@@ -26,6 +26,7 @@ func TestAWSIAMRoleCloudfrontPoweruser(t *testing.T) {
 			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		},
 	}
-
 	defer testutil.Cleanup(t, terraformOptions)
+
+	testutil.Run(t, terraformOptions)
 }
