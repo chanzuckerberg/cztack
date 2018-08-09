@@ -32,7 +32,7 @@ variable "port" {
 }
 
 variable "instance_type" {
-  default = "cache.m3.large"
+  default = "cache.m4.large"
 }
 
 variable "parameter_group_name" {
@@ -40,17 +40,17 @@ variable "parameter_group_name" {
 }
 
 variable "engine_version" {
-  default = "3.2.6"
+  default = "4.0.10"
 }
 
 variable "apply_immediately" {
-  default = "true"
+  default = true
 }
 
 # This is to get a around a limitation where the elasticache cluster id can be
 # only 20 characters long. Use it only if you get that error.
 variable "resource_name" {
-  description = "if not set, name will be ${var.project}-${var.env}-${var.name}"
+  description = "If not set, name will be ${var.project}-${var.env}-${var.name}."
   type        = "string"
   default     = ""
 }
