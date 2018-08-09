@@ -3,7 +3,7 @@ locals {
 
   tags = {
     managedBy = "terraform"
-    Name      = "${local.name}"
+    Name      = "${var.project}-${var.env}-${var.service}"
     project   = "${var.project}"
     env       = "${var.env}"
     service   = "${var.service}"
@@ -13,13 +13,13 @@ locals {
 
 resource "aws_security_group" "rds" {
   name        = "${local.name}"
-  description = "Allow mysql inbound"
+  description = "Allow postgres inbound"
 
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    from_port   = 3306
-    to_port     = 3306
+    from_port   = "${var.database_port}"
+    to_port     = "${var.database_port}"
     protocol    = "tcp"
     cidr_blocks = ["${var.ingress_cidr_blocks}"]
   }
@@ -31,7 +31,6 @@ resource "aws_security_group" "rds" {
   tags = "${local.tags}"
 }
 
-# engine aurora-mysql means mysql 5.7 compat
 resource "aws_rds_cluster" "db" {
   engine = "aurora-mysql"
 
@@ -56,7 +55,7 @@ resource "aws_rds_cluster" "db" {
 }
 
 resource "aws_rds_cluster_instance" "db" {
-  engine = "aurora-mysql"
+  engine = "aurora-postgresql"
 
   count                   = "${var.instance_count}"
   identifier              = "${local.name}-${count.index}"
@@ -65,17 +64,12 @@ resource "aws_rds_cluster_instance" "db" {
   db_subnet_group_name    = "${var.database_subnet_group}"
   db_parameter_group_name = "${aws_db_parameter_group.db.name}"
 
-  publicly_accessible          = "${var.publicly_accessible}"
-  performance_insights_enabled = true
-
-  apply_immediately = "${var.apply_immediately}"
-
   tags = "${local.tags}"
 }
 
 resource "aws_rds_cluster_parameter_group" "db" {
   name        = "${local.name}"
-  family      = "aurora-mysql5.7"
+  family      = "aurora-postgresql9.6"
   description = "RDS default cluster parameter group"
 
   parameter = ["${var.rds_cluster_parameters}"]
@@ -85,7 +79,7 @@ resource "aws_rds_cluster_parameter_group" "db" {
 
 resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
-  family = "aurora-mysql5.7"
+  family = "aurora-postgresql9.6"
 
   parameter = ["${var.db_parameters}"]
 
