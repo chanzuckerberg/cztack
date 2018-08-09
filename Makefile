@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 MODULES=$(filter-out vendor/ module-template/ scripts/ testutil/,$(sort $(dir $(wildcard */))))
 TEST :=./...
 
