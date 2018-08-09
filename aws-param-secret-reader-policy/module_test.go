@@ -7,13 +7,11 @@ import (
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestAWSParamsSecretReaderPolicy(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
-	region := "us-west-1"
 	curAcct := testutil.AWSCurrentAccountId(t)
 
 	// SETUP ROLE
@@ -27,14 +25,14 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"source_account_id": curAcct,
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": region,
+			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		},
 	}
 
-	defer terraform.Destroy(t, setupTerraformOptions)
+	defer testutil.Cleanup(t, setupTerraformOptions)
 
-	_, err := terraform.InitAndApplyE(t, setupTerraformOptions)
-	assert.Nil(t, err)
+	testutil.Run(t, setupTerraformOptions)
+
 	roleName := terraform.Output(t, setupTerraformOptions, "role_name")
 
 	// SETUP Secrets policy
@@ -47,14 +45,13 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"alias_name": keyAlias,
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": region,
+			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		},
 	}
 
-	defer terraform.Destroy(t, keyTerraformOptions)
+	defer testutil.Cleanup(t, keyTerraformOptions)
 
-	_, err = terraform.InitAndApplyE(t, keyTerraformOptions)
-	assert.Nil(t, err)
+	testutil.Run(t, keyTerraformOptions)
 
 	// Actual test
 	terraformOptions := &terraform.Options{
@@ -68,13 +65,12 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"parameter_store_key_alias": keyAlias,
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": region,
+			"AWS_DEFAULT_REGION": testutil.IAMRegion,
 		},
 	}
 
-	defer terraform.Destroy(t, terraformOptions)
+	defer testutil.Cleanup(t, terraformOptions)
 
-	_, err = terraform.InitAndApplyE(t, terraformOptions)
+	testutil.Run(t, terraformOptions)
 
-	assert.Nil(t, err)
 }

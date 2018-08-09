@@ -12,7 +12,7 @@ package test
 // )
 
 // func TestTerraformBasicExample(t *testing.T) {
-// 	t.Parallel()
+// 	// t.Parallel()
 
 // 	terraformOptions := &terraform.Options{
 // 		TerraformDir: ".",
@@ -26,7 +26,7 @@ package test
 // 		},
 // 	}
 
-// 	defer terraform.Destroy(t, terraformOptions)
+// 	defer testutil.Cleanup(t, terraformOptions)
 
-// 	terraform.InitAndApply(t, terraformOptions)
+// 	testutil.Run(t, terraformOptions)
 // }

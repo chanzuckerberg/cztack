@@ -12,7 +12,7 @@ resource "aws_iam_group" "login" {
 # This was done to make it easier for users to reason about their (and their teammates') access and
 # reduce operational burden.
 resource "aws_iam_policy" "self-iam" {
-  name        = "self-iam"
+  name        = "${var.group_name}-self-iam"
   path        = "${var.iam_path}"
   description = ""
 
@@ -116,6 +116,10 @@ resource "aws_iam_policy" "self-iam" {
   ]
 }
 POLICY
+
+  lifecycle {
+    ignore_changes = ["name"]
+  }
 }
 
 resource "aws_iam_group_policy_attachment" "self-iam" {
