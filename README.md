@@ -79,3 +79,17 @@ This creates a readonly role, based off the AWS-managed readonly policy, but wit
 This creates a security-audit role, based off the AWS-managed policy, but with a few changes.
 
 [Read More](aws-iam-role-security-audit/README.md)
+
+## Contributing
+
+### Writing tests
+
+A few notes on writing test for this repo. Note that this is new ground for us, so this will be a work in progress.
+
+* To make modules testable, all fields that have a unique constraint need to be parameterizeable. Otherwise concurrent tests will conflict.
+* It is tempting in testing module A to use module B to set up some context, but because terragrunt will just store the statefile locally, you can have a conflict.
+  * We've tried to avoid this for now and set up context more directly
+  * And also to not run tests in parrallel
+  * and to clean up state files before and after each run
+* our linter requires a test for each module. At the very least run `init` so that its syntax is checked. See [an example here](aws-iam-group-assume-role/module_test.go).
+* AWS IAM is eventually consistent and supposedly is homed in us-east-1, so its probably best to run all tests that use IAM in that region.
