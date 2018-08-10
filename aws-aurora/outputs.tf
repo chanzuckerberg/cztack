@@ -5,3 +5,7 @@ output "database_name" {
 output "endpoint" {
   value = "${aws_rds_cluster.db.endpoint}"
 }
+
+output "port" {
+  value = "${var.port}"
+}
