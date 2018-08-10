@@ -104,3 +104,8 @@ variable "db_parameters" {
     },
   ]
 }
+
+variable "kms_key_id" {
+  type    = "string"
+  default = ""
+}

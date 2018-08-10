@@ -78,3 +78,9 @@ variable "db_parameters" {
 variable "engine" {
   type = "string"
 }
+
+variable "kms_key_id" {
+  type        = "string"
+  description = "If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module."
+  default     = ""
+}
