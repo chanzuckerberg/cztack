@@ -1,7 +1,7 @@
 output "database_name" {
-  value = "${aws_rds_cluster.db.database_name}"
+  value = "${module.aurora.database_name}"
 }
 
 output "endpoint" {
-  value = "${aws_rds_cluster.db.endpoint}"
+  value = "${module.aurora.endpoint}"
 }

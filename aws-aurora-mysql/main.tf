@@ -1,94 +1,28 @@
-locals {
-  name = "${var.project}-${var.env}-${var.service}"
-
-  tags = {
-    managedBy = "terraform"
-    Name      = "${local.name}"
-    project   = "${var.project}"
-    env       = "${var.env}"
-    service   = "${var.service}"
-    owner     = "${var.owner}"
-  }
-}
-
-resource "aws_security_group" "rds" {
-  name        = "${local.name}"
-  description = "Allow mysql inbound"
-
-  vpc_id = "${var.vpc_id}"
-
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["${var.ingress_cidr_blocks}"]
-  }
-
-  lifecycle {
-    create_before_destroy = true
-    ignore_changes = ["name"]
-  }
-
-  tags = "${local.tags}"
-}
-
-# engine aurora-mysql means mysql 5.7 compat
-resource "aws_rds_cluster" "db" {
+module "aurora" {
+  source = "../aws-aurora"
   engine = "aurora-mysql"
 
-  cluster_identifier                  = "${local.name}"
-  database_name                       = "${var.database_name}"
-  master_username                     = "${var.database_username}"
-  master_password                     = "${var.database_password}"
-  vpc_security_group_ids              = ["${aws_security_group.rds.id}"]
-  db_subnet_group_name                = "${var.database_subnet_group}"
-  storage_encrypted                   = true
-  iam_database_authentication_enabled = true
-  backup_retention_period             = 28
-  final_snapshot_identifier           = "${local.name}-snapshot"
-  skip_final_snapshot                 = "${var.skip_final_snapshot}"
-  backtrack_window                    = "${var.backtrack_window}"
+  project = "${var.project}"
+  env     = "${var.env}"
+  service = "${var.service}"
+  owner   = "${var.owner}"
 
-  enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
+  database_name          = "${var.database_name}"
+  database_subnet_group  = "${var.database_subnet_group}"
+  database_password      = "${var.database_password}"
+  database_username      = "${var.database_username}"
+  db_parameters          = "${var.db_parameters}"
+  rds_cluster_parameters = "${var.rds_cluster_parameters}"
 
-  apply_immediately = "${var.apply_immediately}"
+  ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
+  vpc_id              = "${var.vpc_id}"
+  publicly_accessible = "${var.publicly_accessible}"
 
-  tags = "${local.tags}"
-}
+  instance_class = "${var.instance_class}"
+  instance_count = "${var.instance_count}"
 
-resource "aws_rds_cluster_instance" "db" {
-  engine = "aurora-mysql"
-
-  count                   = "${var.instance_count}"
-  identifier              = "${local.name}-${count.index}"
-  cluster_identifier      = "${aws_rds_cluster.db.id}"
-  instance_class          = "${var.instance_class}"
-  db_subnet_group_name    = "${var.database_subnet_group}"
-  db_parameter_group_name = "${aws_db_parameter_group.db.name}"
-
-  publicly_accessible          = "${var.publicly_accessible}"
-  performance_insights_enabled = true
+  backtrack_window    = "${var.backtrack_window}"
+  skip_final_snapshot = "${var.skip_final_snapshot}"
 
   apply_immediately = "${var.apply_immediately}"
-
-  tags = "${local.tags}"
-}
-
-resource "aws_rds_cluster_parameter_group" "db" {
-  name        = "${local.name}"
-  family      = "aurora-mysql5.7"
-  description = "RDS default cluster parameter group"
-
-  parameter = ["${var.rds_cluster_parameters}"]
-
-  tags = "${local.tags}"
-}
-
-resource "aws_db_parameter_group" "db" {
-  name   = "${local.name}"
-  family = "aurora-mysql5.7"
-
-  parameter = ["${var.db_parameters}"]
-
-  tags = "${local.tags}"
 }
