@@ -32,7 +32,6 @@ resource "aws_security_group" "rds" {
   tags = "${local.tags}"
 }
 
-# engine aurora-mysql means mysql 5.7 compat
 resource "aws_rds_cluster" "db" {
   engine = "${var.engine}"
 
@@ -58,7 +57,7 @@ resource "aws_rds_cluster" "db" {
 }
 
 resource "aws_rds_cluster_instance" "db" {
-  engine = "aurora-mysql"
+  engine = "${var.engine}"
 
   count                   = "${var.instance_count}"
   identifier              = "${local.name}-${count.index}"
@@ -77,19 +76,27 @@ resource "aws_rds_cluster_instance" "db" {
 
 resource "aws_rds_cluster_parameter_group" "db" {
   name        = "${local.name}"
-  family      = "aurora-mysql5.7"
+  family      = "${local.name}"
   description = "RDS default cluster parameter group"
 
   parameter = ["${var.rds_cluster_parameters}"]
+
+  lifecycle {
+    ignore_changes = ["family"]
+  }
 
   tags = "${local.tags}"
 }
 
 resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
-  family = "aurora-mysql5.7"
+  family = "${local.name}"
 
   parameter = ["${var.db_parameters}"]
+
+  lifecycle {
+    ignore_changes = ["family"]
+  }
 
   tags = "${local.tags}"
 }
