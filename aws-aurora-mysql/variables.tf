@@ -96,7 +96,7 @@ variable "db_parameters" {
     },
     {
       name  = "log_output"
-      value = "FILE"
+      value = "file"
     },
     {
       name  = "log_queries_not_using_indexes"
