@@ -85,22 +85,27 @@ variable "db_parameters" {
     {
       name  = "general_log"
       value = 1
+      apply_method = "pending-reboot"
     },
     {
       name  = "slow_query_log"
       value = "1"
+      apply_method = "pending-reboot"
     },
     {
       name  = "long_query_time"
       value = "0"
+      apply_method = "pending-reboot"
     },
     {
       name  = "log_output"
       value = "file"
+      apply_method = "pending-reboot"
     },
     {
       name  = "log_queries_not_using_indexes"
       value = "1"
+      apply_method = "pending-reboot"
     },
   ]
 }
