@@ -48,7 +48,7 @@ resource "aws_rds_cluster" "db" {
   skip_final_snapshot                 = "${var.skip_final_snapshot}"
   backtrack_window                    = "${var.backtrack_window}"
   kms_key_id                          = "${var.kms_key_id}"
-  port = "${var.port}"
+  port                                = "${var.port}"
 
   enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
 

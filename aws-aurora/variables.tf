@@ -84,3 +84,7 @@ variable "kms_key_id" {
   description = "If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module."
   default     = ""
 }
+
+variable "port" {
+  type = "string"
+}
