@@ -68,13 +68,13 @@ variable "rds_cluster_parameters" {
 
   default = [
     {
-      name  = "character_set_server"
-      value = "utf8"
+      name         = "character_set_server"
+      value        = "utf8"
       apply_method = "pending-reboot"
     },
     {
-      name  = "character_set_client"
-      value = "utf8"
+      name         = "character_set_client"
+      value        = "utf8"
       apply_method = "pending-reboot"
     },
   ]
@@ -85,28 +85,28 @@ variable "db_parameters" {
 
   default = [
     {
-      name  = "general_log"
-      value = 1
+      name         = "general_log"
+      value        = 1
       apply_method = "pending-reboot"
     },
     {
-      name  = "slow_query_log"
-      value = "1"
+      name         = "slow_query_log"
+      value        = "1"
       apply_method = "pending-reboot"
     },
     {
-      name  = "long_query_time"
-      value = "0"
+      name         = "long_query_time"
+      value        = "0"
       apply_method = "pending-reboot"
     },
     {
-      name  = "log_output"
-      value = "file"
+      name         = "log_output"
+      value        = "file"
       apply_method = "pending-reboot"
     },
     {
-      name  = "log_queries_not_using_indexes"
-      value = "1"
+      name         = "log_queries_not_using_indexes"
+      value        = "1"
       apply_method = "pending-reboot"
     },
   ]
