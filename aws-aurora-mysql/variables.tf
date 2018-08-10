@@ -70,10 +70,12 @@ variable "rds_cluster_parameters" {
     {
       name  = "character_set_server"
       value = "utf8"
+      apply_method = "pending-reboot"
     },
     {
       name  = "character_set_client"
       value = "utf8"
+      apply_method = "pending-reboot"
     },
   ]
 }
