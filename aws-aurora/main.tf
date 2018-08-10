@@ -13,7 +13,7 @@ locals {
 
 resource "aws_security_group" "rds" {
   name        = "${local.name}"
-  description = "Allow mysql inbound"
+  description = "Allow db traffic."
 
   vpc_id = "${var.vpc_id}"
 
@@ -26,7 +26,7 @@ resource "aws_security_group" "rds" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes        = ["name"]
+    ignore_changes        = ["name", "description"]
   }
 
   tags = "${local.tags}"
