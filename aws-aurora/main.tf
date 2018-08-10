@@ -18,8 +18,8 @@ resource "aws_security_group" "rds" {
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    from_port   = 3306
-    to_port     = 3306
+    from_port   = "${var.port}"
+    to_port     = "${var.port}"
     protocol    = "tcp"
     cidr_blocks = ["${var.ingress_cidr_blocks}"]
   }
@@ -48,6 +48,7 @@ resource "aws_rds_cluster" "db" {
   skip_final_snapshot                 = "${var.skip_final_snapshot}"
   backtrack_window                    = "${var.backtrack_window}"
   kms_key_id                          = "${var.kms_key_id}"
+  port = "${var.port}"
 
   enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
 

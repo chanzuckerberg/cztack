@@ -14,11 +14,6 @@ variable "database_username" {
   type = "string"
 }
 
-variable "database_port" {
-  type    = "string"
-  default = "5432"
-}
-
 variable "env" {
   type = "string"
 }

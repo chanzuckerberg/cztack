@@ -17,6 +17,7 @@ module "aurora" {
   ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
   vpc_id              = "${var.vpc_id}"
   publicly_accessible = "${var.publicly_accessible}"
+  port = 5432
 
   instance_class = "${var.instance_class}"
   instance_count = "${var.instance_count}"
