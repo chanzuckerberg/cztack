@@ -8,7 +8,6 @@
 | backtrack_window |  | string | `0` | no |
 | database_name |  | string | - | yes |
 | database_password |  | string | - | yes |
-| database_port |  | string | `5432` | no |
 | database_subnet_group |  | string | - | yes |
 | database_username |  | string | - | yes |
 | db_parameters |  | list | `<list>` | no |
@@ -30,9 +29,7 @@
 | Name | Description |
 |------|-------------|
 | database_name |  |
-| database_password |  |
-| database_port |  |
-| database_username |  |
 | endpoint |  |
+| port |  |
 
 <!-- END -->

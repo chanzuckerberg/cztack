@@ -11,11 +11,14 @@
 | database_subnet_group |  | string | - | yes |
 | database_username |  | string | - | yes |
 | db_parameters |  | list | `<list>` | no |
+| engine |  | string | - | yes |
 | env |  | string | - | yes |
 | ingress_cidr_blocks |  | list | - | yes |
 | instance_class |  | string | `db.t2.small` | no |
 | instance_count |  | string | - | yes |
+| kms_key_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `` | no |
 | owner |  | string | - | yes |
+| port |  | string | - | yes |
 | project |  | string | - | yes |
 | publicly_accessible |  | string | `false` | no |
 | rds_cluster_parameters |  | list | `<list>` | no |
@@ -29,5 +32,6 @@
 |------|-------------|
 | database_name |  |
 | endpoint |  |
+| port |  |
 
 <!-- END -->

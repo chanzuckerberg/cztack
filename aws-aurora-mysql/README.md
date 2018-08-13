@@ -15,6 +15,7 @@
 | ingress_cidr_blocks |  | list | - | yes |
 | instance_class |  | string | `db.t2.small` | no |
 | instance_count |  | string | - | yes |
+| kms_key_id |  | string | `` | no |
 | owner |  | string | - | yes |
 | project |  | string | - | yes |
 | publicly_accessible |  | string | `false` | no |
