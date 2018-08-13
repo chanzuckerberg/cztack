@@ -18,7 +18,7 @@ parameters.
 | owner |  | string | - | yes |
 | parameter_group_name |  | string | `default.redis3.2` | no |
 | port |  | string | `6379` | no |
-| project |  | string | - | yes |
+| project | Project for tags. See ../README.md#consistent-tagging | string | - | yes |
 | resource_name | If not set, name will be ${var.project}-${var.env}-${var.name}. | string | `` | no |
 | service |  | string | `redis` | no |
 | subnets |  | list | - | yes |
