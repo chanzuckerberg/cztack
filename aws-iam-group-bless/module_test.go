@@ -9,7 +9,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAWSIAMGroupConsoleLogin(t *testing.T) {
+func TestAWSIAMGroupBless(t *testing.T) {
 	// t.Parallel()
 
 	terraformOptions := &terraform.Options{

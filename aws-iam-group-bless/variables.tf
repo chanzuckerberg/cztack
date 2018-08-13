@@ -1,6 +1,5 @@
 variable "principal_name" {
   type        = "string"
-  default     = ""
   description = "Name of the ssh principal this group authorizes."
 }
 
