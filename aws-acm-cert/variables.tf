@@ -14,17 +14,21 @@ variable "aws_route53_zone_id" {
 }
 
 variable "project" {
-  type = "string"
+  type        = "string"
+  description = "Project for tags. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "env" {
-  type = "string"
+  type        = "string"
+  description = "Env for tags. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "service" {
-  type = "string"
+  type        = "string"
+  description = "Service for tags. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "owner" {
-  type = "string"
+  type        = "string"
+  description = "Owner for tags. See [doc](../README.md#consistent-tagging)."
 }

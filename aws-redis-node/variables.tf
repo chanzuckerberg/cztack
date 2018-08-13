@@ -1,14 +1,16 @@
 variable "project" {
   type        = "string"
-  description = "Project for tags. See [../README.md#consistent-tagging]"
+  description = "Project for tags. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "env" {
-  type = "string"
+  type        = "string"
+  description = "Env for tags. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "owner" {
-  type = "string"
+  type        = "string"
+  description = "Owner for tags. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "subnets" {
