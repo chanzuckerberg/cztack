@@ -16,7 +16,7 @@ variable "database_username" {
 
 variable "env" {
   type        = "string"
-  description = "Env for tags. See [doc](../README.md#consistent-tagging)."
+  description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "ingress_cidr_blocks" {
@@ -35,12 +35,12 @@ variable "instance_count" {
 
 variable "owner" {
   type        = "string"
-  description = "Owner for tags. See [doc](../README.md#consistent-tagging)."
+  description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "project" {
   type        = "string"
-  description = "Project for tags. See [doc](../README.md#consistent-tagging)"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "skip_final_snapshot" {
@@ -57,7 +57,7 @@ variable "apply_immediately" {
 
 variable "service" {
   type        = "string"
-  description = "Service for tags. See [doc](../README.md#consistent-tagging)."
+  description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "vpc_id" {

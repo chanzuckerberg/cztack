@@ -16,17 +16,17 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | database_username |  | string | - | yes |
 | db_parameters |  | list | `<list>` | no |
 | engine |  | string | - | yes |
-| env | Env for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | ingress_cidr_blocks |  | list | - | yes |
 | instance_class |  | string | `db.t2.small` | no |
 | instance_count |  | string | `1` | no |
 | kms_key_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `` | no |
-| owner | Owner for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | port |  | string | - | yes |
-| project | Project for tags. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | publicly_accessible |  | string | `false` | no |
 | rds_cluster_parameters |  | list | `<list>` | no |
-| service | Service for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | skip_final_snapshot |  | string | `false` | no |
 | vpc_id |  | string | - | yes |
 

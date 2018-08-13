@@ -29,11 +29,11 @@ output "secret" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| env | Env for tags. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | name | The name of the secret. | string | - | yes |
-| owner | Owner for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| project | Project for tags. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| service | Service for tags. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | use_paths | This exists to support data written by Chamber before version 2.0.0, which used '.' instead of '/' as a separator. | string | `true` | no |
 
 ## Outputs
