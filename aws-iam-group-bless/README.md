@@ -24,7 +24,7 @@ output "group_name" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | iam_path | IAM path under which resources will be created. | string | `/` | no |
-| principal_name | Name of the ssh principal membership in this group authorizes. | string | `` | no |
+| principal_name | Name of the ssh principal this group authorizes. | string | `` | no |
 
 ## Outputs
 

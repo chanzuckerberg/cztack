@@ -1,7 +1,7 @@
 variable "principal_name" {
   type        = "string"
   default     = ""
-  description = "Name of the ssh principal membership in this group authorizes."
+  description = "Name of the ssh principal this group authorizes."
 }
 
 variable "iam_path" {
