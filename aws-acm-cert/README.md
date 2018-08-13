@@ -1,8 +1,8 @@
 # AWS ACM Cert
 
-Will create and attempt to validate an certificate in AWS' ACM service. This module uses DNS verification so the principle running this needs to be able to write to the relevant Route53 zone.
+Will create and attempt to validate an certificate in the [AWS ACM service](https://aws.amazon.com/certificate-manager/). This module uses DNS verification so the principal running this needs to be able to write to the relevant Route53 zone.
 
-NOTE: if you intend to use this certificate in a cloudfront distribution it must exist in us-east-1 region.
+NOTE: if you intend to use this certificate in a cloudfront distribution it must be created in `us-east-1` region.
 
 ## Example
 
@@ -12,6 +12,7 @@ module "cert" {
 
   # the cert domain name
   cert_domain_name = "..."
+  
   # the route53 zone for validating the `cert_domain_name`
   aws_route53_zone_id = "..."
   
