@@ -1,6 +1,6 @@
 # AWS IAM group for ssh
 
-This module will create an IAM group that is by Bless to verify ssh certificate principals.
+This module will create an IAM group that is used by Bless to verify ssh certificate principals.
 
 ## Example
 
