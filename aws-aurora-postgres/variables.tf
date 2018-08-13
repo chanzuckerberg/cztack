@@ -27,7 +27,7 @@ variable "instance_class" {
 }
 
 variable "instance_count" {
-  type = "string"
+  type    = "string"
   default = 1
 }
 
