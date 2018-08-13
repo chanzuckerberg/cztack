@@ -1,16 +1,21 @@
 variable "env" {
   type        = "string"
-  description = "The cloud env (ie staging, prod)."
+  description = "Env for tags. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "project" {
   type        = "string"
-  description = "The project name (probably same as team)."
+  description = "Project for tags. See [doc](../README.md#consistent-tagging)"
+}
+
+variable "owner" {
+  type        = "string"
+  description = "Owner for tags. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "service" {
   type        = "string"
-  description = "The service."
+  description = "Service for tags. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "name" {

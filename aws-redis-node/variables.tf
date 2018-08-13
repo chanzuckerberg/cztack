@@ -26,7 +26,9 @@ variable "ingress_security_group_ids" {
 }
 
 variable "service" {
-  default = "redis"
+  type        = "string"
+  description = "Service for tags. See [doc](../README.md#consistent-tagging)"
+  default     = "redis"
 }
 
 variable "port" {

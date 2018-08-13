@@ -42,16 +42,16 @@ module "db" {
 | database_subnet_group |  | string | - | yes |
 | database_username |  | string | - | yes |
 | db_parameters |  | list | `<list>` | no |
-| env |  | string | - | yes |
+| env | Env for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | ingress_cidr_blocks |  | list | - | yes |
 | instance_class |  | string | `db.t2.small` | no |
 | instance_count |  | string | `1` | no |
 | kms_key_id |  | string | `` | no |
-| owner |  | string | - | yes |
-| project |  | string | - | yes |
+| owner | Owner for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| project | Project for tags. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | publicly_accessible |  | string | `false` | no |
 | rds_cluster_parameters |  | list | `<list>` | no |
-| service |  | string | - | yes |
+| service | Service for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | skip_final_snapshot |  | string | `false` | no |
 | vpc_id |  | string | - | yes |
 

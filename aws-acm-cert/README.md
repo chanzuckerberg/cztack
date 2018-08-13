@@ -37,10 +37,10 @@ module "cert" {
 | aws_route53_zone_id |  | string | - | yes |
 | cert_domain_name | Like www.foo.bar.com or *.foo.bar.com | string | - | yes |
 | cert_subject_alternative_names | A map of <alternative_domain:route53_zone_id> | map | `<map>` | no |
-| env |  | string | - | yes |
-| owner |  | string | - | yes |
-| project |  | string | - | yes |
-| service |  | string | - | yes |
+| env | Env for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| owner | Owner for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| project | Project for tags. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| service | Service for tags. See [doc](../README.md#consistent-tagging). | string | - | yes |
 
 ## Outputs
 
