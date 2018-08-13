@@ -6,12 +6,12 @@ This module will create a group which has the right to assume a particular IAM r
 module "group" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-group-assume-role?ref=v0.11.0"
 
-  group_name      = "…"
-  path            = "…"
+  group_name      = "..."
+  iam_path        = "..."
   target_accounts = [...]
   target_role     = "..."
 
-  depends_on = […]
+  depends_on = ...
 }
 
 output "group_arn" {
