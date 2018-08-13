@@ -24,6 +24,6 @@ module "policy" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | iam_path |  | string | `/` | no |
-| role_name |  | string | - | yes |
+| role_name | The role to which this policy should be attached. | string | - | yes |
 
 <!-- END -->
