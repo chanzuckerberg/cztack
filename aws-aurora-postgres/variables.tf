@@ -28,6 +28,7 @@ variable "instance_class" {
 
 variable "instance_count" {
   type = "string"
+  default = 1
 }
 
 variable "owner" {

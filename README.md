@@ -4,7 +4,11 @@ Cztack (pronounced "stack") is CZI's collection of Terraform modules. We use the
 
 ## Design Principles
 
-TODO
+More TODO here
+
+### Consistent Tagging
+
+We tag all applicable resources with 'owner', 'project', 'env', 'service' and 'managedBy'.
 
 ## Modules
 

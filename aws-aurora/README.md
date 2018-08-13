@@ -1,3 +1,7 @@
+# AWS Aurora Module
+
+This is a low-level module for creating AWS Aurora clusters. We strongly reccomend you use one of the higher-level, opinionated modules for [mysql](../aws-aurora-mysql/README.md) or [postgres](../aws-aurora-postgres/README.md).
+
 <!-- START -->
 
 ## Inputs
@@ -15,7 +19,7 @@
 | env |  | string | - | yes |
 | ingress_cidr_blocks |  | list | - | yes |
 | instance_class |  | string | `db.t2.small` | no |
-| instance_count |  | string | - | yes |
+| instance_count |  | string | `1` | no |
 | kms_key_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `` | no |
 | owner |  | string | - | yes |
 | port |  | string | - | yes |
