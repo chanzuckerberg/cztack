@@ -17,8 +17,8 @@ func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 		TerraformDir: ".",
 
 		Vars: map[string]interface{}{
-			"group_name": random.UniqueId(),
-			"iam_path":   fmt.Sprintf("/%s/", random.UniqueId()),
+			"principal_name": random.UniqueId(),
+			"iam_path":       fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 
 		EnvVars: map[string]string{
