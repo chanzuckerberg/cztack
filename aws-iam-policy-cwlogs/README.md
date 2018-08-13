@@ -9,11 +9,10 @@ module "policy" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-policy-cwlogs?ref=v0.11.0"
 
 
-  iam_path            = "…"
-  target_accounts = [...]
+  iam_path        = "..."
   target_role     = "..."
 
-  depends_on = […]
+  depends_on = [...]
 }
 ```
 
@@ -25,6 +24,6 @@ module "policy" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | iam_path |  | string | `/` | no |
-| role_name |  | string | - | yes |
+| role_name | The role to which this policy should be attached. | string | - | yes |
 
 <!-- END -->
