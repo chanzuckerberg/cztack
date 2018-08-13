@@ -10,6 +10,7 @@ module "group" {
 
   principal_name = "…"
   iam_path = "…"
+  users = ["..."]
 }
 
 output "group_name" {
