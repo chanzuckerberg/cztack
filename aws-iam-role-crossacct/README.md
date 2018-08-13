@@ -1,14 +1,18 @@
-# Module template
+# AWS cross-account role module
+
+This module makes it easy to define a role assumeable by another AWS account. Like [this](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
 
 ## Example
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack/…?ref=v0.11.0"
-}
+  source = "github.com/chanzuckerberg/cztack//aws-iam-role-crossacct?ref=v0.11.0"
 
-output "…" {
-  value = "${…}"
+  # The name of the role to create (in this account).
+  role_name = "..."
+
+  # The id of the other account that can assume this role.
+  source_account_id = "..."
 }
 ```
 

@@ -1,9 +1,11 @@
 variable "source_account_id" {
-  type = "string"
+  type        = "string"
+  description = "AWS Account that can assume this role."
 }
 
 variable "role_name" {
-  type = "string"
+  type        = "string"
+  description = "Name of the role to create"
 }
 
 variable "s3_bucket_prefix" {

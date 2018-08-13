@@ -8,8 +8,11 @@ This creates a role, `role_name` which is assumable from the account `source_acc
 module "group" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-role-poweruser?ref=v0.11.0"
 
-  role_name         = "…" # defaults to "poweruser"
-  source_account_id = "…"
+  # defaults to "poweruser"
+  role_name         = "..."
+
+  # The id of the other AWS account that can assume this role. 
+  source_account_id = "..."
 }
 ```
 
@@ -22,5 +25,12 @@ module "group" {
 | iam_path |  | string | `/` | no |
 | role_name |  | string | `poweruser` | no |
 | source_account_id |  | string | - | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| arn |  |
+| role_name |  |
 
 <!-- END -->

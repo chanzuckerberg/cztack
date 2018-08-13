@@ -8,8 +8,10 @@ This will create a role for attaching to an ECS task, using `policy`.
 module "ecs-role" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-ecs-task-role?ref=v0.11.0"
   
+  # IAM policy
   policy = "..."
 
+  # Variables used for tagging.
   project = "..."
   env     = "..."
   service = "..."
