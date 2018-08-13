@@ -1,5 +1,6 @@
 variable "project" {
-  type = "string"
+  type        = "string"
+  description = "Project for tags. See ../README.md#consistent-tagging"
 }
 
 variable "env" {
