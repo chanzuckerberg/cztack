@@ -4,11 +4,11 @@
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack/…?ref=v0.11.0"
+  source = "github.com/chanzuckerberg/cztack/...?ref=v0.11.0"
 }
 
-output "…" {
-  value = "${…}"
+output "..." {
+  value = "${...}"
 }
 ```
 

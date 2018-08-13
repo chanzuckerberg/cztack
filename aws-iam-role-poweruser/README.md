@@ -8,8 +8,8 @@ This creates a role, `role_name` which is assumable from the account `source_acc
 module "group" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-role-poweruser?ref=v0.11.0"
 
-  role_name         = "…" # defaults to "poweruser"
-  source_account_id = "…"
+  role_name         = "..." # defaults to "poweruser"
+  source_account_id = "..."
 }
 ```
 

@@ -8,8 +8,8 @@ This module will create an IAM group and grant access for its members to log int
 module "group" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-group-console-login?ref=v0.11.0"
 
-  group_name = "…"
-  iam_path = "…"
+  group_name = "..."
+  iam_path   = "..."
 }
 
 output "group_name" {

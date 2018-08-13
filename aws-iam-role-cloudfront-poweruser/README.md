@@ -1,3 +1,8 @@
+# AWS IAM Role Cloudfront Poweruser
+
+This module will create a role which is granted poweruser control over AWS CLoudfront.
+
+
 <!-- START -->
 
 ## Inputs

@@ -8,7 +8,7 @@ This will create a readonly role, assumeable from `source_account_id`.
 module "role" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-role-readonly?ref=v0.11.0"
 
-  source_account_id = "…"
+  source_account_id = "..."
 }
 
 output "role_name" {
