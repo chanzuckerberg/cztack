@@ -2,7 +2,6 @@
 
 This will create a role for doing security audits, assumeable from `source_account_id`.
 
-
 ## Example
 
 ```hcl

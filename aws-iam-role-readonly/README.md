@@ -8,6 +8,10 @@ This will create a readonly role, assumeable from `source_account_id`.
 module "role" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-role-readonly?ref=v0.11.0"
 
+  # defaults to 'readonly'
+  role_name = "..."
+
+  # The ID of the other AWS account that can assume this role.
   source_account_id = "..."
 }
 

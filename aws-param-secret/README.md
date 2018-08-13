@@ -17,7 +17,7 @@ module "secret" {
   name = "password"
 }
 
-// yeah don't really do this
+# yeah don't really do this
 output "secret" {
   value = "${module.secret.value}"
 }
