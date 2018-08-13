@@ -9,3 +9,9 @@ variable "iam_path" {
   default     = "/"
   description = "IAM path under which resources will be created."
 }
+
+variable "users" {
+  type        = "list"
+  default     = []
+  description = "The IAM Users to add to this group."
+}
