@@ -1,21 +1,21 @@
 variable "project" {
   type        = "string"
-  description = "The high-level project. [Doc](https://czi.quip.com/TBxAAAo70sa8#HJSACAjH8mS)"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "env" {
   type        = "string"
-  description = "The compute environment. [Doc](https://czi.quip.com/TBxAAAo70sa8#HJSACAjH8mS)"
+  description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "service" {
   type        = "string"
-  description = "The name of the service. [Doc](https://czi.quip.com/TBxAAAo70sa8#HJSACAjH8mS)"
+  description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "owner" {
   type        = "string"
-  description = "The email address of the owner. Could be a group. [Doc](https://czi.quip.com/TBxAAAo70sa8#HJSACAjH8mS)"
+  description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "log_group_name" {
