@@ -1,13 +1,16 @@
 variable "project" {
-  type = "string"
+  type        = "string"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "env" {
-  type = "string"
+  type        = "string"
+  description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "owner" {
-  type = "string"
+  type        = "string"
+  description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "subnets" {
@@ -23,7 +26,9 @@ variable "ingress_security_group_ids" {
 }
 
 variable "service" {
-  default = "redis"
+  type        = "string"
+  description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
+  default     = "redis"
 }
 
 variable "port" {
