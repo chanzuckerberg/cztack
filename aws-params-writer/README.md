@@ -26,9 +26,10 @@ https://www.terraform.io/docs/state/sensitive-data.html
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| env | The cloud env (ie staging, production). | string | - | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | parameters | Map from parameter names to values to set. | map | - | yes |
-| project | The project name (probably same as team). | string | - | yes |
-| service | The service name. | string | - | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 
 <!-- END -->
