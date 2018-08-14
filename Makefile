@@ -2,7 +2,7 @@ SHELL := /bin/bash
 MODULES=$(filter-out vendor/ module-template/ scripts/ testutil/,$(sort $(dir $(wildcard */))))
 TEST :=./...
 
-all: clean fmt docs test
+all: clean fmt docs lint test
 
 fmt:
 	@for m in $(MODULES); do \
