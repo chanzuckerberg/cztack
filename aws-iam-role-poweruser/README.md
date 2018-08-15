@@ -6,7 +6,7 @@ This creates a role, `role_name` which is assumable from the account `source_acc
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-role-poweruser?ref=v0.11.0"
+  source = "github.com/chanzuckerberg/cztack/aws-iam-role-poweruser?ref=v0.12.0"
 
   # defaults to "poweruser"
   role_name         = "..."
