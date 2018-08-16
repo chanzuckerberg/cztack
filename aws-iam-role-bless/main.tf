@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "client" {
 
 resource "aws_iam_role_policy" "client" {
   name   = "lambda"
-  role   = "${aws_iam_role.client.name}"
+  role   = "${module.client.role_name}"
   policy = "${data.aws_iam_policy_document.client.json}"
 }
 
