@@ -1,14 +1,21 @@
-# Module template
+# aws-iam-role-bless
+
+Creates a role for use with blessclients.
 
 ## Example
 
 ```hcl
-module "group" {
+module "aws-iam-role-bless" {
   source = "github.com/chanzuckerberg/cztack/...?ref=v0.12.0"
+
+  role_name = "..."
+  source_aws_account_id = "..."
+  bless_lambda_arns = "..."
 }
 
 output "..." {
-  value = "${...}"
+  role_name = "${module.aws-iam-role-bless.role_name}"
+  role_arn = "${module.aws-iam-role-bless.role_arn}"
 }
 ```
 
@@ -27,6 +34,7 @@ output "..." {
 
 | Name | Description |
 |------|-------------|
+| role_arn |  |
 | role_name |  |
 
 <!-- END -->
