@@ -1,12 +1,12 @@
-# aws-iam-role-bless
+# AWS IAM Role - Bless client
 
-Creates a role for use with blessclients.
+Creates a role for use with [blessclients](https://github.com/lyft/python-blessclient).
 
 ## Example
 
 ```hcl
 module "aws-iam-role-bless" {
-  source = "github.com/chanzuckerberg/cztack/...?ref=v0.12.0"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=v0.12.0"
 
   role_name = "..."
   source_aws_account_id = "..."

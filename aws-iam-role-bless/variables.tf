@@ -3,7 +3,7 @@ variable "role_name" {
   description = "The name for the role"
 }
 
-variable "source_aws_account_id" {
+variable "source_account_id" {
   type        = "string"
   description = "The source aws account id to allow sts:AssumeRole"
 }
@@ -13,7 +13,7 @@ variable "bless_lambda_arns" {
   description = "List of bless lambda arns"
 }
 
-variable "aws_iam_path" {
+variable "iam_path" {
   type        = "string"
   default     = "/"
   description = "IAM path"
