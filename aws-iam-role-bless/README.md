@@ -9,7 +9,7 @@ module "aws-iam-role-bless" {
   source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=v0.12.0"
 
   role_name = "..."
-  source_aws_account_id = "..."
+  source_account_id = "..."
   bless_lambda_arns = "..."
 }
 
@@ -25,16 +25,15 @@ output "..." {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| aws_iam_path | IAM path | string | `/` | no |
 | bless_lambda_arns | List of bless lambda arns | list | - | yes |
+| iam_path | IAM path | string | `/` | no |
 | role_name | The name for the role | string | - | yes |
-| source_aws_account_id | The source aws account id to allow sts:AssumeRole | string | - | yes |
+| source_account_id | The source aws account id to allow sts:AssumeRole | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| role_arn |  |
 | role_name |  |
 
 <!-- END -->
