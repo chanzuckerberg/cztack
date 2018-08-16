@@ -21,6 +21,7 @@ func TestIAMRoleBless(t *testing.T) {
 		Vars: map[string]interface{}{
 			"role_name":         random.UniqueId(),
 			"source_account_id": curAcct,
+			"bless_lambda_arns": []string{},
 		},
 		EnvVars: map[string]string{
 			"AWS_DEFAULT_REGION": region,
