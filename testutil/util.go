@@ -15,6 +15,7 @@ import (
 )
 
 var IAMRegion = "us-east-1"
+var DefaultRegion = "us-west-2"
 
 func AWSCurrentAccountId(t *testing.T) string {
 	session, err := aws.NewAuthenticatedSession(IAMRegion)
