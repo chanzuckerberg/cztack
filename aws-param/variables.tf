@@ -8,11 +8,6 @@ variable "project" {
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable "owner" {
-  type        = "string"
-  description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
-}
-
 variable "service" {
   type        = "string"
   description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
