@@ -6,7 +6,7 @@ This module will create a role, assumeable by another account, which has ECS Pow
 
 ```hcl
 module "ec2-poweruser" {
-  source = "github.com/chanzuckerberg/cztack//aws-iam-role-ecs-poweruser?ref=v0.11.0"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-role-ecs-poweruser?ref=v0.12.0"
 
   # The name of the role to create in this account.
   role_name = "..."
