@@ -17,20 +17,30 @@ EOF
 
 data "aws_iam_policy_document" "s3" {
   statement {
-    sid = "s3"
+    sid = "s3objects"
 
     actions = [
       "s3:DeleteObject",
-      "s3:ListBucket",
       "s3:GetObject",
-      "s3:GetBucketLocation",
       "s3:PutObject",
       "s3:PutObjectAcl",
     ]
 
     resources = [
-      "arn:aws:s3:::${var.s3_bucket_prefix}*",
-      "arn:aws:s3:::${var.s3_bucket_prefix}*/*",
+      "${formatlist("arn:aws:s3:::%s*/*",var.s3_bucket_prefixes)}",
+    ]
+  }
+
+  statement {
+    sid = "s3buckets"
+
+    actions = [
+      "s3:ListBucket",
+      "s3:GetBucketLocation",
+    ]
+
+    resources = [
+      "${formatlist("arn:aws:s3:::%s*",var.s3_bucket_prefixes)}",
     ]
   }
 }
