@@ -9,7 +9,7 @@ variable "role_name" {
 }
 
 variable "s3_bucket_prefixes" {
-  type        = "string"
+  type        = "list"
   description = "Limits role permissions to buckets with specific prefixes. Empty for all buckets."
 
   default = [
