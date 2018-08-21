@@ -6,7 +6,7 @@ This will create a role for doing security audits, assumeable from `source_accou
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-group-assume-role?ref=v0.12.0"
+  source = "github.com/chanzuckerberg/cztack/aws-iam-group-assume-role?ref=v0.13.0"
 
   source_account_id = "..."
 }
