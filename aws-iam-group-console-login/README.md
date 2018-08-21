@@ -6,7 +6,7 @@ This module will create an IAM group and grant access for its members to log int
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-group-console-login?ref=v0.12.0"
+  source = "github.com/chanzuckerberg/cztack/aws-iam-group-console-login?ref=v0.13.0"
 
   group_name = "..."
   iam_path   = "..."

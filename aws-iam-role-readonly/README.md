@@ -6,7 +6,7 @@ This will create a readonly role, assumeable from `source_account_id`.
 
 ```hcl
 module "role" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-role-readonly?ref=v0.12.0"
+  source = "github.com/chanzuckerberg/cztack/aws-iam-role-readonly?ref=v0.13.0"
 
   # defaults to 'readonly'
   role_name = "..."

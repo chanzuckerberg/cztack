@@ -6,7 +6,7 @@ Creates a role for use with [blessclients](https://github.com/lyft/python-blessc
 
 ```hcl
 module "aws-iam-role-bless" {
-  source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=master"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=v0.13.0"
 
   role_name = "..."
   source_account_id = "..."
