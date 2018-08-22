@@ -28,3 +28,9 @@ variable "role_name" {
   description = "Name of the role to assign the policy to."
   type        = "string"
 }
+
+variable "region" {
+  default     = "*"
+  description = "Region the parameter store values can be read from. Defaults to all."
+  type        = "string"
+}

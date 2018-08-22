@@ -20,12 +20,13 @@ resource "aws_iam_policy" "policy" {
     {
       "Sid": "",
       "Action": [
-        "ssm:GetParameters*",
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath",
         "ssm:GetParameter",
         "ssm:GetParameterHistory"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:ssm::${data.aws_caller_identity.current.account_id}:parameter/${local.resource_name}/*"
+      "Resource": "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.resource_name}/*"
     },
     {
       "Sid": "",
