@@ -23,7 +23,8 @@ resource "aws_iam_policy" "policy" {
         "ssm:GetParameters",
         "ssm:GetParametersByPath",
         "ssm:GetParameter",
-        "ssm:GetParameterHistory"
+        "ssm:GetParameterHistory",
+        "ssm:DescribeParameters"
       ],
       "Effect": "Allow",
       "Resource": "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.resource_name}/*"
