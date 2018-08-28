@@ -3,5 +3,5 @@ locals {
 }
 
 data "aws_ssm_parameter" "secret" {
-  name = "${var.use_paths == "true" ? "/" : ""}${local.service_name}${var.use_paths == "true" ? "/" : "."}${var.name}"
+  name = "${var.use_paths ? "/" : ""}${local.service_name}${var.use_paths ? "/" : "."}${var.name}"
 }

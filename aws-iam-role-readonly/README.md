@@ -34,6 +34,7 @@ output "role_name" {
 
 | Name | Description |
 |------|-------------|
+| arn |  |
 | role_name |  |
 
 <!-- END -->
