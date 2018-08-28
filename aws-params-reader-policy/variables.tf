@@ -19,11 +19,6 @@ variable "parameter_store_key_alias" {
   type        = "string"
 }
 
-variable "iam_path" {
-  type    = "string"
-  default = "/"
-}
-
 variable "role_name" {
   description = "Name of the role to assign the policy to."
   type        = "string"
