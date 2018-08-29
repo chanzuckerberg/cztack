@@ -8,10 +8,9 @@ data "aws_kms_alias" "parameter_store_key" {
   name = "alias/${var.parameter_store_key_alias}"
 }
 
-resource "aws_iam_policy" "policy" {
-  name        = "${local.resource_name}-parameter-policy"
-  description = "Provide access to the parameters of service ${local.resource_name}"
-  path        = "${var.iam_path}"
+resource "aws_iam_role_policy" "policy" {
+  name = "${local.resource_name}-parameter-policy"
+  role = "${var.role_name}"
 
   policy = <<EOF
 {
@@ -40,13 +39,4 @@ resource "aws_iam_policy" "policy" {
   ]
 }
 EOF
-
-  lifecycle {
-    ignore_changes = ["name"]
-  }
-}
-
-resource "aws_iam_role_policy_attachment" "policy_attachment" {
-  role       = "${var.role_name}"
-  policy_arn = "${aws_iam_policy.policy.arn}"
 }
