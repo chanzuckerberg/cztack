@@ -46,6 +46,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:ListAttachedRolePolicies",
       "iam:ListEntitiesForPolicy",
       "iam:ListInstanceProfilesForRole",
+      "iam:ListPolicyVersions",
       "iam:ListRole",
       "iam:ListRolePolicies",
       "iam:PassRole",
