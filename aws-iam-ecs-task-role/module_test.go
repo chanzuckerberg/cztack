@@ -12,7 +12,6 @@ package test
 // )
 
 // func TestTerraformBasicExample(t *testing.T) {
-// 	// t.Parallel()
 
 // 	terraformOptions := &terraform.Options{
 // 		TerraformDir: ".",

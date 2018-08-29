@@ -6,7 +6,6 @@ import (
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
@@ -29,7 +28,5 @@ func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
 
 	defer terraform.Destroy(t, terraformOptions)
 
-	_, err := terraform.InitAndApplyE(t, terraformOptions)
-
-	assert.Nil(t, err)
+	testutil.Run(t, terraformOptions)
 }

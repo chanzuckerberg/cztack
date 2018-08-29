@@ -10,7 +10,6 @@ import (
 )
 
 func TestAWSParamsSecretReaderPolicy(t *testing.T) {
-	// t.Parallel()
 
 	curAcct := testutil.AWSCurrentAccountId(t)
 
