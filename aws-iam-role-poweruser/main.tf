@@ -52,6 +52,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:PassRole",
       "iam:PutRole",
       "iam:PutRolePolicy",
+      "iam:RemoveRoleFromInstanceProfile",
     ]
 
     resources = ["*"]
