@@ -30,6 +30,7 @@ data "aws_iam_policy_document" "misc" {
     sid = "misc"
 
     actions = [
+      "iam:AddRoleToInstanceProfile",
       "iam:AttachRolePolicy",
       "iam:CreateInstanceProfile",
       "iam:CreatePolicy",
