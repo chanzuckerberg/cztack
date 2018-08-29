@@ -31,6 +31,7 @@ data "aws_iam_policy_document" "misc" {
 
     actions = [
       "iam:AttachRolePolicy",
+      "iam:CreateInstanceProfile",
       "iam:CreatePolicy",
       "iam:CreateRole",
       "iam:DeleteRole",
