@@ -38,6 +38,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:DeleteInstanceProfile",
       "iam:DeleteRole",
       "iam:DeleteRolePolicy",
+      "iam:DetachRolePolicy",
       "iam:GetInstanceProfile",
       "iam:GetPolicy",
       "iam:GetPolicyVersion",
