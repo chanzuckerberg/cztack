@@ -30,12 +30,15 @@ data "aws_iam_policy_document" "misc" {
     sid = "misc"
 
     actions = [
+      "iam:AddRoleToInstanceProfile",
       "iam:AttachRolePolicy",
       "iam:CreateInstanceProfile",
       "iam:CreatePolicy",
       "iam:CreateRole",
+      "iam:DeleteInstanceProfile",
       "iam:DeleteRole",
       "iam:DeleteRolePolicy",
+      "iam:DetachRolePolicy",
       "iam:GetInstanceProfile",
       "iam:GetPolicy",
       "iam:GetPolicyVersion",
@@ -43,11 +46,13 @@ data "aws_iam_policy_document" "misc" {
       "iam:ListAttachedRolePolicies",
       "iam:ListEntitiesForPolicy",
       "iam:ListInstanceProfilesForRole",
+      "iam:ListPolicyVersions",
       "iam:ListRole",
       "iam:ListRolePolicies",
       "iam:PassRole",
       "iam:PutRole",
       "iam:PutRolePolicy",
+      "iam:RemoveRoleFromInstanceProfile",
     ]
 
     resources = ["*"]
