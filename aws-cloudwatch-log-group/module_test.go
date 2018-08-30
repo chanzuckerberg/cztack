@@ -9,19 +9,16 @@ import (
 )
 
 func TestAWSCloudWatchLogGroup(t *testing.T) {
-	options := &terraform.Options{
-		TerraformDir: ".",
-		Vars: map[string]interface{}{
+	options := testutil.Options(
+		testutil.DefaultRegion,
+		map[string]interface{}{
 			"project":        random.UniqueId(),
 			"env":            random.UniqueId(),
 			"service":        random.UniqueId(),
 			"owner":          random.UniqueId(),
 			"log_group_name": random.UniqueId(),
 		},
-		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": testutil.DefaultRegion,
-		},
-	}
+	)
 	defer terraform.Destroy(t, options)
 	testutil.Run(t, options)
 }

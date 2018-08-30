@@ -53,20 +53,16 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 	testutil.Run(t, keyTerraformOptions)
 
 	// Actual test
-	terraformOptions := &terraform.Options{
-		TerraformDir: ".",
-
-		Vars: map[string]interface{}{
+	terraformOptions := testutil.Options(
+		testutil.IAMRegion,
+		map[string]interface{}{
 			"project":                   random.UniqueId(),
 			"env":                       random.UniqueId(),
 			"service":                   random.UniqueId(),
 			"role_name":                 roleName,
 			"parameter_store_key_alias": keyAlias,
 		},
-		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": testutil.IAMRegion,
-		},
-	}
+	)
 
 	defer testutil.Cleanup(t, terraformOptions)
 

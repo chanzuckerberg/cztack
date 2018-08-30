@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/chanzuckerberg/cztack/testutil"
-	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSRedisNode(t *testing.T) {
@@ -27,14 +26,8 @@ func TestAWSRedisNode(t *testing.T) {
 
 	az := fmt.Sprintf("%sa", testutil.DefaultRegion)
 
-	options := &terraform.Options{
-		TerraformDir: ".",
-
-		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": testutil.DefaultRegion,
-		},
-
-		Vars: map[string]interface{}{
+	options := testutil.Options(testutil.DefaultRegion,
+		map[string]interface{}{
 			"project": project,
 			"env":     env,
 			"service": service,
@@ -44,7 +37,7 @@ func TestAWSRedisNode(t *testing.T) {
 			"subnets":                    private_subnets,
 			"ingress_security_group_ids": []string{sg},
 		},
-	}
+	)
 
 	defer testutil.Cleanup(t, options)
 

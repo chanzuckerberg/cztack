@@ -5,24 +5,20 @@ import (
 
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
-	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
 
 	curAcct := testutil.AWSCurrentAccountId(t)
 
-	terraformOptions := &terraform.Options{
-		TerraformDir: ".",
+	terraformOptions := testutil.Options(
+		testutil.IAMRegion,
 
-		Vars: map[string]interface{}{
+		map[string]interface{}{
 			"role_name":         random.UniqueId(),
 			"source_account_id": curAcct,
 		},
-		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": testutil.IAMRegion,
-		},
-	}
+	)
 
 	defer testutil.Cleanup(t, terraformOptions)
 

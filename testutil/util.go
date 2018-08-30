@@ -119,6 +119,18 @@ func EnvVar(name string) string {
 	return os.Getenv(name)
 }
 
+func Options(region string, vars map[string]interface{}) *terraform.Options {
+	return &terraform.Options{
+		TerraformDir: ".",
+
+		EnvVars: map[string]string{
+			"AWS_DEFAULT_REGION": region,
+		},
+
+		Vars: vars,
+	}
+}
+
 // Lifted from https://github.com/gruntwork-io/terratest/blob/master/modules/random/random.go and modified
 // to do lowercase only.
 // TODO fork terratest and write a method for random strings that takes a list of acceptable characters.
