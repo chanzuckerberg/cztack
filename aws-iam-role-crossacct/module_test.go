@@ -9,7 +9,6 @@ import (
 )
 
 func TestAWSIAMRoleCrossAcct(t *testing.T) {
-	// t.Parallel()
 
 	curAcct := testutil.AWSCurrentAccountId(t)
 

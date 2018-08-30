@@ -10,7 +10,6 @@ import (
 )
 
 func TestAWSIAMGroupConsoleLogin(t *testing.T) {
-	// t.Parallel()
 
 	terraformOptions := &terraform.Options{
 

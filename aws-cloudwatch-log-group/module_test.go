@@ -23,5 +23,5 @@ func TestAWSCloudWatchLogGroup(t *testing.T) {
 		},
 	}
 	defer terraform.Destroy(t, options)
-	terraform.InitAndApply(t, options)
+	testutil.Run(t, options)
 }

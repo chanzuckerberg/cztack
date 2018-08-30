@@ -9,7 +9,6 @@ import (
 )
 
 func TestAWSIAMRolePowerUser(t *testing.T) {
-	// t.Parallel()
 
 	curAcct := testutil.AWSCurrentAccountId(t)
 
