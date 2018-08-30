@@ -1,6 +1,8 @@
 SHELL := /bin/bash
 MODULES=$(filter-out vendor/ module-template/ scripts/ testutil/,$(sort $(dir $(wildcard */))))
 TEST :=./...
+export PRIVATE_SUBNETS :=subnet-0e74698925a68c650,subnet-0f6ea862112b067c8
+export VPC_ID :=vpc-0442f170b88f8eaf6
 
 all: clean fmt docs lint test
 
