@@ -1,7 +1,7 @@
 module "aurora" {
-  source  = "../aws-aurora"
-  engine  = "aurora-mysql"
-  version = "5.7"
+  source         = "../aws-aurora"
+  engine         = "aurora-mysql"
+  engine_version = "5.7"
 
   project = "${var.project}"
   env     = "${var.env}"
@@ -15,6 +15,7 @@ module "aurora" {
   db_parameters                       = "${var.db_parameters}"
   rds_cluster_parameters              = "${var.rds_cluster_parameters}"
   iam_database_authentication_enabled = false
+  enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
 
   ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
   vpc_id              = "${var.vpc_id}"

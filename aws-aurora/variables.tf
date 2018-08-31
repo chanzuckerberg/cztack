@@ -94,12 +94,16 @@ variable "port" {
   type = "string"
 }
 
-variable "version" {
-  type    = "string"
-  default = "5.7"
+variable "engine_version" {
+  type = "string"
 }
 
 variable "iam_database_authentication_enabled" {
   type    = "string"
   default = true
+}
+
+variable "enabled_cloudwatch_logs_exports" {
+  type    = "list"
+  default = []
 }

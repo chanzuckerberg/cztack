@@ -50,7 +50,7 @@ resource "aws_rds_cluster" "db" {
   kms_key_id                          = "${var.kms_key_id}"
   port                                = "${var.port}"
 
-  enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
+  enabled_cloudwatch_logs_exports = "${var.enabled_cloudwatch_logs_exports}"
 
   apply_immediately = "${var.apply_immediately}"
 
@@ -77,7 +77,7 @@ resource "aws_rds_cluster_instance" "db" {
 
 resource "aws_rds_cluster_parameter_group" "db" {
   name        = "${local.name}"
-  family      = "${var.engine}${var.version}"
+  family      = "${var.engine}${var.engine_version}"
   description = "RDS default cluster parameter group"
 
   parameter = ["${var.rds_cluster_parameters}"]
@@ -91,7 +91,7 @@ resource "aws_rds_cluster_parameter_group" "db" {
 
 resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
-  family = "${var.engine}${var.version}"
+  family = "${var.engine}${var.engine_version}"
 
   parameter = ["${var.db_parameters}"]
 

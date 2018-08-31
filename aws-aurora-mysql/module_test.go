@@ -15,6 +15,7 @@ func TestAWSAuroraMysqlInit(t *testing.T) {
 }
 
 func TestAWSAuroraMysqlInitAndApply(t *testing.T) {
+	t.Parallel()
 	project := testutil.UniqueId()
 	env := testutil.UniqueId()
 	service := testutil.UniqueId()
