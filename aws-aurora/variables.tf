@@ -93,3 +93,13 @@ variable "kms_key_id" {
 variable "port" {
   type = "string"
 }
+
+variable "version" {
+  type    = "string"
+  default = "5.7"
+}
+
+variable "iam_database_authentication_enabled" {
+  type    = "string"
+  default = true
+}

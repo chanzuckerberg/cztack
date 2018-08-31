@@ -42,7 +42,7 @@ resource "aws_rds_cluster" "db" {
   vpc_security_group_ids              = ["${aws_security_group.rds.id}"]
   db_subnet_group_name                = "${var.database_subnet_group}"
   storage_encrypted                   = true
-  iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
   backup_retention_period             = 28
   final_snapshot_identifier           = "${local.name}-snapshot"
   skip_final_snapshot                 = "${var.skip_final_snapshot}"
@@ -77,7 +77,7 @@ resource "aws_rds_cluster_instance" "db" {
 
 resource "aws_rds_cluster_parameter_group" "db" {
   name        = "${local.name}"
-  family      = "${local.name}"
+  family      = "${var.engine}${var.version}"
   description = "RDS default cluster parameter group"
 
   parameter = ["${var.rds_cluster_parameters}"]
@@ -91,7 +91,7 @@ resource "aws_rds_cluster_parameter_group" "db" {
 
 resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
-  family = "${local.name}"
+  family = "${var.engine}${var.version}"
 
   parameter = ["${var.db_parameters}"]
 

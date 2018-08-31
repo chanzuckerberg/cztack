@@ -135,23 +135,29 @@ func Options(region string, vars map[string]interface{}) *terraform.Options {
 // to do lowercase only.
 // TODO fork terratest and write a method for random strings that takes a list of acceptable characters.
 const base62chars = "abcdefghijklmnopqrstuvwxyz"
+const AlphaNum = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+const Alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 const uniqueIDLength = 6 // Should be good for 62^6 = 56+ billion combinations
 
 // UniqueId returns a unique (ish) id we can attach to resources and tfstate files so they don't conflict with each other
 // Uses base 62 to generate a 6 character string that's unlikely to collide with the handful of tests we run in
 // parallel. Based on code here: http://stackoverflow.com/a/9543797/483528
 func UniqueId() string {
-	var out bytes.Buffer
-
-	generator := newRand()
-	for i := 0; i < uniqueIDLength; i++ {
-		out.WriteByte(base62chars[generator.Intn(len(base62chars))])
-	}
-
-	return out.String()
+	return RandomString(base62chars, uniqueIDLength)
 }
 
 // newRand creates a new random number generator, seeding it with the current system time.
 func newRand() *rand.Rand {
 	return rand.New(rand.NewSource(time.Now().UnixNano()))
+}
+
+func RandomString(chars string, length int) string {
+	var out bytes.Buffer
+
+	generator := newRand()
+	for i := 0; i < length; i++ {
+		out.WriteByte(chars[generator.Intn(len(chars))])
+	}
+
+	return out.String()
 }

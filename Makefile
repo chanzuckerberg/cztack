@@ -3,6 +3,8 @@ MODULES=$(filter-out vendor/ module-template/ scripts/ testutil/,$(sort $(dir $(
 TEST :=./...
 export PRIVATE_SUBNETS :=subnet-0e74698925a68c650,subnet-0f6ea862112b067c8
 export VPC_ID :=vpc-0442f170b88f8eaf6
+export VPC_CIDR_BLOCK :=10.72.0.0/16
+export DATABASE_SUBNET_GROUP :=shared-infra-cztack-ci
 
 all: clean fmt docs lint test
 
@@ -38,4 +40,4 @@ clean:
 		rm **/*.tfstate*
 
 test: fmt
-	GOCACHE=off AWS_PROFILE=cztack-ci-1 go test $(TEST)
+	GOCACHE=off AWS_PROFILE=cztack-ci-1 go test -test.timeout 30m $(TEST)
