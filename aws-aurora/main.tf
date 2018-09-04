@@ -68,7 +68,7 @@ resource "aws_rds_cluster_instance" "db" {
   db_parameter_group_name = "${aws_db_parameter_group.db.name}"
 
   publicly_accessible          = "${var.publicly_accessible}"
-  performance_insights_enabled = true
+  performance_insights_enabled = "${var.performance_insights_enabled}"
 
   apply_immediately = "${var.apply_immediately}"
 
