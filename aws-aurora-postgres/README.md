@@ -12,14 +12,15 @@ A simple example:
 
 ```hcl
 module "db" {
-  source = "github.com/chanzuckerberg/cztack//aws-aurora-postgres?ref=v0.13.0"
+  source = "github.com/chanzuckerberg/cztack//aws-aurora-postgres?ref=v0.14.0"
 
   database_name         = "..."
   database_subnet_group = "..."
   database_password     = "..."
   database_password     = "..."
   
-  vpc_id = "..."
+  vpc_id              = "..."
+  ingress_cidr_blocks = "...
 
   # Variables used for tagging
   env     = "..."
