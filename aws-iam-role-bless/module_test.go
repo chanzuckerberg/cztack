@@ -9,7 +9,6 @@ import (
 )
 
 func TestIAMRoleBless(t *testing.T) {
-	t.Parallel()
 
 	region := testutil.IAMRegion
 	curAcct := testutil.AWSCurrentAccountId(t)

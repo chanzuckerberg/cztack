@@ -93,3 +93,22 @@ variable "kms_key_id" {
 variable "port" {
   type = "string"
 }
+
+variable "engine_version" {
+  type = "string"
+}
+
+variable "iam_database_authentication_enabled" {
+  type    = "string"
+  default = true
+}
+
+variable "enabled_cloudwatch_logs_exports" {
+  type    = "list"
+  default = []
+}
+
+variable "performance_insights_enabled" {
+  type    = "string"
+  default = true
+}

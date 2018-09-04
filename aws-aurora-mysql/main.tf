@@ -1,18 +1,22 @@
 module "aurora" {
-  source = "../aws-aurora"
-  engine = "aurora-mysql"
+  source         = "../aws-aurora"
+  engine         = "aurora-mysql"
+  engine_version = "5.7"
 
   project = "${var.project}"
   env     = "${var.env}"
   service = "${var.service}"
   owner   = "${var.owner}"
 
-  database_name          = "${var.database_name}"
-  database_subnet_group  = "${var.database_subnet_group}"
-  database_password      = "${var.database_password}"
-  database_username      = "${var.database_username}"
-  db_parameters          = "${var.db_parameters}"
-  rds_cluster_parameters = "${var.rds_cluster_parameters}"
+  database_name                       = "${var.database_name}"
+  database_subnet_group               = "${var.database_subnet_group}"
+  database_password                   = "${var.database_password}"
+  database_username                   = "${var.database_username}"
+  db_parameters                       = "${var.db_parameters}"
+  rds_cluster_parameters              = "${var.rds_cluster_parameters}"
+  iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
+  performance_insights_enabled        = "${var.performance_insights_enabled}"
+  enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
 
   ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
   vpc_id              = "${var.vpc_id}"

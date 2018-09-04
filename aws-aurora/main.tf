@@ -42,7 +42,7 @@ resource "aws_rds_cluster" "db" {
   vpc_security_group_ids              = ["${aws_security_group.rds.id}"]
   db_subnet_group_name                = "${var.database_subnet_group}"
   storage_encrypted                   = true
-  iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
   backup_retention_period             = 28
   final_snapshot_identifier           = "${local.name}-snapshot"
   skip_final_snapshot                 = "${var.skip_final_snapshot}"
@@ -50,7 +50,7 @@ resource "aws_rds_cluster" "db" {
   kms_key_id                          = "${var.kms_key_id}"
   port                                = "${var.port}"
 
-  enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
+  enabled_cloudwatch_logs_exports = "${var.enabled_cloudwatch_logs_exports}"
 
   apply_immediately = "${var.apply_immediately}"
 
@@ -68,7 +68,7 @@ resource "aws_rds_cluster_instance" "db" {
   db_parameter_group_name = "${aws_db_parameter_group.db.name}"
 
   publicly_accessible          = "${var.publicly_accessible}"
-  performance_insights_enabled = true
+  performance_insights_enabled = "${var.performance_insights_enabled}"
 
   apply_immediately = "${var.apply_immediately}"
 
@@ -77,7 +77,7 @@ resource "aws_rds_cluster_instance" "db" {
 
 resource "aws_rds_cluster_parameter_group" "db" {
   name        = "${local.name}"
-  family      = "${local.name}"
+  family      = "${var.engine}${var.engine_version}"
   description = "RDS default cluster parameter group"
 
   parameter = ["${var.rds_cluster_parameters}"]
@@ -91,7 +91,7 @@ resource "aws_rds_cluster_parameter_group" "db" {
 
 resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
-  family = "${local.name}"
+  family = "${var.engine}${var.engine_version}"
 
   parameter = ["${var.db_parameters}"]
 
