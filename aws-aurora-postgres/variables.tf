@@ -106,3 +106,8 @@ variable "performance_insights_enabled" {
   type    = "string"
   default = false
 }
+
+variable "iam_database_authentication_enabled" {
+  type    = "string"
+  default = false
+}
