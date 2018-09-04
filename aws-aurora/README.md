@@ -15,8 +15,11 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | database_subnet_group |  | string | - | yes |
 | database_username |  | string | - | yes |
 | db_parameters |  | list | `<list>` | no |
+| enabled_cloudwatch_logs_exports |  | list | `<list>` | no |
 | engine |  | string | - | yes |
+| engine_version |  | string | - | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| iam_database_authentication_enabled |  | string | `true` | no |
 | ingress_cidr_blocks |  | list | - | yes |
 | instance_class |  | string | `db.t2.small` | no |
 | instance_count |  | string | `1` | no |
