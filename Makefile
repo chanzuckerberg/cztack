@@ -40,4 +40,4 @@ clean:
 		rm **/*.tfstate*
 
 test: fmt
-	GOCACHE=off AWS_PROFILE=cztack-ci-1 go test -test.timeout 30m $(TEST)
+	GOCACHE=off AWS_PROFILE=cztack-ci-1 go test -parallel 10 -test.timeout 30m $(TEST)
