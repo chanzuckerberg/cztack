@@ -1,7 +1,7 @@
 module "aurora" {
   source         = "../aws-aurora"
   engine         = "aurora-postgresql"
-  engine_version = "${var.version}"
+  engine_version = "${var.engin_version}"
 
   project = "${var.project}"
   env     = "${var.env}"
