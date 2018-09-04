@@ -101,3 +101,8 @@ variable "engine_version" {
   description = "The version of Postgres to use."
   default     = "9.6"
 }
+
+variable "performance_insights_enabled" {
+  type    = "string"
+  default = false
+}

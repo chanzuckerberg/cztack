@@ -15,7 +15,7 @@ module "aurora" {
   db_parameters                       = "${var.db_parameters}"
   rds_cluster_parameters              = "${var.rds_cluster_parameters}"
   iam_database_authentication_enabled = false
-  performance_insights_enabled        = false
+  performance_insights_enabled        = "${var.performance_insights_enabled}"
 
   ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
   vpc_id              = "${var.vpc_id}"

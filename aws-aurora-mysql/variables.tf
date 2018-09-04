@@ -140,3 +140,8 @@ variable "kms_key_id" {
   description = "If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on)."
   default     = ""
 }
+
+variable "performance_insights_enabled" {
+  type    = "string"
+  default = false
+}
