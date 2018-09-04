@@ -43,6 +43,7 @@ module "db" {
 | db_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | list | `<list>` | no |
 | engine_version | The version of Postgres to use. | string | `9.6` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| iam_database_authentication_enabled |  | string | `false` | no |
 | ingress_cidr_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list | - | yes |
 | instance_class | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html) | string | `db.r4.large` | no |
 | instance_count | Number of instances to create in this cluster. | string | `1` | no |

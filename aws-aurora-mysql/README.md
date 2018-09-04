@@ -43,6 +43,7 @@ module "db" {
 | database_username | Default user to be created. | string | - | yes |
 | db_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.Parameters.Instance) | list | `<list>` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| iam_database_authentication_enabled |  | string | `false` | no |
 | ingress_cidr_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list | - | yes |
 | instance_class | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Performance.html) | string | `db.t2.small` | no |
 | instance_count | Number of instances to create in this cluster. | string | `1` | no |
