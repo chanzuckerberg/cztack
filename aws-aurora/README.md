@@ -25,6 +25,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | instance_count |  | string | `1` | no |
 | kms_key_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| performance_insights_enabled |  | string | `true` | no |
 | port |  | string | - | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | publicly_accessible |  | string | `false` | no |

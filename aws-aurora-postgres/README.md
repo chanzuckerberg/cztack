@@ -48,6 +48,7 @@ module "db" {
 | instance_count | Number of instances to create in this cluster. | string | `1` | no |
 | kms_key_id | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | string | `` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| performance_insights_enabled |  | string | `false` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | publicly_accessible | Avoid doing this - it gives access to the open internet. | string | `false` | no |
 | rds_cluster_parameters | Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster) | list | `<list>` | no |
