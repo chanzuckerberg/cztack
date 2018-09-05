@@ -6,7 +6,7 @@ This module makes it easy to define a role assumeable by another AWS account. Li
 
 ```hcl
 module "group" {
-  source = "github.com/chanzuckerberg/cztack//aws-iam-role-crossacct?ref=v0.13.0"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-role-crossacct?ref=v0.14.0"
 
   # The name of the role to create (in this account).
   role_name = "..."

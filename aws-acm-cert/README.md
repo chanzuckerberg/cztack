@@ -1,6 +1,6 @@
 # AWS ACM Cert
 
-Will create and attempt to validate an certificate in the [AWS ACM service](https://aws.amazon.com/certificate-manager/). This module uses DNS verification so the principal running this needs to be able to write to the relevant Route53 zone.
+Will create and attempt to validate an certificate in the [AWS ACM service](https://aws.amazon.com/certificate-manager/). This module uses DNS verification so the principal running this needs to be able to write to the supplied Route53 zone.
 
 NOTE: if you intend to use this certificate in a cloudfront distribution it must be created in `us-east-1` region.
 
@@ -8,7 +8,7 @@ NOTE: if you intend to use this certificate in a cloudfront distribution it must
 
 ```hcl
 module "cert" {
-  source = "github.com/chanzuckerberg/cztack//aws-acm-cert?ref=v0.13.0"
+  source = "github.com/chanzuckerberg/cztack//aws-acm-cert?ref=v0.14.0"
 
   # the cert domain name
   cert_domain_name = "..."

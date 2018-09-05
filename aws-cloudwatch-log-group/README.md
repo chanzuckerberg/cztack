@@ -1,3 +1,9 @@
+# AWS Cloudwatch Log Group
+
+This module will create a new Cloudwatch Log group and tag it appropriately.
+
+By default the name is `${var.project}-${var.env}-${var.service}`, but you can override that by setting `var.log_group_name`.
+
 <!-- START -->
 
 ## Inputs
