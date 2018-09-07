@@ -47,6 +47,6 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 		},
 	)
 
-	defer testutil.Destroy(t, options, 5)
+	defer testutil.Destroy(t, options, 8)
 	testutil.Run(t, options)
 }
