@@ -5,8 +5,8 @@ This module will create a public static site backed by [Cloudfront](https://aws.
 A few things this module does for you–
 
 * creates an s3 bucket
-  * ensures data is encrypted by default through S3 Server Side Encryption
-  * although the bucket is public, we restrict access to a cloudfront [origin access identity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
+  * ensures data is encrypted by default using S3 Server Side Encryption
+  * restricts access to a cloudfront [origin access identity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
   identity
 * creates a cloudfront distribution
   * TLS required through [ACM](https://aws.amazon.com/certificate-manager/)

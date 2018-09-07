@@ -17,6 +17,8 @@ func TestAwsSinglePageStaticSiteInit(t *testing.T) {
 }
 
 func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
+	t.Skip("Skipping because destroy is painfully slow (>30m on average) - consider running destroy out of band")
+
 	t.Parallel()
 	project := testutil.UniqueId()
 	env := testutil.UniqueId()
@@ -47,7 +49,6 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 		},
 	)
 
-	// Destroy cloudfront resources is painfully slow - consider running this out of band
 	defer testutil.Destroy(t, options, 5)
 	testutil.Run(t, options)
 }
