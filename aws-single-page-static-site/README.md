@@ -39,4 +39,20 @@ module "site" {
 
 <!-- START -->
 
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| aliases | Vanity aliases. Make sure your provided cert supports these. | list | `<list>` | no |
+| aws_acm_cert_arn | An AWS ACM cert. Note that Cloudfront requires certs to be in us-east-1. | string | - | yes |
+| aws_route53_zone_id | A route53 zone ID used to write records. | string | - | yes |
+| cloudfront_price_class | Cloudfront [price class](https://aws.amazon.com/cloudfront/pricing/). | string | `PriceClass_100` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| index_document_path | The path to the index document of your site. | string | `index.html` | no |
+| minimum_tls_version | Minimum TLS version to accept. | string | `TLSv1_2016` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| subdomain | The subdomain for this static site. | string | - | yes |
+
 <!-- END -->
