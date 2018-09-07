@@ -47,6 +47,7 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 		},
 	)
 
-	defer testutil.Destroy(t, options, 8)
+	// Destroy is painfully slow - consider running this out of band
+	defer testutil.Destroy(t, options, 5)
 	testutil.Run(t, options)
 }
