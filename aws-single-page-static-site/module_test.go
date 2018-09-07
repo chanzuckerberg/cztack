@@ -47,6 +47,6 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 		},
 	)
 
-	defer terraform.Destroy(t, options)
+	defer testutil.Destroy(t, options, 5)
 	testutil.Run(t, options)
 }
