@@ -47,7 +47,7 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 		},
 	)
 
-	// Destroy is painfully slow - consider running this out of band
+	// Destroy cloudfront resources is painfully slow - consider running this out of band
 	defer testutil.Destroy(t, options, 5)
 	testutil.Run(t, options)
 }
