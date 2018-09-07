@@ -16,5 +16,5 @@ const (
 	// EnvWildcardCertARN is a premade test ACM cert
 	EnvWildcardCertARN = "WILDCARD_CERT_ARN"
 	// EnvWildcardCloudfrontCertARN is a premate test ACM cert in us-east-1
-	EnvWildcardCloudfrontCertARN = "CLOUDFRONT_CERT_ARN"
+	EnvWildcardCloudfrontCertARN = "CLOUDFRONT_WILDCARD_CERT_ARN"
 )
