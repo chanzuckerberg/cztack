@@ -1,19 +1,20 @@
 locals {
   tags = {
-    project      = "${var.project}"
-    env          = "${var.env}"
-    service      = "${var.service}"
-    owner        = "${var.owner}"
-    managedBy    = "terraform"
-    domain       = "${replace(data.aws_route53_zone.zone.name, "/\\.$/", "")}"
-    website_fqdn = "${var.subdomain}.${local.domain}"
-    bucket_name  = "${local.website_fqdn}"
-
-    aliases = [
-      "${local.website_fqdn}",
-      "www.${local.website_fqdn}",
-    ]
+    project   = "${var.project}"
+    env       = "${var.env}"
+    service   = "${var.service}"
+    owner     = "${var.owner}"
+    managedBy = "terraform"
   }
+
+  domain       = "${replace(data.aws_route53_zone.zone.name, "/\\.$/", "")}"
+  website_fqdn = "${var.subdomain}.${local.domain}"
+  bucket_name  = "${local.website_fqdn}"
+
+  aliases = [
+    "${local.website_fqdn}",
+    "www.${local.website_fqdn}",
+  ]
 }
 
 data "aws_route53_zone" "zone" {
