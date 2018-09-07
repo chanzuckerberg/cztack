@@ -19,8 +19,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var IAMRegion = "us-east-1"
-var DefaultRegion = "us-west-2"
+const (
+	// IAMRegion IAM is allegedly hosted in us-east-1 use this region for IAM related things
+	IAMRegion     = "us-east-1"
+	DefaultRegion = "us-west-2"
+)
 
 func AWSCurrentAccountId(t *testing.T) string {
 	session, err := aws.NewAuthenticatedSession(IAMRegion)

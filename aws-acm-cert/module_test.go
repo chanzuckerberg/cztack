@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/chanzuckerberg/cztack/testutil"
@@ -21,9 +22,12 @@ func TestAWSACMCertInitAndApply(t *testing.T) {
 	service := testutil.UniqueId()
 	owner := testutil.UniqueId()
 
-	certDomainName := testutil.RandomString(testutil.Alpha, 16)
+	certDomainName := fmt.Sprintf(
+		"%s.%s",
+		testutil.UniqueId(),
+		testutil.EnvVar(testutil.EnvRoute53ZoneName))
 
-	route53ZoneID := testutil.EnvVar()
+	route53ZoneID := testutil.EnvVar(testutil.EnvRoute53ZoneID)
 
 	options := testutil.Options(
 		testutil.DefaultRegion,
@@ -33,7 +37,9 @@ func TestAWSACMCertInitAndApply(t *testing.T) {
 			"service": service,
 			"owner":   owner,
 
-			"cert_domain_name": certDomainName,
+			"cert_domain_name":      certDomainName,
+			"aws_route53_zone_id":   route53ZoneID,
+			"validation_record_ttl": 5,
 		},
 	)
 

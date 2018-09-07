@@ -11,10 +11,10 @@ import (
 
 func TestAWSRedisNode(t *testing.T) {
 
-	private_subnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
-	log.Printf("subnets %#v\n", private_subnets)
+	privateSubnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
+	log.Printf("subnets %#v\n", privateSubnets)
 	log.Printf("subnets %#v\n", os.Getenv("PRIVATE_SUBNETS"))
-	vpc := testutil.EnvVar("VPC_ID")
+	vpc := testutil.EnvVar(testutil.EnvVPCID)
 
 	sg := testutil.CreateSecurityGroup(t, testutil.DefaultRegion, vpc)
 	defer testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, sg)
@@ -34,7 +34,7 @@ func TestAWSRedisNode(t *testing.T) {
 			"owner":   owner,
 
 			"availability_zone":          az,
-			"subnets":                    private_subnets,
+			"subnets":                    privateSubnets,
 			"ingress_security_group_ids": []string{sg},
 		},
 	)

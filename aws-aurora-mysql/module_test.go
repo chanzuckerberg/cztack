@@ -21,13 +21,13 @@ func TestAWSAuroraMysqlInitAndApply(t *testing.T) {
 	service := testutil.UniqueId()
 	owner := testutil.UniqueId()
 
-	vpc := testutil.EnvVar("VPC_ID")
-	database_subnet_group := testutil.EnvVar("DATABASE_SUBNET_GROUP")
-	ingress_cidr_blocks := testutil.EnvVar("VPC_CIDR_BLOCK")
+	vpc := testutil.EnvVar(testutil.EnvVPCID)
+	databaseSubnetGroup := testutil.EnvVar(testutil.EnvDatabaseSubnetGroup)
+	ingressCidrBlocks := testutil.EnvVar(testutil.EnvVPCCIDRBlock)
 
-	database_password := testutil.RandomString(testutil.AlphaNum, 8)
-	database_username := testutil.RandomString(testutil.Alpha, 8)
-	database_name := testutil.UniqueId()
+	databasePassword := testutil.RandomString(testutil.AlphaNum, 8)
+	databaseUsername := testutil.RandomString(testutil.Alpha, 8)
+	databaseName := testutil.UniqueId()
 
 	options := testutil.Options(
 		testutil.DefaultRegion,
@@ -38,11 +38,11 @@ func TestAWSAuroraMysqlInitAndApply(t *testing.T) {
 			"owner":   owner,
 
 			"vpc_id":                vpc,
-			"database_subnet_group": database_subnet_group,
-			"database_password":     database_password,
-			"database_username":     database_username,
-			"ingress_cidr_blocks":   []string{ingress_cidr_blocks},
-			"database_name":         database_name,
+			"database_subnet_group": databaseSubnetGroup,
+			"database_password":     databasePassword,
+			"database_username":     databaseUsername,
+			"ingress_cidr_blocks":   []string{ingressCidrBlocks},
+			"database_name":         databaseName,
 			"skip_final_snapshot":   true,
 		},
 	)
