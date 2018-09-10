@@ -19,9 +19,13 @@ resource "aws_iam_role" "role" {
 EOF
 }
 
-resource "aws_iam_role_policy" "policy" {
-  name = "${var.project}-${var.env}-${var.service}"
-  role = "${aws_iam_role.role.id}"
+resource "aws_iam_policy" "policy" {
+  count  = "${var.policy_text != "" ? 1 : 0 }"
+  name   = "${var.project}-${var.env}-${var.service}"
+  policy = "${var.policy_text}"
+}
 
-  policy = "${var.policy}"
+resource "aws_iam_role_policy_attachment" "attachment" {
+  role       = "${aws_iam_role.role.name}"
+  policy_arn = "${var.policy_text != "" ? aws_iam_policy.policy.arn : var.policy_arn}"
 }
