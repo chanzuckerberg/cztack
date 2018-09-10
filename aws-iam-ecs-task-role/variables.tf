@@ -22,24 +22,8 @@ variable "owner" {
   description = "Email address of the owner. Can be a group address."
 }
 
-variable "policy_text" {
+variable "policy" {
   type = "string"
 
-  description = "The text of an IAM policy to create and  attach to this role. Not compatible with policy_arn."
-}
-
-variable "policy_arn" {
-  type = "string"
-
-  description = "The ARN of an existing IAM policy to attach to this role. Note compatible with policy_text."
-}
-
-# Validation
-locals {
-  valid = "${(var.policy_text == "" || var.policy_arn == "") && (var.policy_text != "" || var.policy_arn != "")}"
-}
-
-resource "null_resource" "validation" {
-  count                                                                            = "${local.valid ? 0 : 1 }"
-  "[ERROR] You may set one of `var.policy_text` or `var.policy_arn` but not both." = true
+  description = "IAM policy to grant to this role."
 }

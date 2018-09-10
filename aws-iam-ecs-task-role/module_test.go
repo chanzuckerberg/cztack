@@ -1,54 +1,31 @@
 package test
 
-import (
-	"testing"
+// TODO this won't work because you can't pass JSON in as a var (it gets interpretted as HCL) https://github.com/gruntwork-io/terratest/issues/121
 
-	"github.com/chanzuckerberg/cztack/testutil"
-	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
-)
+// package test
 
-func TestAwsIamEcsTaskRoleInit(t *testing.T) {
-	options := &terraform.Options{
-		TerraformDir: ".",
-	}
-	terraform.Init(t, options)
-}
+// import (
+// 	"testing"
 
-func TestAwsIamEcsTaskRoleValidation(t *testing.T) {
-	a := assert.New(t)
+// 	"github.com/gruntwork-io/terratest/modules/random"
+// 	"github.com/gruntwork-io/terratest/modules/terraform"
+// )
 
-	data := []struct {
-		policy_text string
-		policy_arn  string
-	}{
-		{"{}", "foo"},
-		{"", ""},
-	}
+// func TestTerraformBasicExample(t *testing.T) {
 
-	for _, test := range data {
-		t.Run("", func(t *testing.T) {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+// 	terraformOptions := &terraform.Options{
+// 		TerraformDir: ".",
 
-			options := testutil.Options(
-				testutil.DefaultRegion,
-				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
+// 		Vars: map[string]interface{}{
+// 			"project": random.UniqueId(),
+// 			"env":     random.UniqueId(),
+// 			"service": random.UniqueId(),
+// 			"owner":   random.UniqueId(),
+// 			"policy":  "",
+// 		},
+// 	}
 
-					"policy_text": test.policy_text,
-					"policy_arn":  test.policy_arn,
-				},
-			)
-			defer terraform.DestroyE(t, options)
-			output, e := terraform.InitAndApplyE(t, options)
-			a.NotNil(e)
-			a.Contains(output, "You may set one of `var.policy_text` or `var.policy_arn` but not both.")
-		})
-	}
-}
+// 	defer testutil.Cleanup(t, terraformOptions)
+
+// 	testutil.Run(t, terraformOptions)
+// }
