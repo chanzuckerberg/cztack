@@ -40,5 +40,6 @@ output "ecs-role-arn" {
 | Name | Description |
 |------|-------------|
 | arn |  |
+| name |  |
 
 <!-- END -->
