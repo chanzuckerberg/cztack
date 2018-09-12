@@ -13,6 +13,11 @@ variable "aws_route53_zone_id" {
   type = "string"
 }
 
+variable "validation_record_ttl" {
+  type    = "string"
+  default = 60
+}
+
 variable "project" {
   type        = "string"
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"

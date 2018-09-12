@@ -3,6 +3,7 @@ package testutil
 import (
 	"bytes"
 	"fmt"
+	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -19,8 +20,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var IAMRegion = "us-east-1"
-var DefaultRegion = "us-west-2"
+const (
+	// IAMRegion IAM is allegedly hosted in us-east-1 use this region for IAM related things
+	IAMRegion     = "us-east-1"
+	DefaultRegion = "us-west-2"
+)
 
 func AWSCurrentAccountId(t *testing.T) string {
 	session, err := aws.NewAuthenticatedSession(IAMRegion)
@@ -93,6 +97,28 @@ func DeleteSecurityGroup(t *testing.T, region, id string) {
 func DeleteRole(t *testing.T, name string) {
 	iamClient := aws.NewIamClient(t, IAMRegion)
 	iamClient.DeleteRole(&iam.DeleteRoleInput{RoleName: &name})
+}
+
+// Destroy with retries
+func Destroy(t *testing.T, options *terraform.Options, retries ...int) {
+	retryTimes := 3
+	if retries != nil && len(retries) == 1 {
+		retryTimes = retries[0]
+	}
+	var err error
+	var output string
+	for i := 0; i < retryTimes; i++ {
+		output, err = terraform.DestroyE(t, options)
+		if err == nil {
+			return // Done
+		}
+		fmt.Printf("Retrying delete %d time...\n", i)
+		fmt.Println(output)
+		sleep := math.Min(math.Pow(2, float64(i)), 5*60) // Sleep maximum of 5 minutes
+		time.Sleep(time.Duration(sleep) * time.Second)
+	}
+	// err should not be nil by this point
+	t.Fatal(err)
 }
 
 func Run(t *testing.T, options *terraform.Options) {

@@ -41,6 +41,7 @@ module "cert" {
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| validation_record_ttl |  | string | `60` | no |
 
 ## Outputs
 
