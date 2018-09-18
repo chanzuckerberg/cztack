@@ -1,19 +1,18 @@
-resource "aws_iam_role" "infraci" {
-  name = "${var.role_name}"
-  path = "${var.iam_path}"
+data "aws_iam_policy_document" "assume-role" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+    }
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": {
-    "Effect": "Allow",
-    "Principal": {
-      "AWS": "arn:aws:iam::${var.source_account_id}:root"
-    },
-    "Action": "sts:AssumeRole"
+    actions = ["sts:AssumeRole"]
   }
 }
-EOF
+
+resource "aws_iam_role" "infraci" {
+  name               = "${var.role_name}"
+  path               = "${var.iam_path}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "infraci" {
@@ -21,46 +20,43 @@ resource "aws_iam_role_policy_attachment" "infraci" {
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
 
-resource "aws_iam_policy" "secrets" {
-  name = "${var.role_name}-secrets-reader"
-  path = "${var.iam_path}"
+data "aws_iam_policy_document" "secrets" {
+  statement {
+    sid = "ssm"
 
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "ssm",
-        "Action": [
-          "ssm:GetParameter",
-          "ssm:GetParameterHistory",
-          "ssm:GetParameters",
-          "ssm:GetParametersByPath",
-          "ssm:DescribeParameters"
-        ],
-        "Effect": "Allow",
-        "Resource": "*"
-      },
-      {
-        "Sid": "kms",
-        "Effect": "Allow",
-        "Action": [
-          "kms:Decrypt"
-        ],
-        "Resource": "*"
-      },
-      {
-        "Sid": "servicediscovery",
-        "Effect": "Allow",
-        "Action": [
-          "servicediscovery:GetService",
-          "servicediscovery:GetNamespace"
-        ],
-        "Resource": "*"
-      }
+    actions = [
+      "ssm:GetParameter",
+      "ssm:GetParameterHistory",
+      "ssm:GetParameters",
+      "ssm:GetParametersByPath",
+      "ssm:DescribeParameters",
     ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    sid       = "kms"
+    actions   = ["kms:Decrypt"]
+    resources = ["*"]
+  }
+
+  statement {
+    sid = "servicediscovery"
+
+    actions = [
+      "servicediscovery:GetService",
+      "servicediscovery:GetNamespace",
+    ]
+
+    resources = ["*"]
+  }
 }
-EOF
+
+resource "aws_iam_policy" "secrets" {
+  name   = "${var.role_name}-secrets-reader"
+  path   = "${var.iam_path}"
+  policy = "${data.aws_iam_policy_document.secrets.json}"
 
   lifecycle {
     ignore_changes = ["name"]

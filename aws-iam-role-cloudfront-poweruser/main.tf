@@ -1,18 +1,17 @@
-resource "aws_iam_role" "role" {
-  name = "${var.role_name}"
+data "aws_iam_policy_document" "assume-role" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+    }
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": {
-    "Effect": "Allow",
-    "Principal": {
-      "AWS": "arn:aws:iam::${var.source_account_id}:root"
-    },
-    "Action": "sts:AssumeRole"
+    actions = ["sts:AssumeRole"]
   }
 }
-EOF
+
+resource "aws_iam_role" "role" {
+  name               = "${var.role_name}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
 }
 
 data "aws_iam_policy_document" "s3" {

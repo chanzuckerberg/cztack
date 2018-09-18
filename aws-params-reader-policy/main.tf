@@ -8,35 +8,27 @@ data "aws_kms_alias" "parameter_store_key" {
   name = "alias/${var.parameter_store_key_alias}"
 }
 
-resource "aws_iam_role_policy" "policy" {
-  name = "${local.resource_name}-parameter-policy"
-  role = "${var.role_name}"
+data "aws_iam_policy_document" "policy" {
+  statement {
+    actions = [
+      "ssm:GetParameters",
+      "ssm:GetParametersByPath",
+      "ssm:GetParameter",
+      "ssm:GetParameterHistory",
+      "ssm:DescribeParameters",
+    ]
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Action": [
-        "ssm:GetParameters",
-        "ssm:GetParametersByPath",
-        "ssm:GetParameter",
-        "ssm:GetParameterHistory",
-        "ssm:DescribeParameters"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.resource_name}/*"
-    },
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Action": [
-         "kms:Decrypt"
-      ],
-      "Resource": "${data.aws_kms_alias.parameter_store_key.target_key_arn}"
-    }
-  ]
+    resources = ["arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.resource_name}/*"]
+  }
+
+  statement {
+    actions   = ["kms:Decrypt"]
+    resources = ["${data.aws_kms_alias.parameter_store_key.target_key_arn}"]
+  }
 }
-EOF
+
+resource "aws_iam_role_policy" "policy" {
+  name   = "${local.resource_name}-parameter-policy"
+  role   = "${var.role_name}"
+  policy = "${data.aws_iam_policy_document.policy.json}"
 }
