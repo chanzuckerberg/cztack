@@ -1,19 +1,18 @@
-resource "aws_iam_role" "readonly" {
-  name = "${var.role_name}"
-  path = "${var.iam_path}"
+data "aws_iam_policy_document" "assume-role" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+    }
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": {
-    "Effect": "Allow",
-    "Principal": {
-      "AWS": "arn:aws:iam::${var.source_account_id}:root"
-    },
-    "Action": "sts:AssumeRole"
+    actions = ["sts:AssumeRole"]
   }
 }
-EOF
+
+resource "aws_iam_role" "readonly" {
+  name               = "${var.role_name}"
+  path               = "${var.iam_path}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "readonly" {
@@ -21,27 +20,23 @@ resource "aws_iam_role_policy_attachment" "readonly" {
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
 
-resource "aws_iam_policy" "secrets" {
-  name = "${var.role_name}-chamber-read"
-  path = "${var.iam_path}"
-
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "ssm:Describe*",
-                "ssm:Get*",
-                "ssm:List*",
-                "kms:Decrypt"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        }
+data "aws_iam_policy_document" "secrets" {
+  statement {
+    actions = [
+      "kms:Decrypt",
+      "ssm:Describe*",
+      "ssm:Get*",
+      "ssm:List*",
     ]
+
+    resources = ["*"]
+  }
 }
-EOF
+
+resource "aws_iam_policy" "secrets" {
+  name   = "${var.role_name}-chamber-read"
+  path   = "${var.iam_path}"
+  policy = "${data.aws_iam_policy_document.secrets.json}"
 
   lifecycle {
     ignore_changes = ["name"]

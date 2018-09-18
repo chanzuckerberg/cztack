@@ -1,26 +1,34 @@
-resource "aws_iam_role" "poweruser" {
-  name = "${var.role_name}"
-  path = "${var.iam_path}"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::${var.source_account_id}:root"
-      },
-      "Action": "sts:AssumeRole"
+data "aws_iam_policy_document" "assume-role" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
     }
-  ]
+
+    actions = ["sts:AssumeRole"]
+  }
 }
-EOF
+
+resource "aws_iam_role" "poweruser" {
+  name               = "${var.role_name}"
+  path               = "${var.iam_path}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "poweruser" {
   role       = "${aws_iam_role.poweruser.name}"
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+}
+
+data "aws_iam_policy_document" "poweruser" {
+  statement {
+    sid = "misc"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+    }
+  }
 }
 
 # These are extra permissions we're adding that
