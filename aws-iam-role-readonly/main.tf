@@ -23,10 +23,10 @@ resource "aws_iam_role_policy_attachment" "readonly" {
 data "aws_iam_policy_document" "secrets" {
   statement {
     actions = [
+      "kms:Decrypt",
       "ssm:Describe*",
       "ssm:Get*",
       "ssm:List*",
-      "kms:Decrypt",
     ]
 
     resources = ["*"]

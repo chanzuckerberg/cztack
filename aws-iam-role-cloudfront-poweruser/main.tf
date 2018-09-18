@@ -34,8 +34,8 @@ data "aws_iam_policy_document" "s3" {
     sid = "s3buckets"
 
     actions = [
-      "s3:ListBucket",
       "s3:GetBucketLocation",
+      "s3:ListBucket",
     ]
 
     resources = [

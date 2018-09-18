@@ -30,11 +30,11 @@ data "aws_iam_policy_document" "secrets" {
     sid = "ssm"
 
     actions = [
+      "ssm:DescribeParameters",
       "ssm:GetParameter",
       "ssm:GetParameterHistory",
       "ssm:GetParameters",
       "ssm:GetParametersByPath",
-      "ssm:DescribeParameters",
     ]
 
     resources = ["*"]
