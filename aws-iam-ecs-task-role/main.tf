@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "role" {
   statement {
     principals {
       type        = "Service"
-      identifiers = "ecs-tasks.amazonaws.com"
+      identifiers = ["ecs-tasks.amazonaws.com"]
     }
 
     actions = ["sts:AssumeRole"]
