@@ -5,19 +5,23 @@ variable "alias_name" {
 }
 
 variable "project" {
-  type = "string"
+  type        = "string"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
 variable "env" {
-  type    = "string"
-  default = ""
+  type        = "string"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
+  default     = ""
 }
 
 variable "service" {
-  type    = "string"
-  default = ""
+  type        = "string"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
+  default     = ""
 }
 
 variable "owner" {
-  type = "string"
+  type        = "string"
+  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
