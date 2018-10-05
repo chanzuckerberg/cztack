@@ -7,9 +7,6 @@ This will create a role for attaching to an ECS task, using `policy`.
 ```hcl
 module "ecs-role" {
   source = "github.com/chanzuckerberg/cztack/aws-iam-ecs-task-role?ref=v0.14.0"
-  
-  # IAM policy
-  policy = "..."
 
   # Variables used for tagging.
   project = "..."
@@ -31,7 +28,6 @@ output "ecs-role-arn" {
 |------|-------------|:----:|:-----:|:-----:|
 | env | Environment name. For example– dev, staging or prod. | string | - | yes |
 | owner | Email address of the owner. Can be a group address. | string | - | yes |
-| policy | IAM policy to grant to this role. | string | - | yes |
 | project | High-level project, should be unique across the organization. | string | - | yes |
 | service | Name of this thing we're running. | string | - | yes |
 
