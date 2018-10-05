@@ -3,3 +3,21 @@ variable "alias_name" {
   default     = "parameter_store_key"
   type        = "string"
 }
+
+variable "project" {
+  type = "string"
+}
+
+variable "env" {
+  type    = "string"
+  default = ""
+}
+
+variable "service" {
+  type    = "string"
+  default = ""
+}
+
+variable "owner" {
+  type = "string"
+}
