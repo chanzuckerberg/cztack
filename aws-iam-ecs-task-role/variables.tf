@@ -21,9 +21,3 @@ variable "owner" {
 
   description = "Email address of the owner. Can be a group address."
 }
-
-variable "policy" {
-  type = "string"
-
-  description = "IAM policy to grant to this role."
-}

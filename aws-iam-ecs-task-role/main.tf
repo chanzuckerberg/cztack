@@ -14,10 +14,3 @@ resource "aws_iam_role" "role" {
   description        = "Task role for ${var.service} task in ${var.project}-${var.env}. Owned by ${var.owner}."
   assume_role_policy = "${data.aws_iam_policy_document.role.json}"
 }
-
-resource "aws_iam_role_policy" "policy" {
-  name = "${var.project}-${var.env}-${var.service}"
-  role = "${aws_iam_role.role.id}"
-
-  policy = "${var.policy}"
-}
