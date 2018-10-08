@@ -42,6 +42,12 @@ This module will create a good password policy for your AWS account.
 
 [Read More](aws-iam-password-policy/README.md)
 
+### AWS IAM instance profile
+
+This module will create an EC2 instance profile, attaching to it a new IAM role with permissions to run standard system agents (Systems Manager Agent and Cloudwatch Logs Agent).
+
+[Read More](aws-iam-instance-profile/README.md)
+
 ### AWS IAM cloudwatch logs policy
 
 This will create a policy that allow writing to cloudwatch logs.
