@@ -21,11 +21,6 @@ variable "iam_path" {
   description = "The IAM path under which the Bless lambda will be run."
 }
 
-variable "aws_account_id" {
-  type        = "string"
-  description = "The AWS Account ID where Bless is hosted."
-}
-
 variable "kmsauth_iam_group_name_format" {
   type        = "string"
   default     = "{}"

@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_kms_key" "bless" {
   description             = "KMS key for ${local.name}"
   deletion_window_in_days = 7
@@ -18,7 +20,7 @@ data "aws_iam_policy_document" "kmsauth" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.aws_account_id}:root"] # allows root + admins on the account to manage this key
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"] # allows root + admins on the account to manage this key
     }
   }
 

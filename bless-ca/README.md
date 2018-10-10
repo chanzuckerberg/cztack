@@ -98,7 +98,6 @@ You can read more about Bless and SSH certificates here:
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | authorized_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | list | `<list>` | no |
-| aws_account_id | The AWS Account ID where Bless is hosted. | string | - | yes |
 | bless_logging_level | Bless lambda logging level. | string | `INFO` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | iam_path | The IAM path under which the Bless lambda will be run. | string | `/` | no |
