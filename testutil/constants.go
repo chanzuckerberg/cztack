@@ -17,4 +17,8 @@ const (
 	EnvWildcardCertARN = "WILDCARD_CERT_ARN"
 	// EnvWildcardCloudfrontCertARN is a premate test ACM cert in us-east-1
 	EnvWildcardCloudfrontCertARN = "CLOUDFRONT_WILDCARD_CERT_ARN"
+	// EnvAccountID is the aws account id
+	EnvAccountID = "ACCOUNT_ID"
+	// EnvAWSProfile is the aws profile
+	EnvAWSProfile = "AWS_PROFILE"
 )
