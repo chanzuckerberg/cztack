@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/chanzuckerberg/cztack/testutil"
-
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
