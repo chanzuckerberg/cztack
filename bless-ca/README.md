@@ -8,8 +8,8 @@ A few things this module does for you–
   * Encrypts it with KMS
   * A [custom provider](https://github.com/chanzuckerberg/terraform-provider-bless) ensures no sensitive material is persisted to the terraform remote store
 * Creates a [kmsauth](https://github.com/lyft/python-kmsauth) kms key
-  * And authorizes a list of IAM users to allow them to assert their identity
-* Packages and configures the Bless Lambda
+  * And authorizes a list of IAM users to allow them to assert their identity through kmsauth
+* Packages and configures the Bless Lambda using a [custom provider](https://github.com/chanzuckerberg/terraform-provider-bless)
   * Creates the bless lambda execution role
   * Configures the bless lambda with some defaults (which you can override)
 
@@ -43,10 +43,6 @@ If you are using [fogg](https://github.com/chanzuckerberg/fogg) this can also be
 ## Example
 
 ```hcl
-locals {
-  bless_backup_region = "us-east-2"
-}
-
 // Configure the terraform-provider-bless
 provider "bless" {
   region  = "${var.region}"
@@ -66,7 +62,7 @@ module "bless" {
   aws_account_id   = "..."
 }
 
-module "client" {
+module "blessclient" {
   source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=master"
 
   role_name         = "blessclient"
@@ -74,7 +70,6 @@ module "client" {
 
   bless_lambda_arns = [
     "${module.bless.lambda_arn}",
-    "${module.bless_backup.lambda_arn}",
   ]
 }
 
@@ -85,7 +80,7 @@ module "bless-users" {
   users           = ["..."]
   group_name      = "bless-users"
   target_accounts = ["..."]
-  target_role     = "${module.client.role_name}"
+  target_role     = "${module.blessclient.role_name}"
 }
 ```
 ## Resources

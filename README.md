@@ -103,3 +103,8 @@ A few notes on writing test for this repo. Note that this is new ground for us, 
   * and to clean up state files before and after each run
 * our linter requires a test for each module. At the very least run `init` so that its syntax is checked. See [an example here](aws-iam-group-assume-role/module_test.go).
 * AWS IAM is eventually consistent and supposedly is homed in us-east-1, so its probably best to run all tests that use IAM in that region.
+
+#### Test Dependencies
+* [go](https://golang.org/doc/install)
+* [terraform](https://www.terraform.io/intro/getting-started/install.html)
+* [terraform-provider-bless](https://github.com/chanzuckerberg/terraform-provider-bless/releases) - Place it in the same directory as your terraform executable. `dirname \`which terraform\``

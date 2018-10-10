@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 
@@ -23,14 +24,16 @@ func TestBlessCAInitAndApply(t *testing.T) {
 
 	project := testutil.UniqueId()
 	env := testutil.UniqueId()
-	service := testutil.UniqueId()
+	service := "bless" // other components in the name are random so keep this to identify
 	owner := testutil.UniqueId()
+
+	region := testutil.IAMRegion
 
 	accountID, err := strconv.ParseInt(testutil.EnvVar(testutil.EnvAccountID), 10, 0)
 	a.Nil(err)
 
 	options := testutil.Options(
-		testutil.IAMRegion, // us-east-1
+		region,
 		map[string]interface{}{
 			"project": project,
 			"env":     env,
@@ -40,8 +43,9 @@ func TestBlessCAInitAndApply(t *testing.T) {
 			"aws_account_id": accountID,
 
 			//test only
-			"region":                     testutil.DefaultRegion,
+			"region":                     region,
 			"bless_provider_aws_profile": testutil.EnvVar(testutil.EnvAWSProfile),
+			"test_user_name":             fmt.Sprintf("bless-%s", testutil.UniqueId()),
 		},
 	)
 

@@ -1,16 +1,3 @@
-### TEST ONLY ####
-variable "region" {
-  type        = "string"
-  description = "testonly: region for bless provider"
-}
-
-variable "bless_provider_aws_profile" {
-  type = "string"
-}
-
-##################
-
-### copied from bless ###
 variable "iam_path" {
   type        = "string"
   default     = "/"

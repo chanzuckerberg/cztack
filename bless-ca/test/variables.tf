@@ -1,3 +1,20 @@
+### TEST ONLY ####
+variable "region" {
+  type        = "string"
+  description = "testonly: region for bless provider"
+}
+
+variable "bless_provider_aws_profile" {
+  type = "string"
+}
+
+variable "test_user_name" {
+  type = "string"
+}
+
+##################
+
+### copied from bless ###
 variable "iam_path" {
   type        = "string"
   default     = "/"
@@ -7,12 +24,6 @@ variable "iam_path" {
 variable "aws_account_id" {
   type        = "string"
   description = "The AWS Account ID where Bless is hosted."
-}
-
-variable "authorized_users" {
-  type        = "list"
-  default     = []
-  description = "A list of IAM users authorized ot invoke bless and the corresponding kmsauth key."
 }
 
 variable "kmsauth_iam_group_name_format" {
