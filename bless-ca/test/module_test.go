@@ -2,10 +2,7 @@ package test
 
 import (
 	"fmt"
-	"strconv"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -20,7 +17,6 @@ func TestBlessCAInit(t *testing.T) {
 
 func TestBlessCAInitAndApply(t *testing.T) {
 	t.Parallel()
-	a := assert.New(t)
 
 	project := testutil.UniqueId()
 	env := testutil.UniqueId()
@@ -29,9 +25,6 @@ func TestBlessCAInitAndApply(t *testing.T) {
 
 	region := testutil.IAMRegion
 
-	accountID, err := strconv.ParseInt(testutil.EnvVar(testutil.EnvAccountID), 10, 0)
-	a.Nil(err)
-
 	options := testutil.Options(
 		region,
 		map[string]interface{}{
@@ -39,8 +32,6 @@ func TestBlessCAInitAndApply(t *testing.T) {
 			"env":     env,
 			"service": service,
 			"owner":   owner,
-
-			"aws_account_id": accountID,
 
 			//test only
 			"region":                     region,
