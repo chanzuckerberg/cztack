@@ -7,13 +7,19 @@ import (
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	log "github.com/sirupsen/logrus"
 )
+
+func init() {
+	log.SetLevel(log.DebugLevel)
+
+}
 
 func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 
 	curAcct := testutil.AWSCurrentAccountId(t)
 
-	// SETUP ROLE
+	log.Debug("SETUP ROLE")
 
 	setupTerraformOptions := &terraform.Options{
 		TerraformDir: "../aws-iam-role-crossacct",
@@ -22,6 +28,8 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"role_name":         random.UniqueId(),
 			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 			"source_account_id": curAcct,
+			"owner":             random.UniqueId(),
+			"project":           random.UniqueId(),
 		},
 		EnvVars: map[string]string{
 			"AWS_DEFAULT_REGION": testutil.IAMRegion,
@@ -34,7 +42,7 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 
 	roleName := terraform.Output(t, setupTerraformOptions, "role_name")
 
-	// SETUP Secrets policy
+	log.Debug("SETUP Secrets policy")
 
 	keyAlias := random.UniqueId()
 	keyTerraformOptions := &terraform.Options{
@@ -42,6 +50,8 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 
 		Vars: map[string]interface{}{
 			"alias_name": keyAlias,
+			"owner":      random.UniqueId(),
+			"project":    random.UniqueId(),
 		},
 		EnvVars: map[string]string{
 			"AWS_DEFAULT_REGION": testutil.IAMRegion,

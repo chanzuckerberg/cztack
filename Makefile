@@ -12,6 +12,10 @@ export CLOUDFRONT_WILDCARD_CERT_ARN := arn:aws:acm:us-east-1:119435350371:certif
 
 all: clean fmt docs lint test
 
+setup:
+	go get github.com/rakyll/gotest
+	go install github.com/rakyll/gotest
+
 fmt:
 	@for m in $(MODULES); do \
 		terraform fmt $m; \
@@ -44,4 +48,4 @@ clean:
 		rm **/*.tfstate*
 
 test: fmt
-	GOCACHE=off AWS_PROFILE=cztack-ci-1 AWS_SDK_LOAD_CONFIG=true go test -parallel 10 -test.timeout 45m $(TEST)
+	GOCACHE=off AWS_PROFILE=cztack-ci-1 AWS_SDK_LOAD_CONFIG=true gotest -parallel 10 -test.timeout 45m $(TEST)
