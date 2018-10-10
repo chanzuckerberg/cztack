@@ -73,7 +73,7 @@ module "blessclient" {
   ]
 }
 
-# Group to authorizes users to invoke bless lambda
+# Group that authorizes users to invoke bless lambda
 module "bless-users" {
   source = "github.com/chanzuckerberg/cztack//aws-iam-group-assume-role?ref=master"
 
