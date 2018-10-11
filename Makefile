@@ -13,10 +13,6 @@ export ACCOUNT_ID := 119435350371
 
 all: clean fmt docs lint test
 
-setup:
-	go get github.com/rakyll/gotest
-	go install github.com/rakyll/gotest
-
 fmt:
 	@for m in $(MODULES); do \
 		terraform fmt $m; \

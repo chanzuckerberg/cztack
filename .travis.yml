@@ -19,6 +19,10 @@ install:
 - chmod +x ~/bin/terraform-docs
 # awscli
 - pip install awscli --upgrade --user
+# gotest
+- go get github.com/rakyll/gotest
+- go install github.com/rakyll/gotest
+
 jobs:
   include:
   - stage: check
