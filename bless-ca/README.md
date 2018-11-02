@@ -1,12 +1,12 @@
 # Bless CA
 
-This module does the heavy-lifting of setting up a [BLESS](https://github.com/Netflix/bless) lambda function. Bless is an SSH certificate authority– you can use it to authorize users to SSH into individual machines.
+This module does the heavy-lifting of setting up a [BLESS](https://github.com/Netflix/bless) lambda function. Bless is an SSH certificate authority– you can use it to authorize users to SSH into individual machines without managing authorized keys for each user.
 
 A few things this module does for you–
 
 * Creates the CA keypair
   * Encrypts it with KMS
-  * A [custom provider](https://github.com/chanzuckerberg/terraform-provider-bless) ensures no sensitive material is persisted to the terraform remote store
+  * A [custom provider](https://github.com/chanzuckerberg/terraform-provider-bless) ensures no sensitive material is persisted to the terraform state
 * Creates a [kmsauth](https://github.com/lyft/python-kmsauth) kms key
   * And authorizes a list of IAM users to allow them to assert their identity through kmsauth
 * Packages and configures the Bless Lambda using a [custom provider](https://github.com/chanzuckerberg/terraform-provider-bless)
@@ -15,7 +15,6 @@ A few things this module does for you–
 
 ## Usage
 - In order to protect the CA private key, it is recommended running this module in an isolated and restricted AWS account.
-
 - To use this terraform module, you will have to [configure](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin) the [terraform-provider-bless](https://github.com/chanzuckerberg/terraform-provider-bless).
 If you are using [fogg](https://github.com/chanzuckerberg/fogg) this can also be done by adding the following to your `fogg.json` and then running `fogg apply`:
 ```json
@@ -36,7 +35,6 @@ If you are using [fogg](https://github.com/chanzuckerberg/fogg) this can also be
 ```
 
 - To interact with Bless you can use [blessclient](https://github.com/chanzuckerberg/blessclient).
-
 - To achieve multi-region availability, you can configure different terraform providers (aws and bless) in different regions.
 
 
@@ -50,6 +48,7 @@ provider "bless" {
 }
 
 module "bless" {
+  // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
   source = "github.com/chanzuckerberg/cztack//bless-ca?ref=master"
 
   project = "..."
@@ -63,6 +62,7 @@ module "bless" {
 }
 
 module "blessclient" {
+  // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
   source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=master"
 
   role_name         = "blessclient"
@@ -75,6 +75,7 @@ module "blessclient" {
 
 # Group that authorizes users to invoke bless lambda
 module "bless-users" {
+  // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
   source = "github.com/chanzuckerberg/cztack//aws-iam-group-assume-role?ref=master"
 
   users           = ["..."]
@@ -83,6 +84,7 @@ module "bless-users" {
   target_role     = "${module.blessclient.role_name}"
 }
 ```
+
 ## Resources
 
 You can read more about Bless and SSH certificates here:
