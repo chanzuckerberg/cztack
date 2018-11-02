@@ -1,3 +1,7 @@
+# AWS Role infraci
+
+Creates a role useful for running `terraform plan` in CI jobs.
+
 <!-- START -->
 
 ## Inputs
