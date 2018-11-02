@@ -7,7 +7,7 @@ environment variables.
 Parameters are stored in AWS SSM Parameter store at the path `/{project}-{env}-{service}/{name}` where name
 is each of the keys of the parameters input.
 
-**Note** that these parameters will stored unencrypted in the Terraform state file. See more about this issue
+**WARNING:** These parameters will stored **unencrypted** in the Terraform state file. See more about this issue
 in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html).
 
 <!-- START -->
