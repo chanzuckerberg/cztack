@@ -1,16 +1,16 @@
 # AWS S3 Single Page Static Site
 
-This module will create a public static site backed by [Cloudfront](https://aws.amazon.com/cloudfront/) and [S3](https://aws.amazon.com/s3/).
+This module will create a public static site powered by [S3](https://aws.amazon.com/s3/) with [Cloudfront](https://aws.amazon.com/cloudfront/) in front.
 
 A few things this module does for you–
 
-* creates an s3 bucket
+* creates a private s3 bucket
   * ensures data is encrypted by default using S3 Server Side Encryption
   * restricts access to a cloudfront [origin access identity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
   identity
 * creates a cloudfront distribution
   * TLS required through [ACM](https://aws.amazon.com/certificate-manager/)
-  * allows you to configure vanity aliases
+  * allows you to configure multiple aliases
   * configures the distribution to serve a single page application
   * configures gzip compression
 * configures route53 records for your distribution
