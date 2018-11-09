@@ -23,10 +23,9 @@ resource "aws_iam_policy" "assume-role" {
 data "aws_iam_policy_document" "assume-role" {
   statement {
     sid       = "assume0"
-    resources = "${local.account_arns}"
+    resources = ["${local.account_arns}"]
+    actions   = ["sts:AssumeRole"]
   }
-
-  actions = ["sts:AssumeRole"]
 }
 
 resource "aws_iam_group_policy_attachment" "assume-role" {

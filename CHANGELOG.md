@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.15.1 2018-11-09
+* Bugfix for aws_iam_policy_document in aws-iam-group-assume-role
+
 ## 0.15.0 2018-11-08
 * [new] aws single page app static site
 * [new] aws-iam-instance-profile
