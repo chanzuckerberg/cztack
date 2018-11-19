@@ -11,6 +11,7 @@ data "aws_iam_policy_document" "assume-role" {
 
 resource "aws_iam_role" "ec2-poweruser" {
   name               = "${var.role_name}"
+  path               = "${var.iam_path}"
   assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
 }
 
