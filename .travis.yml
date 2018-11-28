@@ -42,7 +42,7 @@ jobs:
     - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile
       cztack-ci-2
     - aws --profile cztack-ci-2 sts get-caller-identity
-    script: travis_wait 30 make test
+    script: travis_wait 45 make test
 env:
   global:
   - secure: H6toE/cJTjXbp9QEONjA2wvWxIPIzPiX3VRY0r5C6YTYEMeujR/w8XW/HMrUFgK7DrD6td5vgpDVeoC84SmQ/KIyU/jEOJsjktxcsMK4Y/5Pbi5p9iK24ps7LUFLDGtYAnYiSOWd3lTDr1vRp/N1Es8VaSqyyRJwi5NwBFGjA0YoxiriIYe7WRCz9HRTiUSQ3PKZPJBLznqUrClvwVq9kZyI7zwyNmDYOrbXzKRPJfPCxHlWE/RsglXu0tSmuL6qxXVIhqp7ijRwJcCSMqpXYyYXPIHAm3b4dyXLSCzI3j+HwZqoTtnZFROMYrhVrgPlcntOe/NWMDu3UurE3ePEG6ghP/E5VD6xgcyiFDYvQV5f4ERPhmfurmOewESJdrtNQhepGutTaUX/gEzdu8rTaxc1fWFmOkscQOWCiPThqowdBP2kQtcrv660Z1PmtNuHmGyBS8j0hkkuyfWjX6YMf+egXpJSDT5kaEw+l6mn9yqL752hUdehKiBEroWqiv9eszFkFqPtBvNZO9vi+bRLeraq9lZJRHjS/T6LosfrLnXAo1X3Uqx79ruNFqLccADlsSqVMsSnyyIyv2d4uXvYTgPrqra1vbu7TQgjuMvwHXiLGt+h/ZLm8HFvSCFNAwzz3Ca+LxTN0TNpEHGmiqj0FoTfyuENvbAMkL4wyU7RprA=
