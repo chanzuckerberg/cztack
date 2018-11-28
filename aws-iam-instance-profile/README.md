@@ -10,7 +10,7 @@ For any other permissions that need to be attached to the role, this can be done
 
 ```hcl
 module "profile" {
-  source = "github.com/chanzuckerberg/cztack//aws-iam-instance_profile?ref=v0.14.0"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-instance_profile?ref=v0.15.1"
 
   # The prefix of the name of the instance profile and role to create in this account.
   name_prefix = "..."
@@ -34,6 +34,7 @@ resource "aws_instance" "instance" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| enable_ssm | Attach the appropriate policies to allow the instance to integrate with AWS Systems Manager. | string | `true` | no |
 | iam_path | The IAM path to the role. | string | `/` | no |
 | name_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | string | - | yes |
 | role_description | The description of the IAM role. | string | `` | no |
