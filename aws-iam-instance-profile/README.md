@@ -29,23 +29,22 @@ resource "aws_instance" "instance" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| enable_ssm | Attach the appropriate policies to allow the instance to integrate with AWS Systems Manager. | string | `true` | no |
-| iam_path | The IAM path to the role. | string | `/` | no |
-| name_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | string | - | yes |
-| role_description | The description of the IAM role. | string | `` | no |
+| enable\_ssm | Attach the appropriate policies to allow the instance to integrate with AWS Systems Manager. | string | `true` | no |
+| iam\_path | The IAM path to the role. | string | `/` | no |
+| name\_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | string | - | yes |
+| role\_description | The description of the IAM role. | string | `` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| profile_arn | The ARN assigned by AWS to the instance profile. |
-| profile_name | The instance profile's name. |
-| role_arn | The Amazon Resource Name (ARN) specifying the role. |
-| role_name | The name of the role. |
+| profile\_arn | The ARN assigned by AWS to the instance profile. |
+| profile\_name | The instance profile's name. |
+| role\_arn | The Amazon Resource Name (ARN) specifying the role. |
+| role\_name | The name of the role. |
 
 <!-- END -->

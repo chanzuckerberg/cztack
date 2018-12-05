@@ -24,23 +24,22 @@ output "group_name" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| depends_on | Pseudo depends_on because Terraform modules do not support depends_on | list | `<list>` | no |
-| group_name | The name of the group this module will create. | string | - | yes |
-| iam_path | The IAM path under which the group and policies will be created. Useful for avoiding naming conflicts. | string | `/` | no |
-| target_accounts | List of accounts in which this role should be assume-able. | list | - | yes |
-| target_role | Name of the role to be assume-able. If not specified or given as empty string, then the group name will be used as the role name. | string | `` | no |
+| depends\_on | Pseudo depends_on because Terraform modules do not support depends_on | list | `<list>` | no |
+| group\_name | The name of the group this module will create. | string | - | yes |
+| iam\_path | The IAM path under which the group and policies will be created. Useful for avoiding naming conflicts. | string | `/` | no |
+| target\_accounts | List of accounts in which this role should be assume-able. | list | - | yes |
+| target\_role | Name of the role to be assume-able. If not specified or given as empty string, then the group name will be used as the role name. | string | `` | no |
 | users | List of user's names who should be added to this group. | list | `<list>` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| group_arn |  |
-| group_name |  |
+| group\_arn | - |
+| group\_name | - |
 
 <!-- END -->

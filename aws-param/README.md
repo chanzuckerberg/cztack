@@ -24,7 +24,6 @@ output "secret" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -33,12 +32,12 @@ output "secret" {
 | name | The name of the secret. | string | - | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| use_paths | This exists to support data written by Chamber before version 2.0.0, which used '.' instead of '/' as a separator. | string | `true` | no |
+| use\_paths | This exists to support data written by Chamber before version 2.0.0, which used '.' instead of '/' as a separator. | string | `true` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| value |  |
+| value | - |
 
 <!-- END -->

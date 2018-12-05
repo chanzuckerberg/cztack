@@ -17,20 +17,19 @@ module "group" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam_path | The IAM path to put this role in. | string | `/` | no |
-| role_name | The name of the role. | string | - | yes |
-| source_account_id | The AWS account id that should be able to assume this role. | string | - | yes |
+| iam\_path | The IAM path to put this role in. | string | `/` | no |
+| role\_name | The name of the role. | string | - | yes |
+| source\_account\_id | The AWS account id that should be able to assume this role. | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| iam_path |  |
-| role_name |  |
+| iam\_path | - |
+| role\_name | - |
 
 <!-- END -->

@@ -3,19 +3,18 @@
 Creates a role useful for running `terraform plan` in CI jobs.
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam_path |  | string | `/` | no |
-| role_name |  | string | `infraci` | no |
-| source_account_id |  | string | - | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | - | string | `infraci` | no |
+| source\_account\_id | - | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| role_name |  |
+| role\_name | - |
 
 <!-- END -->
