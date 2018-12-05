@@ -51,6 +51,18 @@ data "aws_iam_policy_document" "secrets" {
 
     resources = ["*"]
   }
+
+  statement {
+    sid       = "secretsmanager"
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "secretsmanager:ResourceTag/allowCI"
+      values   = ["true"]
+    }
+  }
 }
 
 resource "aws_iam_policy" "secrets" {
