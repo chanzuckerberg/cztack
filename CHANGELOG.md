@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.15.2 2018-12-05
+* `aws-iam-ec2-poweruser-role` Add iam_path
+* `aws-iam-ecs-task-role` Add iam_path
+* `aws-iam-instance-profile` Add option to disable attach SSM policy
+* `aws-iam-role-infraci` Add secrets manager read access to secrets tagged with allowCI=true
+* `aws-aurora-*` Expose the reader endpoint* 
+
 ## 0.15.1 2018-11-09
 * Bugfix for aws_iam_policy_document in aws-iam-group-assume-role
 
