@@ -64,5 +64,6 @@ module "db" {
 | database\_name | - |
 | endpoint | - |
 | port | - |
+| reader\_endpoint | - |
 
 <!-- END -->
