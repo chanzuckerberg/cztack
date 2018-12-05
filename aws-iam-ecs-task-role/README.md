@@ -21,12 +21,12 @@ output "ecs-role-arn" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | env | Environment name. For example– dev, staging or prod. | string | - | yes |
+| iam\_path | IAM path for the role. | string | `/` | no |
 | owner | Email address of the owner. Can be a group address. | string | - | yes |
 | project | High-level project, should be unique across the organization. | string | - | yes |
 | service | Name of this thing we're running. | string | - | yes |
@@ -35,7 +35,7 @@ output "ecs-role-arn" {
 
 | Name | Description |
 |------|-------------|
-| arn |  |
-| name |  |
+| arn | - |
+| name | - |
 
 <!-- END -->

@@ -13,13 +13,12 @@ module "group" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam_path |  | string | `/` | no |
-| role_name | The name of this role. | string | `security-audit` | no |
-| source_account_id | The AWS account from which this role should be assumeable. | string | - | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | The name of this role. | string | `security-audit` | no |
+| source\_account\_id | The AWS account from which this role should be assumeable. | string | - | yes |
 
 <!-- END -->

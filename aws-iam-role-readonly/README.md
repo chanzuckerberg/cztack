@@ -21,20 +21,19 @@ output "role_name" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam_path |  | string | `/` | no |
-| role_name |  | string | `readonly` | no |
-| source_account_id | The AWS account from which this role should be assumeable. | string | - | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | - | string | `readonly` | no |
+| source\_account\_id | The AWS account from which this role should be assumeable. | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn |  |
-| role_name |  |
+| arn | - |
+| role\_name | - |
 
 <!-- END -->

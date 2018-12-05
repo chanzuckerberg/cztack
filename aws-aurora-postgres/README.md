@@ -31,39 +31,38 @@ module "db" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| apply_immediately | If false changes will not be applied until next maintenance window. | string | `false` | no |
-| database_name | The name of the database to be created in the cluster. | string | - | yes |
-| database_password | Password for user that will be created. | string | - | yes |
-| database_subnet_group | The name of an existing database subnet group to use. | string | - | yes |
-| database_username | Default user to be created. | string | - | yes |
-| db_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | list | `<list>` | no |
-| engine_version | The version of Postgres to use. | string | `9.6` | no |
+| apply\_immediately | If false changes will not be applied until next maintenance window. | string | `false` | no |
+| database\_name | The name of the database to be created in the cluster. | string | - | yes |
+| database\_password | Password for user that will be created. | string | - | yes |
+| database\_subnet\_group | The name of an existing database subnet group to use. | string | - | yes |
+| database\_username | Default user to be created. | string | - | yes |
+| db\_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | list | `<list>` | no |
+| engine\_version | The version of Postgres to use. | string | `9.6` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| iam_database_authentication_enabled |  | string | `false` | no |
-| ingress_cidr_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list | - | yes |
-| instance_class | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html) | string | `db.r4.large` | no |
-| instance_count | Number of instances to create in this cluster. | string | `1` | no |
-| kms_key_id | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | string | `` | no |
+| iam\_database\_authentication\_enabled | - | string | `false` | no |
+| ingress\_cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list | - | yes |
+| instance\_class | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html) | string | `db.r4.large` | no |
+| instance\_count | Number of instances to create in this cluster. | string | `1` | no |
+| kms\_key\_id | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | string | `` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| performance_insights_enabled |  | string | `false` | no |
+| performance\_insights\_enabled | - | string | `false` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| publicly_accessible | Avoid doing this - it gives access to the open internet. | string | `false` | no |
-| rds_cluster_parameters | Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster) | list | `<list>` | no |
+| publicly\_accessible | Avoid doing this - it gives access to the open internet. | string | `false` | no |
+| rds\_cluster\_parameters | Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster) | list | `<list>` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| skip_final_snapshot | When you destroy a database RDS will, by default, take snapshot. Set this to skip that step. | string | `false` | no |
-| vpc_id | The id of the existing VPC in which this cluster should be created. | string | - | yes |
+| skip\_final\_snapshot | When you destroy a database RDS will, by default, take snapshot. Set this to skip that step. | string | `false` | no |
+| vpc\_id | The id of the existing VPC in which this cluster should be created. | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| database_name |  |
-| endpoint |  |
-| port |  |
+| database\_name | - |
+| endpoint | - |
+| port | - |
 
 <!-- END -->

@@ -18,12 +18,11 @@ module "policy" {
 
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam_path |  | string | `/` | no |
-| role_name | The role to which this policy should be attached. | string | - | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | The role to which this policy should be attached. | string | - | yes |
 
 <!-- END -->

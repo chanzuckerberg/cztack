@@ -29,25 +29,24 @@ module "cert" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| aws_route53_zone_id |  | string | - | yes |
-| cert_domain_name | Like www.foo.bar.com or *.foo.bar.com | string | - | yes |
-| cert_subject_alternative_names | A map of <alternative_domain:route53_zone_id> | map | `<map>` | no |
+| aws\_route53\_zone\_id | - | string | - | yes |
+| cert\_domain\_name | Like www.foo.bar.com or *.foo.bar.com | string | - | yes |
+| cert\_subject\_alternative\_names | A map of <alternative_domain:route53_zone_id> | map | `<map>` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| validation_record_ttl |  | string | `60` | no |
+| validation\_record\_ttl | - | string | `60` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn |  |
-| id |  |
+| arn | - |
+| id | - |
 
 <!-- END -->
