@@ -6,6 +6,10 @@ output "endpoint" {
   value = "${module.aurora.endpoint}"
 }
 
+output "reader_endpoint" {
+  value = "${module.aurora.reader_endpoint}"
+}
+
 output "port" {
   value = "${module.aurora.port}"
 }

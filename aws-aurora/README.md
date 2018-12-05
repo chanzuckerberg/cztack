@@ -40,5 +40,6 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | database\_name | - |
 | endpoint | - |
 | port | - |
+| reader\_endpoint | - |
 
 <!-- END -->
