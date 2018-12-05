@@ -11,7 +11,6 @@ is each of the keys of the parameters input.
 in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html).
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |

@@ -20,20 +20,19 @@ output "..." {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| bless_lambda_arns | List of bless lambda arns | list | - | yes |
-| iam_path | IAM path | string | `/` | no |
-| role_name | The name for the role | string | - | yes |
-| source_account_id | The source aws account id to allow sts:AssumeRole | string | - | yes |
+| bless\_lambda\_arns | List of bless lambda arns | list | - | yes |
+| iam\_path | IAM path | string | `/` | no |
+| role\_name | The name for the role | string | - | yes |
+| source\_account\_id | The source aws account id to allow sts:AssumeRole | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| role_name |  |
+| role\_name | - |
 
 <!-- END -->

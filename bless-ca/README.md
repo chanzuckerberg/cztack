@@ -94,16 +94,15 @@ You can read more about Bless and SSH certificates here:
 
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| authorized_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | list | `<list>` | no |
-| bless_logging_level | Bless lambda logging level. | string | `INFO` | no |
+| authorized\_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | list | `<list>` | no |
+| bless\_logging\_level | Bless lambda logging level. | string | `INFO` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| iam_path | The IAM path under which the Bless lambda will be run. | string | `/` | no |
-| kmsauth_iam_group_name_format | Formatting string to tell bless which IAM groups are relevant when checking SSH certificate principal validity. | string | `{}` | no |
+| iam\_path | The IAM path under which the Bless lambda will be run. | string | `/` | no |
+| kmsauth\_iam\_group\_name\_format | Formatting string to tell bless which IAM groups are relevant when checking SSH certificate principal validity. | string | `{}` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
@@ -112,7 +111,7 @@ You can read more about Bless and SSH certificates here:
 
 | Name | Description |
 |------|-------------|
-| ca_public_key |  |
-| lambda_arn |  |
+| ca\_public\_key | - |
+| lambda\_arn | - |
 
 <!-- END -->

@@ -17,20 +17,19 @@ module "group" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam_path |  | string | `/` | no |
-| role_name |  | string | `poweruser` | no |
-| source_account_id |  | string | - | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | - | string | `poweruser` | no |
+| source\_account\_id | - | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn |  |
-| role_name |  |
+| arn | - |
+| role\_name | - |
 
 <!-- END -->

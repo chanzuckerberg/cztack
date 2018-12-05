@@ -18,18 +18,17 @@ output "group_name" {
 ```
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| group_name | Name of the group to be created. | string | `console-login` | no |
-| iam_path | IAM path under which resources will be created. | string | `/` | no |
+| group\_name | Name of the group to be created. | string | `console-login` | no |
+| iam\_path | IAM path under which resources will be created. | string | `/` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| group_name |  |
+| group\_name | - |
 
 <!-- END -->

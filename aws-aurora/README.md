@@ -3,43 +3,42 @@
 This is a low-level module for creating AWS Aurora clusters. We strongly reccomend you use one of the higher-level, opinionated modules for [mysql](../aws-aurora-mysql/README.md) or [postgres](../aws-aurora-postgres/README.md).
 
 <!-- START -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| apply_immediately |  | string | `false` | no |
-| backtrack_window |  | string | `0` | no |
-| database_name |  | string | - | yes |
-| database_password |  | string | - | yes |
-| database_subnet_group |  | string | - | yes |
-| database_username |  | string | - | yes |
-| db_parameters |  | list | `<list>` | no |
-| enabled_cloudwatch_logs_exports |  | list | `<list>` | no |
-| engine |  | string | - | yes |
-| engine_version |  | string | - | yes |
+| apply\_immediately | - | string | `false` | no |
+| backtrack\_window | - | string | `0` | no |
+| database\_name | - | string | - | yes |
+| database\_password | - | string | - | yes |
+| database\_subnet\_group | - | string | - | yes |
+| database\_username | - | string | - | yes |
+| db\_parameters | - | list | `<list>` | no |
+| enabled\_cloudwatch\_logs\_exports | - | list | `<list>` | no |
+| engine | - | string | - | yes |
+| engine\_version | - | string | - | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| iam_database_authentication_enabled |  | string | `true` | no |
-| ingress_cidr_blocks |  | list | - | yes |
-| instance_class |  | string | `db.t2.small` | no |
-| instance_count |  | string | `1` | no |
-| kms_key_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `` | no |
+| iam\_database\_authentication\_enabled | - | string | `true` | no |
+| ingress\_cidr\_blocks | - | list | - | yes |
+| instance\_class | - | string | `db.t2.small` | no |
+| instance\_count | - | string | `1` | no |
+| kms\_key\_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| performance_insights_enabled |  | string | `true` | no |
-| port |  | string | - | yes |
+| performance\_insights\_enabled | - | string | `true` | no |
+| port | - | string | - | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| publicly_accessible |  | string | `false` | no |
-| rds_cluster_parameters |  | list | `<list>` | no |
+| publicly\_accessible | - | string | `false` | no |
+| rds\_cluster\_parameters | - | list | `<list>` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| skip_final_snapshot |  | string | `false` | no |
-| vpc_id |  | string | - | yes |
+| skip\_final\_snapshot | - | string | `false` | no |
+| vpc\_id | - | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| database_name |  |
-| endpoint |  |
-| port |  |
+| database\_name | - |
+| endpoint | - |
+| port | - |
 
 <!-- END -->
