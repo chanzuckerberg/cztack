@@ -13,6 +13,13 @@ export ACCOUNT_ID := 119435350371
 
 all: clean fmt docs lint test
 
+setup: ## setup development dependencies
+	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/master/download.sh | sh
+
+release: ## run a release
+	./bin/bff bump
+	git push
+
 fmt:
 	@for m in $(MODULES); do \
 		terraform fmt $m; \
