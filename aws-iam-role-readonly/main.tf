@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "secrets" {
 }
 
 resource "aws_iam_role_policy" "secrets" {
-  name = "secrets"
-  role = "${aws_iam_role.readonly.name}"
+  name   = "secrets"
+  role   = "${aws_iam_role.readonly.name}"
   policy = "${data.aws_iam_policy_document.secrets.json}"
 }
