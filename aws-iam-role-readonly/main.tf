@@ -33,12 +33,8 @@ data "aws_iam_policy_document" "secrets" {
   }
 }
 
-resource "aws_iam_policy" "secrets" {
-  name   = "${var.role_name}-chamber-read"
-  path   = "${var.iam_path}"
+resource "aws_iam_role_policy" "secrets" {
+  name   = "secrets"
+  role   = "${aws_iam_role.readonly.name}"
   policy = "${data.aws_iam_policy_document.secrets.json}"
-
-  lifecycle {
-    ignore_changes = ["name"]
-  }
 }
