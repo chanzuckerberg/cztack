@@ -17,7 +17,7 @@ setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/master/download.sh | sh
 
 release: ## run a release
-	./bin/bff bump
+	bff bump
 	git push
 
 fmt:
