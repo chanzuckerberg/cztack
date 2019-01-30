@@ -1,11 +1,16 @@
 # Changelog
 
+## 0.15.3 2019-01-30
+* 00061db [Bugfix] Limit SSM s3 policies (#85)
+* 418e527 [Bugfix] Changed policy for readonly to include secrets policy (#84)
+* 60203ad Add iam:TagRole to poweruser (#83)
+
 ## 0.15.2 2018-12-05
 * `aws-iam-ec2-poweruser-role` Add iam_path
 * `aws-iam-ecs-task-role` Add iam_path
 * `aws-iam-instance-profile` Add option to disable attach SSM policy
 * `aws-iam-role-infraci` Add secrets manager read access to secrets tagged with allowCI=true
-* `aws-aurora-*` Expose the reader endpoint* 
+* `aws-aurora-*` Expose the reader endpoint*
 
 ## 0.15.1 2018-11-09
 * Bugfix for aws_iam_policy_document in aws-iam-group-assume-role
