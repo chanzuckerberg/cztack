@@ -68,6 +68,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:PutRolePolicy",
       "iam:RemoveRoleFromInstanceProfile",
       "iam:TagRole",
+      "iam:UpdateAssumeRolePolicy",
       "iam:UpdateRole",
     ]
 
