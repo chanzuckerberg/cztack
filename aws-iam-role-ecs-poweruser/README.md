@@ -22,14 +22,14 @@ module "ec2-poweruser" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam\_path |  | string | `"/"` | no |
-| role\_name |  | string | n/a | yes |
-| source\_account\_id |  | string | n/a | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | - | string | - | yes |
+| source\_account\_id | - | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn |  |
+| arn | - |
 
 <!-- END -->

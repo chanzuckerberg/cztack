@@ -25,17 +25,17 @@ output "ecs-role-arn" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| env | Environment name. For example– dev, staging or prod. | string | n/a | yes |
-| iam\_path | IAM path for the role. | string | `"/"` | no |
-| owner | Email address of the owner. Can be a group address. | string | n/a | yes |
-| project | High-level project, should be unique across the organization. | string | n/a | yes |
-| service | Name of this thing we're running. | string | n/a | yes |
+| env | Environment name. For example– dev, staging or prod. | string | - | yes |
+| iam\_path | IAM path for the role. | string | `/` | no |
+| owner | Email address of the owner. Can be a group address. | string | - | yes |
+| project | High-level project, should be unique across the organization. | string | - | yes |
+| service | Name of this thing we're running. | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn |  |
-| name |  |
+| arn | - |
+| name | - |
 
 <!-- END -->

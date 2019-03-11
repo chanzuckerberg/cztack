@@ -22,7 +22,7 @@ module "policy" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam\_path |  | string | `"/"` | no |
-| role\_name | The role to which this policy should be attached. | string | n/a | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | The role to which this policy should be attached. | string | - | yes |
 
 <!-- END -->

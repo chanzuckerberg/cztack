@@ -43,15 +43,15 @@ module "site" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | aliases | Vanity aliases. Make sure your provided cert supports these. | list | `<list>` | no |
-| aws\_acm\_cert\_arn | An AWS ACM cert. Note that Cloudfront requires certs to be in us-east-1. | string | n/a | yes |
-| aws\_route53\_zone\_id | A route53 zone ID used to write records. | string | n/a | yes |
-| cloudfront\_price\_class | Cloudfront [price class](https://aws.amazon.com/cloudfront/pricing/). | string | `"PriceClass_100"` | no |
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| index\_document\_path | The path to the index document of your site. | string | `"index.html"` | no |
-| minimum\_tls\_version | Minimum TLS version to accept. | string | `"TLSv1_2016"` | no |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| subdomain | The subdomain for this static site. | string | n/a | yes |
+| aws\_acm\_cert\_arn | An AWS ACM cert. Note that Cloudfront requires certs to be in us-east-1. | string | - | yes |
+| aws\_route53\_zone\_id | A route53 zone ID used to write records. | string | - | yes |
+| cloudfront\_price\_class | Cloudfront [price class](https://aws.amazon.com/cloudfront/pricing/). | string | `PriceClass_100` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| index\_document\_path | The path to the index document of your site. | string | `index.html` | no |
+| minimum\_tls\_version | Minimum TLS version to accept. | string | `TLSv1_2016` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
+| subdomain | The subdomain for this static site. | string | - | yes |
 
 <!-- END -->

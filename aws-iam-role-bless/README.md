@@ -24,15 +24,15 @@ output "..." {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| bless\_lambda\_arns | List of bless lambda arns | list | n/a | yes |
-| iam\_path | IAM path | string | `"/"` | no |
-| role\_name | The name for the role | string | n/a | yes |
-| source\_account\_id | The source aws account id to allow sts:AssumeRole | string | n/a | yes |
+| bless\_lambda\_arns | List of bless lambda arns | list | - | yes |
+| iam\_path | IAM path | string | `/` | no |
+| role\_name | The name for the role | string | - | yes |
+| source\_account\_id | The source aws account id to allow sts:AssumeRole | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| role\_name |  |
+| role\_name | - |
 
 <!-- END -->

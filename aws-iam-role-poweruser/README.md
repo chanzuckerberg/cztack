@@ -21,15 +21,15 @@ module "group" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| iam\_path |  | string | `"/"` | no |
-| role\_name |  | string | `"poweruser"` | no |
-| source\_account\_id |  | string | n/a | yes |
+| iam\_path | - | string | `/` | no |
+| role\_name | - | string | `poweruser` | no |
+| source\_account\_id | - | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn |  |
-| role\_name |  |
+| arn | - |
+| role\_name | - |
 
 <!-- END -->
