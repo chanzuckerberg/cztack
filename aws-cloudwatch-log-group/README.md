@@ -9,17 +9,17 @@ By default the name is `${var.project}-${var.env}-${var.service}`, but you can o
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| log\_group\_name | Name for the log group. If not set, it will be $project-$env-$service} | string | `` | no |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| log\_group\_name | Name for the log group. If not set, it will be $project-$env-$service} | string | `""` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | - |
-| name | - |
+| arn |  |
+| name |  |
 
 <!-- END -->

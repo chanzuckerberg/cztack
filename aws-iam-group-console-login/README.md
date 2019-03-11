@@ -22,13 +22,13 @@ output "group_name" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| group\_name | Name of the group to be created. | string | `console-login` | no |
-| iam\_path | IAM path under which resources will be created. | string | `/` | no |
+| group\_name | Name of the group to be created. | string | `"console-login"` | no |
+| iam\_path | IAM path under which resources will be created. | string | `"/"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| group\_name | - |
+| group\_name |  |
 
 <!-- END -->
