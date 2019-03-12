@@ -49,6 +49,7 @@ resource "aws_rds_cluster" "db" {
   backtrack_window                    = "${var.backtrack_window}"
   kms_key_id                          = "${var.kms_key_id}"
   port                                = "${var.port}"
+  db_cluster_parameter_group_name     = "${aws_rds_cluster_parameter_group.db.id}"
 
   enabled_cloudwatch_logs_exports = "${var.enabled_cloudwatch_logs_exports}"
 
