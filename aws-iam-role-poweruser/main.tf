@@ -63,6 +63,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:ListPolicyVersions",
       "iam:ListRolePolicies",
       "iam:ListRoles",
+      "iam:ListServerCertificates",
       "iam:PassRole",
       "iam:PutRole",
       "iam:PutRolePolicy",
