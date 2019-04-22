@@ -23,6 +23,7 @@ variable "parameters" {
   description = "Map from parameter names to values to set."
 }
 
+// TODO(el): Remove once tf 0.12 is released
 variable "parameters_count" {
   type        = "string"
   description = "HACK: The number of keys in var.parameters. To avoid hitting value of count cannot be computed."
