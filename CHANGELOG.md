@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.16.0 2019-04-22
+* [9d5798e](../../commit/9d5798e3a0ff47602b7db6343dfd114cdbf5c8fa) Update aws-params-writer to explicitly take a parameters count (#90)
+* [57261e8](../../commit/57261e8e88f13f0b4d8ea5e7878342e08bc59e90) Add iam:ListServerCertificates permission to poweruser (#89)
+* [cbaa829](../../commit/cbaa829ebfb6856b14a7fe339522c114d8dd1e33) Fix a bug with missing param group connection to the Aurora resource (#88)
+
 ## 0.15.3 2019-01-30
 * 00061db [Bugfix] Limit SSM s3 policies (#85)
 * 418e527 [Bugfix] Changed policy for readonly to include secrets policy (#84)
