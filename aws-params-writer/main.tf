@@ -7,7 +7,7 @@ data "aws_kms_key" "key" {
 }
 
 resource "aws_ssm_parameter" "parameter" {
-  count = "${length(keys(var.parameters))}"
+  count = "${var.parameters_count}"
 
   name  = "/${local.service_name}/${element(keys(var.parameters), count.index)}"
   value = "${lookup(var.parameters, element(keys(var.parameters), count.index))}"
