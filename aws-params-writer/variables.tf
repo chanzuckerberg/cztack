@@ -22,3 +22,8 @@ variable "parameters" {
   type        = "map"
   description = "Map from parameter names to values to set."
 }
+
+variable "parameters_count" {
+  type        = "string"
+  description = "HACK: The number of keys in var.parameters. To avoid hitting value of count cannot be computed."
+}

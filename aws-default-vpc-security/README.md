@@ -40,6 +40,6 @@ You will need to invoke this module with a properly configured provider for ever
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| default\_sg\_lockdown | Restrict default security group to deny all traffic (you can selectively enable traffic with other security groups). | string | `true` | no |
+| default\_sg\_lockdown | Restrict default security group to deny all traffic (you can selectively enable traffic with other security groups). | string | `"true"` | no |
 
 <!-- END -->

@@ -33,20 +33,20 @@ module "cert" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| aws\_route53\_zone\_id | - | string | - | yes |
-| cert\_domain\_name | Like www.foo.bar.com or *.foo.bar.com | string | - | yes |
+| aws\_route53\_zone\_id |  | string | n/a | yes |
+| cert\_domain\_name | Like www.foo.bar.com or *.foo.bar.com | string | n/a | yes |
 | cert\_subject\_alternative\_names | A map of <alternative_domain:route53_zone_id> | map | `<map>` | no |
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | - | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | - | yes |
-| validation\_record\_ttl | - | string | `60` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| validation\_record\_ttl |  | string | `"60"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | - |
-| id | - |
+| arn |  |
+| id |  |
 
 <!-- END -->
