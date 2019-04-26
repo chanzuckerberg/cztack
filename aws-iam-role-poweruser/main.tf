@@ -85,6 +85,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:DeleteUser",
       "iam:CreateGroup",
       "iam:DeleteGroup",
+      "route53domains:RegisterDomain",
     ]
 
     resources = ["*"]
