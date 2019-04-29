@@ -7,7 +7,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/random"
 )
 
-func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
+func TestAWSIAMRoleRoute53DomainsPoweruser(t *testing.T) {
 
 	curAcct := testutil.AWSCurrentAccountId(t)
 

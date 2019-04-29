@@ -16,6 +16,6 @@ resource "aws_iam_role" "route53domains-poweruser" {
 }
 
 resource "aws_iam_role_policy_attachment" "route53domains-fullaccess" {
-  role       = "${aws_iam_role.ecs-poweruser.name}"
+  role       = "${aws_iam_role.route53domains-poweruser.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53DomainsFullAccess"
 }
