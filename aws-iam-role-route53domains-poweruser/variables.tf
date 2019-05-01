@@ -3,7 +3,8 @@ variable "source_account_id" {
 }
 
 variable "role_name" {
-  type = "string"
+  type    = "string"
+  default = "route53domains-poweruser"
 }
 
 variable "iam_path" {
