@@ -1,12 +1,12 @@
 # AWS IAM role for Route53Domains Poweruser
 
-This module will create a role which has Route53Domains FullAccess privileges.
+This module will create a role which has Route53Domains FullAccess privileges and Route53 ReadOnly priveleges.
 
 ## Example
 
 ```hcl
 module "route53domains-poweruser" {
-  source = "github.com/chanzuckerberg/cztack//aws-iam-role-route53domains-poweruser?ref=v0.14.0"
+  source = "github.com/chanzuckerberg/cztack/aws-iam-role-route53domains-poweruser?ref=v0.14.0"
 
   # The name of the role to create in this account.
   role_name = "..."
