@@ -19,3 +19,8 @@ resource "aws_iam_role_policy_attachment" "route53domains-fullaccess" {
   role       = "${aws_iam_role.route53domains-poweruser.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53DomainsFullAccess"
 }
+
+resource "aws_iam_role_policy_attachment" "route53-readonly" {
+  role       = "${aws_iam_role.route53domains-poweruser.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess"
+}
