@@ -8,11 +8,27 @@ locals {
   }
 }
 
+// HACK HACK debug
+resource "local_file" "SANs" {
+  content  = "${keys(var.cert_subject_alternative_names)}"
+  filename = "/tmp/sans"
+}
+
+// HACK HACK debug
+resource "local_file" "validation" {
+  content  = "${aws_acm_certificate.cert.domain_validation_options}"
+  filename = "/tmp/cert_validations"
+}
+
 resource "aws_acm_certificate" "cert" {
   domain_name               = "${var.cert_domain_name}"
   subject_alternative_names = ["${keys(var.cert_subject_alternative_names)}"]
   validation_method         = "DNS"
   tags                      = "${local.tags}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # https://www.terraform.io/docs/providers/aws/r/acm_certificate_validation.html
