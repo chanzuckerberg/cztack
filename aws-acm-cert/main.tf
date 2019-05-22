@@ -26,11 +26,16 @@ resource "aws_acm_certificate" "cert" {
 resource "aws_route53_record" "cert_validation" {
   count = "${local.cert_validation_count}"
   # count = "${length(aws_acm_certificate.cert.domain_validation_options)}"
+  sorted_domain_validation_options = ["${sort(aws_acm_certificate.cert.domain_validation_options)}"]
+  name    = "${lookup(sorted_domain_validation_options[count.index], "resource_record_name")}"
+  type    = "${lookup(sorted_domain_validation_options[count.index], "resource_record_type")}"
+  zone_id = "${lookup(var.cert_subject_alternative_name_to_zone_id_map, lookup(sorted_domain_validation_options[count.index], "domain_name"), var.aws_route53_zone_id)}"
+  records = ["${lookup(sorted_domain_validation_options[count.index], "resource_record_value")}"]
 
-  name    = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_name")}"
-  type    = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_type")}"
-  zone_id = "${lookup(var.cert_subject_alternative_name_to_zone_id_map, lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "domain_name"), var.aws_route53_zone_id)}"
-  records = ["${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_value")}"]
+  # name    = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_name")}"
+  # type    = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_type")}"
+  # zone_id = "${lookup(var.cert_subject_alternative_name_to_zone_id_map, lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "domain_name"), var.aws_route53_zone_id)}"
+  # records = ["${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_value")}"]
   ttl     = "${var.validation_record_ttl}"
 }
 
