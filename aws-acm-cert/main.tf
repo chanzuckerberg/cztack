@@ -15,10 +15,6 @@ resource "aws_acm_certificate" "cert" {
   subject_alternative_names = ["${keys(var.cert_subject_alternative_names)}"]
   validation_method         = "DNS"
   tags                      = "${local.tags}"
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 # https://www.terraform.io/docs/providers/aws/r/acm_certificate_validation.html
