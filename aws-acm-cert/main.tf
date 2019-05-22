@@ -6,8 +6,6 @@ locals {
     owner     = "${var.owner}"
     managedBy = "terraform"
   }
-
-  cert_validation_count = "${length(var.cert_subject_alternative_names) + 1}"
 }
 
 resource "aws_acm_certificate" "cert" {
@@ -19,7 +17,7 @@ resource "aws_acm_certificate" "cert" {
 
 # https://www.terraform.io/docs/providers/aws/r/acm_certificate_validation.html
 resource "aws_route53_record" "cert_validation" {
-  count = "${local.cert_validation_count}"
+  count = "${length(aws_acm_certificate.cert.domain_validation_options)}"
 
   name    = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_name")}"
   type    = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_type")}"
