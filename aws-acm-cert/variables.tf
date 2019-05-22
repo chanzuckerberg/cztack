@@ -3,12 +3,21 @@ variable "cert_domain_name" {
   description = "Like www.foo.bar.com or *.foo.bar.com"
 }
 
+# variable "cert_subject_alternative_names" {
+#   type        = "map"
+#   description = "A map of <alternative_domain:route53_zone_id>"
+#   default     = {}
+# }
 variable "cert_subject_alternative_names" {
+  type        = "list"
+  description = "A list of alternative domains"
+  default     = []
+}
+variable "cert_subject_alternative_name_to_zone_id_map" {
   type        = "map"
   description = "A map of <alternative_domain:route53_zone_id>"
   default     = {}
 }
-
 variable "aws_route53_zone_id" {
   type = "string"
 }
