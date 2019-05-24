@@ -72,6 +72,11 @@ variable "skip_final_snapshot" {
   default     = false
 }
 
+variable "snapshot_identifier" {
+  type    = "string"
+  default = ""
+}
+
 variable "apply_immediately" {
   type        = "string"
   description = "If false changes will not be applied until next maintenance window."

@@ -46,6 +46,7 @@ resource "aws_rds_cluster" "db" {
   backup_retention_period             = 28
   final_snapshot_identifier           = "${local.name}-snapshot"
   skip_final_snapshot                 = "${var.skip_final_snapshot}"
+  snapshot_identifier                 = "${var.snapshot_identifier}"
   backtrack_window                    = "${var.backtrack_window}"
   kms_key_id                          = "${var.kms_key_id}"
   port                                = "${var.port}"

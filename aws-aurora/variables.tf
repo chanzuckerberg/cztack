@@ -47,6 +47,11 @@ variable "skip_final_snapshot" {
   default = false
 }
 
+variable "snapshot_identifier" {
+  type    = "string"
+  default = ""
+}
+
 variable "backtrack_window" {
   default = 0
 }
