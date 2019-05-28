@@ -33,6 +33,7 @@ module "cert" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| allow\_validation\_record\_overwrite | Allow the overwrite of validation records. This is needed if you are creating certificates in multiple regions. | string | `"true"` | no |
 | aws\_route53\_zone\_id |  | string | n/a | yes |
 | cert\_domain\_name | Like www.foo.bar.com or *.foo.bar.com | string | n/a | yes |
 | cert\_subject\_alternative\_names | A map of <alternative_domain:route53_zone_id> | map | `<map>` | no |

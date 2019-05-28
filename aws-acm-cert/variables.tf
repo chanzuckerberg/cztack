@@ -37,3 +37,9 @@ variable "owner" {
   type        = "string"
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
+
+variable "allow_validation_record_overwrite" {
+  type        = "string"
+  description = "Allow the overwrite of validation records. This is needed if you are creating certificates in multiple regions."
+  default     = true
+}
