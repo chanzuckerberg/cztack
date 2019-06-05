@@ -10,7 +10,7 @@ resource "aws_iam_user" "bless-test" {
 }
 
 module "bless" {
-  source = ".."
+  source = "./.."
 
   project = "${var.project}"
   service = "${var.service}"
