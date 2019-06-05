@@ -81,7 +81,14 @@ resource "aws_rds_cluster_parameter_group" "db" {
   family      = "${var.engine}${var.engine_version}"
   description = "RDS default cluster parameter group"
 
-  parameter = "${var.rds_cluster_parameters}"
+  dynamic "parameter" {
+    for_each = var.rds_cluster_parameters
+    content {
+      name         = parameter.value.name
+      value        = parameter.value.value
+      apply_method = parameter.value.apply_method
+    }
+  }
 
   lifecycle {
     ignore_changes = ["family"]
@@ -94,7 +101,14 @@ resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
   family = "${var.engine}${var.engine_version}"
 
-  parameter = "${var.db_parameters}"
+  dynamic "parameter" {
+    for_each = var.db_parameters
+    content {
+      name         = parameter.value.name
+      value        = parameter.value.value
+      apply_method = parameter.value.apply_method
+    }
+  }
 
   lifecycle {
     ignore_changes = ["family"]
