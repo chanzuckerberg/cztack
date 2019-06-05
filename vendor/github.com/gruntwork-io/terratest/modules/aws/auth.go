@@ -2,6 +2,7 @@ package aws
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -13,8 +14,22 @@ import (
 	"github.com/pquerna/otp/totp"
 )
 
-// NewAuthenticatedSession gets an AWS Session, checking that the user has credentials properly configured in their environment.
+const (
+	AuthAssumeRoleEnvVar = "TERRATEST_IAM_ROLE" // OS environment variable name through which Assume Role ARN may be passed for authentication
+)
+
+// NewAuthenticatedSession creates an AWS session following to standard AWS authentication workflow.
+// If AuthAssumeIamRoleEnvVar environment variable is set, assumes IAM role specified in it.
 func NewAuthenticatedSession(region string) (*session.Session, error) {
+	if assumeRoleArn, ok := os.LookupEnv(AuthAssumeRoleEnvVar); ok {
+		return NewAuthenticatedSessionFromRole(region, assumeRoleArn)
+	} else {
+		return NewAuthenticatedSessionFromDefaultCredentials(region)
+	}
+}
+
+// NewAuthenticatedSessionFromDefaultCredentials gets an AWS Session, checking that the user has credentials properly configured in their environment.
+func NewAuthenticatedSessionFromDefaultCredentials(region string) (*session.Session, error) {
 	sess, err := session.NewSession(aws.NewConfig().WithRegion(region))
 	if err != nil {
 		return nil, err
