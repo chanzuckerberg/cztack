@@ -27,8 +27,9 @@ jobs:
   include:
   - stage: check
     script: make lint
-  - stage: check
-    script: make check-docs
+  # terraform-docs is incompatible with 0.12 for now
+  # - stage: check
+  #   script: make check-docs
   - stage: check
     before_script:
     - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile
