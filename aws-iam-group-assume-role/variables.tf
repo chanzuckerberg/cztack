@@ -27,7 +27,7 @@ variable "target_role" {
 }
 
 # Pseudo depends_on because Terraform modules do not support depends_on
-variable depends_on {
+variable "dependencies" {
   default = []
   type    = "list"
 }

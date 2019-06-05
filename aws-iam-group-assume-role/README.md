@@ -11,7 +11,7 @@ module "group" {
   target_accounts = [...]
   target_role     = "..."
 
-  depends_on = ...
+  dependencies = ...
 }
 
 output "group_arn" {
@@ -28,7 +28,7 @@ output "group_name" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| depends\_on | Pseudo depends_on because Terraform modules do not support depends_on | list | `<list>` | no |
+| dependencies | Pseudo depends_on because Terraform modules do not support depends_on | list | `<list>` | no |
 | group\_name | The name of the group this module will create. | string | n/a | yes |
 | iam\_path | The IAM path under which the group and policies will be created. Useful for avoiding naming conflicts. | string | `"/"` | no |
 | target\_accounts | List of accounts in which this role should be assume-able. | list | n/a | yes |
