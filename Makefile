@@ -49,7 +49,7 @@ check-docs:
 	done;
 
 clean:
-		rm **/*.tfstate*
+		rm **/*.tfstate*; true
 
 test: fmt
-	GOCACHE=off AWS_PROFILE=cztack-ci-1 AWS_SDK_LOAD_CONFIG=true gotest -parallel 10 -test.timeout 45m $(TEST)
+	AWS_PROFILE=cztack-ci-1 AWS_SDK_LOAD_CONFIG=true gotest -count=1 -parallel 10 -test.timeout 45m $(TEST)
