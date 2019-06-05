@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "lambda" {
 
     resources = ["${aws_kms_key.bless_kms_auth.arn}"]
 
-    condition = {
+    condition {
       test     = "StringEquals"
       variable = "kms:EncryptionContext:to"
       values   = ["${local.name}"]

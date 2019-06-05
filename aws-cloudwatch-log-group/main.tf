@@ -5,7 +5,7 @@ locals {
 resource "aws_cloudwatch_log_group" "group" {
   name = "${local.log_group_name}"
 
-  tags {
+  tags = {
     project   = "${var.project}"
     env       = "${var.env}"
     service   = "${var.service}"
