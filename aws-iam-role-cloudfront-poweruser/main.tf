@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "s3" {
     ]
 
     resources = [
-      "${formatlist("arn:aws:s3:::%s*/*",var.s3_bucket_prefixes)}",
+      "${formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_prefixes)}",
     ]
   }
 
@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "s3" {
     ]
 
     resources = [
-      "${formatlist("arn:aws:s3:::%s*",var.s3_bucket_prefixes)}",
+      "${formatlist("arn:aws:s3:::%s*", var.s3_bucket_prefixes)}",
     ]
   }
 }
