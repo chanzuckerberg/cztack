@@ -1,3 +1,8 @@
+locals {
+  all_regions_enabled  = "${length(var.authorized_regions) == 0 ? 1 : 0}"
+  all_regions_disabled = "${1 - local.all_regions_enabled}"
+}
+
 data "aws_iam_policy_document" "assume-role" {
   statement {
     principals {
@@ -18,17 +23,6 @@ resource "aws_iam_role" "poweruser" {
 resource "aws_iam_role_policy_attachment" "poweruser" {
   role       = "${aws_iam_role.poweruser.name}"
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
-}
-
-data "aws_iam_policy_document" "poweruser" {
-  statement {
-    sid = "misc"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
-    }
-  }
 }
 
 # These are extra permissions we're adding that
