@@ -3,12 +3,6 @@ data "aws_iam_policy_document" "client" {
     sid       = "Lambda"
     actions   = ["lambda:InvokeFunction"]
     resources = ["${var.bless_lambda_arns}"]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
   }
 }
 
