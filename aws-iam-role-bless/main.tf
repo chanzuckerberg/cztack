@@ -8,7 +8,6 @@ data "aws_iam_policy_document" "client" {
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
     }
-
   }
 }
 
