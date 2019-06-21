@@ -25,12 +25,3 @@ module "client" {
   iam_path          = "${var.iam_path}"
   source_account_id = "${var.source_account_id}"
 }
-
-
-
-
-    "Condition": {
-      "Bool": {
-        "aws:MultiFactorAuthPresent": "true"
-      }
-    }
