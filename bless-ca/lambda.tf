@@ -21,7 +21,7 @@ resource "aws_lambda_function" "bless" {
   function_name    = "${local.name}"
   handler          = "bless_lambda.lambda_handler"
   source_code_hash = "${data.bless_lambda.code.output_base64sha256}"
-  runtime          = "python3.6"
+  runtime          = "python3.7"
   kms_key_arn      = "${aws_kms_key.bless.arn}"
   timeout          = 10
   tags             = "${local.tags}"
