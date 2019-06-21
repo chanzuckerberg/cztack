@@ -3,6 +3,12 @@ data "aws_iam_policy_document" "client" {
     sid       = "Lambda"
     actions   = ["lambda:InvokeFunction"]
     resources = ["${var.bless_lambda_arns}"]
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
   }
 }
 
@@ -19,3 +25,12 @@ module "client" {
   iam_path          = "${var.iam_path}"
   source_account_id = "${var.source_account_id}"
 }
+
+
+
+
+    "Condition": {
+      "Bool": {
+        "aws:MultiFactorAuthPresent": "true"
+      }
+    }

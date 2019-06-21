@@ -25,9 +25,6 @@ data "aws_iam_policy_document" "assume-role" {
     sid       = "assume0"
     resources = ["${local.account_arns}"]
     actions   = ["sts:AssumeRole"]
-    condition = [
-      Bool = ["aws:MultiFactorAuthPresent" = "true"]
-  }
 }
 
 resource "aws_iam_group_policy_attachment" "assume-role" {
