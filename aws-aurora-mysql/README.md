@@ -1,6 +1,6 @@
 # AWS Aurora MySQL
 
-This module will created a robust and secure [AWS Aurora](https://aws.amazon.com/rds/aurora/) MySQL cluster.
+This module will create a robust and secure [AWS Aurora](https://aws.amazon.com/rds/aurora/) MySQL cluster.
 
 A few things this module does for you–
 
