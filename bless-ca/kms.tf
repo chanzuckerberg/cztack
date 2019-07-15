@@ -3,6 +3,7 @@ data "aws_caller_identity" "current" {}
 resource "aws_kms_key" "bless" {
   description             = "KMS key for ${local.name}"
   deletion_window_in_days = 7
+  enable_key_rotation     = true
 
   tags = "${local.tags}"
 }
@@ -63,6 +64,7 @@ data "aws_iam_policy_document" "kmsauth" {
 resource "aws_kms_key" "bless_kms_auth" {
   description             = "KMS key for kmsauth for ${local.name}"
   deletion_window_in_days = 7
+  enable_key_rotation     = true
   policy                  = "${data.aws_iam_policy_document.kmsauth.json}"
 
   tags = "${local.tags}"
