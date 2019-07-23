@@ -28,8 +28,6 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"role_name":         random.UniqueId(),
 			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 			"source_account_id": curAcct,
-			"owner":             random.UniqueId(),
-			"project":           random.UniqueId(),
 		},
 		EnvVars: map[string]string{
 			"AWS_DEFAULT_REGION": testutil.IAMRegion,

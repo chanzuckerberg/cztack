@@ -64,7 +64,7 @@ variable "apply_immediately" {
 # This is to get a around a limitation where the elasticache cluster id can be
 # only 20 characters long. Use it only if you get that error.
 variable "resource_name" {
-  description = "If not set, name will be ${var.project}-${var.env}-${var.name}."
+  description = "If not set, name will be [var.project]-[var.env]-[var.name]."
   type        = "string"
   default     = ""
 }
