@@ -21,7 +21,7 @@ resource "aws_security_group" "rds" {
     from_port   = "${var.port}"
     to_port     = "${var.port}"
     protocol    = "tcp"
-    cidr_blocks = ["${var.ingress_cidr_blocks}"]
+    cidr_blocks = "${var.ingress_cidr_blocks}"
   }
 
   lifecycle {
@@ -81,7 +81,7 @@ resource "aws_rds_cluster_parameter_group" "db" {
   family      = "${var.engine}${var.engine_version}"
   description = "RDS default cluster parameter group"
 
-  parameter = ["${var.rds_cluster_parameters}"]
+  parameter = "${var.rds_cluster_parameters}"
 
   lifecycle {
     ignore_changes = ["family"]
@@ -94,7 +94,7 @@ resource "aws_db_parameter_group" "db" {
   name   = "${local.name}"
   family = "${var.engine}${var.engine_version}"
 
-  parameter = ["${var.db_parameters}"]
+  parameter = "${var.db_parameters}"
 
   lifecycle {
     ignore_changes = ["family"]

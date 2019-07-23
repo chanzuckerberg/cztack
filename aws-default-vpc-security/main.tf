@@ -49,7 +49,7 @@ resource "aws_default_subnet" "default" {
 # https://github.com/hashicorp/terraform/issues/9824
 resource "aws_default_network_acl" "default" {
   default_network_acl_id = "${aws_default_vpc.default.default_network_acl_id}"
-  subnet_ids             = ["${aws_default_subnet.default.*.id}"]
+  subnet_ids             = "${aws_default_subnet.default.*.id}"
 
   # According to https://www.terraform.io/docs/providers/aws/r/default_network_acl.html
   # these are the default rules (ie allow all).
