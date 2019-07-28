@@ -3,7 +3,7 @@ resource "aws_kms_key" "parameter_store" {
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
-  tags {
+  tags = {
     project   = "${var.project}"
     env       = "${var.env}"
     service   = "${var.service}"

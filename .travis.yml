@@ -1,17 +1,17 @@
 language: go
 go:
-- 1.10.3
+- 1.12.5
 sudo: false
 dist: trusty
 cache: pip
 install:
 # terraform
-- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
+- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip
 - unzip terraform.zip
 - mv terraform ~/bin/
 - chmod +x ~/bin/terraform
 # terraform-provider-bless
-- wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.5/terraform-provider-bless_0.2.5_linux_amd64.tar.gz
+- wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.8/terraform-provider-bless_0.2.8_linux_amd64.tar.gz
 - tar -C ~/bin -xzf terraform-provider-bless.tar
 # terraform-docs
 - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.6.0/terraform-docs-v0.6.0-linux-amd64
@@ -27,8 +27,9 @@ jobs:
   include:
   - stage: check
     script: make lint
-  - stage: check
-    script: make check-docs
+  # terraform-docs is incompatible with 0.12 for now
+  # - stage: check
+  #   script: make check-docs
   - stage: check
     before_script:
     - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile

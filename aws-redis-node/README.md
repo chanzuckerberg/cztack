@@ -18,7 +18,7 @@ parameters.
 | parameter\_group\_name |  | string | `"default.redis3.2"` | no |
 | port |  | string | `"6379"` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| resource\_name | If not set, name will be ${var.project}-${var.env}-${var.name}. | string | `""` | no |
+| resource\_name | If not set, name will be [var.project]-[var.env]-[var.name]. | string | `""` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | `"redis"` | no |
 | subnets | List of subnets to which this EC instance should be attached. They should probably be private. | list | n/a | yes |
 

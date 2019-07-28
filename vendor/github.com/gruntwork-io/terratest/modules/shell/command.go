@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"sync"
 	"syscall"
 	"testing"
 
@@ -90,19 +91,12 @@ func readStdoutAndStderr(t *testing.T, stdout io.ReadCloser, stderr io.ReadClose
 	stdoutScanner := bufio.NewScanner(stdout)
 	stderrScanner := bufio.NewScanner(stderr)
 
-	for {
-		if stdoutScanner.Scan() {
-			text := stdoutScanner.Text()
-			logger.Log(t, text)
-			allOutput = append(allOutput, text)
-		} else if stderrScanner.Scan() {
-			text := stderrScanner.Text()
-			logger.Log(t, text)
-			allOutput = append(allOutput, text)
-		} else {
-			break
-		}
-	}
+	wg := &sync.WaitGroup{}
+	mutex := &sync.Mutex{}
+	wg.Add(2)
+	go readData(t, stdoutScanner, wg, mutex, &allOutput)
+	go readData(t, stderrScanner, wg, mutex, &allOutput)
+	wg.Wait()
 
 	if err := stdoutScanner.Err(); err != nil {
 		return "", err
@@ -113,6 +107,20 @@ func readStdoutAndStderr(t *testing.T, stdout io.ReadCloser, stderr io.ReadClose
 	}
 
 	return strings.Join(allOutput, "\n"), nil
+}
+
+func readData(t *testing.T, scanner *bufio.Scanner, wg *sync.WaitGroup, mutex *sync.Mutex, allOutput *[]string) {
+	defer wg.Done()
+	for scanner.Scan() {
+		logTextAndAppendToOutput(t, mutex, scanner.Text(), allOutput)
+	}
+}
+
+func logTextAndAppendToOutput(t *testing.T, mutex *sync.Mutex, text string, allOutput *[]string) {
+	defer mutex.Unlock()
+	logger.Log(t, text)
+	mutex.Lock()
+	*allOutput = append(*allOutput, text)
 }
 
 // GetExitCodeForRunCommandError tries to read the exit code for the error object returned from running a shell command. This is a bit tricky to do

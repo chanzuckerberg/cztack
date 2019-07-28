@@ -2,7 +2,7 @@
 # we do this to enable running this for each region, example–
 #  ``` module "..." {
 #   ...
-#   providers {
+#   providers = {
 #     'aws' = 'aws.us-west-1'
 #   }
 # }
@@ -12,7 +12,7 @@ provider "aws" {}
 data "aws_availability_zones" "available" {}
 
 resource "aws_default_vpc" "default" {
-  tags {
+  tags = {
     Name = "Default VPC"
   }
 }
@@ -32,7 +32,7 @@ resource "aws_default_route_table" "default" {
     gateway_id = "${data.aws_internet_gateway.default.id}"
   }
 
-  tags {
+  tags = {
     Name = "Default Route Table"
   }
 }
@@ -49,7 +49,7 @@ resource "aws_default_subnet" "default" {
 # https://github.com/hashicorp/terraform/issues/9824
 resource "aws_default_network_acl" "default" {
   default_network_acl_id = "${aws_default_vpc.default.default_network_acl_id}"
-  subnet_ids             = ["${aws_default_subnet.default.*.id}"]
+  subnet_ids             = "${aws_default_subnet.default.*.id}"
 
   # According to https://www.terraform.io/docs/providers/aws/r/default_network_acl.html
   # these are the default rules (ie allow all).
@@ -71,7 +71,7 @@ resource "aws_default_network_acl" "default" {
     to_port    = 0
   }
 
-  tags {
+  tags = {
     Name = "Default Network ACL"
   }
 }
@@ -82,7 +82,7 @@ resource "aws_default_security_group" "default" {
 
   # No ingress or egress here means we permit no traffic.
 
-  tags {
+  tags = {
     Name = "Default Security Group"
   }
 }

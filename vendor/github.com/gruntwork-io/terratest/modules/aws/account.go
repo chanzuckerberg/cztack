@@ -5,7 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/service/iam"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/sts"
 )
 
 // GetAccountId gets the Account ID for the currently logged in IAM User.
@@ -19,17 +20,17 @@ func GetAccountId(t *testing.T) string {
 
 // GetAccountIdE gets the Account ID for the currently logged in IAM User.
 func GetAccountIdE(t *testing.T) (string, error) {
-	iamClient, err := NewIamClientE(t, defaultRegion)
+	stsClient, err := NewStsClientE(t, defaultRegion)
 	if err != nil {
 		return "", err
 	}
 
-	user, err := iamClient.GetUser(&iam.GetUserInput{})
+	identity, err := stsClient.GetCallerIdentity(&sts.GetCallerIdentityInput{})
 	if err != nil {
 		return "", err
 	}
 
-	return extractAccountIDFromARN(*user.User.Arn)
+	return aws.StringValue(identity.Account), nil
 }
 
 // An IAM arn is of the format arn:aws:iam::123456789012:user/test. The account id is the number after arn:aws:iam::,
@@ -42,4 +43,13 @@ func extractAccountIDFromARN(arn string) (string, error) {
 	}
 
 	return arnParts[4], nil
+}
+
+// NewStsClientE creates a new STS client.
+func NewStsClientE(t *testing.T, region string) (*sts.STS, error) {
+	sess, err := NewAuthenticatedSession(region)
+	if err != nil {
+		return nil, err
+	}
+	return sts.New(sess), nil
 }

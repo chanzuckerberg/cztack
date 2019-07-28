@@ -25,9 +25,7 @@ data "aws_iam_policy_document" "s3" {
       "s3:PutObjectAcl",
     ]
 
-    resources = [
-      "${formatlist("arn:aws:s3:::%s*/*",var.s3_bucket_prefixes)}",
-    ]
+    resources = "${formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_prefixes)}"
   }
 
   statement {
@@ -38,9 +36,7 @@ data "aws_iam_policy_document" "s3" {
       "s3:ListBucket",
     ]
 
-    resources = [
-      "${formatlist("arn:aws:s3:::%s*",var.s3_bucket_prefixes)}",
-    ]
+    resources = "${formatlist("arn:aws:s3:::%s*", var.s3_bucket_prefixes)}"
   }
 }
 

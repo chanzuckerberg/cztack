@@ -20,6 +20,40 @@ const regionOverrideEnvVarName = "TERRATEST_REGION"
 // this region as a default.
 const defaultRegion = "us-east-1"
 
+// Reference for launch dates: https://aws.amazon.com/about-aws/global-infrastructure/
+var stableRegions = []string{
+	"us-east-1",      // Launched 2006
+	"us-east-2",      // Launched 2016
+	"us-west-1",      // Launched 2009
+	"us-west-2",      // Launched 2011
+	"ca-central-1",   // Launched 2016
+	"sa-east-1",      // Launched 2011
+	"eu-west-1",      // Launched 2007
+	"eu-west-2",      // Launched 2016
+	"eu-west-3",      // Launched 2017
+	"eu-central-1",   // Launched 2014
+	"ap-southeast-1", // Launched 2010
+	"ap-southeast-2", // Launched 2012
+	"ap-northeast-1", // Launched 2011
+	"ap-northeast-2", // Launched 2016
+	"ap-south-1",     // Launched 2016
+}
+
+// GetStableRandomRegion gets a randomly chosen AWS region that is considered stable. Like GetRandomRegion, you can
+// further restrict the stable region list using approvedRegions and forbiddenRegions. We consider stable regions to be
+// those that have been around for at least 1 year.
+// Note that regions in the approvedRegions list that are not considered stable are ignored.
+func GetRandomStableRegion(t *testing.T, approvedRegions []string, forbiddenRegions []string) string {
+	regionsToPickFrom := stableRegions
+	if len(approvedRegions) > 0 {
+		regionsToPickFrom = collections.ListIntersection(regionsToPickFrom, approvedRegions)
+	}
+	if len(forbiddenRegions) > 0 {
+		regionsToPickFrom = collections.ListSubtract(regionsToPickFrom, forbiddenRegions)
+	}
+	return GetRandomRegion(t, regionsToPickFrom, nil)
+}
+
 // GetRandomRegion gets a randomly chosen AWS region. If approvedRegions is not empty, this will be a region from the approvedRegions
 // list; otherwise, this method will fetch the latest list of regions from the AWS APIs and pick one of those. If
 // forbiddenRegions is not empty, this method will make sure the returned region is not in the forbiddenRegions list.

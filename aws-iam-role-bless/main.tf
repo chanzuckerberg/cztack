@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "client" {
   statement {
     sid       = "Lambda"
     actions   = ["lambda:InvokeFunction"]
-    resources = ["${var.bless_lambda_arns}"]
+    resources = "${var.bless_lambda_arns}"
   }
 }
 

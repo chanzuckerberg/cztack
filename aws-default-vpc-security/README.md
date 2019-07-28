@@ -27,7 +27,7 @@ module "default-vpc" {
 
   default_sg_lockdown = true
 
-  providers {
+  providers = {
     "aws" = "aws.us-west-1"
   }
 }
