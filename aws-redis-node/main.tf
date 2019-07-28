@@ -13,7 +13,7 @@ locals {
 
 resource "aws_elasticache_subnet_group" "default" {
   name       = "${var.resource_name != "" ? var.resource_name : local.name}"
-  subnet_ids = ["${var.subnets}"]
+  subnet_ids = "${var.subnets}"
 }
 
 resource "aws_elasticache_cluster" "default" {
@@ -25,7 +25,7 @@ resource "aws_elasticache_cluster" "default" {
   num_cache_nodes      = 1
   parameter_group_name = "${var.parameter_group_name}"
   subnet_group_name    = "${aws_elasticache_subnet_group.default.name}"
-  security_group_ids   = ["${var.ingress_security_group_ids}"]
+  security_group_ids   = "${var.ingress_security_group_ids}"
   apply_immediately    = "${var.apply_immediately}"
   availability_zone    = "${var.availability_zone}"
   tags                 = "${local.tags}"
