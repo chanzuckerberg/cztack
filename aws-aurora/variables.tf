@@ -112,3 +112,8 @@ variable "performance_insights_enabled" {
   type    = "string"
   default = true
 }
+
+variable "db_cluster_parameter_group_name" {
+  type    = "string"
+  default = ""
+}
