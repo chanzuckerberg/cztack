@@ -6,7 +6,7 @@ dist: trusty
 cache: pip
 install:
 # terraform
-- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.6_linux_amd64.zip
+- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.6/terraform_0.12.6_linux_amd64.zip
 - unzip terraform.zip
 - mv terraform ~/bin/
 - chmod +x ~/bin/terraform
