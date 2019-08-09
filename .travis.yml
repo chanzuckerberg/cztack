@@ -6,7 +6,7 @@ dist: trusty
 cache: pip
 install:
 # terraform
-- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip
+- wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.6_linux_amd64.zip
 - unzip terraform.zip
 - mv terraform ~/bin/
 - chmod +x ~/bin/terraform
@@ -14,9 +14,9 @@ install:
 - wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.8/terraform-provider-bless_0.2.8_linux_amd64.tar.gz
 - tar -C ~/bin -xzf terraform-provider-bless.tar
 # terraform-docs
-- wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.6.0/terraform-docs-v0.6.0-linux-amd64
-- mv terraform-docs ~/bin/terraform-docs
-- chmod +x ~/bin/terraform-docs
+# - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.6.0/terraform-docs-v0.6.0-linux-amd64
+# - mv terraform-docs ~/bin/terraform-docs
+# - chmod +x ~/bin/terraform-docs
 # awscli
 - pip install awscli --upgrade --user
 # gotest
@@ -32,16 +32,11 @@ jobs:
   #   script: make check-docs
   - stage: check
     before_script:
-    - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile
-      cztack-ci-1
-    - aws configure set aws_secret_access_key $CI1_AWS_SECRET_ACCESS_KEY --profile
-      cztack-ci-1
+    - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile cztack-ci-1
+    - aws configure set aws_secret_access_key $CI1_AWS_SECRET_ACCESS_KEY --profile cztack-ci-1
     - aws --profile cztack-ci-1 sts get-caller-identity
-
-    - aws configure set aws_access_key_id     $CI2_AWS_ACCESS_KEY_ID     --profile
-      cztack-ci-2
-    - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile
-      cztack-ci-2
+    - aws configure set aws_access_key_id     $CI2_AWS_ACCESS_KEY_ID     --profile cztack-ci-2
+    - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile cztack-ci-2
     - aws --profile cztack-ci-2 sts get-caller-identity
     script: travis_wait 45 make test
 env:

@@ -99,7 +99,7 @@ variable "kms_key_id" {
 variable "engine_version" {
   type        = "string"
   description = "The version of Postgres to use."
-  default     = "9.6"
+  default     = "10"
 }
 
 variable "performance_insights_enabled" {

@@ -16,36 +16,43 @@ func TestAWSAuroraPostgresInit(t *testing.T) {
 
 func TestAWSAuroraPostgresInitAndApply(t *testing.T) {
 	t.Parallel()
-	project := testutil.UniqueId()
-	env := testutil.UniqueId()
-	service := testutil.UniqueId()
-	owner := testutil.UniqueId()
+	versions := []string{"9.6", "10"}
 
-	vpc := testutil.EnvVar(testutil.EnvVPCID)
-	databaseSubnetGroup := testutil.EnvVar(testutil.EnvDatabaseSubnetGroup)
-	ingressCidrBlocks := testutil.EnvVar(testutil.EnvVPCCIDRBlock)
+	for _, version := range versions {
+		func() {
+			project := testutil.UniqueId()
+			env := testutil.UniqueId()
+			service := testutil.UniqueId()
+			owner := testutil.UniqueId()
 
-	databasePassword := testutil.RandomString(testutil.AlphaNum, 8)
-	databaseUsername := testutil.RandomString(testutil.Alpha, 8)
-	databaseName := testutil.UniqueId()
+			vpc := testutil.EnvVar(testutil.EnvVPCID)
+			databaseSubnetGroup := testutil.EnvVar(testutil.EnvDatabaseSubnetGroup)
+			ingressCidrBlocks := testutil.EnvVar(testutil.EnvVPCCIDRBlock)
 
-	options := testutil.Options(
-		testutil.DefaultRegion,
-		map[string]interface{}{
-			"project": project,
-			"env":     env,
-			"service": service,
-			"owner":   owner,
+			databasePassword := testutil.RandomString(testutil.AlphaNum, 8)
+			databaseUsername := testutil.RandomString(testutil.Alpha, 8)
+			databaseName := testutil.UniqueId()
 
-			"vpc_id":                vpc,
-			"database_subnet_group": databaseSubnetGroup,
-			"database_password":     databasePassword,
-			"database_username":     databaseUsername,
-			"ingress_cidr_blocks":   []string{ingressCidrBlocks},
-			"database_name":         databaseName,
-			"skip_final_snapshot":   true,
-		},
-	)
-	defer terraform.Destroy(t, options)
-	testutil.Run(t, options)
+			options := testutil.Options(
+				testutil.DefaultRegion,
+				map[string]interface{}{
+					"project": project,
+					"env":     env,
+					"service": service,
+					"owner":   owner,
+
+					"vpc_id":                vpc,
+					"database_subnet_group": databaseSubnetGroup,
+					"database_password":     databasePassword,
+					"database_username":     databaseUsername,
+					"ingress_cidr_blocks":   []string{ingressCidrBlocks},
+					"database_name":         databaseName,
+					"skip_final_snapshot":   true,
+					"engine_version":        version,
+				},
+			)
+			defer terraform.Destroy(t, options)
+			testutil.Run(t, options)
+		}()
+	}
 }
