@@ -8,18 +8,18 @@ You can use [our secrets setup module](../aws-param-secrets-setup/README.md) to 
 
 ```hcl
 module "secret" {
-  source = "github.com/chanzuckerberg/cztack/aws-ssm-params-secret?ref=v0.14.0"
+  source = "github.com/chanzuckerberg/cztack/aws-ssm-params-secret?ref=v0.18.2"
 
   project = "acme"
   env     = "staging"
   service = "website"
 
-  name = "password"
+  parameters = ["password"]
 }
 
 # yeah don't really do this
 output "secret" {
-  value = "${module.secret.value}"
+  value = module.secret.values
 }
 ```
 
