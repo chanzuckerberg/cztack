@@ -6,7 +6,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAWSParamSecret(t *testing.T) {
+func TestAWSSSMParams(t *testing.T) {
 	options := &terraform.Options{
 		TerraformDir: ".",
 	}

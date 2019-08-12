@@ -1,4 +1,6 @@
-# AWS ParamStore Secret
+# AWS ParamStore Secret (DEPRECATED)
+
+__*Deprecated. Please use `aws-ssm-params` module for new code*__
 
 This module is made to work together with [Chamber](https://github.com/segmentio/chamber) to manage secrets in AWS. Typically a user would use chamber to put secrets into the ParamStore and then use this module to read them out in Terraform code.
 
