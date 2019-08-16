@@ -1,4 +1,6 @@
 <!-- START -->
+Accept GitHub webhooks to S3. Keeps track of events such as pushing code to a repository.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |

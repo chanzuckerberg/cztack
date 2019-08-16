@@ -41,7 +41,7 @@ resource "aws_iam_role_policy" "firehose" {
 }
 
 module "attach-logs" {
-  source    = "github.com/chanzuckerberg/cztack//aws-iam-policy-cwlogs?ref=v0.17.1"
+  source    = "../aws-iam-policy-cwlogs"
   role_name = "${aws_iam_role.lambda.name}"
   iam_path  = "${var.iam_path}"
 }
@@ -53,7 +53,7 @@ resource "aws_iam_role" "lambda" {
 }
 
 module "github_secret" {
-  source  = "github.com/chanzuckerberg/cztack//aws-param?ref=v0.17.1"
+  source  = "../aws-param"
   project = "${var.project}"
   env     = "${var.env}"
   service = "${var.service}"
