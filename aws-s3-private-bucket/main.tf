@@ -34,6 +34,13 @@ resource "aws_s3_bucket" "bucket" {
   tags = "${local.tags}"
 }
 
+resource "aws_s3_bucket_public_access_block" "bucket" {
+  bucket = "${aws_s3_bucket.bucket}"
+
+  block_public_acls   = true
+  block_public_policy = true
+}
+
 data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
   source_json = "${var.bucket_policy}"
