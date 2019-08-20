@@ -51,7 +51,7 @@ variable "iam_path" {
 }
 
 variable "s3_prefix" {
-  type = "string"
-  default = ""
+  type        = "string"
+  default     = ""
   description = "Firehose will add this prefix to files it writes to the s3 bucket"
 }
