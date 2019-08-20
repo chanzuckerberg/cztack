@@ -17,6 +17,6 @@
 | arn |  |
 | domain\_name |  |
 | id |  |
-| name | HACK(el): we do this to hint TF dependency graph since modules can't depend_on |
+| name | We do this to hint TF dependency graph since modules can't depend_on |
 
 <!-- END -->
