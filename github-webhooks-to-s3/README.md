@@ -17,9 +17,9 @@ module "archiver" {
   owner   = "${var.owner}"
   service = "${var.component}"
 
-  fqdn            = "github-archive.foo.bar.com"
+  fqdn            = "github.foo.bar.com"
   certificate_arn = "..." // This MUST be in us-east-1 region
-  route53_zone_id = "..."
+  route53_zone_id = "..." // Route53 zone to write records to
 }
 
 ```
