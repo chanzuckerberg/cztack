@@ -1,6 +1,4 @@
 <!-- START -->
-Accept GitHub webhooks to S3. Keeps track of events such as pushing code to a repository.
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -14,11 +12,7 @@ Accept GitHub webhooks to S3. Keeps track of events such as pushing code to a re
 | owner | Owner for tagging and naming. | string | n/a | yes |
 | project | Project for tagging and naming. | string | n/a | yes |
 | route53\_zone\_id | The route53 zone id for fqdn's domain | string | n/a | yes |
+| s3\_prefix | Firehose will add this prefix to files it writes to the s3 bucket | string | `""` | no |
 | service | Service for tagging and naming. | string | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
 
 <!-- END -->

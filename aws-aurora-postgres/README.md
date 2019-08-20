@@ -41,7 +41,7 @@ module "db" {
 | database\_subnet\_group | The name of an existing database subnet group to use. | string | n/a | yes |
 | database\_username | Default user to be created. | string | n/a | yes |
 | db\_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | list | `<list>` | no |
-| engine\_version | The version of Postgres to use. | string | `"9.6"` | no |
+| engine\_version | The version of Postgres to use. | string | `"10"` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | iam\_database\_authentication\_enabled |  | string | `"false"` | no |
 | ingress\_cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list | n/a | yes |

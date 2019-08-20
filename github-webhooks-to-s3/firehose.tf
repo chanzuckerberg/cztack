@@ -78,7 +78,7 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose" {
   s3_configuration {
     role_arn           = "${aws_iam_role.firehose.arn}"
     bucket_arn         = "${module.bucket.arn}"
-    prefix             = ""
+    prefix             = "${var.s3_prefix}"
     compression_format = "GZIP"
 
     cloudwatch_logging_options {
