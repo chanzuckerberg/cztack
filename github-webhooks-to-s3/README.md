@@ -20,6 +20,5 @@ Accept GitHub webhooks to S3. Keeps track of events such as pushing code to a re
 
 | Name | Description |
 |------|-------------|
-| fivetran\_role\_arn |  |
 
 <!-- END -->
