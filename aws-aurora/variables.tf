@@ -117,3 +117,7 @@ variable "db_cluster_parameter_group_name" {
   type    = "string"
   default = ""
 }
+
+variable "db_deletion_protection" {
+  type = "string"
+}
