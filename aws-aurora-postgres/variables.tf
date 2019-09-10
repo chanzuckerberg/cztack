@@ -111,8 +111,3 @@ variable "iam_database_authentication_enabled" {
   type    = "string"
   default = false
 }
-
-variable "db_cluster_parameter_group_name" {
-  type    = "string"
-  default = ""
-}
