@@ -33,7 +33,8 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_rds_cluster" "db" {
-  engine = "${var.engine}"
+  engine         = "${var.engine}"
+  engine_version = "${var.engine_version}"
 
   cluster_identifier                  = "${local.name}"
   database_name                       = "${var.database_name}"
@@ -60,7 +61,8 @@ resource "aws_rds_cluster" "db" {
 }
 
 resource "aws_rds_cluster_instance" "db" {
-  engine = "${var.engine}"
+  engine         = "${var.engine}"
+  engine_version = "${var.engine_version}"
 
   count                   = "${var.instance_count}"
   identifier              = "${local.name}-${count.index}"

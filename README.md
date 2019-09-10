@@ -92,6 +92,13 @@ This creates a security-audit role, based off the AWS-managed policy, but with a
 
 [Read More](aws-iam-role-security-audit/README.md)
 
+### GitHub Webhooks to S3
+
+Accept GitHub webhooks and store them in S3
+
+[Read More](github-webhooks-to-s3/README.md)
+
+
 ## Contributing
 
 ### Writing tests
