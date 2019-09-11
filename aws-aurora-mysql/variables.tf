@@ -153,5 +153,5 @@ variable "iam_database_authentication_enabled" {
 
 variable "db_deletion_protection" {
   type    = "string"
-  default = true
+  default = false
 }

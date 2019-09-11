@@ -37,14 +37,13 @@ func TestAWSAuroraMysqlInitAndApply(t *testing.T) {
 			"service": service,
 			"owner":   owner,
 
-			"vpc_id":                 vpc,
-			"database_subnet_group":  databaseSubnetGroup,
-			"database_password":      databasePassword,
-			"database_username":      databaseUsername,
-			"ingress_cidr_blocks":    []string{ingressCidrBlocks},
-			"database_name":          databaseName,
-			"skip_final_snapshot":    true,
-			"db_deletion_protection": false,
+			"vpc_id":                vpc,
+			"database_subnet_group": databaseSubnetGroup,
+			"database_password":     databasePassword,
+			"database_username":     databaseUsername,
+			"ingress_cidr_blocks":   []string{ingressCidrBlocks},
+			"database_name":         databaseName,
+			"skip_final_snapshot":   true,
 		},
 	)
 	defer terraform.Destroy(t, options)

@@ -115,5 +115,5 @@ variable "performance_insights_enabled" {
 
 variable "db_deletion_protection" {
   type    = "string"
-  default = "true"
+  default = false
 }
