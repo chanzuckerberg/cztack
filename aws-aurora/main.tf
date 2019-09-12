@@ -51,6 +51,7 @@ resource "aws_rds_cluster" "db" {
   kms_key_id                          = "${var.kms_key_id}"
   port                                = "${var.port}"
   db_cluster_parameter_group_name     = "${aws_rds_cluster_parameter_group.db.id}"
+  deletion_protection                 = "${var.db_deletion_protection}"
 
   enabled_cloudwatch_logs_exports = "${var.enabled_cloudwatch_logs_exports}"
 

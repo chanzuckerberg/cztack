@@ -112,3 +112,8 @@ variable "performance_insights_enabled" {
   type    = "string"
   default = true
 }
+
+variable "db_deletion_protection" {
+  type    = "string"
+  default = false
+}

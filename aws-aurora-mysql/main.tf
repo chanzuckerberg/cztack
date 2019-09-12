@@ -13,6 +13,7 @@ module "aurora" {
   database_password                   = "${var.database_password}"
   database_username                   = "${var.database_username}"
   db_parameters                       = "${var.db_parameters}"
+  db_deletion_protection              = "${var.db_deletion_protection}"
   rds_cluster_parameters              = "${var.rds_cluster_parameters}"
   iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
   performance_insights_enabled        = "${var.performance_insights_enabled}"
