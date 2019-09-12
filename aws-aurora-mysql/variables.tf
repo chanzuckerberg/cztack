@@ -155,3 +155,8 @@ variable "db_deletion_protection" {
   type    = "string"
   default = false
 }
+
+variable "engine_version" {
+  type    = "string"
+  default = "5.7"
+}
