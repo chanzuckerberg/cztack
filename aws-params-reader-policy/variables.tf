@@ -29,3 +29,9 @@ variable "region" {
   description = "Region the parameter store values can be read from. Defaults to all."
   type        = "string"
 }
+
+variable "extra_services" {
+  type        = list(string)
+  description = "Extra services to be given parameter read access to, within the same project and environment."
+  default     = []
+}
