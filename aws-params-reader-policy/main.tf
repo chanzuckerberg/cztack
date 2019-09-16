@@ -1,5 +1,10 @@
 locals {
   resource_name = "${var.project}-${var.env}-${var.service}"
+  services      = concat([var.service], var.extra_services)
+
+  param_resources = [
+    for serv in local.services : "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${var.project}-${var.env}-${serv}/*"
+  ]
 }
 
 data "aws_caller_identity" "current" {}
@@ -18,7 +23,7 @@ data "aws_iam_policy_document" "policy" {
       "ssm:DescribeParameters",
     ]
 
-    resources = ["arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.resource_name}/*"]
+    resources = local.param_resources
   }
 
   statement {
