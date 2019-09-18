@@ -9,7 +9,7 @@ locals {
 
   domain       = "${replace(data.aws_route53_zone.zone.name, "/\\.$/", "")}"
   website_fqdn = "${var.subdomain}.${local.domain}"
-  bucket_name  = "${local.website_fqdn}"
+  bucket_name  = "${var.bucket_name != "" ? var.bucket_name : local.website_fqdn}"
 
   aliases = [
     "${local.website_fqdn}",
@@ -54,8 +54,9 @@ resource "aws_s3_bucket" "bucket" {
 
   // Cloudfront needs this to compress assets
   // https://stackoverflow.com/questions/35590622/cloudfront-with-s3-website-as-origin-is-not-serving-gzipped-files
+  // Content-Type is also needed to allow CORS json requests
   cors_rule {
-    allowed_headers = ["Authorization", "Content-Length"]
+    allowed_headers = ["Authorization", "Content-Length", "Content-Type"]
     allowed_methods = ["GET"]
     allowed_origins = ["*"]
     max_age_seconds = 3000
@@ -70,6 +71,15 @@ resource "aws_s3_bucket" "bucket" {
   }
 
   tags = "${local.tags}"
+}
+
+resource "aws_s3_bucket_public_access_block" "bucket" {
+  bucket = "${aws_s3_bucket.bucket.id}"
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
@@ -89,13 +99,36 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   aliases = "${concat(var.aliases, local.aliases)}"
 
   default_cache_behavior {
-    allowed_methods = ["GET", "HEAD"]
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods  = ["GET", "HEAD"]
 
     target_origin_id = "${local.website_fqdn}"
 
     forwarded_values {
       query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 3600
+    max_ttl                = 86400
+    compress               = true
+  }
+
+  ordered_cache_behavior {
+    path_pattern    = "${var.path_pattern}"
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
+    cached_methods  = ["GET", "HEAD"]
+
+    target_origin_id = "${local.website_fqdn}"
+
+    forwarded_values {
+      query_string = true
+      headers      = ["Origin"]
 
       cookies {
         forward = "none"

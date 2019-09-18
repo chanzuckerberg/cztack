@@ -47,7 +47,7 @@ variable "cloudfront_price_class" {
 
 variable "minimum_tls_version" {
   type        = "string"
-  default     = "TLSv1_2016"
+  default     = "TLSv1.1_2016"
   description = "Minimum TLS version to accept."
 }
 
@@ -55,4 +55,16 @@ variable "aliases" {
   type        = "list"
   default     = []
   description = "Vanity aliases. Make sure your provided cert supports these."
+}
+
+variable "bucket_name" {
+  type        = "string"
+  description = "Name of the bucket to created. If not given, it will use the domain name."
+  default     = ""
+}
+
+variable "path_pattern" {
+  type        = "string"
+  description = "The pattern (for example, images/*.jpg) that specifies which requests you want this cache behavior to apply to."
+  default     = "*"
 }
