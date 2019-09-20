@@ -64,7 +64,10 @@ data "aws_iam_policy_document" "secrets" {
     }
   }
 
-  statement {
+  dynamic statement {
+
+    for_each = compact([var.terraform_state_lock_dynamodb_arn])
+
     sid        = "statefileaccess"
 
     actions = [
@@ -73,7 +76,7 @@ data "aws_iam_policy_document" "secrets" {
       "dynamodb:DeleteItem",
     ]
 
-    resources = ["arn:aws:dynamodb:*:*:table/statelocks"]
+    resources = [each.key]
   }
 }
 
