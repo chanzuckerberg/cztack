@@ -73,7 +73,7 @@ data "aws_iam_policy_document" "secrets" {
       "dynamodb:DeleteItem",
     ]
 
-    resources = ["*"]
+    resources = ["arn:aws:dynamodb:*:*:table/statelocks"]
   }
 }
 
