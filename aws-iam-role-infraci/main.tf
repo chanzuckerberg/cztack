@@ -63,6 +63,18 @@ data "aws_iam_policy_document" "secrets" {
       values   = ["true"]
     }
   }
+
+  statement {
+    sid        = "statefileaccess"
+
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:DeleteItem"
+    ]
+
+    resources = ["arn:aws:dynamodb:*:*:"]
+  }
 }
 
 resource "aws_iam_policy" "secrets" {
