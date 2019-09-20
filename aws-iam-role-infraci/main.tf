@@ -70,10 +70,10 @@ data "aws_iam_policy_document" "secrets" {
     actions = [
       "dynamodb:GetItem",
       "dynamodb:PutItem",
-      "dynamodb:DeleteItem"
+      "dynamodb:DeleteItem",
     ]
 
-    resources = ["arn:aws:dynamodb:*:*:"]
+    resources = ["*"]
   }
 }
 
