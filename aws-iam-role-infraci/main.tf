@@ -68,15 +68,18 @@ data "aws_iam_policy_document" "secrets" {
 
     for_each = compact([var.terraform_state_lock_dynamodb_arn])
 
-    sid        = "statefileaccess"
 
-    actions = [
-      "dynamodb:GetItem",
-      "dynamodb:PutItem",
-      "dynamodb:DeleteItem",
-    ]
+    content {
+      sid        = "statefileaccess"
 
-    resources = [each.key]
+      actions = [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:DeleteItem",
+      ]
+
+      resources = [statement.value]
+    }
   }
 }
 
