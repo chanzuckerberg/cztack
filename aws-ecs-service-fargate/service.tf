@@ -1,0 +1,181 @@
+locals {
+  container_name = var.container_name == null ? local.name : var.container_name
+
+  task_definition = "${aws_ecs_task_definition.job.family}:${aws_ecs_task_definition.job.revision}"
+}
+
+module "container-sg" {
+  source      = "terraform-aws-modules/security-group/aws"
+  version     = "3.1.0"
+  name        = local.name
+  description = "ECS ingress port"
+  vpc_id      = var.vpc_id
+  tags        = local.tags
+
+  ingress_with_source_security_group_id = [
+    {
+      from_port                = var.container_port
+      to_port                  = var.container_port
+      protocol                 = "tcp"
+      description              = "Container port"
+      source_security_group_id = module.alb-sg.this_security_group_id
+    },
+  ]
+
+  egress_with_cidr_blocks = [
+    for cidr in var.container_egress_cidrs : {
+      rule        = "all-all"
+      cidr_blocks = cidr
+    }
+  ]
+
+  egress_with_source_security_group_id = [
+    for sg in var.container_egress_security_group_ids : {
+      rule                     = "all-all"
+      source_security_group_id = sg
+    }
+  ]
+}
+
+# Only one of the following is active at a time, depending on whether or not a task definition was provided
+resource "aws_ecs_service" "job" {
+  name        = local.name
+  cluster     = var.cluster_id
+  count       = var.manage_task_definition ? 1 : 0
+  launch_type = "FARGATE"
+
+  task_definition                   = local.task_definition
+  desired_count                     = var.desired_count
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+
+  network_configuration {
+    subnets         = var.task_subnets
+    security_groups = [module.container-sg.this_security_group_id]
+  }
+
+  load_balancer {
+    target_group_arn = aws_alb_target_group.service.arn
+    container_name   = local.container_name
+    container_port   = var.container_port
+  }
+
+  dynamic "service_registries" {
+    for_each = aws_service_discovery_service.discovery[*]
+    content {
+      registry_arn = service_registries.arn
+    }
+  }
+
+  depends_on = [aws_alb.service]
+}
+
+resource "aws_ecs_service" "unmanaged-job" {
+  name        = local.name
+  cluster     = var.cluster_id
+  count       = var.manage_task_definition ? 0 : 1
+  launch_type = "FARGATE"
+
+  task_definition                   = local.task_definition
+  desired_count                     = var.desired_count
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+
+  network_configuration {
+    subnets         = var.task_subnets
+    security_groups = [module.container-sg.this_security_group_id]
+  }
+
+  load_balancer {
+    target_group_arn = aws_alb_target_group.service.arn
+    container_name   = local.container_name
+    container_port   = var.container_port
+  }
+
+  dynamic "service_registries" {
+    for_each = aws_service_discovery_service.discovery[*]
+    content {
+      registry_arn = aws_service_discovery_service.discovery[0].arn
+    }
+  }
+
+  # This lifecycle block is the only difference between job and unmanaged-job
+  lifecycle {
+    ignore_changes = ["task_definition"]
+  }
+
+  depends_on = [aws_alb.service]
+}
+
+# Default container definition if manage_task_definition == false.
+# Defaults to a minimal hello-world implementation; should be updated separately from
+# Terraform, e.g. using ecs deploy or czecs
+
+locals {
+  dummy_task = <<TEMPLATE
+[
+  {
+    "name": "${local.container_name}",
+    "image": "library/busybox:1.29",
+    "command": ["sh", "-c", "while true; do { echo -e 'HTTP/1.1 200 OK\r\n\nRunning stub server'; date; } | nc -l -p ${var.container_port}; done"],
+    "portMappings": [
+      {
+        "containerPort": ${var.container_port},
+        "hostPort": ${var.container_port}
+      }
+    ]
+  }
+]
+TEMPLATE
+}
+
+data "aws_iam_policy_document" "execution_role" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "task_execution_role" {
+  name               = "${local.name}-execution-role"
+  assume_role_policy = data.aws_iam_policy_document.execution_role.json
+}
+
+# TODO: Add support for giving permissions to ECR ARNs and possibly cloudwatch log group
+# Or provide ability to pass in own execution role ARN
+resource "aws_iam_role_policy_attachment" "task_execution_role" {
+  role       = aws_iam_role.task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+data "aws_iam_policy_document" "registry_secretsmanager" {
+  count = var.registry_secretsmanager_arn != null ? 1 : 0
+
+  statement {
+    actions = [
+      "kms:Decrypt",
+      "secretsmanager:GetSecretValue",
+    ]
+
+    resources = [var.registry_secretsmanager_arn]
+  }
+}
+
+resource "aws_iam_role_policy" "task_execution_role_secretsmanager" {
+  count  = var.registry_secretsmanager_arn != null ? 1 : 0
+  role   = aws_iam_role.task_execution_role.name
+  policy = data.aws_iam_policy_document.registry_secretsmanager[0].json
+}
+
+resource "aws_ecs_task_definition" "job" {
+  family                   = local.name
+  container_definitions    = var.manage_task_definition ? var.task_definition : local.dummy_task
+  task_role_arn            = var.task_role_arn
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = var.cpu
+  memory                   = var.memory
+  network_mode             = "awsvpc"
+  execution_role_arn       = aws_iam_role.task_execution_role.arn
+}
