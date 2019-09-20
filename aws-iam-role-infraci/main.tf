@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "secrets" {
 
 
     content {
-      sid        = "statefileaccess"
+      sid = "statefileaccess"
 
       actions = [
         "dynamodb:GetItem",
