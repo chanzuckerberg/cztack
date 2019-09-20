@@ -63,6 +63,24 @@ data "aws_iam_policy_document" "secrets" {
       values   = ["true"]
     }
   }
+
+  dynamic statement {
+
+    for_each = compact([var.terraform_state_lock_dynamodb_arn])
+
+
+    content {
+      sid = "statefileaccess"
+
+      actions = [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:DeleteItem",
+      ]
+
+      resources = [statement.value]
+    }
+  }
 }
 
 resource "aws_iam_policy" "secrets" {

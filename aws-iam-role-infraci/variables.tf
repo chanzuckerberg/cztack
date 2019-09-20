@@ -9,3 +9,9 @@ variable "role_name" {
 variable "iam_path" {
   default = "/"
 }
+
+variable "terraform_state_lock_dynamodb_arn" {
+  type        = "string"
+  default     = ""
+  description = "The ARN of the state file DynamoDB table"
+}
