@@ -13,4 +13,5 @@ variable "iam_path" {
 variable "terraform_state_lock_dynamodb_arn" {
   type = "string"
   default = ""
+  description = "The unique identifier (ARN) of the state file DynamoDB table"
 }
