@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.20.0 2019-09-23
+## 0.19.5 2019-09-23
 
 * [04f67e0f](../../commit/04f67e0fec7bdf76427cf30e193c5508e8aeb801) Adding terraform statefile policy to infraci role ([#126](../../pull/126))
 
