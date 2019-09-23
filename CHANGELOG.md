@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.20.0 2019-09-23
+
+* [04f67e0f](../../commit/04f67e0fec7bdf76427cf30e193c5508e8aeb801) Adding terraform statefile policy to infraci role ([#126](../../pull/126))
+
 ## 0.19.4 2019-09-18
 
 * [fbfaf513](../../commit/fbfaf5134197f67c437b2f7f6dd308e1a940b7af) Add internal features to aws-single-page-static-site ([#125](../../pull/125))
