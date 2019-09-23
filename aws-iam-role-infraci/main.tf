@@ -66,7 +66,7 @@ data "aws_iam_policy_document" "secrets" {
 
   dynamic statement {
 
-    for_each = var.terraform_state_lock_dynamodb_arns
+    for_each = distinct(var.terraform_state_lock_dynamodb_arns)
 
 
     content {
