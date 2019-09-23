@@ -10,7 +10,7 @@ variable "iam_path" {
   default = "/"
 }
 
-variable "terraform_state_lock_dynamodb_arn" {
+variable "terraform_state_lock_dynamodb_arns" {
   type        = list(string)
   default     = []
   description = "ARNs of the state file DynamoDB tables"
