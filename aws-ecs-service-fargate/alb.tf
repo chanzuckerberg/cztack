@@ -7,7 +7,7 @@ locals {
   ssl_policy = compact([var.ssl_policy, var.internal_lb ? "ELBSecurityPolicy-TLS-1-2-2017-01" : "ELBSecurityPolicy-TLS-1-1-2017-01"])[0]
 }
 
-resource "aws_alb_target_group" "service" {
+resource "aws_lb_target_group" "service" {
   name        = local.name
   port        = var.container_port
   protocol    = "HTTP"
@@ -26,7 +26,7 @@ resource "aws_alb_target_group" "service" {
   tags = local.tags
 }
 
-resource "aws_alb" "service" {
+resource "aws_lb" "service" {
   name            = local.name
   internal        = var.internal_lb
   security_groups = [module.alb-sg.this_security_group_id]
@@ -45,14 +45,14 @@ resource "aws_alb" "service" {
   tags = local.tags
 }
 
-resource "aws_alb_listener" "http" {
-  load_balancer_arn = aws_alb.service.arn
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.service.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
     type             = var.disable_http_redirect ? "forward" : "redirect"
-    target_group_arn = var.disable_http_redirect ? aws_alb_target_group.service.arn : null
+    target_group_arn = var.disable_http_redirect ? aws_lb_target_group.service.arn : null
 
     dynamic "redirect" {
       for_each = compact([var.disable_http_redirect ? "" : "present"])
@@ -65,15 +65,15 @@ resource "aws_alb_listener" "http" {
   }
 }
 
-resource "aws_alb_listener" "https" {
-  load_balancer_arn = aws_alb.service.arn
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.service.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = local.ssl_policy
   certificate_arn   = var.acm_certificate_arn
 
   default_action {
-    target_group_arn = aws_alb_target_group.service.arn
+    target_group_arn = aws_lb_target_group.service.arn
     type             = "forward"
   }
 }

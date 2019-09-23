@@ -14,8 +14,8 @@ resource "aws_route53_record" "ipv4" {
   allow_overwrite = false
 
   alias {
-    name                   = aws_alb.service.dns_name
-    zone_id                = aws_alb.service.zone_id
+    name                   = aws_lb.service.dns_name
+    zone_id                = aws_lb.service.zone_id
     evaluate_target_health = true
   }
 }
@@ -29,8 +29,8 @@ resource "aws_route53_record" "ipv6" {
   type    = "AAAA"
 
   alias {
-    name                   = aws_alb.service.dns_name
-    zone_id                = aws_alb.service.zone_id
+    name                   = aws_lb.service.dns_name
+    zone_id                = aws_lb.service.zone_id
     evaluate_target_health = true
   }
 }
@@ -42,8 +42,8 @@ resource "aws_route53_record" "www-ipv4" {
   type    = "A"
 
   alias {
-    name                   = aws_alb.service.dns_name
-    zone_id                = aws_alb.service.zone_id
+    name                   = aws_lb.service.dns_name
+    zone_id                = aws_lb.service.zone_id
     evaluate_target_health = true
   }
 }
@@ -55,8 +55,8 @@ resource "aws_route53_record" "www-ipv6" {
   type    = "AAAA"
 
   alias {
-    name                   = aws_alb.service.dns_name
-    zone_id                = aws_alb.service.zone_id
+    name                   = aws_lb.service.dns_name
+    zone_id                = aws_lb.service.zone_id
     evaluate_target_health = true
   }
 }

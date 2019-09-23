@@ -15,7 +15,7 @@ resource "aws_ecs_service" "job" {
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.service.arn
+    target_group_arn = aws_lb_target_group.service.arn
     container_name   = local.container_name
     container_port   = var.container_port
   }
@@ -27,7 +27,9 @@ resource "aws_ecs_service" "job" {
     }
   }
 
-  depends_on = [aws_alb.service]
+  tags = local.tags
+
+  depends_on = [aws_lb.service]
 }
 
 resource "aws_ecs_service" "unmanaged-job" {
@@ -40,7 +42,7 @@ resource "aws_ecs_service" "unmanaged-job" {
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.service.arn
+    target_group_arn = aws_lb_target_group.service.arn
     container_name   = local.container_name
     container_port   = var.container_port
   }
@@ -54,10 +56,12 @@ resource "aws_ecs_service" "unmanaged-job" {
 
   # This lifecycle block is the only difference between job and unmanaged-job
   lifecycle {
-    ignore_changes = ["task_definition"]
+    ignore_changes = [task_definition]
   }
 
-  depends_on = [aws_alb.service]
+  tags = local.tags
+
+  depends_on = [aws_lb.service]
 }
 
 # Default container definition if manage_task_definition == false.
@@ -87,4 +91,5 @@ resource "aws_ecs_task_definition" "job" {
   family                = local.name
   container_definitions = var.manage_task_definition ? var.task_definition : local.dummy_task
   task_role_arn         = var.task_role_arn
+  tags                  = local.tags
 }

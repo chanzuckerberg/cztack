@@ -1,9 +1,9 @@
 output "alb_dns_name" {
-  value = aws_alb.service.dns_name
+  value = aws_lb.service.dns_name
 }
 
 output "alb_route53_zone_id" {
-  value = aws_alb.service.zone_id
+  value = aws_lb.service.zone_id
 }
 
 output "ecs_task_definition_family" {

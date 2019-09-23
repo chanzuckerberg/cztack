@@ -1,13 +1,13 @@
 resource "aws_service_discovery_private_dns_namespace" "discovery" {
-  count       = "${var.with_service_discovery ? 1 : 0}"
+  count       = var.with_service_discovery ? 1 : 0
   name        = "${local.name}.terraform.local"
   description = "Namespace for service discovery for ${local.name}"
-  vpc         = "${var.vpc_id}"
+  vpc         = var.vpc_id
 }
 
 resource "aws_service_discovery_service" "discovery" {
-  count       = "${var.with_service_discovery ? 1 : 0}"
-  name        = "${local.name}"
+  count       = var.with_service_discovery ? 1 : 0
+  name        = local.name
   description = "Service discovery for ${local.name}"
 
   health_check_custom_config {
