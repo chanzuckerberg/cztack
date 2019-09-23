@@ -1,0 +1,144 @@
+locals {
+  name = "${var.project}-${var.env}-${var.service}"
+
+  container_name = var.container_name == null ? local.name : var.container_name
+
+  task_definition = "${aws_ecs_task_definition.job.family}:${aws_ecs_task_definition.job.revision}"
+
+  tags = {
+    managedBy = "terraform"
+    Name      = local.name
+    project   = var.project
+    env       = var.env
+    service   = var.service
+    owner     = var.owner
+  }
+}
+
+# Only one of the following is active at a time, depending on whether or not a task definition was provided and on use_fargate flag
+resource "aws_ecs_service" "job" {
+  name        = local.name
+  cluster     = var.cluster_id
+  count       = var.manage_task_definition ? 1 : 0
+  launch_type = "FARGATE"
+
+  task_definition                    = local.task_definition
+  desired_count                      = var.desired_count
+  deployment_maximum_percent         = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+  scheduling_strategy                = "REPLICA"
+
+  network_configuration {
+    subnets         = var.task_subnets
+    security_groups = var.security_group_ids
+  }
+
+  tags = local.tags
+}
+
+resource "aws_ecs_service" "unmanaged-job" {
+  name        = local.name
+  cluster     = var.cluster_id
+  count       = var.manage_task_definition ? 0 : 1
+  launch_type = "FARGATE"
+
+  task_definition                    = local.task_definition
+  desired_count                      = var.desired_count
+  deployment_maximum_percent         = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+  scheduling_strategy                = "REPLICA"
+
+  network_configuration {
+    subnets         = var.task_subnets
+    security_groups = var.security_group_ids
+  }
+
+  lifecycle {
+    ignore_changes = [task_definition]
+  }
+
+  tags = local.tags
+}
+
+# Default container definition if var.manage_task_definition == false
+# Defaults to a minimal hello-world implementation; should be updated separately from
+# Terraform, e.g. using ecs deploy or czecs
+locals {
+  template = <<TEMPLATE
+[
+  {
+    "name": "${local.container_name}",
+    "image": "library/busybox:1.29",
+    "command": ["sh", "-c", "while true; do { echo -e 'HTTP/1.1 200 OK\r\n\nRunning stub server'; date; } | nc -l -p 8080; done"]
+  }
+]
+TEMPLATE
+}
+
+data "aws_iam_policy_document" "execution_role" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "task_execution_role" {
+  name               = "${local.name}-execution-role"
+  assume_role_policy = data.aws_iam_policy_document.execution_role.json
+}
+
+# TODO(mbarrien): We can probably narrow this down to allowing access to only
+# the specific ECR arn if applicable, and the specific cloudwatch log group.
+# Either pass both identifiers in, or pass the entire role ARN as an argument
+resource "aws_iam_role_policy_attachment" "task_execution_role" {
+  role       = aws_iam_role.task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+data "aws_iam_policy_document" "registry_secretsmanager" {
+  count = var.registry_secretsmanager_arn != null ? 1 : 0
+
+  statement {
+    actions = [
+      "kms:Decrypt",
+    ]
+
+    resources = [var.registry_secretsmanager_arn]
+  }
+
+  statement {
+    actions = [
+      "secretsmanager:GetSecretValue",
+    ]
+
+    # Limit to only current version of the secret
+    condition {
+      test     = "ForAnyValue:StringEquals"
+      variable = "secretsmanager:VersionStage"
+      values   = ["AWSCURRENT"]
+    }
+
+    resources = [var.registry_secretsmanager_arn]
+  }
+}
+
+resource "aws_iam_role_policy" "task_execution_role_secretsmanager" {
+  count  = var.registry_secretsmanager_arn != null ? 1 : 0
+  role   = aws_iam_role.task_execution_role.name
+  policy = data.aws_iam_policy_document.registry_secretsmanager[0].json
+}
+
+resource "aws_ecs_task_definition" "job" {
+  family                   = local.name
+  container_definitions    = var.manage_task_definition ? var.task_definition : local.template
+  task_role_arn            = var.task_role_arn
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = var.cpu
+  memory                   = var.memory
+  network_mode             = "awsvpc"
+  execution_role_arn       = aws_iam_role.task_execution_role.arn
+}
