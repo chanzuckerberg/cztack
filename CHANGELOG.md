@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.20.0 2019-09-23
+
+* [9bcd84c7](../../commit/9bcd84c74a2a26fe4ccfbb32bc8347bd4c0fa5e8) [breaking] Modified infraci role to accept a list of dyanmodb table arns ([#130](../../pull/130))
+
 ## 0.19.5 2019-09-23
 
 * [04f67e0f](../../commit/04f67e0fec7bdf76427cf30e193c5508e8aeb801) Adding terraform statefile policy to infraci role ([#126](../../pull/126))
