@@ -15,7 +15,7 @@ locals {
   }
 }
 
-# Only one of the following is active at a time, depending on whether or not a task definition was provided and on use_fargate flag
+# Only one of the following is active at a time, depending on var.manage_task_definition
 resource "aws_ecs_service" "job" {
   name        = local.name
   cluster     = var.cluster_id

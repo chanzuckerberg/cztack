@@ -8,7 +8,7 @@ In Fargate, the hostPort and containerPort must match; 0 is not allowed for host
 
 ## Terraform managed task definition vs czecs
 
-If the user sets var.manage_task_definition = true, Terraform will manage the lifecycle
+If the user sets `var.manage_task_definition = true`, Terraform will manage the lifecycle
 of the container definition; any external changes are reset on the next Terraform run.
 
 If var.manage_task_definition = false, the user is expected to manage the
@@ -110,26 +110,26 @@ module "web-service" {
   # This port will exposed on this named container. This named container will also be
   # the one to which the load balancer points. The cert will be attached to the https listener.
   # The health of that contiainer will be checked with the `health_check_path` path.
-  container_port       = 80
-  container_name       = myservice
-  acm_certificate_arn  = data.aws_acm_certificate.staging.arn
-  health_check_path    = "/health"
+  container_port      = 80
+  container_name      = myservice
+  acm_certificate_arn = data.aws_acm_certificate.staging.arn
+  health_check_path   = "/health"
 
   # The VPC and subnets in which the load balancer will be created.
-  vpc_id               = data.terraform_remote_state.cloud-env.outputs.vpc_id
-  lb_subnets           = data.terraform_remote_state.cloud-env.outputs.public_subnets
-  fargate_task_subnets = data.terraform_remote_state.cloud-env.outputs.private_subnets
+  vpc_id              = data.terraform_remote_state.cloud-env.outputs.vpc_id
+  lb_subnets          = data.terraform_remote_state.cloud-env.outputs.public_subnets
+  task_subnets        = data.terraform_remote_state.cloud-env.outputs.private_subnets
 
   # The cluster in which the service is run.
-  cluster_id           = data.terraform_remote_state.ecs.outputs.cluster_id
+  cluster_id          = data.terraform_remote_state.ecs.outputs.cluster_id
   # See above. This is what defines the containers that are run.
-  task_definition      = local.template
+  task_definition     = local.template
 
   # The task is given this role. Useful for services that need to make API calls to AWS.
-  task_role_arn        = aws_iam_role.role.arn
+  task_role_arn       = aws_iam_role.role.arn
 
-  fargate_cpu          = 256
-  fargate_memory       = 512
+  cpu                 = 256
+  memory              = 512
 
   with_service_discovery = "true"
 }

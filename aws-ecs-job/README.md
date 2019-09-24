@@ -5,7 +5,7 @@ background worker daemon sort of things.
 
 ## Terraform managed task definition vs czecs
 
-If the user sets var.manage_task_definition = true, Terraform will manage the lifecycle
+If the user sets `var.manage_task_definition = true`, Terraform will manage the lifecycle
 of the container definition; any external changes are reset on the next Terraform run.
 
 If var.manage_task_definition = false, the user is expected to manage the
