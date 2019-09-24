@@ -12,7 +12,7 @@ If the user sets var.manage_task_definition = true, Terraform will manage the li
 of the container definition; any external changes are reset on the next Terraform run.
 
 If var.manage_task_definition = false, the user is expected to manage the
-container definition external to Terraform (e.g. using czecs). Upon creation,
+container definition external to Terraform (e.g. using [czecs](https://github.com/chanzuckerberg/czecs)). Upon creation,
 Terraform will use a stub definition, but from that point forward will ignore any
 changes to the definition, allowing external task definition management.
 
