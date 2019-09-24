@@ -89,7 +89,7 @@ variable "acm_certificate_arn" {
 }
 
 variable "ssl_policy" {
-  description = "ELB policy to determine with SSL/TLS encyprtion protocols are enabled. Probably don't touch this."
+  description = "ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this."
   type        = string
   default     = null
 }

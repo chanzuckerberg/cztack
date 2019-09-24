@@ -173,7 +173,7 @@ resolvable from within the VPC; it is not publicly resolvable.
 | route53\_zone\_id | Zone in which to create an alias record to the ALB. | string | n/a | yes |
 | security\_group\_ids | Security group to use for the Fargate task. | list | `<list>` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| ssl\_policy | Probably don't touch this. | string | `"ELBSecurityPolicy-TLS-1-1-2017-01"` | no |
+| ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | string | `null` | no |
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |
