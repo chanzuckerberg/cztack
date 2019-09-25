@@ -132,48 +132,6 @@ locals {
 TEMPLATE
 }
 
-data "aws_iam_policy_document" "execution_role" {
-  statement {
-    principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
-}
-
-resource "aws_iam_role" "task_execution_role" {
-  name               = "${local.name}-execution-role"
-  assume_role_policy = data.aws_iam_policy_document.execution_role.json
-}
-
-# TODO: Add support for giving permissions to ECR ARNs and possibly cloudwatch log group
-# Or provide ability to pass in own execution role ARN
-resource "aws_iam_role_policy_attachment" "task_execution_role" {
-  role       = aws_iam_role.task_execution_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-data "aws_iam_policy_document" "registry_secretsmanager" {
-  count = var.registry_secretsmanager_arn != null ? 1 : 0
-
-  statement {
-    actions = [
-      "kms:Decrypt",
-      "secretsmanager:GetSecretValue",
-    ]
-
-    resources = [var.registry_secretsmanager_arn]
-  }
-}
-
-resource "aws_iam_role_policy" "task_execution_role_secretsmanager" {
-  count  = var.registry_secretsmanager_arn != null ? 1 : 0
-  role   = aws_iam_role.task_execution_role.name
-  policy = data.aws_iam_policy_document.registry_secretsmanager[0].json
-}
-
 resource "aws_ecs_task_definition" "job" {
   family                   = local.name
   container_definitions    = var.manage_task_definition ? var.task_definition : local.dummy_task
@@ -183,5 +141,5 @@ resource "aws_ecs_task_definition" "job" {
   cpu                      = var.cpu
   memory                   = var.memory
   network_mode             = "awsvpc"
-  execution_role_arn       = aws_iam_role.task_execution_role.arn
+  execution_role_arn       = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn
 }

@@ -59,6 +59,12 @@ variable "container_name" {
   default     = null
 }
 
+variable "registry_secretsmanager_arn" {
+  description = "ARN for AWS Secrets Manager secret for credentials to private registry"
+  type        = string
+  default     = null
+}
+
 variable "manage_task_definition" {
   description = "If false, Terraform will not touch the task definition for the ECS service after initial creation"
   type        = bool

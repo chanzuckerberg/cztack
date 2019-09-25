@@ -92,4 +92,5 @@ resource "aws_ecs_task_definition" "job" {
   container_definitions = var.manage_task_definition ? var.task_definition : local.dummy_task
   task_role_arn         = var.task_role_arn
   tags                  = local.tags
+  execution_role_arn    = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn
 }

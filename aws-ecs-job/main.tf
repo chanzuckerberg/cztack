@@ -68,4 +68,5 @@ resource "aws_ecs_task_definition" "job" {
   family                = local.name
   container_definitions = var.manage_task_definition ? var.task_definition : local.template
   task_role_arn         = var.task_role_arn
+  execution_role_arn    = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn
 }
