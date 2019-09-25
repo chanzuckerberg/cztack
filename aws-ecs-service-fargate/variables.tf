@@ -94,13 +94,13 @@ variable "task_subnets" {
   default     = []
 }
 
-variable "container_egress_cidrs" {
+variable "task_egress_cidrs" {
   type        = list(string)
   description = "CIDRs the task is allowed to communicate with for outbound traffic."
   default     = ["0.0.0.0/0"]
 }
 
-variable "container_egress_security_group_ids" {
+variable "task_egress_security_group_ids" {
   type        = list(string)
   description = "Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network is true."
   default     = []

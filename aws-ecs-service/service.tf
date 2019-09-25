@@ -23,15 +23,15 @@ module "container-sg" {
     },
   ]
 
-  egress_with_cidr_blocks = length(var.container_egress_cidrs) == 0 ? [] : [
+  egress_with_cidr_blocks = length(var.task_egress_cidrs) == 0 ? [] : [
     {
-      cidr_blocks = join(",", var.container_egress_cidrs)
+      cidr_blocks = join(",", var.task_egress_cidrs)
       rule        = "all-all"
     },
   ]
 
   egress_with_source_security_group_id = [
-    for sg in var.container_egress_security_group_ids : {
+    for sg in var.task_egress_security_group_ids : {
       rule                     = "all-all"
       source_security_group_id = sg
     }
