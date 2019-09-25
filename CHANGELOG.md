@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.21.0 2019-09-25
+
+* [6918848f](../../commit/6918848f1dab99c67e49d21bdc839d907ff8b647) [feature] Add ECS modules to cztack ([#132](../../pull/132))
+
 ## 0.20.0 2019-09-23
 
 * [9bcd84c7](../../commit/9bcd84c74a2a26fe4ccfbb32bc8347bd4c0fa5e8) [breaking] Modified infraci role to accept a list of dyanmodb table arns ([#130](../../pull/130))
