@@ -86,10 +86,10 @@ module "alb-sg" {
   vpc_id      = var.vpc_id
   tags        = local.tags
 
-  ingress_with_cidr_blocks = [
-    for cidr_rule in setproduct(var.lb_ingress_cidrs, local.ingress_rules) : {
-      cidr_blocks = cidr_rule[0]
-      rule        = cidr_rule[1]
+  ingress_with_cidr_blocks = length(var.lb_ingress_cidrs) == 0 ? [] : [
+    for rule in local.ingress_rules : {
+      cidr_blocks = join(",", var.lb_ingress_cidrs)
+      rule        = rule
     }
   ]
 

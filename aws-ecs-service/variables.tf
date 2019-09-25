@@ -83,9 +83,9 @@ variable "acm_certificate_arn" {
 }
 
 variable "ssl_policy" {
-  description = "Probably don't touch this."
+  description = "ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this."
   type        = string
-  default     = "ELBSecurityPolicy-TLS-1-1-2017-01"
+  default     = null
 }
 
 variable "lb_ingress_cidrs" {

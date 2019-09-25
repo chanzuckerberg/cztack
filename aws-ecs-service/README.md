@@ -86,7 +86,7 @@ data "aws_acm_certificate" "staging" {
 }
 
 module "web-service" {
-  source = "git@github.com:chanzuckerberg/shared-infra//terraform/modules/ecs-service-with-alb?ref=v0.15.1"
+  source = "github.com/chanzuckerberg/cztack//aws-ecs-service?ref=v0.20.0"
 
   # this is the name of the service and many of the resources will have this name
   service = "myservice"
@@ -106,22 +106,22 @@ module "web-service" {
   # This port will exposed on this named container. This named container will also be
   # the one to which the load balancer points. The cert will be attached to the https listener.
   # The health of that contiainer will be checked with the `health_check_path` path.
-  container_port       = 80
-  container_name       = myservice
-  acm_certificate_arn  = data.aws_acm_certificate.staging.arn
-  health_check_path    = "/health"
+  container_port      = 80
+  container_name      = myservice
+  acm_certificate_arn = data.aws_acm_certificate.staging.arn
+  health_check_path   = "/health"
 
   # The VPC and subnets in which the load balancer will be created.
-  vpc_id               = data.terraform_remote_state.cloud-env.outputs.vpc_id
-  lb_subnets           = data.terraform_remote_state.cloud-env.outputs.public_subnets
+  vpc_id              = data.terraform_remote_state.cloud-env.outputs.vpc_id
+  lb_subnets          = data.terraform_remote_state.cloud-env.outputs.public_subnets
 
   # The cluster in which the service is run.
-  cluster_id           = data.terraform_remote_state.ecs.outputs.cluster_id
+  cluster_id          = data.terraform_remote_state.ecs.outputs.cluster_id
   # See above. This is what defines the containers that are run.
-  task_definition      = local.template
+  task_definition     = local.template
 
   # The task is given this role. Useful for services that need to make API calls to AWS.
-  task_role_arn        = aws_iam_role.role.arn
+  task_role_arn       = aws_iam_role.role.arn
 
   with_service_discovery = true
 }
@@ -147,7 +147,7 @@ resolvable from within the VPC; it is not publicly resolvable.
 | desired\_count |  | number | n/a | yes |
 | disable\_http\_redirect | Disable redirecting HTTP to HTTPS. | bool | `true` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| extra\_tags | Extra tags that will be added to components created by this module. | map | `<map>` | no |
+| extra\_tags | Extra tags that will be added to components created by this module. | map | `{}` | no |
 | health\_check\_grace\_period\_seconds | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | number | `60` | no |
 | health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | string | `"200-399"` | no |
 | health\_check\_path |  | string | `"/"` | no |
@@ -156,13 +156,13 @@ resolvable from within the VPC; it is not publicly resolvable.
 | lb\_idle\_timeout\_seconds |  | number | `60` | no |
 | lb\_ingress\_cidrs |  | list | `<list>` | no |
 | lb\_subnets | List of subnets in which to deploy the load balancer. | list | n/a | yes |
-| manage_task_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
+| manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
 | route53\_zone\_id | Zone in which to create an alias record to the ALB. | string | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| ssl\_policy | Probably don't touch this. | string | `null` | no |
+| ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | string | `null` | no |
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |

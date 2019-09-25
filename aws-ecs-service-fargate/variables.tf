@@ -79,7 +79,7 @@ variable "task_role_arn" {
 
 variable "task_definition" {
   description = "JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform."
-  type        = "string"
+  type        = string
   default     = null
 }
 
@@ -163,12 +163,6 @@ variable "memory" {
   description = "Memory in megabytes for Fargate task. Used if task_definition provided, or for initial stub task if externally managed."
   type        = number
   default     = 512
-}
-
-variable "security_group_ids" {
-  description = "Security group to use for the Fargate task."
-  type        = list(string)
-  default     = []
 }
 
 variable "registry_secretsmanager_arn" {

@@ -90,7 +90,7 @@ data "aws_acm_certificate" "staging" {
 }
 
 module "web-service" {
-  source = "git@github.com:chanzuckerberg/shared-infra//terraform/modules/ecs-service-with-alb?ref=v0.15.1"
+  source = "github.com/chanzuckerberg/cztack//aws-ecs-service-fargate?ref=v0.20.0"
 
   # this is the name of the service and many of the resources will have this name
   service = "myservice"
@@ -131,13 +131,13 @@ module "web-service" {
   cpu                 = 256
   memory              = 512
 
-  with_service_discovery = "true"
+  with_service_discovery = true
 }
 ```
 
 ## Service Discovery
 
-In addition to a load balancer, this module supports registering all instances of Fargate
+In addition to a load balancer, this module supports registering all instances of
 tasks with DNS via ECS service discovery. If with_service_discovery is true, a new private
 DNS zone is created, and the tasks are registered in that DNS zone. The domain name is only
 resolvable from within the VPC; it is not publicly resolvable.
@@ -160,9 +160,9 @@ resolvable from within the VPC; it is not publicly resolvable.
 | health\_check\_grace\_period\_seconds | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | number | `60` | no |
 | health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | string | `"200-399"` | no |
 | health\_check\_path |  | string | `"/"` | no |
-| internal\_lb |  | string | `"false"` | no |
+| internal\_lb |  | bool | `false` | no |
 | lb\_egress\_cidrs | TODO: Defaults should be more restrictive.Idea: create internal and internet facing modules that set these variables. | list | `<list>` | no |
-| lb\_idle\_timeout\_seconds |  | string | `"60"` | no |
+| lb\_idle\_timeout\_seconds |  | number | `60` | no |
 | lb\_ingress\_cidrs |  | list | `<list>` | no |
 | lb\_subnets | List of subnets in which to deploy the load balancer. | list | n/a | yes |
 | manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
@@ -171,7 +171,6 @@ resolvable from within the VPC; it is not publicly resolvable.
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
 | route53\_zone\_id | Zone in which to create an alias record to the ALB. | string | n/a | yes |
-| security\_group\_ids | Security group to use for the Fargate task. | list | `<list>` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | string | `null` | no |
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
@@ -179,7 +178,7 @@ resolvable from within the VPC; it is not publicly resolvable.
 | task\_role\_arn |  | string | n/a | yes |
 | task\_subnets | List of private_subnets in which to deploy the Fargate task. | list | `<list>` | no |
 | vpc\_id |  | string | n/a | yes |
-| with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53_zone_id. | string | `"false"` | no |
+| with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53_zone_id. | bool | `false` | no |
 
 ## Outputs
 
