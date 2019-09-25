@@ -4,6 +4,40 @@ locals {
   task_definition = "${aws_ecs_task_definition.job.family}:${aws_ecs_task_definition.job.revision}"
 }
 
+module "container-sg" {
+  source      = "terraform-aws-modules/security-group/aws"
+  version     = "3.1.0"
+  create      = var.awsvpc_network_mode
+  name        = local.name
+  description = "ECS ingress port"
+  vpc_id      = var.vpc_id
+  tags        = local.tags
+
+  ingress_with_source_security_group_id = [
+    {
+      from_port                = var.container_port
+      to_port                  = var.container_port
+      protocol                 = "tcp"
+      description              = "Container port"
+      source_security_group_id = module.alb-sg.this_security_group_id
+    },
+  ]
+
+  egress_with_cidr_blocks = length(var.container_egress_cidrs) == 0 ? [] : [
+    {
+      cidr_blocks = join(",", var.container_egress_cidrs)
+      rule        = "all-all"
+    },
+  ]
+
+  egress_with_source_security_group_id = [
+    for sg in var.container_egress_security_group_ids : {
+      rule                     = "all-all"
+      source_security_group_id = sg
+    }
+  ]
+}
+
 # Only one of the following is active at a time, depending on var.manage_task_definition
 resource "aws_ecs_service" "job" {
   name    = local.name
@@ -13,6 +47,14 @@ resource "aws_ecs_service" "job" {
   task_definition                   = local.task_definition
   desired_count                     = var.desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+
+  dynamic "network_configuration" {
+    for_each = compact([var.awsvpc_network_mode ? "present" : ""])
+    content {
+      subnets         = var.task_subnets
+      security_groups = [module.container-sg.this_security_group_id]
+    }
+  }
 
   load_balancer {
     target_group_arn = aws_lb_target_group.service.arn
@@ -40,6 +82,14 @@ resource "aws_ecs_service" "unmanaged-job" {
   task_definition                   = local.task_definition
   desired_count                     = var.desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+
+  dynamic "network_configuration" {
+    for_each = compact([var.awsvpc_network_mode ? "present" : ""])
+    content {
+      subnets         = var.task_subnets
+      security_groups = [module.container-sg.this_security_group_id]
+    }
+  }
 
   load_balancer {
     target_group_arn = aws_lb_target_group.service.arn
@@ -79,7 +129,7 @@ locals {
     "portMappings": [
       {
         "containerPort": ${var.container_port},
-        "hostPort": 0
+        "hostPort": ${var.awsvpc_network_mode ? var.container_port : 0}
       }
     ]
   }
@@ -92,5 +142,6 @@ resource "aws_ecs_task_definition" "job" {
   container_definitions = var.manage_task_definition ? var.task_definition : local.dummy_task
   task_role_arn         = var.task_role_arn
   tags                  = local.tags
+  network_mode          = var.awsvpc_network_mode ? "awsvpc" : null
   execution_role_arn    = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn
 }

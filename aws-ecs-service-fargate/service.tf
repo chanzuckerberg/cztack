@@ -22,11 +22,11 @@ module "container-sg" {
     },
   ]
 
-  egress_with_cidr_blocks = [
-    for cidr in var.container_egress_cidrs : {
+  egress_with_cidr_blocks = length(var.container_egress_cidrs) == 0 ? [] : [
+    {
+      cidr_blocks = join(",", var.container_egress_cidrs)
       rule        = "all-all"
-      cidr_blocks = cidr
-    }
+    },
   ]
 
   egress_with_source_security_group_id = [

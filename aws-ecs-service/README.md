@@ -59,7 +59,7 @@ locals {
     "portMappings": [
       {
         "containerPort": 80,
-        "hostPort": 0
+        "hostPort": 0        # If awsvpc_network_mode is true, must match containerPort so must be 80
       }
     ],
     "environment": [
@@ -142,6 +142,8 @@ resolvable from within the VPC; it is not publicly resolvable.
 | access\_logs\_bucket | S3 bucket to write alb access logs to. Empty for no access logs. | string | `null` | no |
 | acm\_certificate\_arn | Certificate for the HTTPS listener. | string | n/a | yes |
 | cluster\_id |  | string | n/a | yes |
+| container\_egress\_cidrs | CIDR blocks the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network_mode is true. | list | `["0.0.0.0/0"]` | no |
+| container\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network_mode is true. | list | `[]` | no |
 | container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | string | `null` | no |
 | container\_port |  | number | n/a | yes |
 | desired\_count |  | number | n/a | yes |
@@ -152,9 +154,9 @@ resolvable from within the VPC; it is not publicly resolvable.
 | health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | string | `"200-399"` | no |
 | health\_check\_path |  | string | `"/"` | no |
 | internal\_lb |  | bool | `false` | no |
-| lb\_egress\_cidrs | TODO: Defaults should be more restrictive.Idea: create internal and internet facing modules that set these variables. | list | `<list>` | no |
 | lb\_idle\_timeout\_seconds |  | number | `60` | no |
 | lb\_ingress\_cidrs |  | list | `<list>` | no |
+| lb\_ingress\_security\_group\_ids |  | list | `<list>` | no |
 | lb\_subnets | List of subnets in which to deploy the load balancer. | list | n/a | yes |
 | manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
@@ -166,6 +168,7 @@ resolvable from within the VPC; it is not publicly resolvable.
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |
+| task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. Only used if awsvpc_network_mode is true. | list | `[]` | no |
 | vpc\_id |  | string | n/a | yes |
 | with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53_zone_id. | bool | `false` | no |
 

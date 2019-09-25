@@ -150,6 +150,8 @@ resolvable from within the VPC; it is not publicly resolvable.
 | access\_logs\_bucket | S3 bucket to write alb access logs to. Empty for no access logs. | string | `null` | no |
 | acm\_certificate\_arn | Certificate for the HTTPS listener. | string | n/a | yes |
 | cluster\_id |  | string | n/a | yes |
+| container\_egress\_cidrs | CIDR blocks the task is allowed to communicate with for outbound traffic. | list | `["0.0.0.0/0"]` | no |
+| container\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. | list | `[]` | no |
 | container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | string | `null` | no |
 | container\_port |  | number | n/a | yes |
 | cpu | CPU units for Fargate task. Used if var.manage_task_definition provided, or for initial stub task if externally managed. | number | `256` | no |
@@ -161,9 +163,9 @@ resolvable from within the VPC; it is not publicly resolvable.
 | health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | string | `"200-399"` | no |
 | health\_check\_path |  | string | `"/"` | no |
 | internal\_lb |  | bool | `false` | no |
-| lb\_egress\_cidrs | TODO: Defaults should be more restrictive.Idea: create internal and internet facing modules that set these variables. | list | `<list>` | no |
 | lb\_idle\_timeout\_seconds |  | number | `60` | no |
 | lb\_ingress\_cidrs |  | list | `<list>` | no |
+| lb\_ingress\_security\_group\_ids |  | list | `<list>` | no |
 | lb\_subnets | List of subnets in which to deploy the load balancer. | list | n/a | yes |
 | manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
 | memory | Memory in megabytes for Fargate task. Used if task_definition provided, or for initial stub task if externally managed. | number | `512` | no |
@@ -176,7 +178,7 @@ resolvable from within the VPC; it is not publicly resolvable.
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |
-| task\_subnets | List of private_subnets in which to deploy the Fargate task. | list | `<list>` | no |
+| task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. | list | `[]` | no |
 | vpc\_id |  | string | n/a | yes |
 | with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53_zone_id. | bool | `false` | no |
 

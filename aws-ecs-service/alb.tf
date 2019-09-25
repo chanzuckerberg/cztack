@@ -12,7 +12,7 @@ resource "aws_lb_target_group" "service" {
   port        = var.container_port
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
-  target_type = "instance"
+  target_type = var.awsvpc_network_mode ? "ip" : "instance"
 
   deregistration_delay = 60
 
@@ -100,10 +100,20 @@ module "alb-sg" {
     }
   ]
 
-  egress_with_cidr_blocks = [
+  egress_with_cidr_blocks = var.awsvpc_network_mode ? [] : [
     {
-      rule        = ["all-all"]
       cidr_blocks = ["0.0.0.0/0"]
+      rule        = "all-all"
+    },
+  ]
+
+  egress_with_source_security_group_id = [
+    {
+      from_port                = var.container_port
+      to_port                  = var.container_port
+      protocol                 = "tcp"
+      description              = "Container port"
+      source_security_group_id = module.container-sg.this_security_group_id
     },
   ]
 }

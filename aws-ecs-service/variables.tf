@@ -88,6 +88,30 @@ variable "ssl_policy" {
   default     = null
 }
 
+variable "task_subnets" {
+  description = "List of subnets in which to deploy the task for awsvpc networking mode. Only used if awsvpc_network_mode is true."
+  type        = list(string)
+  default     = []
+}
+
+variable "container_egress_cidrs" {
+  type        = list(string)
+  description = "CIDR blocks the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network_mode is true."
+  default     = ["0.0.0.0/0"]
+}
+
+variable "container_egress_security_group_ids" {
+  type        = list(string)
+  description = "Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network_mode is true."
+  default     = []
+}
+
+variable "awsvpc_network_mode" {
+  description = "Give the task its own IP and security group if true. Use host EC2 network if false."
+  type        = bool
+  default     = false
+}
+
 variable "lb_ingress_cidrs" {
   type    = list(string)
   default = ["0.0.0.0/0"]

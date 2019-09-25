@@ -37,12 +37,6 @@ variable "lb_subnets" {
   type        = list(string)
 }
 
-variable "task_subnets" {
-  description = "List of private_subnets in which to deploy the Fargate task."
-  type        = list(string)
-  default     = []
-}
-
 variable "vpc_id" {
   type = string
 }
@@ -94,14 +88,22 @@ variable "ssl_policy" {
   default     = null
 }
 
+variable "task_subnets" {
+  description = "List of subnets in which to deploy the task for awsvpc networking mode."
+  type        = list(string)
+  default     = []
+}
+
 variable "container_egress_cidrs" {
-  type    = list(string)
-  default = ["0.0.0.0/0"]
+  type        = list(string)
+  description = "CIDRs the task is allowed to communicate with for outbound traffic."
+  default     = ["0.0.0.0/0"]
 }
 
 variable "container_egress_security_group_ids" {
-  type    = list(string)
-  default = []
+  type        = list(string)
+  description = "Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network is true."
+  default     = []
 }
 
 variable "lb_ingress_cidrs" {
