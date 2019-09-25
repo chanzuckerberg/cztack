@@ -141,5 +141,5 @@ resource "aws_ecs_task_definition" "job" {
   cpu                      = var.cpu
   memory                   = var.memory
   network_mode             = "awsvpc"
-  execution_role_arn       = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn
+  execution_role_arn       = aws_iam_role.task_execution_role.arn
 }

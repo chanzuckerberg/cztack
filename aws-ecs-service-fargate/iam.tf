@@ -9,8 +9,8 @@ data "aws_iam_policy_document" "execution_role" {
   }
 }
 
+# Always create and attach, Fargate requires task definition to have execution role ARN to support log driver awslogs.
 resource "aws_iam_role" "task_execution_role" {
-  count              = var.registry_secretsmanager_arn != null ? 1 : 0
   name               = "${local.name}-execution-role"
   assume_role_policy = data.aws_iam_policy_document.execution_role.json
 }
@@ -19,7 +19,7 @@ resource "aws_iam_role" "task_execution_role" {
 # Or provide ability to pass in own execution role ARN
 resource "aws_iam_role_policy_attachment" "task_execution_role" {
   count      = var.registry_secretsmanager_arn != null ? 1 : 0
-  role       = aws_iam_role.task_execution_role[0].name
+  role       = aws_iam_role.task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
@@ -52,6 +52,6 @@ data "aws_iam_policy_document" "registry_secretsmanager" {
 
 resource "aws_iam_role_policy" "task_execution_role_secretsmanager" {
   count  = var.registry_secretsmanager_arn != null ? 1 : 0
-  role   = aws_iam_role.task_execution_role[0].name
+  role   = aws_iam_role.task_execution_role.name
   policy = data.aws_iam_policy_document.registry_secretsmanager[0].json
 }
