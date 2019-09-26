@@ -19,7 +19,6 @@ resource "aws_iam_role" "task_execution_role" {
 # the specific ECR arn if applicable, and the specific cloudwatch log group.
 # Either pass both identifiers in, or pass the entire role ARN as an argument
 resource "aws_iam_role_policy_attachment" "task_execution_role" {
-  count      = var.registry_secretsmanager_arn != null ? 1 : 0
   role       = aws_iam_role.task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
