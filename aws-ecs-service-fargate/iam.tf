@@ -18,7 +18,6 @@ resource "aws_iam_role" "task_execution_role" {
 # TODO: Add support for giving permissions to ECR ARNs and possibly cloudwatch log group
 # Or provide ability to pass in own execution role ARN
 resource "aws_iam_role_policy_attachment" "task_execution_role" {
-  count      = var.registry_secretsmanager_arn != null ? 1 : 0
   role       = aws_iam_role.task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
