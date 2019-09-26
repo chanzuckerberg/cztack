@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.21.1 2019-09-26
+
+* [57354a7f](../../commit/57354a7f702af6ed6501564d038d561b63afbde4) Fix aws-ecs-* task execution role permissions ([#133](../../pull/133))
+
 ## 0.21.0 2019-09-25
 
 * [6918848f](../../commit/6918848f1dab99c67e49d21bdc839d907ff8b647) [feature] Add ECS modules to cztack ([#132](../../pull/132))
