@@ -102,7 +102,7 @@ module "alb-sg" {
 
   egress_with_cidr_blocks = var.awsvpc_network_mode ? [] : [
     {
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = "0.0.0.0/0"
       rule        = "all-all"
     },
   ]
