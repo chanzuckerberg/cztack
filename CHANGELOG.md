@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.21.2 2019-09-27
+
+* [da0ca125](../../commit/da0ca125165c380fbb52d2d283b07a17e209695e) upgraded to go 1.13 ([#135](../../pull/135))
+* [b2809c4d](../../commit/b2809c4d01903cf76caac4cc2339f45773bca944) [bugfix] aws-ecs-service fix type of cidr_blocks ([#134](../../pull/134))
+
 ## 0.21.1 2019-09-26
 
 * [57354a7f](../../commit/57354a7f702af6ed6501564d038d561b63afbde4) Fix aws-ecs-* task execution role permissions ([#133](../../pull/133))
