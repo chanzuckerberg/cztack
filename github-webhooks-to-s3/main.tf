@@ -3,6 +3,7 @@ locals {
 
   tags = {
     managedBy = "terraform"
+    Name      = local.name
     env       = "${var.env}"
     owner     = "${var.owner}"
     service   = "${var.service}"
