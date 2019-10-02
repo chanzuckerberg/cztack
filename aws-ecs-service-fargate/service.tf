@@ -62,7 +62,7 @@ resource "aws_ecs_service" "job" {
   dynamic "service_registries" {
     for_each = aws_service_discovery_service.discovery[*]
     content {
-      registry_arn = service_registries.arn
+      registry_arn = service_registries.value.arn
     }
   }
 
@@ -95,7 +95,7 @@ resource "aws_ecs_service" "unmanaged-job" {
   dynamic "service_registries" {
     for_each = aws_service_discovery_service.discovery[*]
     content {
-      registry_arn = aws_service_discovery_service.discovery[0].arn
+      registry_arn = service_registries.value.arn
     }
   }
 
