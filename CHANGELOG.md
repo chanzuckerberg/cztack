@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.21.3 2019-10-02
+
+* [29f3f4cb](../../commit/29f3f4cbe64fd3fcbcec95e4c02b77c1910e3b47) aws-ecs-service fix service discovery arn ([#137](../../pull/137))
+* [cf3d830a](../../commit/cf3d830a690bcbfd49f8eb17b8af8b23eb2bff15) Add Name tags to cloudwatch logs ([#136](../../pull/136))
+
 ## 0.21.2 2019-09-27
 
 * [da0ca125](../../commit/da0ca125165c380fbb52d2d283b07a17e209695e) upgraded to go 1.13 ([#135](../../pull/135))
