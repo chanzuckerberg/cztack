@@ -43,3 +43,9 @@ variable "allow_validation_record_overwrite" {
   description = "Allow the overwrite of validation records. This is needed if you are creating certificates in multiple regions."
   default     = true
 }
+
+variable "subject_alternative_names_order" {
+  type        = list(string)
+  description = "Order to list the subject alternative names in the ACM cert. Workaround for https://github.com/terraform-providers/terraform-provider-aws/issues/8531"
+  default     = null
+}

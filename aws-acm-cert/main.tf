@@ -12,7 +12,7 @@ locals {
 
 resource "aws_acm_certificate" "cert" {
   domain_name               = "${var.cert_domain_name}"
-  subject_alternative_names = "${keys(var.cert_subject_alternative_names)}"
+  subject_alternative_names = var.subject_alternative_names_order == null ? keys(var.cert_subject_alternative_names) : var.subject_alternative_names_order
   validation_method         = "DNS"
   tags                      = "${local.tags}"
 
