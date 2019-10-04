@@ -41,6 +41,7 @@ module "cert" {
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| subject\_alternative\_names\_order | Order to list the subject alternative names in the ACM cert. Workaround for https://github.com/terraform-providers/terraform-provider-aws/issues/8531 | list(string) | `null` | no |
 | validation\_record\_ttl |  | string | `"60"` | no |
 
 ## Outputs
