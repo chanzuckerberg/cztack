@@ -196,3 +196,9 @@ variable "tag_service" {
   type        = bool
   default     = true
 }
+
+variable "ordered_placement_strategy" {
+  type        = list(object({ type = string, field = string }))
+  default     = []
+  description = "Placement strategy for the task instances."
+}

@@ -66,6 +66,14 @@ resource "aws_ecs_service" "job" {
     }
   }
 
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
+  }
+
   tags = var.tag_service ? local.tags : {}
 
   depends_on = [aws_lb.service]
@@ -96,6 +104,14 @@ resource "aws_ecs_service" "unmanaged-job" {
     for_each = aws_service_discovery_service.discovery[*]
     content {
       registry_arn = service_registries.value.arn
+    }
+  }
+
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
     }
   }
 

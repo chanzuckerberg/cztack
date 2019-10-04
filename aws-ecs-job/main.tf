@@ -27,6 +27,14 @@ resource "aws_ecs_service" "job" {
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   scheduling_strategy                = var.scheduling_strategy
 
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
+  }
+
   tags = var.tag_service ? local.tags : {}
 }
 
@@ -40,6 +48,14 @@ resource "aws_ecs_service" "unmanaged-job" {
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   scheduling_strategy                = var.scheduling_strategy
+
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
+  }
 
   lifecycle {
     ignore_changes = [task_definition]

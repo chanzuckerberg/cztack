@@ -160,6 +160,7 @@ service = false` argument can be removed.
 | lb\_ingress\_security\_group\_ids |  | list | `<list>` | no |
 | lb\_subnets | List of subnets in which to deploy the load balancer. | list | n/a | yes |
 | manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
+| ordered\_placement\_strategy | Placement strategy for the task instances. | list | `[]` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
