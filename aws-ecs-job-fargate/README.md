@@ -30,6 +30,7 @@ changes to the definition, allowing external task definition management.
 | registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
 | security\_group\_ids | Security group to use for the Fargate task. | list | `<list>` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | bool | `true` | no |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |
 | task\_subnets | Subnets to launch Fargate task in. | list | `<list>` | no |

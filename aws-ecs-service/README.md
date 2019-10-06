@@ -166,6 +166,7 @@ resolvable from within the VPC; it is not publicly resolvable.
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | string | `null` | no |
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
+| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | bool | `true` | no |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |
 | task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. Only used if awsvpc_network_mode is true. | list | `[]` | no |

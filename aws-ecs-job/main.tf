@@ -27,7 +27,7 @@ resource "aws_ecs_service" "job" {
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   scheduling_strategy                = var.scheduling_strategy
 
-  tags = local.tags
+  tags = var.tag_service ? local.tags : {}
 }
 
 resource "aws_ecs_service" "unmanaged-job" {
@@ -45,7 +45,7 @@ resource "aws_ecs_service" "unmanaged-job" {
     ignore_changes = [task_definition]
   }
 
-  tags = local.tags
+  tags = var.tag_service ? local.tags : {}
 }
 
 # Default container definition if var.manage_task_definition == false

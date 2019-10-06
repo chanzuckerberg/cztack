@@ -27,6 +27,7 @@ changes to the definition, allowing external task definition management.
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | scheduling\_strategy | Scheduling strategy for the service: REPLICA or DAEMON. | string | `"REPLICA"` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | bool | `true` | no |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
 | task\_role\_arn |  | string | n/a | yes |
 

@@ -66,7 +66,7 @@ resource "aws_ecs_service" "job" {
     }
   }
 
-  tags = local.tags
+  tags = var.tag_service ? local.tags : {}
 
   depends_on = [aws_lb.service]
 }
@@ -104,8 +104,7 @@ resource "aws_ecs_service" "unmanaged-job" {
     ignore_changes = [task_definition]
   }
 
-  tags = local.tags
-
+  tags = var.tag_service ? local.tags : {}
 
   depends_on = [aws_lb.service]
 }
