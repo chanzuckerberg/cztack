@@ -38,7 +38,7 @@ resource "aws_iam_role" "role" {
 }
 
 module "role-policy" {
-  source    = "github.com/chanzuckerberg/cztack//aws-params-reader-policy?ref=v0.19.4"
+  source    = "github.com/chanzuckerberg/cztack//aws-params-reader-policy?ref=v0.21.3"
   project   = var.project
   env       = var.env
   service   = var.component
@@ -86,7 +86,7 @@ data "aws_acm_certificate" "staging" {
 }
 
 module "web-service" {
-  source = "github.com/chanzuckerberg/cztack//aws-ecs-service?ref=v0.20.0"
+  source = "github.com/chanzuckerberg/cztack//aws-ecs-service?ref=v0.21.3"
 
   # this is the name of the service and many of the resources will have this name
   service = "myservice"
@@ -133,6 +133,16 @@ In addition to a load balancer, this module supports registering all instances o
 tasks with DNS via ECS service discovery. If with_service_discovery is true, a new private
 DNS zone is created, and the tasks are registered in that DNS zone. The domain name is only
 resolvable from within the VPC; it is not publicly resolvable.
+
+## Migrating old ECS services
+Older ECS services were created with an ARN in an old format that did not include the ECS cluster name as part of the ARN. AWS began allowing opt-in to the new ARN format starting November 15, 2018, and will require the new format starting January 1, 2020. ECS only allows applying tags (such as cost tags) on services that have the new ARN format. Applying tags to older ECS services using the old ARN format will return the following error message:
+```
+InvalidParameterException: Long arn format must be used for tagging operations
+```
+This module by default will assume your organization has opted in to the new ARN format and will apply tags to the ECS service. Creating new services after the opt-in will work fine, but migrating an existing older ECS service to using this module (via a state mv or an import) will encounter the above error message the next time it is applied.
+
+Since changing a service to use the new ARN requires destroying and recreating the service, this can result in downtime. In such cases, you can opt-out applying tags by passing `tag_service = false` as an argument to the module. It is recommended that at the next possible down time, the ECS service be replaced by running `terraform taint`, and if `manage_task_definition = false` restoring the ECS task definition version (the taint/replace will restore to only the last stub definition). After the service is destroy/replaced, the `tag_
+service = false` argument can be removed.
 
 <!-- START -->
 ## Inputs
