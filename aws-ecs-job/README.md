@@ -34,6 +34,7 @@ service = false` argument can be removed.
 | deployment\_minimum\_healthy\_percent | (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. | number | `100` | no |
 | desired\_count |  | number | n/a | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| ordered\_placement\_strategy | Placement strategy for the task instances. | list | `[]` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | scheduling\_strategy | Scheduling strategy for the service: REPLICA or DAEMON. | string | `"REPLICA"` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |

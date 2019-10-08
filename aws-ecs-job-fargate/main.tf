@@ -33,6 +33,14 @@ resource "aws_ecs_service" "job" {
     security_groups = var.security_group_ids
   }
 
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
+  }
+
   tags = var.tag_service ? local.tags : {}
 }
 
@@ -51,6 +59,14 @@ resource "aws_ecs_service" "unmanaged-job" {
   network_configuration {
     subnets         = var.task_subnets
     security_groups = var.security_group_ids
+  }
+
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategy
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
   }
 
   lifecycle {

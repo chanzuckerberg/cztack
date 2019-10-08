@@ -35,6 +35,7 @@ Since changing a service to use the new ARN requires destroying and recreating t
 | desired\_count |  | number | n/a | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | memory | Memory in megabytes for Fargate task. Used if task_definition provided, or for initial stub task if externally managed. | number | `512` | no |
+| ordered\_placement\_strategy | Placement strategy for the task instances. | list | `[]` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
 | registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
 | security\_group\_ids | Security group to use for the Fargate task. | list | `<list>` | no |
