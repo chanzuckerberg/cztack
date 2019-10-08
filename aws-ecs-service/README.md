@@ -169,9 +169,10 @@ resolvable from within the VPC; it is not publicly resolvable.
 |------|-------------|
 | alb\_access\_logs\_prefix | ALB access logs S3 prefix |
 | alb\_dns\_name |  |
+| alb\_http\_listener\_arn | ALB HTTPS listener ARN" |
+| alb\_https\_listener\_arn | ALB HTTP listener ARN, only if HTTPS forwarding is disabled |
 | alb\_route53\_zone\_id |  |
 | container\_security\_group\_id | Security group id for the container. |
 | ecs\_task\_definition\_family | The family of the task definition defined for the given/generated container definition. |
 | private\_service\_discovery\_domain | Domain name for service discovery, if with_service_discovery=true. Only resolvable within the VPC. |
-
 <!-- END -->
