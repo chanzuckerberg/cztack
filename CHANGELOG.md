@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.0 2019-10-08
+
+* [093abc49](../../commit/093abc491ab7fdbc1693d8360da3a386dd81f7fe) aws-ecs Add support for ordered_placement_strategy ([#139](../../pull/139))
+* [d832ad1f](../../commit/d832ad1fa2520a2d0069ea7ca113ce749e68994c) Add tags to IAM roles ([#142](../../pull/142))
+* [499fed7b](../../commit/499fed7ba1cce9f5edb5aa0a3e6165b5753ef0f8) [fix] aws-ecs support not applying tags to services ([#140](../../pull/140))
+* [49209981](../../commit/49209981d40c8d7eb2cbf57b52034103dceb528b) Output ALB listener ARNs from aws-ecs-service ([#141](../../pull/141))
+* [f4e551ed](../../commit/f4e551ed0b5020c3b19ce5a833136092fc50cd20) aws-acm-cert Add workaround for TF bug ([#138](../../pull/138))
+
 ## 0.21.3 2019-10-02
 
 * [29f3f4cb](../../commit/29f3f4cbe64fd3fcbcec95e4c02b77c1910e3b47) aws-ecs-service fix service discovery arn ([#137](../../pull/137))
