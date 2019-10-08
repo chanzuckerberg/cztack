@@ -13,6 +13,7 @@ data "aws_iam_policy_document" "execution_role" {
 resource "aws_iam_role" "task_execution_role" {
   name               = "${local.name}-execution-role"
   assume_role_policy = data.aws_iam_policy_document.execution_role.json
+  tags               = local.tags
 }
 
 # TODO: Add support for giving permissions to ECR ARNs and possibly cloudwatch log group

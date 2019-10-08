@@ -13,6 +13,7 @@ resource "aws_iam_role" "task_execution_role" {
   count              = var.registry_secretsmanager_arn != null ? 1 : 0
   name               = "${local.name}-execution-role"
   assume_role_policy = data.aws_iam_policy_document.execution_role.json
+  tags               = local.tags
 }
 
 # TODO(mbarrien): We can probably narrow this down to allowing access to only

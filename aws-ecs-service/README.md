@@ -20,21 +20,12 @@ data "aws_route53_zone" "zone" {
   private_zone = false
 }
 
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
-}
-
-resource "aws_iam_role" "role" {
-  name               = "${var.project}-${var.env}-myservice"
-  description        = "Task role for myservice in ${var.env} environment"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+module "role" {
+  source    = "github.com/chanzuckerberg/cztack//aws-iam-ecs-task-role?ref=v0.21.3"
+  project   = var.project
+  env       = var.env
+  service   = var.component
+  owner     = var.owner
 }
 
 module "role-policy" {
@@ -43,7 +34,7 @@ module "role-policy" {
   env       = var.env
   service   = var.component
   region    = var.region
-  role_name = aws_iam_role.role.name
+  role_name = module.role.name
 }
 
 # This will define a task that runs this (example) container.
@@ -121,7 +112,7 @@ module "web-service" {
   task_definition     = local.template
 
   # The task is given this role. Useful for services that need to make API calls to AWS.
-  task_role_arn       = aws_iam_role.role.arn
+  task_role_arn       = module.role.arn
 
   with_service_discovery = true
 }

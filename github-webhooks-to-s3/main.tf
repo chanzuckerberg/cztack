@@ -48,9 +48,10 @@ module "attach-logs" {
 }
 
 resource "aws_iam_role" "lambda" {
-  name               = "${local.name}"
-  path               = "${var.iam_path}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+  name               = local.name
+  path               = var.iam_path
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  tags               = local.tags
 }
 
 module "github_secret" {

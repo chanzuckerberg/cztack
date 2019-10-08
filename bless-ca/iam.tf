@@ -59,6 +59,7 @@ resource "aws_iam_role" "bless" {
   name_prefix        = "${local.name}-"
   path               = "${var.iam_path}"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "lambda" {
@@ -68,7 +69,7 @@ resource "aws_iam_role_policy" "lambda" {
 }
 
 module "logs_policy" {
-  source    = "github.com/chanzuckerberg/cztack//aws-iam-policy-cwlogs?ref=v0.14.0"
+  source    = "../aws-iam-policy-cwlogs"
   role_name = "${aws_iam_role.bless.name}"
   iam_path  = "${var.iam_path}"
 }
