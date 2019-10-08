@@ -25,3 +25,13 @@ output "alb_access_logs_prefix" {
   description = "ALB access logs S3 prefix"
   value       = local.access_logs_prefix
 }
+
+output "alb_https_listener_arn" {
+  description = "ALB HTTPS listener ARN"
+  value       = aws_lb_listener.https.arn
+}
+
+output "alb_http_listener_arn" {
+  description = "ALB HTTP listener ARN, only if HTTPS forwarding is disabled"
+  value       = var.disable_http_redirect ? aws_lb_listener.http.arn : null
+}
