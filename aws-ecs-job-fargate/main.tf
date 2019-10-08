@@ -33,7 +33,7 @@ resource "aws_ecs_service" "job" {
     security_groups = var.security_group_ids
   }
 
-  tags = local.tags
+  tags = var.tag_service ? local.tags : {}
 }
 
 resource "aws_ecs_service" "unmanaged-job" {
@@ -57,7 +57,7 @@ resource "aws_ecs_service" "unmanaged-job" {
     ignore_changes = [task_definition]
   }
 
-  tags = local.tags
+  tags = var.tag_service ? local.tags : {}
 }
 
 # Default container definition if var.manage_task_definition == false

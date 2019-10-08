@@ -89,3 +89,9 @@ variable "manage_task_definition" {
   type        = bool
   default     = true
 }
+
+variable "tag_service" {
+  description = "Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services."
+  type        = bool
+  default     = true
+}
