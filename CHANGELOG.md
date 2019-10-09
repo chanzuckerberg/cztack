@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.22.1 2019-10-09
+
+* [133cb5c3](../../commit/133cb5c3ab7a3671f4212fe1e28476e675247247) [bugfix] fix permissions on aws-ecs-service secrets ([#143](../../pull/143))
+
 ## 0.22.0 2019-10-08
 
 * [093abc49](../../commit/093abc491ab7fdbc1693d8360da3a386dd81f7fe) aws-ecs Add support for ordered_placement_strategy ([#139](../../pull/139))
