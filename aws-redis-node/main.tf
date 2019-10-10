@@ -19,7 +19,7 @@ resource "aws_elasticache_subnet_group" "default" {
 resource "aws_elasticache_cluster" "default" {
   cluster_id           = "${var.resource_name != "" ? var.resource_name : local.name}"
   engine               = "redis"
-  engine_version       = "3.2.6"
+  engine_version       = "${var.engine_version}"
   node_type            = "${var.instance_type}"
   port                 = "${var.port}"
   num_cache_nodes      = 1

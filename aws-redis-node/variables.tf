@@ -21,6 +21,7 @@ variable "subnets" {
 variable "availability_zone" {
   type        = "string"
   description = "Availability zone in which this instance should run."
+  default     = null
 }
 
 variable "ingress_security_group_ids" {
@@ -42,17 +43,17 @@ variable "port" {
 variable "instance_type" {
   type        = "string"
   description = "The type of instance to run. See [supported node types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html)"
-  default     = "cache.m4.large"
+  default     = "cache.m5.large"
 }
 
 variable "parameter_group_name" {
-  default = "default.redis3.2"
+  default = "default.redis5.0"
 }
 
 variable "engine_version" {
   type        = "string"
   description = "The version of Redis to run. See [supported versions](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html)"
-  default     = "4.0.10"
+  default     = "5.0.5"
 }
 
 variable "apply_immediately" {
