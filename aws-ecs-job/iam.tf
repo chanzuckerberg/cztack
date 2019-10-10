@@ -30,23 +30,8 @@ data "aws_iam_policy_document" "registry_secretsmanager" {
 
   statement {
     actions = [
-      "kms:Decrypt",
-    ]
-
-    resources = [var.registry_secretsmanager_arn]
-  }
-
-  statement {
-    actions = [
       "secretsmanager:GetSecretValue",
     ]
-
-    # Limit to only current version of the secret
-    condition {
-      test     = "ForAnyValue:StringEquals"
-      variable = "secretsmanager:VersionStage"
-      values   = ["AWSCURRENT"]
-    }
 
     resources = [var.registry_secretsmanager_arn]
   }
