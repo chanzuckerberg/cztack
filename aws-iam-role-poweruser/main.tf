@@ -72,6 +72,7 @@ data "aws_iam_policy_document" "misc" {
       "iam:TagRole",
       "iam:UpdateAssumeRolePolicy",
       "iam:UpdateRole",
+      "iam:UpdateRoleDescription",
     ]
 
     resources = ["*"]
