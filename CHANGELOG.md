@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.22.2 2019-10-10
+
+* [61d294b5](../../commit/61d294b57fdc12c795d995864574059b65f17172) Add UpdateRoleDescription perms to aws-iam-role-poweruser ([#145](../../pull/145))
+* [4dee504e](../../commit/4dee504e75885a37df6dc4776dba00fc35d6fb7a) [bugfix] Fix secretsmanager execution role IAM policy in aws-ecs-job ([#144](../../pull/144))
+* [3f3b0f55](../../commit/3f3b0f55376216dc520800166dcc22f3521a6681) Make aws-redis-node match internal lib, upgrade default ([#146](../../pull/146))
+
 ## 0.22.1 2019-10-09
 
 * [133cb5c3](../../commit/133cb5c3ab7a3671f4212fe1e28476e675247247) [bugfix] fix permissions on aws-ecs-service secrets ([#143](../../pull/143))
