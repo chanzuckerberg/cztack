@@ -12,16 +12,17 @@ locals {
 }
 
 resource "aws_security_group" "rds" {
-  name        = "${local.name}"
+  name        = local.name
   description = "Allow db traffic."
 
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
 
   ingress {
-    from_port   = "${var.port}"
-    to_port     = "${var.port}"
-    protocol    = "tcp"
-    cidr_blocks = "${var.ingress_cidr_blocks}"
+    from_port       = var.port
+    to_port         = var.port
+    protocol        = "tcp"
+    cidr_blocks     = var.ingress_cidr_blocks
+    security_groups = var.ingress_security_groups
   }
 
   lifecycle {
@@ -29,7 +30,7 @@ resource "aws_security_group" "rds" {
     ignore_changes        = ["name", "description"]
   }
 
-  tags = "${local.tags}"
+  tags = local.tags
 }
 
 resource "aws_rds_cluster" "db" {

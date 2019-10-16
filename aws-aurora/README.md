@@ -19,7 +19,8 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | engine\_version |  | string | n/a | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | iam\_database\_authentication\_enabled |  | string | `"true"` | no |
-| ingress\_cidr\_blocks |  | list | n/a | yes |
+| ingress\_cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list(string) | `[]` | no |
+| ingress\_security\_groups | A list of security groups that should be allowed to communicate with this Aurora cluster. | list(string) | `[]` | no |
 | instance\_class |  | string | `"db.t2.small"` | no |
 | instance\_count |  | string | `"1"` | no |
 | kms\_key\_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | string | `""` | no |

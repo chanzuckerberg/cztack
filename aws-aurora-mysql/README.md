@@ -44,7 +44,8 @@ module "db" {
 | db\_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.Parameters.Instance) | list | `<list>` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
 | iam\_database\_authentication\_enabled |  | string | `"false"` | no |
-| ingress\_cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list | n/a | yes |
+| ingress\_cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | list(string) | `[]` | no |
+| ingress\_security\_groups | A list of security groups that should be allowed to communicate with this Aurora cluster. | list(string) | `[]` | no |
 | instance\_class | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Performance.html) | string | `"db.t2.small"` | no |
 | instance\_count | Number of instances to create in this cluster. | string | `"1"` | no |
 | kms\_key\_id | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | string | `""` | no |
