@@ -19,10 +19,11 @@ module "aurora" {
   performance_insights_enabled        = "${var.performance_insights_enabled}"
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
 
-  ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
-  vpc_id              = "${var.vpc_id}"
-  publicly_accessible = "${var.publicly_accessible}"
-  port                = 3306
+  ingress_cidr_blocks     = var.ingress_cidr_blocks
+  ingress_security_groups = var.ingress_security_groups
+  vpc_id                  = var.vpc_id
+  publicly_accessible     = var.publicly_accessible
+  port                    = 3306
 
   instance_class = "${var.instance_class}"
   instance_count = "${var.instance_count}"

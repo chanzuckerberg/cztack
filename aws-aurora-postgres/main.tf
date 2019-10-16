@@ -17,12 +17,13 @@ module "aurora" {
   iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
   performance_insights_enabled        = "${var.performance_insights_enabled}"
 
-  ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
-  vpc_id              = "${var.vpc_id}"
-  publicly_accessible = "${var.publicly_accessible}"
-  port                = 5432
-  instance_class      = "${var.instance_class}"
-  instance_count      = "${var.instance_count}"
+  ingress_cidr_blocks     = var.ingress_cidr_blocks
+  ingress_security_groups = var.ingress_security_groups
+  vpc_id                  = var.vpc_id
+  publicly_accessible     = var.publicly_accessible
+  port                    = 5432
+  instance_class          = var.instance_class
+  instance_count          = var.instance_count
 
   # backtrack_window not supported yet
   backtrack_window    = 0

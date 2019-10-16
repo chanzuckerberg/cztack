@@ -20,7 +20,15 @@ variable "env" {
 }
 
 variable "ingress_cidr_blocks" {
-  type = "list"
+  type        = list(string)
+  default     = []
+  description = "A list of CIDR blocks that should be allowed to communicate with this Aurora cluster."
+}
+
+variable "ingress_security_groups" {
+  type        = list(string)
+  description = "A list of security groups that should be allowed to communicate with this Aurora cluster."
+  default     = []
 }
 
 variable "instance_class" {
