@@ -36,6 +36,7 @@ func TestAWSRedisNode(t *testing.T) {
 			"availability_zone":          az,
 			"subnets":                    privateSubnets,
 			"ingress_security_group_ids": []string{sg},
+			"vpc_id":                     vpc,
 		},
 	)
 
