@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.23.0 2019-10-17
+
+* [cf652857](../../commit/cf652857014c729efb338aeee637875a88d606ed) [breaking] Fix aws-redis-node security groups ([#149](../../pull/149))
+* [13056bad](../../commit/13056badbb543697a5b2885180204e9b4a88e9ad) Allow restricting aws-aurora ingress by security groups ([#148](../../pull/148))
+* [20df8cf1](../../commit/20df8cf1b27670a3dc4f8895d6a1e9b17d5f5e86) upgraded to go 1.13.1 ([#147](../../pull/147))
+
 ## 0.22.2 2019-10-10
 
 * [61d294b5](../../commit/61d294b57fdc12c795d995864574059b65f17172) Add UpdateRoleDescription perms to aws-iam-role-poweruser ([#145](../../pull/145))
