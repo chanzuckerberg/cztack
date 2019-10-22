@@ -26,13 +26,6 @@ install:
   - aws configure set aws_secret_access_key $CI2_AWS_SECRET_ACCESS_KEY --profile cztack-ci-2
   - aws --profile cztack-ci-2 sts get-caller-identity
 
-# - name: lint
-  # stage: check
-  # script: make lint
-# terraform-docs is incompatible with 0.12 for now
-# - stage: check
-#   script: make check-docs
-
 script:
   - travis_wait 45 make test-ci
 
