@@ -1,0 +1,15 @@
+regions:
+  - us-west-2
+
+account-blacklist:
+  - "1"
+
+accounts:
+  "119435350371": {}
+
+resource-types:
+  # we can add to this over time
+  targets:
+    - RDSDBCluster
+    - RDSSnapshot
+    - RDSInstance

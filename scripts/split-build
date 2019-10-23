@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+import os, sys
+
+buckets = int(sys.argv[1])
+bucket  = int(sys.argv[2])
+
+assert bucket < buckets
+
+b = []
+
+for i in range(buckets):
+    b.append([])
+
+for i, line in enumerate(sys.stdin):
+    for x in line.strip().split():
+        b[ i % buckets ].append(x)
+
+for pkg in b[bucket]:
+    print(pkg)

@@ -10,20 +10,27 @@ export ROUTE53_ZONE_ID := Z2W9YC1AAOXX6B
 export WILDCARD_CERT_ARN := arn:aws:acm:us-west-2:119435350371:certificate/b13e8e24-6436-488d-990d-2cedee3e36dd
 export CLOUDFRONT_WILDCARD_CERT_ARN := arn:aws:acm:us-east-1:119435350371:certificate/99f1fb68-4469-4280-b452-7193c8c787ca
 export ACCOUNT_ID := 119435350371
+export AWS_PROFILE=cztack-ci-1
+export AWS_SDK_LOAD_CONFIG=true
+export GOFLAGS=-mod=vendor
+export GO111MODULE=on
 
 all: clean fmt docs lint test
 
 setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/master/download.sh | sh
+.PHONY: setup
 
 release: ## run a release
 	bff bump
 	git push
+.PHONY: release
 
 fmt:
 	@for m in $(MODULES); do \
 		terraform fmt $m; \
 	done
+.PHONY: fmt
 
 lint:
 	@for m in $(MODULES); do \
@@ -33,6 +40,7 @@ lint:
 	@for m in $(MODULES); do \
 		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
 	done
+.PHONY: lint
 
 docs:
 	@for m in $(MODULES); do \
@@ -40,6 +48,7 @@ docs:
 		../scripts/update-readme.sh update; \
 		popd; \
 	done;
+.PHONY: docs
 
 check-docs:
 	@for m in $(MODULES); do \
@@ -47,9 +56,21 @@ check-docs:
 		../scripts/update-readme.sh check || exit $$?; \
 		popd; \
 	done;
+.PHONY: check-docs
 
 clean:
 		rm **/*.tfstate*; true
+.PHONY: clean
 
 test: fmt
-	AWS_PROFILE=cztack-ci-1 AWS_SDK_LOAD_CONFIG=true gotest -count=1 -parallel 10 -test.timeout 45m $(TEST)
+	go test -count=1 -parallel 10 -test.timeout 45m $(TEST)
+.PHONY: test
+
+test-ci:
+	go list ./... | ./scripts/split-build $(TEST_BUCKETS) $(TEST_BUCKET_INDEX) | xargs go test -count=1 -parallel 10 -test.timeout 45m
+.PHONY: test
+
+deps:
+	go mod tidy
+	go mod vendor
+.PHONY: deps
