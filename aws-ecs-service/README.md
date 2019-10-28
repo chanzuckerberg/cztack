@@ -166,6 +166,7 @@ service = false` argument can be removed.
 | registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
 | route53\_zone\_id | Zone in which to create an alias record to the ALB. | string | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+| slow_start | Seconds for targets to warm up before the load balancer sends them a full share of requests. | number | 60 | no |
 | ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | string | `null` | no |
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
 | tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | bool | `true` | no |
