@@ -196,3 +196,9 @@ variable "ordered_placement_strategy" {
   default     = []
   description = "Placement strategy for the task instances."
 }
+
+variable "slow_start" {
+  description = "Seconds for targets to warm up before the load balancer sends them a full share of requests. 30-900 seconds or 0 to disable."
+  type        = number
+  default     = 60
+}
