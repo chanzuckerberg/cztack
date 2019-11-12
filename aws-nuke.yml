@@ -13,3 +13,5 @@ resource-types:
     - RDSDBCluster
     - RDSSnapshot
     - RDSInstance
+    - RDSDBClusterParameterGroup
+    - RDSDBParameterGroup
