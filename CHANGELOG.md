@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.0 2019-11-27
+
+* [c59aa0e3](../../commit/c59aa0e37a7e52bb66ede87fca9515f8dc8fb768) [feature] Adds support for SAML trust relationship to existing roles ([#154](../../pull/154))
+* [8bc7c988](../../commit/8bc7c9882c0cbb8ec328c774d9b9fe913f893fe5) Adding a generic .editorconfig. https://editorconfig.org/ ([#152](../../pull/152))
+* [e1df3558](../../commit/e1df355811a259a9d6c6a66250fcee3a21dd2a12) add db param groups to list of things that can be nuked ([#153](../../pull/153))
+* [39f66dcc](../../commit/39f66dccfabd8702187daf7fbc168dbcebd6df0b) Add slow_start parameter to ecs-service-with-alb ([#151](../../pull/151))
+* [7fcf7337](../../commit/7fcf73374a90734c4d93e2acc9cded9db93ac77b) speed up build by paritioning ([#150](../../pull/150))
+
 ## 0.23.0 2019-10-17
 
 * [cf652857](../../commit/cf652857014c729efb338aeee637875a88d606ed) [breaking] Fix aws-redis-node security groups ([#149](../../pull/149))
