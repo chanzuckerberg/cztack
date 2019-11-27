@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "assume-role" {
-  dynamic source_account {
+  dynamic "source_account" {
     for_each = compact([var.source_account])
     statement {
       principals {
@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "assume-role" {
     }
   }
 
-  dynamic saml {
+  dynamic "saml" {
     for_each = compact([var.saml_idp_arn])
     statement {
       principals {
