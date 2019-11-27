@@ -24,7 +24,8 @@ module "route53domains-poweruser" {
 |------|-------------|:----:|:-----:|:-----:|
 | iam\_path |  | string | `"/"` | no |
 | role\_name |  | string | `"route53domains-poweruser"` | no |
-| source\_account\_id |  | string | n/a | yes |
+| source\_account\_id | The source AWS account to establish a trust relationship. Ignored if empty or not provided. | string | '' | no |
+| saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | string | '' | no |
 
 ## Outputs
 

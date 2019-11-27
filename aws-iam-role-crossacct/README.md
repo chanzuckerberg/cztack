@@ -23,7 +23,8 @@ module "group" {
 |------|-------------|:----:|:-----:|:-----:|
 | iam\_path | The IAM path to put this role in. | string | `"/"` | no |
 | role\_name | The name of the role. | string | n/a | yes |
-| source\_account\_id | The AWS account id that should be able to assume this role. | string | n/a | yes |
+| source\_account\_id | The source AWS account to establish a trust relationship. Ignored if empty or not provided. | string | '' | no |
+| saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | string | '' | no |
 
 ## Outputs
 
