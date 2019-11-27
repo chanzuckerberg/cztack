@@ -1,7 +1,7 @@
 data "aws_iam_policy_document" "assume-role" {
-  dynamic "source_account" {
-    for_each = compact([var.source_account])
-    statement {
+  dynamic "statement" {
+    for_each = compact([var.source_account_id])
+    content {
       principals {
         type        = "AWS"
         identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
@@ -10,9 +10,9 @@ data "aws_iam_policy_document" "assume-role" {
     }
   }
 
-  dynamic "saml" {
+  dynamic "statement" {
     for_each = compact([var.saml_idp_arn])
-    statement {
+    content {
       principals {
         type        = "Federated"
         identifiers = ["${var.saml_idp_arn}"]
