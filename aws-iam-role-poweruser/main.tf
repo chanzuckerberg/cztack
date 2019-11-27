@@ -1,12 +1,33 @@
 data "aws_iam_policy_document" "assume-role" {
-  statement {
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+  dynamic source_account {
+    for_each = compact([var.source_account])
+    statement {
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+      }
+      actions = ["sts:AssumeRole"]
     }
-
-    actions = ["sts:AssumeRole"]
   }
+
+  dynamic saml {
+    for_each = compact([var.saml_idp_arn])
+    statement {
+      principals {
+        type        = "Federated"
+        identifiers = ["${var.saml_idp_arn}"]
+      }
+
+      actions = ["sts:AssumeRoleWithSAML"]
+
+      condition {
+        test     = "StringEquals"
+        variable = "SAML:aud"
+        values   = ["https://signin.aws.amazon.com/saml"]
+      }
+    }
+  }
+
 }
 
 resource "aws_iam_role" "poweruser" {
