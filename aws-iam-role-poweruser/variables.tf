@@ -15,7 +15,6 @@ variable "saml_idp_arn" {
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
 
-
 variable "iam_path" {
   type    = "string"
   default = "/"

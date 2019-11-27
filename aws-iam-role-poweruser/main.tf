@@ -27,7 +27,6 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
-
 }
 
 resource "aws_iam_role" "poweruser" {
