@@ -18,6 +18,27 @@ resource "aws_s3_bucket" "bucket" {
     enabled = var.enable_versioning
   }
 
+  lifecycle_rule {
+    enabled = true
+
+    abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
+
+    expiration {
+      expired_object_delete_marker = true
+    }
+
+    noncurrent_version_transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    noncurrent_version_expiration {
+      days = 365
+    }
+  }
+
+
+
   # TODO
   #   logging {
   #   target_bucket = ""
