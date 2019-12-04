@@ -28,3 +28,9 @@ variable "enable_versioning" {
   description = "Keep old versions of overwritten S3 objects."
   default     = true
 }
+
+variable "abort_incomplete_multipart_upload_days" {
+  type        = number
+  description = "Number of days after which an incomplete multipart upload is canceled."
+  default     = 14
+}
