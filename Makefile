@@ -59,7 +59,7 @@ check-docs:
 .PHONY: check-docs
 
 clean:
-		rm **/*.tfstate*; true
+	rm **/*.tfstate*; true
 .PHONY: clean
 
 test: fmt
