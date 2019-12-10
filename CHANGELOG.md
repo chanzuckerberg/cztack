@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.25.0 2019-12-10
+
+* [e6b42dd1](../../commit/e6b42dd1e8cc308cbfeaad814bdf668d1bae9694) Updating VERSION file to 0.24.0
+* [39aa6fac](../../commit/39aa6facd9ebc5d9d869817ee1a6e491dbc9417c) enforcing SSL for every action ([#157](../../pull/157))
+* [190c3c29](../../commit/190c3c29500563e4d976f839b1ffd8bf4c31800f) [feature] lifecycle policy for s3 buckets ([#156](../../pull/156))
+
 ## 0.24.0 2019-11-27
 
 * [c59aa0e3](../../commit/c59aa0e37a7e52bb66ede87fca9515f8dc8fb768) [feature] Adds support for SAML trust relationship to existing roles ([#154](../../pull/154))
