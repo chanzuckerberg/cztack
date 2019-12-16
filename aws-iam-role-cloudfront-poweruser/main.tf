@@ -30,8 +30,8 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "role" {
-  name               = "${var.role_name}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
+  name               = var.role_name
+  assume_role_policy = data.aws_iam_policy_document.assume-role.json
 }
 
 data "aws_iam_policy_document" "s3" {
@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "s3" {
       "s3:PutObjectAcl",
     ]
 
-    resources = "${formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_prefixes)}"
+    resources = formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_prefixes)
   }
 
   statement {
@@ -56,7 +56,7 @@ data "aws_iam_policy_document" "s3" {
       "s3:ListBucket",
     ]
 
-    resources = "${formatlist("arn:aws:s3:::%s*", var.s3_bucket_prefixes)}"
+    resources = formatlist("arn:aws:s3:::%s*", var.s3_bucket_prefixes)
   }
 }
 
@@ -71,21 +71,21 @@ data "aws_iam_policy_document" "cloudfront" {
 resource "aws_iam_policy" "s3" {
   name        = "${var.role_name}-s3"
   description = "Provide access to s3 resources for a distribution ${var.role_name}"
-  policy      = "${data.aws_iam_policy_document.s3.json}"
+  policy      = data.aws_iam_policy_document.s3.json
 }
 
 resource "aws_iam_policy" "cloudfront" {
   name        = "${var.role_name}-cloudfront"
   description = "Provide access to cloudfront ${var.role_name}"
-  policy      = "${data.aws_iam_policy_document.cloudfront.json}"
+  policy      = data.aws_iam_policy_document.cloudfront.json
 }
 
 resource "aws_iam_role_policy_attachment" "s3" {
-  role       = "${aws_iam_role.role.name}"
-  policy_arn = "${aws_iam_policy.s3.arn}"
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.s3.arn
 }
 
 resource "aws_iam_role_policy_attachment" "cloudfront" {
-  role       = "${aws_iam_role.role.name}"
-  policy_arn = "${aws_iam_policy.cloudfront.arn}"
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.cloudfront.arn
 }

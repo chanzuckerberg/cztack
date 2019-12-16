@@ -1,15 +1,15 @@
 output "database_name" {
-  value = "${module.aurora.database_name}"
+  value = module.aurora.database_name
 }
 
 output "endpoint" {
-  value = "${module.aurora.endpoint}"
+  value = module.aurora.endpoint
 }
 
 output "reader_endpoint" {
-  value = "${module.aurora.reader_endpoint}"
+  value = module.aurora.reader_endpoint
 }
 
 output "port" {
-  value = "${module.aurora.port}"
+  value = module.aurora.port
 }

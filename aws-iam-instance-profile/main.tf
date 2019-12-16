@@ -11,10 +11,10 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "role" {
-  name_prefix        = "${var.name_prefix}"
-  description        = "${var.role_description}"
-  path               = "${var.iam_path}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
+  name_prefix        = var.name_prefix
+  description        = var.role_description
+  path               = var.iam_path
+  assume_role_policy = data.aws_iam_policy_document.assume-role.json
 
   lifecycle {
     ignore_changes = ["name", "name_prefix", "path"]
@@ -22,20 +22,20 @@ resource "aws_iam_role" "role" {
 }
 
 resource "aws_iam_role_policy" "ssm" {
-  count  = "${var.enable_ssm ? 1 : 0}"
-  role   = "${aws_iam_role.role.name}"
-  policy = "${data.aws_iam_policy_document.ssm_policy.json}"
+  count  = var.enable_ssm ? 1 : 0
+  role   = aws_iam_role.role.name
+  policy = data.aws_iam_policy_document.ssm_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "cloudwatch-agent" {
-  role       = "${aws_iam_role.role.name}"
+  role       = aws_iam_role.role.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
 resource "aws_iam_instance_profile" "profile" {
-  name_prefix = "${var.name_prefix}"
-  path        = "${var.iam_path}"
-  role        = "${aws_iam_role.role.name}"
+  name_prefix = var.name_prefix
+  path        = var.iam_path
+  role        = aws_iam_role.role.name
 
   lifecycle {
     ignore_changes = ["name", "name_prefix", "path"]

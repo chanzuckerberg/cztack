@@ -30,9 +30,9 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "role" {
-  name               = "${var.role_name}"
-  path               = "${var.iam_path}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
+  name               = var.role_name
+  path               = var.iam_path
+  assume_role_policy = data.aws_iam_policy_document.assume-role.json
 
   # We have to force detach policies in order to recreate roles.
   # The other option would be to use name_prefix and create_before_destroy, but that

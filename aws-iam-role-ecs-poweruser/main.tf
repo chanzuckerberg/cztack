@@ -30,18 +30,18 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "ecs-poweruser" {
-  name               = "${var.role_name}"
-  path               = "${var.iam_path}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
+  name               = var.role_name
+  path               = var.iam_path
+  assume_role_policy = data.aws_iam_policy_document.assume-role.json
 }
 
 resource "aws_iam_role_policy_attachment" "ecs-fullaccess" {
-  role       = "${aws_iam_role.ecs-poweruser.name}"
+  role       = aws_iam_role.ecs-poweruser.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "ecr-poweruser" {
-  role       = "${aws_iam_role.ecs-poweruser.name}"
+  role       = aws_iam_role.ecs-poweruser.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
 }
 
@@ -69,12 +69,12 @@ data "aws_iam_policy_document" "secrets" {
 
 resource "aws_iam_policy" "secrets" {
   name        = "${var.role_name}-secrets"
-  path        = "${var.iam_path}"
+  path        = var.iam_path
   description = "Provide access to the parameters of service ${var.role_name}"
-  policy      = "${data.aws_iam_policy_document.secrets.json}"
+  policy      = data.aws_iam_policy_document.secrets.json
 }
 
 resource "aws_iam_role_policy_attachment" "secrets" {
-  role       = "${aws_iam_role.ecs-poweruser.name}"
-  policy_arn = "${aws_iam_policy.secrets.arn}"
+  role       = aws_iam_role.ecs-poweruser.name
+  policy_arn = aws_iam_policy.secrets.arn
 }

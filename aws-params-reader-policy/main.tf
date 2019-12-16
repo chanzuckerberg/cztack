@@ -34,6 +34,6 @@ data "aws_iam_policy_document" "policy" {
 
 resource "aws_iam_role_policy" "policy" {
   name   = "${local.resource_name}-parameter-policy"
-  role   = "${var.role_name}"
-  policy = "${data.aws_iam_policy_document.policy.json}"
+  role   = var.role_name
+  policy = data.aws_iam_policy_document.policy.json
 }
