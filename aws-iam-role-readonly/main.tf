@@ -30,13 +30,13 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "readonly" {
-  name               =  var.role_name
-  path               =  var.iam_path
-  assume_role_policy =  data.aws_iam_policy_document.assume-role.json
+  name               = var.role_name
+  path               = var.iam_path
+  assume_role_policy = data.aws_iam_policy_document.assume-role.json
 }
 
 resource "aws_iam_role_policy_attachment" "readonly" {
-  role       =  aws_iam_role.readonly.name
+  role       = aws_iam_role.readonly.name
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
 
@@ -55,6 +55,6 @@ data "aws_iam_policy_document" "secrets" {
 
 resource "aws_iam_role_policy" "secrets" {
   name   = "secrets"
-  role   =  aws_iam_role.readonly.name
-  policy =  data.aws_iam_policy_document.secrets.json
+  role   = aws_iam_role.readonly.name
+  policy = data.aws_iam_policy_document.secrets.json
 }

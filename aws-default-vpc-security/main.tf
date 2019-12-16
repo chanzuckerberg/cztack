@@ -25,11 +25,11 @@ data "aws_internet_gateway" "default" {
 }
 
 resource "aws_default_route_table" "default" {
-  default_route_table_id =  aws_default_vpc.default.default_route_table_id
+  default_route_table_id = aws_default_vpc.default.default_route_table_id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id =  data.aws_internet_gateway.default.id
+    gateway_id = data.aws_internet_gateway.default.id
   }
 
   tags = {
@@ -40,16 +40,16 @@ resource "aws_default_route_table" "default" {
 # count hack here based on https://github.com/hashicorp/terraform/issues/11574#issuecomment-365690226
 # :(
 resource "aws_default_subnet" "default" {
-  count =  length(split(",", join(",", flatten(data.aws_availability_zones.available.*.names))))
+  count = length(split(",", join(",", flatten(data.aws_availability_zones.available.*.names))))
 
-  availability_zone =  data.aws_availability_zones.available.names[count.index]
+  availability_zone = data.aws_availability_zones.available.names[count.index]
 }
 
 # Re-attach default subnets to the default netowrk ACL to avoid this issue–
 # https://github.com/hashicorp/terraform/issues/9824
 resource "aws_default_network_acl" "default" {
-  default_network_acl_id =  aws_default_vpc.default.default_network_acl_id
-  subnet_ids             =  aws_default_subnet.default.*.id
+  default_network_acl_id = aws_default_vpc.default.default_network_acl_id
+  subnet_ids             = aws_default_subnet.default.*.id
 
   # According to https://www.terraform.io/docs/providers/aws/r/default_network_acl.html
   # these are the default rules (ie allow all).
@@ -77,8 +77,8 @@ resource "aws_default_network_acl" "default" {
 }
 
 resource "aws_default_security_group" "default" {
-  count  =  var.default_sg_lockdown ? 1 : 0
-  vpc_id =  aws_default_vpc.default.id
+  count  = var.default_sg_lockdown ? 1 : 0
+  vpc_id = aws_default_vpc.default.id
 
   # No ingress or egress here means we permit no traffic.
 

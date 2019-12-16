@@ -1,18 +1,18 @@
 locals {
   tags = {
-    project   =  var.project
-    env       =  var.env
-    service   =  var.service
-    owner     =  var.owner
+    project   = var.project
+    env       = var.env
+    service   = var.service
+    owner     = var.owner
     managedBy = "terraform"
   }
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket =  var.bucket_name
+  bucket = var.bucket_name
   acl    = "private"
 
-  policy =  data.aws_iam_policy_document.bucket_policy.json
+  policy = data.aws_iam_policy_document.bucket_policy.json
 
   versioning {
     enabled = var.enable_versioning
@@ -52,11 +52,11 @@ resource "aws_s3_bucket" "bucket" {
       }
     }
   }
-  tags =  local.tags
+  tags = local.tags
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket" {
-  bucket =  aws_s3_bucket.bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -66,7 +66,7 @@ resource "aws_s3_bucket_public_access_block" "bucket" {
 
 data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
-  source_json =  var.bucket_policy
+  source_json = var.bucket_policy
 
   statement {
     sid       = "EnforceTLS"

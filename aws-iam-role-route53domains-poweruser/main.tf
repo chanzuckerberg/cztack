@@ -30,17 +30,17 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "route53domains-poweruser" {
-  name               =  var.role_name
-  path               =  var.iam_path
-  assume_role_policy =  data.aws_iam_policy_document.assume-role.json
+  name               = var.role_name
+  path               = var.iam_path
+  assume_role_policy = data.aws_iam_policy_document.assume-role.json
 }
 
 resource "aws_iam_role_policy_attachment" "route53domains-fullaccess" {
-  role       =  aws_iam_role.route53domains-poweruser.name
+  role       = aws_iam_role.route53domains-poweruser.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53DomainsFullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "route53-readonly" {
-  role       =  aws_iam_role.route53domains-poweruser.name
+  role       = aws_iam_role.route53domains-poweruser.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess"
 }

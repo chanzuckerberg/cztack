@@ -4,14 +4,14 @@ locals {
 }
 
 resource "aws_cloudwatch_log_group" "group" {
-  name =  local.log_group_name
+  name = local.log_group_name
 
   tags = {
     Name      = local.name
-    project   =  var.project
-    env       =  var.env
-    service   =  var.service
-    owner     =  var.owner
+    project   = var.project
+    env       = var.env
+    service   = var.service
+    owner     = var.owner
     managedBy = "terraform"
   }
 }
