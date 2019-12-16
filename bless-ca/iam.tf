@@ -57,19 +57,19 @@ data "aws_iam_policy_document" "lambda" {
 
 resource "aws_iam_role" "bless" {
   name_prefix        = "${local.name}-"
-  path               = "${var.iam_path}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+  path               =  var.iam_path
+  assume_role_policy =  data.aws_iam_policy_document.assume_role.json
   tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "lambda" {
   name   = "${local.name}-lambda"
-  role   = "${aws_iam_role.bless.id}"
-  policy = "${data.aws_iam_policy_document.lambda.json}"
+  role   =  aws_iam_role.bless.id
+  policy =  data.aws_iam_policy_document.lambda.json
 }
 
 module "logs_policy" {
   source    = "../aws-iam-policy-cwlogs"
-  role_name = "${aws_iam_role.bless.name}"
-  iam_path  = "${var.iam_path}"
+  role_name =  aws_iam_role.bless.name
+  iam_path  =  var.iam_path
 }

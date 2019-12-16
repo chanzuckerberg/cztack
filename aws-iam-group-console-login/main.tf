@@ -1,6 +1,6 @@
 resource "aws_iam_group" "login" {
-  name = "${var.group_name}"
-  path = "${var.iam_path}"
+  name =  var.group_name
+  path =  var.iam_path
 }
 
 # This policy was based on one published by AWS (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_users-self-manage-mfa-and-creds.html)
@@ -114,9 +114,9 @@ data "aws_iam_policy_document" "self-iam" {
 
 resource "aws_iam_policy" "self-iam" {
   name        = "${var.group_name}-self-iam"
-  path        = "${var.iam_path}"
+  path        =  var.iam_path
   description = ""
-  policy      = "${data.aws_iam_policy_document.self-iam.json}"
+  policy      =  data.aws_iam_policy_document.self-iam.json
 
   lifecycle {
     ignore_changes = ["name"]
@@ -124,6 +124,6 @@ resource "aws_iam_policy" "self-iam" {
 }
 
 resource "aws_iam_group_policy_attachment" "self-iam" {
-  policy_arn = "${aws_iam_policy.self-iam.arn}"
-  group      = "${aws_iam_group.login.name}"
+  policy_arn =  aws_iam_policy.self-iam.arn
+  group      =  aws_iam_group.login.name
 }

@@ -4,10 +4,10 @@ resource "aws_kms_key" "parameter_store" {
   enable_key_rotation     = true
 
   tags = {
-    project   = "${var.project}"
-    env       = "${var.env}"
-    service   = "${var.service}"
-    owner     = "${var.owner}"
+    project   =  var.project
+    env       =  var.env
+    service   =  var.service
+    owner     =  var.owner
     managedBy = "terraform"
   }
 }
@@ -17,5 +17,5 @@ resource "aws_kms_key" "parameter_store" {
 # encryption and access control for specific keys
 resource "aws_kms_alias" "parameter_store_alias" {
   name          = "alias/${var.alias_name}"
-  target_key_id = "${aws_kms_key.parameter_store.id}"
+  target_key_id =  aws_kms_key.parameter_store.id
 }

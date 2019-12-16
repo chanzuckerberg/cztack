@@ -3,36 +3,36 @@ locals {
 }
 
 resource "aws_iam_group" "assume-role" {
-  name = "${var.group_name}"
-  path = "${var.iam_path}"
+  name =  var.group_name
+  path =  var.iam_path
 }
 
 resource "aws_iam_group_membership" "assume-role" {
-  name  = "${var.group_name}"
-  users = "${var.users}"
-  group = "${aws_iam_group.assume-role.name}"
+  name  =  var.group_name
+  users =  var.users
+  group =  aws_iam_group.assume-role.name
 
   # depends_on = ["null_resource.dependency_getter"]
 }
 
 resource "aws_iam_policy" "assume-role" {
-  name        = "${var.group_name}"
-  path        = "${var.iam_path}"
+  name        =  var.group_name
+  path        =  var.iam_path
   description = ""
-  policy      = "${data.aws_iam_policy_document.assume-role.json}"
+  policy      =  data.aws_iam_policy_document.assume-role.json
 }
 
 data "aws_iam_policy_document" "assume-role" {
   statement {
     sid       = "assume0"
-    resources = "${local.account_arns}"
+    resources =  local.account_arns
     actions   = ["sts:AssumeRole"]
   }
 }
 
 resource "aws_iam_group_policy_attachment" "assume-role" {
-  policy_arn = "${aws_iam_policy.assume-role.arn}"
-  group      = "${aws_iam_group.assume-role.name}"
+  policy_arn =  aws_iam_policy.assume-role.arn
+  group      =  aws_iam_group.assume-role.name
 }
 
 # # https://github.com/hashicorp/terraform/issues/1178

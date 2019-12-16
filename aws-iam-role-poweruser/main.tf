@@ -30,13 +30,13 @@ data "aws_iam_policy_document" "assume-role" {
 }
 
 resource "aws_iam_role" "poweruser" {
-  name               = "${var.role_name}"
-  path               = "${var.iam_path}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume-role.json}"
+  name               =  var.role_name
+  path               =  var.iam_path
+  assume_role_policy =  data.aws_iam_policy_document.assume-role.json
 }
 
 resource "aws_iam_role_policy_attachment" "poweruser" {
-  role       = "${aws_iam_role.poweruser.name}"
+  role       =  aws_iam_role.poweruser.name
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
 }
 
@@ -135,12 +135,12 @@ data "aws_iam_policy_document" "misc" {
 
 resource "aws_iam_policy" "misc" {
   name        = "${var.role_name}-misc"
-  path        = "${var.iam_path}"
+  path        =  var.iam_path
   description = "Extra permissions we're granting that PowerUserAccess lacks"
-  policy      = "${data.aws_iam_policy_document.misc.json}"
+  policy      =  data.aws_iam_policy_document.misc.json
 }
 
 resource "aws_iam_role_policy_attachment" "misc" {
-  role       = "${aws_iam_role.poweruser.name}"
-  policy_arn = "${aws_iam_policy.misc.arn}"
+  role       =  aws_iam_role.poweruser.name
+  policy_arn =  aws_iam_policy.misc.arn
 }
