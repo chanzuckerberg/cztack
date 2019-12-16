@@ -17,7 +17,7 @@ resource "aws_iam_role" "role" {
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
 
   lifecycle {
-    ignore_changes = ["name", "name_prefix", "path"]
+    ignore_changes = [name, name_prefix, path]
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_iam_instance_profile" "profile" {
   role        = aws_iam_role.role.name
 
   lifecycle {
-    ignore_changes = ["name", "name_prefix", "path"]
+    ignore_changes = [name, name_prefix, path]
   }
 }
 
