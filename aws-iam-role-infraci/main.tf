@@ -109,7 +109,7 @@ resource "aws_iam_policy" "secrets" {
   policy = data.aws_iam_policy_document.secrets.json
 
   lifecycle {
-    ignore_changes = ["name"]
+    ignore_changes = [name]
   }
 }
 

@@ -119,7 +119,7 @@ resource "aws_iam_policy" "self-iam" {
   policy      = data.aws_iam_policy_document.self-iam.json
 
   lifecycle {
-    ignore_changes = ["name"]
+    ignore_changes = [name]
   }
 }
 
