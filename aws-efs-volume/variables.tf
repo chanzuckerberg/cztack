@@ -22,7 +22,7 @@ variable "kms_key_id" {
 }
 
 variable "volume_name" {
-  type = string
+  type        = string
   description = "Name of the volume"
 }
 

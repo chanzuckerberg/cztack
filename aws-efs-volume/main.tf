@@ -28,19 +28,19 @@ resource "aws_security_group" "efs" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port = 2049
-    to_port   = 2049
-    protocol  = "tcp"
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
     security_groups = var.security_groups
-    cidr_blocks = var.cidr_blocks
+    cidr_blocks     = var.cidr_blocks
   }
 
   egress {
-    from_port = 2049
-    to_port   = 2049
-    protocol  = "tcp"
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
     security_groups = var.security_groups
-    cidr_blocks = var.cidr_blocks
+    cidr_blocks     = var.cidr_blocks
   }
 
   tags = local.tags

@@ -7,13 +7,12 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestPrivateBucket(t *testing.T) {
+func TestEfsVolume(t *testing.T) {
 
 	project := testutil.UniqueId()
 	env := testutil.UniqueId()
 	service := testutil.UniqueId()
 	owner := testutil.UniqueId()
-	vpcId := testutil.UniqueId()
 
 	volumeName := testutil.UniqueId()
 
@@ -26,7 +25,8 @@ func TestPrivateBucket(t *testing.T) {
 			"owner":   owner,
 
 			"volume_name": volumeName,
-			"vpc_id": vpcId,
+			"vpc_id": testutil.EnvVar(testutil.EnvVPCID),
+			"subnet_ids": testutil.ListEnvVar("PRIVATE_SUBNETS"),
 		},
 	)
 
