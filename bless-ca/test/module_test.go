@@ -16,6 +16,7 @@ func TestBlessCAInit(t *testing.T) {
 }
 
 func TestBlessCAInitAndApply(t *testing.T) {
+	t.Skip("This test fails often due to AWS eventual-consistency issues. It's sisabled until someone has a chance to fix it.")
 	t.Parallel()
 
 	project := testutil.UniqueId()
