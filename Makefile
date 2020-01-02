@@ -22,7 +22,7 @@ setup: ## setup development dependencies
 .PHONY: setup
 
 release: ## run a release
-	bff bump
+	./bin/bff bump
 	git push
 .PHONY: release
 
