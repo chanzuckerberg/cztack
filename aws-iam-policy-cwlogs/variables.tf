@@ -1,9 +1,9 @@
 variable "role_name" {
-  type        = "string"
+  type        = string
   description = "The role to which this policy should be attached."
 }
 
 variable "iam_path" {
-  type    = "string"
+  type    = string
   default = "/"
 }
