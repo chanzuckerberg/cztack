@@ -1,21 +1,21 @@
 variable "database_name" {
-  type = "string"
+  type = string
 }
 
 variable "database_subnet_group" {
-  type = "string"
+  type = string
 }
 
 variable "database_password" {
-  type = "string"
+  type = string
 }
 
 variable "database_username" {
-  type = "string"
+  type = string
 }
 
 variable "env" {
-  type        = "string"
+  type        = string
   description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
@@ -32,22 +32,22 @@ variable "ingress_security_groups" {
 }
 
 variable "instance_class" {
-  type    = "string"
+  type    = string
   default = "db.t2.small"
 }
 
 variable "instance_count" {
-  type    = "string"
+  type    = string
   default = 1
 }
 
 variable "owner" {
-  type        = "string"
+  type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "project" {
-  type        = "string"
+  type        = string
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
@@ -64,12 +64,12 @@ variable "apply_immediately" {
 }
 
 variable "service" {
-  type        = "string"
+  type        = string
   description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
 variable "vpc_id" {
-  type = "string"
+  type = string
 }
 
 variable "publicly_accessible" {
@@ -77,51 +77,51 @@ variable "publicly_accessible" {
 }
 
 variable "rds_cluster_parameters" {
-  type = "list"
+  type = list
 
   default = []
 }
 
 variable "db_parameters" {
-  type = "list"
+  type = list
 
   default = []
 }
 
 variable "engine" {
-  type = "string"
+  type = string
 }
 
 variable "kms_key_id" {
-  type        = "string"
+  type        = string
   description = "If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module."
   default     = ""
 }
 
 variable "port" {
-  type = "string"
+  type = string
 }
 
 variable "engine_version" {
-  type = "string"
+  type = string
 }
 
 variable "iam_database_authentication_enabled" {
-  type    = "string"
+  type    = string
   default = true
 }
 
 variable "enabled_cloudwatch_logs_exports" {
-  type    = "list"
+  type    = list
   default = []
 }
 
 variable "performance_insights_enabled" {
-  type    = "string"
+  type    = string
   default = true
 }
 
 variable "db_deletion_protection" {
-  type    = "string"
+  type    = string
   default = false
 }

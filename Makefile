@@ -27,7 +27,7 @@ release: ## run a release
 .PHONY: release
 
 fmt:
-	for m in $(MODULES); do \
+	@for m in $(MODULES); do \
 		terraform fmt $$m; \
 	done
 .PHONY: fmt

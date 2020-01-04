@@ -1,26 +1,26 @@
 variable "bucket_name" {
-  type = "string"
+  type = string
 }
 
 variable "bucket_policy" {
-  type    = "string"
+  type    = string
   default = ""
 }
 
 variable "project" {
-  type = "string"
+  type = string
 }
 
 variable "env" {
-  type = "string"
+  type = string
 }
 
 variable "service" {
-  type = "string"
+  type = string
 }
 
 variable "owner" {
-  type = "string"
+  type = string
 }
 
 variable "enable_versioning" {
