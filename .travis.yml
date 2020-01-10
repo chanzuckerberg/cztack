@@ -6,12 +6,12 @@ dist: trusty
 cache: pip
 install:
   # terraform
-  - wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.6/terraform_0.12.6_linux_amd64.zip
+  - wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.6/terraform_0.12.19_linux_amd64.zip
   - unzip terraform.zip
   - mv terraform ~/bin/
   - chmod +x ~/bin/terraform
   # terraform-provider-bless
-  - wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.8/terraform-provider-bless_0.2.8_linux_amd64.tar.gz
+  - wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.10/terraform-provider-bless_0.2.10_linux_amd64.tar.gz
   - tar -C ~/bin -xzf terraform-provider-bless.tar
   # terraform-docs
   # - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.6.0/terraform-docs-v0.6.0-linux-amd64
