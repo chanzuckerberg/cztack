@@ -167,3 +167,9 @@ variable "engine_version" {
   type    = string
   default = "5.7"
 }
+
+variable ca_cert_identifier {
+  type        = string
+  description = "Identifier for the certificate authority. Use rds-ca-2015 for anything new."
+  default     = "rds-ca-2015"
+}

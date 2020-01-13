@@ -118,3 +118,9 @@ variable "iam_database_authentication_enabled" {
   type    = string
   default = false
 }
+
+variable ca_cert_identifier {
+  type        = string
+  description = "Identifier for the certificate authority. Use rds-ca-2015 for anything new."
+  default     = "rds-ca-2015"
+}
