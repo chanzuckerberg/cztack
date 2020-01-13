@@ -71,6 +71,7 @@ resource "aws_rds_cluster_instance" "db" {
   instance_class          = var.instance_class
   db_subnet_group_name    = var.database_subnet_group
   db_parameter_group_name = aws_db_parameter_group.db.name
+  ca_cert_identifier      = var.ca_cert_identifier
 
   publicly_accessible          = var.publicly_accessible
   performance_insights_enabled = var.performance_insights_enabled

@@ -16,6 +16,7 @@ module "aurora" {
   rds_cluster_parameters              = var.rds_cluster_parameters
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   performance_insights_enabled        = var.performance_insights_enabled
+  ca_cert_identifier                  = var.ca_cert_identifier
 
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = var.ingress_security_groups

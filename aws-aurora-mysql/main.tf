@@ -18,6 +18,7 @@ module "aurora" {
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   performance_insights_enabled        = var.performance_insights_enabled
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
+  ca_cert_identifier                  = var.ca_cert_identifier
 
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = var.ingress_security_groups
