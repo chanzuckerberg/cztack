@@ -12,7 +12,7 @@ resource "aws_efs_file_system" "efs" {
   creation_token = var.volume_name
   encrypted      = true
   kms_key_id     = var.kms_key_id
-  tags           = merge(local.tags, {Name = var.volume_name})
+  tags           = merge(local.tags, { Name = var.volume_name })
 }
 
 resource "aws_efs_mount_target" "efs" {
