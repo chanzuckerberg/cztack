@@ -23,27 +23,35 @@ This module by default will assume your organization has opted in to the new ARN
 Since changing a service to use the new ARN requires destroying and recreating the service, this can result in downtime. In such cases, you can opt-out applying tags by passing `tag_service = false` as an argument to the module. It is recommended that at the next possible down time, the ECS service be replaced by running `terraform taint`, and if `manage_task_definition = false` restoring the ECS task definition version (the taint/replace will restore to only the last stub definition). After the service is destroy/replaced, the `tag_service = false` argument can be removed.
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| cluster\_id |  | string | n/a | yes |
-| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | string | `null` | no |
-| cpu | CPU units for Fargate task. Used if task_definition provided, or for initial stub task if externally managed. | number | `256` | no |
-| deployment\_maximum\_percent | (Optional) The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy. | number | `200` | no |
-| deployment\_minimum\_healthy\_percent | (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. | number | `100` | no |
-| desired\_count |  | number | n/a | yes |
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| memory | Memory in megabytes for Fargate task. Used if task_definition provided, or for initial stub task if externally managed. | number | `512` | no |
-| ordered\_placement\_strategy | Placement strategy for the task instances. | list | `[]` | no |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
-| security\_group\_ids | Security group to use for the Fargate task. | list | `<list>` | no |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | bool | `true` | no |
-| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
-| task\_role\_arn |  | string | n/a | yes |
-| task\_subnets | Subnets to launch Fargate task in. | list | `<list>` | no |
+|------|-------------|------|---------|:-----:|
+| cluster\_id | n/a | `string` | n/a | yes |
+| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | `string` | n/a | yes |
+| cpu | CPU units for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `256` | no |
+| deployment\_maximum\_percent | (Optional) The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy. | `number` | `200` | no |
+| deployment\_minimum\_healthy\_percent | (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. | `number` | `100` | no |
+| desired\_count | n/a | `number` | n/a | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | `bool` | `true` | no |
+| memory | Memory in megabytes for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `512` | no |
+| ordered\_placement\_strategy | Placement strategy for the task instances. | `list(object({ type = string, field = string }))` | `[]` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | n/a | yes |
+| security\_group\_ids | Security group to use for the Fargate task. | `list(string)` | `[]` | no |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
+| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | n/a | yes |
+| task\_role\_arn | n/a | `string` | n/a | yes |
+| task\_subnets | Subnets to launch Fargate task in. | `list(string)` | `[]` | no |
 
 ## Outputs
 

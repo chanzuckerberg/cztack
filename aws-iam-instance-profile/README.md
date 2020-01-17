@@ -29,14 +29,20 @@ resource "aws_instance" "instance" {
 ```
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| enable\_ssm | Attach the appropriate policies to allow the instance to integrate with AWS Systems Manager. | string | `"true"` | no |
-| iam\_path | The IAM path to the role. | string | `"/"` | no |
-| name\_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | string | n/a | yes |
-| role\_description | The description of the IAM role. | string | `""` | no |
+|------|-------------|------|---------|:-----:|
+| enable\_ssm | Attach the appropriate policies to allow the instance to integrate with AWS Systems Manager. | `string` | `"true"` | no |
+| iam\_path | The IAM path to the role. | `string` | `"/"` | no |
+| name\_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | `string` | n/a | yes |
+| role\_description | The description of the IAM role. | `string` | `""` | no |
 
 ## Outputs
 

@@ -18,11 +18,21 @@ module "policy" {
 
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| iam\_path |  | string | `"/"` | no |
-| role\_name | The role to which this policy should be attached. | string | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| iam\_path | n/a | `string` | `"/"` | no |
+| role\_name | The role to which this policy should be attached. | `string` | n/a | yes |
+
+## Outputs
+
+No output.
 
 <!-- END -->

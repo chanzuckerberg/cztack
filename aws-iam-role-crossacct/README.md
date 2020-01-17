@@ -17,20 +17,26 @@ module "group" {
 ```
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| iam\_path | The IAM path to put this role in. | string | `"/"` | no |
-| role\_name | The name of the role. | string | n/a | yes |
-| source\_account\_id | The source AWS account to establish a trust relationship. Ignored if empty or not provided. | string | '' | no |
-| saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | string | '' | no |
+|------|-------------|------|---------|:-----:|
+| iam\_path | The IAM path to put this role in. | `string` | `"/"` | no |
+| role\_name | The name of the role. | `string` | n/a | yes |
+| saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
+| source\_account\_id | The source AWS account to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| iam\_path |  |
-| role\_name |  |
+| iam\_path | n/a |
+| role\_name | n/a |
 
 <!-- END -->
