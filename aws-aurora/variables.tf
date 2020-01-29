@@ -106,6 +106,10 @@ variable "engine_version" {
   type = string
 }
 
+variable "params_engine_version" {
+  type = string
+}
+
 variable "iam_database_authentication_enabled" {
   type    = string
   default = true
