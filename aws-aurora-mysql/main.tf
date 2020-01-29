@@ -1,7 +1,8 @@
 module "aurora" {
-  source         = "../aws-aurora"
-  engine         = "aurora-mysql"
-  engine_version = var.engine_version
+  source                = "../aws-aurora"
+  engine                = "aurora-mysql"
+  engine_version        = var.engine_version
+  params_engine_version = var.engine_version
 
   project = var.project
   env     = var.env
