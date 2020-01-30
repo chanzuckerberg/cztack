@@ -17,7 +17,6 @@ module "db" {
   database_name         = "..."
   database_subnet_group = "..."
   database_password     = "..."
-  database_password     = "..."
   
   vpc_id              = "..."
   ingress_cidr_blocks = "...
