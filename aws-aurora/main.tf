@@ -23,7 +23,7 @@ resource "aws_security_group" "rds" {
       from_port   = var.port
       to_port     = var.port
       protocol    = "tcp"
-      cidr_blocks = ingress.value
+      cidr_blocks = [ingress.value]
     }
   }
 
@@ -33,7 +33,7 @@ resource "aws_security_group" "rds" {
       from_port       = var.port
       to_port         = var.port
       protocol        = "tcp"
-      security_groups = ingress.value
+      security_groups = [ingress.value]
     }
   }
 
