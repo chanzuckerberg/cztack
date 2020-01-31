@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	// IAMRegion IAM is allegedly hosted in us-east-1 use this region for IAM related things
+	// IAMRegion IAM is allegedly hosted in us-east-1, so use this region for IAM related things
 	IAMRegion     = "us-east-1"
 	DefaultRegion = "us-west-2"
 )
