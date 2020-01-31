@@ -17,13 +17,26 @@ resource "aws_security_group" "rds" {
 
   vpc_id = var.vpc_id
 
-  ingress {
-    from_port       = var.port
-    to_port         = var.port
-    protocol        = "tcp"
-    cidr_blocks     = var.ingress_cidr_blocks
-    security_groups = var.ingress_security_groups
+  dynamic ingress {
+    for_each = var.ingress_cidr_blocks
+    content {
+      from_port   = var.port
+      to_port     = var.port
+      protocol    = "tcp"
+      cidr_blocks = ingress.value
+    }
   }
+
+  dynamic ingress {
+    for_each = var.ingress_security_groups
+    content {
+      from_port       = var.port
+      to_port         = var.port
+      protocol        = "tcp"
+      security_groups = ingress.value
+    }
+  }
+
 
   lifecycle {
     create_before_destroy = true
