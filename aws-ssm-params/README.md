@@ -24,19 +24,25 @@ output "secret" {
 ```
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| parameters | Set of names of secrets. | set(string) | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| parameters | Set of names of secrets. | `set(string)` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| values | "Map from keys to corresponding values stored in the SSM Parameter Store." |
+| values | Map from keys to corresponding values stored in the SSM Parameter Store. |
 
 <!-- END -->

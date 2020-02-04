@@ -36,10 +36,20 @@ module "default-vpc" {
 You will need to invoke this module with a properly configured provider for every region you want to lock down.
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| default\_sg\_lockdown | Restrict default security group to deny all traffic (you can selectively enable traffic with other security groups). | string | `"true"` | no |
+|------|-------------|------|---------|:-----:|
+| default\_sg\_lockdown | Restrict default security group to deny all traffic (you can selectively enable traffic with other security groups). | `bool` | `true` | no |
+
+## Outputs
+
+No output.
 
 <!-- END -->

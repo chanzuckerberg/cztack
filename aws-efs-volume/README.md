@@ -1,25 +1,31 @@
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| volume\_name |  | string | n/a | yes |
-| kms\_key\_id | KMS key ID to use for encryption | kms key | n/a | no |
-| env |  | string | n/a | yes |
-| owner |  | string | n/a | yes |
-| project |  | string | n/a | yes |
-| service |  | string | n/a | yes |
-| vpc\_id | VPC ID that should be able to access this volume | list | n/a | yes |
-| cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this EFS volume | list | [] | no |
-| security\_groups | A list of security groups that should be allowed to communicate with this EFS volume. | list | [] | no |
-| subnets\_ids | Subnets that need access to this EFS volume | list | [] | no |
+|------|-------------|------|---------|:-----:|
+| cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this EFS volume | `list(string)` | `[]` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| kms\_key\_id | If supplied, EFS will use this key to encrypt data at rest. Empty string means that EFS will use an AWS-managed key. Encryption is always on with this module. | `string` | `""` | no |
+| owner | n/a | `string` | n/a | yes |
+| project | n/a | `string` | n/a | yes |
+| security\_groups | A list of security groups that should be allowed to communicate with this EFS volume. | `list(string)` | `[]` | no |
+| service | n/a | `string` | n/a | yes |
+| subnet\_ids | A list of subnets that need EFS targets created for this resource | `list(string)` | `[]` | no |
+| volume\_name | Name of the volume | `string` | n/a | yes |
+| vpc\_id | n/a | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| id | EFS volume id |
-| dns\_name | DNS name to reach the EFS volume |
-| security\_group | ID of the security group attached to the efs volume |
+| dns\_name | n/a |
+| id | HACK(el): we do this to hint TF dependency graph since modules can't depend\_on |
+| security\_group | n/a |
 
 <!-- END -->

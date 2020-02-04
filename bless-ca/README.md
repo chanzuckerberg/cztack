@@ -94,24 +94,32 @@ You can read more about Bless and SSH certificates here:
 
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| bless | n/a |
+| random | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| authorized\_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | list | `<list>` | no |
-| bless\_logging\_level | Bless lambda logging level. | string | `"INFO"` | no |
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| iam\_path | The IAM path under which the Bless lambda will be run. | string | `"/"` | no |
-| kmsauth\_iam\_group\_name\_format | Formatting string to tell bless which IAM groups are relevant when checking SSH certificate principal validity. | string | `"{}"` | no |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| authorized\_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | `list` | `[]` | no |
+| bless\_logging\_level | Bless lambda logging level. | `string` | `"INFO"` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| iam\_path | The IAM path under which the Bless lambda will be run. | `string` | `"/"` | no |
+| kmsauth\_iam\_group\_name\_format | Formatting string to tell bless which IAM groups are relevant when checking SSH certificate principal validity. | `string` | `"{}"` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| ca\_public\_key |  |
-| lambda\_arn |  |
+| ca\_public\_key | n/a |
+| lambda\_arn | n/a |
 
 <!-- END -->

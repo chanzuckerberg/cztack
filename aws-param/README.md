@@ -26,20 +26,26 @@ output "secret" {
 ```
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| name | The name of the secret. | string | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| use\_paths | This exists to support data written by Chamber before version 2.0.0, which used '.' instead of '/' as a separator. | string | `"true"` | no |
+|------|-------------|------|---------|:-----:|
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| name | The name of the secret. | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| use\_paths | This exists to support data written by Chamber before version 2.0.0, which used '.' instead of '/' as a separator. | `string` | `"true"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| value |  |
+| value | n/a |
 
 <!-- END -->

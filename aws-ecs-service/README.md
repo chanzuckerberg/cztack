@@ -136,56 +136,66 @@ Since changing a service to use the new ARN requires destroying and recreating t
 service = false` argument can be removed.
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| access\_logs\_bucket | S3 bucket to write alb access logs to. Empty for no access logs. | string | `null` | no |
-| acm\_certificate\_arn | Certificate for the HTTPS listener. | string | n/a | yes |
-| cluster\_id |  | string | n/a | yes |
-| container\_egress\_cidrs | CIDR blocks the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network_mode is true. | list | `["0.0.0.0/0"]` | no |
-| container\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc_network_mode is true. | list | `[]` | no |
-| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | string | `null` | no |
-| container\_port |  | number | n/a | yes |
-| desired\_count |  | number | n/a | yes |
-| disable\_http\_redirect | Disable redirecting HTTP to HTTPS. | bool | `true` | no |
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| extra\_tags | Extra tags that will be added to components created by this module. | map | `{}` | no |
-| health\_check\_grace\_period\_seconds | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | number | `60` | no |
-| health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | string | `"200-399"` | no |
-| health\_check\_path |  | string | `"/"` | no |
-| internal\_lb |  | bool | `false` | no |
-| lb\_idle\_timeout\_seconds |  | number | `60` | no |
-| lb\_ingress\_cidrs |  | list | `<list>` | no |
-| lb\_ingress\_security\_group\_ids |  | list | `<list>` | no |
-| lb\_subnets | List of subnets in which to deploy the load balancer. | list | n/a | yes |
-| manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | bool | `true` | no |
-| ordered\_placement\_strategy | Placement strategy for the task instances. | list | `[]` | no |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | string | `null` | no |
-| route53\_zone\_id | Zone in which to create an alias record to the ALB. | string | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| slow_start | Seconds for targets to warm up before the load balancer sends them a full share of requests. | number | 60 | no |
-| ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | string | `null` | no |
-| subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | string | n/a | yes |
-| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | bool | `true` | no |
-| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | string | `null` | no |
-| task\_role\_arn |  | string | n/a | yes |
-| task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. Only used if awsvpc_network_mode is true. | list | `[]` | no |
-| vpc\_id |  | string | n/a | yes |
-| with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53_zone_id. | bool | `false` | no |
+|------|-------------|------|---------|:-----:|
+| access\_logs\_bucket | S3 bucket to write alb access logs to. Null for no access logs. | `string` | n/a | yes |
+| acm\_certificate\_arn | Certificate for the HTTPS listener. | `string` | n/a | yes |
+| awsvpc\_network\_mode | Give the task its own IP and security group if true. Use host EC2 network if false. | `bool` | `false` | no |
+| cluster\_id | n/a | `string` | n/a | yes |
+| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | `string` | n/a | yes |
+| container\_port | The port the container to be exposed to is listening on. | `number` | n/a | yes |
+| desired\_count | n/a | `number` | n/a | yes |
+| disable\_http\_redirect | Disable redirecting HTTP to HTTPS. | `bool` | `true` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| extra\_tags | Extra tags that will be added to components created by this module. | `map(string)` | `{}` | no |
+| health\_check\_grace\_period\_seconds | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | `number` | `60` | no |
+| health\_check\_interval | Time between health checks of the underlying service. | `number` | n/a | yes |
+| health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb\_target\_group.html#matcher) | `string` | `"200-399"` | no |
+| health\_check\_path | n/a | `string` | `"/"` | no |
+| health\_check\_timeout | Timeout for a health check of the underlying service. | `number` | n/a | yes |
+| internal\_lb | n/a | `bool` | `false` | no |
+| lb\_idle\_timeout\_seconds | n/a | `number` | `60` | no |
+| lb\_ingress\_cidrs | n/a | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]<br></pre> | no |
+| lb\_ingress\_security\_group\_ids | n/a | `list(string)` | `[]` | no |
+| lb\_subnets | List of subnets in which to deploy the load balancer. | `list(string)` | n/a | yes |
+| manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | `bool` | `true` | no |
+| ordered\_placement\_strategy | Placement strategy for the task instances. | `list(object({ type = string, field = string }))` | `[]` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | n/a | yes |
+| route53\_zone\_id | Zone in which to create an alias record to the ALB. | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| slow\_start | Seconds for targets to warm up before the load balancer sends them a full share of requests. 30-900 seconds or 0 to disable. | `number` | `60` | no |
+| ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | `string` | n/a | yes |
+| subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | `string` | n/a | yes |
+| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
+| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | n/a | yes |
+| task\_egress\_cidrs | CIDR blocks the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network\_mode is true. | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]<br></pre> | no |
+| task\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network\_mode is true. | `list(string)` | `[]` | no |
+| task\_role\_arn | n/a | `string` | n/a | yes |
+| task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. Only used if awsvpc\_network\_mode is true. | `list(string)` | `[]` | no |
+| vpc\_id | n/a | `string` | n/a | yes |
+| with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53\_zone\_id. | `bool` | `false` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | alb\_access\_logs\_prefix | ALB access logs S3 prefix |
-| alb\_dns\_name |  |
-| alb\_http\_listener\_arn | ALB HTTPS listener ARN" |
-| alb\_https\_listener\_arn | ALB HTTP listener ARN, only if HTTPS forwarding is disabled |
-| alb\_route53\_zone\_id |  |
+| alb\_dns\_name | n/a |
+| alb\_http\_listener\_arn | ALB HTTP listener ARN, only if HTTPS forwarding is disabled |
+| alb\_https\_listener\_arn | ALB HTTPS listener ARN |
+| alb\_route53\_zone\_id | n/a |
 | container\_security\_group\_id | Security group id for the container. |
 | ecs\_task\_definition\_family | The family of the task definition defined for the given/generated container definition. |
-| private\_service\_discovery\_domain | Domain name for service discovery, if with_service_discovery=true. Only resolvable within the VPC. |
+| private\_service\_discovery\_domain | Domain name for service discovery, if with\_service\_discovery=true. Only resolvable within the VPC. |
+
 <!-- END -->

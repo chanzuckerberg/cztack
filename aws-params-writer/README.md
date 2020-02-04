@@ -11,15 +11,25 @@ is each of the keys of the parameters input.
 in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html).
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
-| parameters | Map from parameter names to values to set. | map | n/a | yes |
-| parameters\_count | HACK: The number of keys in var.parameters. To avoid hitting value of count cannot be computed. | string | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | string | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | string | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| parameters | Map from parameter names to values to set. | `map` | n/a | yes |
+| parameters\_count | HACK: The number of keys in var.parameters. To avoid hitting value of count cannot be computed. | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+
+## Outputs
+
+No output.
 
 <!-- END -->

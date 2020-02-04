@@ -11,5 +11,18 @@ module "password-policy" {
 ```
 
 <!-- START -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+## Inputs
+
+No input.
+
+## Outputs
+
+No output.
 
 <!-- END -->
