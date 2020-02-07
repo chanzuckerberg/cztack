@@ -34,3 +34,28 @@ variable "abort_incomplete_multipart_upload_days" {
   description = "Number of days after which an incomplete multipart upload is canceled."
   default     = 14
 }
+
+variable "lifecycle_rule" {
+  description = "List of maps containing configuration of object lifecycle management."
+  type        = any
+  default = [
+    {
+      enabled = true
+
+      abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
+
+      expiration = {
+        expired_object_delete_marker = true
+      }
+
+      noncurrent_version_transition = {
+        days          = 30
+        storage_class = "STANDARD_IA"
+      }
+
+      noncurrent_version_expiration = {
+        days = 365
+      }
+    }
+  ]
+}
