@@ -42,8 +42,6 @@ variable "lifecycle_rule" {
     {
       enabled = true
 
-      abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
-
       expiration = {
         expired_object_delete_marker = true
       }
