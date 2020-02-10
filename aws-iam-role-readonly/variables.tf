@@ -43,3 +43,9 @@ variable authorize_read_secrets {
   description = "Should this role also be authorized to decrypt and read secrets."
   default     = true
 }
+
+variable tags {
+  type        = map(string)
+  default     = {}
+  description = "A map of tags to assign this IAM Role."
+}
