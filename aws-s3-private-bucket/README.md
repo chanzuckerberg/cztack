@@ -14,6 +14,7 @@
 | bucket\_policy | n/a | `string` | `""` | no |
 | enable\_versioning | Keep old versions of overwritten S3 objects. | `bool` | `true` | no |
 | env | n/a | `string` | n/a | yes |
+| lifecycle\_rules | List of maps containing configuration of object lifecycle management. | `any` | <pre>[<br>  {<br>    "enabled": true,<br>    "expiration": {<br>      "expired_object_delete_marker": true<br>    },<br>    "noncurrent_version_expiration": {<br>      "days": 365<br>    },<br>    "noncurrent_version_transition": {<br>      "days": 30,<br>      "storage_class": "STANDARD_IA"<br>    }<br>  }<br>]</pre> | no |
 | owner | n/a | `string` | n/a | yes |
 | project | n/a | `string` | n/a | yes |
 | service | n/a | `string` | n/a | yes |

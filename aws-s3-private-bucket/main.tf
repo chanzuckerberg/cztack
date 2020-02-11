@@ -18,26 +18,55 @@ resource "aws_s3_bucket" "bucket" {
     enabled = var.enable_versioning
   }
 
-  lifecycle_rule {
-    enabled = true
+  # dynamic block used instead of simply assigning a variable b/c lifecycle_rule is configuration block
+  dynamic "lifecycle_rule" {
+    for_each = var.lifecycle_rules
 
-    abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
+    content {
+      id                                     = lookup(lifecycle_rule.value, "id", null) #lookup() provides default value in case it does not exist in var.lifecycle_rules input
+      prefix                                 = lookup(lifecycle_rule.value, "prefix", null)
+      tags                                   = lookup(lifecycle_rule.value, "tags", null)
+      enabled                                = lookup(lifecycle_rule.value, "enabled", false)
+      abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
 
-    expiration {
-      expired_object_delete_marker = true
-    }
+      dynamic "expiration" {
+        for_each = length(keys(lookup(lifecycle_rule.value, "expiration", {}))) == 0 ? [] : [lookup(lifecycle_rule.value, "expiration", {})]
 
-    noncurrent_version_transition {
-      days          = 30
-      storage_class = "STANDARD_IA"
-    }
+        content {
+          date                         = lookup(expiration.value, "date", null)
+          days                         = lookup(expiration.value, "days", null)
+          expired_object_delete_marker = lookup(expiration.value, "expired_object_delete_marker", null)
+        }
+      }
 
-    noncurrent_version_expiration {
-      days = 365
+      dynamic "transition" {
+        for_each = length(keys(lookup(lifecycle_rule.value, "transition", {}))) == 0 ? [] : [lookup(lifecycle_rule.value, "transition", {})]
+
+        content {
+          date          = lookup(transition.value, "date", null)
+          days          = lookup(transition.value, "days", null)
+          storage_class = lookup(transition.value, "storage_class", null)
+        }
+      }
+
+      dynamic "noncurrent_version_expiration" {
+        for_each = length(keys(lookup(lifecycle_rule.value, "noncurrent_version_expiration", {}))) == 0 ? [] : [lookup(lifecycle_rule.value, "noncurrent_version_expiration", {})]
+
+        content {
+          days = lookup(noncurrent_version_expiration.value, "days", null)
+        }
+      }
+
+      dynamic "noncurrent_version_transition" {
+        for_each = length(keys(lookup(lifecycle_rule.value, "noncurrent_version_transition", {}))) == 0 ? [] : [lookup(lifecycle_rule.value, "noncurrent_version_transition", {})]
+
+        content {
+          days          = lookup(lifecycle_rule.value.noncurrent_version_transition, "days", null)
+          storage_class = lookup(lifecycle_rule.value.noncurrent_version_transition, "storage_class", null)
+        }
+      }
     }
   }
-
-
 
   # TODO
   #   logging {
