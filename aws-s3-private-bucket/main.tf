@@ -20,10 +20,10 @@ resource "aws_s3_bucket" "bucket" {
 
   # dynamic block used instead of simply assigning a variable b/c lifecycle_rule is configuration block
   dynamic "lifecycle_rule" {
-    for_each = var.lifecycle_rule
+    for_each = var.lifecycle_rules
 
     content {
-      id                                     = lookup(lifecycle_rule.value, "id", null) #lookup() provides default value in case it does not exist in var.lifecycle_rule input
+      id                                     = lookup(lifecycle_rule.value, "id", null) #lookup() provides default value in case it does not exist in var.lifecycle_rules input
       prefix                                 = lookup(lifecycle_rule.value, "prefix", null)
       tags                                   = lookup(lifecycle_rule.value, "tags", null)
       enabled                                = lookup(lifecycle_rule.value, "enabled", false)

@@ -35,7 +35,7 @@ variable "abort_incomplete_multipart_upload_days" {
   default     = 14
 }
 
-variable "lifecycle_rule" {
+variable "lifecycle_rules" {
   description = "List of maps containing configuration of object lifecycle management."
   type        = any
   default = [
