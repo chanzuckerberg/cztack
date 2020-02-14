@@ -10,7 +10,7 @@ For any other permissions that need to be attached to the role, this can be done
 
 ```hcl
 module "profile" {
-  source = "github.com/chanzuckerberg/cztack//aws-iam-instance_profile?ref=v0.15.1"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-instance-profile?ref=v0.15.1"
 
   # The prefix of the name of the instance profile and role to create in this account.
   name_prefix = "..."
