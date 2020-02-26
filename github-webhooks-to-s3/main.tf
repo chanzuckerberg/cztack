@@ -55,11 +55,11 @@ resource "aws_iam_role" "lambda" {
 }
 
 module "github_secret" {
-  source  = "../aws-param"
-  project = var.project
-  env     = var.env
-  service = var.service
-  name    = "github_secret"
+  source     = "../aws-ssm-params"
+  project    = var.project
+  env        = var.env
+  service    = var.service
+  parameters = ["github_secret"]
 }
 
 resource "aws_lambda_function" "lambda" {
@@ -77,7 +77,7 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables = {
       FIREHOSE_DELIVERY_STREAM = local.name
-      GITHUB_SECRET            = module.github_secret.value
+      GITHUB_SECRET            = module.github_secret.values["github_secret"]
     }
   }
 }

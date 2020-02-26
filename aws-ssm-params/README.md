@@ -2,7 +2,7 @@
 
 This module is made to work together with [Chamber](https://github.com/segmentio/chamber) to manage secrets in AWS. Typically a user would use chamber to put secrets into the ParamStore and then use this module to read them out in Terraform code.
 
-You can use [our secrets setup module](../aws-param-secrets-setup/README.md) to prepare an AWS account/region to work with these tools.
+You can use [our secrets setup module](../aws-params-secrets-setup/README.md) to prepare an AWS account/region to work with these tools.
 
 ## Example
 
