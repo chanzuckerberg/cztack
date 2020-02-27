@@ -3,7 +3,6 @@ locals {
 }
 
 data "aws_ssm_parameter" "secret" {
-  # https://github.com/hashicorp/terraform/issues/22281#issuecomment-517080564
-  for_each = { for v in var.parameters : v => v }
+  for_each = var.parameters
   name     = "/${local.service_name}/${each.key}"
 }
