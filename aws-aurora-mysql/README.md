@@ -18,7 +18,7 @@ module "db" {
   database_subnet_group = "..."
   database_password     = "..."
   database_password     = "..."
-  
+
   vpc_id               = "..."
   ingress_cidr_blocks	 = "..."
 
@@ -41,7 +41,7 @@ No provider.
 |------|-------------|------|---------|:-----:|
 | apply\_immediately | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
 | backtrack\_window | Turns on Backgrack for this many seconds. [Doc](https://aws.amazon.com/blogs/aws/amazon-aurora-backtrack-turn-back-time/) | `string` | `0` | no |
-| ca\_cert\_identifier | Identifier for the certificate authority. rds-ca-2015 is the latest available version. | `string` | `"rds-ca-2015"` | no |
+| ca\_cert\_identifier | Identifier for the certificate authority. 9 is the latest available version. | `string` | `"rds-ca-2015"` | no |
 | database\_name | The name of the database to be created in the cluster. | `string` | n/a | yes |
 | database\_password | Password for user that will be created. | `string` | n/a | yes |
 | database\_subnet\_group | The name of an existing database subnet group to use. | `string` | n/a | yes |
