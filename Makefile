@@ -23,6 +23,7 @@ setup: ## setup development dependencies
 
 release: ## run a release
 	./bin/bff bump
+	git push
 	git push --tags
 	@echo "Go to github.com/chanzuckerberg/cztack/ and make the tag into a release (not automated yet)."
 .PHONY: release
