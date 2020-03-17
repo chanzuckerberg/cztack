@@ -39,7 +39,7 @@ No provider.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | apply\_immediately | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
-| ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2015 for anything new. | `string` | `"rds-ca-2015"` | no |
+| ca\_cert\_identifier | Identifier for the certificate authority. | `string` | `"rds-ca-2019"` | no |
 | database\_name | The name of the database to be created in the cluster. | `string` | n/a | yes |
 | database\_password | Password for user that will be created. | `string` | n/a | yes |
 | database\_subnet\_group | The name of an existing database subnet group to use. | `string` | n/a | yes |

@@ -15,7 +15,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 |------|-------------|------|---------|:-----:|
 | apply\_immediately | n/a | `bool` | `false` | no |
 | backtrack\_window | n/a | `number` | `0` | no |
-| ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2015 for anything new. | `string` | `"rds-ca-2015"` | no |
+| ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2015 for anything new. | `string` | `"rds-ca-2019"` | no |
 | database\_name | n/a | `string` | n/a | yes |
 | database\_password | n/a | `string` | n/a | yes |
 | database\_subnet\_group | n/a | `string` | n/a | yes |
@@ -33,6 +33,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | instance\_count | n/a | `string` | `1` | no |
 | kms\_key\_id | If supplied, RDS will use this key to encrypt data at rest. Empty string means that RDS will use an AWS-managed key. Encryption is always on with this module. | `string` | `""` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| params\_engine\_version | n/a | `string` | n/a | yes |
 | performance\_insights\_enabled | n/a | `string` | `true` | no |
 | port | n/a | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
