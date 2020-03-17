@@ -27,6 +27,24 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.oidc
+    iterator = oidc
+
+    principals {
+      type        = "Federated"
+      identifiers = [oidc.idp_arn]
+    }
+
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    condition {
+      test     = "StringEquals"
+      variable = "${oidc.provider}:aud"
+      values   = oidc.client_ids
+    }
+  }
+
 }
 
 resource "aws_iam_role" "role" {

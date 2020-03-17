@@ -28,6 +28,7 @@ module "group" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | iam\_path | The IAM path to put this role in. | `string` | `"/"` | no |
+| oidc | A list of AWS OIDC IDPs to establish a trust relationship for this role. | <pre>list(object(<br>    {<br>      idp_arn : string,          # the AWS IAM IDP arn<br>      client_ids : list(string), # a list of oidc client ids<br>      provider : string          # your provider url, such as foo.okta.com<br>    }<br>  ))<br></pre> | `[]` | no |
 | role\_name | The name of the role. | `string` | n/a | yes |
 | saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
 | source\_account\_id | The source AWS account to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
@@ -37,6 +38,7 @@ module "group" {
 | Name | Description |
 |------|-------------|
 | iam\_path | n/a |
+| role\_arn | n/a |
 | role\_name | n/a |
 
 <!-- END -->
