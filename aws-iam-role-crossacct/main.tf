@@ -35,14 +35,14 @@ data "aws_iam_policy_document" "assume-role" {
     content {
       principals {
         type        = "Federated"
-        identifiers = [oidc.idp_arn]
+        identifiers = [oidc["idp_arn"]]
       }
 
       actions = ["sts:AssumeRoleWithWebIdentity"]
       condition {
         test     = "StringEquals"
-        variable = "${oidc.provider}:aud"
-        values   = oidc.client_ids
+        variable = "${oidc["provider"]}:aud"
+        values   = oidc["client_ids"]
       }
     }
   }
