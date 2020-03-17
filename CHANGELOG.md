@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.29.0 2020-03-17
+
+* [72fe3a70](../../commit/72fe3a7011ece3af372cf150e3635bec8e4b9d4c) [feature] Allow the aws-iam-role-crossacct for OIDC federation ([#179](../../pull/179))
+* [968da0b0](../../commit/968da0b00ff5be389278759f24fb17659165a8e4) retry downloading dependencies ([#178](../../pull/178))
+* [b770f3df](../../commit/b770f3df41660de1a9973bca03dbd9357affa089) add git push to release
+
 ## 0.25.0 2019-12-10
 
 * [e6b42dd1](../../commit/e6b42dd1e8cc308cbfeaad814bdf668d1bae9694) Updating VERSION file to 0.24.0
