@@ -14,9 +14,3 @@ variable "role_description" {
   description = "The description of the IAM role."
   default     = ""
 }
-
-variable "enable_ssm" {
-  type        = string
-  description = "Attach the appropriate policies to allow the instance to integrate with AWS Systems Manager."
-  default     = "true"
-}
