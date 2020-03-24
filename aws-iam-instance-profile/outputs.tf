@@ -1,10 +1,10 @@
 output "role_arn" {
-  value       = aws_iam_role.role.arn
+  value       = coalescelist(aws_iam_role.role[*].arn, [""])[0]
   description = "The Amazon Resource Name (ARN) specifying the role."
 }
 
 output "role_name" {
-  value       = aws_iam_role.role.name
+  value       = local.role_name
   description = "The name of the role."
 }
 
