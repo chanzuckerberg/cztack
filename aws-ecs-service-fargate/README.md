@@ -166,12 +166,12 @@ service = false` argument can be removed.
 | extra\_tags | Extra tags that will be added to components created by this module. | `map(string)` | `{}` | no |
 | health\_check\_grace\_period\_seconds | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | `number` | `60` | no |
 | health\_check\_interval | Time between health checks of the underlying service. | `number` | n/a | yes |
-| health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb\_target\_group.html#matcher) | `string` | `"200-399"` | no |
+| health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | `string` | `"200-399"` | no |
 | health\_check\_path | n/a | `string` | `"/"` | no |
 | health\_check\_timeout | Timeout for a health check of the underlying service. | `number` | n/a | yes |
 | internal\_lb | n/a | `bool` | `false` | no |
 | lb\_idle\_timeout\_seconds | n/a | `number` | `60` | no |
-| lb\_ingress\_cidrs | n/a | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]<br></pre> | no |
+| lb\_ingress\_cidrs | n/a | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | lb\_ingress\_security\_group\_ids | n/a | `list(string)` | `[]` | no |
 | lb\_subnets | List of subnets in which to deploy the load balancer. | `list(string)` | n/a | yes |
 | manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | `bool` | `true` | no |
@@ -186,7 +186,7 @@ service = false` argument can be removed.
 | subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | `string` | n/a | yes |
 | tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
 | task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | n/a | yes |
-| task\_egress\_cidrs | CIDRs the task is allowed to communicate with for outbound traffic. | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]<br></pre> | no |
+| task\_egress\_cidrs | CIDRs the task is allowed to communicate with for outbound traffic. | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | task\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network is true. | `list(string)` | `[]` | no |
 | task\_role\_arn | n/a | `string` | n/a | yes |
 | task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. | `list(string)` | `[]` | no |
