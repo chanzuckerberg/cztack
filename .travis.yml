@@ -6,7 +6,7 @@ dist: trusty
 cache: pip
 install:
   # terraform
-  - travis_retry wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.19/terraform_0.12.19_linux_amd64.zip
+  - travis_retry wget -t 10 -O terraform.zip https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
   - unzip terraform.zip
   - mv terraform ~/bin/
   - chmod +x ~/bin/terraform
@@ -14,9 +14,9 @@ install:
   - travis_retry wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.10/terraform-provider-bless_0.2.10_linux_amd64.tar.gz
   - tar -C ~/bin -xzf terraform-provider-bless.tar
   # terraform-docs
-  # - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.6.0/terraform-docs-v0.6.0-linux-amd64
-  # - mv terraform-docs ~/bin/terraform-docs
-  # - chmod +x ~/bin/terraform-docs
+  - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.8.2/terraform-docs-v0.8.2-linux-amd64
+  - mv terraform-docs ~/bin/terraform-docs
+  - chmod +x ~/bin/terraform-docs
   # awscli
   - pip install awscli --upgrade --user
   - aws configure set aws_access_key_id     $CI1_AWS_ACCESS_KEY_ID     --profile cztack-ci-1
@@ -49,3 +49,14 @@ env:
     - secure: EzbYu45kuUeC56EVsLHdzhrLZc7tqUJAq5ayK1ccYYQbBkfrRYvFYbY2KHm/F7xQqqH8mai/LLTL9Z3VCbi60GVw/ywdQZR3Hv+KRClrl3+UccpoR0y4WxMERp6yjy7rwvcjg37J/mxjyQUyyUVahj/bLB9Sst/M6/OWbrK9SIO8l/ZynBBEm2PPqelwwIg+kpOatKY/mwBsaLl3i/lirR6kSE3gJMU/v8e+ecQRW2wsZ5u+ZiwfIuYI0a2GIt8UpI0H1tgZHh4aT+ArKICTkggWJTxqKy21xyEUe7frku8SUmyRBdu1h2O3Xz/qQ4tzUgDPaDMaxL/9L5Xm0K9RkhANTGXzmVBtVOtohdLL4Jn6VHcedPH2thm47+fWSwr1MaMI8o4RJro9B5mj1uDOz4W4rac6RXkPERB3IeBR2+g138TT1CxpaawrS/E92uDOggJ1/lpVyKFGwP1JoCJsz+yhxRgvEIUIR4mPDU6MqPOjZEr2ub9YK3AWDBMzyF41BLx1Rpd/ChN8LzEX0HrpGx3dNhh8LPxum1/8O0GpZFQZcex44FLp8UB7j4zC1KDo44SKUPcNM31GHiDKMN/uWvCSlN56c0rnZ/a/aWNUUipaXKJmnbU/IyAsLIMb6pXVxbSID2hq7hh1LFv7i/bp4tDNNrW8hLrCeQkYjzdE+Jo=
     - secure: U/daF6UvK+oUEMT/10O+li4+VLZcEBAlGv22M31T1KYbNItM6oNOhKqE/QG29K98X3naw07tdpfFnPdgDBokaZXIXJr853pCDevjrrg8+HtgTAoRZMDtnVSQRrpT/o44U3bxuGAhCAEq4QBrqgdWhYLoBcw1qv3sg4FhBAOR5DFm4L/+uZ4d7RvYBBk4yed9H1l/Av67ps9klZ70VAQ2JB1sGWyD2wiajaZh+nP5Z4TE1j+XdKKpOeAuAS0oml5onXk8i/fOTmi3pplbaWsQjQjQXH0JzKsqi1aqieevTCMt4GBHjKaU34i9TmMprL9bxCCHrI3s4xJ+gi5LAaV8hjliKuAIwPqq7dcx/JwH7pDxLTLzycGWTG9HHgE26sp+OFCTG54ed47Y/4jttEBl6jyV7C9jNKi6GcJ/+qgXZ596tKBY6+oPNjoduA9aMkuQ7HGlbOsYdul1xGSwZB1G4Z/Xwt/6VFgtjdbxkNAkfkJGh2drPP7oZ4xbWS8AF3Ww5ELdlrk+mNh18h9UBITD65UGvasYBXQy5ufnHiojn7ZXXhGEt9gvJKCLYMrqRQYHZzQPym7iMwfqrY/YSsuGbO2QulXNlvX04854PDIf/AQzdzCYkI1ADQ6L8TQzMXSgqpr0LrQloUdVKugP0As2ykQ9vT9YfG1wbrR4yAybNz4=
     - secure: vgbr7f5EUve/KKGP+H72Vp9AO3VsW+N1GapoUE4SVH26S3pMV+rk+5uzZI4c/qhuKN0K9mUGjn96R6/SApE6WhgFq6IiRKMEv3LqKUO08iV1nbyRSln55d8ndzNiZwx+s6hKEv85qIOJpEqRDY8u3e1BrO88nFLlY/rFBIlbcy+6zZcOuAxH6DWaYYlxWob2N3DCJypCBNIivMGzVfEEqF+ltVaYS5dpSPowBthQUPY2+/Qc3v6e4+VXZuFJ28FzsOmWryHdgqrxptCx/7nPVxS3N1wX1T+GPmiLd4UCZqThT0hN//67g03LmlQr0+HxmnGPSDWEEg3PfzrvNeHbEG5Pb9mXVJ8Rt6hn2FYUqLqbfh7SAsTIZ2FKPoRo0kQWGGqjs/yyHbEw5HDTxtdyVnpoYIJW7HrsNeyQyEugwca0/nBmzlBYxqm5lhBDhsIay3uZ21y7ZQ70L8vubhx80VzyqqC4DAT6oJ5V9Y4EfG3SG6B33ZBCe0ej1LWRdeLR7SarW/R22dyCs1gY2cxy5yWrDJDtZBtHRIpvK0Y9mjTEHaFogatLaPaNK33s3lNuXh2asbhktG80PjdJpcLQaqhziTjFPV8OMtBtgI5vAOiIHiXw3s1Er5Ct2HcmpWTTQbRPoPMkKubJEq9bYlrLTsqNPimtkfEZm0aryRvL0+U=
+
+stages:
+  - check
+  - test
+
+jobs:
+  include:
+    - stage: check
+      script: make check-docs
+    - stage: check
+      script: make lint

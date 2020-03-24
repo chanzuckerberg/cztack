@@ -15,7 +15,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 |------|-------------|------|---------|:-----:|
 | apply\_immediately | n/a | `bool` | `false` | no |
 | backtrack\_window | n/a | `number` | `0` | no |
-| ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2015 for anything new. | `string` | `"rds-ca-2019"` | no |
+| ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2019 for anything new. | `string` | `"rds-ca-2019"` | no |
 | database\_name | n/a | `string` | n/a | yes |
 | database\_password | n/a | `string` | n/a | yes |
 | database\_subnet\_group | n/a | `string` | n/a | yes |

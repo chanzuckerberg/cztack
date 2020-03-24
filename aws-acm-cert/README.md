@@ -41,7 +41,7 @@ module "cert" {
 |------|-------------|------|---------|:-----:|
 | allow\_validation\_record\_overwrite | Allow the overwrite of validation records. This is needed if you are creating certificates in multiple regions. | `string` | `true` | no |
 | aws\_route53\_zone\_id | n/a | `string` | n/a | yes |
-| cert\_domain\_name | Like www.foo.bar.com or \*.foo.bar.com | `string` | n/a | yes |
+| cert\_domain\_name | Like www.foo.bar.com or *.foo.bar.com | `string` | n/a | yes |
 | cert\_subject\_alternative\_names | A map of <alternative\_domain:route53\_zone\_id> | `map` | `{}` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
