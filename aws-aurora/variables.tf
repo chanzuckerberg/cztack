@@ -132,6 +132,6 @@ variable "db_deletion_protection" {
 
 variable ca_cert_identifier {
   type        = string
-  description = "Identifier for the certificate authority. Use rds-ca-2015 for anything new."
-  default     = "rds-ca-2015"
+  description = "Identifier for the certificate authority. Use rds-ca-2019 for anything new."
+  default     = "rds-ca-2019"
 }
