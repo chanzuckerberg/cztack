@@ -80,7 +80,7 @@ resource "aws_lb_listener" "https" {
 
 module "alb-sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "3.1.0"
+  version     = "3.4.0"
   name        = "${local.name}-alb"
   description = "Security group for ${var.internal_lb ? "internal" : "internet facing"} ALB"
   vpc_id      = var.vpc_id
