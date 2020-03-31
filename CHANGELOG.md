@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.30.0 2020-03-31
+
+* [50ef023c](../../commit/50ef023cecef2b9c2c55cfe78e5323dd3df82796) [feature] aws-iam-role-*: Allow multiple accounts to assume role, deprecate source_account_id ([#185](../../pull/185))
+* [4fcd6f92](../../commit/4fcd6f92521c64e3e7c2496c3faedbfc5180edf5) upgraded to go 1.14 ([#184](../../pull/184))
+* [b31cd721](../../commit/b31cd721d79be8a927d36a5b62b3fcedbf4fbe86) [breaking] [feature] aws-iam-instance-profile reuse existing role and remove SSM support ([#183](../../pull/183))
+* [8d7f1ff8](../../commit/8d7f1ff82a72b910530df8f71dcab6d9359e13ca) Update docstrings ([#182](../../pull/182))
+
 ## 0.29.0 2020-03-17
 
 * [72fe3a70](../../commit/72fe3a7011ece3af372cf150e3635bec8e4b9d4c) [feature] Allow the aws-iam-role-crossacct for OIDC federation ([#179](../../pull/179))
