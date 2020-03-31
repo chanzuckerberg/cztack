@@ -4,7 +4,18 @@ data "aws_iam_policy_document" "assume-role" {
     content {
       principals {
         type        = "AWS"
-        identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
+        identifiers = ["arn:aws:iam::${statement.value}:root"]
+      }
+      actions = ["sts:AssumeRole"]
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.source_account_ids
+    content {
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${statement.value}:root"]
       }
       actions = ["sts:AssumeRole"]
     }
@@ -15,7 +26,7 @@ data "aws_iam_policy_document" "assume-role" {
     content {
       principals {
         type        = "Federated"
-        identifiers = ["${var.saml_idp_arn}"]
+        identifiers = [statement.value]
       }
 
       actions = ["sts:AssumeRoleWithSAML"]

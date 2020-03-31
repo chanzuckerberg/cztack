@@ -5,7 +5,13 @@ variable "role_name" {
 
 variable "source_account_id" {
   type        = string
-  description = "The source aws account id to allow sts:AssumeRole"
+  description = "The source aws account id to allow sts:AssumeRole. DEPRECATED: Please use source_account_ids"
+}
+
+variable "source_account_ids" {
+  type        = set(string)
+  default     = []
+  description = "The source aws account ids to allow sts:AssumeRole"
 }
 
 variable "bless_lambda_arns" {
