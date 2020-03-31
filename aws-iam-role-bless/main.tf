@@ -15,7 +15,8 @@ resource "aws_iam_role_policy" "client" {
 module "client" {
   source = "../aws-iam-role-crossacct"
 
-  role_name         = var.role_name
-  iam_path          = var.iam_path
-  source_account_id = var.source_account_id
+  role_name          = var.role_name
+  iam_path           = var.iam_path
+  source_account_id  = var.source_account_id
+  source_account_ids = var.source_account_ids
 }

@@ -33,7 +33,8 @@ output "..." {
 | bless\_lambda\_arns | List of bless lambda arns | `list` | n/a | yes |
 | iam\_path | IAM path | `string` | `"/"` | no |
 | role\_name | The name for the role | `string` | n/a | yes |
-| source\_account\_id | The source aws account id to allow sts:AssumeRole | `string` | n/a | yes |
+| source\_account\_id | The source aws account id to allow sts:AssumeRole. DEPRECATED: Please use source\_account\_ids | `string` | n/a | yes |
+| source\_account\_ids | The source aws account ids to allow sts:AssumeRole | `set(string)` | `[]` | no |
 
 ## Outputs
 
