@@ -9,3 +9,7 @@ output "endpoint" {
 output "reader_endpoint" {
   value = module.aurora.reader_endpoint
 }
+
+output "rds_cluster_id" {
+  value = module.aurora.rds_cluster_id
+}

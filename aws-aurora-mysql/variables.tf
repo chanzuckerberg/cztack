@@ -168,6 +168,11 @@ variable "engine_version" {
   default = "5.7"
 }
 
+variable "params_engine_version" {
+  type    = string
+  default = "5.7"
+}
+
 variable ca_cert_identifier {
   type        = string
   description = "Identifier for the certificate authority. rds-ca-2019 is the latest available version."

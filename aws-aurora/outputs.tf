@@ -13,3 +13,7 @@ output "reader_endpoint" {
 output "port" {
   value = var.port
 }
+
+output "rds_cluster_id" {
+  value = aws_rds_cluster.db.id
+}

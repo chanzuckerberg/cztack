@@ -57,6 +57,7 @@ No provider.
 | instance\_count | Number of instances to create in this cluster. | `string` | `1` | no |
 | kms\_key\_id | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | `string` | `""` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| params\_engine\_version | n/a | `string` | `"5.7"` | no |
 | performance\_insights\_enabled | n/a | `string` | `false` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | publicly\_accessible | Avoid doing this - it gives access to the open internet. | `string` | `false` | no |
@@ -71,6 +72,7 @@ No provider.
 |------|-------------|
 | database\_name | n/a |
 | endpoint | n/a |
+| rds\_cluster\_id | n/a |
 | reader\_endpoint | n/a |
 
 <!-- END -->
