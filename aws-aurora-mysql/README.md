@@ -73,6 +73,7 @@ No provider.
 | database\_name | n/a |
 | db\_parameter\_group\_name | n/a |
 | endpoint | n/a |
+| engine | n/a |
 | rds\_cluster\_id | n/a |
 | reader\_endpoint | n/a |
 

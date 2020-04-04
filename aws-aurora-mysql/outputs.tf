@@ -1,3 +1,7 @@
+output "engine" {
+  value = "aurora-mysql"
+}
+
 output "database_name" {
   value = module.aurora.database_name
 }
