@@ -17,3 +17,7 @@ output "port" {
 output "rds_cluster_id" {
   value = aws_rds_cluster.db.id
 }
+
+output "db_parameter_group_name" {
+  value = aws_db_parameter_group.db.name
+}
