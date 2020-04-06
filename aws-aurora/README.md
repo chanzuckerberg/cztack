@@ -48,8 +48,10 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | Name | Description |
 |------|-------------|
 | database\_name | n/a |
+| db\_parameter\_group\_name | n/a |
 | endpoint | n/a |
 | port | n/a |
+| rds\_cluster\_id | n/a |
 | reader\_endpoint | n/a |
 
 <!-- END -->

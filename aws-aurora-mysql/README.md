@@ -48,7 +48,7 @@ No provider.
 | database\_username | Default user to be created. | `string` | n/a | yes |
 | db\_deletion\_protection | n/a | `string` | `false` | no |
 | db\_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.Parameters.Instance) | `list` | <pre>[<br>  {<br>    "apply_method": "pending-reboot",<br>    "name": "general_log",<br>    "value": 1<br>  },<br>  {<br>    "apply_method": "pending-reboot",<br>    "name": "slow_query_log",<br>    "value": "1"<br>  },<br>  {<br>    "apply_method": "pending-reboot",<br>    "name": "long_query_time",<br>    "value": "0"<br>  },<br>  {<br>    "apply_method": "pending-reboot",<br>    "name": "log_output",<br>    "value": "file"<br>  },<br>  {<br>    "apply_method": "pending-reboot",<br>    "name": "log_queries_not_using_indexes",<br>    "value": "1"<br>  }<br>]</pre> | no |
-| engine\_version | n/a | `string` | `"5.7"` | no |
+| engine\_version | The version of the engine to be used for aurora-mysql. | `string` | `"5.7"` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | iam\_database\_authentication\_enabled | n/a | `string` | `false` | no |
 | ingress\_cidr\_blocks | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | `list(string)` | `[]` | no |
@@ -57,6 +57,7 @@ No provider.
 | instance\_count | Number of instances to create in this cluster. | `string` | `1` | no |
 | kms\_key\_id | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | `string` | `""` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| params\_engine\_version | The engine version to be appended to the parameter group family. | `string` | `"5.7"` | no |
 | performance\_insights\_enabled | n/a | `string` | `false` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | publicly\_accessible | Avoid doing this - it gives access to the open internet. | `string` | `false` | no |
@@ -70,7 +71,10 @@ No provider.
 | Name | Description |
 |------|-------------|
 | database\_name | n/a |
+| db\_parameter\_group\_name | n/a |
 | endpoint | n/a |
+| engine | n/a |
+| rds\_cluster\_id | n/a |
 | reader\_endpoint | n/a |
 
 <!-- END -->
