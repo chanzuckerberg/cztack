@@ -164,13 +164,15 @@ variable "db_deletion_protection" {
 }
 
 variable "engine_version" {
-  type    = string
-  default = "5.7"
+  type        = string
+  description = "The version of the engine to be used for aurora-mysql."
+  default     = "5.7"
 }
 
 variable "params_engine_version" {
-  type    = string
-  default = "5.7"
+  type        = string
+  description = "The engine version to be appended to the parameter group family."
+  default     = "5.7"
 }
 
 variable ca_cert_identifier {
