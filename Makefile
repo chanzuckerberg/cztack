@@ -12,7 +12,6 @@ export CLOUDFRONT_WILDCARD_CERT_ARN := arn:aws:acm:us-east-1:119435350371:certif
 export ACCOUNT_ID := 119435350371
 export AWS_PROFILE=cztack-ci-1
 export AWS_SDK_LOAD_CONFIG=true
-export GOFLAGS=-mod=vendor
 export GO111MODULE=on
 
 all: clean fmt docs lint test
