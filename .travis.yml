@@ -60,3 +60,5 @@ jobs:
       script: make check-docs
     - stage: check
       script: make lint
+    - stage: check
+      script: make check-mod

@@ -60,6 +60,11 @@ check-docs:
 	done;
 .PHONY: check-docs
 
+check-mod:
+	go mod tidy
+	git diff --exit-code -- go.mod go.sum
+.PHONY: check-mod
+
 clean:
 	rm **/*.tfstate*; true
 .PHONY: clean
@@ -74,5 +79,4 @@ test-ci:
 
 deps:
 	go mod tidy
-	go mod vendor
 .PHONY: deps
