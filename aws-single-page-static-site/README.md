@@ -38,6 +38,10 @@ module "site" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -47,7 +51,7 @@ module "site" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | aliases | Vanity aliases. Make sure your provided cert supports these. | `list` | `[]` | no |
 | aws\_acm\_cert\_arn | An AWS ACM cert. Note that Cloudfront requires certs to be in us-east-1. | `string` | n/a | yes |
 | aws\_route53\_zone\_id | A route53 zone ID used to write records. | `string` | n/a | yes |

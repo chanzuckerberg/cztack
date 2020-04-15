@@ -26,6 +26,10 @@ output "secret" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -35,7 +39,7 @@ output "secret" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | name | The name of the secret. | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |

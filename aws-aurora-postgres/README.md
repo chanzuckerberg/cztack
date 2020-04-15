@@ -30,6 +30,12 @@ module "db" {
 ```
 
 <!-- START -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.44.0 |
+
 ## Providers
 
 No provider.
@@ -37,7 +43,7 @@ No provider.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | apply\_immediately | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
 | ca\_cert\_identifier | Identifier for the certificate authority. | `string` | `"rds-ca-2019"` | no |
 | database\_name | The name of the database to be created in the cluster. | `string` | n/a | yes |

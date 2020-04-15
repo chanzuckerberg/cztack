@@ -1,4 +1,5 @@
 # github.com/aws/aws-sdk-go v1.19.43
+## explicit
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/awserr
 github.com/aws/aws-sdk-go/aws/awsutil
@@ -58,10 +59,13 @@ github.com/boombuler/barcode/utils
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
 # github.com/go-sql-driver/mysql v1.4.1
+## explicit
 github.com/go-sql-driver/mysql
 # github.com/google/uuid v1.1.1
+## explicit
 github.com/google/uuid
 # github.com/gruntwork-io/terratest v0.16.1
+## explicit
 github.com/gruntwork-io/terratest/modules/aws
 github.com/gruntwork-io/terratest/modules/collections
 github.com/gruntwork-io/terratest/modules/customerrors
@@ -79,15 +83,19 @@ github.com/konsorten/go-windows-terminal-sequences
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
 # github.com/pquerna/otp v1.2.0
+## explicit
 github.com/pquerna/otp
 github.com/pquerna/otp/hotp
 github.com/pquerna/otp/totp
 # github.com/sirupsen/logrus v1.4.2
+## explicit
 github.com/sirupsen/logrus
 # github.com/stretchr/testify v1.3.0
+## explicit
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
 # golang.org/x/crypto v0.0.0-20190530122614-20be4c3c3ed5
+## explicit
 golang.org/x/crypto/curve25519
 golang.org/x/crypto/ed25519
 golang.org/x/crypto/ed25519/internal/edwards25519
@@ -97,9 +105,11 @@ golang.org/x/crypto/poly1305
 golang.org/x/crypto/ssh
 golang.org/x/crypto/ssh/agent
 # golang.org/x/net v0.0.0-20190603091049-60506f45cf65
+## explicit
 golang.org/x/net/context
 # golang.org/x/sys v0.0.0-20190422165155-953cdadca894
 golang.org/x/sys/cpu
 golang.org/x/sys/unix
 # google.golang.org/appengine v1.6.0
+## explicit
 google.golang.org/appengine/cloudsql

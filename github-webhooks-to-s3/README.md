@@ -25,6 +25,10 @@ module "archiver" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -34,7 +38,7 @@ module "archiver" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | certificate\_arn | A certificate in us-east-1 for var.fqdn | `string` | n/a | yes |
 | env | Env for tagging and naming. | `string` | n/a | yes |
 | fqdn | The fqdn to expose the api gateway as | `string` | n/a | yes |

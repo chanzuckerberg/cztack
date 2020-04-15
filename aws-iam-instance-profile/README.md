@@ -29,6 +29,10 @@ resource "aws_instance" "instance" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -38,9 +42,9 @@ resource "aws_instance" "instance" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | create\_role | Creates a role for use with the instance profile. | `bool` | `true` | no |
-| existing\_role\_name | Use existing role with the given name instead of creating a new role. Attaches all standard policies to given role. Only used if create\_role is false. | `string` | n/a | yes |
+| existing\_role\_name | Use existing role with the given name instead of creating a new role. Attaches all standard policies to given role. Only used if create\_role is false. | `string` | `null` | no |
 | iam\_path | The IAM path to the role. | `string` | `"/"` | no |
 | name\_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | `string` | n/a | yes |
 | role\_description | The description of the IAM role. | `string` | `""` | no |

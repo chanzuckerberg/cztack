@@ -3,6 +3,10 @@
 Creates a role useful for running `terraform plan` in CI jobs.
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -12,7 +16,7 @@ Creates a role useful for running `terraform plan` in CI jobs.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | iam\_path | n/a | `string` | `"/"` | no |
 | role\_name | n/a | `string` | `"infraci"` | no |
 | saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |

@@ -14,7 +14,7 @@ install:
   - travis_retry wget -t 10 -O terraform-provider-bless.tar https://github.com/chanzuckerberg/terraform-provider-bless/releases/download/v0.2.10/terraform-provider-bless_0.2.10_linux_amd64.tar.gz
   - tar -C ~/bin -xzf terraform-provider-bless.tar
   # terraform-docs
-  - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.8.2/terraform-docs-v0.8.2-linux-amd64
+  - wget -t 10 -O terraform-docs https://github.com/segmentio/terraform-docs/releases/download/v0.9.1/terraform-docs-v0.9.1-linux-amd64
   - mv terraform-docs ~/bin/terraform-docs
   - chmod +x ~/bin/terraform-docs
   # awscli

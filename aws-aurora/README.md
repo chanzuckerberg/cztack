@@ -3,6 +3,12 @@
 This is a low-level module for creating AWS Aurora clusters. We strongly reccomend you use one of the higher-level, opinionated modules for [mysql](../aws-aurora-mysql/README.md) or [postgres](../aws-aurora-postgres/README.md).
 
 <!-- START -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.44.0 |
+
 ## Providers
 
 | Name | Version |
@@ -12,7 +18,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | apply\_immediately | n/a | `bool` | `false` | no |
 | backtrack\_window | n/a | `number` | `0` | no |
 | ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2019 for anything new. | `string` | `"rds-ca-2019"` | no |

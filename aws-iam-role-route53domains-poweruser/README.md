@@ -18,6 +18,10 @@ module "route53domains-poweruser" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -27,7 +31,7 @@ module "route53domains-poweruser" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | iam\_path | n/a | `string` | `"/"` | no |
 | role\_name | n/a | `string` | `"route53domains-poweruser"` | no |
 | saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |

@@ -18,6 +18,10 @@ module "policy" {
 
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -27,7 +31,7 @@ module "policy" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | iam\_path | n/a | `string` | `"/"` | no |
 | role\_name | The role to which this policy should be attached. | `string` | n/a | yes |
 
