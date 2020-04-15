@@ -3,6 +3,10 @@
 Creates a policy to access encrypted parameters in Parameter Store for a given service (or prefix).
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -12,7 +16,7 @@ Creates a policy to access encrypted parameters in Parameter Store for a given s
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | extra\_services | Extra services to be given parameter read access to, within the same project and environment. | `list(string)` | `[]` | no |
 | parameter\_store\_key\_alias | Alias of the encryption key used to encrypt parameter store values. | `string` | `"parameter_store_key"` | no |

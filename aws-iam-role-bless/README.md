@@ -20,6 +20,10 @@ output "..." {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -29,7 +33,7 @@ output "..." {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | bless\_lambda\_arns | List of bless lambda arns | `list` | n/a | yes |
 | iam\_path | IAM path | `string` | `"/"` | no |
 | role\_name | The name for the role | `string` | n/a | yes |

@@ -11,6 +11,10 @@ is each of the keys of the parameters input.
 in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html).
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -20,7 +24,7 @@ in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html)
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | parameters | Map from parameter names to values to set. | `map(string)` | n/a | yes |
