@@ -24,6 +24,10 @@ Since changing a service to use the new ARN requires destroying and recreating t
 service = false` argument can be removed.
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -33,9 +37,9 @@ service = false` argument can be removed.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | cluster\_id | n/a | `string` | n/a | yes |
-| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | `string` | n/a | yes |
+| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | `string` | `null` | no |
 | deployment\_maximum\_percent | (Optional) The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy. | `number` | `200` | no |
 | deployment\_minimum\_healthy\_percent | (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. | `number` | `100` | no |
 | desired\_count | n/a | `number` | n/a | yes |
@@ -44,11 +48,11 @@ service = false` argument can be removed.
 | ordered\_placement\_strategy | Placement strategy for the task instances. | `list(object({ type = string, field = string }))` | `[]` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | n/a | yes |
+| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | `null` | no |
 | scheduling\_strategy | Scheduling strategy for the service: REPLICA or DAEMON. | `string` | `"REPLICA"` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
-| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | n/a | yes |
+| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | `null` | no |
 | task\_role\_arn | n/a | `string` | n/a | yes |
 
 ## Outputs

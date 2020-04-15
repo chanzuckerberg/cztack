@@ -11,6 +11,10 @@ module "password-policy" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |

@@ -31,6 +31,12 @@ module "db" {
 ```
 
 <!-- START -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.44.0 |
+
 ## Providers
 
 No provider.
@@ -38,7 +44,7 @@ No provider.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | apply\_immediately | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
 | backtrack\_window | Turns on Backgrack for this many seconds. [Doc](https://aws.amazon.com/blogs/aws/amazon-aurora-backtrack-turn-back-time/) | `string` | `0` | no |
 | ca\_cert\_identifier | Identifier for the certificate authority. rds-ca-2019 is the latest available version. | `string` | `"rds-ca-2019"` | no |

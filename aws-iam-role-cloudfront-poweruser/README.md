@@ -3,6 +3,10 @@
 This module will create a role which is granted poweruser control over AWS Cloudfront.
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -12,7 +16,7 @@ This module will create a role which is granted poweruser control over AWS Cloud
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | iam\_path | n/a | `string` | `"/"` | no |
 | role\_name | Name of the role to create | `string` | n/a | yes |
 | s3\_bucket\_prefixes | Limits role permissions to buckets with specific prefixes. Empty for all buckets. | `list` | <pre>[<br>  ""<br>]</pre> | no |

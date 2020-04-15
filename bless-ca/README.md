@@ -94,6 +94,10 @@ You can read more about Bless and SSH certificates here:
 
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -105,7 +109,7 @@ You can read more about Bless and SSH certificates here:
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | authorized\_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | `list` | `[]` | no |
 | bless\_logging\_level | Bless lambda logging level. | `string` | `"INFO"` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |

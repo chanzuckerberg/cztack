@@ -24,6 +24,10 @@ output "group_name" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -33,7 +37,7 @@ output "group_name" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | dependencies | Pseudo depends\_on because Terraform modules do not support depends\_on | `list` | `[]` | no |
 | group\_name | The name of the group this module will create. | `string` | n/a | yes |
 | iam\_path | The IAM path under which the group and policies will be created. Useful for avoiding naming conflicts. | `string` | `"/"` | no |

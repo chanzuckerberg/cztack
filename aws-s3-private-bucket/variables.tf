@@ -57,3 +57,8 @@ variable "lifecycle_rules" {
     }
   ]
 }
+
+variable public_access_block {
+  type    = bool
+  default = true
+}

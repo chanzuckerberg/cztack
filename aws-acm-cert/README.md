@@ -29,6 +29,10 @@ module "cert" {
 ```
 
 <!-- START -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -38,16 +42,16 @@ module "cert" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | allow\_validation\_record\_overwrite | Allow the overwrite of validation records. This is needed if you are creating certificates in multiple regions. | `string` | `true` | no |
 | aws\_route53\_zone\_id | n/a | `string` | n/a | yes |
-| cert\_domain\_name | Like www.foo.bar.com or *.foo.bar.com | `string` | n/a | yes |
+| cert\_domain\_name | Like www.foo.bar.com or \*.foo.bar.com | `string` | n/a | yes |
 | cert\_subject\_alternative\_names | A map of <alternative\_domain:route53\_zone\_id> | `map` | `{}` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| subject\_alternative\_names\_order | Order to list the subject alternative names in the ACM cert. Workaround for https://github.com/terraform-providers/terraform-provider-aws/issues/8531 | `list(string)` | n/a | yes |
+| subject\_alternative\_names\_order | Order to list the subject alternative names in the ACM cert. Workaround for https://github.com/terraform-providers/terraform-provider-aws/issues/8531 | `list(string)` | `null` | no |
 | validation\_record\_ttl | n/a | `string` | `60` | no |
 
 ## Outputs

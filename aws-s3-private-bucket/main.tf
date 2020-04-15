@@ -85,6 +85,8 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket" {
+  count = var.public_access_block ? 1 : 0
+
   bucket = aws_s3_bucket.bucket.id
 
   block_public_acls       = true
