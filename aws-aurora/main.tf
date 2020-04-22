@@ -11,6 +11,35 @@ locals {
   }
 }
 
+## Enhanced monitoring configuration.
+resource "aws_iam_role" "rds_enhanced_monitoring" {
+  count = var.enhanced_monitoring_interval > 0 ? 1 : 0
+  name_prefix        = "rds-enhanced-monitoring-"
+  assume_role_policy = data.aws_iam_policy_document.rds_enhanced_monitoring.json
+}
+
+resource "aws_iam_role_policy_attachment" "rds_enhanced_monitoring" {
+  count = var.enhanced_monitoring_interval > 0 ? 1 : 0
+  role       = aws_iam_role.rds_enhanced_monitoring.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
+data "aws_iam_policy_document" "rds_enhanced_monitoring" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["monitoring.rds.amazonaws.com"]
+    }
+  }
+}
+
+## RDS configuration
 resource "aws_security_group" "rds" {
   name        = local.name
   description = "Allow db traffic."
@@ -85,6 +114,9 @@ resource "aws_rds_cluster_instance" "db" {
   db_subnet_group_name    = var.database_subnet_group
   db_parameter_group_name = aws_db_parameter_group.db.name
   ca_cert_identifier      = var.ca_cert_identifier
+
+  monitoring_interval     = var.enhanced_monitoring_interval
+  monitoring_role_arn     = var.enhanced_monitoring_interval > 0 ? aws_iam_role.rds_enhanced_monitoring[0].arn : null
 
   publicly_accessible          = var.publicly_accessible
   performance_insights_enabled = var.performance_insights_enabled

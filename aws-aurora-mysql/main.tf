@@ -20,6 +20,7 @@ module "aurora" {
   performance_insights_enabled        = var.performance_insights_enabled
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
   ca_cert_identifier                  = var.ca_cert_identifier
+  enhanced_monitoring_interval        = var.enhanced_monitoring_interval
 
   ingress_cidr_blocks     = var.ingress_cidr_blocks
   ingress_security_groups = var.ingress_security_groups

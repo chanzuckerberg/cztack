@@ -13,12 +13,13 @@ func TestAWSAurora(t *testing.T) {
 	options := testutil.Options(
 		testutil.DefaultRegion,
 		map[string]interface{}{
-			"database_name":         testutil.UniqueId(),
-			"engine_version":        "10.7",
-			"params_engine_version": "10",
-			"port":                  "5432",
-			"engine":                "aurora-postgresql",
-			"vpc_id":                "vpc-12345",
+			"database_name":                testutil.UniqueId(),
+			"engine_version":               "10.7",
+			"params_engine_version":        "10",
+			"port":                         "5432",
+			"engine":                       "aurora-postgresql",
+			"vpc_id":                       "vpc-12345",
+			"enhanced_monitoring_interval": 15,
 
 			"project":               testutil.UniqueId(),
 			"service":               testutil.UniqueId(),

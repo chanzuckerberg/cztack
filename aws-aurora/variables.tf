@@ -135,3 +135,9 @@ variable ca_cert_identifier {
   description = "Identifier for the certificate authority. Use rds-ca-2019 for anything new."
   default     = "rds-ca-2019"
 }
+
+variable enhanced_monitoring_interval {
+  type        = number
+  description = "How frequently to collect enhanced monitoring metrics (0 to disable)"
+  default     = 0
+}

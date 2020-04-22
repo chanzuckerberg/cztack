@@ -41,14 +41,15 @@ func TestAWSAuroraPostgresInitAndApply(t *testing.T) {
 					"service": service,
 					"owner":   owner,
 
-					"vpc_id":                vpc,
-					"database_subnet_group": databaseSubnetGroup,
-					"database_password":     databasePassword,
-					"database_username":     databaseUsername,
-					"ingress_cidr_blocks":   []string{ingressCidrBlocks},
-					"database_name":         databaseName,
-					"skip_final_snapshot":   true,
-					"engine_version":        version,
+					"vpc_id":                       vpc,
+					"database_subnet_group":        databaseSubnetGroup,
+					"database_password":            databasePassword,
+					"database_username":            databaseUsername,
+					"ingress_cidr_blocks":          []string{ingressCidrBlocks},
+					"database_name":                databaseName,
+					"skip_final_snapshot":          true,
+					"engine_version":               version,
+					"enhanced_monitoring_interval": 15,
 				},
 			)
 			defer terraform.Destroy(t, options)
