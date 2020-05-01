@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.31.1 2020-05-01
+
+* [e2c9d0b5](../../commit/e2c9d0b59655a7e76b8367afe88f7a020d6f39ed) Include TagSession privilege for assumed roles. ([#189](../../pull/189))
+
 ## 0.30.0 2020-03-31
 
 * [50ef023c](../../commit/50ef023cecef2b9c2c55cfe78e5323dd3df82796) [feature] aws-iam-role-*: Allow multiple accounts to assume role, deprecate source_account_id ([#185](../../pull/185))
