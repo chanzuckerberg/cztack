@@ -1,3 +1,9 @@
+# aws-s3-private-bucket
+
+This module creates a bucket indented for non-public traffic. It can be made public via a bucket_policy and setting public_access_block=false.
+
+## Example
+
 <!-- START -->
 ## Requirements
 
