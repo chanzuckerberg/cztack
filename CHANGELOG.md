@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.32.0 2020-05-20
+
+* [bd7a4398](../../commit/bd7a439882c733f6cdd6b3e9c58dcd67ee045de4) [feature] AWS Poweruser role allows OIDC sts:AssumeRoleWithWebIdentity ([#192](../../pull/192))
+* [28c40d01](../../commit/28c40d0178fedb649d3d738a4a35a676e4883186) Update README.md
+* [cfe9771b](../../commit/cfe9771bfd8caf2fca701d75f889116c48eac688) Adding a generic .editorconfig. https://editorconfig.org/ ([#191](../../pull/191))
+
 ## 0.31.1 2020-05-01
 
 * [e2c9d0b5](../../commit/e2c9d0b59655a7e76b8367afe88f7a020d6f39ed) Include TagSession privilege for assumed roles. ([#189](../../pull/189))
