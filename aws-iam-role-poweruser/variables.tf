@@ -42,5 +42,5 @@ variable oidc {
 variable authorize_iam {
   type        = bool
   default     = true
-  description = "Indicates if we should augment the PoserUserAccess policy with certain IAM actions."
+  description = "Indicates if we should augment the PowerUserAccess policy with certain IAM actions."
 }
