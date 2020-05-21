@@ -166,5 +166,5 @@ resource "aws_iam_role_policy_attachment" "misc" {
   count = var.authorize_iam ? 1 : 0
 
   role       = aws_iam_role.poweruser.name
-  policy_arn = aws_iam_policy.misc.arn
+  policy_arn = aws_iam_policy.misc[count.index].arn
 }
