@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.33.0 2020-05-21
+
+* [8b5df1fb](../../commit/8b5df1fbef55cf600c29e23a13ced1799f0ddb61) [feature] Optionally disable poweruser role iam actions ([#194](../../pull/194))
+* [d411f6fa](../../commit/d411f6fa40de04957d58de5dd76f1a927caa0091) [feature] Readonly role OIDC federation enabled + kms decrypt optional ([#195](../../pull/195))
+
 ## 0.32.0 2020-05-20
 
 * [bd7a4398](../../commit/bd7a439882c733f6cdd6b3e9c58dcd67ee045de4) [feature] AWS Poweruser role allows OIDC sts:AssumeRoleWithWebIdentity ([#192](../../pull/192))
