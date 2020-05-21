@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "assume-role" {
         type        = "AWS"
         identifiers = ["arn:aws:iam::${statement.value}:root"]
       }
-      actions = ["sts:AssumeRole"]
+      actions = ["sts:AssumeRole", "sts:TagSession"]
     }
   }
 
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "assume-role" {
         type        = "AWS"
         identifiers = ["arn:aws:iam::${statement.value}:root"]
       }
-      actions = ["sts:AssumeRole"]
+      actions = ["sts:AssumeRole", "sts:TagSession"]
     }
   }
 
@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "assume-role" {
         identifiers = [statement.value]
       }
 
-      actions = ["sts:AssumeRoleWithSAML"]
+      actions = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
 
       condition {
         test     = "StringEquals"
@@ -38,6 +38,26 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.oidc
+    iterator = oidc
+
+    content {
+      principals {
+        type        = "Federated"
+        identifiers = [oidc.value["idp_arn"]]
+      }
+
+      actions = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
+      condition {
+        test     = "StringEquals"
+        variable = "${oidc.value["provider"]}:aud"
+        values   = oidc.value["client_ids"]
+      }
+    }
+  }
+
 }
 
 resource "aws_iam_role" "readonly" {
@@ -65,6 +85,8 @@ data "aws_iam_policy_document" "secrets" {
 }
 
 resource "aws_iam_role_policy" "secrets" {
+  count = var.authorize_read_secrets ? 1 : 0
+
   name   = "secrets"
   role   = aws_iam_role.readonly.name
   policy = data.aws_iam_policy_document.secrets.json
