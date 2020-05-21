@@ -38,3 +38,9 @@ variable oidc {
   default     = []
   description = "A list of AWS OIDC IDPs to establish a trust relationship for this role."
 }
+
+variable authorize_iam {
+  type        = bool
+  default     = true
+  description = "Indicates if we should augment the PowerUserAccess policy with certain IAM actions."
+}

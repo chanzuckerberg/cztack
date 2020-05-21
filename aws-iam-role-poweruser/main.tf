@@ -154,6 +154,8 @@ data "aws_iam_policy_document" "misc" {
 }
 
 resource "aws_iam_policy" "misc" {
+  count = var.authorize_iam ? 1 : 0
+
   name        = "${var.role_name}-misc"
   path        = var.iam_path
   description = "Extra permissions we're granting that PowerUserAccess lacks"
@@ -161,6 +163,8 @@ resource "aws_iam_policy" "misc" {
 }
 
 resource "aws_iam_role_policy_attachment" "misc" {
+  count = var.authorize_iam ? 1 : 0
+
   role       = aws_iam_role.poweruser.name
   policy_arn = aws_iam_policy.misc.arn
 }
