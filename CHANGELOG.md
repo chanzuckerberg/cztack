@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.33.1 2020-05-21
+
+* [9d289b25](../../commit/9d289b2563f22b6f9729bc2d88774d4f6b24d224) [fix] Use index when referring to a dependency with a count
+
 ## 0.33.0 2020-05-21
 
 * [8b5df1fb](../../commit/8b5df1fbef55cf600c29e23a13ced1799f0ddb61) [feature] Optionally disable poweruser role iam actions ([#194](../../pull/194))
