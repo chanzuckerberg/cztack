@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "assume-role" {
         type        = "AWS"
         identifiers = ["arn:aws:iam::${statement.value}:root"]
       }
-      actions = ["sts:AssumeRole"]
+      actions = ["sts:AssumeRole", "sts:TagSession"]
     }
   }
 
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "assume-role" {
         type        = "AWS"
         identifiers = ["arn:aws:iam::${statement.value}:root"]
       }
-      actions = ["sts:AssumeRole"]
+      actions = ["sts:AssumeRole", "sts:TagSession"]
     }
   }
 
@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "assume-role" {
         identifiers = [statement.value]
       }
 
-      actions = ["sts:AssumeRoleWithSAML"]
+      actions = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
 
       condition {
         test     = "StringEquals"
@@ -38,6 +38,26 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.oidc
+    iterator = oidc
+
+    content {
+      principals {
+        type        = "Federated"
+        identifiers = [oidc.value["idp_arn"]]
+      }
+
+      actions = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
+      condition {
+        test     = "StringEquals"
+        variable = "${oidc.value["provider"]}:aud"
+        values   = oidc.value["client_ids"]
+      }
+    }
+  }
+
 }
 
 resource "aws_iam_role" "poweruser" {
@@ -134,6 +154,8 @@ data "aws_iam_policy_document" "misc" {
 }
 
 resource "aws_iam_policy" "misc" {
+  count = var.authorize_iam ? 1 : 0
+
   name        = "${var.role_name}-misc"
   path        = var.iam_path
   description = "Extra permissions we're granting that PowerUserAccess lacks"
@@ -141,6 +163,8 @@ resource "aws_iam_policy" "misc" {
 }
 
 resource "aws_iam_role_policy_attachment" "misc" {
+  count = var.authorize_iam ? 1 : 0
+
   role       = aws_iam_role.poweruser.name
-  policy_arn = aws_iam_policy.misc.arn
+  policy_arn = aws_iam_policy.misc[count.index].arn
 }

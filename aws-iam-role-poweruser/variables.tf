@@ -25,3 +25,22 @@ variable "iam_path" {
   type    = string
   default = "/"
 }
+
+variable oidc {
+  type = list(object(
+    {
+      idp_arn : string,          # the AWS IAM IDP arn
+      client_ids : list(string), # a list of oidc client ids
+      provider : string          # your provider url, such as foo.okta.com
+    }
+  ))
+
+  default     = []
+  description = "A list of AWS OIDC IDPs to establish a trust relationship for this role."
+}
+
+variable authorize_iam {
+  type        = bool
+  default     = true
+  description = "Indicates if we should augment the PowerUserAccess policy with certain IAM actions."
+}
