@@ -13,6 +13,9 @@ export ACCOUNT_ID := 119435350371
 export AWS_PROFILE=cztack-ci-1
 export AWS_SDK_LOAD_CONFIG=true
 export GO111MODULE=on
+TEST_BUCKETS := 1
+TEST_BUCKET_INDEX := 0
+TESTS := $(shell go list ./... | ./scripts/split-build $(TEST_BUCKETS) $(TEST_BUCKET_INDEX))
 
 all: clean fmt docs lint test
 
@@ -73,7 +76,7 @@ test: fmt
 .PHONY: test
 
 test-ci:
-	go list ./... | ./scripts/split-build $(TEST_BUCKETS) $(TEST_BUCKET_INDEX) | xargs go test -count=1 -parallel 10 -test.timeout 45m
+	go test -count=1 -parallel 10 -test.timeout 45m $(TEST)
 .PHONY: test
 
 deps:

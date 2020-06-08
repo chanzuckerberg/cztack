@@ -1,0 +1,99 @@
+name: CI
+"on":
+- push
+jobs:
+  check-mod:
+    name: check-mod
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-go@v2
+      with:
+        go-version: 1.14.3
+    - run: make check-mod
+  lint:
+    name: check-mod
+    runs-on: ubuntu-latest
+    steps:
+    - uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.24
+        terraform_wrapper: "false"
+    - run: make lint
+  # check-docs:
+  #   name: check-mod
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/setup-go@v2
+  #     with:
+  #       go-version: 1.14.3
+  #   - run: make check-docs
+  test:
+    strategy:
+      matrix:
+        module: [
+          aws-acm-cert,
+          aws-aurora,
+          aws-aurora-mysql,
+          aws-aurora-postgres,
+          aws-cloudwatch-log-group,
+          aws-default-vpc-security,
+          aws-ecs-job,
+          aws-ecs-job-fargate,
+          aws-ecs-service,
+          aws-ecs-service-fargate,
+          aws-efs-volume,
+          aws-iam-ecs-task-role,
+          aws-iam-group-assume-role,
+          aws-iam-group-console-login,
+          aws-iam-instance-profile,
+          aws-iam-password-policy,
+          aws-iam-policy-cwlogs,
+          aws-iam-role-bless,
+          aws-iam-role-cloudfront-poweruser,
+          aws-iam-role-crossacct,
+          aws-iam-role-ec2-poweruser,
+          aws-iam-role-ecs-poweruser,
+          aws-iam-role-infraci,
+          aws-iam-role-poweruser,
+          aws-iam-role-readonly,
+          aws-iam-role-route53domains-poweruser,
+          aws-iam-role-security-audit,
+          aws-param,
+          aws-params-reader-policy,
+          aws-params-secrets-setup,
+          aws-params-writer,
+          aws-redis-node,
+          aws-s3-private-bucket,
+          aws-single-page-static-site,
+          aws-ssm-params,
+          aws-ssm-params-writer,
+          # bless-ca,
+          # bless-ca/test,
+          github-webhooks-to-s3,
+          module-template,
+          testutil,
+        ]
+    name: test ${{ matrix.module }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+    - run: env
+    - uses: actions/checkout@v2
+    - uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.24
+        terraform_wrapper: "false"
+    - uses: actions/setup-go@v2
+      with:
+        go-version: 1.14.3
+    - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
+        --profile cztack-ci-1
+    - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY
+        }} --profile cztack-ci-1
+    - run: aws --profile cztack-ci-1 sts get-caller-identity
+    - run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }}
+        --profile cztack-ci-2
+    - run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY
+        }} --profile cztack-ci-2
+    - run: aws --profile cztack-ci-2 sts get-caller-identity
+    - run: make test-ci TEST=./${{ matrix.module }}
