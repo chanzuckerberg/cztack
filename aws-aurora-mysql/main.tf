@@ -32,6 +32,7 @@ module "aurora" {
   instance_count = var.instance_count
 
   backtrack_window    = var.backtrack_window
+  snapshot_identifier = var.snapshot_identifier
   skip_final_snapshot = var.skip_final_snapshot
 
   kms_key_id = var.kms_key_id

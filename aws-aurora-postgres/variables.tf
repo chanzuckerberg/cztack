@@ -73,6 +73,11 @@ variable "publicly_accessible" {
   default     = false
 }
 
+variable "snapshot_identifier" {
+  type    = string
+  description = "Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot."
+}
+
 variable "skip_final_snapshot" {
   type        = string
   description = "When you destroy a database RDS will, by default, take snapshot. Set this to skip that step."
