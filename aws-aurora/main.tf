@@ -59,6 +59,7 @@ resource "aws_rds_cluster" "db" {
   storage_encrypted                   = true
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   backup_retention_period             = 28
+  snapshot_identifier                 = var.snapshot_identifier
   final_snapshot_identifier           = "${local.name}-snapshot"
   skip_final_snapshot                 = var.skip_final_snapshot
   backtrack_window                    = var.backtrack_window
