@@ -98,8 +98,11 @@ Accept GitHub webhooks and store them in S3
 
 [Read More](github-webhooks-to-s3/README.md)
 
-
 ## Contributing
+
+### Adding a new module
+
+To create a new module, copy the `module-template` directory and modify as you see fit. And make sure to add the module to the list of modules to test in .github/workflows/ci.yml.
 
 ### Writing tests
 
