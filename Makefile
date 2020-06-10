@@ -73,7 +73,7 @@ test: fmt
 .PHONY: test
 
 test-ci:
-	go list ./... | ./scripts/split-build $(TEST_BUCKETS) $(TEST_BUCKET_INDEX) | xargs go test -count=1 -parallel 10 -test.timeout 45m
+	go test -count=1 -parallel 10 -test.timeout 45m $(TEST)
 .PHONY: test
 
 deps:
