@@ -27,7 +27,16 @@ func TestAWSACMCertInitAndApply(t *testing.T) {
 		testutil.UniqueId(),
 		testutil.EnvVar(testutil.EnvRoute53ZoneName))
 
+	alternativeDomainName := fmt.Sprintf(
+		"%s.%s",
+		testutil.UniqueId(),
+		testutil.EnvVar(testutil.EnvRoute53ZoneName))
+
 	route53ZoneID := testutil.EnvVar(testutil.EnvRoute53ZoneID)
+
+	alternativeNames := map[string]string{
+		alternativeDomainName: route53ZoneID,
+	}
 
 	options := testutil.Options(
 		testutil.DefaultRegion,
@@ -37,9 +46,10 @@ func TestAWSACMCertInitAndApply(t *testing.T) {
 			"service": service,
 			"owner":   owner,
 
-			"cert_domain_name":      certDomainName,
-			"aws_route53_zone_id":   route53ZoneID,
-			"validation_record_ttl": 5,
+			"cert_domain_name":               certDomainName,
+			"aws_route53_zone_id":            route53ZoneID,
+			"validation_record_ttl":          5,
+			"cert_subject_alternative_names": alternativeNames,
 		},
 	)
 
