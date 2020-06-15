@@ -4,7 +4,7 @@ variable "cert_domain_name" {
 }
 
 variable "cert_subject_alternative_names" {
-  type        = map
+  type        = map(string)
   description = "A map of <alternative_domain:route53_zone_id>"
   default     = {}
 }
