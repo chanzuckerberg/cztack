@@ -30,7 +30,7 @@ func TestAWSAurora(t *testing.T) {
 		},
 	)
 
-	rc, e := terraform.InitAndPlanWithExitCode(t, options)
+	rc, e := terraform.InitAndPlanWithExitCodeE(t, options)
 	a.NoError(e)
 	a.Equal(2, rc) // 2 means planned changes, no errors
 }
