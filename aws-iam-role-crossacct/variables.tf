@@ -40,7 +40,7 @@ variable oidc {
 }
 
 variable role_tags {
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "A map of tags to assign this IAM Role."
 }
