@@ -19,6 +19,9 @@ func TestIAMRoleBless(t *testing.T) {
 		Vars: map[string]interface{}{
 			"role_name":         random.UniqueId(),
 			"source_account_id": curAcct,
+			"tags": map[string]string{
+				"test": random.UniqueId(),
+			},
 			"bless_lambda_arns": []string{"arn:aws:lambda:us-west-2:111111111111:function:test"},
 		},
 		EnvVars: map[string]string{
