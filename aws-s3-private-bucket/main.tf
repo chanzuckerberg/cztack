@@ -12,7 +12,7 @@ locals {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
-# `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
+  # `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
 
   # Using canned ACL will conflict with using grant ACL
   acl = local.acl
@@ -22,11 +22,11 @@ resource "aws_s3_bucket" "bucket" {
   # user FULL_CONTROL permission - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
   # How to find the canonical user id: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
   dynamic "grant" {
-    for_each = var.canonical_user_id_and_permissions 
+    for_each = var.canonical_user_id_and_permissions
 
     content {
       id          = pair.canonical_user_id
-      permissions =  pair.permissions
+      permissions = pair.permissions
       type        = "CanonicalUser"
     }
   }
