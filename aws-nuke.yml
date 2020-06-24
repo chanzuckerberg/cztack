@@ -1,4 +1,7 @@
 regions:
+  - us-east-1
+  - us-east-2
+  - us-west-1
   - us-west-2
 
 account-blacklist:
@@ -13,18 +16,27 @@ accounts:
       EC2SecurityGroup:
         - type: glob
           value: "shared-infra-cztack-ci-bastion-*"
+      EC2Instance:
+        - type: glob
+          value: "shared-infra-cztack-ci-bastion-*"
 
 
 
 resource-types:
   # we can add to this over time
   targets:
-    - RDSDBCluster
-    - RDSSnapshot
-    - RDSInstance
-    - RDSDBClusterParameterGroup
-    - RDSDBParameterGroup
     - EC2Image
-    - EC2Snapshot
+    - EC2Instance
     - EC2KeyPair
     - EC2SecurityGroup
+    - EC2Snapshot
+    - EFSFileSystem
+    - EFSMountTarget
+    - ElasticacheCacheCluster
+    - IAMRole
+    - RDSDBCluster
+    - RDSDBClusterParameterGroup
+    - RDSDBParameterGroup
+    - RDSInstance
+    - RDSSnapshot
+    - S3Bucket
