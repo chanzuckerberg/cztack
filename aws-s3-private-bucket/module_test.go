@@ -7,13 +7,12 @@ import (
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 	"github.com/stretchr/testify/require"
 )
 
 func TestPrivateBucketDefaults(t *testing.T) {
 
-	test := &TerraformTest{
+	test := &testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
 			project := testutil.UniqueId()
 			env := testutil.UniqueId()
@@ -39,9 +38,25 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r := require.New(t)
 			region := options.EnvVars["AWS_DEFAULT_REGION"]
 			bucket := options.Vars["bucket_name"].(string)
+
+			// some assertions built into terratest
 			aws.AssertS3BucketExists(t, region, bucket)
 			aws.AssertS3BucketPolicyExists(t, region, bucket)
 			aws.AssertS3BucketVersioningExists(t, region, bucket)
+
+			bucketPolicy := aws.GetS3BucketPolicy(t, region, bucket)
+			policy, err := testutil.UnmarshalS3BucketPolicy(bucketPolicy)
+			r.NoError(err)
+			r.NotNil(policy)
+
+			r.Len(policy.Statement, 1)
+			r.Equal(policy.Statement[0].Effect, "Deny")
+			r.Equal(policy.Statement[0].Principal, "*")
+			r.Equal(policy.Statement[0].Action, "*")
+			r.Len(policy.Statement[0].Condition, 1)
+			r.Equal(policy.Statement[0].Condition["Bool"]["aws:SecureTransport"], "false")
+
+			// get a client to query for other assertions
 			s3Client := aws.NewS3Client(t, region)
 
 			acl, err := s3Client.GetBucketAcl(&s3.GetBucketAclInput{
@@ -61,39 +76,18 @@ func TestPrivateBucketDefaults(t *testing.T) {
 
 			r.NotNil(enc.ServerSideEncryptionConfiguration)
 			r.Len(enc.ServerSideEncryptionConfiguration.Rules, 1)
+
+			block, err := s3Client.GetPublicAccessBlock(&s3.GetPublicAccessBlockInput{
+				Bucket: &bucket,
+			})
+			r.NoError(err)
+			r.NotNil(block)
+			r.True(*block.PublicAccessBlockConfiguration.BlockPublicAcls)
+			r.True(*block.PublicAccessBlockConfiguration.BlockPublicPolicy)
+			r.True(*block.PublicAccessBlockConfiguration.IgnorePublicAcls)
+			r.True(*block.PublicAccessBlockConfiguration.RestrictPublicBuckets)
 		},
 	}
 
 	test.Run(t)
-}
-
-type TerraformTest struct {
-	Options  func(*testing.T) *terraform.Options
-	Validate func(*testing.T, *terraform.Options)
-}
-
-func (tt *TerraformTest) Run(t *testing.T) {
-	terraformDirectory := "."
-
-	defer test_structure.RunTestStage(t, "cleanup", func() {
-		options := test_structure.LoadTerraformOptions(t, terraformDirectory)
-		terraform.Destroy(t, options)
-		testutil.Clean(terraformDirectory)
-		test_structure.CleanupTestDataFolder(t, terraformDirectory)
-	})
-
-	test_structure.RunTestStage(t, "options", func() {
-		options := tt.Options(t)
-		test_structure.SaveTerraformOptions(t, terraformDirectory, options)
-	})
-
-	test_structure.RunTestStage(t, "apply", func() {
-		options := test_structure.LoadTerraformOptions(t, terraformDirectory)
-		testutil.Run(t, options)
-	})
-
-	test_structure.RunTestStage(t, "validate", func() {
-		options := test_structure.LoadTerraformOptions(t, terraformDirectory)
-		tt.Validate(t, options)
-	})
 }

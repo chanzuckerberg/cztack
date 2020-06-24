@@ -138,7 +138,10 @@ func Cleanup(t *testing.T, options *terraform.Options) {
 
 func ListEnvVar(name string) []string {
 	s := os.Getenv(name)
-	return strings.Split(s, ",")
+	splitFn := func(c rune) bool {
+		return c == ','
+	}
+	return strings.FieldsFunc(s, splitFn)
 }
 
 func EnvVar(name string) string {
