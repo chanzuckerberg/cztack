@@ -12,28 +12,21 @@ locals {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
-  # To define the access control list (ACL) of the bucket, there are two ways:
-  # 1. Define the canned ACL using the acl argument
-  # 2. Define the grant ACL using the grant argument
-  # These two ways conflict with each other so we can only use one of them
+# `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
 
   # Using canned ACL will conflict with using grant ACL
   acl = local.acl
 
-  # Use ACL policy grant to grant permissions to certain users, grant will conflict with canned ACL.
-  # We sometimes need to grant ceertain canonical users, 
-  # (eg. when it is a logging bucket, then we need to grant the awslogsdelivery account FULL_CONTROL permission
-  # more details of how to grant awslogsdelivery permissions in https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html)
-  # Details in how to find the canonical user id: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
+  # Use ACL policy grant to grant permissions to certain users.
+  # Especially useful for logging buckets, where we  need to grant the awslogsdelivery
+  # user FULL_CONTROL permission - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
+  # How to find the canonical user id: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
   dynamic "grant" {
-    for_each = [for pair in var.canonical_user_id_and_permissions : {
-      canonical_user_id = pair.canonical_user_id
-      permissions       = pair.permissions
-    }]
+    for_each = var.canonical_user_id_and_permissions 
 
     content {
-      id          = grant.value.canonical_user_id
-      permissions = grant.value.permissions
+      id          = pair.canonical_user_id
+      permissions =  pair.permissions
       type        = "CanonicalUser"
     }
   }
