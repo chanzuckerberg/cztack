@@ -1,5 +1,5 @@
 locals {
-  use_grant_acl = length(var.canonical_user_id_and_permissions) == 0 ? false : true
+  acl = length(var.canonical_user_id_and_permissions) == 0 ? null : "private"
 
   tags = {
     project   = var.project
