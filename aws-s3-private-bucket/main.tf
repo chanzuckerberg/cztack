@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "bucket" {
   # These two ways conflict with each other so we can only use one of them
 
   # Using canned ACL will conflict with using grant ACL
-  acl = local.use_grant_acl ? null : "private"
+  acl = local.acl
 
   # Use ACL policy grant to grant permissions to certain users, grant will conflict with canned ACL.
   # We sometimes need to grant ceertain canonical users, 
