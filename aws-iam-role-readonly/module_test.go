@@ -19,6 +19,9 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 			"role_name":         random.UniqueId(),
 			"source_account_id": curAcct,
 			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
+			"tags": map[string]string{
+				"test": random.UniqueId(),
+			},
 		},
 	)
 

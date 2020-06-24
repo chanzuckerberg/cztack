@@ -24,3 +24,9 @@ variable "iam_path" {
   default     = "/"
   description = "IAM path"
 }
+
+variable tags {
+  type        = map(string)
+  default     = {}
+  description = "A map of tags to assign this IAM Role."
+}
