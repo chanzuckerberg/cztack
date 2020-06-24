@@ -1,5 +1,5 @@
 locals {
-  acl = length(var.canonical_user_id_and_permissions) == 0 ? null : "private"
+  acl = length(var.grants) == 0 ? null : "private"
 
   tags = {
     project   = var.project
@@ -22,7 +22,7 @@ resource "aws_s3_bucket" "bucket" {
   # user FULL_CONTROL permission - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
   # How to find the canonical user id: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
   dynamic "grant" {
-    for_each = var.canonical_user_id_and_permissions
+    for_each = var.grants
 
     content {
       id          = pair.canonical_user_id

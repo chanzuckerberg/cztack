@@ -14,7 +14,7 @@ module "s3-bucket" {
   service     = var.component
 
   # optional, defined when using grant ACL, if not defined, the bucket will use the `acl = private` as default
-  canonical_user_id_and_permissions = [
+  grants = [
     {
       canonical_user_id : "canonical_user1_id"
       permissions : ["FULL_CONTROL"]
@@ -49,7 +49,7 @@ No requirements.
 | bucket\_policy | n/a | `string` | `""` | no |
 | enable\_versioning | Keep old versions of overwritten S3 objects. | `bool` | `true` | no |
 | env | n/a | `string` | n/a | yes |
-| canonical\_user\_id\_and\_permissions | List of objects with the canonical user id and permissions, used when defining the grant acl. | <pre>list(object(<br>    {<br>      canonical_user_id : string,      <br>      permissions : list(string), # a list of permissions granted to the AWS account with the canonical user      <br>    }<br>  ))</pre> | `[]` | no |
+| grants | List of objects with the canonical user id and permissions, used when defining the grant acl. | <pre>list(object(<br>    {<br>      canonical_user_id : string,      <br>      permissions : list(string), # a list of permissions granted to the AWS account with the canonical user      <br>    }<br>  ))</pre> | `[]` | no |
 | lifecycle\_rules | List of maps containing configuration of object lifecycle management. | `any` | <pre>[<br>  {<br>    "enabled": true,<br>    "expiration": {<br>      "expired_object_delete_marker": true<br>    },<br>    "noncurrent_version_expiration": {<br>      "days": 365<br>    },<br>    "noncurrent_version_transition": {<br>      "days": 30,<br>      "storage_class": "STANDARD_IA"<br>    }<br>  }<br>]</pre> | no |
 | owner | n/a | `string` | n/a | yes |
 | project | n/a | `string` | n/a | yes |
