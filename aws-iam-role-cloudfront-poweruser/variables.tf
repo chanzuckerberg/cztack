@@ -34,3 +34,9 @@ variable "saml_idp_arn" {
   default     = ""
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
+
+variable tags {
+  type        = map(string)
+  default     = {}
+  description = "A map of tags to assign this IAM Role."
+}

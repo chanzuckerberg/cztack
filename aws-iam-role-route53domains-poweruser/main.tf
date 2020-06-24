@@ -44,6 +44,7 @@ resource "aws_iam_role" "route53domains-poweruser" {
   name               = var.role_name
   path               = var.iam_path
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
+  tags               = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "route53domains-fullaccess" {
