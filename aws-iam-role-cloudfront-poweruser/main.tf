@@ -43,6 +43,7 @@ data "aws_iam_policy_document" "assume-role" {
 resource "aws_iam_role" "role" {
   name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
+  tags               = var.tags
 }
 
 data "aws_iam_policy_document" "s3" {

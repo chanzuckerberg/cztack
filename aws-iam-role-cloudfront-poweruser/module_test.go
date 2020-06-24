@@ -19,6 +19,9 @@ func TestAWSIAMRoleCloudfrontPoweruser(t *testing.T) {
 			"role_name":         random.UniqueId(),
 			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 			"source_account_id": curAcct,
+			"tags": map[string]string{
+				"test": random.UniqueId(),
+			},
 		},
 	)
 
