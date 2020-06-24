@@ -44,3 +44,9 @@ variable authorize_iam {
   default     = true
   description = "Indicates if we should augment the PowerUserAccess policy with certain IAM actions."
 }
+
+variable tags {
+  type        = map(string)
+  default     = {}
+  description = "A map of tags to assign this IAM Role."
+}
