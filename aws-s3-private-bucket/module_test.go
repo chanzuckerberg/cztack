@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-sdk-go/service/s3"
@@ -91,14 +92,28 @@ func TestPrivateBucketDefaults(t *testing.T) {
 
 			// policy simulations
 
-			// deny when not using https
-			resp := testutil.S3SimulateRequest(t, region, "s3:ListBucket", bucketArn, bucketPolicy, false)
-			r.Equal("explicitDeny", *resp.EvalDecision)
+			objectArn := fmt.Sprintf("%s/foo", bucketArn)
 
-			//
-			resp = testutil.S3SimulateRequest(t, region, "s3:ListBucket", bucketArn, bucketPolicy, true)
-			r.Equal("allowed", *resp.EvalDecision)
+			sims := []struct {
+				action          string
+				secureTransport bool
+				arn             string
+				result          string
+			}{
+				// deny when not using https
+				{"s3:ListBucket", false, bucketArn, "explicitDeny"},
+				// allow with https
+				{"s3:ListBucket", true, bucketArn, "allowed"},
+				// deny when not using https
+				{"s3:GetObject", false, objectArn, "explicitDeny"},
+				// allow with https
+				{"s3:GetObject", true, objectArn, "allowed"},
+			}
 
+			for _, test := range sims {
+				resp := testutil.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
+				r.Equal(test.result, *resp.EvalDecision)
+			}
 		},
 	}
 
