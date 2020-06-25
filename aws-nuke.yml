@@ -14,8 +14,9 @@ accounts:
         - cztack-ci
         - edu
       EC2SecurityGroup:
-        - property: "tag:env"
-          value: "cztack-ci"
+        - property: Name
+          type: contains
+          value: bastion
       EC2Instance:
         - property: "tag:env"
           value: "cztack-ci"
