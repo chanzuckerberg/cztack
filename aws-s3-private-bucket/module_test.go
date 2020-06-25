@@ -38,6 +38,8 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r := require.New(t)
 			region := options.EnvVars["AWS_DEFAULT_REGION"]
 			bucket := options.Vars["bucket_name"].(string)
+			outputs := terraform.OutputAll(t, options)
+			bucketArn := outputs["arn"].(string)
 
 			// some assertions built into terratest
 			aws.AssertS3BucketExists(t, region, bucket)
@@ -86,6 +88,17 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r.True(*block.PublicAccessBlockConfiguration.BlockPublicPolicy)
 			r.True(*block.PublicAccessBlockConfiguration.IgnorePublicAcls)
 			r.True(*block.PublicAccessBlockConfiguration.RestrictPublicBuckets)
+
+			// policy simulations
+
+			// deny when not using https
+			resp := testutil.S3SimulateRequest(t, region, "s3:ListBucket", bucketArn, bucketPolicy, false)
+			r.Equal("explicitDeny", *resp.EvalDecision)
+
+			//
+			resp = testutil.S3SimulateRequest(t, region, "s3:ListBucket", bucketArn, bucketPolicy, true)
+			r.Equal("allowed", *resp.EvalDecision)
+
 		},
 	}
 

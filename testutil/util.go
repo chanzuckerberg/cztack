@@ -190,3 +190,7 @@ func RandomString(chars string, length int) string {
 
 	return out.String()
 }
+
+func Strptr(in string) *string {
+	return &in
+}
