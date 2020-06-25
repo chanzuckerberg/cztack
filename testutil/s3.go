@@ -31,6 +31,7 @@ func UnmarshalS3BucketPolicy(in string) (*S3BucketPolicy, error) {
 	return p, err
 }
 
+// S3S3SimulateRequest uses the IAM policy simulator to run end-to-end tests on permissions
 func S3SimulateRequest(t *testing.T, region, action, bucketArn, bucketPolicy string, secureTransport bool) *iam.EvaluationResult {
 	r := require.New(t)
 
