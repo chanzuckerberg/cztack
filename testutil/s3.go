@@ -47,7 +47,6 @@ func S3SimulateRequest(t *testing.T, region, action, bucketArn, bucketPolicy str
 				ContextKeyValues: []*string{Strptr(strconv.FormatBool(secureTransport))},
 			},
 		},
-		// CallerArn:    testutil.Strptr(""),
 		ResourceArns:    []*string{&bucketArn},
 		PolicySourceArn: &UserArn,
 		ResourcePolicy:  &bucketPolicy,

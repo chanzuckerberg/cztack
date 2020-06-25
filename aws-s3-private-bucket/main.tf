@@ -100,12 +100,12 @@ data "aws_iam_policy_document" "bucket_policy" {
   source_json = var.bucket_policy
 
   statement {
-    sid       = "EnforceTLS"
-    actions   = ["*"]
+    sid     = "EnforceTLS"
+    actions = ["*"]
     resources = [
       "arn:aws:s3:::${var.bucket_name}",
       "arn:aws:s3:::${var.bucket_name}/*",
-      ]
+    ]
 
     principals {
       type        = "*"
