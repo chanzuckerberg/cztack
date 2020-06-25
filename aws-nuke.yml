@@ -14,13 +14,11 @@ accounts:
         - cztack-ci
         - edu
       EC2SecurityGroup:
-        - type: glob
-          value: "shared-infra-cztack-ci-bastion-*"
+        - property: "tag:env"
+          value: "cztack-ci"
       EC2Instance:
-        - type: glob
-          value: "shared-infra-cztack-ci-bastion-*"
-
-
+        - property: "tag:env"
+          value: "cztack-ci"
 
 resource-types:
   # we can add to this over time
