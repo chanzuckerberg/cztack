@@ -1,4 +1,7 @@
 locals {
+  # If grants are defined, we use `grant` to grant permissions, otherwise it will use the `acl` to grant permissions
+  acl = length(var.grants) == 0 ? "private" : null
+
   tags = {
     project   = var.project
     env       = var.env
@@ -10,7 +13,27 @@ locals {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
-  acl    = "private"
+  # `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
+
+  # Using canned ACL will conflict with using grant ACL
+  acl = local.acl
+
+  # Use ACL policy grant to grant permissions to certain users.
+  # Especially useful for logging buckets, where we  need to grant the awslogsdelivery
+  # user FULL_CONTROL permission - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
+  # How to find the canonical user id: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
+  dynamic "grant" {
+    for_each = [for pair in var.grants : {
+      canonical_user_id = pair.canonical_user_id
+      permissions       = pair.permissions
+    }]
+
+    content {
+      id          = grant.value.canonical_user_id
+      permissions = grant.value.permissions
+      type        = "CanonicalUser"
+    }
+  }
 
   policy = data.aws_iam_policy_document.bucket_policy.json
 
