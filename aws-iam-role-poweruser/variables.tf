@@ -48,7 +48,7 @@ variable authorize_iam {
 variable max_session_duration {
   type        = number
   default     = 60 * 60 // 1 hour
-  description = "The maximum session duration (in seconds) that you want to set for the specified role."
+  description = "The maximum session duration (in seconds) for the role."
 }
 
 variable tags {
