@@ -17,6 +17,9 @@ func TestAWSIAMRoleRoute53DomainsPoweruser(t *testing.T) {
 		map[string]interface{}{
 			"role_name":         random.UniqueId(),
 			"source_account_id": curAcct,
+			"tags": map[string]string{
+				"test": random.UniqueId(),
+			},
 		},
 	)
 

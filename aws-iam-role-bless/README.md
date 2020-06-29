@@ -39,6 +39,7 @@ No requirements.
 | role\_name | The name for the role | `string` | n/a | yes |
 | source\_account\_id | The source aws account id to allow sts:AssumeRole. DEPRECATED: Please use source\_account\_ids | `string` | n/a | yes |
 | source\_account\_ids | The source aws account ids to allow sts:AssumeRole | `set(string)` | `[]` | no |
+| tags | A map of tags to assign this IAM Role. | `map(string)` | `{}` | no |
 
 ## Outputs
 

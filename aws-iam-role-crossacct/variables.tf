@@ -39,7 +39,7 @@ variable oidc {
   description = "A list of AWS OIDC IDPs to establish a trust relationship for this role."
 }
 
-variable role_tags {
+variable tags {
   type        = map(string)
   default     = {}
   description = "A map of tags to assign this IAM Role."
