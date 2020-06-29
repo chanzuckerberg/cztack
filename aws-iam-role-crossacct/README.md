@@ -32,6 +32,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | iam\_path | The IAM path to put this role in. | `string` | `"/"` | no |
+| max\_session\_duration | The maximum session duration (in seconds) that you want to set for the specified role. | `number` | `3600` | no |
 | oidc | A list of AWS OIDC IDPs to establish a trust relationship for this role. | <pre>list(object(<br>    {<br>      idp_arn : string,          # the AWS IAM IDP arn<br>      client_ids : list(string), # a list of oidc client ids<br>      provider : string          # your provider url, such as foo.okta.com<br>    }<br>  ))</pre> | `[]` | no |
 | role\_name | The name of the role. | `string` | n/a | yes |
 | role\_tags | A map of tags to assign this IAM Role. | `map(string)` | `{}` | no |

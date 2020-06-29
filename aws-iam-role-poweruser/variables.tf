@@ -44,3 +44,9 @@ variable authorize_iam {
   default     = true
   description = "Indicates if we should augment the PowerUserAccess policy with certain IAM actions."
 }
+
+variable max_session_duration {
+  type        = number
+  default     = 60 * 60 // 1 hour
+  description = "The maximum session duration (in seconds) that you want to set for the specified role."
+}
