@@ -3,3 +3,4 @@
 *.tfstate.backup
 bin
 .idea
+.test-data

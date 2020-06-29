@@ -68,8 +68,8 @@ clean:
 	rm **/*.tfstate*; true
 .PHONY: clean
 
-test: fmt
-	go test -count=1 -parallel 10 -test.timeout 45m $(TEST)
+test:
+	go test -count=1 -v -parallel 10 -test.timeout 45m $(TEST)
 .PHONY: test
 
 test-ci:
