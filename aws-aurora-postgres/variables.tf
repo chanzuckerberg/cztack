@@ -124,3 +124,9 @@ variable ca_cert_identifier {
   description = "Identifier for the certificate authority."
   default     = "rds-ca-2019"
 }
+
+variable auto_minor_version_upgrade {
+  type        = bool
+  description = "Set the databases to automatically upgrade minor versions."
+  default     = true
+}
