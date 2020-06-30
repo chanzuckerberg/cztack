@@ -49,7 +49,7 @@ No requirements.
 | bucket\_policy | n/a | `string` | `""` | no |
 | enable\_versioning | Keep old versions of overwritten S3 objects. | `bool` | `true` | no |
 | env | n/a | `string` | n/a | yes |
-| grants | List of objects with the canonical user id and permissions, used when defining the grant acl. | <pre>list(object(<br>    {<br>      canonical_user_id : string,      <br>      permissions : list(string), # a list of permissions granted to the AWS account with the canonical user      <br>    }<br>  ))</pre> | `[]` | no |
+| grants | A list of canonical user ID to permissions pairs. Used when we want to grant permissions to AWS accounts via the S3 ACL system. | `list(object({ canonical_user_id : string, permissions : list(string) }))` | `[]` | no |
 | lifecycle\_rules | List of maps containing configuration of object lifecycle management. | `any` | <pre>[<br>  {<br>    "enabled": true,<br>    "expiration": {<br>      "expired_object_delete_marker": true<br>    },<br>    "noncurrent_version_expiration": {<br>      "days": 365<br>    },<br>    "noncurrent_version_transition": {<br>      "days": 30,<br>      "storage_class": "STANDARD_IA"<br>    }<br>  }<br>]</pre> | no |
 | owner | n/a | `string` | n/a | yes |
 | project | n/a | `string` | n/a | yes |

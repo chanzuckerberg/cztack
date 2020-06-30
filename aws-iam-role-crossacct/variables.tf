@@ -44,3 +44,10 @@ variable tags {
   default     = {}
   description = "A map of tags to assign this IAM Role."
 }
+
+
+variable max_session_duration {
+  type        = number
+  default     = 60 * 60 // 1 hour
+  description = "The maximum session duration (in seconds) for the role."
+}

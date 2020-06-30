@@ -45,6 +45,12 @@ variable authorize_iam {
   description = "Indicates if we should augment the PowerUserAccess policy with certain IAM actions."
 }
 
+variable max_session_duration {
+  type        = number
+  default     = 60 * 60 // 1 hour
+  description = "The maximum session duration (in seconds) for the role."
+}
+
 variable tags {
   type        = map(string)
   default     = {}
