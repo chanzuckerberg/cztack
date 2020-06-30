@@ -20,6 +20,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | apply\_immediately | n/a | `bool` | `false` | no |
+| auto\_minor\_version\_upgrade | Set the databases to automatically upgrade minor versions. | `bool` | `true` | no |
 | backtrack\_window | n/a | `number` | `0` | no |
 | ca\_cert\_identifier | Identifier for the certificate authority. Use rds-ca-2019 for anything new. | `string` | `"rds-ca-2019"` | no |
 | database\_name | n/a | `string` | n/a | yes |

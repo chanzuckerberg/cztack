@@ -45,6 +45,7 @@ No provider.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | apply\_immediately | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
+| auto\_minor\_version\_upgrade | Set the databases to automatically upgrade minor versions. | `bool` | `true` | no |
 | ca\_cert\_identifier | Identifier for the certificate authority. | `string` | `"rds-ca-2019"` | no |
 | database\_name | The name of the database to be created in the cluster. | `string` | n/a | yes |
 | database\_password | Password for user that will be created. | `string` | n/a | yes |
