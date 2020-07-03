@@ -68,3 +68,9 @@ variable grants {
   default     = []
   description = "A list of canonical user ID to permissions pairs. Used when we want to grant permissions to AWS accounts via the S3 ACL system."
 }
+
+variable log_delivery_write_acl_enable {
+  type        = bool
+  default     = true
+  description = "Enables logging"
+}
