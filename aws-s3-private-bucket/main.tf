@@ -1,8 +1,8 @@
 locals {
   # If grants are defined, we use `grant` to grant permissions, otherwise it will use the `acl` to grant permissions
-  private_acl = length(var.grants) == 0 ? "private" : null
+  private_acl            = length(var.grants) == 0 ? "private" : null
   log_delivery_write_acl = var.log_delivery_write_acl_enable ? "log-delivery-write" : null
-  acl = try(coalesce(private_acl, log_delivery_write_acl), null)
+  acl                    = try(coalesce(private_acl, log_delivery_write_acl), null)
 
   tags = {
     project   = var.project
