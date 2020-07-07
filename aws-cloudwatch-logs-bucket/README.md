@@ -1,6 +1,17 @@
 # aws-cloudwatch-logs-bucket
 
-This module uses the `aws-s3-private-bucket` module as its source and enables logging for Cloudfront to the specified S3 bucket. We include the grant to `aws-logs-delivery` whose canonical id is `c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0`, documentation for this can be found [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsBucketAndFileOwnership).
+This module uses the `aws-s3-private-bucket` module as its source and enables logging for Cloudfront to the specified S3 bucket. We include the grant to `aws-logs-delivery` whose canonical id is `c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0`, documentation for this can be found [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsBucketAndFileOwnership). The suggestion is found here:
+
+```
+Restoring the ACL for the bucket
+If you remove permissions for the awslogsdelivery account, CloudFront won't be able to save logs to the S3 bucket. To enable CloudFront to start saving logs for your distribution again, restore the ACL permission by doing one of the following:
+
+...
+
+Add the ACL permission for awslogsdelivery manually by navigating to the S3 bucket in the Amazon S3 console and adding permission. To add the ACL for awslogsdelivery, you must provide the canonical ID for the account, which is the following:
+
+c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0
+```
 
 ## Example
 
