@@ -21,12 +21,17 @@ locals {
 data "aws_canonical_user_id" "current_user" {}
 
 module "aws-s3-logs-bucket" {
-  source                        = "../aws-s3-private-bucket"
-  bucket_name                   = "${var.project}-${var.env}-${var.service}-cloudfront-logs"
-  log_delivery_write_acl_enable = true
-  grants                        = local.grants
-  env                           = var.env
-  owner                         = var.owner
-  project                       = var.project
-  service                       = var.service
+  source                                 = "../aws-s3-private-bucket"
+  log_delivery_write_acl_enable          = true
+  grants                                 = local.grants
+  env                                    = var.env
+  owner                                  = var.owner
+  project                                = var.project
+  service                                = var.service
+  bucket_name                            = var.bucket_name
+  bucket_policy                          = var.bucket_policy
+  enable_versioning                      = var.enable_versioning
+  abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
+  public_access_block                    = var.public_access_block
+  lifecycle_rules                        = var.lifecycle_rules
 }
