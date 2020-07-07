@@ -65,6 +65,7 @@ jobs:
           aws-params-secrets-setup,
           aws-params-writer,
           aws-redis-node,
+          aws-s3-logs-bucket,
           aws-s3-private-bucket,
           aws-single-page-static-site,
           aws-ssm-params,
