@@ -71,6 +71,6 @@ variable grants {
 
 variable log_delivery_write_acl_enable {
   type        = bool
-  default     = true
+  default     = false
   description = "Enables logging"
 }
