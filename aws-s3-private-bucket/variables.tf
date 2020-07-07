@@ -72,5 +72,5 @@ variable grants {
 variable log_delivery_write_acl_enable {
   type        = bool
   default     = false
-  description = "Enables logging"
+  description = "Enables CloudFront to save logs in your distribution's S3 bucket"
 }
