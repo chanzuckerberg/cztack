@@ -1,6 +1,6 @@
 # aws-s3-logs-bucket
 
-This module uses the `aws-s3-private-bucket` module as its source and enables logging for Cloudfront to the specified S3 bucket. We include the grant to `aws-logs-delivery` whose canonical id is `c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0`, documentation for this can be found here: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsBucketAndFileOwnership.
+This module uses the `aws-s3-private-bucket` module as its source and enables logging for Cloudfront to the specified S3 bucket. We include the grant to `aws-logs-delivery` whose canonical id is `c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0`, documentation for this can be found [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsBucketAndFileOwnership).
 
 ## Example
 
