@@ -1,4 +1,4 @@
-# aws-cloudwatch-logs-bucket
+# aws-cloudfront-logs-bucket
 
 This module uses the `aws-s3-private-bucket` module as its source and enables logging for Cloudfront to the specified S3 bucket. We include the grant to `aws-logs-delivery` whose canonical id is `c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0`, documentation for this can be found [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsBucketAndFileOwnership). The suggestion is found here:
 
@@ -17,7 +17,7 @@ c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0
 
 ```hcl
 module "s3-bucket" {
-  source      = "github.com/chanzuckerberg/cztack/aws-cloudwatch-logs-bucket?ref=v0.33.1"
+  source      = "github.com/chanzuckerberg/cztack/aws-cloudfront-logs-bucket?ref=v0.33.1"
   bucket_name = "..."
   env         = var.env
   owner       = var.owner
