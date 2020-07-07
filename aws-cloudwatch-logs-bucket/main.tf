@@ -20,7 +20,7 @@ locals {
 
 data "aws_canonical_user_id" "current_user" {}
 
-module "aws-s3-logs-bucket" {
+module "aws-cloudwatch-logs-bucket" {
   source                                 = "../aws-s3-private-bucket"
   grants                                 = local.grants
   env                                    = var.env
