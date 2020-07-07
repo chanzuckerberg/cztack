@@ -22,7 +22,6 @@ data "aws_canonical_user_id" "current_user" {}
 
 module "aws-s3-logs-bucket" {
   source                                 = "../aws-s3-private-bucket"
-  log_delivery_write_acl_enable          = true
   grants                                 = local.grants
   env                                    = var.env
   owner                                  = var.owner
