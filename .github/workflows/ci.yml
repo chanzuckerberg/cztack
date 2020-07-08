@@ -37,6 +37,7 @@ jobs:
           aws-aurora,
           aws-aurora-mysql,
           aws-aurora-postgres,
+          aws-cloudfront-logs-bucket,
           aws-cloudwatch-log-group,
           aws-default-vpc-security,
           aws-ecs-job,
