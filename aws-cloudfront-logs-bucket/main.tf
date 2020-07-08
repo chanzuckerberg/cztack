@@ -28,9 +28,6 @@ module "aws-cloudfront-logs-bucket" {
   project                                = var.project
   service                                = var.service
   bucket_name                            = var.bucket_name
-  domain_name                            = module.aws-s3-private-bucket.domain_name
-  bucket_arn                             = module.aws-s3-private-bucket.arn
-  bucket_id                              = module.aws-s3-private-bucket.id
   bucket_policy                          = var.bucket_policy
   enable_versioning                      = var.enable_versioning
   abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
