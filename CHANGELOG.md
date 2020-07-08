@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.35.0 2020-07-08
+
+* [d87b0071](../../commit/d87b0071e7729697680297d70284c649a0cf13cb) Enable logging with private s3 bucket ([#210](../../pull/210))
+* [90a9ec4e](../../commit/90a9ec4e8df882ee226a659de7b6ea25dc67e989) [feature] support auto_minor_version_upgrade ([#209](../../pull/209))
+* [fe0d0304](../../commit/fe0d0304138fec1ad9544502809174c6ab1d323b) [feature] Allow overwriting the IAM Role max session duration ([#208](../../pull/208))
+* [1fe821e1](../../commit/1fe821e17b01c31d39c00dd186752426064ace57) [fix] [testing] make TDD more productive ([#206](../../pull/206))
+* [9c9ef09f](../../commit/9c9ef09f0d1d5d2936a3e732b54647a611c2f884) nuke more resources ([#207](../../pull/207))
+
 ## 0.33.1 2020-05-21
 
 * [9d289b25](../../commit/9d289b2563f22b6f9729bc2d88774d4f6b24d224) [fix] Use index when referring to a dependency with a count
