@@ -13,7 +13,7 @@ locals {
 
 module "sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "3.4.0"
+  version     = "3.11.0"
   name        = local.name
   description = "Allow traffic to Redis."
   vpc_id      = var.vpc_id

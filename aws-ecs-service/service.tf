@@ -6,7 +6,7 @@ locals {
 
 module "container-sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "3.4.0"
+  version     = "3.11.0"
   create      = var.awsvpc_network_mode
   name        = local.name
   description = "ECS ingress port"
