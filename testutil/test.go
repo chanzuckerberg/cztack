@@ -94,7 +94,9 @@ func (tt *Test) Run(t *testing.T) {
 		terraform.DestroyE(t, options) //nolint
 		Clean(terraformDirectory)
 		test_structure.CleanupTestDataFolder(t, terraformDirectory)
-		tt.Cleanup(t, options)
+		if tt.Cleanup != nil {
+			tt.Cleanup(t, options)
+		}
 	})
 
 	tt.Stage(t, "options", func() {
