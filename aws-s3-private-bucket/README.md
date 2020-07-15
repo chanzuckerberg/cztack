@@ -47,6 +47,7 @@ No requirements.
 | abort\_incomplete\_multipart\_upload\_days | Number of days after which an incomplete multipart upload is canceled. | `number` | `14` | no |
 | bucket\_name | n/a | `string` | n/a | yes |
 | bucket\_policy | n/a | `string` | `""` | no |
+| cors\_rules | List of maps containing the cors rule configuration objects. | `any` | `[]` | no |
 | enable\_versioning | Keep old versions of overwritten S3 objects. | `bool` | `true` | no |
 | env | n/a | `string` | n/a | yes |
 | grants | A list of canonical user ID to permissions pairs. Used when we want to grant permissions to AWS accounts via the S3 ACL system. | `list(object({ canonical_user_id : string, permissions : list(string) }))` | `[]` | no |

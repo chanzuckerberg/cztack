@@ -41,6 +41,20 @@ resource "aws_s3_bucket" "bucket" {
     enabled = var.enable_versioning
   }
 
+  dynamic "cors_rule" {
+    for_each = var.cors_rules
+
+    content {
+      allowed_headers = lookup(cors_rule.value, "allowed_headers", null)
+      allowed_methods = lookup(cors_rule.value, "allowed_methods", null)
+      allowed_origins = lookup(cors_rule.value, "allowed_origins", null)
+      expose_headers  = lookup(cors_rule.value, "expose_headers", null)
+      max_age_seconds = lookup(cors_rule.value, "max_age_seconds", null)
+    }
+  }
+
+  acceleration_status = var.transfer_acceleration ? "Enabled" : "Suspended"
+
   # dynamic block used instead of simply assigning a variable b/c lifecycle_rule is configuration block
   dynamic "lifecycle_rule" {
     for_each = var.lifecycle_rules

@@ -58,6 +58,17 @@ variable "lifecycle_rules" {
   ]
 }
 
+variable "cors_rules" {
+  description = "List of maps containing the cors rule configuration objects."
+  type        = any
+  default     = []
+}
+
+variable transfer_acceleration {
+  type    = bool
+  default = false
+}
+
 variable public_access_block {
   type    = bool
   default = true
