@@ -33,20 +33,15 @@ fmt:
 	done
 .PHONY: fmt
 
-lint: lint-tf lint-go
-.PHONY: lint
-
-lint-tf:
+lint:
 	@for m in $(MODULES); do \
 		terraform fmt -check $$m || exit $$?; \
 	done;
-.PHONY: lint-tf
 
-lint-go:
 	@for m in $(MODULES); do \
 		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
 	done
-.PHONY: lint-go
+.PHONY: lint
 
 docs:
 	@for m in $(MODULES); do \
