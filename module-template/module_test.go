@@ -4,10 +4,14 @@ import (
 	"testing"
 
 	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestModule(t *testing.T) {
-	test := testutil.Test{}
+	test := testutil.Test{
+		Options:  func(t *testing.T) *terraform.Options { return nil },
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
 	test.Run(t)
 }

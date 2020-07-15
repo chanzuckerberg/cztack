@@ -6,25 +6,30 @@ import (
 
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSIAMRoleInfraCI(t *testing.T) {
 
-	curAcct := testutil.AWSCurrentAccountId(t)
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+			curAcct := testutil.AWSCurrentAccountId(t)
 
-	terraformOptions := testutil.Options(
-		testutil.IAMRegion,
-		map[string]interface{}{
-			"role_name":         random.UniqueId(),
-			"source_account_id": curAcct,
-			"tags": map[string]string{
-				"test": random.UniqueId(),
-			},
-			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
+			return testutil.Options(
+				testutil.IAMRegion,
+				map[string]interface{}{
+					"role_name":         random.UniqueId(),
+					"source_account_id": curAcct,
+					"tags": map[string]string{
+						"test": random.UniqueId(),
+					},
+					"iam_path": fmt.Sprintf("/%s/", random.UniqueId()),
+				},
+			)
+
 		},
-	)
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
-	defer testutil.Cleanup(t, terraformOptions)
-
-	testutil.Run(t, terraformOptions)
+	test.Run(t)
 }

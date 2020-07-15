@@ -9,16 +9,20 @@ import (
 )
 
 func TestAWSIAMInstanceProfile(t *testing.T) {
-	terraformOptions := testutil.Options(
-		testutil.IAMRegion,
-		map[string]interface{}{
-			"name_prefix":      random.UniqueId(),
-			"iam_path":         "/foo/",
-			"role_description": random.UniqueId(),
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+
+			return testutil.Options(
+				testutil.IAMRegion,
+				map[string]interface{}{
+					"name_prefix":      random.UniqueId(),
+					"iam_path":         "/foo/",
+					"role_description": random.UniqueId(),
+				},
+			)
 		},
-	)
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
-	defer terraform.Destroy(t, terraformOptions)
-
-	testutil.Run(t, terraformOptions)
+	test.Run(t)
 }

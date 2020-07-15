@@ -3,12 +3,22 @@ package test
 import (
 	"testing"
 
+	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSDefaultVPCSecurity(t *testing.T) {
-	options := &terraform.Options{
-		TerraformDir: ".",
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+			return testutil.Options(
+				testutil.DefaultRegion,
+				map[string]interface{}{},
+			)
+		},
+
+		Mode: testutil.Plan,
+
+		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
-	terraform.Init(t, options)
+	test.Run(t)
 }

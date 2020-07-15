@@ -9,9 +9,19 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+type TestMode int
+
+const (
+	Apply TestMode = 0
+	Plan  TestMode = 1
+	Init  TestMode = 2
+)
+
 type Test struct {
 	Options  func(*testing.T) *terraform.Options
 	Validate func(*testing.T, *terraform.Options)
+
+	Mode TestMode
 
 	skip []string
 	only []string
@@ -80,7 +90,7 @@ func (tt *Test) Run(t *testing.T) {
 
 	defer tt.Stage(t, "cleanup", func() {
 		options := test_structure.LoadTerraformOptions(t, terraformDirectory)
-		terraform.Destroy(t, options)
+		terraform.DestroyE(t, options) //nolint
 		Clean(terraformDirectory)
 		test_structure.CleanupTestDataFolder(t, terraformDirectory)
 	})
@@ -92,8 +102,18 @@ func (tt *Test) Run(t *testing.T) {
 	})
 
 	tt.Stage(t, "apply", func() {
+		r := require.New(t)
 		options := test_structure.LoadTerraformOptions(t, terraformDirectory)
-		terraform.InitAndApply(t, options)
+		switch tt.Mode {
+		case Apply:
+			terraform.InitAndApply(t, options)
+		case Plan:
+			rc, err := terraform.InitAndPlanWithExitCodeE(t, options)
+			r.NoError(err)
+			r.Equal(2, rc)
+		case Init:
+			terraform.Init(t, options)
+		}
 	})
 
 	tt.Stage(t, "validate", func() {
