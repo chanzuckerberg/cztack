@@ -3,12 +3,11 @@ package test
 import (
 	"testing"
 
-	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/chanzuckerberg/cztack/testutil"
 )
 
 func TestModule(t *testing.T) {
-	options := &terraform.Options{
-		TerraformDir: ".",
-	}
-	terraform.Init(t, options)
+	test := testutil.Test{}
+
+	test.Run(t)
 }

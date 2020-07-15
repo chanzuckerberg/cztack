@@ -1,10 +1,12 @@
 package testutil
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
+	"github.com/stretchr/testify/require"
 )
 
 type Test struct {
@@ -13,6 +15,17 @@ type Test struct {
 
 	skip []string
 	only []string
+}
+
+func (tt *Test) validate() error {
+	if tt.Options == nil {
+		return errors.New("Options must be set")
+	}
+
+	if tt.Validate == nil {
+		return errors.New("Validate must be set")
+	}
+	return nil
 }
 
 func (tt *Test) setupEnv(t *testing.T) {
@@ -56,7 +69,12 @@ func (tt *Test) Stage(t *testing.T, stage string, f func()) {
 }
 
 func (tt *Test) Run(t *testing.T) {
+	r := require.New(t)
+
 	terraformDirectory := "."
+
+	err := tt.validate()
+	r.NoError(err)
 
 	tt.setupEnv(t)
 
