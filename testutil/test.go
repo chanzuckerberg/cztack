@@ -20,6 +20,7 @@ const (
 type Test struct {
 	Options  func(*testing.T) *terraform.Options
 	Validate func(*testing.T, *terraform.Options)
+	Cleanup  func(*testing.T, *terraform.Options)
 
 	Mode TestMode
 
@@ -93,6 +94,7 @@ func (tt *Test) Run(t *testing.T) {
 		terraform.DestroyE(t, options) //nolint
 		Clean(terraformDirectory)
 		test_structure.CleanupTestDataFolder(t, terraformDirectory)
+		tt.Cleanup(t, options)
 	})
 
 	tt.Stage(t, "options", func() {

@@ -13,6 +13,7 @@ import (
 func TestAWSRedisNode(t *testing.T) {
 
 	test := testutil.Test{
+
 		Options: func(t *testing.T) *terraform.Options {
 			privateSubnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
 			log.Printf("subnets %#v\n", privateSubnets)
@@ -20,7 +21,6 @@ func TestAWSRedisNode(t *testing.T) {
 			vpc := testutil.EnvVar(testutil.EnvVPCID)
 
 			sg := testutil.CreateSecurityGroup(t, testutil.DefaultRegion, vpc)
-			defer testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, sg)
 
 			project := testutil.UniqueId()
 			env := testutil.UniqueId()
@@ -44,6 +44,10 @@ func TestAWSRedisNode(t *testing.T) {
 			)
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
+
+		Cleanup: func(t *testing.T, options *terraform.Options) {
+			testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, options.Vars["ingress_security_group_ids"].([]string)[0])
+		},
 	}
 
 	test.Run(t)
