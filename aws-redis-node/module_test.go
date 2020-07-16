@@ -46,7 +46,7 @@ func TestAWSRedisNode(t *testing.T) {
 		Validate: func(t *testing.T, options *terraform.Options) {},
 
 		Cleanup: func(t *testing.T, options *terraform.Options) {
-			testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, options.Vars["ingress_security_group_ids"].([]string)[0])
+			testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, options.Vars["ingress_security_group_ids"].([]interface{})[0].(string))
 		},
 	}
 
