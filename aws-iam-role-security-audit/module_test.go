@@ -20,7 +20,7 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 			"tags": map[string]string{
 				"test": random.UniqueId(),
 			},
-			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
+			"iam_path": fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 	)
 

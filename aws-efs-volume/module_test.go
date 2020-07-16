@@ -25,8 +25,8 @@ func TestEfsVolume(t *testing.T) {
 			"owner":   owner,
 
 			"volume_name": volumeName,
-			"vpc_id": testutil.EnvVar(testutil.EnvVPCID),
-			"subnet_ids": testutil.ListEnvVar("PRIVATE_SUBNETS"),
+			"vpc_id":      testutil.EnvVar(testutil.EnvVPCID),
+			"subnet_ids":  testutil.ListEnvVar("PRIVATE_SUBNETS"),
 		},
 	)
 
