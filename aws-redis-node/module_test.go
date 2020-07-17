@@ -7,40 +7,48 @@ import (
 	"testing"
 
 	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSRedisNode(t *testing.T) {
 
-	privateSubnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
-	log.Printf("subnets %#v\n", privateSubnets)
-	log.Printf("subnets %#v\n", os.Getenv("PRIVATE_SUBNETS"))
-	vpc := testutil.EnvVar(testutil.EnvVPCID)
+	test := testutil.Test{
 
-	sg := testutil.CreateSecurityGroup(t, testutil.DefaultRegion, vpc)
-	defer testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, sg)
+		Options: func(t *testing.T) *terraform.Options {
+			privateSubnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
+			log.Printf("subnets %#v\n", privateSubnets)
+			log.Printf("subnets %#v\n", os.Getenv("PRIVATE_SUBNETS"))
+			vpc := testutil.EnvVar(testutil.EnvVPCID)
 
-	project := testutil.UniqueId()
-	env := testutil.UniqueId()
-	service := testutil.UniqueId()
-	owner := testutil.UniqueId()
+			sg := testutil.CreateSecurityGroup(t, testutil.DefaultRegion, vpc)
 
-	az := fmt.Sprintf("%sa", testutil.DefaultRegion)
+			project := testutil.UniqueId()
+			env := testutil.UniqueId()
+			service := testutil.UniqueId()
+			owner := testutil.UniqueId()
 
-	options := testutil.Options(testutil.DefaultRegion,
-		map[string]interface{}{
-			"project": project,
-			"env":     env,
-			"service": service,
-			"owner":   owner,
+			az := fmt.Sprintf("%sa", testutil.DefaultRegion)
 
-			"availability_zone":          az,
-			"subnets":                    privateSubnets,
-			"ingress_security_group_ids": []string{sg},
-			"vpc_id":                     vpc,
+			return testutil.Options(testutil.DefaultRegion,
+				map[string]interface{}{
+					"project": project,
+					"env":     env,
+					"service": service,
+					"owner":   owner,
+
+					"availability_zone":          az,
+					"subnets":                    privateSubnets,
+					"ingress_security_group_ids": []string{sg},
+					"vpc_id":                     vpc,
+				},
+			)
 		},
-	)
+		Validate: func(t *testing.T, options *terraform.Options) {},
 
-	defer testutil.Cleanup(t, options)
+		Cleanup: func(t *testing.T, options *terraform.Options) {
+			testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, options.Vars["ingress_security_group_ids"].([]interface{})[0].(string))
+		},
+	}
 
-	testutil.Run(t, options)
+	test.Run(t)
 }

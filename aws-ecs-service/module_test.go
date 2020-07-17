@@ -2,13 +2,23 @@ package test
 
 import (
 	"testing"
-
-	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSECSService(t *testing.T) {
-	options := &terraform.Options{
-		TerraformDir: ".",
-	}
-	terraform.Init(t, options)
+
+	// TODO needs varaibles set to pass
+	// test := testutil.Test{
+	// 	Options: func(t *testing.T) *terraform.Options {
+
+	// 		return testutil.Options(
+	// 			testutil.DefaultRegion,
+	// 			map[string]interface{}{})
+	// 	},
+	// 	Validate: func(t *testing.T, options *terraform.Options) {},
+
+	// 	Mode: testutil.Init,
+	// }
+
+	// test.Run(t)
+
 }

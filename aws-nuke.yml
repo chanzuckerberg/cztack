@@ -18,8 +18,10 @@ accounts:
           type: contains
           value: bastion
       EC2Instance:
-        - property: "tag:env"
-          value: "cztack-ci"
+        # - property: "tag:env"
+          # value: "cztack-ci"
+        - type: dateOlderThan
+          value: 3600
 
 resource-types:
   # we can add to this over time

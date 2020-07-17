@@ -6,20 +6,24 @@ import (
 
 	"github.com/chanzuckerberg/cztack/testutil"
 	"github.com/gruntwork-io/terratest/modules/random"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 
-	terraformOptions := testutil.Options(
-		testutil.IAMRegion,
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+			return testutil.Options(
+				testutil.IAMRegion,
 
-		map[string]interface{}{
-			"group_name": random.UniqueId(),
-			"iam_path":   fmt.Sprintf("/%s/", random.UniqueId()),
+				map[string]interface{}{
+					"group_name": random.UniqueId(),
+					"iam_path":   fmt.Sprintf("/%s/", random.UniqueId()),
+				},
+			)
 		},
-	)
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
-	defer testutil.Cleanup(t, terraformOptions)
-
-	testutil.Run(t, terraformOptions)
+	test.Run(t)
 }
