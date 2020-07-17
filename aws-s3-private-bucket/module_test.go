@@ -12,6 +12,7 @@ import (
 )
 
 func TestPrivateBucketDefaults(t *testing.T) {
+	t.Parallel()
 
 	test := &testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {

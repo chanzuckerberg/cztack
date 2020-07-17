@@ -9,16 +9,22 @@ import (
 )
 
 func TestAWSCloudWatchLogGroup(t *testing.T) {
-	options := testutil.Options(
-		testutil.DefaultRegion,
-		map[string]interface{}{
-			"project":        random.UniqueId(),
-			"env":            random.UniqueId(),
-			"service":        random.UniqueId(),
-			"owner":          random.UniqueId(),
-			"log_group_name": random.UniqueId(),
+
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+			return testutil.Options(
+				testutil.DefaultRegion,
+				map[string]interface{}{
+					"project":        random.UniqueId(),
+					"env":            random.UniqueId(),
+					"service":        random.UniqueId(),
+					"owner":          random.UniqueId(),
+					"log_group_name": random.UniqueId(),
+				},
+			)
 		},
-	)
-	defer terraform.Destroy(t, options)
-	testutil.Run(t, options)
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
+
+	test.Run(t)
 }

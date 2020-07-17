@@ -15,44 +15,49 @@ func TestAWSACMCertInit(t *testing.T) {
 	terraform.Init(t, options)
 }
 
-func TestAWSACMCertInitAndApply(t *testing.T) {
+func TestAWSACMCertDefaults(t *testing.T) {
 	t.Parallel()
-	project := testutil.UniqueId()
-	env := testutil.UniqueId()
-	service := testutil.UniqueId()
-	owner := testutil.UniqueId()
 
-	certDomainName := fmt.Sprintf(
-		"%s.%s",
-		testutil.UniqueId(),
-		testutil.EnvVar(testutil.EnvRoute53ZoneName))
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+			project := testutil.UniqueId()
+			env := testutil.UniqueId()
+			service := testutil.UniqueId()
+			owner := testutil.UniqueId()
 
-	alternativeDomainName := fmt.Sprintf(
-		"%s.%s",
-		testutil.UniqueId(),
-		testutil.EnvVar(testutil.EnvRoute53ZoneName))
+			certDomainName := fmt.Sprintf(
+				"%s.%s",
+				testutil.UniqueId(),
+				testutil.EnvVar(testutil.EnvRoute53ZoneName))
 
-	route53ZoneID := testutil.EnvVar(testutil.EnvRoute53ZoneID)
+			alternativeDomainName := fmt.Sprintf(
+				"%s.%s",
+				testutil.UniqueId(),
+				testutil.EnvVar(testutil.EnvRoute53ZoneName))
 
-	alternativeNames := map[string]string{
-		alternativeDomainName: route53ZoneID,
+			route53ZoneID := testutil.EnvVar(testutil.EnvRoute53ZoneID)
+
+			alternativeNames := map[string]string{
+				alternativeDomainName: route53ZoneID,
+			}
+
+			return testutil.Options(
+				testutil.DefaultRegion,
+				map[string]interface{}{
+					"project": project,
+					"env":     env,
+					"service": service,
+					"owner":   owner,
+
+					"cert_domain_name":               certDomainName,
+					"aws_route53_zone_id":            route53ZoneID,
+					"validation_record_ttl":          5,
+					"cert_subject_alternative_names": alternativeNames,
+				},
+			)
+		},
+		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
 
-	options := testutil.Options(
-		testutil.DefaultRegion,
-		map[string]interface{}{
-			"project": project,
-			"env":     env,
-			"service": service,
-			"owner":   owner,
-
-			"cert_domain_name":               certDomainName,
-			"aws_route53_zone_id":            route53ZoneID,
-			"validation_record_ttl":          5,
-			"cert_subject_alternative_names": alternativeNames,
-		},
-	)
-
-	defer terraform.Destroy(t, options)
-	testutil.Run(t, options)
+	test.Run(t)
 }

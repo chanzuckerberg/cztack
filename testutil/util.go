@@ -96,13 +96,13 @@ func DeleteSecurityGroup(t *testing.T, region, id string) {
 
 func DeleteRole(t *testing.T, name string) {
 	iamClient := aws.NewIamClient(t, IAMRegion)
-	iamClient.DeleteRole(&iam.DeleteRoleInput{RoleName: &name})
+	iamClient.DeleteRole(&iam.DeleteRoleInput{RoleName: &name}) //nolint
 }
 
 // Destroy with retries
 func Destroy(t *testing.T, options *terraform.Options, retries ...int) {
 	retryTimes := 3
-	if retries != nil && len(retries) == 1 {
+	if len(retries) == 1 {
 		retryTimes = retries[0]
 	}
 	var err error

@@ -9,21 +9,24 @@ import (
 )
 
 func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
+	test := testutil.Test{
+		Options: func(t *testing.T) *terraform.Options {
+			curAcct := testutil.AWSCurrentAccountId(t)
 
-	curAcct := testutil.AWSCurrentAccountId(t)
+			return testutil.Options(
+				testutil.IAMRegion,
+				map[string]interface{}{
+					"role_name":         random.UniqueId(),
+					"source_account_id": curAcct,
+					"tags": map[string]string{
+						"test": random.UniqueId(),
+					},
+				},
+			)
 
-	terraformOptions := testutil.Options(
-		testutil.IAMRegion,
-		map[string]interface{}{
-			"role_name":         random.UniqueId(),
-			"source_account_id": curAcct,
-			"tags": map[string]string{
-				"test": random.UniqueId(),
-			},
 		},
-	)
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
-	defer terraform.Destroy(t, terraformOptions)
-
-	testutil.Run(t, terraformOptions)
+	test.Run(t)
 }
