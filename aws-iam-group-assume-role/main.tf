@@ -1,5 +1,5 @@
 locals {
-  account_arns = "${formatlist("arn:aws:iam::%s:role/${var.target_role == "" ? var.group_name : var.target_role}", var.target_accounts)}"
+  account_arns = formatlist("arn:aws:iam::%s:role/${var.target_role == "" ? var.group_name : var.target_role}", var.target_accounts)
 }
 
 resource "aws_iam_group" "assume-role" {

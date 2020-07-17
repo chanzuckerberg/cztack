@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "firehose-write" {
       "firehose:PutRecord",
     ]
 
-    resources = ["${aws_kinesis_firehose_delivery_stream.firehose.arn}"]
+    resources = [aws_kinesis_firehose_delivery_stream.firehose.arn]
   }
 }
 
@@ -79,5 +79,23 @@ resource "aws_lambda_function" "lambda" {
       FIREHOSE_DELIVERY_STREAM = local.name
       GITHUB_SECRET            = module.github_secret.values["github_secret"]
     }
+  }
+}
+
+module lambda {
+  source = "../aws-lambda-function"
+
+  source_s3_bucket = var.lambda_source_s3_bucket
+  source_s3_key    = var.lambda_source_s3_key
+
+  handler = "handler"
+  runtime = "go1.x"
+
+  role    = aws_iam_role.lambda.arn
+  timeout = 20
+
+  environment = {
+    FIREHOSE_DELIVERY_STREAM = local.name
+    GITHUB_SECRET            = module.github_secret.values["github_secret"]
   }
 }

@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "kmsauth" {
 
     principals {
       type        = "AWS"
-      identifiers = "${var.authorized_users}" # allows users to state their identity through kmsauth
+      identifiers = var.authorized_users # allows users to state their identity through kmsauth
     }
 
     condition {
