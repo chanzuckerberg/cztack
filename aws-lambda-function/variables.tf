@@ -40,14 +40,10 @@ variable runtime {
   description = "Lambda language runtime."
 }
 
-variable role_arn {
-  type        = string
-  description = "AWS IAM Role the lambda should use."
-}
-
 variable timeout {
   type        = number
   description = "Execution timeout for the lambda."
+  default     = null
 }
 
 variable environment {
