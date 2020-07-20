@@ -57,8 +57,9 @@ variable environment {
 }
 
 variable kms_key_arn {
-  type    = string
-  default = null
+  type        = string
+  description = "KMS key used to encrypt environment variables."
+  default     = null
 }
 
 variable source_code_hash {

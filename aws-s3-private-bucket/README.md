@@ -56,6 +56,7 @@ No requirements.
 | project | n/a | `string` | n/a | yes |
 | public\_access\_block | n/a | `bool` | `true` | no |
 | service | n/a | `string` | n/a | yes |
+| transfer\_acceleration | n/a | `bool` | `false` | no |
 
 ## Outputs
 
