@@ -18,10 +18,12 @@ accounts:
           type: contains
           value: bastion
       EC2Instance:
-        # - property: "tag:env"
-          # value: "cztack-ci"
-        - type: dateOlderThan
-          value: 3600
+        - property: "tag:env"
+          value: "cztack-ci"
+        # - type: dateOlderThan
+        #   value: 3600
+      LambdaFunction:
+        - "shared-infra-cztack-ci-bastion"
 
 resource-types:
   # we can add to this over time
@@ -41,3 +43,7 @@ resource-types:
     - RDSInstance
     - RDSSnapshot
     - S3Bucket
+    - LambdaFunction
+    - ELB
+    - ELBv2
+    - ELBv2TargetGroup

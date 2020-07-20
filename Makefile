@@ -18,6 +18,7 @@ all: clean fmt docs lint test
 
 setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/master/download.sh | sh
+	curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/master/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
 .PHONY: setup
 
 release: ## run a release

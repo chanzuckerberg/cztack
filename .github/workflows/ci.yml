@@ -22,7 +22,7 @@ jobs:
         terraform_wrapper: "false"
     - run: make lint
   # check-docs:
-  #   name: check-mod
+  #   name: check-docs
   #   runs-on: ubuntu-latest
   #   steps:
   #   - uses: actions/setup-go@v2
@@ -70,8 +70,7 @@ jobs:
           aws-single-page-static-site,
           aws-ssm-params,
           aws-ssm-params-writer,
-          # bless-ca,
-          # bless-ca/test,
+          bless-ca/test,
           github-webhooks-to-s3,
           module-template,
           testutil,
@@ -83,11 +82,16 @@ jobs:
     - uses: actions/checkout@v2
     - uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: 0.12.24
+        terraform_version: 0.12.28
         terraform_wrapper: "false"
     - uses: actions/setup-go@v2
       with:
         go-version: 1.14.3
+    # we can stop this when we move to terraform 0.13 and drop support for 0.12
+    - name: Install bless provider
+      run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/master/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+    - name: Check bless provider
+      run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
     - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
         --profile cztack-ci-1
     - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY
