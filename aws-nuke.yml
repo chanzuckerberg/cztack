@@ -26,6 +26,12 @@ accounts:
 resource-types:
   # we can add to this over time
   targets:
+    - APIGatewayAPIKey
+    - APIGatewayClientCertificate
+    - APIGatewayDomainName
+    - APIGatewayRestAPI
+    - APIGatewayUsagePlan
+    - APIGatewayVpcLink
     - EC2Image
     - EC2Instance
     - EC2KeyPair
@@ -35,6 +41,7 @@ resource-types:
     - EFSMountTarget
     - ElasticacheCacheCluster
     - IAMRole
+    - LambdaEventSourceMapping
     - RDSDBCluster
     - RDSDBClusterParameterGroup
     - RDSDBParameterGroup
