@@ -90,6 +90,8 @@ jobs:
     # we can stop this when we move to terraform 0.13 and drop support for 0.12
     - name: Install bless provider
       run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/master/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/terraform-provider-bless -d
+    - name: Check bless provider
+      run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless/terraform-provider-bless_v0.4.2
     - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
         --profile cztack-ci-1
     - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY
