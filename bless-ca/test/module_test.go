@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/service/lambda"
 	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/stretchr/testify/require"
 )
 
 func TestBlessCAInit(t *testing.T) {
@@ -16,8 +19,7 @@ func TestBlessCAInit(t *testing.T) {
 }
 
 func TestBlessCAInitAndApply(t *testing.T) {
-	// t.Skip("This test fails often due to AWS eventual-consistency issues. It's disabled until someone has a chance to fix it.")
-	// t.Parallel()
+	region := testutil.IAMRegion
 
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
@@ -25,8 +27,6 @@ func TestBlessCAInitAndApply(t *testing.T) {
 			env := testutil.UniqueId()
 			service := "bless" // other components in the name are random so keep this to identify
 			owner := testutil.UniqueId()
-
-			region := testutil.IAMRegion
 
 			return testutil.Options(
 				region,
@@ -44,7 +44,16 @@ func TestBlessCAInitAndApply(t *testing.T) {
 			)
 
 		},
-		Validate: func(t *testing.T, options *terraform.Options) {},
+		Validate: func(t *testing.T, options *terraform.Options) {
+			r := require.New(t)
+			outputs := terraform.OutputAll(t, options)
+			l := aws.NewLambdaClient(t, region)
+
+			_, e := l.GetFunction(&lambda.GetFunctionInput{
+				FunctionName: testutil.Strptr(outputs["lambda_arn"].(string)),
+			})
+			r.NoError(e)
+		},
 	}
 
 	test.Run(t)

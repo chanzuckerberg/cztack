@@ -21,11 +21,13 @@ variable owner {
 variable source_s3_bucket {
   type        = string
   description = "Bucket holding lambda source code."
+  default     = null
 }
 
 variable source_s3_key {
   type        = string
   description = "Key identifying location of code."
+  default     = null
 }
 
 variable handler {
@@ -51,4 +53,20 @@ variable timeout {
 variable environment {
   type        = map(string)
   description = "Map of environment variables."
+  default     = {}
+}
+
+variable kms_key_arn {
+  type    = string
+  default = null
+}
+
+variable source_code_hash {
+  type    = string
+  default = null
+}
+
+variable filename {
+  type    = string
+  default = null
 }

@@ -12,19 +12,29 @@ locals {
 }
 
 
-resource "aws_lambda_function" "lambda" {
+resource aws_lambda_function lambda {
+
   s3_bucket = var.source_s3_bucket
   s3_key    = var.source_s3_key
+
+  filename         = var.filename
+  source_code_hash = var.source_code_hash
 
   function_name = local.name
   handler       = var.handler
 
-  runtime = var.runtime
-  role    = var.role_arn
-  timeout = var.timeout
-  tags    = local.tags
+  runtime     = var.runtime
+  role        = var.role_arn
+  timeout     = var.timeout
+  kms_key_arn = var.kms_key_arn
 
-  environment {
-    variables = var.environment
+  dynamic environment {
+    for_each = length(var.environment) > 0 ? [0] : []
+
+    content {
+      variables = var.environment
+    }
   }
+
+  tags = local.tags
 }
