@@ -62,8 +62,7 @@ EOF
 }
 
 resource aws_cloudwatch_log_group log {
-  name              = "/aws/lambda/${local.name}"
-  retention_in_days = 14
+  name = "/aws/lambda/${local.name}"
 }
 
 resource aws_iam_policy lambda_logging {
@@ -81,7 +80,7 @@ resource aws_iam_policy lambda_logging {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:*",
+      "Resource": "${aws_cloudwatch_log_group.log.arn}",
       "Effect": "Allow"
     }
   ]
