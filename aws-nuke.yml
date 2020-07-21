@@ -24,10 +24,23 @@ accounts:
         #   value: 3600
       LambdaFunction:
         - "shared-infra-cztack-ci-bastion"
+      CloudWatchLogsLogGroup:
+        - /aws/lambda/shared-infra-cztack-ci-bastion
+        - /ec2/var/log/aide
+        - /ec2/var/log/audit
+        - /ec2/var/log/authlog
+        - /ec2/var/log/boot
+        - /ec2/var/log/cron
+        - /ec2/var/log/messages
+        - /ec2/var/log/secure
+        - /ec2/var/log/unattended-upgrades
+        - /ec2/var/log/yum
+        - shared-infra-cztack-ci-vpc-flow-logs
 
 resource-types:
   # we can add to this over time
   targets:
+    - CloudWatchLogsLogGroup
     - EC2Image
     - EC2Instance
     - EC2KeyPair
