@@ -19,7 +19,7 @@ func TestGitHubWebhooks(t *testing.T) {
 			owner := testutil.UniqueId()
 
 			route53ZoneID := testutil.EnvVar(testutil.EnvRoute53ZoneID)
-			certArn := testutil.EnvVar(testutil.EnvWildcardCertARN)
+			certArn := testutil.EnvVar(testutil.EnvWildcardCloudfrontCertARN)
 			subdomain := testutil.UniqueId()
 			domain := testutil.EnvVar(testutil.EnvRoute53ZoneName)
 
@@ -41,6 +41,7 @@ func TestGitHubWebhooks(t *testing.T) {
 				},
 			)
 		},
+		// Mode:     testutil.Plan,
 		Validate: func(t *testing.T, options *terraform.Options) {},
 		Cleanup: func(t *testing.T, options *terraform.Options) {
 			s := aws.NewSsmClient(t, testutil.DefaultRegion)

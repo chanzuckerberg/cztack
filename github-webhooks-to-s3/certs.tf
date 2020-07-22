@@ -1,10 +1,6 @@
 resource "aws_api_gateway_domain_name" "github" {
-  regional_certificate_arn = var.certificate_arn
-  domain_name              = var.fqdn
-
-  endpoint_configuration {
-    types = ["REGIONAL"]
-  }
+  certificate_arn = var.certificate_arn
+  domain_name     = var.fqdn
 }
 
 resource "aws_api_gateway_base_path_mapping" "github" {

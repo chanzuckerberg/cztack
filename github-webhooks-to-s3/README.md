@@ -1,10 +1,9 @@
 # GitHub Webhooks to S3
 
-This module will configure an aggregator for GitHub webhooks. It sets up an API Gateway with a Lambda that will authenticate incoming webhooks from GitHub and then use Firehose to store these events into S3. This module will configure the necessary IAM Roles, S3 bucket, API Gateway, and Firehose resources.
+This module will configure an aggregator for GitHub webhooks. It sets up an API Gateway with a Lambda that will authenticate incomming webhooks from GitHub and then use Firehose to store these events into S3. This module will configure the necessary IAM Roles, S3 bucket, API Gateway, and Firehose resources.
 
 ## Usage
-
-- Create a webhook you would like to capture in GitHub and point it at your `var.fqdn`.
+- Create a Webhook you would like to capture in GitHub and point it at your `var.fqdn`.
 - API Gateway relies on ACM Certificates in us-east-1
 - This module reads secrets from the AWS ParamStore using [chamber](https://github.com/segmentio/chamber).You can write the GitHub validation secret `AWS_PROFILE=<your profile> chamber write <var.project>-<var.env>-<var.service> github_secret <the secret>`
 

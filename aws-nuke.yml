@@ -10,6 +10,8 @@ account-blacklist:
 accounts:
   "119435350371":
     filters:
+      ACMCertificate:
+        - arn:aws:acm:us-east-1:119435350371:certificate/99f1fb68-4469-4280-b452-7193c8c787ca
       EC2KeyPair:
         - cztack-ci
         - edu
@@ -18,14 +20,13 @@ accounts:
           type: contains
           value: bastion
       EC2Instance:
-        # - property: "tag:env"
-          # value: "cztack-ci"
-        - type: dateOlderThan
-          value: 3600
+        - property: "tag:env"
+          value: "cztack-ci"
 
 resource-types:
   # we can add to this over time
   targets:
+    - ACMCertificate
     - APIGatewayAPIKey
     - APIGatewayClientCertificate
     - APIGatewayDomainName

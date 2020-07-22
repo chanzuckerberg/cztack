@@ -1,7 +1,8 @@
 module "bucket" {
   source = "../aws-s3-private-bucket"
 
-  bucket_name = local.name
+  bucket_name   = local.name
+  bucket_policy = ""
 
   project = var.project
   env     = var.env
