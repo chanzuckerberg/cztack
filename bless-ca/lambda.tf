@@ -25,7 +25,6 @@ module lambda {
   runtime          = "python3.6"
   kms_key_arn      = aws_kms_key.bless.arn
   timeout          = 10
-  role_arn         = aws_iam_role.bless.arn
 
   project = var.project
   env     = var.env
