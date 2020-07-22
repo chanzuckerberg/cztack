@@ -38,7 +38,7 @@ No requirements.
 | environment | Map of environment variables. | `map(string)` | `{}` | no |
 | filename | n/a | `string` | `null` | no |
 | handler | Name of the lambda handler. | `string` | n/a | yes |
-| kms\_key\_arn | n/a | `string` | `null` | no |
+| kms\_key\_arn | KMS key used to encrypt environment variables. | `string` | `null` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | role\_arn | AWS IAM Role the lambda should use. | `string` | n/a | yes |
