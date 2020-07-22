@@ -6,7 +6,4 @@ runner:
       - '%E%f:%l: %m'
       - '%C%.%#'
     level: warning
-  terraform-fmt:
-    cmd: terraform fmt -check -recursive
-    errorformat:
-      - '%f'
+

@@ -20,7 +20,7 @@ jobs:
       with:
         terraform_version: 0.12.24
         terraform_wrapper: "false"
-    - run: make lint
+    - run: make lint-ci
   # check-docs:
   #   name: check-docs
   #   runs-on: ubuntu-latest

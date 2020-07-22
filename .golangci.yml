@@ -1,4 +1,12 @@
 run:
-  skip-dirs:
-    - exp
-    - cmd/exp
+  timeout: 5m
+  tests: true
+issues:
+  max-same-issues: 0
+
+linters:
+  enable:
+    - gofmt
+    - whitespace
+    - unparam
+    - scopelint

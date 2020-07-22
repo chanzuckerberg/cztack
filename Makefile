@@ -19,6 +19,7 @@ all: clean fmt docs lint test
 setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/master/download.sh | sh
 	curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/master/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
+	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
 .PHONY: setup
 
 release: ## run a release
@@ -34,15 +35,18 @@ fmt:
 .PHONY: fmt
 
 lint:
-	terraform fmt -check -recursive
-
-	@UNFMT_FILES=$$(sh -c "gofmt -l . $*" 2>&1); \
-	test -z "$${UNFMT_FILES}" || (echo "unformated go files" && exit -1);
-
 	@for m in $(MODULES); do \
 		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
 	done
+	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode  nofilter
 .PHONY: lint
+
+lint-ci:
+	@for m in $(MODULES); do \
+		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
+	done
+	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -tee -fail-on-error
+.PHONY: lint-ci
 
 docs:
 	@for m in $(MODULES); do \

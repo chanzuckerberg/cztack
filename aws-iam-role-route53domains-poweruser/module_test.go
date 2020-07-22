@@ -9,7 +9,6 @@ import (
 )
 
 func TestAWSIAMRoleRoute53DomainsPoweruser(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
 
