@@ -29,15 +29,15 @@ release: ## run a release
 .PHONY: release
 
 fmt:
-	@for m in $(MODULES); do \
-		terraform fmt $$m; \
-	done
+	terraform fmt -recursive
+	go fmt ./...
 .PHONY: fmt
 
 lint:
-	@for m in $(MODULES); do \
-		terraform fmt -check $$m || exit $$?; \
-	done;
+	terraform fmt -check -recursive
+
+	@UNFMT_FILES=$$(sh -c "gofmt -l . $*" 2>&1); \
+	test -z "$${UNFMT_FILES}" || (echo "unformated go files" && exit -1);
 
 	@for m in $(MODULES); do \
 		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
