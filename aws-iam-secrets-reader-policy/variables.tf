@@ -9,6 +9,6 @@ variable iam_path {
 }
 
 variable secrets_arns {
-  type = list(string)
+  type        = list(string)
   description = "List of secrets ARNs for reading."
 }
