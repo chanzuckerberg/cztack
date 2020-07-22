@@ -16,14 +16,18 @@ data "bless_lambda" "code" {
   kmsauth_iam_group_name_format = var.kmsauth_iam_group_name_format
 }
 
-resource "aws_lambda_function" "bless" {
+module lambda {
+  source = "../aws-lambda-function"
+
   filename         = local.lambda_zip_file
-  function_name    = local.name
   handler          = "bless_lambda.lambda_handler"
   source_code_hash = data.bless_lambda.code.output_base64sha256
   runtime          = "python3.6"
   kms_key_arn      = aws_kms_key.bless.arn
   timeout          = 10
-  tags             = local.tags
-  role             = aws_iam_role.bless.arn
+
+  project = var.project
+  env     = var.env
+  service = var.service
+  owner   = var.owner
 }

@@ -2,6 +2,7 @@ package testutil
 
 import (
 	"errors"
+	"os"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -100,7 +101,18 @@ func (tt *Test) Run(t *testing.T) {
 	})
 
 	tt.Stage(t, "options", func() {
-		// TODO if options already exist at save point, fail?
+		fileExists := func(filename string) bool {
+			info, err := os.Stat(filename)
+			if os.IsNotExist(err) {
+				return false
+			}
+			return !info.IsDir()
+		}
+
+		if fileExists(test_structure.FormatTestDataPath(terraformDirectory, "TerraformOptions.json")) {
+			t.Log("options file exists, skipping generation")
+			return
+		}
 		options := tt.Options(t)
 		test_structure.SaveTerraformOptions(t, terraformDirectory, options)
 	})

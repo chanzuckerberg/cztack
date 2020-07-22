@@ -64,12 +64,12 @@ resource "aws_iam_role" "bless" {
 
 resource "aws_iam_role_policy" "lambda" {
   name   = "${local.name}-lambda"
-  role   = aws_iam_role.bless.id
+  role   = module.lambda.role_name
   policy = data.aws_iam_policy_document.lambda.json
 }
 
 module "logs_policy" {
   source    = "../aws-iam-policy-cwlogs"
-  role_name = aws_iam_role.bless.name
+  role_name = module.lambda.role_name
   iam_path  = var.iam_path
 }
