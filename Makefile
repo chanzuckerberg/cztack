@@ -43,11 +43,11 @@ lint:
 .PHONY: lint
 
 lint-ci-check:
-	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -fail-on-error -reporter=github-check -name=lint
+	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -fail-on-error -reporter=github-check -name=lint -filter-mode diff_context
 .PHONY: lint-ci
 
 lint-ci-review:
-	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -fail-on-error -reporter github-pr-review
+	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -fail-on-error -reporter github-pr-review -filter-mode diff_context
 .PHONY: lint-ci
 
 docs:
