@@ -23,7 +23,6 @@ func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
 					},
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

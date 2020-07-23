@@ -29,7 +29,6 @@ func TestIAMRoleBless(t *testing.T) {
 					"AWS_DEFAULT_REGION": region,
 				},
 			}
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

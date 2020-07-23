@@ -10,7 +10,6 @@ import (
 )
 
 func TestAWSIAMRoleReadOnly(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
 			curAcct := testutil.AWSCurrentAccountId(t)
@@ -27,7 +26,6 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 					},
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

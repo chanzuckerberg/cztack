@@ -11,10 +11,8 @@ import (
 )
 
 func TestDefaults(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
-
 			// vars are all encoded in the test terraform files
 			opt := testutil.Options(
 				testutil.DefaultRegion,

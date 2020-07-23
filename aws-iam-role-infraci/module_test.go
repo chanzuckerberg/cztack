@@ -10,7 +10,6 @@ import (
 )
 
 func TestAWSIAMRoleInfraCI(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
 			curAcct := testutil.AWSCurrentAccountId(t)
@@ -26,7 +25,6 @@ func TestAWSIAMRoleInfraCI(t *testing.T) {
 					"iam_path": fmt.Sprintf("/%s/", random.UniqueId()),
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

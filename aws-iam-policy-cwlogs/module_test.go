@@ -9,7 +9,6 @@ import (
 )
 
 func TestAWSIAMPolicyCwlogs(t *testing.T) {
-
 	roleName := testutil.CreateRole(t)
 	defer testutil.DeleteRole(t, roleName) //nolint
 
