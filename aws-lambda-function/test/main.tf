@@ -32,3 +32,7 @@ output arn {
 output invoke_arn {
   value = module.lambda.invoke_arn
 }
+
+output log_group_name {
+  value = module.lambda.log_group_name
+}
