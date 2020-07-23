@@ -46,7 +46,7 @@ lint-ci-check:
 	@for m in $(MODULES); do \
 		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
 	done
-	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -tee -fail-on-error -reporter=github-check -name=lint
+	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -tee -fail-on-error -reporter=github-check -name=lint -filter-mode added
 .PHONY: lint-ci
 
 lint-ci-review:
