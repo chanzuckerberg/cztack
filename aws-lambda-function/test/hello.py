@@ -1,8 +1,8 @@
+
 def hello(event, context):
-    print("event %s" % event)
-    print("context %s" % context)
     message = 'Hello {}!'.format(event['name'])
-    return message
+    print(message)
+    return {"message": message, "log_group_name": context.log_group_name, "log_stream_name": context.log_stream_name, "aws_request_id": context.aws_request_id}
 
 
 if __name__ == '__main__':

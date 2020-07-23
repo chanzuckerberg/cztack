@@ -194,3 +194,11 @@ func RandomString(chars string, length int) string {
 func Strptr(in string) *string {
 	return &in
 }
+
+func Boolptr(in bool) *bool {
+	return &in
+}
+
+func Int64ptr(in int64) *int64 {
+	return &in
+}
