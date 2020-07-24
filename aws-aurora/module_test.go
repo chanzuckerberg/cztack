@@ -8,7 +8,6 @@ import (
 )
 
 func TestAWSAurora(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
 			return testutil.Options(
@@ -30,7 +29,6 @@ func TestAWSAurora(t *testing.T) {
 					"database_subnet_group": testutil.UniqueId(),
 				},
 			)
-
 		},
 
 		Mode: testutil.Plan,
@@ -38,5 +36,4 @@ func TestAWSAurora(t *testing.T) {
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
 	test.Run(t)
-
 }

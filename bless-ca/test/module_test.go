@@ -42,7 +42,6 @@ func TestBlessCAInitAndApply(t *testing.T) {
 					"test_user_name":             fmt.Sprintf("bless-%s", testutil.UniqueId()),
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {
 			r := require.New(t)

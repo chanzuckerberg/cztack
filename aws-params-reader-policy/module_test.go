@@ -12,11 +12,9 @@ import (
 
 func init() {
 	log.SetLevel(log.DebugLevel)
-
 }
 
 func TestAWSParamsSecretReaderPolicy(t *testing.T) {
-
 	curAcct := testutil.AWSCurrentAccountId(t)
 
 	log.Debug("SETUP ROLE")
@@ -75,5 +73,4 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 	defer testutil.Cleanup(t, terraformOptions)
 
 	testutil.Run(t, terraformOptions)
-
 }

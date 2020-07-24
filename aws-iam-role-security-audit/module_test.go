@@ -10,10 +10,8 @@ import (
 )
 
 func TestAWSIAMRoleReadOnly(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
-
 			curAcct := testutil.AWSCurrentAccountId(t)
 
 			return testutil.Options(
@@ -27,7 +25,6 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 					"iam_path": fmt.Sprintf("/%s/", random.UniqueId()),
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

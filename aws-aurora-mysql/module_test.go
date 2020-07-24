@@ -43,7 +43,6 @@ func TestAWSAuroraMysqlDefaults(t *testing.T) {
 					"skip_final_snapshot":   true,
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

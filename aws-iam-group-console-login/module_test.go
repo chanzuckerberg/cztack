@@ -10,7 +10,6 @@ import (
 )
 
 func TestAWSIAMGroupConsoleLogin(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
 			return testutil.Options(

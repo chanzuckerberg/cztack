@@ -11,7 +11,6 @@ import (
 )
 
 func TestAWSRedisNode(t *testing.T) {
-
 	test := testutil.Test{
 
 		Options: func(t *testing.T) *terraform.Options {

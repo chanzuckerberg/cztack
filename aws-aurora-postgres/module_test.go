@@ -19,6 +19,7 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 	versions := []string{"9.6", "10.12", "11.7"}
 
 	for _, version := range versions {
+		v := version
 		t.Run(version, func(t *testing.T) {
 			test := testutil.Test{
 				Options: func(t *testing.T) *terraform.Options {
@@ -50,10 +51,9 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 							"ingress_cidr_blocks":   []string{ingressCidrBlocks},
 							"database_name":         databaseName,
 							"skip_final_snapshot":   true,
-							"engine_version":        version,
+							"engine_version":        v,
 						},
 					)
-
 				},
 				Validate: func(t *testing.T, options *terraform.Options) {},
 			}
