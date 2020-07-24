@@ -1,6 +1,8 @@
 name: CI
-"on":
-- push
+
+on:
+- pull_request
+
 jobs:
   check-mod:
     name: check-mod
@@ -20,7 +22,12 @@ jobs:
       with:
         terraform_version: 0.12.24
         terraform_wrapper: "false"
-    - run: make lint
+    - name: setup
+      run: make setup
+    - name: linters
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+      run: make lint-ci
   # check-docs:
   #   name: check-docs
   #   runs-on: ubuntu-latest

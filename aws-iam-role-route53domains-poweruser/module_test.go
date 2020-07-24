@@ -9,10 +9,8 @@ import (
 )
 
 func TestAWSIAMRoleRoute53DomainsPoweruser(t *testing.T) {
-
 	test := testutil.Test{
 		Options: func(t *testing.T) *terraform.Options {
-
 			curAcct := testutil.AWSCurrentAccountId(t)
 
 			return testutil.Options(
@@ -26,7 +24,6 @@ func TestAWSIAMRoleRoute53DomainsPoweruser(t *testing.T) {
 					},
 				},
 			)
-
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
