@@ -62,7 +62,8 @@ EOF
 }
 
 resource aws_cloudwatch_log_group log {
-  name = "/aws/lambda/${local.name}"
+  name              = "/aws/lambda/${local.name}"
+  retention_in_days = var.log_retention_in_days
 }
 
 data aws_region current {}

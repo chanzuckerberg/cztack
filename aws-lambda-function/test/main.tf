@@ -19,6 +19,8 @@ module lambda {
   filename         = data.archive_file.notifier.output_path
   source_code_hash = data.archive_file.notifier.output_base64sha256
 
+  log_retention_in_days = 1
+
   project = random_string.random.result
   env     = random_string.random.result
   service = random_string.random.result
