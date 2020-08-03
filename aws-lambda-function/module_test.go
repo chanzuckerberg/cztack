@@ -107,6 +107,14 @@ func TestDefaults(t *testing.T) {
 			})
 			r.NoError(err)
 			r.True(found)
+
+			// log retention
+			out, err := cw.DescribeLogGroups(&cloudwatchlogs.DescribeLogGroupsInput{
+				LogGroupNamePrefix: &data.LogGroupName,
+			})
+			r.NoError(err)
+			r.Len(out.LogGroups, 1)
+			r.Equal(int64(1), *out.LogGroups[0].RetentionInDays)
 		},
 	}
 
