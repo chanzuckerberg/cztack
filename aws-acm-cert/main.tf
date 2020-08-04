@@ -7,7 +7,7 @@ locals {
     managedBy = "terraform"
   }
 
-  cert_validation_count = length(var.cert_subject_alternative_names) + 1
+  cert_validation_count = var.cert_subject_alternative_names_count + 1
 }
 
 resource "aws_acm_certificate" "cert" {

@@ -8,13 +8,15 @@ Currently that just means creating an KMS key for encrypting the parameters stor
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | < 3.0.0 |
 
 ## Inputs
 

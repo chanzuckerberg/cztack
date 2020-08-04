@@ -7,13 +7,13 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.44.0 |
+| aws | >= 2.44.0, < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.44.0 |
+| aws | >= 2.44.0, < 3.0.0 |
 
 ## Inputs
 

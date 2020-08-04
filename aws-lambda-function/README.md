@@ -22,13 +22,15 @@ module lambda {
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | < 3.0.0 |
 
 ## Inputs
 
@@ -39,20 +41,23 @@ No requirements.
 | filename | n/a | `string` | `null` | no |
 | handler | Name of the lambda handler. | `string` | n/a | yes |
 | kms\_key\_arn | KMS key used to encrypt environment variables. | `string` | `null` | no |
+| log\_retention\_in\_days | n/a | `number` | `null` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| role\_arn | AWS IAM Role the lambda should use. | `string` | n/a | yes |
 | runtime | Lambda language runtime. | `string` | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | source\_code\_hash | n/a | `string` | `null` | no |
 | source\_s3\_bucket | Bucket holding lambda source code. | `string` | `null` | no |
 | source\_s3\_key | Key identifying location of code. | `string` | `null` | no |
-| timeout | Execution timeout for the lambda. | `number` | n/a | yes |
+| timeout | Execution timeout for the lambda. | `number` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | arn | n/a |
+| invoke\_arn | n/a |
+| log\_group\_name | n/a |
+| role\_name | n/a |
 
 <!-- END -->
