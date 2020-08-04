@@ -49,7 +49,7 @@ module "cert" {
 | aws\_route53\_zone\_id | n/a | `string` | n/a | yes |
 | cert\_domain\_name | Like www.foo.bar.com or \*.foo.bar.com | `string` | n/a | yes |
 | cert\_subject\_alternative\_names | A map of <alternative\_domain:route53\_zone\_id> | `map(string)` | `{}` | no |
-| cert\_subject\_alternative\_names\_count | The size of var.cert\_subject\_alternative\_names. Since var.cert\_subject\_alternative\_names can have dynamic keys/values we must hint terraform on its size. If you have no SANs then this should be 0. | `number` | n/a | yes |
+| cert\_subject\_alternative\_names\_count | The size of var.cert\_subject\_alternative\_names. Since var.cert\_subject\_alternative\_names can have dynamic keys/values we must hint terraform on its size. If you have no SANs then this should be 0. | `number` | `0` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
