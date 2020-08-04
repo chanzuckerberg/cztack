@@ -34,7 +34,7 @@ module "db" {
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.44.0 |
+| aws | >= 2.44.0, < 3.0.0 |
 
 ## Providers
 

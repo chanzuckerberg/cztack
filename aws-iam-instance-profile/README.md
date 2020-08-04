@@ -31,13 +31,15 @@ resource "aws_instance" "instance" {
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | < 3.0.0 |
 
 ## Inputs
 

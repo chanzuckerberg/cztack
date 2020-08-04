@@ -49,3 +49,9 @@ variable "subject_alternative_names_order" {
   description = "Order to list the subject alternative names in the ACM cert. Workaround for https://github.com/terraform-providers/terraform-provider-aws/issues/8531"
   default     = null
 }
+
+variable "cert_subject_alternative_names_count" {
+  type        = number
+  description = "The size of var.cert_subject_alternative_names. Since var.cert_subject_alternative_names can have dynamic keys/values we must hint terraform on its size. If you have no SANs then this should be 0."
+  default     = 0
+}

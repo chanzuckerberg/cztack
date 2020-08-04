@@ -49,10 +49,11 @@ func TestAWSACMCertDefaults(t *testing.T) {
 					"service": service,
 					"owner":   owner,
 
-					"cert_domain_name":               certDomainName,
-					"aws_route53_zone_id":            route53ZoneID,
-					"validation_record_ttl":          5,
-					"cert_subject_alternative_names": alternativeNames,
+					"cert_domain_name":                     certDomainName,
+					"aws_route53_zone_id":                  route53ZoneID,
+					"validation_record_ttl":                5,
+					"cert_subject_alternative_names":       alternativeNames,
+					"cert_subject_alternative_names_count": len(alternativeNames),
 				},
 			)
 		},

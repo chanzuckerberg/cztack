@@ -13,13 +13,15 @@ in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html)
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | < 3.0.0 |
 
 ## Inputs
 

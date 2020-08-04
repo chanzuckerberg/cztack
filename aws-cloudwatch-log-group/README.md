@@ -7,13 +7,15 @@ By default the name is `${var.project}-${var.env}-${var.service}`, but you can o
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | < 3.0.0 |
 
 ## Inputs
 
