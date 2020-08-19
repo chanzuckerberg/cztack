@@ -1,4 +1,4 @@
-# AWS SSM Params Writer (DEPRECATED)
+# AWS SSM Params Writer
 
 This module will set encrypted string parameters in the AWS SSM parameter store. Designed to be used in combination with
 [Chamber](https://github.com/segmentio/chamber) to send variables that are output by a Terraform run to a process via

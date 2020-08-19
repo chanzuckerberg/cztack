@@ -1,4 +1,4 @@
-# AWS Params Writer
+# AWS Params Writer (DEPRECATED)
 
 __*Deprecated. Please use `aws-ssm-params-writer` module for new code*__
 
