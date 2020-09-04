@@ -29,21 +29,19 @@ module "s3-bucket" {
 <!-- START -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
+No requirements.
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_aws-cloudfront-logs-bucket"></a> [aws-cloudfront-logs-bucket](#module\_aws-cloudfront-logs-bucket) | ../aws-s3-private-bucket |  |
+| <a name="module_aws-cloudfront-logs-bucket"></a> [aws-cloudfront-logs-bucket](#module\_aws-cloudfront-logs-bucket) | ../aws-s3-private-bucket | n/a |
 
 ## Resources
 
