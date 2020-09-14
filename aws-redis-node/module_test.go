@@ -13,7 +13,7 @@ import (
 func TestAWSRedisNode(t *testing.T) {
 	test := testutil.Test{
 
-		Options: func(t *testing.T) *terraform.Options {
+		Setup: func(t *testing.T) *terraform.Options {
 			privateSubnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
 			log.Printf("subnets %#v\n", privateSubnets)
 			log.Printf("subnets %#v\n", os.Getenv("PRIVATE_SUBNETS"))

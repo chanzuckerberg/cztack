@@ -12,7 +12,7 @@ import (
 
 func TestPrivateBucketDefaults(t *testing.T) {
 	test := &testutil.Test{
-		Options: func(t *testing.T) *terraform.Options {
+		Setup: func(t *testing.T) *terraform.Options {
 			project := testutil.UniqueId()
 			env := testutil.UniqueId()
 			service := testutil.UniqueId()

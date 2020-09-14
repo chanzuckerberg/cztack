@@ -10,7 +10,7 @@ import (
 func TestModule(t *testing.T) {
 	t.Skip("remove this for real tests")
 	test := testutil.Test{
-		Options:  func(t *testing.T) *terraform.Options { return nil },
+		Setup:    func(t *testing.T) *terraform.Options { return nil },
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
 

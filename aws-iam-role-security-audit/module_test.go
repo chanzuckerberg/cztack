@@ -11,7 +11,7 @@ import (
 
 func TestAWSIAMRoleReadOnly(t *testing.T) {
 	test := testutil.Test{
-		Options: func(t *testing.T) *terraform.Options {
+		Setup: func(t *testing.T) *terraform.Options {
 			curAcct := testutil.AWSCurrentAccountId(t)
 
 			return testutil.Options(
