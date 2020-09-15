@@ -23,8 +23,8 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 		TerraformDir: "../aws-iam-role-crossacct",
 
 		Vars: map[string]interface{}{
-			"role_name":         random.UniqueID(),
-			"iam_path":          fmt.Sprintf("/%s/", random.UniqueID()),
+			"role_name":         random.UniqueId(),
+			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 			"source_account_id": curAcct,
 		},
 		EnvVars: map[string]string{
@@ -40,14 +40,14 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 
 	log.Debug("SETUP Secrets policy")
 
-	keyAlias := random.UniqueID()
+	keyAlias := random.UniqueId()
 	keyTerraformOptions := &terraform.Options{
 		TerraformDir: "../aws-params-secrets-setup",
 
 		Vars: map[string]interface{}{
 			"alias_name": keyAlias,
-			"owner":      random.UniqueID(),
-			"project":    random.UniqueID(),
+			"owner":      random.UniqueId(),
+			"project":    random.UniqueId(),
 		},
 		EnvVars: map[string]string{
 			"AWS_DEFAULT_REGION": tftest.IAMRegion,
@@ -62,9 +62,9 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 	terraformOptions := tftest.Options(
 		tftest.IAMRegion,
 		map[string]interface{}{
-			"project":                   random.UniqueID(),
-			"env":                       random.UniqueID(),
-			"service":                   random.UniqueID(),
+			"project":                   random.UniqueId(),
+			"env":                       random.UniqueId(),
+			"service":                   random.UniqueId(),
 			"role_name":                 roleName,
 			"parameter_store_key_alias": keyAlias,
 		},

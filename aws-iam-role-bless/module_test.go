@@ -18,10 +18,10 @@ func TestIAMRoleBless(t *testing.T) {
 				TerraformDir: ".",
 
 				Vars: map[string]interface{}{
-					"role_name":         random.UniqueID(),
+					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
 					"tags": map[string]string{
-						"test": random.UniqueID(),
+						"test": random.UniqueId(),
 					},
 					"bless_lambda_arns": []string{"arn:aws:lambda:us-west-2:111111111111:function:test"},
 				},

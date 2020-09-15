@@ -17,10 +17,10 @@ func TestAWSIAMRoleCrossAcct(t *testing.T) {
 				tftest.IAMRegion,
 
 				map[string]interface{}{
-					"role_name":         random.UniqueID(),
+					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
 					"tags": map[string]string{
-						"test": random.UniqueID(),
+						"test": random.UniqueId(),
 					},
 				},
 			)

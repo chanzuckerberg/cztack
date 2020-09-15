@@ -18,11 +18,11 @@ func TestAWSIAMRoleCloudfrontPoweruser(t *testing.T) {
 				tftest.IAMRegion,
 
 				map[string]interface{}{
-					"role_name":         random.UniqueID(),
-					"iam_path":          fmt.Sprintf("/%s/", random.UniqueID()),
+					"role_name":         random.UniqueId(),
+					"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 					"source_account_id": curAcct,
 					"tags": map[string]string{
-						"test": random.UniqueID(),
+						"test": random.UniqueId(),
 					},
 				},
 			)

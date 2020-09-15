@@ -17,12 +17,12 @@ func TestAWSIAMRoleInfraCI(t *testing.T) {
 			return tftest.Options(
 				tftest.IAMRegion,
 				map[string]interface{}{
-					"role_name":         random.UniqueID(),
+					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
 					"tags": map[string]string{
-						"test": random.UniqueID(),
+						"test": random.UniqueId(),
 					},
-					"iam_path": fmt.Sprintf("/%s/", random.UniqueID()),
+					"iam_path": fmt.Sprintf("/%s/", random.UniqueId()),
 				},
 			)
 		},

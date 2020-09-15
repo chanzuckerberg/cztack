@@ -18,11 +18,11 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 				tftest.IAMRegion,
 
 				map[string]interface{}{
-					"role_name":         random.UniqueID(),
+					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
-					"iam_path":          fmt.Sprintf("/%s/", random.UniqueID()),
+					"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 					"tags": map[string]string{
-						"test": random.UniqueID(),
+						"test": random.UniqueId(),
 					},
 				},
 			)

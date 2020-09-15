@@ -16,7 +16,7 @@ func TestAWSIAMPolicyCwlogs(t *testing.T) {
 		tftest.IAMRegion,
 		map[string]interface{}{
 			"role_name": roleName,
-			"iam_path":  fmt.Sprintf("/%s/", random.UniqueID()),
+			"iam_path":  fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 	)
 
