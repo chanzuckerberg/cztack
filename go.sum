@@ -67,8 +67,8 @@ github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc/go.mod h1:paBW
 github.com/cenkalti/backoff v2.2.1+incompatible/go.mod h1:90ReRw6GdpyfrHakVjL/QHaoyV4aDUVVkXQJJJ3NXXM=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
-github.com/chanzuckerberg/go-misc v0.0.0-20200915194757-c2eb1ce5e7df h1:wHWQL1RDzxX/gwzgYMtxPn8aOp6y7G5Ne5TjKqMvABc=
-github.com/chanzuckerberg/go-misc v0.0.0-20200915194757-c2eb1ce5e7df/go.mod h1:MO6WhK6RITohpOZ0Q+ey7XLfTfMgnDaIQ4L+26JaXyg=
+github.com/chanzuckerberg/go-misc v0.0.0-20200915205749-885671466208 h1:5bIGDLMxmvNRi2q5k40iVuJRocDeagc1SOuVGhvTkbw=
+github.com/chanzuckerberg/go-misc v0.0.0-20200915205749-885671466208/go.mod h1:MO6WhK6RITohpOZ0Q+ey7XLfTfMgnDaIQ4L+26JaXyg=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
