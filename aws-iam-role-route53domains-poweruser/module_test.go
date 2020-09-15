@@ -3,18 +3,18 @@ package test
 import (
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSIAMRoleRoute53DomainsPoweruser(t *testing.T) {
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			curAcct := testutil.AWSCurrentAccountId(t)
+			curAcct := tftest.AWSCurrentAccountId(t)
 
-			return testutil.Options(
-				testutil.IAMRegion,
+			return tftest.Options(
+				tftest.IAMRegion,
 
 				map[string]interface{}{
 					"role_name":         random.UniqueId(),

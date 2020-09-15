@@ -3,16 +3,16 @@ package test
 import (
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestIAMRoleBless(t *testing.T) {
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			region := testutil.IAMRegion
-			curAcct := testutil.AWSCurrentAccountId(t)
+			region := tftest.IAMRegion
+			curAcct := tftest.AWSCurrentAccountId(t)
 
 			return &terraform.Options{
 				TerraformDir: ".",

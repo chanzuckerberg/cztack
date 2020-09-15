@@ -3,31 +3,31 @@ package test
 import (
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSAuroraMysqlDefaults(t *testing.T) {
 	t.Parallel()
 
-	test := testutil.Test{
+	test := tftest.Test{
 
 		Setup: func(t *testing.T) *terraform.Options {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+			project := tftest.UniqueId()
+			env := tftest.UniqueId()
+			service := tftest.UniqueId()
+			owner := tftest.UniqueId()
 
-			vpc := testutil.EnvVar(testutil.EnvVPCID)
-			databaseSubnetGroup := testutil.EnvVar(testutil.EnvDatabaseSubnetGroup)
-			ingressCidrBlocks := testutil.EnvVar(testutil.EnvVPCCIDRBlock)
+			vpc := tftest.EnvVar(tftest.EnvVPCID)
+			databaseSubnetGroup := tftest.EnvVar(tftest.EnvDatabaseSubnetGroup)
+			ingressCidrBlocks := tftest.EnvVar(tftest.EnvVPCCIDRBlock)
 
-			databasePassword := testutil.RandomString(testutil.AlphaNum, 8)
-			databaseUsername := testutil.RandomString(testutil.Alpha, 8)
-			databaseName := testutil.UniqueId()
+			databasePassword := tftest.RandomString(tftest.AlphaNum, 8)
+			databaseUsername := tftest.RandomString(tftest.Alpha, 8)
+			databaseName := tftest.UniqueId()
 
-			return testutil.Options(
-				testutil.DefaultRegion,
+			return tftest.Options(
+				tftest.DefaultRegion,
 				map[string]interface{}{
 					"project": project,
 					"env":     env,

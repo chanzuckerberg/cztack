@@ -3,16 +3,16 @@ package test
 import (
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSIAMInstanceProfile(t *testing.T) {
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			return testutil.Options(
-				testutil.IAMRegion,
+			return tftest.Options(
+				tftest.IAMRegion,
 				map[string]interface{}{
 					"name_prefix":      random.UniqueId(),
 					"iam_path":         "/foo/",

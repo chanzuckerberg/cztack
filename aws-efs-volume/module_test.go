@@ -3,22 +3,22 @@ package test
 import (
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestEfsVolume(t *testing.T) {
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+			project := tftest.UniqueId()
+			env := tftest.UniqueId()
+			service := tftest.UniqueId()
+			owner := tftest.UniqueId()
 
-			volumeName := testutil.UniqueId()
+			volumeName := tftest.UniqueId()
 
-			return testutil.Options(
-				testutil.DefaultRegion,
+			return tftest.Options(
+				tftest.DefaultRegion,
 				map[string]interface{}{
 					"project": project,
 					"env":     env,
@@ -26,8 +26,8 @@ func TestEfsVolume(t *testing.T) {
 					"owner":   owner,
 
 					"volume_name": volumeName,
-					"vpc_id":      testutil.EnvVar(testutil.EnvVPCID),
-					"subnet_ids":  testutil.ListEnvVar("PRIVATE_SUBNETS"),
+					"vpc_id":      tftest.EnvVar(tftest.EnvVPCID),
+					"subnet_ids":  tftest.ListEnvVar("PRIVATE_SUBNETS"),
 				},
 			)
 		},

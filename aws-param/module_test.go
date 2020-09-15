@@ -6,7 +6,7 @@ import (
 
 func TestAWSParamSecret(t *testing.T) {
 	// TODO needs variables set to pass
-	// test := testutil.Test{
+	// test := tftest.Test{
 	// 	Options:  func(t *testing.T) *terraform.Options { return nil },
 	// 	Validate: func(t *testing.T, options *terraform.Options) {},
 	// }

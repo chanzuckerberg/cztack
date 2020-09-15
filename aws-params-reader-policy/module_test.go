@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	log "github.com/sirupsen/logrus"
@@ -15,7 +15,7 @@ func init() {
 }
 
 func TestAWSParamsSecretReaderPolicy(t *testing.T) {
-	curAcct := testutil.AWSCurrentAccountId(t)
+	curAcct := tftest.AWSCurrentAccountId(t)
 
 	log.Debug("SETUP ROLE")
 
@@ -28,13 +28,13 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"source_account_id": curAcct,
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": testutil.IAMRegion,
+			"AWS_DEFAULT_REGION": tftest.IAMRegion,
 		},
 	}
 
-	defer testutil.Cleanup(t, setupTerraformOptions)
+	defer tftest.Cleanup(t, setupTerraformOptions)
 
-	testutil.Run(t, setupTerraformOptions)
+	tftest.Run(t, setupTerraformOptions)
 
 	roleName := terraform.Output(t, setupTerraformOptions, "role_name")
 
@@ -50,17 +50,17 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 			"project":    random.UniqueId(),
 		},
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": testutil.IAMRegion,
+			"AWS_DEFAULT_REGION": tftest.IAMRegion,
 		},
 	}
 
-	defer testutil.Cleanup(t, keyTerraformOptions)
+	defer tftest.Cleanup(t, keyTerraformOptions)
 
-	testutil.Run(t, keyTerraformOptions)
+	tftest.Run(t, keyTerraformOptions)
 
 	// Actual test
-	terraformOptions := testutil.Options(
-		testutil.IAMRegion,
+	terraformOptions := tftest.Options(
+		tftest.IAMRegion,
 		map[string]interface{}{
 			"project":                   random.UniqueId(),
 			"env":                       random.UniqueId(),
@@ -70,7 +70,7 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 		},
 	)
 
-	defer testutil.Cleanup(t, terraformOptions)
+	defer tftest.Cleanup(t, terraformOptions)
 
-	testutil.Run(t, terraformOptions)
+	tftest.Run(t, terraformOptions)
 }

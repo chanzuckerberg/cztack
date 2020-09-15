@@ -6,29 +6,29 @@ import (
 	"os"
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAWSRedisNode(t *testing.T) {
-	test := testutil.Test{
+	test := tftest.Test{
 
 		Setup: func(t *testing.T) *terraform.Options {
-			privateSubnets := testutil.ListEnvVar("PRIVATE_SUBNETS")
+			privateSubnets := tftest.ListEnvVar("PRIVATE_SUBNETS")
 			log.Printf("subnets %#v\n", privateSubnets)
 			log.Printf("subnets %#v\n", os.Getenv("PRIVATE_SUBNETS"))
-			vpc := testutil.EnvVar(testutil.EnvVPCID)
+			vpc := tftest.EnvVar(tftest.EnvVPCID)
 
-			sg := testutil.CreateSecurityGroup(t, testutil.DefaultRegion, vpc)
+			sg := tftest.CreateSecurityGroup(t, tftest.DefaultRegion, vpc)
 
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+			project := tftest.UniqueId()
+			env := tftest.UniqueId()
+			service := tftest.UniqueId()
+			owner := tftest.UniqueId()
 
-			az := fmt.Sprintf("%sa", testutil.DefaultRegion)
+			az := fmt.Sprintf("%sa", tftest.DefaultRegion)
 
-			return testutil.Options(testutil.DefaultRegion,
+			return tftest.Options(tftest.DefaultRegion,
 				map[string]interface{}{
 					"project": project,
 					"env":     env,
@@ -45,7 +45,7 @@ func TestAWSRedisNode(t *testing.T) {
 		Validate: func(t *testing.T, options *terraform.Options) {},
 
 		Cleanup: func(t *testing.T, options *terraform.Options) {
-			testutil.DeleteSecurityGroup(t, testutil.DefaultRegion, options.Vars["ingress_security_group_ids"].([]interface{})[0].(string))
+			tftest.DeleteSecurityGroup(t, tftest.DefaultRegion, options.Vars["ingress_security_group_ids"].([]interface{})[0].(string))
 		},
 	}
 

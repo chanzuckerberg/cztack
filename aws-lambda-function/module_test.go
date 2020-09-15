@@ -10,18 +10,18 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go/service/lambda"
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
 )
 
 func TestDefaults(t *testing.T) {
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
 			// vars are all encoded in the test terraform files
-			opt := testutil.Options(
-				testutil.DefaultRegion,
+			opt := tftest.Options(
+				tftest.DefaultRegion,
 				map[string]interface{}{},
 			)
 			opt.TerraformDir = "./test"
@@ -29,19 +29,19 @@ func TestDefaults(t *testing.T) {
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {
 			r := require.New(t)
-			l := aws.NewLambdaClient(t, testutil.DefaultRegion)
+			l := aws.NewLambdaClient(t, tftest.DefaultRegion)
 
 			arn := terraform.Output(t, options, "arn")
 			invokeArn := terraform.Output(t, options, "invoke_arn")
 
 			r.NotEmpty(invokeArn)
 			_, e := l.GetFunction(&lambda.GetFunctionInput{
-				FunctionName: testutil.Strptr(arn),
+				FunctionName: tftest.Strptr(arn),
 			})
 
 			r.NoError(e)
 
-			username := testutil.UniqueId()
+			username := tftest.UniqueId()
 
 			payload := struct {
 				Name string `json:"name"`
@@ -51,8 +51,8 @@ func TestDefaults(t *testing.T) {
 			r.NoError(e)
 
 			ret, e := l.Invoke(&lambda.InvokeInput{
-				FunctionName: testutil.Strptr(arn),
-				LogType:      testutil.Strptr("Tail"),
+				FunctionName: tftest.Strptr(arn),
+				LogType:      tftest.Strptr("Tail"),
 				Payload:      payloadBytes,
 			})
 			r.NoError(e)
@@ -87,12 +87,12 @@ func TestDefaults(t *testing.T) {
 			time.Sleep(10 * time.Second)
 
 			// test logs via cloudwatch logs
-			cw := aws.NewCloudWatchLogsClient(t, testutil.DefaultRegion)
+			cw := aws.NewCloudWatchLogsClient(t, tftest.DefaultRegion)
 			found := false
 			err := cw.GetLogEventsPages(&cloudwatchlogs.GetLogEventsInput{
 				LogGroupName:  &data.LogGroupName,
 				LogStreamName: &data.LogStreamName,
-				Limit:         testutil.Int64ptr(10000),
+				Limit:         tftest.Int64ptr(10000),
 			}, func(evs *cloudwatchlogs.GetLogEventsOutput, _ bool) bool {
 				for _, ev := range evs.Events {
 					if strings.Contains(*ev.Message, username) {
