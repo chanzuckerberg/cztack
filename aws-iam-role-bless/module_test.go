@@ -10,7 +10,7 @@ import (
 
 func TestIAMRoleBless(t *testing.T) {
 	test := testutil.Test{
-		Options: func(t *testing.T) *terraform.Options {
+		Setup: func(t *testing.T) *terraform.Options {
 			region := testutil.IAMRegion
 			curAcct := testutil.AWSCurrentAccountId(t)
 

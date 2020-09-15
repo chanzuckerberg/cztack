@@ -19,7 +19,7 @@ const (
 )
 
 type Test struct {
-	Options  func(*testing.T) *terraform.Options
+	Setup    func(*testing.T) *terraform.Options
 	Validate func(*testing.T, *terraform.Options)
 	Cleanup  func(*testing.T, *terraform.Options)
 
@@ -30,8 +30,8 @@ type Test struct {
 }
 
 func (tt *Test) validate() error {
-	if tt.Options == nil {
-		return errors.New("Options must be set")
+	if tt.Setup == nil {
+		return errors.New("Setup must be set")
 	}
 
 	if tt.Validate == nil {
@@ -113,7 +113,7 @@ func (tt *Test) Run(t *testing.T) {
 			t.Log("options file exists, skipping generation")
 			return
 		}
-		options := tt.Options(t)
+		options := tt.Setup(t)
 		test_structure.SaveTerraformOptions(t, terraformDirectory, options)
 	})
 

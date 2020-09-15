@@ -10,7 +10,7 @@ import (
 
 func TestAWSCloudWatchLogGroup(t *testing.T) {
 	test := testutil.Test{
-		Options: func(t *testing.T) *terraform.Options {
+		Setup: func(t *testing.T) *terraform.Options {
 			return testutil.Options(
 				testutil.DefaultRegion,
 				map[string]interface{}{

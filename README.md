@@ -109,7 +109,7 @@ To create a new module, copy the `module-template` directory and modify as you s
 A few notes on writing test for this repo. Note that this is new ground for us, so this will be a work in progress.
 
 * To make modules testable, all fields that have a unique constraint need to be parameterizeable. Otherwise concurrent tests will conflict.
-* It is tempting in testing module A to use module B to set up some context, but because terragrunt will just store the statefile locally, you can have a conflict.
+* It is tempting in testing module A to use module B to set up some context, but because terraform will just store the statefile locally, you can have a conflict.
   * We've tried to avoid this for now and set up context more directly
   * And also to not run tests in parrallel
   * and to clean up state files before and after each run
@@ -117,6 +117,7 @@ A few notes on writing test for this repo. Note that this is new ground for us, 
 * AWS IAM is eventually consistent and supposedly is homed in us-east-1, so its probably best to run all tests that use IAM in that region.
 
 #### Test Dependencies
+
 * [go](https://golang.org/doc/install)
 * [terraform](https://www.terraform.io/intro/getting-started/install.html)
 * [terraform-provider-bless](https://github.com/chanzuckerberg/terraform-provider-bless/releases) - Place it in the same directory as your terraform executable. `dirname \`which terraform\``

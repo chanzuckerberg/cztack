@@ -22,7 +22,7 @@ func TestBlessCAInitAndApply(t *testing.T) {
 	region := testutil.IAMRegion
 
 	test := testutil.Test{
-		Options: func(t *testing.T) *terraform.Options {
+		Setup: func(t *testing.T) *terraform.Options {
 			project := testutil.UniqueId()
 			env := testutil.UniqueId()
 			service := "bless" // other components in the name are random so keep this to identify

@@ -22,7 +22,7 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 		v := version
 		t.Run(version, func(t *testing.T) {
 			test := testutil.Test{
-				Options: func(t *testing.T) *terraform.Options {
+				Setup: func(t *testing.T) *terraform.Options {
 					project := testutil.UniqueId()
 					env := testutil.UniqueId()
 					service := testutil.UniqueId()
