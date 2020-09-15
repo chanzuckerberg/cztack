@@ -80,7 +80,6 @@ jobs:
           bless-ca/test,
           github-webhooks-to-s3,
           module-template,
-          testutil,
         ]
     name: test ${{ matrix.module }}
     runs-on: ubuntu-latest
