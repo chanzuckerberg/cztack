@@ -1,9 +1,9 @@
 locals {
-  name = "${var.project}-${var.env}-${var.service}"
+  name = var.function_name != null ? var.function_name : "${var.project}-${var.env}-${var.service}"
 
   tags = {
     managedBy = "terraform"
-    Name      = local.name
+    Name      = var.function_name
     env       = var.env
     owner     = var.owner
     service   = var.service

@@ -72,3 +72,8 @@ variable log_retention_in_days {
   type    = number
   default = null
 }
+
+variable function_name {
+  type    = string
+  default = null
+}
