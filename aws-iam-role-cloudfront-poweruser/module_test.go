@@ -12,17 +12,17 @@ import (
 func TestAWSIAMRoleCloudfrontPoweruser(t *testing.T) {
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			curAcct := tftest.AWSCurrentAccountId(t)
+			curAcct := tftest.AWSCurrentAccountID(t)
 
 			return tftest.Options(
 				tftest.IAMRegion,
 
 				map[string]interface{}{
-					"role_name":         random.UniqueId(),
-					"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
+					"role_name":         random.UniqueID(),
+					"iam_path":          fmt.Sprintf("/%s/", random.UniqueID()),
 					"source_account_id": curAcct,
 					"tags": map[string]string{
-						"test": random.UniqueId(),
+						"test": random.UniqueID(),
 					},
 				},
 			)

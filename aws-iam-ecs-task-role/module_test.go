@@ -17,10 +17,10 @@ package test
 // 		TerraformDir: ".",
 
 // 		Vars: map[string]interface{}{
-// 			"project": random.UniqueId(),
-// 			"env":     random.UniqueId(),
-// 			"service": random.UniqueId(),
-// 			"owner":   random.UniqueId(),
+// 			"project": random.UniqueID(),
+// 			"env":     random.UniqueID(),
+// 			"service": random.UniqueID(),
+// 			"owner":   random.UniqueID(),
 // 			"policy":  "",
 // 		},
 // 	}

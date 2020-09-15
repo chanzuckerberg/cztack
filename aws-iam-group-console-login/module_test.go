@@ -16,8 +16,8 @@ func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 				tftest.IAMRegion,
 
 				map[string]interface{}{
-					"group_name": random.UniqueId(),
-					"iam_path":   fmt.Sprintf("/%s/", random.UniqueId()),
+					"group_name": random.UniqueID(),
+					"iam_path":   fmt.Sprintf("/%s/", random.UniqueID()),
 				},
 			)
 		},

@@ -14,9 +14,9 @@ func TestAWSIAMInstanceProfile(t *testing.T) {
 			return tftest.Options(
 				tftest.IAMRegion,
 				map[string]interface{}{
-					"name_prefix":      random.UniqueId(),
+					"name_prefix":      random.UniqueID(),
 					"iam_path":         "/foo/",
-					"role_description": random.UniqueId(),
+					"role_description": random.UniqueID(),
 				},
 			)
 		},

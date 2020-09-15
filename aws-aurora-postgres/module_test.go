@@ -23,10 +23,10 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 		t.Run(version, func(t *testing.T) {
 			test := tftest.Test{
 				Setup: func(t *testing.T) *terraform.Options {
-					project := tftest.UniqueId()
-					env := tftest.UniqueId()
-					service := tftest.UniqueId()
-					owner := tftest.UniqueId()
+					project := tftest.UniqueID()
+					env := tftest.UniqueID()
+					service := tftest.UniqueID()
+					owner := tftest.UniqueID()
 
 					vpc := tftest.EnvVar(tftest.EnvVPCID)
 					databaseSubnetGroup := tftest.EnvVar(tftest.EnvDatabaseSubnetGroup)
@@ -34,7 +34,7 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 
 					databasePassword := tftest.RandomString(tftest.AlphaNum, 8)
 					databaseUsername := tftest.RandomString(tftest.Alpha, 8)
-					databaseName := tftest.UniqueId()
+					databaseName := tftest.UniqueID()
 
 					return tftest.Options(
 						tftest.DefaultRegion,

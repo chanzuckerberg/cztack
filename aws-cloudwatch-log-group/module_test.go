@@ -14,11 +14,11 @@ func TestAWSCloudWatchLogGroup(t *testing.T) {
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"project":        random.UniqueId(),
-					"env":            random.UniqueId(),
-					"service":        random.UniqueId(),
-					"owner":          random.UniqueId(),
-					"log_group_name": random.UniqueId(),
+					"project":        random.UniqueID(),
+					"env":            random.UniqueID(),
+					"service":        random.UniqueID(),
+					"owner":          random.UniqueID(),
+					"log_group_name": random.UniqueID(),
 				},
 			)
 		},

@@ -19,18 +19,18 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 	t.Skip("Skipping because destroy is painfully slow (>30m on average) - consider running destroy out of band")
 
 	t.Parallel()
-	project := tftest.UniqueId()
-	env := tftest.UniqueId()
-	service := tftest.UniqueId()
-	owner := tftest.UniqueId()
+	project := tftest.UniqueID()
+	env := tftest.UniqueID()
+	service := tftest.UniqueID()
+	owner := tftest.UniqueID()
 
-	subdomain := tftest.UniqueId()
+	subdomain := tftest.UniqueID()
 	awsACMCert := tftest.EnvVar(tftest.EnvWildcardCloudfrontCertARN)
 	route53ZoneID := tftest.EnvVar(tftest.EnvRoute53ZoneID)
 
 	aliases := []string{fmt.Sprintf(
 		"%s.%s",
-		tftest.UniqueId(),
+		tftest.UniqueID(),
 		tftest.EnvVar(tftest.EnvRoute53ZoneName))}
 
 	options := tftest.Options(

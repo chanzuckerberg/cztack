@@ -41,7 +41,7 @@ func TestDefaults(t *testing.T) {
 
 			r.NoError(e)
 
-			username := tftest.UniqueId()
+			username := tftest.UniqueID()
 
 			payload := struct {
 				Name string `json:"name"`
