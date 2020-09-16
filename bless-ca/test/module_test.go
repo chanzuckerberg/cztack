@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go/service/lambda"
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
@@ -19,16 +19,16 @@ func TestBlessCAInit(t *testing.T) {
 }
 
 func TestBlessCAInitAndApply(t *testing.T) {
-	region := testutil.IAMRegion
+	region := tftest.IAMRegion
 
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
 			service := "bless" // other components in the name are random so keep this to identify
-			owner := testutil.UniqueId()
+			owner := tftest.UniqueID()
 
-			return testutil.Options(
+			return tftest.Options(
 				region,
 				map[string]interface{}{
 					"project": project,
@@ -38,8 +38,8 @@ func TestBlessCAInitAndApply(t *testing.T) {
 
 					//test only
 					"region":                     region,
-					"bless_provider_aws_profile": testutil.EnvVar(testutil.EnvAWSProfile),
-					"test_user_name":             fmt.Sprintf("bless-%s", testutil.UniqueId()),
+					"bless_provider_aws_profile": tftest.EnvVar(tftest.EnvAWSProfile),
+					"test_user_name":             fmt.Sprintf("bless-%s", tftest.UniqueID()),
 				},
 			)
 		},
@@ -49,7 +49,7 @@ func TestBlessCAInitAndApply(t *testing.T) {
 			l := aws.NewLambdaClient(t, region)
 
 			_, e := l.GetFunction(&lambda.GetFunctionInput{
-				FunctionName: testutil.Strptr(outputs["lambda_arn"].(string)),
+				FunctionName: tftest.Strptr(outputs["lambda_arn"].(string)),
 			})
 			r.NoError(e)
 		},
