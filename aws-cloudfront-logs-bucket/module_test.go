@@ -4,24 +4,24 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
 )
 
 func TestPrivateBucketDefaults(t *testing.T) {
-	test := &testutil.Test{
+	test := &tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
 
-			bucketName := testutil.UniqueId()
+			bucketName := tftest.UniqueID()
 
-			return testutil.Options(
-				testutil.DefaultRegion,
+			return tftest.Options(
+				tftest.DefaultRegion,
 				map[string]interface{}{
 					"project": project,
 					"env":     env,

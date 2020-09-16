@@ -25,7 +25,7 @@ package test
 // 		},
 // 	}
 
-// 	defer testutil.Cleanup(t, terraformOptions)
+// 	defer tftest.Cleanup(t, terraformOptions)
 
-// 	testutil.Run(t, terraformOptions)
+// 	tftest.Run(t, terraformOptions)
 // }

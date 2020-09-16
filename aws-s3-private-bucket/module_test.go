@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
@@ -14,17 +14,17 @@ import (
 func TestPrivateBucketDefaults(t *testing.T) {
 	t.Parallel()
 
-	test := &testutil.Test{
+	test := &tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
 
-			bucketName := testutil.UniqueId()
+			bucketName := tftest.UniqueID()
 
-			return testutil.Options(
-				testutil.DefaultRegion,
+			return tftest.Options(
+				tftest.DefaultRegion,
 				map[string]interface{}{
 					"project": project,
 					"env":     env,
@@ -49,7 +49,7 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			aws.AssertS3BucketVersioningExists(t, region, bucket)
 
 			bucketPolicy := aws.GetS3BucketPolicy(t, region, bucket)
-			policy, err := testutil.UnmarshalS3BucketPolicy(bucketPolicy)
+			policy, err := tftest.UnmarshalS3BucketPolicy(bucketPolicy)
 			r.NoError(err)
 			r.NotNil(policy)
 
@@ -112,7 +112,7 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			}
 
 			for _, test := range sims {
-				resp := testutil.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
+				resp := tftest.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
 				r.Equal(test.result, *resp.EvalDecision)
 			}
 		},

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
@@ -18,31 +18,31 @@ func TestAWSACMCertInit(t *testing.T) {
 func TestAWSACMCertDefaults(t *testing.T) {
 	t.Parallel()
 
-	test := testutil.Test{
+	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := testutil.UniqueId()
-			env := testutil.UniqueId()
-			service := testutil.UniqueId()
-			owner := testutil.UniqueId()
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
 
 			certDomainName := fmt.Sprintf(
 				"%s.%s",
-				testutil.UniqueId(),
-				testutil.EnvVar(testutil.EnvRoute53ZoneName))
+				tftest.UniqueID(),
+				tftest.EnvVar(tftest.EnvRoute53ZoneName))
 
 			alternativeDomainName := fmt.Sprintf(
 				"%s.%s",
-				testutil.UniqueId(),
-				testutil.EnvVar(testutil.EnvRoute53ZoneName))
+				tftest.UniqueID(),
+				tftest.EnvVar(tftest.EnvRoute53ZoneName))
 
-			route53ZoneID := testutil.EnvVar(testutil.EnvRoute53ZoneID)
+			route53ZoneID := tftest.EnvVar(tftest.EnvRoute53ZoneID)
 
 			alternativeNames := map[string]string{
 				alternativeDomainName: route53ZoneID,
 			}
 
-			return testutil.Options(
-				testutil.DefaultRegion,
+			return tftest.Options(
+				tftest.DefaultRegion,
 				map[string]interface{}{
 					"project": project,
 					"env":     env,

@@ -4,23 +4,23 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/chanzuckerberg/cztack/testutil"
+	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/random"
 )
 
 func TestAWSIAMPolicyCwlogs(t *testing.T) {
-	roleName := testutil.CreateRole(t)
-	defer testutil.DeleteRole(t, roleName) //nolint
+	roleName := tftest.CreateRole(t)
+	defer tftest.DeleteRole(t, roleName) //nolint
 
-	terraformOptions := testutil.Options(
-		testutil.IAMRegion,
+	terraformOptions := tftest.Options(
+		tftest.IAMRegion,
 		map[string]interface{}{
 			"role_name": roleName,
 			"iam_path":  fmt.Sprintf("/%s/", random.UniqueId()),
 		},
 	)
 
-	defer testutil.Cleanup(t, terraformOptions)
+	defer tftest.Cleanup(t, terraformOptions)
 
-	testutil.Run(t, terraformOptions)
+	tftest.Run(t, terraformOptions)
 }
