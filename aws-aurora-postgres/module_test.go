@@ -15,7 +15,6 @@ func TestAWSAuroraPostgresInit(t *testing.T) {
 }
 
 func TestAWSAuroraPostgresDefaults(t *testing.T) {
-	t.Parallel()
 	versions := []string{"9.6", "10.12", "11.7"}
 
 	for _, version := range versions {
