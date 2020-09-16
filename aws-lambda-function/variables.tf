@@ -75,5 +75,6 @@ variable log_retention_in_days {
 
 variable function_name {
   type    = string
+  description = "If not set, function use default naming convention of $project-$env-$service. See local.name in main.tf"
   default = null
 }

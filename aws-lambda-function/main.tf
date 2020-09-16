@@ -3,7 +3,7 @@ locals {
 
   tags = {
     managedBy = "terraform"
-    Name      = var.function_name
+    Name      = local.name
     env       = var.env
     owner     = var.owner
     service   = var.service
