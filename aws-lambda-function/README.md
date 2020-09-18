@@ -39,6 +39,7 @@ module lambda {
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | environment | Map of environment variables. | `map(string)` | `{}` | no |
 | filename | n/a | `string` | `null` | no |
+| function\_name | If not set, function use default naming convention of $project-$env-$service. See local.name in main.tf | `string` | `null` | no |
 | handler | Name of the lambda handler. | `string` | n/a | yes |
 | kms\_key\_arn | KMS key used to encrypt environment variables. | `string` | `null` | no |
 | log\_retention\_in\_days | n/a | `number` | `null` | no |
@@ -56,8 +57,10 @@ module lambda {
 | Name | Description |
 |------|-------------|
 | arn | n/a |
+| function\_name | n/a |
 | invoke\_arn | n/a |
 | log\_group\_name | n/a |
+| role\_id | n/a |
 | role\_name | n/a |
 
 <!-- END -->
