@@ -2,6 +2,18 @@ locals {
   # If grants are defined, we use `grant` to grant permissions, otherwise it will use the `acl` to grant permissions
   acl = length(var.grants) == 0 ? "private" : null
 
+  # `canonical_user_id` and `uri` shuold be specified exclusively in each grant, so we skip the invalid inputs in grants
+  # invalid input is the case that they are both or neither specified
+  valid_grants = [ for grant in var.grants : {
+      canonical_user_id    = lookup(grant, "canonical_user_id", null) 
+      uri                  = lookup(grant, "uri", null) 
+      permissions          = grant.permissions
+    } if !(
+            (lookup(grant, "canonical_user_id", null) != null && lookup(grant, "uri", null) != null) || 
+            (lookup(grant, "canonical_user_id", null) == null && lookup(grant, "uri", null) == null)
+          ) 
+    ]
+
   tags = {
     project   = var.project
     env       = var.env
@@ -18,20 +30,14 @@ resource "aws_s3_bucket" "bucket" {
   # Using canned ACL will conflict with using grant ACL
   acl = local.acl
 
-  # Use ACL policy grant to grant permissions to certain users.
-  # Especially useful for logging buckets, where we  need to grant the awslogsdelivery
-  # user FULL_CONTROL permission - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
-  # How to find the canonical user id: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
   dynamic "grant" {
-    for_each = [for pair in var.grants : {
-      canonical_user_id = pair.canonical_user_id
-      permissions       = pair.permissions
-    }]
+    for_each = local.valid_grants
 
     content {
-      id          = grant.value.canonical_user_id
+      id          = lookup(grant.value, "canonical_user_id", null)
+      uri         = lookup(grant.value, "uri", null)
       permissions = grant.value.permissions
-      type        = "CanonicalUser"
+      type        = lookup(grant.value, "canonical_user_id", null) == null? "Group" : "CanonicalUser"
     }
   }
 
