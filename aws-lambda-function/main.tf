@@ -16,12 +16,14 @@ resource aws_lambda_function lambda {
   s3_bucket = var.source_s3_bucket
   s3_key    = var.source_s3_key
 
+  description      = var.function_description
   filename         = var.filename
   source_code_hash = var.source_code_hash
 
   function_name = local.name
   handler       = var.handler
 
+  publish     = var.publish_lambda
   runtime     = var.runtime
   role        = aws_iam_role.role.arn
   timeout     = var.timeout
@@ -41,6 +43,7 @@ resource aws_lambda_function lambda {
 
 resource aws_iam_role role {
   name = local.name
+  path = var.lambda_role_path
 
   assume_role_policy = <<EOF
 {

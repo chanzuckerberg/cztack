@@ -52,6 +52,18 @@ variable environment {
   default     = {}
 }
 
+variable function_description {
+  type        = string
+  description = "Description for the lambda function."
+  default     = ""
+}
+
+variable publish_lambda {
+  type        = bool
+  description = "Whether to publish creation/change as new Lambda Function Version. "
+  default     = false
+}
+
 variable kms_key_arn {
   type        = string
   description = "KMS key used to encrypt environment variables."
@@ -70,6 +82,11 @@ variable filename {
 
 variable log_retention_in_days {
   type    = number
+  default = null
+}
+
+variable lambda_role_path {
+  type    = string
   default = null
 }
 
