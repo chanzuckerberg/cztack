@@ -4,7 +4,8 @@ locals {
 }
 
 resource "aws_cloudwatch_log_group" "group" {
-  name = local.log_group_name
+  name              = local.log_group_name
+  retention_in_days = var.retention_in_days
 
   tags = {
     Name      = local.name
