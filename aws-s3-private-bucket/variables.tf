@@ -75,7 +75,7 @@ variable public_access_block {
 }
 
 variable grants {
-  type        = list(object({ canonical_user_id : string, permissions : list(string) }))
+  type        = any
   default     = []
-  description = "A list of canonical user ID to permissions pairs. Used when we want to grant permissions to AWS accounts via the S3 ACL system."
+  description = "A list of objects containing the grant configurations. Used when we want to grant permissions to AWS accounts via the S3 ACL system."
 }
