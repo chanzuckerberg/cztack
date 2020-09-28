@@ -95,7 +95,7 @@ jobs:
         go-version: 1.14.3
     # we can stop this when we move to terraform 0.13 and drop support for 0.12
     - name: Install bless provider
-      run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/master/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+      run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
     - name: Check bless provider
       run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
     - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
