@@ -24,3 +24,9 @@ variable "log_group_name" {
 
   default = ""
 }
+
+variable "retention_in_days" {
+  type        = number
+  description = "N of days you want to retain log events. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653, and 0."
+  default     = 0
+}
