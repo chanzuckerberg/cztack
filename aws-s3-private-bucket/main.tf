@@ -70,7 +70,8 @@ resource "aws_s3_bucket" "bucket" {
       prefix                                 = lookup(lifecycle_rule.value, "prefix", null)
       tags                                   = lookup(lifecycle_rule.value, "tags", null)
       enabled                                = lookup(lifecycle_rule.value, "enabled", false)
-      abort_incomplete_multipart_upload_days = lookup(lifecycle_rule.value, "abort_incomplete_multipart_upload_days", 0)
+      # var.abort_incomplete_multipart_upload_days is 14 by default
+      abort_incomplete_multipart_upload_days = lookup(lifecycle_rule.value, "abort_incomplete_multipart_upload_days", var.abort_incomplete_multipart_upload_days)
 
       dynamic "expiration" {
         for_each = length(keys(lookup(lifecycle_rule.value, "expiration", {}))) == 0 ? [] : [lookup(lifecycle_rule.value, "expiration", {})]
