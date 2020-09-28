@@ -31,7 +31,7 @@ variable "enable_versioning" {
 
 variable "abort_incomplete_multipart_upload_days" {
   type        = number
-  description = "Number of days after which an incomplete multipart upload is canceled."
+  description = "Number of days after which an incomplete multipart upload is canceled. The value for this variable is set for all lifecycle rules, to specify the abort_incomplete_multipart_upload_days for each rule, you can specify it in the lifecycle_rules variable."
   default     = 14
 }
 
@@ -54,6 +54,8 @@ variable "lifecycle_rules" {
       noncurrent_version_expiration = {
         days = 365
       }
+      # if abort_incomplete_multipart_upload_days is not specified in the rule, it will use var.abort_incomplete_multipart_upload_days for general cases
+      abort_incomplete_multipart_upload_days = 7
     }
   ]
 }
