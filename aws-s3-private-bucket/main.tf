@@ -4,15 +4,15 @@ locals {
 
   # `canonical_user_id` and `uri` shuold be specified exclusively in each grant, so we skip the invalid inputs in grants
   # invalid input is the case that they are both or neither specified
-  valid_grants = [ for grant in var.grants : {
-      canonical_user_id    = lookup(grant, "canonical_user_id", null) 
-      uri                  = lookup(grant, "uri", null) 
-      permissions          = grant.permissions
-    } if !(
-            (lookup(grant, "canonical_user_id", null) != null && lookup(grant, "uri", null) != null) || 
-            (lookup(grant, "canonical_user_id", null) == null && lookup(grant, "uri", null) == null)
-          ) 
-    ]
+  valid_grants = [for grant in var.grants : {
+    canonical_user_id = lookup(grant, "canonical_user_id", null)
+    uri               = lookup(grant, "uri", null)
+    permissions       = grant.permissions
+    } if ! (
+    (lookup(grant, "canonical_user_id", null) != null && lookup(grant, "uri", null) != null) ||
+    (lookup(grant, "canonical_user_id", null) == null && lookup(grant, "uri", null) == null)
+    )
+  ]
 
   tags = {
     project   = var.project
@@ -37,7 +37,7 @@ resource "aws_s3_bucket" "bucket" {
       id          = lookup(grant.value, "canonical_user_id", null)
       uri         = lookup(grant.value, "uri", null)
       permissions = grant.value.permissions
-      type        = lookup(grant.value, "canonical_user_id", null) == null? "Group" : "CanonicalUser"
+      type        = lookup(grant.value, "canonical_user_id", null) == null ? "Group" : "CanonicalUser"
     }
   }
 
@@ -66,10 +66,10 @@ resource "aws_s3_bucket" "bucket" {
     for_each = var.lifecycle_rules
 
     content {
-      id                                     = lookup(lifecycle_rule.value, "id", null) #lookup() provides default value in case it does not exist in var.lifecycle_rules input
-      prefix                                 = lookup(lifecycle_rule.value, "prefix", null)
-      tags                                   = lookup(lifecycle_rule.value, "tags", null)
-      enabled                                = lookup(lifecycle_rule.value, "enabled", false)
+      id      = lookup(lifecycle_rule.value, "id", null) #lookup() provides default value in case it does not exist in var.lifecycle_rules input
+      prefix  = lookup(lifecycle_rule.value, "prefix", null)
+      tags    = lookup(lifecycle_rule.value, "tags", null)
+      enabled = lookup(lifecycle_rule.value, "enabled", false)
       # var.abort_incomplete_multipart_upload_days is 14 by default
       abort_incomplete_multipart_upload_days = lookup(lifecycle_rule.value, "abort_incomplete_multipart_upload_days", var.abort_incomplete_multipart_upload_days)
 
