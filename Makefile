@@ -37,17 +37,25 @@ fmt:
 .PHONY: fmt
 
 lint:
+	terraform fmt -check -diff -recursive
 	@for m in $(MODULES); do \
-		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main" -level=debug; \
+		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main"; \
+		terraform fmt -check $$m; \
 	done;
 	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode diff_context -diff "git diff main"
 .PHONY: lint
 
 lint-ci:
+	terraform fmt -check -diff -recursive
+	@for m in $(MODULES); do \
+		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main"  -fail-on-error -reporter github-pr-review -filter-mode diff_context; \
+		terraform fmt -check $$m; \
+	done;
 	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff main" -fail-on-error -reporter github-pr-review -filter-mode diff_context
 .PHONY: lint-ci
 
 lint-all:
+	terraform fmt -check -diff -recursive
 	@for m in $(MODULES); do \
 		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main" -level=debug -filter-mode nofilter; \
 	done;
