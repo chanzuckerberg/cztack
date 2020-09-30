@@ -20,7 +20,8 @@ setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/main/download.sh | sh
 	curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
 	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
-	curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh
+	curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh
+	sh .download-tflint.sh v0.20.2
 .PHONY: setup
 
 release: ## run a release
@@ -36,15 +37,30 @@ fmt:
 .PHONY: fmt
 
 lint:
+	terraform fmt -check -diff -recursive
 	@for m in $(MODULES); do \
-		ls $$m/*_test.go 2>/dev/null 1>/dev/null || (echo "no test(s) for $$m"; exit $$?); \
-	done
-	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode nofilter
+		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main"; \
+		terraform fmt -check $$m; \
+	done;
+	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode diff_context -diff "git diff main"
 .PHONY: lint
 
 lint-ci:
-	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff master" -fail-on-error -reporter github-pr-review -filter-mode diff_context
+	terraform fmt -check -diff -recursive
+	@for m in $(MODULES); do \
+		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main"  -fail-on-error -reporter github-pr-review -filter-mode diff_context; \
+		terraform fmt -check $$m; \
+	done;
+	./bin/reviewdog -conf .reviewdog.yml  -diff "git diff main" -fail-on-error -reporter github-pr-review -filter-mode diff_context
 .PHONY: lint-ci
+
+lint-all:
+	terraform fmt -check -diff -recursive
+	@for m in $(MODULES); do \
+		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main" -level=debug -filter-mode nofilter; \
+	done;
+	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode nofilter
+.PHONY: lint-all
 
 docs:
 	@for m in $(MODULES); do \
