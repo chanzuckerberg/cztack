@@ -75,6 +75,7 @@ jobs:
           aws-redis-node,
           aws-s3-private-bucket,
           aws-single-page-static-site,
+          aws-sns-lambda,
           aws-ssm-params,
           aws-ssm-params-writer,
           bless-ca/test,
