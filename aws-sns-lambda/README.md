@@ -57,7 +57,7 @@ data "archive_file" "lambda_archive" {
 | lambda_role_path | Path of the IAM role for lambda. If not specify, IAM will set the path to '/'.| string | null | no |
 | lambda_handler | Name of the lambda handler. | string | n/a | yes | 
 | lambda_runtime | Lambda language runtime. | string | n/a | yes |
-| lambda_timeout | Execution timeout for the lambda. If null, defaults to 3 sec. | number | n/a | yes |
+| lambda_timeout | Execution timeout for the lambda. | number | n/a | yes |
 | lambda_source_code_hash | Lambda source code, used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file. | string | null | no |
 | lambda_zip_file | The path to the function's deployment package within the local filesystem. | string | null | no |
 | lambda_function_name | Name for lambda function. | string | null | no |
@@ -77,4 +77,5 @@ data "archive_file" "lambda_archive" {
 | sns_topics_arns | List of ARNs for the SNS topics creasted, depending on the length of sns_configurations. |
 
 <!-- START -->
+Error: no lines in file
 <!-- END -->

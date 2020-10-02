@@ -21,6 +21,7 @@ variable owner {
 variable lambda_environment {
   type        = map
   description = "Environment for lambda."
+  default     = {}
 }
 
 variable function_description {
@@ -36,13 +37,13 @@ variable publish_lambda {
 }
 
 variable lambda_role_path {
-  type    = string
+  type        = string
   description = "Path of the IAM role for lambda."
-  default = null
+  default     = null
 }
 
 variable lambda_handler {
-  type        = string
+  type = string
 }
 
 variable lambda_runtime {
@@ -52,18 +53,18 @@ variable lambda_runtime {
 
 variable lambda_timeout {
   type        = number
-  description = "Execution timeout for the lambda. If null, defaults to 3 sec."
+  description = "Execution timeout for the lambda."
   default     = null
 }
 
 variable lambda_source_code_hash {
-  type        = string
-  default     = null
+  type    = string
+  default = null
 }
 
 variable lambda_zip_file {
-  type        = string
-  default     = null
+  type    = string
+  default = null
 }
 
 variable log_retention_in_days {
@@ -79,12 +80,12 @@ variable lambda_function_name {
 }
 
 variable sns_configurations {
-  type       = list(object(
-    { 
-      topic_name                        = string,
-      topic_display_name                = string, 
-      confirmation_timeout_in_minutes   = number
-      endpoint_auto_confirms            = bool
+  type = list(object(
+    {
+      topic_name                      = string,
+      topic_display_name              = string,
+      confirmation_timeout_in_minutes = number,
+      endpoint_auto_confirms          = bool
     })
   )
   description = "List of objects containing the SNS configurations."

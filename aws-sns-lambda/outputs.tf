@@ -3,5 +3,5 @@ output lambda_role_name {
 }
 
 output sns_topic_arns {
-  value = {for key, sns in aws_sns_topic.sns: key => sns.arn}
+  value = { for key, sns in aws_sns_topic.sns : key => sns.arn }
 }
