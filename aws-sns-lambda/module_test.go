@@ -24,8 +24,9 @@ func TestAWSSNSLambdaDefaults(t *testing.T) {
 			service := tftest.UniqueID()
 			owner := tftest.UniqueID()
 
-			lambda_handler := tftest.RandomString(tftest.AlphaNum, 8)
-			lambda_runtime := "nodejs12.x"
+			lambda_handler  := tftest.RandomString(tftest.AlphaNum, 8)
+			lambda_runtime  := "nodejs12.x"
+			lambda_zip_file := tftest.RandomString(tftest.AlphaNum, 8)
 
 			return tftest.Options(
 				tftest.DefaultRegion,
@@ -34,8 +35,9 @@ func TestAWSSNSLambdaDefaults(t *testing.T) {
 					"env":            env,
 					"service":        service,
 					"owner":          owner,
-					"lambda_handler": lambda_handler,
-					"lambda_runtime": lambda_runtime,
+					"lambda_handler":  lambda_handler,
+					"lambda_runtime":  lambda_runtime,
+					"lambda_zip_file": lambda_zip_file,
 				},
 			)
 		},

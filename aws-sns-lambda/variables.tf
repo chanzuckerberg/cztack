@@ -43,7 +43,8 @@ variable lambda_role_path {
 }
 
 variable lambda_handler {
-  type = string
+  type        = string
+  description = "Name of the lambda handler. "
 }
 
 variable lambda_runtime {
@@ -58,13 +59,14 @@ variable lambda_timeout {
 }
 
 variable lambda_source_code_hash {
-  type    = string
-  default = null
+  type        = string
+  description = "Lambda source code, used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file."
+  default     = null
 }
 
 variable lambda_zip_file {
-  type    = string
-  default = null
+  type        = string
+  description = "The path to the function's deployment package within the local filesystem."
 }
 
 variable log_retention_in_days {

@@ -46,35 +46,6 @@ data "archive_file" "lambda_archive" {
 }
 ```
 
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| env | Env for tagging and naming. | `string` | n/a | yes |
-| lambda_environment | Map of lambda environment variables. | `map(string)` | `{}` | no |
-| function_deescription | Description for the lambda function. | string | "" | no |
-| publish_lambda | Whether to publish creation/change as new Lambda Function Version. | bool | false | no |
-| lambda_role_path | Path of the IAM role for lambda. If not specify, IAM will set the path to '/'.| string | null | no |
-| lambda_handler | Name of the lambda handler. | string | n/a | yes | 
-| lambda_runtime | Lambda language runtime. | string | n/a | yes |
-| lambda_timeout | Execution timeout for the lambda. | number | n/a | yes |
-| lambda_source_code_hash | Lambda source code, used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file. | string | null | no |
-| lambda_zip_file | The path to the function's deployment package within the local filesystem. | string | null | no |
-| lambda_function_name | Name for lambda function. | string | null | no |
-| log_retention_in_days | The number of days to retain log events in the log group for lambda. | number | null | no
-| sns_configurations | List of objects containing the SNS configurations, list length equals the number of SNS topics created. | <pre>object(<br>    {<br>      topic_name : string,      <br>      topic_display_name : string, <br>      confirmation_timeout_in_minutes : string, <br>      endpoint_auto_confirms : string, <br>    }<br>  )</pre> | [] | no
-| owner | Owner for tagging and naming. | `string` | n/a | yes |
-| project | Project for tagging and naming. | `string` | n/a | yes |
-| runtime | Lambda language runtime. | `string` | n/a | yes |
-| service | Service for tagging and naming. | `string` | n/a | yes |
-
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| lambda_role_name | Name of the IAM role for lambda. |
-| sns_topics_arns | List of ARNs for the SNS topics creasted, depending on the length of sns_configurations. |
 
 <!-- START -->
 Error: no lines in file
