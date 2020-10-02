@@ -21,6 +21,8 @@ resource aws_lambda_function lambda {
 
   function_name = local.name
   handler       = var.handler
+  description   = var.function_description
+  publish       = var.publish_lambda
 
   runtime     = var.runtime
   role        = aws_iam_role.role.arn
@@ -41,6 +43,7 @@ resource aws_lambda_function lambda {
 
 resource aws_iam_role role {
   name = local.name
+  path = var.lambda_role_path
 
   assume_role_policy = <<EOF
 {

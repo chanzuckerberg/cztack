@@ -51,6 +51,9 @@ module lambda {
 | source\_s3\_bucket | Bucket holding lambda source code. | `string` | `null` | no |
 | source\_s3\_key | Key identifying location of code. | `string` | `null` | no |
 | timeout | Execution timeout for the lambda. | `number` | `null` | no |
+| function_description | Description for lambda function. | `string` | "" | no |
+| publish_lambda | Whether to publish creation/change as new Lambda Function Version. | `bool` | false | no |
+| lambda_role_path | The path to the IAM role for lambda. | `string` | null | no | 
 
 ## Outputs
 
