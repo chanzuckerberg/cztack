@@ -157,22 +157,13 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   # This is error handling logic for single page applications
-  custom_error_response {
-    error_code         = 403
-    response_code      = 200
-    response_page_path = "/${var.index_document_path}"
-  }
-
-  custom_error_response {
-    error_code         = 404
-    response_code      = 200
-    response_page_path = "/${var.index_document_path}"
-  }
-
-  custom_error_response {
-    error_code         = 503
-    response_code      = 200
-    response_page_path = "/${var.index_document_path}"
+  dynamic "custom_error_response" {
+    for_each = var.custom_error_response_codes
+    content {
+      error_code         = custom_error_response.value
+      response_code      = 200
+      response_page_path = "/${var.index_document_path}"
+    }
   }
 
   tags = local.tags
