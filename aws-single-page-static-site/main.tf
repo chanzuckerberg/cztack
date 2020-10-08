@@ -82,6 +82,17 @@ resource "aws_s3_bucket_public_access_block" "bucket" {
   restrict_public_buckets = true
 }
 
+module "security_headers_lambda" {
+  source = "../aws-lambda-edge-add-security-headers"
+
+  function_name = replace("${local.website_fqdn}-static-site-security-headers", ".", "-")
+
+  project = var.project
+  owner   = var.owner
+  env     = var.env
+  service = var.service
+}
+
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.bucket.bucket_domain_name
@@ -117,6 +128,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     default_ttl            = 3600
     max_ttl                = 86400
     compress               = true
+
+    lambda_function_association {
+      event_type   = "origin-response"
+      include_body = false
+      lambda_arn   = module.security_headers_lambda.qualified_arn
+    }
   }
 
   ordered_cache_behavior {
@@ -140,6 +157,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     default_ttl            = 3600
     max_ttl                = 86400
     compress               = true
+
+    lambda_function_association {
+      event_type   = "origin-response"
+      include_body = false
+      lambda_arn   = module.security_headers_lambda.qualified_arn
+    }
   }
 
   restrictions {
