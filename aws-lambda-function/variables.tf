@@ -78,3 +78,15 @@ variable function_name {
   description = "If not set, function use default naming convention of $project-$env-$service. See local.name in main.tf"
   default     = null
 }
+
+variable at_edge {
+  type        = bool
+  description = "Is this lambda going to be used with a Cloufront distribution? If you set this, you will not have control over log retention, and you cannot include environment variables."
+  default     = false
+}
+
+variable publish {
+  type        = bool
+  description = "Publish a version of the lambda? Same as the aws_lambda_function publish argument."
+  default     = false
+}
