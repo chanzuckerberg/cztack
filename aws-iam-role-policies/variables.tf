@@ -20,7 +20,7 @@ variable owner {
 
 variable principals {
   type        = list(object({ type = string, identifiers = list(string) }))
-  description = "The Principal element in the role's trust policy to specify who can assume the role, this will be used in the `assume_role_policy` for the IAM role."
+  description = "AWS IAM Principals which will be able to assume this role."
   default     = []
 }
 
