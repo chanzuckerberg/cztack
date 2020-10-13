@@ -18,10 +18,10 @@ func TestAWSIAMROle(t *testing.T) {
 		tftest.IAMRegion,
 		map[string]interface{}{
 			"role_name": roleName,
-			"project": project,
-			"env":     env,
-			"service": service,
-			"owner":   owner,
+			"project":   project,
+			"env":       env,
+			"service":   service,
+			"owner":     owner,
 		},
 	)
 
