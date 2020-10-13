@@ -1,4 +1,4 @@
-# AWS-IAM-ROLE-POLICIES
+# aws-iam-role
 A module for creating an IAM role with the inline policies and managed policies attached to the role.
 
 ## Example
