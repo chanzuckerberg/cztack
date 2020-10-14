@@ -48,5 +48,48 @@ data "archive_file" "lambda_archive" {
 
 
 <!-- START -->
+<<<<<<< HEAD
 Error: no lines in file
+=======
+## Requirements
+
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | < 3.0.0 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| env | Env for tagging and naming. | `string` | n/a | yes |
+| function\_description | Description for the lambda function. | `string` | `""` | no |
+| lambda\_environment | Environment for lambda. | `map` | `{}` | no |
+| lambda\_function\_name | Name for lambda function. If not set, function use default naming convention of $project-$env-$service. | `string` | `null` | no |
+| lambda\_handler | Name of the lambda handler. | `string` | n/a | yes |
+| lambda\_role\_path | Path of the IAM role for lambda. | `string` | `null` | no |
+| lambda\_runtime | Lambda language runtime. | `string` | n/a | yes |
+| lambda\_source\_code\_hash | Lambda source code, used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file. | `string` | `null` | no |
+| lambda\_timeout | Execution timeout for the lambda. | `number` | `null` | no |
+| lambda\_zip\_file | The path to the function's deployment package within the local filesystem. | `string` | n/a | yes |
+| log\_retention\_in\_days | The number of days to retain log events in the log group for lambda. | `number` | `null` | no |
+| owner | Owner for tagging and naming. | `string` | n/a | yes |
+| project | Project for tagging and naming. | `string` | n/a | yes |
+| publish\_lambda | Whether to publish creation/change as new Lambda Function Version. | `bool` | `false` | no |
+| service | Service for tagging and naming | `string` | n/a | yes |
+| sns\_configurations | List of objects containing the SNS configurations. | <pre>list(object(<br>    {<br>      topic_name                      = string,<br>      topic_display_name              = string,<br>      confirmation_timeout_in_minutes = number,<br>      endpoint_auto_confirms          = bool<br>    })<br>  )</pre> | `[]` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| lambda\_role\_name | Name for the lambda execution role. |
+| sns\_topic\_arns | SNS topic ARNs. |
+
+>>>>>>> c9be4e4... fix test
 <!-- END -->
