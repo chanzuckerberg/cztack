@@ -18,10 +18,15 @@ variable owner {
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
+variable iam_path {
+  type        = string
+  description = "The IAM path under which the IAM role will be created."
+  default     = null
+}
+
 variable principals {
   type        = list(object({ type = string, identifiers = list(string) }))
   description = "AWS IAM Principals which will be able to assume this role."
-  default     = []
 }
 
 variable role_name {
