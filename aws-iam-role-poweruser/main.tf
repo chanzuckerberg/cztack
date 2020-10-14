@@ -99,6 +99,8 @@ data "aws_iam_policy_document" "misc" {
       "iam:GetRole",
       "iam:GetRolePolicy",
       "iam:GetServiceLastAccessedDetails",
+      "iam:GetUser",
+      "iam:GetUserPolicy",
       "iam:ListAccessKeys",
       "iam:ListAccountAliases",
       "iam:ListAttachedGroupPolicies",
