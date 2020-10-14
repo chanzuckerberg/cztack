@@ -13,7 +13,7 @@ data "archive_file" "notifier" {
 module sns-lambda {
   source = "./.."
 
-  lambda_handler = "hello.hello"
+  lambda_handler = "hello.hello2"
   lambda_runtime = "python3.8"
 
   lambda_zip_file         = data.archive_file.notifier.output_path
