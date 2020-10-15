@@ -39,12 +39,15 @@ module lambda {
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | environment | Map of environment variables. | `map(string)` | `{}` | no |
 | filename | n/a | `string` | `null` | no |
+| function\_description | Description for lambda function. | `string` | `""` | no |
 | function\_name | If not set, function use default naming convention of $project-$env-$service. See local.name in main.tf | `string` | `null` | no |
 | handler | Name of the lambda handler. | `string` | n/a | yes |
 | kms\_key\_arn | KMS key used to encrypt environment variables. | `string` | `null` | no |
+| lambda\_role\_path | The path to the IAM role for lambda. | `string` | `null` | no |
 | log\_retention\_in\_days | n/a | `number` | `null` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| publish\_lambda | Whether to publish creation/change as new lambda function version. | `bool` | `false` | no |
 | runtime | Lambda language runtime. | `string` | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | source\_code\_hash | n/a | `string` | `null` | no |
