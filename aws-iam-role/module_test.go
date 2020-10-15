@@ -4,37 +4,44 @@ import (
 	"testing"
 
 	"github.com/chanzuckerberg/go-misc/tftest"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAWSIAMROle(t *testing.T) {
-	roleName := tftest.CreateRole(t)
-	project := tftest.UniqueID()
-	env := tftest.UniqueID()
-	service := tftest.UniqueID()
-	owner := tftest.UniqueID()
+func TestAWSIAMRole(t *testing.T) {
+	test := tftest.Test{
 
-	principals := []interface{}{
-		map[string]interface{}{
-			"type":        "Service",
-			"identifiers": []string{"firehose.amazonaws.com"},
+		Setup: func(t *testing.T) *terraform.Options {
+			roleName := tftest.UniqueID()
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
+
+			principals := []interface{}{
+				map[string]interface{}{
+					"type":        "Service",
+					"identifiers": []string{"firehose.amazonaws.com"},
+				},
+			}
+
+			options := tftest.Options(
+				tftest.IAMRegion,
+				map[string]interface{}{
+					"role_name":  roleName,
+					"project":    project,
+					"env":        env,
+					"service":    service,
+					"owner":      owner,
+					"principals": principals,
+				},
+			)
+
+			return options
 		},
+
+		Validate: func(t1 *testing.T, t2 *terraform.Options) {},
+		Cleanup:  func(t1 *testing.T, options *terraform.Options) {},
 	}
 
-	defer tftest.DeleteRole(t, roleName) //nolint
-
-	terraformOptions := tftest.Options(
-		tftest.IAMRegion,
-		map[string]interface{}{
-			"role_name":  roleName,
-			"project":    project,
-			"env":        env,
-			"service":    service,
-			"owner":      owner,
-			"principals": principals,
-		},
-	)
-
-	defer tftest.Cleanup(t, terraformOptions)
-
-	tftest.Run(t, terraformOptions)
+	test.Run(t)
 }
