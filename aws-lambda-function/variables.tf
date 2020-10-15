@@ -78,3 +78,21 @@ variable function_name {
   description = "If not set, function use default naming convention of $project-$env-$service. See local.name in main.tf"
   default     = null
 }
+
+variable function_description {
+  type        = string
+  description = "Description for lambda function."
+  default     = ""
+}
+
+variable publish_lambda {
+  type        = bool
+  description = "Whether to publish creation/change as new lambda function version."
+  default     = false
+}
+
+variable lambda_role_path {
+  type        = string
+  description = "The path to the IAM role for lambda."
+  default     = null
+}
