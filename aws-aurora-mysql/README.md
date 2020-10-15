@@ -12,7 +12,7 @@ A simple example:
 
 ```hcl
 module "db" {
-  source = "github.com/chanzuckerberg/cztack//aws-aurora-mysql?ref=v0.14.0"
+  source = "github.com/chanzuckerberg/cztack//aws-aurora-mysql?ref=v0.36.0"
 
   database_name         = "..."
   database_subnet_group = "..."

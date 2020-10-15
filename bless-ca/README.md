@@ -49,7 +49,7 @@ provider "bless" {
 
 module "bless" {
   // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
-  source = "github.com/chanzuckerberg/cztack//bless-ca?ref=master"
+  source = "github.com/chanzuckerberg/cztack//bless-ca?ref=v0.36.0"
 
   project = "..."
   service = "..."
@@ -63,7 +63,7 @@ module "bless" {
 
 module "blessclient" {
   // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
-  source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=master"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-role-bless?ref=v0.36.0"
 
   role_name         = "blessclient"
   source_account_id = "..."
@@ -76,7 +76,7 @@ module "blessclient" {
 # Group that authorizes users to invoke bless lambda
 module "bless-users" {
   // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
-  source = "github.com/chanzuckerberg/cztack//aws-iam-group-assume-role?ref=master"
+  source = "github.com/chanzuckerberg/cztack//aws-iam-group-assume-role?ref=v0.36.0"
 
   users           = ["..."]
   group_name      = "bless-users"

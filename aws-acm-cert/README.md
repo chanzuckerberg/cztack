@@ -8,7 +8,7 @@ NOTE: if you intend to use this certificate in a cloudfront distribution it must
 
 ```hcl
 module "cert" {
-  source = "github.com/chanzuckerberg/cztack//aws-acm-cert?ref=v0.14.0"
+  source = "github.com/chanzuckerberg/cztack//aws-acm-cert?ref=v0.36.0"
 
   # the cert domain name
   cert_domain_name = "..."
