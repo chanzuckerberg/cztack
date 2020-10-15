@@ -22,7 +22,7 @@ This module is specifically designed for Single Page Applications– In order to
 
 ```hcl
 module "site" {
-  source = "github.com/chanzuckerberg/cztack//aws-single-page-static-site?ref=v0.14.0"
+  source = "github.com/chanzuckerberg/cztack//aws-single-page-static-site?ref=v0.36.0"
 
   cert_domain_name               = "..."
   cert_subject_alternative_names = "..."
