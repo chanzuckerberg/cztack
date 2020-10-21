@@ -19,18 +19,18 @@ module aws-sns-lambda {
   owner                   = var.owner
   project                 = var.project
   service                 = var.service
+  #  If there is only one SNS config, and topic_name is not provided, then use [var.project]-[var.env]-[var.service] as default topic name, otherwise, the SNS config without the topic_name will be discarded.
   sns_configurations      = [
     {
       topic_name : "...",
       topic_display_name : "...",
-      endpoint_auto_confirms          : false
-      confirmation_timeout_in_minutes : 1
+      endpoint_auto_confirms          : true
     },
     {
       topic_name : "heroku-dyno",
       topic_display_name : null,
       endpoint_auto_confirms          : false
-      confirmation_timeout_in_minutes : 1
+      confirmation_timeout_in_minutes : 10
     }
   ]
   publish_lambda          = true
@@ -48,9 +48,6 @@ data "archive_file" "lambda_archive" {
 
 
 <!-- START -->
-<<<<<<< HEAD
-Error: no lines in file
-=======
 ## Requirements
 
 | Name | Version |
@@ -82,7 +79,7 @@ Error: no lines in file
 | project | Project for tagging and naming. | `string` | n/a | yes |
 | publish\_lambda | Whether to publish creation/change as new Lambda Function Version. | `bool` | `false` | no |
 | service | Service for tagging and naming | `string` | n/a | yes |
-| sns\_configurations | List of objects containing the SNS configurations. | <pre>list(object(<br>    {<br>      topic_name                      = string,<br>      topic_display_name              = string,<br>      confirmation_timeout_in_minutes = number,<br>      endpoint_auto_confirms          = bool<br>    })<br>  )</pre> | `[]` | no |
+| sns\_configurations | List of objects containing the SNS configurations. | `list(any)` | `[]` | no |
 
 ## Outputs
 
@@ -91,5 +88,4 @@ Error: no lines in file
 | lambda\_role\_name | Name for the lambda execution role. |
 | sns\_topic\_arns | SNS topic ARNs. |
 
->>>>>>> c9be4e4... fix test
 <!-- END -->

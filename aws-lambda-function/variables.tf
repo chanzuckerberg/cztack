@@ -42,7 +42,7 @@ variable runtime {
 
 variable timeout {
   type        = number
-  description = "Execution timeout for the lambda. "
+  description = "Execution timeout for the lambda."
   default     = null
 }
 

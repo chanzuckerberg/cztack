@@ -44,7 +44,7 @@ variable lambda_role_path {
 
 variable lambda_handler {
   type        = string
-  description = "Name of the lambda handler. "
+  description = "Name of the lambda handler."
 }
 
 variable lambda_runtime {
@@ -82,14 +82,7 @@ variable lambda_function_name {
 }
 
 variable sns_configurations {
-  type = list(object(
-    {
-      topic_name                      = string,
-      topic_display_name              = string,
-      confirmation_timeout_in_minutes = number,
-      endpoint_auto_confirms          = bool
-    })
-  )
+  type        = list(any)
   description = "List of objects containing the SNS configurations."
   default     = []
 }
