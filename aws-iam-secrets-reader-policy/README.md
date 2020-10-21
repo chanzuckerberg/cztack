@@ -6,15 +6,14 @@ Grant read permissions on listed secrets to this role.
 
 ```hcl
 module "policy" {
-  source = "github.com/chanzuckerberg/cztack/aws-iam-secrets-reader-policy?ref=…"
+  source = "github.com/chanzuckerberg/cztack/aws-iam-secrets-reader-policy?ref=v0.36.0"
 
-  iam_path        = "..."
-  target_role     = "..."
+  iam_path  = "..."
+  role_name = "..."
 
   secrets_arns = [...]
 }
 ```
-
 
 <!-- START -->
 ## Requirements

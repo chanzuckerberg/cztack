@@ -21,7 +21,7 @@ data "aws_route53_zone" "zone" {
 }
 
 module "role" {
-  source    = "github.com/chanzuckerberg/cztack//aws-iam-ecs-task-role?ref=v0.21.3"
+  source    = "github.com/chanzuckerberg/cztack//aws-iam-ecs-task-role?ref=v0.36.0"
   project   = var.project
   env       = var.env
   service   = var.component
@@ -29,7 +29,7 @@ module "role" {
 }
 
 module "role-policy" {
-  source    = "github.com/chanzuckerberg/cztack//aws-params-reader-policy?ref=v0.21.3"
+  source    = "github.com/chanzuckerberg/cztack//aws-params-reader-policy?ref=v0.36.0"
   project   = var.project
   env       = var.env
   service   = var.component
@@ -77,7 +77,7 @@ data "aws_acm_certificate" "staging" {
 }
 
 module "web-service" {
-  source = "github.com/chanzuckerberg/cztack//aws-ecs-service?ref=v0.21.3"
+  source = "github.com/chanzuckerberg/cztack//aws-ecs-service?ref=v0.36.0"
 
   # this is the name of the service and many of the resources will have this name
   service = "myservice"

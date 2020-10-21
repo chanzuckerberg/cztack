@@ -10,7 +10,7 @@ This module will configure an aggregator for GitHub webhooks. It sets up an API 
 ```hcl
 module "archiver" {
   // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
-  source = "github.com/chanzuckerberg/cztack//github-webhooks-to-s3?ref=master"
+  source = "github.com/chanzuckerberg/cztack//github-webhooks-to-s3?ref=v0.36.0"
 
   env     = "${var.env}"
   project = "${var.project}"
