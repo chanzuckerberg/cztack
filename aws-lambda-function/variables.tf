@@ -96,3 +96,9 @@ variable lambda_role_path {
   description = "The path to the IAM role for lambda."
   default     = null
 }
+
+variable at_edge {
+  type        = bool
+  description = "Is this lambda going to be used with a Cloufront distribution? If you set this, you will not have control over log retention, and you cannot include environment variables."
+  default     = false
+}
