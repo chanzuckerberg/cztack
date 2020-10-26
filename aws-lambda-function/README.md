@@ -36,6 +36,7 @@ module lambda {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| at\_edge | Is this lambda going to be used with a Cloufront distribution? If you set this, you will not have control over log retention, and you cannot include environment variables. | `bool` | `false` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | environment | Map of environment variables. | `map(string)` | `{}` | no |
 | filename | n/a | `string` | `null` | no |
@@ -63,6 +64,7 @@ module lambda {
 | function\_name | n/a |
 | invoke\_arn | n/a |
 | log\_group\_name | n/a |
+| qualified\_arn | If the lambda function is published, the qualified\_arn points at the latest version number. |
 | role\_id | n/a |
 | role\_name | n/a |
 
