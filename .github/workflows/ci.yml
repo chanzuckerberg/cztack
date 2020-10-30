@@ -1,7 +1,10 @@
 name: CI
 
 on:
-- pull_request
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   check-mod:
@@ -92,26 +95,39 @@ jobs:
     timeout-minutes: 45
     steps:
     - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          module:
+            - '${{ matrix.module }}/**'
     - uses: hashicorp/setup-terraform@v1
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
       with:
         terraform_version: 0.12.28
         terraform_wrapper: "false"
     - uses: actions/setup-go@v2
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
       with:
         go-version: 1.14.3
     # we can stop this when we move to terraform 0.13 and drop support for 0.12
     - name: Install bless provider
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
       run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
     - name: Check bless provider
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
       run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
-    - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
-        --profile cztack-ci-1
-    - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY
-        }} --profile cztack-ci-1
+    - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
+    - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
     - run: aws --profile cztack-ci-1 sts get-caller-identity
-    - run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }}
-        --profile cztack-ci-2
-    - run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY
-        }} --profile cztack-ci-2
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
+    - run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }} --profile cztack-ci-2
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
+    - run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-2
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
     - run: aws --profile cztack-ci-2 sts get-caller-identity
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
     - run: make test-ci TEST=./${{ matrix.module }}
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
