@@ -68,3 +68,10 @@ variable "path_pattern" {
   description = "The pattern (for example, images/*.jpg) that specifies which requests you want this cache behavior to apply to."
   default     = "*"
 }
+
+variable "custom_error_response_codes" {
+  type        = list(number)
+  description = "The http response codes for which to return the default index page."
+  default     = [404, 403, 503]
+}
+

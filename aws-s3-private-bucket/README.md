@@ -47,14 +47,14 @@ module "s3-bucket" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| abort\_incomplete\_multipart\_upload\_days | Number of days after which an incomplete multipart upload is canceled. | `number` | `14` | no |
+| abort\_incomplete\_multipart\_upload\_days | Number of days after which an incomplete multipart upload is canceled. The value for this variable is set for all lifecycle rules, to specify the abort\_incomplete\_multipart\_upload\_days for each rule, you can specify it in the lifecycle\_rules variable. | `number` | `14` | no |
 | bucket\_name | n/a | `string` | n/a | yes |
 | bucket\_policy | n/a | `string` | `""` | no |
 | cors\_rules | List of maps containing the cors rule configuration objects. | `any` | `[]` | no |
 | enable\_versioning | Keep old versions of overwritten S3 objects. | `bool` | `true` | no |
 | env | n/a | `string` | n/a | yes |
-| grants | A list of objects containing the grant configuration, with `permissions` and either `canonical_user_id` or `uri`. Used when we want to grant permissions to AWS accounts via the S3 ACL system. | `any` | `[]` | no |
-| lifecycle\_rules | List of maps containing configuration of object lifecycle management. | `any` | <pre>[<br>  {<br>    "enabled": true,<br>    "expiration": {<br>      "expired_object_delete_marker": true<br>    },<br>    "noncurrent_version_expiration": {<br>      "days": 365<br>    },<br>    "noncurrent_version_transition": {<br>      "days": 30,<br>      "storage_class": "STANDARD_IA"<br>    }<br>  }<br>]</pre> | no |
+| grants | A list of objects containing the grant configurations. Used when we want to grant permissions to AWS accounts via the S3 ACL system. | `any` | `[]` | no |
+| lifecycle\_rules | List of maps containing configuration of object lifecycle management. | `any` | <pre>[<br>  {<br>    "abort_incomplete_multipart_upload_days": 7,<br>    "enabled": true,<br>    "expiration": {<br>      "expired_object_delete_marker": true<br>    },<br>    "noncurrent_version_expiration": {<br>      "days": 365<br>    },<br>    "noncurrent_version_transition": {<br>      "days": 30,<br>      "storage_class": "STANDARD_IA"<br>    }<br>  }<br>]</pre> | no |
 | owner | n/a | `string` | n/a | yes |
 | project | n/a | `string` | n/a | yes |
 | public\_access\_block | n/a | `bool` | `true` | no |
