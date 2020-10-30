@@ -24,7 +24,7 @@ module lambda {
   handler          = "index.handler"
   runtime          = "nodejs10.x"
   at_edge          = true
-  publish          = true
+  publish_lambda   = true
 
   env     = var.env
   owner   = var.owner

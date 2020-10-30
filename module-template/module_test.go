@@ -8,8 +8,10 @@ import (
 )
 
 func TestModule(t *testing.T) {
-	t.Skip("remove this for real tests")
 	test := tftest.Test{
+		// just run init, swtich to Plan or Apply when you can
+		Mode: tftest.Init,
+
 		Setup:    func(t *testing.T) *terraform.Options { return nil },
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

@@ -4,7 +4,12 @@ This module creates a Lambda@Edge that, when setup as an `origin-response` funct
 
 This must be used with a `viewer_protocol_policy` of `redirect-to-https`, otherwise it will add out of spec headers to insecure HTTP only requests.
 
+## Warning - Cannot be automatically deleted
+
+Lambda@Edge functions are [hard to delete automatically](https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html) and there is no terraform-specific work-around to deal with that.
+
 ## Example
+
 ```hcl
 resource aws_cloudfront_distribution cf {
   enabled = true

@@ -3,11 +3,15 @@
 This module uses cloudfront to redirect from the `source_domain` to the `target_domain`. The most common use case for this is to redirect a naked domain, eg `http://foo.com`, to something else like `https://www.foo.com`.
 
 The redirect has the following properties:
+
 - Always redirects http:// to https://
 - Add HSTS + preload headers to the https:// response.
 
-## Example
+## Warning - Cannot be automatically deleted
 
+Lambda@Edge functions are [hard to delete automatically](https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html) and there is no terraform-specific work-around to deal with that.
+
+## Example
 
 ```hcl
 module domain-redirect {
