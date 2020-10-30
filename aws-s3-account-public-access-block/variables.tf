@@ -11,8 +11,8 @@ variable restrict {
   # # TODO(el): on tf 0.13
   #  validation {
   #    condition {
-  #       (var.restrict == "all" || var.restrict == "new")
+  #       (var.restrict == "all" || var.restrict == "new" || var.restrict == "none")
   #    }
-  #    error_message = "restrict must be one of (all, new)"
+  #    error_message = "restrict must be one of (all, new, none)"
   #  }
 }

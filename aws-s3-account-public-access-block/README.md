@@ -4,6 +4,7 @@ This module sets an S3 public access block at the account level. That way we don
 Restrict:
 - `all`: will block all types of public access for all buckets in the account.
 - `new`: will block any new access to S3 buckets, but preserve any existing access.
+- `none`: will not block any S3 public access.
 
 <!-- START -->
 ## Requirements
