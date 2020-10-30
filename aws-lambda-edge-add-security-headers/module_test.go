@@ -12,7 +12,19 @@ func TestModule(t *testing.T) {
 		// just run init, swtich to Plan or Apply when you can
 		Mode: tftest.Init,
 
-		Setup:    func(t *testing.T) *terraform.Options { return nil },
+		Setup: func(t *testing.T) *terraform.Options {
+			return tftest.Options(
+				tftest.DefaultRegion,
+				map[string]interface{}{
+					"project": tftest.UniqueID(),
+					"env":     tftest.UniqueID(),
+					"service": tftest.UniqueID(),
+					"owner":   tftest.UniqueID(),
+
+					"function_name": tftest.UniqueID(),
+				},
+			)
+		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
 
