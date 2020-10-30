@@ -59,6 +59,7 @@ module "site" {
 | aws\_route53\_zone\_id | A route53 zone ID used to write records. | `string` | n/a | yes |
 | bucket\_name | Name of the bucket to created. If not given, it will use the domain name. | `string` | `""` | no |
 | cloudfront\_price\_class | Cloudfront [price class](https://aws.amazon.com/cloudfront/pricing/). | `string` | `"PriceClass_100"` | no |
+| custom\_error\_response\_codes | The http response codes for which to return the default index page. | `list(number)` | <pre>[<br>  404,<br>  403,<br>  503<br>]</pre> | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | index\_document\_path | The path to the index document of your site. | `string` | `"index.html"` | no |
 | minimum\_tls\_version | Minimum TLS version to accept. | `string` | `"TLSv1.1_2016"` | no |
