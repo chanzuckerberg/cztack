@@ -100,3 +100,7 @@ test-ci:
 deps:
 	go mod tidy
 .PHONY: deps
+
+modules:
+	@echo $(MODULES)
+.PHONY: modules

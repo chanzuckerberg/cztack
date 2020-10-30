@@ -41,16 +41,17 @@ jobs:
       matrix:
         module: [
           aws-acm-cert,
-          aws-aurora,
           aws-aurora-mysql,
           aws-aurora-postgres,
+          aws-aurora,
+          aws-cloudfront-domain-redirect,
           aws-cloudfront-logs-bucket,
           aws-cloudwatch-log-group,
           aws-default-vpc-security,
-          aws-ecs-job,
           aws-ecs-job-fargate,
-          aws-ecs-service,
+          aws-ecs-job,
           aws-ecs-service-fargate,
+          aws-ecs-service,
           aws-efs-volume,
           aws-iam-ecs-task-role,
           aws-iam-group-assume-role,
@@ -58,7 +59,6 @@ jobs:
           aws-iam-instance-profile,
           aws-iam-password-policy,
           aws-iam-policy-cwlogs,
-          aws-iam-role,
           aws-iam-role-bless,
           aws-iam-role-cloudfront-poweruser,
           aws-iam-role-crossacct,
@@ -69,6 +69,10 @@ jobs:
           aws-iam-role-readonly,
           aws-iam-role-route53domains-poweruser,
           aws-iam-role-security-audit,
+          aws-iam-role,
+          aws-iam-secrets-reader-policy,
+          aws-lambda-edge-add-security-headers,
+          aws-lambda-function,
           aws-param,
           aws-params-reader-policy,
           aws-params-secrets-setup,
@@ -77,11 +81,11 @@ jobs:
           aws-s3-private-bucket,
           aws-single-page-static-site,
           aws-sns-lambda,
-          aws-ssm-params,
           aws-ssm-params-writer,
+          aws-ssm-params,
           bless-ca/test,
           github-webhooks-to-s3,
-          module-template,
+          module-template
         ]
     name: test ${{ matrix.module }}
     runs-on: ubuntu-latest
