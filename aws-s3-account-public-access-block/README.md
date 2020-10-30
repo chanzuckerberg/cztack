@@ -9,13 +9,15 @@ Restrict:
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| aws | > 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | > 2.0.0 |
 
 ## Inputs
 

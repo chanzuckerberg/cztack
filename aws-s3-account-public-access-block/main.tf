@@ -1,6 +1,5 @@
 locals {
   is_all  = var.restrict == "all"
-  is_new  = var.restrict == "new"
   is_none = var.restrict == "none"
 
 
