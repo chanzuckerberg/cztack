@@ -102,3 +102,9 @@ variable at_edge {
   description = "Is this lambda going to be used with a Cloufront distribution? If you set this, you will not have control over log retention, and you cannot include environment variables."
   default     = false
 }
+
+variable reserved_concurrent_executions {
+  type        = number
+  description = "Set reserved_concurrent_executions for this function. See [docs](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)."
+  default     = -1 // aws default
+}
