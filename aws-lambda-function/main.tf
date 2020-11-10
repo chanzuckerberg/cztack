@@ -29,6 +29,8 @@ resource aws_lambda_function lambda {
   timeout     = var.timeout
   kms_key_arn = var.kms_key_arn
 
+  reserved_concurrent_executions = var.reserved_concurrent_executions
+
   dynamic environment {
     for_each = length(var.environment) > 0 ? [0] : []
 
