@@ -20,7 +20,7 @@ module lambda {
 
   function_name    = var.function_name != null ? var.function_name : replace("${var.project}-${var.env}-${var.service}-security-headers", ".", "-")
   filename         = data.archive_file.lambda.output_path
-  source_code_hash = data.archive_file.lambda.output_sha
+  source_code_hash = data.archive_file.lambda.output_base64sha256
   handler          = "index.handler"
   runtime          = "nodejs10.x"
   at_edge          = true
