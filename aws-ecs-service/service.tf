@@ -160,26 +160,26 @@ resource "aws_ecs_task_definition" "job" {
   dynamic "volume" {
     for_each = var.volumes
     content {
-        name = volume.name
+        name = volume.value.name
         dynamic "docker_volume_configuration" {
-            for_each = try(volume.docker_volume_configuration, [])
+            for_each = try(volume.value.docker_volume_configuration, [])
             content {
-              scope = try(docker_volume_configuration.scope, null)
-              autoprovision = try(docker_volume_configuration.autoprovision, null)
-              driver = try(docker_volume_configuration.driver, null)
-              driver_opts = try(docker_volume_configuration.driver_opts, null)
-              labels = try(docker_volume_configuration.labels, null)
+              scope = try(docker_volume_configuration.value.scope, null)
+              autoprovision = try(docker_volume_configuration.value.autoprovision, null)
+              driver = try(docker_volume_configuration.value.driver, null)
+              driver_opts = try(docker_volume_configuration.value.driver_opts, null)
+              labels = try(docker_volume_configuration.value.labels, null)
             }
         }
         dynamic "efs_volume_configuration" {
-            for_each = try(volume.efs_volume_configuration, [])
+            for_each = try(volume.value.efs_volume_configuration, [])
             content {
-              file_system_id = try(efs_volume_configuration.file_system_id, null)
-              root_directory = try(efs_volume_configuration.root_directory, null)
-              transit_encryption = try(efs_volume_configuration.transit_encryption, null)
+              file_system_id = try(efs_volume_configuration.value.file_system_id, null)
+              root_directory = try(efs_volume_configuration.value.root_directory, null)
+              # transit_encryption = try(efs_volume_configuration.value.transit_encryption, null)
             }
         }
-        host_path = try(volume.host_path, null)
+        host_path = try(volume.value.host_path, null)
     }
   }
   tags                  = local.tags
