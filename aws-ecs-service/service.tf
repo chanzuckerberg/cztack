@@ -157,6 +157,31 @@ resource "aws_ecs_task_definition" "job" {
   family                = local.name
   container_definitions = var.manage_task_definition ? var.task_definition : local.dummy_task
   task_role_arn         = var.task_role_arn
+  dynamic "volume" {
+    for_each = var.volumes
+    content {
+        name = volume.name
+        dynamic "docker_volume_configuration" {
+            for_each = try(volume.docker_volume_configuration, [])
+            content {
+              scope = try(docker_volume_configuration.scope, null)
+              autoprovision = try(docker_volume_configuration.autoprovision, null)
+              driver = try(docker_volume_configuration.driver, null)
+              driver_opts = try(docker_volume_configuration.driver_opts, null)
+              labels = try(docker_volume_configuration.labels, null)
+            }
+        }
+        dynamic "efs_volume_configuration" {
+            for_each = try(volume.efs_volume_configuration, [])
+            content {
+              file_system_id = try(efs_volume_configuration.file_system_id, null)
+              root_directory = try(efs_volume_configuration.root_directory, null)
+              transit_encryption = try(efs_volume_configuration.transit_encryption, null)
+            }
+        }
+        host_path = try(volume.host_path, null)
+    }
+  }
   tags                  = local.tags
   network_mode          = var.awsvpc_network_mode ? "awsvpc" : null
   execution_role_arn    = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn

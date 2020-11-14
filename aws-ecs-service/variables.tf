@@ -18,6 +18,11 @@ variable "owner" {
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
+variable "volumes" {
+  default     = []
+  description = "Volumes"
+}
+
 variable "extra_tags" {
   type        = map(string)
   description = "Extra tags that will be added to components created by this module."
