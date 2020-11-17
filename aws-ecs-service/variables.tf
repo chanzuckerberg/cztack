@@ -18,9 +18,16 @@ variable "owner" {
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
-variable "volumes" {
-  default     = []
-  description = "Volumes"
+variable "ecs_task_definition" {
+  default     = {arn = "", revision = "", family = ""}
+  description = "Fully formed ECS Task Definition"
+  type        = object({ arn = string, revision = string, family = string })
+}
+
+variable "create_task_definition" {
+  default     = true
+  description = "Whether to create the ECS task definition internally (false requires ecs_task_definition parameter to be set)"
+  type        = bool
 }
 
 variable "extra_tags" {

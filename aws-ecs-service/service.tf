@@ -1,7 +1,8 @@
 locals {
   container_name = var.container_name == null ? local.name : var.container_name
 
-  task_definition = "${aws_ecs_task_definition.job.family}:${aws_ecs_task_definition.job.revision}"
+  # task_definition = var.create_task_definition ? "${aws_ecs_task_definition.job.family}:${aws_ecs_task_definition.job.revision}" : "${var.ecs_task_definition.family}:${var.ecs_task_definition.revision}"
+  task_definition = "${var.ecs_task_definition.family}:${var.ecs_task_definition.revision}"
 }
 
 module "container-sg" {
@@ -153,35 +154,11 @@ locals {
 TEMPLATE
 }
 
-resource "aws_ecs_task_definition" "job" {
+resource "aws_ecs_task_definition" "job_arg" {
+  count                 = var.create_task_definition ? 1 : 0
   family                = local.name
   container_definitions = var.manage_task_definition ? var.task_definition : local.dummy_task
   task_role_arn         = var.task_role_arn
-  dynamic "volume" {
-    for_each = var.volumes
-    content {
-        name = volume.value.name
-        dynamic "docker_volume_configuration" {
-            for_each = try(volume.value.docker_volume_configuration, [])
-            content {
-              scope = try(docker_volume_configuration.value.scope, null)
-              # autoprovision = try(docker_volume_configuration.value.autoprovision, false)
-              driver = try(docker_volume_configuration.value.driver, null)
-              driver_opts = try(docker_volume_configuration.value.driver_opts, null)
-              labels = try(docker_volume_configuration.value.labels, null)
-            }
-        }
-        dynamic "efs_volume_configuration" {
-            for_each = try(volume.value.efs_volume_configuration, [])
-            content {
-              file_system_id = try(efs_volume_configuration.value.file_system_id, null)
-              root_directory = try(efs_volume_configuration.value.root_directory, null)
-              # transit_encryption = try(efs_volume_configuration.value.transit_encryption, null)
-            }
-        }
-        host_path = try(volume.value.host_path, null)
-    }
-  }
   tags                  = local.tags
   network_mode          = var.awsvpc_network_mode ? "awsvpc" : null
   execution_role_arn    = var.registry_secretsmanager_arn == null ? null : aws_iam_role.task_execution_role[0].arn

@@ -8,7 +8,8 @@ output "alb_route53_zone_id" {
 
 output "ecs_task_definition_family" {
   description = "The family of the task definition defined for the given/generated container definition."
-  value       = aws_ecs_task_definition.job.family
+  # value       = var.create_task_definition ? aws_ecs_task_definition.job.family : var.ecs_task_definition.family
+  value       = var.ecs_task_definition.family
 }
 
 output "container_security_group_id" {
