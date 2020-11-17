@@ -165,7 +165,7 @@ resource "aws_ecs_task_definition" "job" {
             for_each = try(volume.value.docker_volume_configuration, [])
             content {
               scope = try(docker_volume_configuration.value.scope, null)
-              autoprovision = try(docker_volume_configuration.value.autoprovision, true)
+              autoprovision = try(docker_volume_configuration.value.autoprovision, false)
               driver = try(docker_volume_configuration.value.driver, null)
               driver_opts = try(docker_volume_configuration.value.driver_opts, null)
               labels = try(docker_volume_configuration.value.labels, null)
