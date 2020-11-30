@@ -88,7 +88,8 @@ jobs:
           aws-ssm-params,
           bless-ca/test,
           github-webhooks-to-s3,
-          module-template
+          module-template,
+          snowflake-table-grant-all,
         ]
     name: test ${{ matrix.module }}
     runs-on: ubuntu-latest
