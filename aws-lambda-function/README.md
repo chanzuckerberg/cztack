@@ -49,6 +49,7 @@ module lambda {
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | publish\_lambda | Whether to publish creation/change as new lambda function version. | `bool` | `false` | no |
+| reserved\_concurrent\_executions | Set reserved\_concurrent\_executions for this function. See [docs](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html). | `number` | `-1` | no |
 | runtime | Lambda language runtime. | `string` | n/a | yes |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | source\_code\_hash | n/a | `string` | `null` | no |
