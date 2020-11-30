@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	awsSDK "github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/chanzuckerberg/go-misc/tftest"
-	"github.com/gruntwork-io/terratest/modules/aws"
+	awsTest "github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
 )
@@ -48,11 +48,11 @@ func TestPublicBucketDefaults(t *testing.T) {
 			bucketArn := outputs["arn"].(string)
 
 			// some assertions built into terratest
-			aws.AssertS3BucketExists(t, region, bucket)
-			aws.AssertS3BucketPolicyExists(t, region, bucket)
-			aws.AssertS3BucketVersioningExists(t, region, bucket)
+			awsTest.AssertS3BucketExists(t, region, bucket)
+			awsTest.AssertS3BucketPolicyExists(t, region, bucket)
+			awsTest.AssertS3BucketVersioningExists(t, region, bucket)
 
-			bucketPolicy := aws.GetS3BucketPolicy(t, region, bucket)
+			bucketPolicy := awsTest.GetS3BucketPolicy(t, region, bucket)
 			policy, err := tftest.UnmarshalS3BucketPolicy(bucketPolicy)
 			r.NoError(err)
 			r.NotNil(policy)
@@ -65,7 +65,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 			// r.Equal(policy.Statement[0].Condition["Bool"]["aws:SecureTransport"], "false")
 
 			// get a client to query for other assertions
-			s3Client := aws.NewS3Client(t, region)
+			s3Client := awsTest.NewS3Client(t, region)
 
 			acl, err := s3Client.GetBucketAcl(&s3.GetBucketAclInput{
 				Bucket: &bucket,
@@ -79,29 +79,26 @@ func TestPublicBucketDefaults(t *testing.T) {
 
 			tagOutput, err := s3Client.GetBucketTagging(&s3.GetBucketTaggingInput{
 				Bucket: &bucket,
-			}) //input format: *s3.GetBucketTaggingInput
+			})
 			r.NoError(err)
 			r.Contains(tagOutput.TagSet, []*s3.Tag{
 				{
-					Key:   awsSDK.String("managedBy"),
-					Value: awsSDK.String("terraformm"),
+					Key:   aws.String("managedBy"),
+					Value: aws.String("terraform"),
 				},
 				{
-					Key:   awsSDK.String("isPublic"),
-					Value: awsSDK.String("true"),
+					Key:   aws.String("isPublic"),
+					Value: aws.String("true"),
 				},
 				{
-					Key:   awsSDK.String("public_reason"),
-					Value: awsSDK.String("test bucket"),
+					Key:   aws.String("public_reason"),
+					Value: aws.String("test bucket"),
 				},
 				{
-					Key:   awsSDK.String("bucket_contents"),
-					Value: awsSDK.String("dummy data"),
+					Key:   aws.String("bucket_contents"),
+					Value: aws.String("dummy data"),
 				},
 			})
-			// r.Contains(tagOutput.TagSet, "public_reason")
-			// r.Contains(tagOutput.TagSet, "bucket_contents")
-			// r.Equal(tagOutput.TagSet[4], "asdf")
 
 			enc, err := s3Client.GetBucketEncryption(&s3.GetBucketEncryptionInput{
 				Bucket: &bucket,
