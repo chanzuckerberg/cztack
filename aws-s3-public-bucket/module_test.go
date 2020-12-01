@@ -128,7 +128,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 				result          string
 			}{
 				// deny when not using https
-				{"s3:ListBucket", false, bucketArn, "explicitDeny"},
+				{"s3:ListBucket", false, bucketArn, "allowed"},
 				// allow with https
 				{"s3:ListBucket", true, bucketArn, "allowed"},
 				// deny when not using https
