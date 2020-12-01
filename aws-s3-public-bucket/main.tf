@@ -15,7 +15,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = var.bucket_name
+  bucket = local.bucket_name
 
   policy = data.aws_iam_policy_document.bucket_policy.json
 
@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "bucket_policy" {
   statement {
     sid       = "EnforceHTTPS"
     actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${var.bucket_name}/*"]
+    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
 
     principals {
       type        = "*"
@@ -59,7 +59,7 @@ data "aws_iam_policy_document" "bucket_policy" {
   statement {
     sid       = "AllowPublicRead"
     actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${var.bucket_name}/*"]
+    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
     principals {
       type        = "*"
       identifiers = ["*"]
@@ -72,7 +72,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     content {
       sid       = "AllowPublicList"
       actions   = ["s3:ListBucket"]
-      resources = ["arn:aws:s3:::${var.bucket_name}"]
+      resources = ["arn:aws:s3:::${local.bucket_name}"]
       principals {
         type        = "*"
         identifiers = ["*"]

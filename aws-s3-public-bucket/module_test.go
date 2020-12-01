@@ -22,7 +22,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 			service := tftest.UniqueID()
 			owner := tftest.UniqueID()
 
-			bucketName := tftest.UniqueID()
+			bucketName := fmt.Sprintf("%s-public", tftest.UniqueID())
 
 			// variables.tf inputs
 			return tftest.Options(
