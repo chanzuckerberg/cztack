@@ -13,6 +13,11 @@ variable "env" {
   description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
 }
 
+variable "volumes" {
+  default     = []
+  description = "Volumes defined per the efs task definition [docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#volume)"
+}
+
 variable "owner" {
   type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
