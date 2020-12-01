@@ -80,24 +80,23 @@ func TestPublicBucketDefaults(t *testing.T) {
 			tagOutput, err := s3Client.GetBucketTagging(&s3.GetBucketTaggingInput{
 				Bucket: &bucket,
 			})
+
 			r.NoError(err)
-			r.Contains(tagOutput.TagSet, []*s3.Tag{
-				{
-					Key:   aws.String("managedBy"),
-					Value: aws.String("terraform"),
-				},
-				{
-					Key:   aws.String("isPublic"),
-					Value: aws.String("true"),
-				},
-				{
-					Key:   aws.String("public_reason"),
-					Value: aws.String("test bucket"),
-				},
-				{
-					Key:   aws.String("bucket_contents"),
-					Value: aws.String("dummy data"),
-				},
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("managedBy"),
+				Value: aws.String("terraform"),
+			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("isPublic"),
+				Value: aws.String("true"),
+			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("public_reason"),
+				Value: aws.String("test bucket"),
+			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("bucket_contents"),
+				Value: aws.String("dummy data"),
 			})
 
 			enc, err := s3Client.GetBucketEncryption(&s3.GetBucketEncryptionInput{
