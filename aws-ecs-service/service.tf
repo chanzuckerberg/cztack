@@ -178,8 +178,8 @@ resource "aws_ecs_task_definition" "job" {
       dynamic "efs_volume_configuration" {
         for_each = try(volume.value.efs_volume_configuration, [])
         content {
-          file_system_id     = try(efs_volume_configuration.value.file_system_id, null)
-          root_directory     = try(efs_volume_configuration.value.root_directory, null)
+          file_system_id = try(efs_volume_configuration.value.file_system_id, null)
+          root_directory = try(efs_volume_configuration.value.root_directory, null)
           # transit_encryption = try(efs_volume_configuration.value.transit_encryption, null)
         }
       }
