@@ -37,10 +37,10 @@ variable "bucket_policy" {
 
 variable "bucket_contents" {
   type        = string
-  description = "Sentence that describes the data inside this bucket"
+  description = "Describe the data within this bucket."
 }
 
 variable "public_reason" {
   type        = string
-  description = "Sentence that describes why the bucket is public-read"
+  description = "Describe why this bucket must be public and what it is being used for."
 }

@@ -6,7 +6,7 @@ output "name" {
 
 output "domain_name" {
   value       = aws_s3_bucket.bucket.bucket_domain_name
-  description = "domain where you host the public bucket"
+  description = "Domain where you host the public bucket"
 }
 
 output "arn" {
