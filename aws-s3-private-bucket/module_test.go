@@ -53,12 +53,12 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r.NoError(err)
 			r.NotNil(policy)
 
-			r.Len(policy.Statement, 1)
-			r.Equal(policy.Statement[0].Effect, "Deny")
-			r.Equal(policy.Statement[0].Principal, "*")
-			r.Equal(policy.Statement[0].Action, "*")
-			r.Len(policy.Statement[0].Condition, 1)
-			r.Equal(policy.Statement[0].Condition["Bool"]["aws:SecureTransport"], "false")
+			r.Len(policy.Statements, 1)
+			r.Equal(policy.Statements[0].Effect, "Deny")
+			r.Equal(policy.Statements[0].Principal, "*")
+			r.Equal(policy.Statements[0].Action, "*")
+			r.Len(policy.Statements[0].Condition, 1)
+			r.Equal(policy.Statements[0].Condition["Bool"]["aws:SecureTransport"], "false")
 
 			// get a client to query for other assertions
 			s3Client := aws.NewS3Client(t, region)
