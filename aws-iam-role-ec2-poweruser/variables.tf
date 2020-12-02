@@ -25,6 +25,18 @@ variable "saml_idp_arn" {
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
 
+variable "iam_actions" {
+  type        = list(string)
+  default     = ["ec2:*"]
+  description = "List of EC2 API Actions that we are granting this role. "
+}
+
+variable "iam_ec2_resources" {
+  type        = list(string)
+  default     = ["*"]
+  description = "List of ARN's corresponding to specific EC2 instances. "
+}
+
 variable tags {
   type        = map(string)
   default     = {}

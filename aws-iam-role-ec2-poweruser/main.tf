@@ -50,8 +50,8 @@ resource "aws_iam_role" "ec2-poweruser" {
 data "aws_iam_policy_document" "ec2" {
   statement {
     sid       = "ec2"
-    actions   = ["ec2:*"]
-    resources = ["*"]
+    actions   = var.iam_actions
+    resources = var.iam_ec2_resources
   }
 }
 
