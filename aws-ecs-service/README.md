@@ -188,6 +188,7 @@ service = false` argument can be removed.
 | task\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network\_mode is true. | `list(string)` | `[]` | no |
 | task\_role\_arn | n/a | `string` | n/a | yes |
 | task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. Only used if awsvpc\_network\_mode is true. | `list(string)` | `[]` | no |
+| volumes | Volumes defined per the efs task definition [docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#volume) | `list` | `[]` | no |
 | vpc\_id | n/a | `string` | n/a | yes |
 | with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53\_zone\_id. | `bool` | `false` | no |
 
