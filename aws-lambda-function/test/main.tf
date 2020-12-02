@@ -10,8 +10,25 @@ data "archive_file" "notifier" {
   output_path = "${path.module}/hello.zip"
 }
 
+variable project {
+  type        = string
+  description = "Project for tagging and naming."
+}
+variable env {
+  type        = string
+  description = "Env for tagging and naming."
+}
+variable service {
+  type        = string
+  description = "Service for tagging and naming"
+}
+variable owner {
+  type        = string
+  description = "Owner for tagging and naming."
+}
+
 module lambda {
-  source = "../"
+  source = "../."
 
   handler = "hello.hello"
   runtime = "python3.8"
@@ -21,10 +38,10 @@ module lambda {
 
   log_retention_in_days = 1
 
-  project = random_string.random.result
-  env     = random_string.random.result
-  service = random_string.random.result
-  owner   = random_string.random.result
+  project = var.project
+  env     = var.env
+  service = var.service
+  owner   = var.owner
 }
 
 output arn {
