@@ -6,6 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/chanzuckerberg/go-misc/tftest"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
@@ -53,12 +54,14 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r.NoError(err)
 			r.NotNil(policy)
 
-			r.Len(policy.Statement, 1)
-			r.Equal(policy.Statement[0].Effect, "Deny")
-			r.Equal(policy.Statement[0].Principal, "*")
-			r.Equal(policy.Statement[0].Action, "*")
-			r.Len(policy.Statement[0].Condition, 1)
-			r.Equal(policy.Statement[0].Condition["Bool"]["aws:SecureTransport"], "false")
+			spew.Dump(bucketPolicy)
+			spew.Dump(policy)
+			r.Len(policy.Statements, 1)
+			r.Equal(policy.Statements[0].Effect, "Deny")
+			r.Equal(policy.Statements[0].Principal, "*")
+			r.Equal(policy.Statements[0].Action, tftest.AWSStrings{"*"})
+			r.Len(policy.Statements[0].Condition, 1)
+			r.Equal(policy.Statements[0].Condition["Bool"]["aws:SecureTransport"], "false")
 
 			// get a client to query for other assertions
 			s3Client := aws.NewS3Client(t, region)
