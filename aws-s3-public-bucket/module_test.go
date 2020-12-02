@@ -21,7 +21,6 @@ func TestPublicBucketDefaults(t *testing.T) {
 			env := tftest.UniqueID()
 			service := tftest.UniqueID()
 			owner := tftest.UniqueID()
-
 			bucketName := fmt.Sprintf("%s-public", tftest.UniqueID())
 
 			// variables.tf inputs
@@ -56,13 +55,6 @@ func TestPublicBucketDefaults(t *testing.T) {
 			policy, err := tftest.UnmarshalS3BucketPolicy(bucketPolicy)
 			r.NoError(err)
 			r.NotNil(policy)
-
-			// r.Len(policy.Statement, 1)
-			// r.Equal(policy.Statement[0].Effect, "Deny")
-			// r.Equal(policy.Statement[0].Principal, "*")
-			// r.Equal(policy.Statement[0].Action, "*")
-			// r.Len(policy.Statement[0].Condition, 1)
-			// r.Equal(policy.Statement[0].Condition["Bool"]["aws:SecureTransport"], "false")
 
 			// get a client to query for other assertions
 			s3Client := awsTest.NewS3Client(t, region)
@@ -107,18 +99,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 			r.NotNil(enc.ServerSideEncryptionConfiguration)
 			r.Len(enc.ServerSideEncryptionConfiguration.Rules, 1)
 
-			// block, err := s3Client.GetPublicAccessBlock(&s3.GetPublicAccessBlockInput{
-			// 	Bucket: &bucket,
-			// })
-			// r.NoError(err)
-			// r.NotNil(block)
-			// r.True(*block.PublicAccessBlockConfiguration.BlockPublicAcls)
-			// r.True(*block.PublicAccessBlockConfiguration.BlockPublicPolicy)
-			// r.True(*block.PublicAccessBlockConfiguration.IgnorePublicAcls)
-			// r.True(*block.PublicAccessBlockConfiguration.RestrictPublicBuckets)
-
 			// policy simulations
-
 			objectArn := fmt.Sprintf("%s/foo", bucketArn)
 
 			sims := []struct {
