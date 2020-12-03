@@ -1,13 +1,13 @@
 locals {
   tags = {
-    project         = var.project
-    env             = var.env
-    service         = var.service
-    owner           = var.owner
-    managedBy       = "terraform"
-    isPublic        = true
-    public_read_justification   = var.public_read_justification
-    bucket_contents = var.bucket_contents
+    project                   = var.project
+    env                       = var.env
+    service                   = var.service
+    owner                     = var.owner
+    managedBy                 = "terraform"
+    isPublic                  = true
+    public_read_justification = var.public_read_justification
+    bucket_contents           = var.bucket_contents
   }
 
   // make sure we have public in the name
