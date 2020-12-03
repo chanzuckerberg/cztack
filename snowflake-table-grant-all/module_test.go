@@ -13,16 +13,25 @@ func TestModule(t *testing.T) {
 		Mode: tftest.Init,
 
 		Setup: func(t *testing.T) *terraform.Options {
-			return tftest.Options(
-				tftest.DefaultRegion,
-				map[string]interface{}{
-					"database_name": "database",
-					"schema_name":   "schema",
-					"table_name":    "table",
-					"roles":         []string{"a", "b", "c"},
-					"shares":        []string{"as", "bs", "cs"},
+			vars := map[string]interface{}{
+				"database_name": "database",
+				"schema_name":   "schema",
+				"table_name":    "table",
+				"roles":         []string{"a", "b", "c"},
+				"shares":        []string{"as", "bs", "cs"},
+			}
+
+			opts := &terraform.Options{
+				TerraformDir: ".",
+
+				EnvVars: map[string]string{
+					"AWS_DEFAULT_REGION": tftest.DefaultRegion,
 				},
-			)
+
+				Vars: vars,
+			}
+
+			return opts
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
