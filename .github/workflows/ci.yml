@@ -89,7 +89,8 @@ jobs:
           aws-ssm-params,
           bless-ca/test,
           github-webhooks-to-s3,
-          module-template
+          module-template,
+          snowflake-table-grant-all,
         ]
     name: test ${{ matrix.module }}
     runs-on: ubuntu-latest
@@ -118,6 +119,15 @@ jobs:
     - name: Check bless provider
       if: github.event == 'push' || steps.filter.outputs.module == 'true'
       run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
+
+    # we can stop this when we move to terraform 0.13 and drop support for 0.12
+    - name: Install Snowflake provider
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
+      run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+    - name: Check Snowflake provider
+      if: github.event == 'push' || steps.filter.outputs.module == 'true'
+      run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
+
     - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
       if: github.event == 'push' || steps.filter.outputs.module == 'true'
     - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
