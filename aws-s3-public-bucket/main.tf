@@ -6,7 +6,7 @@ locals {
     owner           = var.owner
     managedBy       = "terraform"
     isPublic        = true
-    public_reason   = var.public_reason
+    public_read_justification   = var.public_read_justification
     bucket_contents = var.bucket_contents
   }
 
@@ -36,25 +36,6 @@ resource "aws_s3_bucket" "bucket" {
 data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
   source_json = var.bucket_policy
-
-  statement {
-    sid       = "EnforceHTTPS"
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    effect = "Deny"
-
-    condition {
-      test     = "Bool"
-      variable = "aws:SecureTransport"
-      values   = ["false"]
-    }
-  }
 
   statement {
     sid       = "AllowPublicRead"

@@ -27,12 +27,12 @@ func TestPublicBucketDefaults(t *testing.T) {
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"project":         project,
-					"env":             env,
-					"service":         service,
-					"owner":           owner,
-					"public_reason":   "test bucket",
-					"bucket_contents": "dummy data",
+					"project":                   project,
+					"env":                       env,
+					"service":                   service,
+					"owner":                     owner,
+					"public_read_justification": "test bucket",
+					"bucket_contents":           "dummy data",
 
 					"bucket_name": bucketName,
 				},
@@ -83,7 +83,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 				Value: aws.String("true"),
 			})
 			r.Contains(tagOutput.TagSet, &s3.Tag{
-				Key:   aws.String("public_reason"),
+				Key:   aws.String("public_read_justification"),
 				Value: aws.String("test bucket"),
 			})
 			r.Contains(tagOutput.TagSet, &s3.Tag{
@@ -108,18 +108,19 @@ func TestPublicBucketDefaults(t *testing.T) {
 				arn             string
 				result          string
 			}{
-				// deny when not using https
+				// allow listbucket when not using https
 				{"s3:ListBucket", false, bucketArn, "allowed"},
-				// allow with https
+				// allow listbucket with https
 				{"s3:ListBucket", true, bucketArn, "allowed"},
-				// deny when not using https
-				{"s3:GetObject", false, objectArn, "explicitDeny"},
-				// allow with https
+				// allow getobject when not using https
+				{"s3:GetObject", true, objectArn, "allowed"},
+				// allow getobject with https
 				{"s3:GetObject", true, objectArn, "allowed"},
 			}
 
 			for _, test := range sims {
 				resp := tftest.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
+				fmt.Println("Testing ", test.action, " with https enabled=", test.secureTransport)
 				r.Equal(test.result, *resp.EvalDecision)
 			}
 		},

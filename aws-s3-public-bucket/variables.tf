@@ -40,7 +40,7 @@ variable "bucket_contents" {
   description = "Describe the data within this bucket."
 }
 
-variable "public_reason" {
+variable "public_read_justification" {
   type        = string
   description = "Describe why this bucket must be public and what it is being used for."
 }
