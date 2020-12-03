@@ -20,20 +20,10 @@ func TestDefaults(t *testing.T) {
 	test := tftest.Test{
 
 		Setup: func(t *testing.T) *terraform.Options {
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
-
 			// vars are all encoded in the test terraform files
 			opt := tftest.Options(
 				tftest.DefaultRegion,
-				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
-				},
+				map[string]interface{}{},
 			)
 			opt.TerraformDir = "./test"
 			return opt
