@@ -17,7 +17,7 @@
 |------|-------------|------|---------|:--------:|
 | allow\_public\_list | Allow public to list bucket contents. | `bool` | `false` | no |
 | bucket\_contents | Describe the data within this bucket. | `string` | n/a | yes |
-| bucket\_name | The name of the bucket. | `string` | n/a | yes |
+| bucket\_name | The name of the bucket. Note that `-public` will be appended to `bucket_name`s that don't contain a `public` substring. This module will output the computed `bucket_name`. | `string` | n/a | yes |
 | bucket\_policy | A policy to attach to this bucket. | `string` | `""` | no |
 | env | Env for tagging and naming. | `string` | n/a | yes |
 | owner | Owner for tagging and naming. | `string` | n/a | yes |
