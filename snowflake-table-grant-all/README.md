@@ -24,13 +24,13 @@ module "foo_table_grant_all" {
 
 | Name | Version |
 |------|---------|
-| snowflake | > 2.18.1 |
+| snowflake | > 0.18.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| snowflake | > 2.18.1 |
+| snowflake | > 0.18.0 |
 
 ## Inputs
 
