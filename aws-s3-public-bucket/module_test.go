@@ -21,7 +21,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 			env := tftest.UniqueID()
 			service := tftest.UniqueID()
 			owner := tftest.UniqueID()
-			bucketName := fmt.Sprintf("%s-public", tftest.UniqueID())
+			bucketName := tftest.UniqueID()
 
 			// variables.tf inputs
 			return tftest.Options(
@@ -45,6 +45,8 @@ func TestPublicBucketDefaults(t *testing.T) {
 			bucket := options.Vars["bucket_name"].(string)
 			outputs := terraform.OutputAll(t, options)
 			bucketArn := outputs["arn"].(string)
+
+			r.Contains(outputs["name"], "public")
 
 			// some assertions built into terratest
 			awsTest.AssertS3BucketExists(t, region, bucket)
