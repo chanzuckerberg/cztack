@@ -20,7 +20,7 @@ variable "env" {
 
 variable "bucket_name" {
   type        = string
-  description = "The name of the bucket."
+  description = "The name of the bucket. Note that `-public` will be appended to `bucket_name`s that don't contain a `public` substring. This module will output the computed `bucket_name`."
 }
 
 variable "allow_public_list" {
