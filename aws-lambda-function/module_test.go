@@ -18,7 +18,6 @@ import (
 
 func TestDefaults(t *testing.T) {
 	test := tftest.Test{
-
 		Setup: func(t *testing.T) *terraform.Options {
 			// vars are all encoded in the test terraform files
 			opt := tftest.Options(
