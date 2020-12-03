@@ -82,6 +82,7 @@ jobs:
           aws-params-writer,
           aws-redis-node,
           aws-s3-private-bucket,
+          aws-s3-public-bucket,
           aws-single-page-static-site,
           aws-sns-lambda,
           aws-ssm-params-writer,
