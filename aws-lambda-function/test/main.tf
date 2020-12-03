@@ -28,7 +28,7 @@ variable owner {
 }
 
 module lambda {
-  source = "../"
+  source = "../."
 
   handler = "hello.hello"
   runtime = "python3.8"
