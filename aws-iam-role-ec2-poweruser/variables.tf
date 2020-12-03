@@ -25,16 +25,10 @@ variable "saml_idp_arn" {
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
 
-variable "iam_actions" {
-  type        = list(string)
-  default     = ["ec2:*"]
-  description = "List of EC2 API Actions that we are granting this role. "
-}
-
-variable "iam_ec2_resources" {
-  type        = list(string)
-  default     = ["*"]
-  description = "List of ARN's corresponding to specific EC2 instances. "
+variable iam_policy_details {
+  type        = object({ actions : list(string), resources : list(string) })
+  description = "Map containing a list of EC2 API Actions & a list of target EC2 resources. Action entries do not need the 'ec2:' policy prefix. This is used to build an aws_iam_policy_document."
+  default     = { actions : ["*"], resources = ["*"] }
 }
 
 variable tags {

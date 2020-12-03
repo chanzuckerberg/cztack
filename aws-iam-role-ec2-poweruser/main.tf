@@ -50,8 +50,8 @@ resource "aws_iam_role" "ec2-poweruser" {
 data "aws_iam_policy_document" "ec2" {
   statement {
     sid       = "ec2"
-    actions   = var.iam_actions
-    resources = var.iam_ec2_resources
+    actions   = formatlist("ec2:%s", var.iam_policy_details.actions)
+    resources = var.iam_policy_details.resources
   }
 }
 
