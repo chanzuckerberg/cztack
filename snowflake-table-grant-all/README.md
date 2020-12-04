@@ -38,6 +38,7 @@ module "foo_table_grant_all" {
 |------|-------------|------|---------|:--------:|
 | database\_name | The name of the database that contains this table. | `string` | n/a | yes |
 | on\_future | When set to true, and schema\_name present, apply grant to all future tables in schema.<br>  When set to true, and schema\_name absent, apply grant to all future tables in database.<br><br>  NOTE: table\_name and shares must be unset in order to use on\_future. | `bool` | `null` | no |
+| per\_privilege\_grants | A map of privileges to authorized roles and shares. Privileges must be UPPER case.<br>  This allows you to authorize extra roles/shares for specific privileges.<br>  The reason this module exists is that the provider only supports one grant resource per (database\_name, schema\_name, table\_name, on\_future, with\_grant\_option) tuple.<br>  For example, if you used this module to grant an ALL privilege to a role you couldn't grant a subset of the ALL privs to another role. | `map(object({ roles : list(string), shares : list(string) }))` | `{}` | no |
 | roles | Grants privilege to these roles. | `set(string)` | `null` | no |
 | schema\_name | The name of the schema that contains this table. | `string` | `null` | no |
 | shares | Grants privilege to these shares (only valid if on\_future is unset). | `set(string)` | `null` | no |

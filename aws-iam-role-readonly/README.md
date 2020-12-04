@@ -38,13 +38,16 @@ output "role_name" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | authorize\_read\_secrets | Should this role also be authorized to decrypt and read secrets. | `bool` | `true` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | iam\_path | n/a | `string` | `"/"` | no |
 | oidc | A list of AWS OIDC IDPs to establish a trust relationship for this role. | <pre>list(object(<br>    {<br>      idp_arn : string,          # the AWS IAM IDP arn<br>      client_ids : list(string), # a list of oidc client ids<br>      provider : string          # your provider url, such as foo.okta.com<br>    }<br>  ))</pre> | `[]` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | role\_name | n/a | `string` | `"readonly"` | no |
 | saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | source\_account\_id | The source AWS account to establish a trust relationship. Ignored if empty or not provided. DEPRECATED: Please use source\_account\_ids. | `string` | `""` | no |
 | source\_account\_ids | The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided. | `set(string)` | `[]` | no |
-| tags | A map of tags to assign this IAM Role. | `map(string)` | `{}` | no |
 
 ## Outputs
 
