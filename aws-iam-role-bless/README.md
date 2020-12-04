@@ -37,11 +37,14 @@ output "..." {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | bless\_lambda\_arns | List of bless lambda arns | `list` | n/a | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | iam\_path | IAM path | `string` | `"/"` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | role\_name | The name for the role | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | source\_account\_id | The source aws account id to allow sts:AssumeRole. DEPRECATED: Please use source\_account\_ids | `string` | n/a | yes |
 | source\_account\_ids | The source aws account ids to allow sts:AssumeRole | `set(string)` | `[]` | no |
-| tags | A map of tags to assign this IAM Role. | `map(string)` | `{}` | no |
 
 ## Outputs
 
