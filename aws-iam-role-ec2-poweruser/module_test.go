@@ -8,19 +8,25 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
+func TestAWSIAMRoleEC2Poweruser(t *testing.T) {
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
 			curAcct := tftest.AWSCurrentAccountID(t)
+
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
 
 			return tftest.Options(
 				tftest.IAMRegion,
 				map[string]interface{}{
 					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
-					"tags": map[string]string{
-						"test": random.UniqueId(),
-					},
+					"project": project,
+					"env":     env,
+					"service": service,
+					"owner":   owner,
 				},
 			)
 		},
