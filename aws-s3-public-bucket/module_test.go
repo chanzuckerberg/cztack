@@ -42,12 +42,11 @@ func TestPublicBucketDefaults(t *testing.T) {
 		Validate: func(t *testing.T, options *terraform.Options) {
 			r := require.New(t)
 			region := options.EnvVars["AWS_DEFAULT_REGION"]
-			bucket := options.Vars["bucket_name"].(string)
 			outputs := terraform.OutputAll(t, options)
+			bucket := outputs["name"].(string)
 			bucketArn := outputs["arn"].(string)
 
 			r.Contains(outputs["name"], "public")
-
 			// some assertions built into terratest
 			awsTest.AssertS3BucketExists(t, region, bucket)
 			awsTest.AssertS3BucketPolicyExists(t, region, bucket)
@@ -125,6 +124,7 @@ func TestPublicBucketDefaults(t *testing.T) {
 				fmt.Println("Testing ", test.action, " with https enabled=", test.secureTransport)
 				r.Equal(test.result, *resp.EvalDecision)
 			}
+
 		},
 	}
 
