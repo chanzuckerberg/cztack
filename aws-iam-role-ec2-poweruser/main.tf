@@ -1,3 +1,12 @@
+locals {
+  tags = {
+    env     = var.env
+    owner   = var.owner
+    service = var.service
+    project = var.project
+  }
+}
+
 data "aws_iam_policy_document" "assume-role" {
   dynamic "statement" {
     for_each = compact([var.source_account_id])
@@ -44,14 +53,14 @@ resource "aws_iam_role" "ec2-poweruser" {
   name               = var.role_name
   path               = var.iam_path
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
-  tags               = var.tags
+  tags               = local.tags
 }
 
 data "aws_iam_policy_document" "ec2" {
   statement {
     sid       = "ec2"
-    actions   = ["ec2:*"]
-    resources = ["*"]
+    actions   = formatlist("ec2:%s", var.iam_policy_details.actions)
+    resources = var.iam_policy_details.resources
   }
 }
 
