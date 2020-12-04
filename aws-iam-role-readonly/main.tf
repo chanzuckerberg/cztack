@@ -1,3 +1,12 @@
+locals {
+  tags = {
+    env     = var.env
+    owner   = var.owner
+    service = var.service
+    project = var.project
+  }
+}
+
 data "aws_iam_policy_document" "assume-role" {
   dynamic "statement" {
     for_each = compact([var.source_account_id])
@@ -64,7 +73,7 @@ resource "aws_iam_role" "readonly" {
   name               = var.role_name
   path               = var.iam_path
   assume_role_policy = data.aws_iam_policy_document.assume-role.json
-  tags               = var.tags
+  tags               = local.tags
 }
 
 resource "aws_iam_role_policy_attachment" "readonly" {
