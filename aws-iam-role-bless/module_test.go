@@ -14,15 +14,21 @@ func TestIAMRoleBless(t *testing.T) {
 			region := tftest.IAMRegion
 			curAcct := tftest.AWSCurrentAccountID(t)
 
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
+
 			return &terraform.Options{
 				TerraformDir: ".",
 
 				Vars: map[string]interface{}{
 					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
-					"tags": map[string]string{
-						"test": random.UniqueId(),
-					},
+					"project":           project,
+					"env":               env,
+					"service":           service,
+					"owner":             owner,
 					"bless_lambda_arns": []string{"arn:aws:lambda:us-west-2:111111111111:function:test"},
 				},
 				EnvVars: map[string]string{

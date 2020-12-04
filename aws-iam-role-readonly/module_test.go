@@ -14,6 +14,11 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 		Setup: func(t *testing.T) *terraform.Options {
 			curAcct := tftest.AWSCurrentAccountID(t)
 
+			project := tftest.UniqueID()
+			env := tftest.UniqueID()
+			service := tftest.UniqueID()
+			owner := tftest.UniqueID()
+
 			return tftest.Options(
 				tftest.IAMRegion,
 
@@ -21,9 +26,10 @@ func TestAWSIAMRoleReadOnly(t *testing.T) {
 					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
 					"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
-					"tags": map[string]string{
-						"test": random.UniqueId(),
-					},
+					"project":           project,
+					"env":               env,
+					"service":           service,
+					"owner":             owner,
 				},
 			)
 		},
