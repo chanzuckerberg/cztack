@@ -23,10 +23,10 @@ func TestAWSIAMRoleEC2Poweruser(t *testing.T) {
 				map[string]interface{}{
 					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
+					"project":           project,
+					"env":               env,
+					"service":           service,
+					"owner":             owner,
 				},
 			)
 		},
