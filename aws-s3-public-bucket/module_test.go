@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/chanzuckerberg/go-misc/tftest"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/gruntwork-io/terratest/modules/aws"
+	awsTest "github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
 )
 
-func TestPrivateBucketDefaults(t *testing.T) {
+func TestPublicBucketDefaults(t *testing.T) {
 	t.Parallel()
 
 	test := &tftest.Test{
@@ -21,16 +21,18 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			env := tftest.UniqueID()
 			service := tftest.UniqueID()
 			owner := tftest.UniqueID()
-
 			bucketName := tftest.UniqueID()
 
+			// variables.tf inputs
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
+					"project":                   project,
+					"env":                       env,
+					"service":                   service,
+					"owner":                     owner,
+					"public_read_justification": "test bucket",
+					"bucket_contents":           "dummy data",
 
 					"bucket_name": bucketName,
 				},
@@ -44,27 +46,20 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			outputs := terraform.OutputAll(t, options)
 			bucketArn := outputs["arn"].(string)
 
-			// some assertions built into terratest
-			aws.AssertS3BucketExists(t, region, bucket)
-			aws.AssertS3BucketPolicyExists(t, region, bucket)
-			aws.AssertS3BucketVersioningExists(t, region, bucket)
+			r.Contains(outputs["name"], "public")
 
-			bucketPolicy := aws.GetS3BucketPolicy(t, region, bucket)
+			// some assertions built into terratest
+			awsTest.AssertS3BucketExists(t, region, bucket)
+			awsTest.AssertS3BucketPolicyExists(t, region, bucket)
+			awsTest.AssertS3BucketVersioningExists(t, region, bucket)
+
+			bucketPolicy := awsTest.GetS3BucketPolicy(t, region, bucket)
 			policy, err := tftest.UnmarshalS3BucketPolicy(bucketPolicy)
 			r.NoError(err)
 			r.NotNil(policy)
 
-			spew.Dump(bucketPolicy)
-			spew.Dump(policy)
-			r.Len(policy.Statements, 1)
-			r.Equal(policy.Statements[0].Effect, "Deny")
-			r.Equal(policy.Statements[0].Principal, "*")
-			r.Equal(policy.Statements[0].Action, tftest.AWSStrings{"*"})
-			r.Len(policy.Statements[0].Condition, 1)
-			r.Equal(policy.Statements[0].Condition["Bool"]["aws:SecureTransport"], "false")
-
 			// get a client to query for other assertions
-			s3Client := aws.NewS3Client(t, region)
+			s3Client := awsTest.NewS3Client(t, region)
 
 			acl, err := s3Client.GetBucketAcl(&s3.GetBucketAclInput{
 				Bucket: &bucket,
@@ -76,6 +71,28 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r.Equal("CanonicalUser", *acl.Grants[0].Grantee.Type)
 			r.Equal("FULL_CONTROL", *acl.Grants[0].Permission)
 
+			tagOutput, err := s3Client.GetBucketTagging(&s3.GetBucketTaggingInput{
+				Bucket: &bucket,
+			})
+
+			r.NoError(err)
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("managedBy"),
+				Value: aws.String("terraform"),
+			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("isPublic"),
+				Value: aws.String("true"),
+			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("public_read_justification"),
+				Value: aws.String("test bucket"),
+			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("bucket_contents"),
+				Value: aws.String("dummy data"),
+			})
+
 			enc, err := s3Client.GetBucketEncryption(&s3.GetBucketEncryptionInput{
 				Bucket: &bucket,
 			})
@@ -84,18 +101,7 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r.NotNil(enc.ServerSideEncryptionConfiguration)
 			r.Len(enc.ServerSideEncryptionConfiguration.Rules, 1)
 
-			block, err := s3Client.GetPublicAccessBlock(&s3.GetPublicAccessBlockInput{
-				Bucket: &bucket,
-			})
-			r.NoError(err)
-			r.NotNil(block)
-			r.True(*block.PublicAccessBlockConfiguration.BlockPublicAcls)
-			r.True(*block.PublicAccessBlockConfiguration.BlockPublicPolicy)
-			r.True(*block.PublicAccessBlockConfiguration.IgnorePublicAcls)
-			r.True(*block.PublicAccessBlockConfiguration.RestrictPublicBuckets)
-
 			// policy simulations
-
 			objectArn := fmt.Sprintf("%s/foo", bucketArn)
 
 			sims := []struct {
@@ -104,18 +110,19 @@ func TestPrivateBucketDefaults(t *testing.T) {
 				arn             string
 				result          string
 			}{
-				// deny when not using https
-				{"s3:ListBucket", false, bucketArn, "explicitDeny"},
-				// allow with https
+				// allow listbucket when not using https
+				{"s3:ListBucket", false, bucketArn, "allowed"},
+				// allow listbucket with https
 				{"s3:ListBucket", true, bucketArn, "allowed"},
-				// deny when not using https
-				{"s3:GetObject", false, objectArn, "explicitDeny"},
-				// allow with https
+				// allow getobject when not using https
+				{"s3:GetObject", true, objectArn, "allowed"},
+				// allow getobject with https
 				{"s3:GetObject", true, objectArn, "allowed"},
 			}
 
 			for _, test := range sims {
 				resp := tftest.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
+				fmt.Println("Testing ", test.action, " with https enabled=", test.secureTransport)
 				r.Equal(test.result, *resp.EvalDecision)
 			}
 		},
