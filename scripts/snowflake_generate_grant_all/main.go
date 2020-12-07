@@ -150,7 +150,7 @@ func generateModule(name string, schema *schema.Resource) ([]byte, error) {
 				lookup(var.per_privilege_grants, each.value, %s).roles,
 				)`, defaultPrivType)
 		case "shares":
-			resourceAll["roles"] = fmt.Sprintf(`setunion(
+			resourceAll["shares"] = fmt.Sprintf(`setunion(
 				var.shares,
 				lookup(var.per_privilege_grants, each.value, %s).shares,
 				)`, defaultPrivType)
