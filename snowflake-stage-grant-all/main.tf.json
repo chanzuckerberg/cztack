@@ -46,7 +46,7 @@
         "database_name": "var.database_name",
         "for_each": "toset(local.privileges)",
         "privilege": "each.value",
-        "roles": "setunion(\n\t\t\t\tvar.roles,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).roles,\n\t\t\t\t)",
+        "roles": "setunion(\n\t\t\t\tvar.shares,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).shares,\n\t\t\t\t)",
         "schema_name": "var.schema_name",
         "stage_name": "var.stage_name",
         "with_grant_option": "var.with_grant_option"

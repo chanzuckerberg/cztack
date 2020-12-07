@@ -79,7 +79,7 @@ func writeModule(name string, tf []byte) error {
 	}
 
 	// write the file
-	return ioutil.WriteFile(path.Join(moduleDir, "main.json"), tf, 0644)
+	return ioutil.WriteFile(path.Join(moduleDir, "main.tf.json"), tf, 0644)
 }
 
 func generateModule(name string, schema *schema.Resource) ([]byte, error) {
