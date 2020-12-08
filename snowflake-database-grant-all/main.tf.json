@@ -7,9 +7,9 @@
       "default": null
     },
     "per_privilege_grants": {
-      "type": "map(object({shares : list(string),roles : list(string)})",
+      "type": "map(object({shares : list(string),roles : list(string)}))",
       "description": "A map of privileges to authorized roles and shares. Privileges must be UPPER case.\n  This allows you to authorize extra roles/shares for specific privileges.\n  The reason this module exists is that the provider only supports one grant resource per (database_name, schema_name, table_name, on_future, with_grant_option) tuple.\n\tFor example, if you used this module to grant an ALL privilege to a role you couldn't grant a subset of the ALL privs to another role.",
-      "default": "{}"
+      "default": {}
     },
     "roles": {
       "type": "set(string)",
@@ -41,12 +41,12 @@
   "resource": {
     "snowflake_database_grant": {
       "all": {
-        "database_name": "var.database_name",
-        "for_each": "toset(local.privileges)",
-        "privilege": "each.value",
-        "roles": "setunion(\n\t\t\t\tvar.roles,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).roles,\n\t\t\t\t)",
-        "shares": "setunion(\n\t\t\t\tvar.shares,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).shares,\n\t\t\t\t)",
-        "with_grant_option": "var.with_grant_option"
+        "database_name": "${var.database_name}",
+        "for_each": "${toset(local.privileges)}",
+        "privilege": "${each.value}",
+        "roles": "${setunion(\n\t\t\t\tvar.roles,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).roles,\n\t\t\t\t)}",
+        "shares": "${setunion(\n\t\t\t\tvar.shares,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).shares,\n\t\t\t\t)}",
+        "with_grant_option": "${var.with_grant_option}"
       }
     }
   }

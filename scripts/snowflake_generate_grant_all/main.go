@@ -26,9 +26,9 @@ const (
 )
 
 type Variable struct {
-	TType       string  `json:"type"`
-	Description string  `json:"description"`
-	Default     *string `json:"default"`
+	TType       string      `json:"type"`
+	Description string      `json:"description"`
+	Default     interface{} `json:"default"`
 }
 
 type ModuleTemplate struct {
@@ -130,34 +130,34 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 	)
 
 	m.Variables[perPrivTypeVarName] = Variable{
-		TType: fmt.Sprintf("map(object({%s})", strings.Join(perPrivTypeInner, ",")),
+		TType: fmt.Sprintf("map(object({%s}))", strings.Join(perPrivTypeInner, ",")),
 		Description: `A map of privileges to authorized roles and shares. Privileges must be UPPER case.
   This allows you to authorize extra roles/shares for specific privileges.
   The reason this module exists is that the provider only supports one grant resource per (database_name, schema_name, table_name, on_future, with_grant_option) tuple.
 	For example, if you used this module to grant an ALL privilege to a role you couldn't grant a subset of the ALL privs to another role.`,
-		Default: optString("{}"),
+		Default: map[string]interface{}{},
 	}
 
 	// Generate the all grant resource
 	resourceAll := map[string]interface{}{
-		"for_each":  "toset(local.privileges)",
-		"privilege": "each.value",
+		"for_each":  "${toset(local.privileges)}",
+		"privilege": "${each.value}",
 	}
 	for name := range grant.Resource.Schema {
 		switch name {
 		case "privilege": // do nothing
 		case "roles":
-			resourceAll["roles"] = fmt.Sprintf(`setunion(
+			resourceAll["roles"] = fmt.Sprintf(`${setunion(
 				var.roles,
 				lookup(var.per_privilege_grants, each.value, %s).roles,
-				)`, defaultPrivType)
+				)}`, defaultPrivType)
 		case "shares":
-			resourceAll["shares"] = fmt.Sprintf(`setunion(
+			resourceAll["shares"] = fmt.Sprintf(`${setunion(
 				var.shares,
 				lookup(var.per_privilege_grants, each.value, %s).shares,
-				)`, defaultPrivType)
+				)}`, defaultPrivType)
 		default:
-			resourceAll[name] = fmt.Sprintf("var.%s", name)
+			resourceAll[name] = fmt.Sprintf("${var.%s}", name)
 
 		}
 	}
