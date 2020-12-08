@@ -49,3 +49,14 @@ variable with_grant_option {
 
   default = null
 }
+
+variable per_privilege_grants {
+  type        = map(object({ roles : list(string), shares : list(string) }))
+  description = <<EOF
+  A map of privileges to authorized roles and shares. Privileges must be UPPER case.
+  This allows you to authorize extra roles/shares for specific privileges.
+  The reason this module exists is that the provider only supports one grant resource per (database_name, schema_name, table_name, on_future, with_grant_option) tuple.
+  For example, if you used this module to grant an ALL privilege to a role you couldn't grant a subset of the ALL privs to another role.
+  EOF
+  default     = {}
+}
