@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"sort"
 	"strings"
 
 	"github.com/chanzuckerberg/terraform-provider-snowflake/pkg/provider"
@@ -32,11 +33,11 @@ type Variable struct {
 
 type ModuleTemplate struct {
 	Comment   string                 `json:"//,omitempty"`
-	Variables map[string]Variable    `json:"variables,omitempty"`
+	Variables map[string]Variable    `json:"variable,omitempty"`
 	Locals    map[string]interface{} `json:"locals,omitempty"`
 
 	// resource type: resource name: arguments
-	Resources map[string]map[string]map[string]interface{} `json:"resources,omitempty"`
+	Resources map[string]map[string]map[string]interface{} `json:"resource,omitempty"`
 }
 
 func main() {
@@ -81,11 +82,14 @@ func writeModule(name string, tf []byte) error {
 }
 
 func generateModule(name string, grant *resources.TerraformGrantResource) ([]byte, error) {
+	privileges := grant.ValidPrivs.ToList()
+	sort.Strings(privileges)
+
 	m := &ModuleTemplate{
 		Comment:   topLvlComment,
 		Variables: map[string]Variable{},
 		Locals: map[string]interface{}{
-			"privileges": grant.ValidPrivs.ToList(),
+			"privileges": privileges,
 		},
 	}
 
@@ -158,7 +162,7 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		}
 	}
 	m.Resources = map[string]map[string]map[string]interface{}{
-		name: map[string]map[string]interface{}{
+		name: {
 			"all": resourceAll,
 		},
 	}
