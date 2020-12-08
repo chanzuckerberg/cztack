@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: hashicorp/setup-terraform@v1
+    - uses: hashicorp/setup-terraform@v1.2.1
       with:
         terraform_version: 0.12.24
         terraform_wrapper: "false"
@@ -103,7 +103,7 @@ jobs:
         filters: |
           module:
             - '${{ matrix.module }}/**'
-    - uses: hashicorp/setup-terraform@v1
+    - uses: hashicorp/setup-terraform@v1.2.1
       if: github.event == 'push' || steps.filter.outputs.module == 'true'
       with:
         terraform_version: 0.12.28
