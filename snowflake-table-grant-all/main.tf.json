@@ -43,7 +43,14 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "REFERENCES",
+      "SELECT",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "TRUNCATE"
+    ]
   },
   "resources": {
     "snowflake_table_grant": {

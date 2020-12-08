@@ -23,7 +23,13 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "MODIFY",
+      "MONITOR",
+      "OPERATE",
+      "OWNERSHIP",
+      "USAGE"
+    ]
   },
   "resources": {
     "snowflake_warehouse_grant": {

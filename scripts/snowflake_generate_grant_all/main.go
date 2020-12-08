@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/chanzuckerberg/terraform-provider-snowflake/pkg/provider"
+	"github.com/chanzuckerberg/terraform-provider-snowflake/pkg/resources"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/errgo.v2/fmt/errors"
@@ -47,12 +48,9 @@ func main() {
 }
 
 func exec() error {
-	p := provider.Provider()
-	for name, resourceSchema := range p.ResourcesMap {
-		if !(strings.HasSuffix(name, "_grant") || strings.HasSuffix(name, "_grants")) {
-			continue // not a grant resource, ignore it
-		}
-		tf, err := generateModule(name, resourceSchema)
+	grants := provider.GetGrantResources()
+	for name, grant := range grants {
+		tf, err := generateModule(name, grant)
 		if err != nil {
 			return err
 		}
@@ -82,17 +80,17 @@ func writeModule(name string, tf []byte) error {
 	return ioutil.WriteFile(path.Join(moduleDir, "main.tf.json"), tf, 0644)
 }
 
-func generateModule(name string, schema *schema.Resource) ([]byte, error) {
+func generateModule(name string, grant *resources.TerraformGrantResource) ([]byte, error) {
 	m := &ModuleTemplate{
 		Comment:   topLvlComment,
 		Variables: map[string]Variable{},
 		Locals: map[string]interface{}{
-			"privileges": []string{}, // TODO(el) figure out how to derive these privileges
+			"privileges": grant.ValidPrivs.ToList(),
 		},
 	}
 
 	// Grab the vars from the provider
-	for name, config := range schema.Schema {
+	for name, config := range grant.Resource.Schema {
 		// ignore these
 		if name == "privilege" {
 			continue
@@ -113,11 +111,11 @@ func generateModule(name string, schema *schema.Resource) ([]byte, error) {
 	// Add the extra per_privilege_grants variable
 	perPrivTypeInner := []string{}
 	defaultPrivTypes := []string{}
-	if _, sharesOK := schema.Schema["shares"]; sharesOK {
+	if _, sharesOK := grant.Resource.Schema["shares"]; sharesOK {
 		perPrivTypeInner = append(perPrivTypeInner, "shares : list(string)")
 		defaultPrivTypes = append(defaultPrivTypes, "shares = []")
 	}
-	if _, rolesOK := schema.Schema["roles"]; rolesOK {
+	if _, rolesOK := grant.Resource.Schema["roles"]; rolesOK {
 		perPrivTypeInner = append(perPrivTypeInner, "roles : list(string)")
 		defaultPrivTypes = append(defaultPrivTypes, "roles = []")
 	}
@@ -141,7 +139,7 @@ func generateModule(name string, schema *schema.Resource) ([]byte, error) {
 		"for_each":  "toset(local.privileges)",
 		"privilege": "each.value",
 	}
-	for name := range schema.Schema {
+	for name := range grant.Resource.Schema {
 		switch name {
 		case "privilege": // do nothing
 		case "roles":

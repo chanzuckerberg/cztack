@@ -38,7 +38,26 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "CREATE STREAM",
+      "CREATE MATERIALIZED VIEW",
+      "CREATE TASK",
+      "CREATE EXTERNAL TABLE",
+      "CREATE MASKING POLICY",
+      "MONITOR",
+      "USAGE",
+      "CREATE VIEW",
+      "CREATE FILE FORMAT",
+      "CREATE PIPE",
+      "CREATE SEQUENCE",
+      "CREATE STAGE",
+      "CREATE FUNCTION",
+      "CREATE PROCEDURE",
+      "CREATE TEMPORARY TABLE",
+      "MODIFY",
+      "OWNERSHIP",
+      "CREATE TABLE"
+    ]
   },
   "resources": {
     "snowflake_schema_grant": {

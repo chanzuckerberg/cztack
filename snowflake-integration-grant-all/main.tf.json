@@ -23,7 +23,10 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "USAGE",
+      "OWNERSHIP"
+    ]
   },
   "resources": {
     "snowflake_integration_grant": {

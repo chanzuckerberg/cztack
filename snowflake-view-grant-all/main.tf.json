@@ -43,7 +43,9 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "SELECT"
+    ]
   },
   "resources": {
     "snowflake_view_grant": {

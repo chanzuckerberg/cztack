@@ -38,7 +38,12 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "OWNERSHIP",
+      "USAGE",
+      "READ",
+      "WRITE"
+    ]
   },
   "resources": {
     "snowflake_stage_grant": {

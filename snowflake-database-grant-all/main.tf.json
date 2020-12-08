@@ -28,7 +28,15 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "MODIFY",
+      "MONITOR",
+      "OWNERSHIP",
+      "REFERENCE_USAGE",
+      "USAGE",
+      "CREATE SCHEMA",
+      "IMPORTED PRIVILEGES"
+    ]
   },
   "resources": {
     "snowflake_database_grant": {

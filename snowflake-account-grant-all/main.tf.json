@@ -18,7 +18,17 @@
     }
   },
   "locals": {
-    "privileges": []
+    "privileges": [
+      "MONITOR USAGE",
+      "MONITOR EXECUTION",
+      "EXECUTE TASK",
+      "CREATE ROLE",
+      "CREATE INTEGRATION",
+      "CREATE DATABASE",
+      "MANAGE GRANTS",
+      "CREATE USER",
+      "CREATE WAREHOUSE"
+    ]
   },
   "resources": {
     "snowflake_account_grant": {
