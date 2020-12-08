@@ -70,28 +70,28 @@ func TestPublicBucketDefaults(t *testing.T) {
 			r.Equal("CanonicalUser", *acl.Grants[0].Grantee.Type)
 			r.Equal("FULL_CONTROL", *acl.Grants[0].Permission)
 
-			tagOutput, err := s3Client.GetBucketTagging(&s3.GetBucketTaggingInput{
+			bucketTags, err := s3Client.GetBucketTagging(&s3.GetBucketTaggingInput{
 				Bucket: &bucket,
 			})
 
 			r.NoError(err)
-			r.Contains(tagOutput.TagSet, &s3.Tag{
+			r.Contains(bucketTags.TagSet, &s3.Tag{
 				Key:   aws.String("managedBy"),
 				Value: aws.String("terraform"),
 			})
-			r.Contains(tagOutput.TagSet, &s3.Tag{
+			r.Contains(bucketTags.TagSet, &s3.Tag{
 				Key:   aws.String("isPublic"),
 				Value: aws.String("true"),
 			})
-			r.Contains(tagOutput.TagSet, &s3.Tag{
+			r.Contains(bucketTags.TagSet, &s3.Tag{
 				Key:   aws.String("public_read_justification"),
 				Value: aws.String("test bucket"),
 			})
-			r.Contains(tagOutput.TagSet, &s3.Tag{
+			r.Contains(bucketTags.TagSet, &s3.Tag{
 				Key:   aws.String("bucket_contents"),
 				Value: aws.String("dummy data"),
 			})
-			r.Contains(tagOutput.TagSet, &s3.Tag{
+			r.Contains(bucketTags.TagSet, &s3.Tag{
 				Key:   aws.String("module_source"),
 				Value: aws.String("github.com/chanzuckerberg/cztack/aws-s3-public-bucket"),
 			})
