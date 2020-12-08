@@ -50,6 +50,7 @@ jobs:
           aws-cloudfront-domain-redirect,
           aws-cloudfront-logs-bucket,
           aws-cloudwatch-log-group,
+          aws-cloudwatch-log-retention-manager,
           aws-default-vpc-security,
           aws-ecs-job-fargate,
           aws-ecs-job,
