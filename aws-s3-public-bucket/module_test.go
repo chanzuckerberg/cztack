@@ -91,6 +91,10 @@ func TestPublicBucketDefaults(t *testing.T) {
 				Key:   aws.String("bucket_contents"),
 				Value: aws.String("dummy data"),
 			})
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("module_source"),
+				Value: aws.String("github.com/chanzuckerberg/cztack/aws-s3-public-bucket"),
+			})
 
 			enc, err := s3Client.GetBucketEncryption(&s3.GetBucketEncryptionInput{
 				Bucket: &bucket,

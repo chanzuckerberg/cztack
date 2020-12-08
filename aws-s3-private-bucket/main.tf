@@ -20,6 +20,7 @@ locals {
     service   = var.service
     owner     = var.owner
     managedBy = "terraform"
+    module_source = "github.com/chanzuckerberg/cztack/aws-s3-private-bucket"
   }
 }
 

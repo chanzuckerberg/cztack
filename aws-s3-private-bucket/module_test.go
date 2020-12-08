@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/chanzuckerberg/go-misc/tftest"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/gruntwork-io/terratest/modules/aws"
+	awsTest "github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
 )
@@ -45,17 +45,15 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			bucketArn := outputs["arn"].(string)
 
 			// some assertions built into terratest
-			aws.AssertS3BucketExists(t, region, bucket)
-			aws.AssertS3BucketPolicyExists(t, region, bucket)
-			aws.AssertS3BucketVersioningExists(t, region, bucket)
+			awsTest.AssertS3BucketExists(t, region, bucket)
+			awsTest.AssertS3BucketPolicyExists(t, region, bucket)
+			awsTest.AssertS3BucketVersioningExists(t, region, bucket)
 
-			bucketPolicy := aws.GetS3BucketPolicy(t, region, bucket)
+			bucketPolicy := awsTest.GetS3BucketPolicy(t, region, bucket)
 			policy, err := tftest.UnmarshalS3BucketPolicy(bucketPolicy)
 			r.NoError(err)
 			r.NotNil(policy)
 
-			spew.Dump(bucketPolicy)
-			spew.Dump(policy)
 			r.Len(policy.Statements, 1)
 			r.Equal(policy.Statements[0].Effect, "Deny")
 			r.Equal(policy.Statements[0].Principal, "*")
@@ -64,7 +62,7 @@ func TestPrivateBucketDefaults(t *testing.T) {
 			r.Equal(policy.Statements[0].Condition["Bool"]["aws:SecureTransport"], "false")
 
 			// get a client to query for other assertions
-			s3Client := aws.NewS3Client(t, region)
+			s3Client := awsTest.NewS3Client(t, region)
 
 			acl, err := s3Client.GetBucketAcl(&s3.GetBucketAclInput{
 				Bucket: &bucket,
@@ -75,6 +73,16 @@ func TestPrivateBucketDefaults(t *testing.T) {
 
 			r.Equal("CanonicalUser", *acl.Grants[0].Grantee.Type)
 			r.Equal("FULL_CONTROL", *acl.Grants[0].Permission)
+
+			tagOutput, err := s3Client.GetBucketTagging(&s3.GetBucketTaggingInput{
+				Bucket: &bucket,
+			})
+
+			r.NoError(err)
+			r.Contains(tagOutput.TagSet, &s3.Tag{
+				Key:   aws.String("module_source"),
+				Value: aws.String("github.com/chanzuckerberg/cztack/aws-s3-private-bucket"),
+			})
 
 			enc, err := s3Client.GetBucketEncryption(&s3.GetBucketEncryptionInput{
 				Bucket: &bucket,

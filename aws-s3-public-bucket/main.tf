@@ -8,6 +8,7 @@ locals {
     isPublic                  = true
     public_read_justification = var.public_read_justification
     bucket_contents           = var.bucket_contents
+    module_source             = "github.com/chanzuckerberg/cztack/aws-s3-public-bucket"
   }
 
   // make sure we have public in the name
