@@ -22,7 +22,8 @@ const (
 	      Changes made directly to this file will be overwritten.
 				Make improvements there so everyone can benefit.`
 
-	perPrivTypeVarName string = "per_privilege_grants"
+	perPrivTypeVarName       string = "per_privilege_grants"
+	snowflakeProviderVersion string = "> 0.18.0"
 )
 
 type Variable struct {
@@ -38,6 +39,9 @@ type ModuleTemplate struct {
 
 	// resource type: resource name: arguments
 	Resources map[string]map[string]map[string]interface{} `json:"resource,omitempty"`
+
+	// required_providers: provider_name: version
+	Terraform map[string]map[string]string `json:"terraform,omitempty"`
 }
 
 func main() {
@@ -90,6 +94,11 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		Variables: map[string]Variable{},
 		Locals: map[string]interface{}{
 			"privileges": privileges,
+		},
+		Terraform: map[string]map[string]string{
+			"required_providers": {
+				"snowflake": snowflakeProviderVersion,
+			},
 		},
 	}
 

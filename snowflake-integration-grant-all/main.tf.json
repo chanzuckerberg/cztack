@@ -38,5 +38,10 @@
         "with_grant_option": "${var.with_grant_option}"
       }
     }
+  },
+  "terraform": {
+    "required_providers": {
+      "snowflake": "\u003e 0.18.0"
+    }
   }
 }
