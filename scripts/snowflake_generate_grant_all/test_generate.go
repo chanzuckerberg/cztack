@@ -25,7 +25,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-const vars string = "%s"
+const vars string = %q
 
 func TestModule(t *testing.T) {
 	test := tftest.Test{
@@ -33,14 +33,6 @@ func TestModule(t *testing.T) {
 		Mode: tftest.Init,
 
 		Setup: func(t *testing.T) *terraform.Options {
-			// vars := map[string]interface{}{
-			// 	"database_name": "database",
-			// 	"schema_name":   "schema",
-			// 	"table_name":    "table",
-			// 	"roles":         []string{"a", "b", "c"},
-			// 	"shares":        []string{"as", "bs", "cs"},
-			// }
-
 			opts := &terraform.Options{
 				TerraformDir: ".",
 				EnvVars: map[string]string{
@@ -74,7 +66,7 @@ func mustJson(jsonData string) map[string]interface{} {
 func generateTestVars(grant *resources.TerraformGrantResource) map[string]interface{} {
 	vars := map[string]interface{}{}
 
-	for name, schema := range grant.Resource.Schema {
+	for name := range grant.Resource.Schema {
 		if strings.HasSuffix(name, "_name") {
 			vars[name] = strings.TrimSuffix(name, "_name")
 			continue
