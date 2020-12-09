@@ -26,9 +26,9 @@ variable "saml_idp_arn" {
 }
 
 variable "default_iam_policy" {
-  type = bool
+  type        = bool
   description = "If this role should use a custom IAM policy (managed outside the module), set this to false"
-  default = true
+  default     = true
 }
 
 variable project {
