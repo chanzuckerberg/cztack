@@ -6,7 +6,7 @@ require (
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/apache/arrow/go/arrow v0.0.0-20201208144906-6ba022f43149 // indirect
 	github.com/aws/aws-sdk-go v1.34.10 // indirect
-	github.com/chanzuckerberg/go-misc v0.0.0-20201203181251-3310eaa565da // indirect
+	github.com/chanzuckerberg/go-misc v0.0.0-20201203181251-3310eaa565da
 	github.com/chanzuckerberg/terraform-provider-snowflake v0.18.3-0.20201208152123-f77e624155b3
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1 // indirect
 	github.com/fatih/color v1.10.0 // indirect
@@ -38,5 +38,5 @@ require (
 	google.golang.org/genproto v0.0.0-20201207150747-9ee31aac76e7 // indirect
 	google.golang.org/grpc v1.34.0 // indirect
 	gopkg.in/errgo.v2 v2.1.0
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
 )

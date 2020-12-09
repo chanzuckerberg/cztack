@@ -56,9 +56,13 @@ func main() {
 }
 
 func exec() error {
+	ciTests := []string{}
+
 	grants := provider.GetGrantResources()
 	for name, grant := range grants {
-		tf, err := generateModule(name, grant)
+		moduleName := moduleName(name)
+		ciTests = append(ciTests, moduleName)
+		tf, err := generateModule(moduleName, grant)
 		if err != nil {
 			return err
 		}
@@ -72,18 +76,21 @@ func exec() error {
 			return err
 		}
 	}
-	return nil
+	return ensureCI(ciTests)
+}
+
+func moduleName(name string) string {
+	return fmt.Sprintf("%s-all", strings.ReplaceAll(name, "_", "-"))
 }
 
 // Assume we're running from this directory
 func writeModule(name string, tf []byte, testCode []byte) error {
-	moduleName := fmt.Sprintf("%s-all", strings.ReplaceAll(name, "_", "-"))
 	cwd, err := os.Getwd()
 	if err != nil {
 		return err
 	}
 	// make sure dir is there
-	moduleDir := path.Join(cwd, "..", "..", moduleName)
+	moduleDir := path.Join(cwd, "..", "..", name)
 	err = os.MkdirAll(moduleDir, 0755)
 	if err != nil {
 		return err

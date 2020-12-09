@@ -1,145 +1,138 @@
-name: CI
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-
 jobs:
-  check-mod:
-    name: check-mod
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-go@v2
-      with:
-        go-version: 1.14.3
-    - run: make check-mod
-  lint:
-    name: lint
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 0.12.24
-        terraform_wrapper: "false"
-    - name: setup
-      run: make setup
-    - name: linters
-      env:
-        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
-      run: make lint-ci
-  # check-docs:
-  #   name: check-docs
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/setup-go@v2
-  #     with:
-  #       go-version: 1.14.3
-  #   - run: make check-docs
-  test:
-    strategy:
-      matrix:
-        module: [
-          aws-acm-cert,
-          aws-aurora-mysql,
-          aws-aurora-postgres,
-          aws-aurora,
-          aws-cloudfront-domain-redirect,
-          aws-cloudfront-logs-bucket,
-          aws-cloudwatch-log-group,
-          aws-cloudwatch-log-retention-manager,
-          aws-default-vpc-security,
-          aws-ecs-job-fargate,
-          aws-ecs-job,
-          aws-ecs-service-fargate,
-          aws-ecs-service,
-          aws-efs-volume,
-          aws-iam-ecs-task-role,
-          aws-iam-group-assume-role,
-          aws-iam-group-console-login,
-          aws-iam-instance-profile,
-          aws-iam-password-policy,
-          aws-iam-policy-cwlogs,
-          aws-iam-role-bless,
-          aws-iam-role-cloudfront-poweruser,
-          aws-iam-role-crossacct,
-          aws-iam-role-ec2-poweruser,
-          aws-iam-role-ecs-poweruser,
-          aws-iam-role-infraci,
-          aws-iam-role-poweruser,
-          aws-iam-role-readonly,
-          aws-iam-role-route53domains-poweruser,
-          aws-iam-role-security-audit,
-          aws-iam-role,
-          aws-iam-secrets-reader-policy,
-          aws-lambda-edge-add-security-headers,
-          aws-lambda-function,
-          aws-param,
-          aws-params-reader-policy,
-          aws-params-secrets-setup,
-          aws-params-writer,
-          aws-redis-node,
-          aws-s3-private-bucket,
-          aws-s3-public-bucket,
-          aws-single-page-static-site,
-          aws-sns-lambda,
-          aws-ssm-params-writer,
-          aws-ssm-params,
-          bless-ca/test,
-          github-webhooks-to-s3,
-          module-template,
-          snowflake-table-grant-all,
-        ]
-    name: test ${{ matrix.module }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 45
-    steps:
-    - uses: actions/checkout@v2
-    - uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        filters: |
-          module:
-            - '${{ matrix.module }}/**'
-    - uses: hashicorp/setup-terraform@v1
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      with:
-        terraform_version: 0.12.28
-        terraform_wrapper: "false"
-    - uses: actions/setup-go@v2
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      with:
-        go-version: 1.14.3
-    # we can stop this when we move to terraform 0.13 and drop support for 0.12
-    - name: Install bless provider
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
-    - name: Check bless provider
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
-
-    # we can stop this when we move to terraform 0.13 and drop support for 0.12
-    - name: Install Snowflake provider
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
-    - name: Check Snowflake provider
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
-
-    - run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-    - run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-    - run: aws --profile cztack-ci-1 sts get-caller-identity
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-    - run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }} --profile cztack-ci-2
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-    - run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-2
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-    - run: aws --profile cztack-ci-2 sts get-caller-identity
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
-    - run: make test-ci TEST=./${{ matrix.module }}
-      if: github.event == 'push' || steps.filter.outputs.module == 'true'
+    check-mod:
+        name: check-mod
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-go@v2
+              with:
+                go-version: 1.14.3
+            - run: make check-mod
+    lint:
+        name: lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: 0.12.24
+                terraform_wrapper: "false"
+            - name: setup
+              run: make setup
+            - env:
+                REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+              name: linters
+              run: make lint-ci
+    test:
+        name: test ${{ matrix.module }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - id: filter
+              uses: dorny/paths-filter@v2
+              with:
+                filters: |
+                    module:
+                      - '${{ matrix.module }}/**'
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: 0.12.28
+                terraform_wrapper: "false"
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              uses: actions/setup-go@v2
+              with:
+                go-version: 1.14.3
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Install bless provider
+              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Check bless provider
+              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Install Snowflake provider
+              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Check Snowflake provider
+              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws --profile cztack-ci-1 sts get-caller-identity
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }} --profile cztack-ci-2
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-2
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws --profile cztack-ci-2 sts get-caller-identity
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: make test-ci TEST=./${{ matrix.module }}
+        strategy:
+            matrix:
+                module:
+                    - aws-acm-cert
+                    - aws-aurora
+                    - aws-aurora-mysql
+                    - aws-aurora-postgres
+                    - aws-cloudfront-domain-redirect
+                    - aws-cloudfront-logs-bucket
+                    - aws-cloudwatch-log-group
+                    - aws-cloudwatch-log-retention-manager
+                    - aws-default-vpc-security
+                    - aws-ecs-job
+                    - aws-ecs-job-fargate
+                    - aws-ecs-service
+                    - aws-ecs-service-fargate
+                    - aws-efs-volume
+                    - aws-iam-ecs-task-role
+                    - aws-iam-group-assume-role
+                    - aws-iam-group-console-login
+                    - aws-iam-instance-profile
+                    - aws-iam-password-policy
+                    - aws-iam-policy-cwlogs
+                    - aws-iam-role
+                    - aws-iam-role-bless
+                    - aws-iam-role-cloudfront-poweruser
+                    - aws-iam-role-crossacct
+                    - aws-iam-role-ec2-poweruser
+                    - aws-iam-role-ecs-poweruser
+                    - aws-iam-role-infraci
+                    - aws-iam-role-poweruser
+                    - aws-iam-role-readonly
+                    - aws-iam-role-route53domains-poweruser
+                    - aws-iam-role-security-audit
+                    - aws-iam-secrets-reader-policy
+                    - aws-lambda-edge-add-security-headers
+                    - aws-lambda-function
+                    - aws-param
+                    - aws-params-reader-policy
+                    - aws-params-secrets-setup
+                    - aws-params-writer
+                    - aws-redis-node
+                    - aws-s3-private-bucket
+                    - aws-s3-public-bucket
+                    - aws-single-page-static-site
+                    - aws-sns-lambda
+                    - aws-ssm-params
+                    - aws-ssm-params-writer
+                    - bless-ca/test
+                    - github-webhooks-to-s3
+                    - module-template
+                    - snowflake-account-grant-all
+                    - snowflake-database-grant-all
+                    - snowflake-integration-grant-all
+                    - snowflake-resource-monitor-grant-all
+                    - snowflake-schema-grant-all
+                    - snowflake-stage-grant-all
+                    - snowflake-table-grant-all
+                    - snowflake-view-grant-all
+                    - snowflake-warehouse-grant-all
+        timeout-minutes: 45
+name: CI
+"on":
+    pull_request: null
+    push:
+        branches:
+            - main
