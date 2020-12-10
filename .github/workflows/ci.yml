@@ -129,6 +129,15 @@ jobs:
                     - snowflake-table-grant-all
                     - snowflake-view-grant-all
                     - snowflake-warehouse-grant-all
+                    - snowflake_account_grant_all
+                    - snowflake_database_grant_all
+                    - snowflake_integration_grant_all
+                    - snowflake_resource_monitor_grant_all
+                    - snowflake_schema_grant_all
+                    - snowflake_stage_grant_all
+                    - snowflake_table_grant_all
+                    - snowflake_view_grant_all
+                    - snowflake_warehouse_grant_all
         timeout-minutes: 45
 name: CI
 "on":

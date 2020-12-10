@@ -59,10 +59,10 @@ func exec() error {
 	ciTests := []string{}
 
 	grants := provider.GetGrantResources()
-	for name, grant := range grants {
-		moduleName := moduleName(name)
+	for resourceName, grant := range grants {
+		moduleName := moduleName(resourceName)
 		ciTests = append(ciTests, moduleName)
-		tf, err := generateModule(moduleName, grant)
+		tf, err := generateModule(resourceName, grant)
 		if err != nil {
 			return err
 		}
@@ -71,7 +71,7 @@ func exec() error {
 			return err
 		}
 
-		err = writeModule(name, tf, []byte(testCode))
+		err = writeModule(moduleName, tf, []byte(testCode))
 		if err != nil {
 			return err
 		}
@@ -80,7 +80,7 @@ func exec() error {
 }
 
 func moduleName(name string) string {
-	return fmt.Sprintf("%s-all", strings.ReplaceAll(name, "_", "-"))
+	return strings.ReplaceAll(fmt.Sprintf("%s-all", name), "_", "-")
 }
 
 // Assume we're running from this directory
@@ -107,6 +107,7 @@ func writeModule(name string, tf []byte, testCode []byte) error {
 }
 
 func generateModule(name string, grant *resources.TerraformGrantResource) ([]byte, error) {
+	logrus.Infof("Generating module for resource %s", name)
 	privileges := grant.ValidPrivs.ToList()
 	sort.Strings(privileges)
 
@@ -124,9 +125,9 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 	}
 
 	// Grab the vars from the provider
-	for name, config := range grant.Resource.Schema {
+	for elementName, config := range grant.Resource.Schema {
 		// ignore these
-		if name == "privilege" {
+		if elementName == "privilege" {
 			continue
 		}
 
@@ -135,7 +136,7 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 			return nil, err
 		}
 
-		m.Variables[name] = Variable{
+		m.Variables[elementName] = Variable{
 			TType:       ttype,
 			Description: config.Description,
 			Default:     nil,
@@ -171,8 +172,8 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		"for_each":  "${toset(local.privileges)}",
 		"privilege": "${each.value}",
 	}
-	for name := range grant.Resource.Schema {
-		switch name {
+	for elementName := range grant.Resource.Schema {
+		switch elementName {
 		case "privilege": // do nothing
 		case "roles":
 			resourceAll["roles"] = fmt.Sprintf(`${setunion(
@@ -185,7 +186,7 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 				lookup(var.per_privilege_grants, each.value, %s).shares,
 				)}`, defaultPrivType)
 		default:
-			resourceAll[name] = fmt.Sprintf("${var.%s}", name)
+			resourceAll[elementName] = fmt.Sprintf("${var.%s}", elementName)
 
 		}
 	}
