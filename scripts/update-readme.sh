@@ -4,21 +4,21 @@
 
 CMD="$1"
 
-TMP=`mktemp`
-TMP2=`mktemp`
-terraform-docs md . > "$TMP"
-sed '/^<!-- START -->$/,/<!-- END -->/{//!d;}' README.md | sed "/^<!-- START -->$/r $TMP" > $TMP2
+TMP=$(mktemp)
+TMP2=$(mktemp)
+./bin/terraform-docs markdown . > "$TMP"
+sed '/^<!-- START -->$/,/<!-- END -->/{//!d;}' README.md | sed "/^<!-- START -->$/r $TMP" > "$TMP2"
 
 case "$CMD" in
     update)
-        mv $TMP2 README.md
+        mv "$TMP2" README.md
     ;;
     check)
-        diff $TMP2 README.md >/dev/null
+        diff "$TMP2" README.md >/dev/null
     ;;
     *)
         echo "unknown command"
-        exit -1
+        exit 1
 esac
 
 exit $?
