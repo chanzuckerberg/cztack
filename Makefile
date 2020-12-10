@@ -23,9 +23,6 @@ setup: ## setup development dependencies
 	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
 	curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh
 	sh .download-tflint.sh v0.20.2
-	# FIXME arm
-	curl -Lo ./bin/terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.10.1/terraform-docs-v0.10.1-$(uname | tr '[:upper:]' '[:lower:]')-amd64
-	chmod +x ./terraform-docs
 .PHONY: setup
 
 release: ## run a release
