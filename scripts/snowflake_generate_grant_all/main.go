@@ -26,7 +26,7 @@ const (
 	perPrivTypeVarName string = "per_privilege_grants"
 
 	// TODO(el): grab this version directly from the provider
-	snowflakeProviderVersion string = "> 0.18.0"
+	snowflakeProviderVersion string = "0.19.0"
 )
 
 type Variable struct {
@@ -44,14 +44,13 @@ type ModuleTemplate struct {
 	Resources map[string]map[string]map[string]interface{} `json:"resource,omitempty"`
 
 	// required_providers: provider_name: version
-	Terraform map[string]map[string]string `json:"terraform,omitempty"`
+	Terraform map[string]map[string]map[string]string `json:"terraform,omitempty"`
 }
 
 func main() {
 	err := exec()
 	if err != nil {
 		logrus.Fatal(err)
-		return
 	}
 }
 
@@ -117,9 +116,12 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		Locals: map[string]interface{}{
 			"privileges": privileges,
 		},
-		Terraform: map[string]map[string]string{
+		Terraform: map[string]map[string]map[string]string{
 			"required_providers": {
-				"snowflake": snowflakeProviderVersion,
+				"snowflake": map[string]string{
+					"source":  "chanzuckerberg/snowflake",
+					"version": snowflakeProviderVersion,
+				},
 			},
 		},
 	}
