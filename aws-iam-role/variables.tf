@@ -29,6 +29,12 @@ variable principals {
   description = "AWS IAM Principals which will be able to assume this role."
 }
 
+variable saml_idp_arn {
+  type        = string
+  default     = ""
+  description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
+}
+
 variable role_name {
   type        = string
   description = "IAM role name."

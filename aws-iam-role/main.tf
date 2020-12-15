@@ -19,6 +19,24 @@ data "aws_iam_policy_document" "assume_role_policy" {
     }
     actions = ["sts:AssumeRole"]
   }
+
+  dynamic statement {
+    for_each = compact([var.saml_idp_arn])
+    content {
+      principals {
+        type        = "Federated"
+        identifiers = [statement.value]
+      }
+
+      actions = ["sts:AssumeRoleWithSAML"]
+
+      condition {
+        test     = "StringEquals"
+        variable = "SAML:aud"
+        values   = ["https://signin.aws.amazon.com/saml"]
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "role" {
