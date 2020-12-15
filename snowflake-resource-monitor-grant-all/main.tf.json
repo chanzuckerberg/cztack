@@ -7,7 +7,7 @@
       "default": null
     },
     "per_privilege_grants": {
-      "type": "map(object({roles : list(string)}))",
+      "type": "map(object({roles = list(string)}))",
       "description": "A map of privileges to authorized roles and shares. Privileges must be UPPER case.\n  This allows you to authorize extra roles/shares for specific privileges.",
       "default": {}
     },
@@ -43,7 +43,7 @@
     "required_providers": {
       "snowflake": {
         "source": "chanzuckerberg/snowflake",
-        "version": "~\u003e 0.19.0"
+        "version": "~\u003e 0.20.0"
       }
     }
   }

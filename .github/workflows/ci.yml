@@ -122,10 +122,17 @@ jobs:
                     - module-template
                     - snowflake-account-grant-all
                     - snowflake-database-grant-all
+                    - snowflake-external-table-grant-all
+                    - snowflake-file-format-grant-all
+                    - snowflake-function-grant-all
                     - snowflake-integration-grant-all
+                    - snowflake-materialized-view-grant-all
+                    - snowflake-procedure-grant-all
                     - snowflake-resource-monitor-grant-all
                     - snowflake-schema-grant-all
+                    - snowflake-sequence-grant-all
                     - snowflake-stage-grant-all
+                    - snowflake-stream-grant-all
                     - snowflake-table-grant-all
                     - snowflake-view-grant-all
                     - snowflake-warehouse-grant-all
