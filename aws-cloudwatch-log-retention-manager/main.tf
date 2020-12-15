@@ -49,7 +49,7 @@ data archive_file lambda {
               # Add or replace existing retention to match policy.
               cloudwatch.put_retention_policy(
                 log_group_name: log_group.log_group_name,
-                retention_in_days: DEFAUT_MAX_RETENTION
+                retention_in_days: MAXIMUM_RETENTION
               )
               print "Result: Fixed\n"
             end
