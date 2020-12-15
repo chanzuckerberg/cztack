@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| snowflake | > 0.18.0 |
+| snowflake | ~> 0.19.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| snowflake | > 0.18.0 |
+| snowflake | ~> 0.19.0 |
 
 ## Inputs
 

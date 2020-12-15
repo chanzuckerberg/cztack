@@ -26,7 +26,7 @@ const (
 	perPrivTypeVarName string = "per_privilege_grants"
 
 	// TODO(el): grab this version directly from the provider
-	snowflakeProviderVersion string = "0.19.0"
+	snowflakeProviderVersion string = "~> 0.19.0"
 )
 
 type Variable struct {
