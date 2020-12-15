@@ -59,12 +59,14 @@ resource "aws_iam_role" "ec2-poweruser" {
 data "aws_iam_policy_document" "ec2" {
   statement {
     sid       = "ec2"
-    actions   = formatlist("ec2:%s", var.iam_policy_details.actions)
-    resources = var.iam_policy_details.resources
+    actions   = ["ec2:*"]
+    resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "ec2" {
+  count = var.default_iam_policy ? 1 : 0
+
   name        = "${var.role_name}-ec2"
   description = "Provides full access to the ec2 api"
   path        = var.iam_path
@@ -72,6 +74,8 @@ resource "aws_iam_policy" "ec2" {
 }
 
 resource "aws_iam_role_policy_attachment" "ec2" {
+  count = var.default_iam_policy ? 1 : 0
+
   role       = aws_iam_role.ec2-poweruser.name
-  policy_arn = aws_iam_policy.ec2.arn
+  policy_arn = aws_iam_policy.ec2[0].arn
 }

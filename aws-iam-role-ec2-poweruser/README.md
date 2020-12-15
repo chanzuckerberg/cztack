@@ -35,9 +35,9 @@ module "ec2-poweruser" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| default\_iam\_policy | If this role should use a custom IAM policy (managed outside the module), set this to false | `bool` | `true` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | iam\_path | n/a | `string` | `"/"` | no |
-| iam\_policy\_details | Map containing a list of EC2 API Actions & a list of target EC2 resources. Action entries do not need the 'ec2:' policy prefix. This is used to build an aws\_iam\_policy\_document. | `object({ actions : list(string), resources : list(string) })` | <pre>{<br>  "actions": [<br>    "*"<br>  ],<br>  "resources": [<br>    "*"<br>  ]<br>}</pre> | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | role\_name | n/a | `string` | n/a | yes |
