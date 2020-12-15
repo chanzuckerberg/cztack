@@ -1,5 +1,6 @@
 run:
 	go run .
+	$(MAKE) -C ../.. docs
 .PHONY: run
 
 update-deps:
