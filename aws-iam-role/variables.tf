@@ -53,7 +53,7 @@ variable inline_policies {
 }
 
 variable attached_policies_names_arns {
-  type        = map
-  description = "Map of policy names to the respective ARNs to be attached to the IAM role. "
+  type        = map(string)
+  description = "Map of policy names to the respective ARNs to be attached to the IAM role."
   default     = {}
 }
