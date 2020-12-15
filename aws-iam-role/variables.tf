@@ -52,8 +52,8 @@ variable inline_policies {
   default     = []
 }
 
-variable attached_policies_arns {
-  type        = list(string)
-  description = "List of policies ARNs to be attached to the IAM role."
-  default     = []
+variable attached_policies_names_arns {
+  type        = map
+  description = "Map of policy names to the respective ARNs to be attached to the IAM role. "
+  default     = {}
 }
