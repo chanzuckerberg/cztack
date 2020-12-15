@@ -80,7 +80,7 @@ module lambda {
 
 resource aws_cloudwatch_event_rule trigger {
   name                = "${var.project}-${var.env}-${var.service}-retention-trigger"
-  schedule_expression = "rate(5 minutes)"
+  schedule_expression = "rate(12 hours)"
   tags                = local.tags
 }
 
