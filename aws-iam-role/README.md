@@ -51,6 +51,7 @@ module iam-role {
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | role\_description | IAM role description. | `string` | `null` | no |
 | role\_name | IAM role name. | `string` | n/a | yes |
+| saml\_idp\_arn | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 
 ## Outputs
