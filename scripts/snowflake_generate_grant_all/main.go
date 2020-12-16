@@ -26,7 +26,7 @@ const (
 	perPrivTypeVarName string = "per_privilege_grants"
 
 	// TODO(el): grab this version directly from the provider
-	snowflakeProviderVersion string = "0.19.0"
+	snowflakeProviderVersion string = "~> 0.20.0"
 )
 
 type Variable struct {
@@ -149,11 +149,11 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 	perPrivTypeInner := []string{}
 	defaultPrivTypes := []string{}
 	if _, sharesOK := grant.Resource.Schema["shares"]; sharesOK {
-		perPrivTypeInner = append(perPrivTypeInner, "shares : list(string)")
+		perPrivTypeInner = append(perPrivTypeInner, "shares = list(string)")
 		defaultPrivTypes = append(defaultPrivTypes, "shares = []")
 	}
 	if _, rolesOK := grant.Resource.Schema["roles"]; rolesOK {
-		perPrivTypeInner = append(perPrivTypeInner, "roles : list(string)")
+		perPrivTypeInner = append(perPrivTypeInner, "roles = list(string)")
 		defaultPrivTypes = append(defaultPrivTypes, "roles = []")
 	}
 
@@ -214,6 +214,18 @@ func reverseType(s *schema.Schema) (string, error) {
 			return "", err
 		}
 		return fmt.Sprintf("set(%s)", inner), nil
+	case schema.TypeList:
+		resource := s.Elem.(*schema.Resource)
+		innerElements := []string{}
+
+		for name, s := range resource.Schema {
+			inner, err := reverseType(s)
+			if err != nil {
+				return "", err
+			}
+			innerElements = append(innerElements, fmt.Sprintf("%s = %s", name, inner))
+		}
+		return fmt.Sprintf("list(object({ %s }))", strings.Join(innerElements, ", ")), nil
 	default:
 		return "", errors.Newf("Unrecognized type %s", t.String())
 	}
