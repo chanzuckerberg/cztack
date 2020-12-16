@@ -1,6 +1,6 @@
 locals {
-  // Slight hack so Terraform can get the size statically during the plan. 
-  // Simply passing the list to `for_each` throws an Invalid for_each argument
+  # Slight hack so Terraform can get the size statically during the plan. 
+  # Simply passing the list to `for_each` throws an Invalid for_each argument
   attached_policies_names_arns = zipmap(var.attached_policies_arns, var.attached_policies_arns)
 
   tags = {
