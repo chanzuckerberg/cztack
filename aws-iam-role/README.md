@@ -42,7 +42,7 @@ module iam-role {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| attached\_policies\_arns | List of policies ARNs to be attached to the IAM role. | `list(string)` | `[]` | no |
+| attached\_policies\_names\_arns | Map of policy names to the respective ARNs to be attached to the IAM role. | `map(string)` | `{}` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | iam\_path | The IAM path under which the IAM role will be created. | `string` | `null` | no |
 | inline\_policies | List of inline policies to be associated with the IAM role. | `list(object({ name = string, policy = string }))` | `[]` | no |
