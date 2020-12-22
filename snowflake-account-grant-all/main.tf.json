@@ -47,5 +47,11 @@
         "version": "~\u003e 0.20.0"
       }
     }
+  },
+  "output": {
+    "privileges": {
+      "description": "Privileges that make up the ALL set.",
+      "value": "${local.privileges}"
+    }
   }
 }
