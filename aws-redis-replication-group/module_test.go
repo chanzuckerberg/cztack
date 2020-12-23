@@ -10,7 +10,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAWSRedisNode(t *testing.T) {
+func TestAWSRedisReplicationGroup(t *testing.T) {
 	test := tftest.Test{
 
 		Setup: func(t *testing.T) *terraform.Options {
@@ -25,6 +25,9 @@ func TestAWSRedisNode(t *testing.T) {
 			env := tftest.UniqueID()
 			service := tftest.UniqueID()
 			owner := tftest.UniqueID()
+			replication_group_description := tftest.UniqueID()
+			transit_encryption_enabled := true
+			at_rest_encryption_enabled := true
 
 			az := fmt.Sprintf("%sa", tftest.DefaultRegion)
 
@@ -39,6 +42,10 @@ func TestAWSRedisNode(t *testing.T) {
 					"subnets":                    privateSubnets,
 					"ingress_security_group_ids": []string{sg},
 					"vpc_id":                     vpc,
+
+					"replication_group_description": replication_group_description,
+					"transit_encryption_enabled":	   transit_encryption_enabled,
+					"at_rest_encryption_enabled":    at_rest_encryption_enabled
 				},
 			)
 		},
