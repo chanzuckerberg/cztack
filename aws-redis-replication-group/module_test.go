@@ -44,8 +44,8 @@ func TestAWSRedisReplicationGroup(t *testing.T) {
 					"vpc_id":                     vpc,
 
 					"replication_group_description": replication_group_description,
-					"transit_encryption_enabled":	   transit_encryption_enabled,
-					"at_rest_encryption_enabled":    at_rest_encryption_enabled
+					"transit_encryption_enabled":    transit_encryption_enabled,
+					"at_rest_encryption_enabled":    at_rest_encryption_enabled,
 				},
 			)
 		},
