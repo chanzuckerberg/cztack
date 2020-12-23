@@ -45,6 +45,6 @@ a replication group with the given parameters.
 |------|-------------|
 | primary_endpoint_address | The endpoint of the primary node in this node group (shard). |
 | configuration_endpoint_address | The configuration endpoint address to allow host discovery. |
-| port | n/a |
+| port | Redis TCP port. |
 
 <!-- END -->
