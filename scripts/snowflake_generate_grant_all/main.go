@@ -26,7 +26,7 @@ const (
 	perPrivTypeVarName string = "per_privilege_grants"
 
 	// TODO(el): grab this version directly from the provider
-	snowflakeProviderVersion string = "~> 0.20.0"
+	snowflakeProviderVersion string = ">= 0.20.0"
 )
 
 type Variable struct {
@@ -224,6 +224,7 @@ func reverseType(s *schema.Schema) (string, error) {
 				return "", err
 			}
 			innerElements = append(innerElements, fmt.Sprintf("%s = %s", name, inner))
+			sort.Strings(innerElements)
 		}
 		return fmt.Sprintf("list(object({ %s }))", strings.Join(innerElements, ", ")), nil
 	default:
