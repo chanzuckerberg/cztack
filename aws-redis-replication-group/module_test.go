@@ -38,7 +38,7 @@ func TestAWSRedisReplicationGroup(t *testing.T) {
 					"service": service,
 					"owner":   owner,
 
-					"availability_zone":          az,
+					"availability_zones":         []string{az},
 					"subnets":                    privateSubnets,
 					"ingress_security_group_ids": []string{sg},
 					"vpc_id":                     vpc,
