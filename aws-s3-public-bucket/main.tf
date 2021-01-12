@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "bucket" {
   policy = data.aws_iam_policy_document.bucket_policy.json
 
   versioning {
-    enabled = true
+    enabled = var.enable_versioning
   }
 
   server_side_encryption_configuration {
@@ -36,6 +36,28 @@ resource "aws_s3_bucket" "bucket" {
 data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
   source_json = var.bucket_policy
+
+  dynamic statement {
+    for_each = var.require_tls ? ["enabled"] : []
+    content {
+      sid       = "EnforceTLS"
+      actions   = ["s3:GetObject"]
+      resources = ["arn:aws:s3:::${local.bucket_name}/*"]
+
+      principals {
+        type        = "*"
+        identifiers = ["*"]
+      }
+
+      effect = "Deny"
+
+      condition {
+        test     = "Bool"
+        variable = "aws:SecureTransport"
+        values   = ["false"]
+      }
+    }
+  }
 
   statement {
     sid       = "AllowPublicRead"
