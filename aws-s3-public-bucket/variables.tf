@@ -50,3 +50,9 @@ variable "enable_versioning" {
   description = "Keep old versions of objects in this bucket."
   default     = true
 }
+
+variable "require_tls" {
+  type        = bool
+  description = "Require TLS to read objects from this bucket."
+  default     = true
+}

@@ -37,22 +37,25 @@ data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
   source_json = var.bucket_policy
 
-  statement {
-    sid       = "EnforceTLS"
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
+  dynamic statement {
+    for_each = var.require_tls ? ["enabled"] : []
+    content {
+      sid       = "EnforceTLS"
+      actions   = ["s3:GetObject"]
+      resources = ["arn:aws:s3:::${local.bucket_name}/*"]
 
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
+      principals {
+        type        = "*"
+        identifiers = ["*"]
+      }
 
-    effect = "Deny"
+      effect = "Deny"
 
-    condition {
-      test     = "Bool"
-      variable = "aws:SecureTransport"
-      values   = ["false"]
+      condition {
+        test     = "Bool"
+        variable = "aws:SecureTransport"
+        values   = ["false"]
+      }
     }
   }
 
