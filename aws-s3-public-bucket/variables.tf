@@ -44,3 +44,9 @@ variable "public_read_justification" {
   type        = string
   description = "Describe why this bucket must be public and what it is being used for."
 }
+
+variable "enable_versioning" {
+  type        = bool
+  description = "Keep old versions of objects in this bucket."
+  default     = true
+}
