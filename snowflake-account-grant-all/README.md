@@ -21,6 +21,8 @@
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| privileges | Privileges that make up the ALL set. |
 
 <!-- END -->
