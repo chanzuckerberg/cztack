@@ -26,6 +26,7 @@ module "aurora" {
   rds_cluster_parameters              = var.rds_cluster_parameters
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   performance_insights_enabled        = var.performance_insights_enabled
+  enabled_cloudwatch_logs_exports     = ["postgresql"]
   ca_cert_identifier                  = var.ca_cert_identifier
   auto_minor_version_upgrade          = var.auto_minor_version_upgrade
 

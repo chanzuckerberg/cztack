@@ -19,10 +19,12 @@
 | bucket\_contents | Describe the data within this bucket. | `string` | n/a | yes |
 | bucket\_name | The name of the bucket. Note that `-public` will be appended to `bucket_name`s that don't contain a `public` substring. This module will output the computed `bucket_name`. | `string` | n/a | yes |
 | bucket\_policy | A policy to attach to this bucket. | `string` | `""` | no |
+| enable\_versioning | Keep old versions of objects in this bucket. | `bool` | `true` | no |
 | env | Env for tagging and naming. | `string` | n/a | yes |
 | owner | Owner for tagging and naming. | `string` | n/a | yes |
 | project | Project for tagging and naming. | `string` | n/a | yes |
 | public\_read\_justification | Describe why this bucket must be public and what it is being used for. | `string` | n/a | yes |
+| require\_tls | Require TLS to read objects from this bucket. | `bool` | `true` | no |
 | service | Service for tagging and naming. | `string` | n/a | yes |
 
 ## Outputs
