@@ -124,7 +124,6 @@ func TestPublicBucketDefaults(t *testing.T) {
 				fmt.Println("Testing ", test.action, " with https enabled=", test.secureTransport)
 				r.Equal(test.result, *resp.EvalDecision)
 			}
-
 		},
 	}
 

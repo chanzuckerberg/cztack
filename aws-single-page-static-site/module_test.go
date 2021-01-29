@@ -1,43 +1,33 @@
 package test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/chanzuckerberg/go-misc/tftest"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestAwsSinglePageStaticSite(t *testing.T) {
 	t.Parallel()
-	project := tftest.UniqueID()
-	env := tftest.UniqueID()
-	service := tftest.UniqueID()
-	owner := tftest.UniqueID()
 
-	subdomain := tftest.UniqueID()
-	awsACMCert := tftest.EnvVar(tftest.EnvWildcardCloudfrontCertARN)
-	route53ZoneID := tftest.EnvVar(tftest.EnvRoute53ZoneID)
+	test := tftest.Test{
+		SkipDestroy: true,
+		Setup: func(t *testing.T) *terraform.Options {
+			subdomain := tftest.UniqueID()
+			route53ZoneID := tftest.EnvVar(tftest.EnvRoute53ZoneID)
 
-	aliases := []string{fmt.Sprintf(
-		"%s.%s",
-		tftest.UniqueID(),
-		tftest.EnvVar(tftest.EnvRoute53ZoneName))}
-
-	options := tftest.Options(
-		tftest.IAMRegion, // us-east-1
-		map[string]interface{}{
-			"project": project,
-			"env":     env,
-			"service": service,
-			"owner":   owner,
-
-			"subdomain":           subdomain,
-			"aws_acm_cert_arn":    awsACMCert,
-			"aws_route53_zone_id": route53ZoneID,
-			"aliases":             aliases,
+			options := tftest.Options(
+				tftest.IAMRegion, // us-east-1
+				map[string]interface{}{
+					"subdomain":           subdomain,
+					"aws_route53_zone_id": route53ZoneID,
+				},
+			)
+			options.TerraformDir = "./test"
+			return options
 		},
-	)
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
-	// defer tftest.Destroy(t, options, 5)
-	tftest.Run(t, options)
+	test.Run(t)
 }
