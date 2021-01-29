@@ -5,19 +5,9 @@ import (
 	"testing"
 
 	"github.com/chanzuckerberg/go-misc/tftest"
-	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAwsSinglePageStaticSiteInit(t *testing.T) {
-	options := &terraform.Options{
-		TerraformDir: ".",
-	}
-	terraform.Init(t, options)
-}
-
-func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
-	t.Skip("Skipping because destroy is painfully slow (>30m on average) - consider running destroy out of band")
-
+func TestAwsSinglePageStaticSite(t *testing.T) {
 	t.Parallel()
 	project := tftest.UniqueID()
 	env := tftest.UniqueID()
@@ -48,6 +38,6 @@ func TestAwsSinglePageStaticSiteInitAndApply(t *testing.T) {
 		},
 	)
 
-	defer tftest.Destroy(t, options, 5)
+	// defer tftest.Destroy(t, options, 5)
 	tftest.Run(t, options)
 }
