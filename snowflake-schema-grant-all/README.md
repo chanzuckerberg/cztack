@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| snowflake | ~> 0.20.0 |
+| snowflake | >= 0.20.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| snowflake | ~> 0.20.0 |
+| snowflake | >= 0.20.0 |
 
 ## Inputs
 
@@ -25,6 +25,8 @@
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| privileges | Privileges that make up the ALL set. |
 
 <!-- END -->

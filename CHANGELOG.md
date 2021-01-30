@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.38.0 2021-01-12
+
+* [ae34a726](../../commit/ae34a7267539f03468a4d31293848254d9b101d3) [feature] aws-s3-public-bucket require https, allow disabling versioning ([#278](../../pull/278))
+* [1b53806c](../../commit/1b53806cbe7022dc7ab15be9843542ba1401a96a) [feature] Add aws-redis-replication-group ([#267](../../pull/267))
+* [68ab717a](../../commit/68ab717a5491403b60550be962c736e244b2367f) fix: Snowflake Provider version less strict
+
 ## 0.35.0 2020-07-08
 
 * [d87b0071](../../commit/d87b0071e7729697680297d70284c649a0cf13cb) Enable logging with private s3 bucket ([#210](../../pull/210))

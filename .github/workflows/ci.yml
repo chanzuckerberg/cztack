@@ -111,6 +111,7 @@ jobs:
                     - aws-params-secrets-setup
                     - aws-params-writer
                     - aws-redis-node
+                    - aws-redis-replication-group
                     - aws-s3-private-bucket
                     - aws-s3-public-bucket
                     - aws-single-page-static-site

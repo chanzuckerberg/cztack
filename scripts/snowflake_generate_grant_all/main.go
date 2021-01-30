@@ -26,7 +26,7 @@ const (
 	perPrivTypeVarName string = "per_privilege_grants"
 
 	// TODO(el): grab this version directly from the provider
-	snowflakeProviderVersion string = "~> 0.20.0"
+	snowflakeProviderVersion string = ">= 0.20.0"
 )
 
 type Variable struct {
@@ -45,6 +45,9 @@ type ModuleTemplate struct {
 
 	// required_providers: provider_name: version
 	Terraform map[string]map[string]map[string]string `json:"terraform,omitempty"`
+
+	// output name: arguments : values
+	Outputs map[string]map[string]interface{} `json:"output,omitempty"`
 }
 
 func main() {
@@ -115,6 +118,12 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		Variables: map[string]Variable{},
 		Locals: map[string]interface{}{
 			"privileges": privileges,
+		},
+		Outputs: map[string]map[string]interface{}{
+			"privileges": {
+				"value":       "${local.privileges}",
+				"description": "Privileges that make up the ALL set.",
+			},
 		},
 		Terraform: map[string]map[string]map[string]string{
 			"required_providers": {
@@ -224,6 +233,7 @@ func reverseType(s *schema.Schema) (string, error) {
 				return "", err
 			}
 			innerElements = append(innerElements, fmt.Sprintf("%s = %s", name, inner))
+			sort.Strings(innerElements)
 		}
 		return fmt.Sprintf("list(object({ %s }))", strings.Join(innerElements, ", ")), nil
 	default:
