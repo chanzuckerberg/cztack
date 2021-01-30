@@ -14,20 +14,11 @@ func TestAWSIAMRoleInfraCI(t *testing.T) {
 		Setup: func(t *testing.T) *terraform.Options {
 			curAcct := tftest.AWSCurrentAccountID(t)
 
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
-
 			return tftest.Options(
 				tftest.IAMRegion,
 				map[string]interface{}{
 					"role_name":         random.UniqueId(),
 					"source_account_id": curAcct,
-					"project":           project,
-					"env":               env,
-					"service":           service,
-					"owner":             owner,
 					"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 				},
 			)

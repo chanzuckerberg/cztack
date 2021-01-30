@@ -21,19 +21,10 @@ func TestAWSRedisNode(t *testing.T) {
 
 			sg := tftest.CreateSecurityGroup(t, tftest.DefaultRegion, vpc)
 
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
-
 			az := fmt.Sprintf("%sa", tftest.DefaultRegion)
 
 			return tftest.Options(tftest.DefaultRegion,
 				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
 
 					"availability_zone":          az,
 					"subnets":                    privateSubnets,

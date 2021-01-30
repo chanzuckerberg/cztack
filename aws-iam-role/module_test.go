@@ -12,10 +12,6 @@ func TestAWSIAMRole(t *testing.T) {
 
 		Setup: func(t *testing.T) *terraform.Options {
 			roleName := tftest.UniqueID()
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
 
 			principals := []interface{}{
 				map[string]interface{}{
@@ -28,10 +24,6 @@ func TestAWSIAMRole(t *testing.T) {
 				tftest.IAMRegion,
 				map[string]interface{}{
 					"role_name":  roleName,
-					"project":    project,
-					"env":        env,
-					"service":    service,
-					"owner":      owner,
 					"principals": principals,
 				},
 			)
