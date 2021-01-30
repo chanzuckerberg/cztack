@@ -29,6 +29,15 @@ locals {
   ]
 }
 
+# these will be inherited in the modules
+provider aws {
+}
+
+provider aws {
+  alias  = "us-east-1"
+  region = "us-east-1"
+}
+
 module cert {
   source = "../../aws-acm-cert"
 
@@ -41,6 +50,10 @@ module cert {
   env     = var.env
   service = var.service
   owner   = var.owner
+
+  providers = {
+    aws = aws.us-east-1
+  }
 }
 
 module site {
