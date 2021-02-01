@@ -58,7 +58,7 @@ resource "aws_iam_role" "ecs-poweruser" {
 
 resource "aws_iam_role_policy_attachment" "ecs-fullaccess" {
   role       = aws_iam_role.ecs-poweruser.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "ecr-poweruser" {
