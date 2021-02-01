@@ -26,49 +26,6 @@ jobs:
     test:
         name: test ${{ matrix.module }}
         runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - id: filter
-              uses: dorny/paths-filter@v2
-              with:
-                filters: |
-                    module:
-                      - '${{ matrix.module }}/**'
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              uses: hashicorp/setup-terraform@v1
-              with:
-                terraform_version: 0.12.30
-                terraform_wrapper: "false"
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              uses: actions/setup-go@v2
-              with:
-                go-version: 1.14.3
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              name: Install bless provider
-              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              name: Check bless provider
-              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              name: Install Snowflake provider
-              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              name: Check Snowflake provider
-              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: aws --profile cztack-ci-1 sts get-caller-identity
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }} --profile cztack-ci-2
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-2
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: aws --profile cztack-ci-2 sts get-caller-identity
-            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-              run: make test-ci TEST=./${{ matrix.module }}
         strategy:
             matrix:
                 module:
@@ -118,7 +75,7 @@ jobs:
                     - aws-sns-lambda
                     - aws-ssm-params
                     - aws-ssm-params-writer
-                    - bless-ca/test
+                    # - bless-ca/test
                     - github-webhooks-to-s3
                     - module-template
                     - snowflake-account-grant-all
@@ -137,10 +94,54 @@ jobs:
                     - snowflake-table-grant-all
                     - snowflake-view-grant-all
                     - snowflake-warehouse-grant-all
+        steps:
+            - uses: actions/checkout@v2
+            - id: filter
+              uses: dorny/paths-filter@v2
+              with:
+                filters: |
+                    module:
+                      - '${{ matrix.module }}/**'
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: 0.12.30
+                terraform_wrapper: "false"
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              uses: actions/setup-go@v2
+              with:
+                go-version: 1.14.3
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Install bless provider
+              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Check bless provider
+              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Install Snowflake provider
+              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Check Snowflake provider
+              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws --profile cztack-ci-1 sts get-caller-identity
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }} --profile cztack-ci-2
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-2
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: aws --profile cztack-ci-2 sts get-caller-identity
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              run: make test-ci TEST=./${{ matrix.module }}
+
         timeout-minutes: 45
 name: CI
 "on":
-    pull_request: null
+    pull_request:
     push:
         branches:
             - main
