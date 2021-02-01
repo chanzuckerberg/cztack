@@ -91,6 +91,10 @@ module "security_headers_lambda" {
   owner   = var.owner
   env     = var.env
   service = var.service
+
+  providers = {
+    aws = aws.us-east-1
+  }
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {

@@ -85,9 +85,12 @@ check-mod:
 .PHONY: check-mod
 
 clean:
-	rm **/*.tfstate*; true
-	rm -rf **/.terraform; true
-	rm -rf **/.test-data; true
+	rm -rf */*.tfstate*; true
+	rm -rf */.terraform; true
+	rm -rf */.test-data; true
+	rm -rf */*/*.tfstate*; true
+	rm -rf */*/.terraform; true
+	rm -rf */*/.test-data; true
 .PHONY: clean
 
 test:
