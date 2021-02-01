@@ -33,13 +33,11 @@ func TestModule(t *testing.T) {
 		Mode: tftest.Init,
 
 		Setup: func(t *testing.T) *terraform.Options {
-			opts := &terraform.Options{
-				TerraformDir: ".",
-				EnvVars: map[string]string{
-					"AWS_DEFAULT_REGION": tftest.DefaultRegion,
-				},
-				Vars: mustJson(vars),
-			}
+			opts := tftest.Options(
+				tftest.DefaultRegion,
+				mustJson(vars),
+			)
+			opts.TerraformDir = "."
 
 			return opts
 		},

@@ -17,20 +17,15 @@ func init() {
 func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 	curAcct := tftest.AWSCurrentAccountID(t)
 
-	log.Debug("SETUP ROLE")
-
-	setupTerraformOptions := &terraform.Options{
-		TerraformDir: "../aws-iam-role-crossacct",
-
-		Vars: map[string]interface{}{
+	setupTerraformOptions := tftest.Options(
+		tftest.IAMRegion,
+		map[string]interface{}{
 			"role_name":         random.UniqueId(),
 			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
 			"source_account_id": curAcct,
 		},
-		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": tftest.IAMRegion,
-		},
-	}
+	)
+	setupTerraformOptions.TerraformDir = "../aws-iam-role-crossacct"
 
 	defer tftest.Cleanup(t, setupTerraformOptions)
 
@@ -41,18 +36,15 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 	log.Debug("SETUP Secrets policy")
 
 	keyAlias := random.UniqueId()
-	keyTerraformOptions := &terraform.Options{
-		TerraformDir: "../aws-params-secrets-setup",
-
-		Vars: map[string]interface{}{
+	keyTerraformOptions := tftest.Options(
+		tftest.IAMRegion,
+		map[string]interface{}{
 			"alias_name": keyAlias,
 			"owner":      random.UniqueId(),
 			"project":    random.UniqueId(),
 		},
-		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": tftest.IAMRegion,
-		},
-	}
+	)
+	keyTerraformOptions.TerraformDir = "../aws-params-secrets-setup"
 
 	defer tftest.Cleanup(t, keyTerraformOptions)
 
