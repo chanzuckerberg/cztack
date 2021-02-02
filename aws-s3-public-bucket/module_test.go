@@ -17,24 +17,15 @@ func TestPublicBucketDefaults(t *testing.T) {
 
 	test := &tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
 			bucketName := tftest.UniqueID()
 
 			// variables.tf inputs
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"project":                   project,
-					"env":                       env,
-					"service":                   service,
-					"owner":                     owner,
 					"public_read_justification": "test bucket",
 					"bucket_contents":           "dummy data",
-
-					"bucket_name": bucketName,
+					"bucket_name":               bucketName,
 				},
 			)
 		},

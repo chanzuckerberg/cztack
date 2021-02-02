@@ -16,11 +16,6 @@ func TestModule(t *testing.T) {
 			route53Zone := tftest.EnvVar(tftest.EnvRoute53ZoneName)
 			targetSubdomain := tftest.UniqueID()
 
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
-
 			target_domain := fmt.Sprintf("%s.%s", targetSubdomain, route53Zone)
 			source_domain := fmt.Sprintf("%s.%s", tftest.UniqueID(), route53Zone)
 			source_domain_zone_id := tftest.EnvVar(tftest.EnvRoute53ZoneID)
@@ -31,11 +26,6 @@ func TestModule(t *testing.T) {
 					"target_domain":         target_domain,
 					"source_domain":         source_domain,
 					"source_domain_zone_id": source_domain_zone_id,
-
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
 				},
 			)
 		},
