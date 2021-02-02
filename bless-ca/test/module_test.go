@@ -23,19 +23,9 @@ func TestBlessCAInitAndApply(t *testing.T) {
 
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := "bless" // other components in the name are random so keep this to identify
-			owner := tftest.UniqueID()
-
 			return tftest.Options(
 				region,
 				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
-
 					//test only
 					"region":                     region,
 					"bless_provider_aws_profile": tftest.EnvVar(tftest.EnvAWSProfile),

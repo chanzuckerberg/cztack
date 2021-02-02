@@ -13,11 +13,6 @@ func TestAWSAuroraMysqlDefaults(t *testing.T) {
 	test := tftest.Test{
 
 		Setup: func(t *testing.T) *terraform.Options {
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
-
 			vpc := tftest.EnvVar(tftest.EnvVPCID)
 			databaseSubnetGroup := tftest.EnvVar(tftest.EnvDatabaseSubnetGroup)
 			ingressCidrBlocks := tftest.EnvVar(tftest.EnvVPCCIDRBlock)
@@ -29,10 +24,6 @@ func TestAWSAuroraMysqlDefaults(t *testing.T) {
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
 
 					"vpc_id":                vpc,
 					"database_subnet_group": databaseSubnetGroup,

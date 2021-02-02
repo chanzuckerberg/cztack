@@ -20,11 +20,6 @@ func TestAWSACMCertDefaults(t *testing.T) {
 
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			project := tftest.UniqueID()
-			env := tftest.UniqueID()
-			service := tftest.UniqueID()
-			owner := tftest.UniqueID()
-
 			certDomainName := fmt.Sprintf(
 				"%s.%s",
 				tftest.UniqueID(),
@@ -44,11 +39,6 @@ func TestAWSACMCertDefaults(t *testing.T) {
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
-
 					"cert_domain_name":                     certDomainName,
 					"aws_route53_zone_id":                  route53ZoneID,
 					"validation_record_ttl":                5,
