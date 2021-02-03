@@ -15,7 +15,7 @@ jobs:
             - uses: actions/checkout@v2
             - uses: hashicorp/setup-terraform@v1
               with:
-                terraform_version: 0.12.30
+                terraform_version: 0.13.6
                 terraform_wrapper: "false"
             - name: setup
               run: make setup
@@ -37,7 +37,7 @@ jobs:
             - if: github.event == 'push' || steps.filter.outputs.module == 'true'
               uses: hashicorp/setup-terraform@v1
               with:
-                terraform_version: 0.12.30
+                terraform_version: 0.13.6
                 terraform_wrapper: "false"
             - if: github.event == 'push' || steps.filter.outputs.module == 'true'
               uses: actions/setup-go@v2
