@@ -30,7 +30,7 @@ module "sg" {
   ]
 
   ingress_with_cidr_blocks = [
-    for cidr_block in var.ingress_security_group_cidr : {
+    for cidr_block in var.ingress_security_group_cidr_blocks : {
       from_port   = var.port
       to_port     = var.port
       protocol    = "tcp"
