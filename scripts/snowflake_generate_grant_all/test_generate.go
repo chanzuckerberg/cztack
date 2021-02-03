@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/chanzuckerberg/go-misc/sets"
 	"github.com/chanzuckerberg/terraform-provider-snowflake/pkg/resources"
 )
 
@@ -26,19 +27,38 @@ import (
 )
 
 const vars string = %q
+const onFutureVars string = %q
 
 func TestModule(t *testing.T) {
 	test := tftest.Test{
-		// just run init, swtich to Plan or Apply when you can
-		Mode: tftest.Init,
+		Mode: tftest.Plan,
 
 		Setup: func(t *testing.T) *terraform.Options {
-			opts := tftest.Options(
-				tftest.DefaultRegion,
-				mustJson(vars),
-			)
-			opts.TerraformDir = "."
+			opts := &terraform.Options{
+				TerraformDir: ".",
+				EnvVars: map[string]string{},
+				Vars: mustJson(vars),
+			}
+			return opts
+		},
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
+	test.Run(t)
+}
+
+func TestModule_onFuture(t *testing.T) {
+	if onFutureVars == "" {
+		return // nothing to test, no future vars
+	}
+	test := tftest.Test{
+		Mode: tftest.Plan,
+		Setup: func(t *testing.T) *terraform.Options {
+			opts := &terraform.Options{
+				TerraformDir: ".",
+				EnvVars: map[string]string{},
+				Vars: mustJson(onFutureVars),
+			}
 			return opts
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
@@ -58,6 +78,43 @@ func mustJson(jsonData string) map[string]interface{} {
 }
 `
 )
+
+func hasOnFutureProperty(grant *resources.TerraformGrantResource) bool {
+	_, ok := grant.Resource.Schema["on_future"]
+	return ok
+}
+
+// generateFutureVars generates vars for on_future=true tests
+func generateFutureTestVars(grant *resources.TerraformGrantResource) map[string]interface{} {
+	vars := map[string]interface{}{}
+
+	// no on-future so nothing to test here
+	if !hasOnFutureProperty(grant) {
+		return vars
+	}
+
+	conflictsWith := sets.NewStringSet().Add(grant.Resource.Schema["on_future"].ConflictsWith...)
+
+	vars["on_future"] = true
+
+	for name := range grant.Resource.Schema {
+		// conflicts, skip
+		if conflictsWith.ContainsElement(name) {
+			continue
+		}
+
+		if strings.HasSuffix(name, "_name") {
+			vars[name] = strings.TrimSuffix(name, "_name")
+			continue
+		}
+
+		if name == "roles" {
+			vars[name] = []string{"role_a", "role_b", "role_c"}
+			continue
+		}
+	}
+	return vars
+}
 
 // generateVars currently generates vars for a basic integration test
 // many input variable combinations are currently missing
@@ -91,5 +148,14 @@ func generateTest(grant *resources.TerraformGrantResource) (string, error) {
 		return "", err
 	}
 
-	return fmt.Sprintf(testTemplate, string(data)), nil
+	futureData := []byte("")
+	if hasOnFutureProperty(grant) {
+		futureVars := generateFutureTestVars(grant)
+		futureData, err = json.Marshal(futureVars)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	return fmt.Sprintf(testTemplate, string(data), string(futureData)), nil
 }

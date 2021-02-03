@@ -45,7 +45,7 @@
         "for_each": "${toset(local.privileges)}",
         "privilege": "${each.value}",
         "roles": "${setunion(\n\t\t\t\tvar.roles,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).roles,\n\t\t\t\t)}",
-        "shares": "${setunion(\n\t\t\t\tvar.shares,\n\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).shares,\n\t\t\t\t)}",
+        "shares": "${\n\t\t\t\tvar.shares == null ? null :\n\t\t\t\tsetunion(\n\t\t\t\t\tvar.shares,\n\t\t\t\t\tlookup(var.per_privilege_grants, each.value, { shares = [], roles = [] }).shares,\n\t\t\t\t)}",
         "with_grant_option": "${var.with_grant_option}"
       }
     }

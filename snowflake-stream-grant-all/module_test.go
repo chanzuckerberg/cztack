@@ -15,19 +15,38 @@ import (
 )
 
 const vars string = "{\"database_name\":\"database\",\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\",\"stream_name\":\"stream\"}"
+const onFutureVars string = "{\"database_name\":\"database\",\"on_future\":true,\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\",\"stream_name\":\"stream\"}"
 
 func TestModule(t *testing.T) {
 	test := tftest.Test{
-		// just run init, swtich to Plan or Apply when you can
-		Mode: tftest.Init,
+		Mode: tftest.Plan,
 
 		Setup: func(t *testing.T) *terraform.Options {
-			opts := tftest.Options(
-				tftest.DefaultRegion,
-				mustJson(vars),
-			)
-			opts.TerraformDir = "."
+			opts := &terraform.Options{
+				TerraformDir: ".",
+				EnvVars: map[string]string{},
+				Vars: mustJson(vars),
+			}
+			return opts
+		},
+		Validate: func(t *testing.T, options *terraform.Options) {},
+	}
 
+	test.Run(t)
+}
+
+func TestModule_onFuture(t *testing.T) {
+	if onFutureVars == "" {
+		return // nothing to test, no future vars
+	}
+	test := tftest.Test{
+		Mode: tftest.Plan,
+		Setup: func(t *testing.T) *terraform.Options {
+			opts := &terraform.Options{
+				TerraformDir: ".",
+				EnvVars: map[string]string{},
+				Vars: mustJson(onFutureVars),
+			}
 			return opts
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},

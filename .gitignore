@@ -4,3 +4,4 @@
 bin
 .idea
 .test-data
+.terraform.lock.hcl

@@ -192,9 +192,11 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 				lookup(var.per_privilege_grants, each.value, %s).roles,
 				)}`, defaultPrivType)
 		case "shares":
-			resourceAll["shares"] = fmt.Sprintf(`${setunion(
-				var.shares,
-				lookup(var.per_privilege_grants, each.value, %s).shares,
+			resourceAll["shares"] = fmt.Sprintf(`${
+				var.shares == null ? null :
+				setunion(
+					var.shares,
+					lookup(var.per_privilege_grants, each.value, %s).shares,
 				)}`, defaultPrivType)
 		default:
 			resourceAll[elementName] = fmt.Sprintf("${var.%s}", elementName)
@@ -239,8 +241,4 @@ func reverseType(s *schema.Schema) (string, error) {
 	default:
 		return "", errors.Newf("Unrecognized type %s", t.String())
 	}
-}
-
-func optString(s string) *string {
-	return &s
 }
