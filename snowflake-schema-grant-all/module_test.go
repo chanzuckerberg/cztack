@@ -24,8 +24,8 @@ func TestModule(t *testing.T) {
 		Setup: func(t *testing.T) *terraform.Options {
 			opts := &terraform.Options{
 				TerraformDir: ".",
-				EnvVars: map[string]string{},
-				Vars: mustJson(vars),
+				EnvVars:      map[string]string{},
+				Vars:         mustJson(vars),
 			}
 			return opts
 		},
@@ -44,8 +44,8 @@ func TestModule_onFuture(t *testing.T) {
 		Setup: func(t *testing.T) *terraform.Options {
 			opts := &terraform.Options{
 				TerraformDir: ".",
-				EnvVars: map[string]string{},
-				Vars: mustJson(onFutureVars),
+				EnvVars:      map[string]string{},
+				Vars:         mustJson(vars),
 			}
 			return opts
 		},
