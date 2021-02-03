@@ -29,6 +29,16 @@ module "sg" {
     }
   ]
 
+  ingress_with_cidr_blocks = [
+    for cidr_block in var.ingress_security_group_cidr : {
+      from_port   = var.port
+      to_port     = var.port
+      protocol    = "tcp"
+      description = "Redis port"
+      cidr_blocks = cidr_block
+    }
+  ]
+
   egress_rules = ["all-all"]
 }
 

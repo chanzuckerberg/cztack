@@ -35,6 +35,12 @@ variable "ingress_security_group_ids" {
   description = "Source security groups which should be able to contact this instance."
 }
 
+variable "ingress_security_group_cidr_blocks" {
+  type        = list(string)
+  description = "Source CIDR blocks which should be able to contact this instance."
+  default     = []
+}
+
 variable "port" {
   type        = number
   description = "Port to host Redis on."
