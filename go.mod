@@ -8,5 +8,5 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/gruntwork-io/terratest v0.32.7
 	github.com/sirupsen/logrus v1.7.0
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.0
 )
