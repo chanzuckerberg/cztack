@@ -112,6 +112,16 @@ func generateFutureTestVars(grant *resources.TerraformGrantResource) map[string]
 			vars[name] = []string{"role_a", "role_b", "role_c"}
 			continue
 		}
+
+		if name == "arguments" {
+			vars[name] = []map[string]string{
+				{
+					"name": "foo",
+					"type": "STRING",
+				},
+			}
+			continue
+		}
 	}
 	return vars
 }

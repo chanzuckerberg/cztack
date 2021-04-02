@@ -15,7 +15,7 @@ import (
 )
 
 const vars string = "{\"database_name\":\"database\",\"procedure_name\":\"procedure\",\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\",\"shares\":[\"share_a\",\"share_b\",\"share_c\"]}"
-const onFutureVars string = "{\"database_name\":\"database\",\"on_future\":true,\"procedure_name\":\"procedure\",\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\"}"
+const onFutureVars string = "{\"arguments\":[{\"name\":\"foo\",\"type\":\"STRING\"}],\"database_name\":\"database\",\"on_future\":true,\"procedure_name\":\"procedure\",\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\"}"
 
 func TestModule(t *testing.T) {
 	test := tftest.Test{
