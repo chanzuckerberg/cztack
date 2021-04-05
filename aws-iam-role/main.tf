@@ -45,6 +45,8 @@ resource "aws_iam_role" "role" {
   path               = var.iam_path
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
+  max_session_duration = var.max_session_duration
+
   tags = local.tags
 }
 

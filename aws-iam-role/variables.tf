@@ -29,6 +29,11 @@ variable principals {
   description = "AWS IAM Principals which will be able to assume this role."
 }
 
+variable max_session_duration {
+  type = number
+  description = "The maximum amount of time, in seconds, that a principal can assume this role."
+  default = 3600
+}
 variable saml_idp_arn {
   type        = string
   default     = ""
