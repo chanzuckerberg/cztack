@@ -5,7 +5,7 @@ variable "iam_path" {
 }
 
 variable "authorized_users" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "A list of IAM users authorized ot invoke bless and the corresponding kmsauth key."
 }

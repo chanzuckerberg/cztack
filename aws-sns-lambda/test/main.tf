@@ -1,4 +1,4 @@
-resource random_string random {
+resource "random_string" "random" {
   length  = 6
   special = false
 }
@@ -10,7 +10,7 @@ data "archive_file" "notifier" {
   output_path = "${path.module}/hello.zip"
 }
 
-module sns-lambda {
+module "sns-lambda" {
   source = "./.."
 
   lambda_handler = "hello.hello2"

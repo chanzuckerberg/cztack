@@ -12,7 +12,7 @@ locals {
 }
 
 
-resource aws_lambda_function lambda {
+resource "aws_lambda_function" "lambda" {
   s3_bucket = var.source_s3_bucket
   s3_key    = var.source_s3_key
 
@@ -31,7 +31,7 @@ resource aws_lambda_function lambda {
 
   reserved_concurrent_executions = var.reserved_concurrent_executions
 
-  dynamic environment {
+  dynamic "environment" {
     for_each = length(var.environment) > 0 ? [0] : []
 
     content {
@@ -42,7 +42,7 @@ resource aws_lambda_function lambda {
   tags = local.tags
 }
 
-data aws_iam_policy_document lambda_role_policy {
+data "aws_iam_policy_document" "lambda_role_policy" {
   statement {
     principals {
       type = "Service"
@@ -55,7 +55,7 @@ data aws_iam_policy_document lambda_role_policy {
   }
 }
 
-resource aws_iam_role role {
+resource "aws_iam_role" "role" {
   name = local.name
   path = var.lambda_role_path
 
@@ -64,13 +64,13 @@ resource aws_iam_role role {
   tags = local.tags
 }
 
-resource aws_cloudwatch_log_group log {
+resource "aws_cloudwatch_log_group" "log" {
   name              = "/aws/lambda/${local.name}"
   retention_in_days = var.log_retention_in_days
 }
 
-data aws_region current {}
-data aws_caller_identity current {}
+data "aws_region" "current" {}
+data "aws_caller_identity" "current" {}
 
 # TODO scope this policy down
 #
@@ -81,7 +81,7 @@ data aws_caller_identity current {}
 #   arn:aws:logs:us-west-2:123456789:log-group:/foo/bar
 # to match operations on the log group(like creating a new stream.) So instead we construct one
 # without the colon before the *, so that we can match both log groups and log streams.
-data aws_iam_policy_document lambda_logging_policy {
+data "aws_iam_policy_document" "lambda_logging_policy" {
   statement {
     effect = "Allow"
     actions = compact([
@@ -98,7 +98,7 @@ data aws_iam_policy_document lambda_logging_policy {
   }
 }
 
-resource aws_iam_policy lambda_logging {
+resource "aws_iam_policy" "lambda_logging" {
   name_prefix = "${local.name}-lambda-logging"
   path        = "/"
   description = "IAM policy for logging from the ${local.name} lambda."
@@ -106,7 +106,7 @@ resource aws_iam_policy lambda_logging {
   policy = data.aws_iam_policy_document.lambda_logging_policy.json
 }
 
-resource aws_iam_role_policy_attachment lambda_logs {
+resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.role.name
   policy_arn = aws_iam_policy.lambda_logging.arn
 }

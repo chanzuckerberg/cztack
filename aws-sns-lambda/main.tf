@@ -1,4 +1,4 @@
-module lambda {
+module "lambda" {
   source                = "../aws-lambda-function"
   environment           = var.lambda_environment
   function_description  = var.function_description

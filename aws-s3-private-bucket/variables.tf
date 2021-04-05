@@ -66,17 +66,17 @@ variable "cors_rules" {
   default     = []
 }
 
-variable transfer_acceleration {
+variable "transfer_acceleration" {
   type    = bool
   default = false
 }
 
-variable public_access_block {
+variable "public_access_block" {
   type    = bool
   default = true
 }
 
-variable grants {
+variable "grants" {
   type        = any
   default     = []
   description = "A list of objects containing the grant configurations. Used when we want to grant permissions to AWS accounts via the S3 ACL system."
