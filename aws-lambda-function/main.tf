@@ -121,3 +121,23 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.role.name
   policy_arn = aws_iam_policy.lambda_logging.arn
 }
+
+// Execution role basic permissions
+data "aws_iam_policy_document" "role" {
+  statement {
+    sid    = "ec2"
+    effect = "Allow"
+    actions = [
+      "ec2:CreateNetworkInterface",
+    ]
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "role" {
+  role   = aws_iam_role.role.name
+  policy = aws_iam_policy_document.role.json
+}
