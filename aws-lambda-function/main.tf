@@ -39,6 +39,17 @@ resource aws_lambda_function lambda {
     }
   }
 
+  dynamic vpc_config {
+    for_each = compact([var.vpc_config])
+
+    content {
+      subnet_ids = vpc_config.subnet_ids
+      security_group_ids = vpc_config.security_group_ids
+    }
+  }
+
+  memory_size = var.memory_size
+
   tags = local.tags
 }
 

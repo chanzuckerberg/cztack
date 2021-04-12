@@ -108,3 +108,19 @@ variable reserved_concurrent_executions {
   description = "Set reserved_concurrent_executions for this function. See [docs](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)."
   default     = -1 // aws default
 }
+
+variable vpc_config {
+  type = object({
+    subnet_ids = list(string),
+    security_group_ids = list(string)
+  })
+
+  description = "The lambda's vpc configuration"
+  default = null
+}
+
+variable memory_size {
+  type = number
+  description = "Amount of memory to allocate to the lambda"
+  default = 128
+}
