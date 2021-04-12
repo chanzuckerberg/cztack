@@ -40,11 +40,11 @@ resource aws_lambda_function lambda {
   }
 
   dynamic vpc_config {
-    for_each = compact([var.vpc_config])
+    for_each = var.vpc_config == nil ? [] : [0]
 
     content {
-      subnet_ids = vpc_config.subnet_ids
-      security_group_ids = vpc_config.security_group_ids
+      subnet_ids = var.vpc_config.subnet_ids
+      security_group_ids = var.vpc_config.security_group_ids
     }
   }
 
