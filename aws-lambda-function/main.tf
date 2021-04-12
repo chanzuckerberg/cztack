@@ -130,6 +130,7 @@ data "aws_iam_policy_document" "role" {
     actions = [
       "ec2:CreateNetworkInterface",
       "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface",
     ]
 
     resources = [
