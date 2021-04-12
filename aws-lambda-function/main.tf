@@ -40,7 +40,7 @@ resource aws_lambda_function lambda {
   }
 
   dynamic vpc_config {
-    for_each = var.vpc_config == nil ? [] : [0]
+    for_each = var.vpc_config == null ? [] : [0]
 
     content {
       subnet_ids = var.vpc_config.subnet_ids
