@@ -139,5 +139,5 @@ data "aws_iam_policy_document" "role" {
 
 resource "aws_iam_role_policy" "role" {
   role   = aws_iam_role.role.name
-  policy = aws_iam_policy_document.role.json
+  policy = data.aws_iam_policy_document.role.json
 }
