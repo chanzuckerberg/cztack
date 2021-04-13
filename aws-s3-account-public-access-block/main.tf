@@ -5,8 +5,8 @@ locals {
 
 
   # These only affect new acls and policies by rejecting requests that contain them
-  block_public_acls   = ! local.is_none # all or new
-  block_public_policy = ! local.is_none # all or new
+  block_public_acls   = !local.is_none # all or new
+  block_public_policy = !local.is_none # all or new
 
   # These affect existing buckets, policies, and acls
   ignore_public_acls      = local.is_all

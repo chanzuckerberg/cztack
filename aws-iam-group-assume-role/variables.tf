@@ -1,5 +1,5 @@
 variable "target_accounts" {
-  type        = list
+  type        = list(any)
   description = "List of accounts in which this role should be assume-able."
 }
 
@@ -15,7 +15,7 @@ variable "group_name" {
 }
 
 variable "users" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "List of user's names who should be added to this group."
 }
@@ -29,5 +29,5 @@ variable "target_role" {
 # Pseudo depends_on because Terraform modules do not support depends_on
 variable "dependencies" {
   default = []
-  type    = list
+  type    = list(any)
 }

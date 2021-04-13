@@ -10,7 +10,7 @@ locals {
 
 data "aws_iam_policy_document" "assume_role_policy" {
   statement {
-    dynamic principals {
+    dynamic "principals" {
       for_each = var.principals
       content {
         type        = principals.value.type
@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     actions = ["sts:AssumeRole"]
   }
 
-  dynamic statement {
+  dynamic "statement" {
     for_each = compact([var.saml_idp_arn])
     content {
       principals {
@@ -44,6 +44,8 @@ resource "aws_iam_role" "role" {
   description        = var.role_description
   path               = var.iam_path
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+
+  max_session_duration = var.max_session_duration
 
   tags = local.tags
 }

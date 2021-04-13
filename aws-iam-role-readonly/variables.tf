@@ -25,7 +25,7 @@ variable "saml_idp_arn" {
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
 
-variable oidc {
+variable "oidc" {
   type = list(object(
     {
       idp_arn : string,          # the AWS IAM IDP arn
@@ -38,28 +38,28 @@ variable oidc {
   description = "A list of AWS OIDC IDPs to establish a trust relationship for this role."
 }
 
-variable authorize_read_secrets {
+variable "authorize_read_secrets" {
   type        = bool
   description = "Should this role also be authorized to decrypt and read secrets."
   default     = true
 }
 
-variable project {
+variable "project" {
   type        = string
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable env {
+variable "env" {
   type        = string
   description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable service {
+variable "service" {
   type        = string
   description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable owner {
+variable "owner" {
   type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }

@@ -26,7 +26,7 @@ variable "saml_idp_arn" {
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
 
-variable oidc {
+variable "oidc" {
   type = list(object(
     {
       idp_arn : string,          # the AWS IAM IDP arn
@@ -39,27 +39,27 @@ variable oidc {
   description = "A list of AWS OIDC IDPs to establish a trust relationship for this role."
 }
 
-variable project {
+variable "project" {
   type        = string
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable env {
+variable "env" {
   type        = string
   description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable service {
+variable "service" {
   type        = string
   description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable owner {
+variable "owner" {
   type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable max_session_duration {
+variable "max_session_duration" {
   type        = number
   default     = 60 * 60 // 1 hour
   description = "The maximum session duration (in seconds) for the role."

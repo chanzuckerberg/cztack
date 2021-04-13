@@ -1,4 +1,4 @@
-variable restrict {
+variable "restrict" {
   type        = string
   default     = "all"
   description = <<EOF

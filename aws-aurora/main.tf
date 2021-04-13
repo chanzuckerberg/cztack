@@ -17,7 +17,7 @@ resource "aws_security_group" "rds" {
 
   vpc_id = var.vpc_id
 
-  dynamic ingress {
+  dynamic "ingress" {
     for_each = var.ingress_cidr_blocks
     content {
       from_port   = var.port
@@ -27,7 +27,7 @@ resource "aws_security_group" "rds" {
     }
   }
 
-  dynamic ingress {
+  dynamic "ingress" {
     for_each = var.ingress_security_groups
     content {
       from_port       = var.port

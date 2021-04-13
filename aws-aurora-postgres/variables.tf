@@ -86,13 +86,13 @@ variable "apply_immediately" {
 }
 
 variable "rds_cluster_parameters" {
-  type        = list
+  type        = list(any)
   description = "Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster)"
   default     = []
 }
 
 variable "db_parameters" {
-  type        = list
+  type        = list(any)
   description = "Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance)"
   default     = []
 }
@@ -119,13 +119,13 @@ variable "iam_database_authentication_enabled" {
   default = false
 }
 
-variable ca_cert_identifier {
+variable "ca_cert_identifier" {
   type        = string
   description = "Identifier for the certificate authority."
   default     = "rds-ca-2019"
 }
 
-variable auto_minor_version_upgrade {
+variable "auto_minor_version_upgrade" {
   type        = bool
   description = "Set the databases to automatically upgrade minor versions."
   default     = true
