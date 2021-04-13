@@ -1,23 +1,23 @@
-variable project {
+variable "project" {
   type = string
 }
-variable env {
+variable "env" {
   type = string
 }
-variable service {
+variable "service" {
   type = string
 }
-variable owner {
+variable "owner" {
   type = string
 }
-variable subdomain {
+variable "subdomain" {
   type = string
 }
-variable aws_route53_zone_id {
+variable "aws_route53_zone_id" {
   type = string
 }
 
-data aws_route53_zone zone {
+data "aws_route53_zone" "zone" {
   zone_id = var.aws_route53_zone_id
 }
 
@@ -30,15 +30,15 @@ locals {
 }
 
 # these will be inherited in the modules
-provider aws {
+provider "aws" {
 }
 
-provider aws {
+provider "aws" {
   alias  = "us-east-1"
   region = "us-east-1"
 }
 
-module cert {
+module "cert" {
   source = "../../aws-acm-cert"
 
   cert_domain_name                     = local.website_fqdn
@@ -56,7 +56,7 @@ module cert {
   }
 }
 
-module site {
+module "site" {
   source = "../."
 
   subdomain           = var.subdomain

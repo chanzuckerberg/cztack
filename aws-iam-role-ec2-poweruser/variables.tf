@@ -31,22 +31,22 @@ variable "default_iam_policy" {
   default     = true
 }
 
-variable project {
+variable "project" {
   type        = string
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable env {
+variable "env" {
   type        = string
   description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable service {
+variable "service" {
   type        = string
   description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable owner {
+variable "owner" {
   type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }

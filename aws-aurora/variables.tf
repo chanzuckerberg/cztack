@@ -77,13 +77,13 @@ variable "publicly_accessible" {
 }
 
 variable "rds_cluster_parameters" {
-  type = list
+  type = list(any)
 
   default = []
 }
 
 variable "db_parameters" {
-  type = list
+  type = list(any)
 
   default = []
 }
@@ -116,7 +116,7 @@ variable "iam_database_authentication_enabled" {
 }
 
 variable "enabled_cloudwatch_logs_exports" {
-  type    = list
+  type    = list(any)
   default = []
 }
 
@@ -130,13 +130,13 @@ variable "db_deletion_protection" {
   default = false
 }
 
-variable ca_cert_identifier {
+variable "ca_cert_identifier" {
   type        = string
   description = "Identifier for the certificate authority. Use rds-ca-2019 for anything new."
   default     = "rds-ca-2019"
 }
 
-variable auto_minor_version_upgrade {
+variable "auto_minor_version_upgrade" {
   type        = bool
   description = "Set the databases to automatically upgrade minor versions."
   default     = true

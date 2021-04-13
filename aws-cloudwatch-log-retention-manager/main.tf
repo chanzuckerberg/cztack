@@ -10,7 +10,7 @@ locals {
   lambda_name = "${var.project}-${var.env}-${var.service}-cloudwatch-retention"
 }
 
-data archive_file lambda {
+data "archive_file" "lambda" {
   type        = "zip"
   output_path = "${path.module}/build/lambda.zip"
   source {
@@ -60,7 +60,7 @@ data archive_file lambda {
   }
 }
 
-module lambda {
+module "lambda" {
   source = "../aws-lambda-function"
 
   function_name    = local.lambda_name
@@ -78,18 +78,18 @@ module lambda {
   service = var.service
 }
 
-resource aws_cloudwatch_event_rule trigger {
+resource "aws_cloudwatch_event_rule" "trigger" {
   name                = "${var.project}-${var.env}-${var.service}-retention-trigger"
   schedule_expression = "rate(12 hours)"
   tags                = local.tags
 }
 
-resource aws_cloudwatch_event_target trigger {
+resource "aws_cloudwatch_event_target" "trigger" {
   rule = aws_cloudwatch_event_rule.trigger.id
   arn  = module.lambda.arn
 }
 
-resource aws_lambda_permission permission {
+resource "aws_lambda_permission" "permission" {
   statement_id  = "AllowScheduledLambdaExecution"
   action        = "lambda:InvokeFunction"
   function_name = local.lambda_name
@@ -97,7 +97,7 @@ resource aws_lambda_permission permission {
   source_arn    = aws_cloudwatch_event_rule.trigger.arn
 }
 
-data aws_iam_policy_document policy {
+data "aws_iam_policy_document" "policy" {
   statement {
     effect = "Allow"
     actions = [
@@ -110,7 +110,7 @@ data aws_iam_policy_document policy {
   }
 }
 
-resource aws_iam_role_policy policy {
+resource "aws_iam_role_policy" "policy" {
   name   = "allow-managing-log-groups"
   role   = module.lambda.role_id
   policy = data.aws_iam_policy_document.policy.json

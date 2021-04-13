@@ -15,7 +15,7 @@ variable "source_account_ids" {
 }
 
 variable "bless_lambda_arns" {
-  type        = list
+  type        = list(any)
   description = "List of bless lambda arns"
 }
 
@@ -25,22 +25,22 @@ variable "iam_path" {
   description = "IAM path"
 }
 
-variable project {
+variable "project" {
   type        = string
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable env {
+variable "env" {
   type        = string
   description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable service {
+variable "service" {
   type        = string
   description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
-variable owner {
+variable "owner" {
   type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }

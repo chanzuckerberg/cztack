@@ -1,4 +1,4 @@
-data archive_file lambda {
+data "archive_file" "lambda" {
   type        = "zip"
   output_path = "${path.module}/build/lambda.zip"
   source {
@@ -15,7 +15,7 @@ data archive_file lambda {
   }
 }
 
-module lambda {
+module "lambda" {
   source = "../aws-lambda-function"
 
   function_name    = var.function_name != null ? var.function_name : replace("${var.project}-${var.env}-${var.service}-security-headers", ".", "-")

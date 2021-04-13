@@ -52,7 +52,7 @@ variable "minimum_tls_version" {
 }
 
 variable "aliases" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "Vanity aliases. Make sure your provided cert supports these."
 }

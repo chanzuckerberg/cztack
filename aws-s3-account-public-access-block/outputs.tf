@@ -1,4 +1,4 @@
-output block_settings {
+output "block_settings" {
   description = "The computed block configuration"
   value = {
     block_public_acls   = local.block_public_acls

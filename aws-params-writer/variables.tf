@@ -19,7 +19,7 @@ variable "owner" {
 }
 
 variable "parameters" {
-  type        = map
+  type        = map(any)
   description = "Map from parameter names to values to set."
 }
 
