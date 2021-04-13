@@ -7,7 +7,7 @@ locals {
   }
 }
 
-resource aws_s3_bucket redirect_bucket {
+resource "aws_s3_bucket" "redirect_bucket" {
   bucket = "redirect-${var.source_domain}-to-${var.target_domain}"
   website {
     redirect_all_requests_to = "https://${var.target_domain}"
@@ -36,7 +36,7 @@ module "cert" {
   service = var.service
 }
 
-resource aws_cloudfront_distribution cf {
+resource "aws_cloudfront_distribution" "cf" {
   enabled = true
   comment = "Redirect requests from ${var.source_domain} to ${var.target_domain}."
 
@@ -93,7 +93,7 @@ resource aws_cloudfront_distribution cf {
   tags = local.tags
 }
 
-resource aws_route53_record alias_ipv4 {
+resource "aws_route53_record" "alias_ipv4" {
   zone_id = var.source_domain_zone_id
   name    = var.source_domain
   type    = "A"
@@ -105,7 +105,7 @@ resource aws_route53_record alias_ipv4 {
   }
 }
 
-resource aws_route53_record alias_ipv6 {
+resource "aws_route53_record" "alias_ipv6" {
   zone_id = var.source_domain_zone_id
   name    = var.source_domain
   type    = "AAAA"

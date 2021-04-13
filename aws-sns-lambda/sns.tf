@@ -19,7 +19,7 @@ locals {
   ]
 }
 
-resource aws_sns_topic sns {
+resource "aws_sns_topic" "sns" {
   for_each     = { for sns_config in local.valid_sns_configs : sns_config.topic_name => sns_config }
   name         = each.value.topic_name == null ? local.default_sns_name : each.value.topic_name
   display_name = each.value.topic_display_name
@@ -32,7 +32,7 @@ resource aws_sns_topic sns {
   }
 }
 
-resource aws_sns_topic_subscription sns_subscription {
+resource "aws_sns_topic_subscription" "sns_subscription" {
   for_each                        = { for sns_config in local.valid_sns_configs : sns_config.topic_name => sns_config }
   topic_arn                       = aws_sns_topic.sns[each.value.topic_name].arn
   confirmation_timeout_in_minutes = each.value.confirmation_timeout_in_minutes

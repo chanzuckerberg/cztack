@@ -16,7 +16,7 @@ data "bless_lambda" "code" {
   kmsauth_iam_group_name_format = var.kmsauth_iam_group_name_format
 }
 
-module lambda {
+module "lambda" {
   source = "../aws-lambda-function"
 
   filename         = local.lambda_zip_file

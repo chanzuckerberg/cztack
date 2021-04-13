@@ -92,7 +92,7 @@ variable "publicly_accessible" {
 }
 
 variable "rds_cluster_parameters" {
-  type        = list
+  type        = list(any)
   description = "Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.Parameters.Cluster)"
 
   default = [
@@ -110,7 +110,7 @@ variable "rds_cluster_parameters" {
 }
 
 variable "db_parameters" {
-  type        = list
+  type        = list(any)
   description = "Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.Parameters.Instance)"
 
   default = [
@@ -175,13 +175,13 @@ variable "params_engine_version" {
   default     = "5.7"
 }
 
-variable ca_cert_identifier {
+variable "ca_cert_identifier" {
   type        = string
   description = "Identifier for the certificate authority. rds-ca-2019 is the latest available version."
   default     = "rds-ca-2019"
 }
 
-variable auto_minor_version_upgrade {
+variable "auto_minor_version_upgrade" {
   type        = bool
   description = "Set the databases to automatically upgrade minor versions."
   default     = true
