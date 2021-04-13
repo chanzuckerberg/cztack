@@ -110,11 +110,13 @@ resource "aws_s3_bucket" "bucket" {
     }
   }
 
-  # TODO
-  #   logging {
-  #   target_bucket = ""
-  #   target_prefix = ""
-  # }
+  dynamic "logging" {
+    for_each = var.logging_bucket == null ? [] : [var.logging_bucket]
+    content {
+      target_bucket = var.logging_bucket.name
+      target_prefix = var.logging_bucket.prefix
+    }
+  }
 
   server_side_encryption_configuration {
     rule {
