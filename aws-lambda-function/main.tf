@@ -39,6 +39,17 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
+  dynamic "vpc_config" {
+    for_each = var.vpc_config == null ? [] : [0]
+
+    content {
+      subnet_ids         = var.vpc_config.subnet_ids
+      security_group_ids = var.vpc_config.security_group_ids
+    }
+  }
+
+  memory_size = var.memory_size
+
   tags = local.tags
 }
 
@@ -109,4 +120,26 @@ resource "aws_iam_policy" "lambda_logging" {
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.role.name
   policy_arn = aws_iam_policy.lambda_logging.arn
+}
+
+// Execution role basic permissions
+data "aws_iam_policy_document" "role" {
+  statement {
+    sid    = "ec2"
+    effect = "Allow"
+    actions = [
+      "ec2:CreateNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface",
+    ]
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "role" {
+  role   = aws_iam_role.role.name
+  policy = data.aws_iam_policy_document.role.json
 }
