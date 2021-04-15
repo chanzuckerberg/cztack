@@ -71,6 +71,12 @@ variable "transfer_acceleration" {
   default = false
 }
 
+variable "logging_bucket" {
+  type        = object({ name = string, prefix = string })
+  description = "Log bucket name and prefix to enable logs for this bucket"
+  default     = null
+}
+
 variable "public_access_block" {
   type    = bool
   default = true
