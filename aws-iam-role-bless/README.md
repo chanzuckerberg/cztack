@@ -36,7 +36,7 @@ output "..." {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bless\_lambda\_arns | List of bless lambda arns | `list` | n/a | yes |
+| bless\_lambda\_arns | List of bless lambda arns | `list(any)` | n/a | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | iam\_path | IAM path | `string` | `"/"` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |

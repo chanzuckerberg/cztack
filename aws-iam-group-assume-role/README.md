@@ -40,12 +40,12 @@ output "group_name" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| dependencies | Pseudo depends\_on because Terraform modules do not support depends\_on | `list` | `[]` | no |
+| dependencies | Pseudo depends\_on because Terraform modules do not support depends\_on | `list(any)` | `[]` | no |
 | group\_name | The name of the group this module will create. | `string` | n/a | yes |
 | iam\_path | The IAM path under which the group and policies will be created. Useful for avoiding naming conflicts. | `string` | `"/"` | no |
-| target\_accounts | List of accounts in which this role should be assume-able. | `list` | n/a | yes |
+| target\_accounts | List of accounts in which this role should be assume-able. | `list(any)` | n/a | yes |
 | target\_role | Name of the role to be assume-able. If not specified or given as empty string, then the group name will be used as the role name. | `string` | `""` | no |
-| users | List of user's names who should be added to this group. | `list` | `[]` | no |
+| users | List of user's names who should be added to this group. | `list(any)` | `[]` | no |
 
 ## Outputs
 

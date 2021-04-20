@@ -66,7 +66,7 @@ data "archive_file" "lambda_archive" {
 |------|-------------|------|---------|:--------:|
 | env | Env for tagging and naming. | `string` | n/a | yes |
 | function\_description | Description for the lambda function. | `string` | `""` | no |
-| lambda\_environment | Environment for lambda. | `map` | `{}` | no |
+| lambda\_environment | Environment for lambda. | `map(any)` | `{}` | no |
 | lambda\_function\_name | Name for lambda function. If not set, function use default naming convention of $project-$env-$service. | `string` | `null` | no |
 | lambda\_handler | Name of the lambda handler. | `string` | n/a | yes |
 | lambda\_role\_path | Path of the IAM role for lambda. | `string` | `null` | no |

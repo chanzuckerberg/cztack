@@ -21,13 +21,13 @@ module "group" {
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| aws | >= 2.60.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| aws | >= 2.60.0 |
 
 ## Inputs
 
