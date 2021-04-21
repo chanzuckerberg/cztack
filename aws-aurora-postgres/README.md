@@ -51,7 +51,7 @@ No provider.
 | database\_password | Password for user that will be created. | `string` | n/a | yes |
 | database\_subnet\_group | The name of an existing database subnet group to use. | `string` | n/a | yes |
 | database\_username | Default user to be created. | `string` | n/a | yes |
-| db\_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | `list` | `[]` | no |
+| db\_parameters | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | `list(any)` | `[]` | no |
 | engine\_version | The version of Postgres to use. | `string` | `"10"` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | iam\_database\_authentication\_enabled | n/a | `string` | `false` | no |
@@ -64,7 +64,7 @@ No provider.
 | performance\_insights\_enabled | n/a | `string` | `false` | no |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | publicly\_accessible | Avoid doing this - it gives access to the open internet. | `string` | `false` | no |
-| rds\_cluster\_parameters | Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster) | `list` | `[]` | no |
+| rds\_cluster\_parameters | Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster) | `list(any)` | `[]` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | skip\_final\_snapshot | When you destroy a database RDS will, by default, take snapshot. Set this to skip that step. | `string` | `false` | no |
 | vpc\_id | The id of the existing VPC in which this cluster should be created. | `string` | n/a | yes |

@@ -28,8 +28,8 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | database\_subnet\_group | n/a | `string` | n/a | yes |
 | database\_username | n/a | `string` | n/a | yes |
 | db\_deletion\_protection | n/a | `string` | `false` | no |
-| db\_parameters | n/a | `list` | `[]` | no |
-| enabled\_cloudwatch\_logs\_exports | n/a | `list` | `[]` | no |
+| db\_parameters | n/a | `list(any)` | `[]` | no |
+| enabled\_cloudwatch\_logs\_exports | n/a | `list(any)` | `[]` | no |
 | engine | n/a | `string` | n/a | yes |
 | engine\_version | n/a | `string` | n/a | yes |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
@@ -45,7 +45,7 @@ This is a low-level module for creating AWS Aurora clusters. We strongly reccome
 | port | n/a | `string` | n/a | yes |
 | project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | publicly\_accessible | n/a | `bool` | `false` | no |
-| rds\_cluster\_parameters | n/a | `list` | `[]` | no |
+| rds\_cluster\_parameters | n/a | `list(any)` | `[]` | no |
 | service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | skip\_final\_snapshot | n/a | `bool` | `false` | no |
 | vpc\_id | n/a | `string` | n/a | yes |

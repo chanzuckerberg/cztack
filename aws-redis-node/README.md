@@ -24,8 +24,8 @@ parameters.
 | availability\_zone | Availability zone in which this instance should run. | `string` | `null` | no |
 | engine\_version | The version of Redis to run. See [supported versions](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html) | `string` | `"5.0.5"` | no |
 | env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| ingress\_security\_group\_cidr\_blocks | Source CIDR blocks which should be able to contact this instance. | `list(string)` | `[]` | no |
 | ingress\_security\_group\_ids | Source security groups which should be able to contact this instance. | `list(string)` | n/a | yes |
-| ingress\_security\_group\_cidr_blocks | CIDR blocks which should be able to contact this instance. | `list(string)` | [] | no |
 | instance\_type | The type of instance to run. See [supported node types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html) | `string` | `"cache.m5.large"` | no |
 | owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | parameter\_group\_name | Parameter group to use for this Redis cache. | `string` | `"default.redis5.0"` | no |
