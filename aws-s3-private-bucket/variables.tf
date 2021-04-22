@@ -87,3 +87,9 @@ variable "grants" {
   default     = []
   description = "A list of objects containing the grant configurations. Used when we want to grant permissions to AWS accounts via the S3 ACL system."
 }
+
+variable "acl" {
+  type        = string
+  default     = "private"
+  description = "Canned ACL to use if grants object is not given. See https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl"
+}
