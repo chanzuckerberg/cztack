@@ -37,29 +37,40 @@ resource aws_cloudfront_distribution cf {
 
 | Name | Version |
 |------|---------|
-| archive | ~> 2.0 |
-| aws | < 3.0.0 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| archive | ~> 2.0 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function |  |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [archive_file.lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| function\_name | The name for the lambda function. | `string` | `null` | no |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_function_name"></a> [function\_name](#input\_function\_name) | The name for the lambda function. | `string` | `null` | no |
+| <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| qualified\_arn | The qualified arn (version number included) of the latest published lambda version. |
-
+| <a name="output_qualified_arn"></a> [qualified\_arn](#output\_qualified\_arn) | The qualified arn (version number included) of the latest published lambda version. |
 <!-- END -->
