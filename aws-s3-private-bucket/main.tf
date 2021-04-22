@@ -1,14 +1,14 @@
 locals {
   # If grants are defined, we use `grant` to grant permissions, otherwise it will use the `acl` to grant permissions
-  acl = length(var.grants) == 0 ? "private" : null
+  acl = length(var.grants) == 0 ? var.acl : null
 
-  # `canonical_user_id` and `uri` shuold be specified exclusively in each grant, so we skip the invalid inputs in grants
+  # `canonical_user_id` and `uri` should be specified exclusively in each grant, so we skip the invalid inputs in grants
   # invalid input is the case that they are both or neither specified
   valid_grants = [for grant in var.grants : {
     canonical_user_id = lookup(grant, "canonical_user_id", null)
     uri               = lookup(grant, "uri", null)
     permissions       = grant.permissions
-    } if !(
+    } if ! (
     (lookup(grant, "canonical_user_id", null) != null && lookup(grant, "uri", null) != null) ||
     (lookup(grant, "canonical_user_id", null) == null && lookup(grant, "uri", null) == null)
     )

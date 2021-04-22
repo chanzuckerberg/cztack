@@ -15,20 +15,29 @@ module "password-policy" {
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_iam_account_password_policy.strict](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_password_policy) | resource |
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
-No output.
-
+No outputs.
 <!-- END -->
