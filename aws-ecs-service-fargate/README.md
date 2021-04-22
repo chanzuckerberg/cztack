@@ -148,68 +148,98 @@ service = false` argument can be removed.
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_alb-sg"></a> [alb-sg](#module\_alb-sg) | terraform-aws-modules/security-group/aws | 3.11.0 |
+| <a name="module_container-sg"></a> [container-sg](#module\_container-sg) | terraform-aws-modules/security-group/aws | 3.11.0 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_ecs_service.job](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service) | resource |
+| [aws_ecs_service.unmanaged-job](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service) | resource |
+| [aws_ecs_task_definition.job](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition) | resource |
+| [aws_iam_role.task_execution_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.task_execution_role_secretsmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy_attachment.task_execution_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_lb.service](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb) | resource |
+| [aws_lb_listener.http](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
+| [aws_lb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
+| [aws_lb_target_group.service](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
+| [aws_route53_record.ipv4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.www-ipv4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.www-ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_service_discovery_private_dns_namespace.discovery](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/service_discovery_private_dns_namespace) | resource |
+| [aws_service_discovery_service.discovery](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/service_discovery_service) | resource |
+| [aws_iam_policy_document.execution_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.registry_secretsmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_route53_zone.zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access\_logs\_bucket | S3 bucket to write alb access logs to. Null for no access logs. | `string` | `null` | no |
-| acm\_certificate\_arn | Certificate for the HTTPS listener. | `string` | n/a | yes |
-| cluster\_id | n/a | `string` | n/a | yes |
-| container\_name | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | `string` | `null` | no |
-| container\_port | The port the container to be exposed to is listening on. | `number` | n/a | yes |
-| cpu | CPU units for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `256` | no |
-| desired\_count | n/a | `number` | n/a | yes |
-| disable\_http\_redirect | Disable redirecting HTTP to HTTPS. | `bool` | `true` | no |
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| extra\_tags | Extra tags that will be added to components created by this module. | `map(string)` | `{}` | no |
-| health\_check\_grace\_period\_seconds | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | `number` | `60` | no |
-| health\_check\_interval | Time between health checks of the underlying service. | `number` | `null` | no |
-| health\_check\_matcher | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | `string` | `"200-399"` | no |
-| health\_check\_path | n/a | `string` | `"/"` | no |
-| health\_check\_timeout | Timeout for a health check of the underlying service. | `number` | `null` | no |
-| internal\_lb | n/a | `bool` | `false` | no |
-| lb\_idle\_timeout\_seconds | n/a | `number` | `60` | no |
-| lb\_ingress\_cidrs | n/a | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
-| lb\_ingress\_security\_group\_ids | n/a | `list(string)` | `[]` | no |
-| lb\_subnets | List of subnets in which to deploy the load balancer. | `list(string)` | n/a | yes |
-| manage\_task\_definition | If false, Terraform will not touch the task definition for the ECS service after initial creation | `bool` | `true` | no |
-| memory | Memory in megabytes for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `512` | no |
-| ordered\_placement\_strategy | Placement strategy for the task instances. | `list(object({ type = string, field = string }))` | `[]` | no |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| registry\_secretsmanager\_arn | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | `null` | no |
-| route53\_zone\_id | Zone in which to create an alias record to the ALB. | `string` | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| ssl\_policy | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | `string` | `null` | no |
-| subdomain | Subdomain in the zone. Final domain name will be subdomain.zone | `string` | n/a | yes |
-| tag\_service | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
-| task\_definition | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | `null` | no |
-| task\_egress\_cidrs | CIDRs the task is allowed to communicate with for outbound traffic. | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
-| task\_egress\_security\_group\_ids | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network is true. | `list(string)` | `[]` | no |
-| task\_role\_arn | n/a | `string` | n/a | yes |
-| task\_subnets | List of subnets in which to deploy the task for awsvpc networking mode. | `list(string)` | `[]` | no |
-| vpc\_id | n/a | `string` | n/a | yes |
-| with\_service\_discovery | Register the service with ECS service discovery. Adds a sub-zone to the given route53\_zone\_id. | `bool` | `false` | no |
+| <a name="input_access_logs_bucket"></a> [access\_logs\_bucket](#input\_access\_logs\_bucket) | S3 bucket to write alb access logs to. Null for no access logs. | `string` | `null` | no |
+| <a name="input_acm_certificate_arn"></a> [acm\_certificate\_arn](#input\_acm\_certificate\_arn) | Certificate for the HTTPS listener. | `string` | n/a | yes |
+| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | n/a | `string` | n/a | yes |
+| <a name="input_container_name"></a> [container\_name](#input\_container\_name) | Name of the container. Must match name in task definition. If omitted, defaults to name derived from project/env/service. | `string` | `null` | no |
+| <a name="input_container_port"></a> [container\_port](#input\_container\_port) | The port the container to be exposed to is listening on. | `number` | n/a | yes |
+| <a name="input_cpu"></a> [cpu](#input\_cpu) | CPU units for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `256` | no |
+| <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | n/a | `number` | n/a | yes |
+| <a name="input_disable_http_redirect"></a> [disable\_http\_redirect](#input\_disable\_http\_redirect) | Disable redirecting HTTP to HTTPS. | `bool` | `true` | no |
+| <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Extra tags that will be added to components created by this module. | `map(string)` | `{}` | no |
+| <a name="input_health_check_grace_period_seconds"></a> [health\_check\_grace\_period\_seconds](#input\_health\_check\_grace\_period\_seconds) | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. | `number` | `60` | no |
+| <a name="input_health_check_interval"></a> [health\_check\_interval](#input\_health\_check\_interval) | Time between health checks of the underlying service. | `number` | `null` | no |
+| <a name="input_health_check_matcher"></a> [health\_check\_matcher](#input\_health\_check\_matcher) | Range of HTTP status codes considered success for health checks. [Doc](https://www.terraform.io/docs/providers/aws/r/lb_target_group.html#matcher) | `string` | `"200-399"` | no |
+| <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path) | n/a | `string` | `"/"` | no |
+| <a name="input_health_check_timeout"></a> [health\_check\_timeout](#input\_health\_check\_timeout) | Timeout for a health check of the underlying service. | `number` | `null` | no |
+| <a name="input_internal_lb"></a> [internal\_lb](#input\_internal\_lb) | n/a | `bool` | `false` | no |
+| <a name="input_lb_idle_timeout_seconds"></a> [lb\_idle\_timeout\_seconds](#input\_lb\_idle\_timeout\_seconds) | n/a | `number` | `60` | no |
+| <a name="input_lb_ingress_cidrs"></a> [lb\_ingress\_cidrs](#input\_lb\_ingress\_cidrs) | n/a | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| <a name="input_lb_ingress_security_group_ids"></a> [lb\_ingress\_security\_group\_ids](#input\_lb\_ingress\_security\_group\_ids) | n/a | `list(string)` | `[]` | no |
+| <a name="input_lb_subnets"></a> [lb\_subnets](#input\_lb\_subnets) | List of subnets in which to deploy the load balancer. | `list(string)` | n/a | yes |
+| <a name="input_manage_task_definition"></a> [manage\_task\_definition](#input\_manage\_task\_definition) | If false, Terraform will not touch the task definition for the ECS service after initial creation | `bool` | `true` | no |
+| <a name="input_memory"></a> [memory](#input\_memory) | Memory in megabytes for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `512` | no |
+| <a name="input_ordered_placement_strategy"></a> [ordered\_placement\_strategy](#input\_ordered\_placement\_strategy) | Placement strategy for the task instances. | `list(object({ type = string, field = string }))` | `[]` | no |
+| <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_registry_secretsmanager_arn"></a> [registry\_secretsmanager\_arn](#input\_registry\_secretsmanager\_arn) | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | `null` | no |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Zone in which to create an alias record to the ALB. | `string` | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | `string` | `null` | no |
+| <a name="input_subdomain"></a> [subdomain](#input\_subdomain) | Subdomain in the zone. Final domain name will be subdomain.zone | `string` | n/a | yes |
+| <a name="input_tag_service"></a> [tag\_service](#input\_tag\_service) | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
+| <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | `null` | no |
+| <a name="input_task_egress_cidrs"></a> [task\_egress\_cidrs](#input\_task\_egress\_cidrs) | CIDRs the task is allowed to communicate with for outbound traffic. | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| <a name="input_task_egress_security_group_ids"></a> [task\_egress\_security\_group\_ids](#input\_task\_egress\_security\_group\_ids) | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network is true. | `list(string)` | `[]` | no |
+| <a name="input_task_role_arn"></a> [task\_role\_arn](#input\_task\_role\_arn) | n/a | `string` | n/a | yes |
+| <a name="input_task_subnets"></a> [task\_subnets](#input\_task\_subnets) | List of subnets in which to deploy the task for awsvpc networking mode. | `list(string)` | `[]` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | n/a | `string` | n/a | yes |
+| <a name="input_with_service_discovery"></a> [with\_service\_discovery](#input\_with\_service\_discovery) | Register the service with ECS service discovery. Adds a sub-zone to the given route53\_zone\_id. | `bool` | `false` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| alb\_access\_logs\_prefix | ALB access logs S3 prefix |
-| alb\_dns\_name | n/a |
-| alb\_http\_listener\_arn | ALB HTTP listener ARN, only if HTTPS forwarding is disabled |
-| alb\_https\_listener\_arn | ALB HTTPS listener ARN |
-| alb\_route53\_zone\_id | n/a |
-| container\_security\_group\_id | Security group id for the container. |
-| ecs\_task\_definition\_family | The family of the task definition defined for the given/generated container definition. |
-| private\_service\_discovery\_domain | Domain name for service discovery, if with\_service\_discovery=true. Only resolvable within the VPC. |
-
+| <a name="output_alb_access_logs_prefix"></a> [alb\_access\_logs\_prefix](#output\_alb\_access\_logs\_prefix) | ALB access logs S3 prefix |
+| <a name="output_alb_dns_name"></a> [alb\_dns\_name](#output\_alb\_dns\_name) | n/a |
+| <a name="output_alb_http_listener_arn"></a> [alb\_http\_listener\_arn](#output\_alb\_http\_listener\_arn) | ALB HTTP listener ARN, only if HTTPS forwarding is disabled |
+| <a name="output_alb_https_listener_arn"></a> [alb\_https\_listener\_arn](#output\_alb\_https\_listener\_arn) | ALB HTTPS listener ARN |
+| <a name="output_alb_route53_zone_id"></a> [alb\_route53\_zone\_id](#output\_alb\_route53\_zone\_id) | n/a |
+| <a name="output_container_security_group_id"></a> [container\_security\_group\_id](#output\_container\_security\_group\_id) | Security group id for the container. |
+| <a name="output_ecs_task_definition_family"></a> [ecs\_task\_definition\_family](#output\_ecs\_task\_definition\_family) | The family of the task definition defined for the given/generated container definition. |
+| <a name="output_private_service_discovery_domain"></a> [private\_service\_discovery\_domain](#output\_private\_service\_discovery\_domain) | Domain name for service discovery, if with\_service\_discovery=true. Only resolvable within the VPC. |
 <!-- END -->

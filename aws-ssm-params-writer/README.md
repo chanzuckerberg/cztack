@@ -15,26 +15,36 @@ in the [Terraform docs](https://www.terraform.io/docs/state/sensitive-data.html)
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_ssm_parameter.parameter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
+| [aws_kms_key.key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/kms_key) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| parameters | Map from parameter names to values to set. | `map(string)` | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | Map from parameter names to values to set. | `map(string)` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 
 ## Outputs
 
-No output.
-
+No outputs.
 <!-- END -->
