@@ -2,6 +2,7 @@ package test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go/service/secretsmanager"
 	"github.com/chanzuckerberg/go-misc/tftest"
@@ -12,6 +13,7 @@ import (
 
 func TestDefaults(t *testing.T) {
 	test := tftest.Test{
+		SkipDestroy: true,
 		Setup: func(t *testing.T) *terraform.Options {
 			// vars are all encoded in the test terraform files
 			return &terraform.Options{
@@ -27,6 +29,9 @@ func TestDefaults(t *testing.T) {
 			r := require.New(t)
 			secret := terraform.Output(t, options, "secret")
 			notSecret := terraform.Output(t, options, "not_secret")
+			// Need sleep to allow IAM time to catch up and recognize that
+			// test user is allowed to assume our roles.
+			time.Sleep(10 * time.Second)
 
 			{
 				roleArn := terraform.Output(t, options, "role")
