@@ -12,14 +12,19 @@ import (
 func TestAWSIAMGroupConsoleLogin(t *testing.T) {
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			return tftest.Options(
-				tftest.IAMRegion,
+			// Not using tftest.Options because module does not take standard arguments
+			return &terraform.Options{
+				TerraformDir: ".",
 
-				map[string]interface{}{
+				EnvVars: map[string]string{
+					"AWS_DEFAULT_REGION": tftest.IAMRegion,
+				},
+
+				Vars: map[string]interface{}{
 					"group_name": random.UniqueId(),
 					"iam_path":   fmt.Sprintf("/%s/", random.UniqueId()),
 				},
-			)
+			}
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}

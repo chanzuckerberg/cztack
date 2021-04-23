@@ -11,7 +11,6 @@ func TestAwsSinglePageStaticSite(t *testing.T) {
 	t.Parallel()
 
 	test := tftest.Test{
-		SkipDestroy: true,
 		Setup: func(t *testing.T) *terraform.Options {
 			subdomain := tftest.UniqueID()
 			route53ZoneID := tftest.EnvVar(tftest.EnvRoute53ZoneID)
