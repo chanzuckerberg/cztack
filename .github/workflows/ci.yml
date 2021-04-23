@@ -1,3 +1,7 @@
+# To avoid https://github.com/aws/aws-cli/issues/5262
+env:
+  AWS_EC2_METADATA_DISABLED: true
+
 jobs:
     check-mod:
         name: check-mod
