@@ -1,6 +1,7 @@
 run:
 	go run .
 	$(MAKE) -C ../.. docs
+	$(MAKE) -C ../.. fmt
 .PHONY: run
 
 update-deps:
