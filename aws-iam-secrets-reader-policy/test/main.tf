@@ -10,36 +10,25 @@ resource "random_string" "not" {
 
 data "aws_caller_identity" "cur" {}
 
+data "aws_iam_policy_document" "assume" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.cur.account_id}:root"]
+    }
+  }
+}
+
 resource "aws_iam_role" "role" {
   name               = random_string.name.result
-  assume_role_policy = <<JSON
-{
-		"Version": "2012-10-17",
-		"Statement": {
-			"Effect": "Allow",
-			"Principal": {
-			"AWS": "arn:aws:iam::${data.aws_caller_identity.cur.account_id}:root"
-			},
-			"Action": "sts:AssumeRole"
-		}
-		}
-JSON
+  assume_role_policy = data.aws_iam_policy_document.assume.json
 }
 
 resource "aws_iam_role" "not" {
   name               = random_string.not.result
-  assume_role_policy = <<JSON
-{
-		"Version": "2012-10-17",
-		"Statement": {
-			"Effect": "Allow",
-			"Principal": {
-			"AWS": "arn:aws:iam::${data.aws_caller_identity.cur.account_id}:root"
-			},
-			"Action": "sts:AssumeRole"
-		}
-		}
-JSON
+  assume_role_policy = data.aws_iam_policy_document.assume.json
 }
 
 resource "aws_secretsmanager_secret" "secret" {

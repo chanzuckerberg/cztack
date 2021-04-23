@@ -1,4 +1,19 @@
+# To avoid https://github.com/aws/aws-cli/issues/5262
+env:
+  AWS_EC2_METADATA_DISABLED: true
+
 jobs:
+    get-modules:
+        runs-on: ubuntu-20.04
+        outputs:
+            matrix: ${{steps.list_dirs.outputs.matrix}}
+        # Modified from https://stackoverflow.com/a/67180216 to filter just directory names
+        # and to filter out scripts dir and to disables bless-ca
+        steps:
+            - uses: actions/checkout@v2
+            - id: list_dirs
+              run: echo "::set-output name=matrix::$(ls -d */|sed -e 's/\///'|grep -v 'bless-ca\|scripts'|jq -cnR '[inputs | select(length>0)]')"
+
     check-mod:
         name: check-mod
         runs-on: ubuntu-latest
@@ -26,75 +41,11 @@ jobs:
     test:
         name: test ${{ matrix.module }}
         runs-on: ubuntu-latest
+        needs: get-modules
         strategy:
             fail-fast: false
             matrix:
-                module:
-                    - aws-acm-cert
-                    - aws-aurora
-                    - aws-aurora-mysql
-                    - aws-aurora-postgres
-                    - aws-cloudfront-domain-redirect
-                    - aws-cloudfront-logs-bucket
-                    - aws-cloudwatch-log-group
-                    - aws-cloudwatch-log-retention-manager
-                    - aws-default-vpc-security
-                    - aws-ecs-job
-                    - aws-ecs-job-fargate
-                    - aws-ecs-service
-                    - aws-ecs-service-fargate
-                    - aws-efs-volume
-                    - aws-iam-ecs-task-role
-                    - aws-iam-group-assume-role
-                    - aws-iam-group-console-login
-                    - aws-iam-instance-profile
-                    - aws-iam-password-policy
-                    - aws-iam-policy-cwlogs
-                    - aws-iam-role
-                    - aws-iam-role-bless
-                    - aws-iam-role-cloudfront-poweruser
-                    - aws-iam-role-crossacct
-                    - aws-iam-role-ec2-poweruser
-                    - aws-iam-role-ecs-poweruser
-                    - aws-iam-role-infraci
-                    - aws-iam-role-poweruser
-                    - aws-iam-role-readonly
-                    - aws-iam-role-route53domains-poweruser
-                    - aws-iam-role-security-audit
-                    - aws-iam-secrets-reader-policy
-                    - aws-lambda-edge-add-security-headers
-                    - aws-lambda-function
-                    - aws-param
-                    - aws-params-reader-policy
-                    - aws-params-secrets-setup
-                    - aws-params-writer
-                    - aws-redis-node
-                    - aws-redis-replication-group
-                    - aws-s3-private-bucket
-                    - aws-s3-public-bucket
-                    - aws-single-page-static-site
-                    - aws-sns-lambda
-                    - aws-ssm-params
-                    - aws-ssm-params-writer
-                    # - bless-ca/test
-                    - github-webhooks-to-s3
-                    - module-template
-                    - snowflake-account-grant-all
-                    - snowflake-database-grant-all
-                    - snowflake-external-table-grant-all
-                    - snowflake-file-format-grant-all
-                    - snowflake-function-grant-all
-                    - snowflake-integration-grant-all
-                    - snowflake-materialized-view-grant-all
-                    - snowflake-procedure-grant-all
-                    - snowflake-resource-monitor-grant-all
-                    - snowflake-schema-grant-all
-                    - snowflake-sequence-grant-all
-                    - snowflake-stage-grant-all
-                    - snowflake-stream-grant-all
-                    - snowflake-table-grant-all
-                    - snowflake-view-grant-all
-                    - snowflake-warehouse-grant-all
+                module: ${{fromJson(needs.get-modules.outputs.matrix)}}
         steps:
             - uses: actions/checkout@v2
             - id: filter
