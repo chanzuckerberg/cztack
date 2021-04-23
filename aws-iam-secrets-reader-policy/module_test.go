@@ -14,12 +14,13 @@ func TestDefaults(t *testing.T) {
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
 			// vars are all encoded in the test terraform files
-			opt := tftest.Options(
-				tftest.DefaultRegion,
-				map[string]interface{}{},
-			)
-			opt.TerraformDir = "./test"
-			return opt
+			return &terraform.Options{
+				TerraformDir: "./test",
+
+				EnvVars: map[string]string{
+					"AWS_DEFAULT_REGION": tftest.DefaultRegion,
+				},
+			}
 		},
 
 		Validate: func(t *testing.T, options *terraform.Options) {

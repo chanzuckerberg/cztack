@@ -8,16 +8,16 @@ import (
 )
 
 func TestAwsSnsLambda(t *testing.T) {
-	region := tftest.IAMRegion
-
 	test := tftest.Test{
+		// Not using tftest.Options because module does not take standard arguments
 		Setup: func(t *testing.T) *terraform.Options {
-			opt := tftest.Options(
-				region,
-				map[string]interface{}{},
-			)
-			opt.TerraformDir = "./test"
-			return opt
+			return &terraform.Options{
+				TerraformDir: "./test",
+
+				EnvVars: map[string]string{
+					"AWS_DEFAULT_REGION": tftest.IAMRegion,
+				},
+			}
 		},
 		Validate: func(t *testing.T, options *terraform.Options) {},
 	}
