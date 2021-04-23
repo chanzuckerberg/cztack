@@ -3,7 +3,6 @@ package test
 import (
 	"testing"
 
-	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/require"
 )
@@ -11,9 +10,17 @@ import (
 func TestAll(t *testing.T) {
 	r := require.New(t)
 
-	terraformOptions := tftest.Options("us-east-1", map[string]interface{}{
-		"restrict": "all",
-	})
+	terraformOptions := &terraform.Options{
+		TerraformDir: ".",
+
+		EnvVars: map[string]string{
+			"AWS_DEFAULT_REGION": "us-east-1",
+		},
+
+		Vars: map[string]interface{}{
+			"restrict": "all",
+		},
+	}
 
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApply(t, terraformOptions)
@@ -32,10 +39,17 @@ func TestAll(t *testing.T) {
 func TestNone(t *testing.T) {
 	r := require.New(t)
 
-	terraformOptions := tftest.Options("us-east-1", map[string]interface{}{
-		"restrict": "none",
-	})
+	terraformOptions := &terraform.Options{
+		TerraformDir: ".",
 
+		EnvVars: map[string]string{
+			"AWS_DEFAULT_REGION": "us-east-1",
+		},
+
+		Vars: map[string]interface{}{
+			"restrict": "none",
+		},
+	}
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApply(t, terraformOptions)
 
@@ -51,9 +65,17 @@ func TestNone(t *testing.T) {
 func TestNew(t *testing.T) {
 	r := require.New(t)
 
-	terraformOptions := tftest.Options("us-east-1", map[string]interface{}{
-		"restrict": "new",
-	})
+	terraformOptions := &terraform.Options{
+		TerraformDir: ".",
+
+		EnvVars: map[string]string{
+			"AWS_DEFAULT_REGION": "us-east-1",
+		},
+
+		Vars: map[string]interface{}{
+			"restrict": "new",
+		},
+	}
 
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndApply(t, terraformOptions)

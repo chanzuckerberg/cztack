@@ -2,6 +2,7 @@ package test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go/service/secretsmanager"
 	"github.com/chanzuckerberg/go-misc/tftest"
@@ -14,18 +15,22 @@ func TestDefaults(t *testing.T) {
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
 			// vars are all encoded in the test terraform files
-			opt := tftest.Options(
-				tftest.DefaultRegion,
-				map[string]interface{}{},
-			)
-			opt.TerraformDir = "./test"
-			return opt
+			return &terraform.Options{
+				TerraformDir: "./test",
+
+				EnvVars: map[string]string{
+					"AWS_DEFAULT_REGION": tftest.DefaultRegion,
+				},
+			}
 		},
 
 		Validate: func(t *testing.T, options *terraform.Options) {
 			r := require.New(t)
 			secret := terraform.Output(t, options, "secret")
 			notSecret := terraform.Output(t, options, "not_secret")
+			// Need sleep to allow IAM time to catch up and recognize that
+			// test user is allowed to assume our roles.
+			time.Sleep(10 * time.Second)
 
 			{
 				roleArn := terraform.Output(t, options, "role")

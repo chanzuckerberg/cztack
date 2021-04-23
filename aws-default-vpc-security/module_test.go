@@ -10,10 +10,14 @@ import (
 func TestAWSDefaultVPCSecurity(t *testing.T) {
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
-			return tftest.Options(
-				tftest.DefaultRegion,
-				map[string]interface{}{},
-			)
+			// Not using tftest.Options because module does not take standard arguments
+			return &terraform.Options{
+				TerraformDir: ".",
+
+				EnvVars: map[string]string{
+					"AWS_DEFAULT_REGION": tftest.DefaultRegion,
+				},
+			}
 		},
 
 		Mode: tftest.Plan,
