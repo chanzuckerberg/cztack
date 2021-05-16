@@ -20,7 +20,7 @@ resource "aws_ecs_service" "job" {
   name        = local.name
   cluster     = var.cluster_id
   count       = var.manage_task_definition ? 1 : 0
-  launch_type = "FARGATE"
+  launch_type = var.use_capacity_provider ? null : "FARGATE"
 
   task_definition                    = local.task_definition
   desired_count                      = var.desired_count
@@ -41,6 +41,16 @@ resource "aws_ecs_service" "job" {
     }
   }
 
+  dynamic "capacity_provider_strategy" {
+    for_each = var.use_capacity_provider ? ["enabled"] : []
+
+    content {
+      capacity_provider = "FARGATE"
+      base              = 0
+      weight            = 100
+    }
+  }
+
   tags = var.tag_service ? local.tags : {}
 }
 
@@ -48,7 +58,7 @@ resource "aws_ecs_service" "unmanaged-job" {
   name        = local.name
   cluster     = var.cluster_id
   count       = var.manage_task_definition ? 0 : 1
-  launch_type = "FARGATE"
+  launch_type = var.use_capacity_provider ? null : "FARGATE"
 
   task_definition                    = local.task_definition
   desired_count                      = var.desired_count
@@ -66,6 +76,16 @@ resource "aws_ecs_service" "unmanaged-job" {
     content {
       type  = ordered_placement_strategy.value.type
       field = ordered_placement_strategy.value.field
+    }
+  }
+
+  dynamic "capacity_provider_strategy" {
+    for_each = var.use_capacity_provider ? ["enabled"] : []
+
+    content {
+      capacity_provider = "FARGATE"
+      base              = 0
+      weight            = 100
     }
   }
 

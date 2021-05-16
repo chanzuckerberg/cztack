@@ -202,3 +202,12 @@ variable "ordered_placement_strategy" {
   default     = []
   description = "Placement strategy for the task instances."
 }
+
+# Ideally this would default to true, remains false for backwards compatibility.
+# Can set to true once ECS cluster is configured to use capacity providers and
+# FARGATE is an option.
+variable "use_capacity_provider" {
+  type        = bool
+  description = "Use ECS capacity provider to request Fargate, instead of using launch_type"
+  default     = false
+}
