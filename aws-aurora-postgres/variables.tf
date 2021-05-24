@@ -105,7 +105,7 @@ variable "kms_key_id" {
 
 variable "engine_version" {
   type        = string
-  description = "The version of Postgres to use."
+  description = "The version of Postgres to use. This should be a *prefix* if auto version upgrades are enabled. (Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version)"
   default     = "10"
 }
 
@@ -127,6 +127,6 @@ variable "ca_cert_identifier" {
 
 variable "auto_minor_version_upgrade" {
   type        = bool
-  description = "Set the databases to automatically upgrade minor versions."
-  default     = true
+  description = "Set the databases to automatically upgrade minor versions. WARNING - if this is enabled, make sure engine_version is set to a *prefix* rather that a specific version so that TF won't try to downgrade DB's that have been auto-upgraded. Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version"
+  default     = false
 }
