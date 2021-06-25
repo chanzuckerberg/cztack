@@ -44,7 +44,7 @@ data "aws_iam_policy_document" "firehose-to-s3" {
     ]
 
     resources = [
-      "${module.bucket.arn}",
+      module.bucket.arn,
       "${module.bucket.arn}/*",
     ]
   }
@@ -59,7 +59,7 @@ data "aws_iam_policy_document" "firehose-to-s3" {
     ]
 
     resources = [
-      "${aws_cloudwatch_log_group.firehose.arn}",
+      aws_cloudwatch_log_group.firehose.arn,
       "${aws_cloudwatch_log_group.firehose.arn}/*",
     ]
   }

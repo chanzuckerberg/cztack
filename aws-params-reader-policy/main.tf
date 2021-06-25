@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "policy" {
 
   statement {
     actions   = ["kms:Decrypt"]
-    resources = ["${data.aws_kms_alias.parameter_store_key.target_key_arn}"]
+    resources = [data.aws_kms_alias.parameter_store_key.target_key_arn]
   }
 }
 

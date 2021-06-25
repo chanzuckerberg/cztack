@@ -12,7 +12,7 @@ locals {
   bucket_name  = var.bucket_name != "" ? var.bucket_name : local.website_fqdn
 
   aliases = [
-    "${local.website_fqdn}",
+    local.website_fqdn,
     "www.${local.website_fqdn}",
   ]
 }
@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
+      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
     }
   }
 
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
+      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
     }
   }
 }

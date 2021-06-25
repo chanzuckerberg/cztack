@@ -28,7 +28,7 @@ resource "aws_route53_record" "cert_validation" {
   name    = lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_name")
   type    = lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_type")
   zone_id = lookup(var.cert_subject_alternative_names, lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "domain_name"), var.aws_route53_zone_id)
-  records = ["${lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_value")}"]
+  records = [lookup(aws_acm_certificate.cert.domain_validation_options[count.index], "resource_record_value")]
   ttl     = var.validation_record_ttl
 
   allow_overwrite = var.allow_validation_record_overwrite

@@ -20,6 +20,6 @@ resource "aws_iam_policy" "logs-policy" {
 
 resource "aws_iam_policy_attachment" "attach-logs" {
   name       = "logs-attachment"
-  roles      = ["${var.role_name}"]
+  roles      = [var.role_name]
   policy_arn = aws_iam_policy.logs-policy.arn
 }

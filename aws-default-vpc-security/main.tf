@@ -20,7 +20,7 @@ resource "aws_default_vpc" "default" {
 data "aws_internet_gateway" "default" {
   filter {
     name   = "attachment.vpc-id"
-    values = ["${aws_default_vpc.default.id}"]
+    values = [aws_default_vpc.default.id]
   }
 }
 
