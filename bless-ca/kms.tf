@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "kmsauth" {
     condition {
       test     = "StringEquals"
       variable = "kms:EncryptionContext:to"
-      values   = ["${local.name}"]
+      values   = [local.name]
     }
 
     condition {

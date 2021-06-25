@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "firehose-write" {
       "firehose:PutRecord",
     ]
 
-    resources = ["${aws_kinesis_firehose_delivery_stream.firehose.arn}"]
+    resources = [aws_kinesis_firehose_delivery_stream.firehose.arn]
   }
 }
 

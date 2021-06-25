@@ -54,7 +54,7 @@ resource "aws_rds_cluster" "db" {
   database_name                       = var.database_name
   master_username                     = var.database_username
   master_password                     = var.database_password
-  vpc_security_group_ids              = ["${aws_security_group.rds.id}"]
+  vpc_security_group_ids              = [aws_security_group.rds.id]
   db_subnet_group_name                = var.database_subnet_group
   storage_encrypted                   = true
   iam_database_authentication_enabled = var.iam_database_authentication_enabled

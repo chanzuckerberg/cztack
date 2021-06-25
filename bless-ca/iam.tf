@@ -19,13 +19,13 @@ data "aws_iam_policy_document" "lambda" {
       "kms:Decrypt",
     ]
 
-    resources = ["${aws_kms_key.bless.arn}"]
+    resources = [aws_kms_key.bless.arn]
   }
 
   statement {
     sid       = "describekey"
     actions   = ["kms:DescribeKey"]
-    resources = ["${aws_kms_key.bless_kms_auth.arn}"]
+    resources = [aws_kms_key.bless_kms_auth.arn]
   }
 
   statement {
@@ -35,12 +35,12 @@ data "aws_iam_policy_document" "lambda" {
       "kms:Decrypt",
     ]
 
-    resources = ["${aws_kms_key.bless_kms_auth.arn}"]
+    resources = [aws_kms_key.bless_kms_auth.arn]
 
     condition {
       test     = "StringEquals"
       variable = "kms:EncryptionContext:to"
-      values   = ["${local.name}"]
+      values   = [local.name]
     }
   }
 
