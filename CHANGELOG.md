@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.39.0 2021-06-25
+
+* [5b963f73](../../commit/5b963f7342aa4c5fce58a7927dc585bf735b6215) Update CODEOWNERS
+* [b71a885f](../../commit/b71a885f73472340541c8cb9f7bc1f5e279538a4) remove vestiges of interpolation syntax that was deprecated in TF v0.12+ ([#316](../../pull/316))
+* [408e99d5](../../commit/408e99d550663b493697d42f0446fb944013e4f4) Bump github.com/aws/aws-sdk-go from 1.37.25 to 1.38.64 ([#315](../../pull/315))
+* [f1550ece](../../commit/f1550ece331be5e210e3826328a9ebd5b4c56581) Bump github.com/sirupsen/logrus from 1.8.0 to 1.8.1 ([#310](../../pull/310))
+* [12793de6](../../commit/12793de6c64cc14b0bf86df73d1c642c03774f9e) [breaking] aws-aurora-postgres: Disable auto minor version upgrade by default. ([#311](../../pull/311))
+* [98fca6f2](../../commit/98fca6f2e4b016fde20db637a0553684c78c069d) Fix running aws cli on GH Actions/Azure, get modules dynamically ([#309](../../pull/309))
+* [e68091be](../../commit/e68091beeab198c6b8fe310e1482384fbc5d7774) Auto merge main branch on update for branches with auto-merge enabled ([#306](../../pull/306))
+* [14ec2cc7](../../commit/14ec2cc76f376f9b4f1c24d4a28432e40945a933) Update docs to use Terraform docs v0.12.1 ([#308](../../pull/308))
+* [b8bacdb7](../../commit/b8bacdb7ae70623f7dd82999183e67661361cc73) [feature] aws-s3-private-bucket add canned acl variable ([#307](../../pull/307))
+* [be13877f](../../commit/be13877f37e570575d5e31a8c598dbe4cd10c891) fix[version]: updating min versions for lambda and cx role ([#305](../../pull/305))
+* [c0c5731e](../../commit/c0c5731e3901a2e1bb1fde5c2b3a5337afdb8ac1) Initial updates for supporting s3 bucket logging targets. ([#302](../../pull/302))
+* [83e12bc7](../../commit/83e12bc7ea438aed3b9ee16186706a3f5ef21d59) [feature]: lambda vpc_config and memory_size ([#301](../../pull/301))
+* [9df43950](../../commit/9df439500dee7468643ca03a844cf7a5b1e1b313) [feature] Allow specifying aws-iam-role max_session_duration ([#299](../../pull/299))
+* [06c61e51](../../commit/06c61e51fee2663f4b0aa8bf1aa20f7f7ba30545) Bump github.com/aws/aws-sdk-go from 1.37.16 to 1.37.25 ([#294](../../pull/294))
+* [fa775364](../../commit/fa775364294cf15084955c6c538efe7903de4d17) Bump github.com/gruntwork-io/terratest from 0.32.7 to 0.32.8 ([#293](../../pull/293))
+* [63a0a896](../../commit/63a0a89603e62a1424813e4ffa6c2cf30f90d071) Bump github.com/sirupsen/logrus from 1.7.0 to 1.8.0 ([#287](../../pull/287))
+* [7d3323d1](../../commit/7d3323d163b6a5d08c8fc9bbafb2a98aaaf5098f) Bump github.com/aws/aws-sdk-go from 1.36.3 to 1.37.16 ([#292](../../pull/292))
+* [f58ea191](../../commit/f58ea191c816de6198a5a0f69e6f16a78d620b98) Bump github.com/aws/aws-sdk-go from 1.36.3 to 1.37.15 ([#288](../../pull/288))
+* [9479aa8a](../../commit/9479aa8a0afd1c2a1d88d9279053f429b8277c12) Create Dependabot config file ([#291](../../pull/291))
+* [cd1e33c1](../../commit/cd1e33c101992a92e90003373532d8a895b79f81) Bump github.com/gruntwork-io/terratest from 0.31.1 to 0.32.7 ([#290](../../pull/290))
+* [234300b7](../../commit/234300b732355e1efec68bdf42be9163cf87851e) Bump github.com/stretchr/testify from 1.6.1 to 1.7.0 ([#289](../../pull/289))
+* [55c16ef9](../../commit/55c16ef9c0fc103757f61a881ea25698b3dbc14a) add go mods auto-tidy workflow
+* [298ee9dc](../../commit/298ee9dce9ba2ae2f9174f0dfe3ee1ed84ddb045) [feature] Add CIDR blocks based security group to Redis ([#286](../../pull/286))
+* [488c4ea9](../../commit/488c4ea939f100ff59722deaf74c7a1dea912637) [fix] s3-private-bucket more lenient aws provider version ([#285](../../pull/285))
+* [e4738500](../../commit/e47385003bb039133c1a5938bf5b67f48823cc48) [refactor] rm unneeded vars ([#281](../../pull/281))
+* [9be9388a](../../commit/9be9388a663590540e6933ad50d6f0b76a7fb33f) [fix] aws-single-page-static site to work outside us-east-1 ([#280](../../pull/280))
+* [ecdcc6f9](../../commit/ecdcc6f95e1e2d3609b867f299c4306b00e88267) enable clouldwatch log exports for aurora postgresql ([#279](../../pull/279))
+* [62f0981e](../../commit/62f0981ef768afb1a8a957c8a45d618db66f89d7) [feature]Snowflake: ALL modules output privileges granted ([#277](../../pull/277))
+
 ## 0.38.0 2021-01-12
 
 * [ae34a726](../../commit/ae34a7267539f03468a4d31293848254d9b101d3) [feature] aws-s3-public-bucket require https, allow disabling versioning ([#278](../../pull/278))
