@@ -10,16 +10,17 @@ variable "cert_subject_alternative_names" {
 }
 
 variable "aws_route53_zone_id" {
-  type = string
+  type        = string
+  description = "Default Route 53 zone to create validation records in"
 }
 
 variable "validation_record_ttl" {
-  type    = string
-  default = 60
+  type        = string
+  default     = 60
+  description = "TTL value of DNS validation records"
 }
 
 variable tags {
-  type        = map(string)
+  type        = object({ project : string, env : string, service : string, owner : string, managedBy : string })
   description = "Tags to apply to certificate"
-  default     = {}
 }
