@@ -38,7 +38,6 @@ resource aws_cloudfront_distribution cf {
 | Name | Version |
 |------|---------|
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
 
 ## Providers
 
@@ -50,7 +49,7 @@ resource aws_cloudfront_distribution cf {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function |  |
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function | n/a |
 
 ## Resources
 

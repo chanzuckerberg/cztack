@@ -1,9 +1,10 @@
 locals {
   tags = {
-    env     = var.env
-    owner   = var.owner
-    service = var.service
-    project = var.project
+    env       = var.env
+    owner     = var.owner
+    service   = var.service
+    project   = var.project
+    managedBy = "terraform"
   }
 }
 
@@ -26,14 +27,10 @@ module "security_headers_lambda" {
 }
 
 module "cert" {
-  source              = "../aws-acm-cert"
+  source              = "../aws-acm-certificate"
   cert_domain_name    = var.source_domain
   aws_route53_zone_id = var.source_domain_zone_id
-
-  project = var.project
-  owner   = var.owner
-  env     = var.env
-  service = var.service
+  tags                = local.tags
 }
 
 resource "aws_cloudfront_distribution" "cf" {

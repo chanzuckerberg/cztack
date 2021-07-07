@@ -22,21 +22,19 @@ output "..." {
 <!-- START -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
+No requirements.
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_client"></a> [client](#module\_client) | ../aws-iam-role-crossacct |  |
+| <a name="module_client"></a> [client](#module\_client) | ../aws-iam-role-crossacct | n/a |
 
 ## Resources
 

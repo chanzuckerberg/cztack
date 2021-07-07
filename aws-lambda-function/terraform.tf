@@ -1,5 +1,6 @@
 terraform {
   required_providers {
-    aws = ">= 2.60.0"
+    # Depends on aws_cloudwatch_log_group.log.arn not returning trailing ":*" starting in 3.0.0
+    aws = ">= 3.0.0"
   }
 }

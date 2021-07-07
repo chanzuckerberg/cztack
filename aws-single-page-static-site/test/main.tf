@@ -22,7 +22,7 @@ data "aws_route53_zone" "zone" {
 }
 
 locals {
-  domain       = replace(data.aws_route53_zone.zone.name, "/\\.$/", "")
+  domain       = data.aws_route53_zone.zone.name
   website_fqdn = "${var.subdomain}.${local.domain}"
   aliases = [
     "www.${local.website_fqdn}",
@@ -39,17 +39,19 @@ provider "aws" {
 }
 
 module "cert" {
-  source = "../../aws-acm-cert"
+  source = "../../aws-acm-certificate"
 
-  cert_domain_name                     = local.website_fqdn
-  aws_route53_zone_id                  = var.aws_route53_zone_id
-  cert_subject_alternative_names       = { for a in local.aliases : a => var.aws_route53_zone_id }
-  cert_subject_alternative_names_count = length(local.aliases)
+  cert_domain_name               = local.website_fqdn
+  aws_route53_zone_id            = var.aws_route53_zone_id
+  cert_subject_alternative_names = { for a in local.aliases : a => var.aws_route53_zone_id }
 
-  project = var.project
-  env     = var.env
-  service = var.service
-  owner   = var.owner
+  tags = {
+    project   = var.project
+    env       = var.env
+    service   = var.service
+    owner     = var.owner
+    managedBy = "terraform"
+  }
 
   providers = {
     aws = aws.us-east-1

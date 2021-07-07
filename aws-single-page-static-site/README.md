@@ -22,7 +22,7 @@ This module is specifically designed for Single Page Applications– In order to
 
 ```hcl
 module "site" {
-  source = "github.com/chanzuckerberg/cztack//aws-single-page-static-site?ref=v0.36.0"
+  source = "github.com/chanzuckerberg/cztack//aws-single-page-static-site?ref=v0.40.0"
 
   cert_domain_name               = "..."
   cert_subject_alternative_names = "..."
@@ -42,19 +42,19 @@ module "site" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_security_headers_lambda"></a> [security\_headers\_lambda](#module\_security\_headers\_lambda) | ../aws-lambda-edge-add-security-headers |  |
+| <a name="module_security_headers_lambda"></a> [security\_headers\_lambda](#module\_security\_headers\_lambda) | ../aws-lambda-edge-add-security-headers | n/a |
 
 ## Resources
 
@@ -80,7 +80,7 @@ module "site" {
 | <a name="input_aws_route53_zone_id"></a> [aws\_route53\_zone\_id](#input\_aws\_route53\_zone\_id) | A route53 zone ID used to write records. | `string` | n/a | yes |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | Name of the bucket to created. If not given, it will use the domain name. | `string` | `""` | no |
 | <a name="input_cloudfront_price_class"></a> [cloudfront\_price\_class](#input\_cloudfront\_price\_class) | Cloudfront [price class](https://aws.amazon.com/cloudfront/pricing/). | `string` | `"PriceClass_100"` | no |
-| <a name="input_custom_error_response_codes"></a> [custom\_error\_response\_codes](#input\_custom\_error\_response\_codes) | The http response codes for which to return the default index page. | `list(number)` | <pre>[<br>  404,<br>  403,<br>  503<br>]</pre> | no |
+| <a name="input_custom_error_response_codes"></a> [custom\_error\_response\_codes](#input\_custom\_error\_response\_codes) | The http response codes for which to return the default index page. Defaults to [404, 403, 503] | `list(number)` | `null` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_index_document_path"></a> [index\_document\_path](#input\_index\_document\_path) | The path to the index document of your site. | `string` | `"index.html"` | no |
 | <a name="input_minimum_tls_version"></a> [minimum\_tls\_version](#input\_minimum\_tls\_version) | Minimum TLS version to accept. | `string` | `"TLSv1.1_2016"` | no |
