@@ -58,10 +58,7 @@ data "aws_iam_policy_document" "firehose-to-s3" {
       "logs:GetLogEvents",
     ]
 
-    resources = [
-      aws_cloudwatch_log_group.firehose.arn,
-      "${aws_cloudwatch_log_group.firehose.arn}/*",
-    ]
+    resources = ["${aws_cloudwatch_log_group.firehose.arn}:*"]
   }
 }
 

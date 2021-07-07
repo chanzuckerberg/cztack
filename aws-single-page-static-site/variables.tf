@@ -71,7 +71,7 @@ variable "path_pattern" {
 
 variable "custom_error_response_codes" {
   type        = list(number)
-  description = "The http response codes for which to return the default index page."
-  default     = [404, 403, 503]
+  description = "The http response codes for which to return the default index page. Defaults to [404, 403, 503]"
+  default     = null
 }
 

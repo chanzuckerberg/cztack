@@ -34,7 +34,7 @@ module "db" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.44.0, < 3.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.44.0 |
 
 ## Providers
 
@@ -44,7 +44,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_aurora"></a> [aurora](#module\_aurora) | ../aws-aurora |  |
+| <a name="module_aurora"></a> [aurora](#module\_aurora) | ../aws-aurora | n/a |
 
 ## Resources
 
@@ -55,14 +55,14 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
-| <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Set the databases to automatically upgrade minor versions. WARNING - if this is enabled, make sure engine_version is set to a *prefix* rather that a specific version so that TF won't try to downgrade DB's that have been auto-upgraded. Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version | `bool` | `false` | no |
+| <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Set the databases to automatically upgrade minor versions. WARNING - if this is enabled, make sure engine\_version is set to a *prefix* rather that a specific version so that TF won't try to downgrade DB's that have been auto-upgraded. Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version | `bool` | `false` | no |
 | <a name="input_ca_cert_identifier"></a> [ca\_cert\_identifier](#input\_ca\_cert\_identifier) | Identifier for the certificate authority. | `string` | `"rds-ca-2019"` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | The name of the database to be created in the cluster. | `string` | n/a | yes |
 | <a name="input_database_password"></a> [database\_password](#input\_database\_password) | Password for user that will be created. | `string` | n/a | yes |
 | <a name="input_database_subnet_group"></a> [database\_subnet\_group](#input\_database\_subnet\_group) | The name of an existing database subnet group to use. | `string` | n/a | yes |
 | <a name="input_database_username"></a> [database\_username](#input\_database\_username) | Default user to be created. | `string` | n/a | yes |
 | <a name="input_db_parameters"></a> [db\_parameters](#input\_db\_parameters) | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | `list(any)` | `[]` | no |
-| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of Postgres to use. This should be a *prefix* if auto version upgrades are enabled. (Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version)| `string` | `"10"` | no |
+| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of Postgres to use. This should be a *prefix* if auto version upgrades are enabled. (Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version) | `string` | `"10"` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | <a name="input_iam_database_authentication_enabled"></a> [iam\_database\_authentication\_enabled](#input\_iam\_database\_authentication\_enabled) | n/a | `string` | `false` | no |
 | <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | `list(string)` | `[]` | no |

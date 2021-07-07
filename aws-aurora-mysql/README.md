@@ -35,7 +35,7 @@ module "db" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.44.0, < 3.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.44.0 |
 
 ## Providers
 
@@ -45,7 +45,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_aurora"></a> [aurora](#module\_aurora) | ../aws-aurora |  |
+| <a name="module_aurora"></a> [aurora](#module\_aurora) | ../aws-aurora | n/a |
 
 ## Resources
 

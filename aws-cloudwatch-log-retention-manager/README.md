@@ -17,20 +17,19 @@ module log-retention-manager {
 | Name | Version |
 |------|---------|
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function |  |
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function | n/a |
 
 ## Resources
 
