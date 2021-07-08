@@ -51,6 +51,12 @@ variable "project" {
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
 
+variable "snapshot_identifier" {
+  type        = string
+  description = "Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot."
+  default     = null
+}
+
 variable "skip_final_snapshot" {
   default = false
 }
