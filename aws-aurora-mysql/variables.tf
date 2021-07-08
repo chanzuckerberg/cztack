@@ -58,8 +58,9 @@ variable "project" {
 }
 
 variable "snapshot_identifier" {
-  type    = string
+  type        = string
   description = "Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot."
+  default     = null
 }
 
 variable "skip_final_snapshot" {
