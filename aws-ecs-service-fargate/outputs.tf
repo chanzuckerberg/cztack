@@ -13,7 +13,7 @@ output "ecs_task_definition_family" {
 
 output "container_security_group_id" {
   description = "Security group id for the container."
-  value       = module.container-sg.this_security_group_id
+  value       = module.container-sg.security_group_id
 }
 
 output "private_service_discovery_domain" {

@@ -8,7 +8,7 @@ You can use [our secrets setup module](../aws-params-secrets-setup/README.md) to
 
 ```hcl
 module "secret" {
-  source = "github.com/chanzuckerberg/cztack/aws-ssm-params-secret?ref=v0.18.2"
+  source = "github.com/chanzuckerberg/cztack//aws-ssm-params?ref=v0.40.0"
 
   project = "acme"
   env     = "staging"

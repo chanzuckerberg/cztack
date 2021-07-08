@@ -13,7 +13,7 @@ locals {
 
 module "sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "3.12.0"
+  version     = "4.3.0"
   name        = local.name
   description = "Allow traffic to Redis."
   vpc_id      = var.vpc_id
@@ -56,7 +56,7 @@ resource "aws_elasticache_cluster" "default" {
   num_cache_nodes      = 1
   parameter_group_name = var.parameter_group_name
   subnet_group_name    = aws_elasticache_subnet_group.default.name
-  security_group_ids   = [module.sg.this_security_group_id]
+  security_group_ids   = [module.sg.security_group_id]
   apply_immediately    = var.apply_immediately
   availability_zone    = var.availability_zone
   tags                 = local.tags
