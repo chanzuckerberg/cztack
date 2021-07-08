@@ -40,6 +40,7 @@ module "aurora" {
 
   # backtrack_window not supported yet
   backtrack_window    = 0
+  snapshot_identifier = var.snapshot_identifier
   skip_final_snapshot = var.skip_final_snapshot
   kms_key_id          = var.kms_key_id
   apply_immediately   = var.apply_immediately
