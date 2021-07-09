@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.41.0 2021-07-08
+
+* [ae62854c](../../commit/ae62854c3dcf8787298fd016f44ad984beca268c) [fix] Various fixes for TF AWS 3.0 compatibility ([#324](../../pull/324))
+* [9991541d](../../commit/9991541d5a6789a1e778b994b17c13a1d2bb1737) [feature] Add 'snapshot_identifier' to all aws-aurora modules ([#323](../../pull/323))
+
 ## 0.40.0 2021-07-07
 
 * [118ad1c4](../../commit/118ad1c481b292bc262bfaccb4f5d8373b975d39) [feature] Terraform AWS Provider 3.0 compatibility ([#322](../../pull/322))

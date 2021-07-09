@@ -18,7 +18,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_sg"></a> [sg](#module\_sg) | terraform-aws-modules/security-group/aws | 3.12.0 |
+| <a name="module_sg"></a> [sg](#module\_sg) | terraform-aws-modules/security-group/aws | 4.3.0 |
 
 ## Resources
 

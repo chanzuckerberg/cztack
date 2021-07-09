@@ -81,14 +81,6 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 # TODO scope this policy down
-#
-# I would love to use "${aws_cloudwatch_log_group.log.arn}", as the
-# resource here, but the provider returns an ARN that looks like:
-#   arn:aws:logs:us-west-2:123456789:log-group:/foo/bar:*
-# Unfortunately you need to use an ARN like:
-#   arn:aws:logs:us-west-2:123456789:log-group:/foo/bar
-# to match operations on the log group(like creating a new stream.) So instead we construct one
-# without the colon before the *, so that we can match both log groups and log streams.
 data "aws_iam_policy_document" "lambda_logging_policy" {
   statement {
     effect = "Allow"
@@ -101,7 +93,7 @@ data "aws_iam_policy_document" "lambda_logging_policy" {
     resources = [
       var.at_edge ?
       "*" :
-      "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:${aws_cloudwatch_log_group.log.name}*",
+      "${aws_cloudwatch_log_group.log.arn}:*"
     ]
   }
 }
