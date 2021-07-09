@@ -77,6 +77,7 @@ No resources.
 | <a name="input_rds_cluster_parameters"></a> [rds\_cluster\_parameters](#input\_rds\_cluster\_parameters) | Cluster params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Cluster) | `list(any)` | `[]` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | When you destroy a database RDS will, by default, take snapshot. Set this to skip that step. | `string` | `false` | no |
+| <a name="input_snapshot_identifier"></a> [snapshot\_identifier](#input\_snapshot\_identifier) | Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot. | `string` | `null` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the existing VPC in which this cluster should be created. | `string` | n/a | yes |
 
 ## Outputs

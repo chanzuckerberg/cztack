@@ -158,8 +158,8 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alb-sg"></a> [alb-sg](#module\_alb-sg) | terraform-aws-modules/security-group/aws | 3.11.0 |
-| <a name="module_container-sg"></a> [container-sg](#module\_container-sg) | terraform-aws-modules/security-group/aws | 3.11.0 |
+| <a name="module_alb-sg"></a> [alb-sg](#module\_alb-sg) | terraform-aws-modules/security-group/aws | 4.3.0 |
+| <a name="module_container-sg"></a> [container-sg](#module\_container-sg) | terraform-aws-modules/security-group/aws | 4.3.0 |
 
 ## Resources
 

@@ -92,5 +92,5 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bucket"></a> [bucket](#output\_bucket) | n/a |
+| <a name="output_bucket"></a> [bucket](#output\_bucket) | S3 bucket that Github webhooks are streamed into |
 <!-- END -->

@@ -87,7 +87,7 @@ resource "aws_s3_bucket_public_access_block" "bucket" {
 module "security_headers_lambda" {
   source = "../aws-lambda-edge-add-security-headers"
 
-  function_name = replace("${local.website_fqdn}-static-site-security-headers", ".", "-")
+  function_name = replace("${local.website_fqdn}-headers", ".", "-")
 
   project = var.project
   owner   = var.owner

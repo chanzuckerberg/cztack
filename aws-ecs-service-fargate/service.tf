@@ -6,7 +6,7 @@ locals {
 
 module "container-sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "3.11.0"
+  version     = "4.3.0"
   name        = local.name
   description = "ECS ingress port"
   vpc_id      = var.vpc_id
@@ -18,7 +18,7 @@ module "container-sg" {
       to_port                  = var.container_port
       protocol                 = "tcp"
       description              = "Container port"
-      source_security_group_id = module.alb-sg.this_security_group_id
+      source_security_group_id = module.alb-sg.security_group_id
     },
   ]
 
@@ -50,7 +50,7 @@ resource "aws_ecs_service" "job" {
 
   network_configuration {
     subnets         = var.task_subnets
-    security_groups = [module.container-sg.this_security_group_id]
+    security_groups = [module.container-sg.security_group_id]
   }
 
   load_balancer {
@@ -91,7 +91,7 @@ resource "aws_ecs_service" "unmanaged-job" {
 
   network_configuration {
     subnets         = var.task_subnets
-    security_groups = [module.container-sg.this_security_group_id]
+    security_groups = [module.container-sg.security_group_id]
   }
 
   load_balancer {
