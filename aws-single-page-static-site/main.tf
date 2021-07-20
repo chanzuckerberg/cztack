@@ -7,7 +7,7 @@ locals {
     managedBy = "terraform"
   }
 
-  domain       = replace(data.aws_route53_zone.zone.name, "/\\.$/", "")
+  domain       = data.aws_route53_zone.zone.name
   website_fqdn = "${var.subdomain}.${local.domain}"
   bucket_name  = var.bucket_name != "" ? var.bucket_name : local.website_fqdn
 
@@ -15,6 +15,8 @@ locals {
     local.website_fqdn,
     "www.${local.website_fqdn}",
   ]
+
+  default_custom_error_response_codes = [404, 403, 503]
 }
 
 data "aws_route53_zone" "zone" {
@@ -85,7 +87,7 @@ resource "aws_s3_bucket_public_access_block" "bucket" {
 module "security_headers_lambda" {
   source = "../aws-lambda-edge-add-security-headers"
 
-  function_name = replace("${local.website_fqdn}-static-site-security-headers", ".", "-")
+  function_name = replace("${local.website_fqdn}-headers", ".", "-")
 
   project = var.project
   owner   = var.owner
@@ -185,7 +187,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   # This is error handling logic for single page applications
   dynamic "custom_error_response" {
-    for_each = var.custom_error_response_codes
+    for_each = coalesce(var.custom_error_response_codes, local.default_custom_error_response_codes)
     content {
       error_code         = custom_error_response.value
       response_code      = 200

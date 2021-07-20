@@ -29,7 +29,7 @@ resource "aws_lb_target_group" "service" {
 resource "aws_lb" "service" {
   name            = local.name
   internal        = var.internal_lb
-  security_groups = [module.alb-sg.this_security_group_id]
+  security_groups = [module.alb-sg.security_group_id]
   subnets         = var.lb_subnets
   idle_timeout    = var.lb_idle_timeout_seconds
 
@@ -80,7 +80,7 @@ resource "aws_lb_listener" "https" {
 
 module "alb-sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "3.11.0"
+  version     = "4.3.0"
   name        = "${local.name}-alb"
   description = "Security group for ${var.internal_lb ? "internal" : "internet facing"} ALB"
   vpc_id      = var.vpc_id
@@ -106,7 +106,7 @@ module "alb-sg" {
       to_port                  = var.container_port
       protocol                 = "tcp"
       description              = "Container port"
-      source_security_group_id = module.container-sg.this_security_group_id
+      source_security_group_id = module.container-sg.security_group_id
     },
   ]
 }

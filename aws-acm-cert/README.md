@@ -1,5 +1,7 @@
 # AWS ACM Cert
 
+**_DEPRECATED: Use aws-acm-certificate if using Terraform AWS Provider >3.0._**
+
 Will create and attempt to validate an certificate in the [AWS ACM service](https://aws.amazon.com/certificate-manager/). This module uses DNS verification so the principal running this needs to be able to write to the supplied Route53 zone.
 
 NOTE: if you intend to use this certificate in a cloudfront distribution it must be created in `us-east-1` region.

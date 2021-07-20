@@ -10,7 +10,7 @@ This module will configure an aggregator for GitHub webhooks. It sets up an API 
 ```hcl
 module "archiver" {
   // Replace with latest cztack stable release https://github.com/chanzuckerberg/cztack/releases
-  source = "github.com/chanzuckerberg/cztack//github-webhooks-to-s3?ref=v0.36.0"
+  source = "github.com/chanzuckerberg/cztack//github-webhooks-to-s3?ref=v0.40.0"
 
   env     = "${var.env}"
   project = "${var.project}"
@@ -27,23 +27,21 @@ module "archiver" {
 <!-- START -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 3.0.0 |
+No requirements.
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | < 3.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_attach-logs"></a> [attach-logs](#module\_attach-logs) | ../aws-iam-policy-cwlogs |  |
-| <a name="module_bucket"></a> [bucket](#module\_bucket) | ../aws-s3-private-bucket |  |
-| <a name="module_github_secret"></a> [github\_secret](#module\_github\_secret) | ../aws-ssm-params |  |
+| <a name="module_attach-logs"></a> [attach-logs](#module\_attach-logs) | ../aws-iam-policy-cwlogs | n/a |
+| <a name="module_bucket"></a> [bucket](#module\_bucket) | ../aws-s3-private-bucket | n/a |
+| <a name="module_github_secret"></a> [github\_secret](#module\_github\_secret) | ../aws-ssm-params | n/a |
 
 ## Resources
 
@@ -92,5 +90,7 @@ module "archiver" {
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_bucket"></a> [bucket](#output\_bucket) | S3 bucket that Github webhooks are streamed into |
 <!-- END -->
