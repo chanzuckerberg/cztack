@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.42.0 2021-07-20
+
+* [8e3894ed](../../commit/8e3894edcdcaf5a7e8b40cba6de80d90e3452355) aws-single-page-static-site remove region from provider
+
 ## 0.41.0 2021-07-08
 
 * [ae62854c](../../commit/ae62854c3dcf8787298fd016f44ad984beca268c) [fix] Various fixes for TF AWS 3.0 compatibility ([#324](../../pull/324))
