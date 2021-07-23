@@ -20,7 +20,6 @@ data "aws_iam_policy_document" "policy" {
       "ssm:GetParametersByPath",
       "ssm:GetParameter",
       "ssm:GetParameterHistory",
-      "ssm:DescribeParameters",
     ]
 
     resources = local.param_resources
