@@ -20,7 +20,6 @@ data "aws_iam_policy_document" "policy" {
       "ssm:GetParametersByPath",
       "ssm:GetParameter",
       "ssm:GetParameterHistory",
-      "ssm:DescribeParameters",
     ]
 
     resources = local.param_resources
@@ -29,6 +28,15 @@ data "aws_iam_policy_document" "policy" {
   statement {
     actions   = ["kms:Decrypt"]
     resources = [data.aws_kms_alias.parameter_store_key.target_key_arn]
+  }
+  # Note (aku): To use this reader policy with chamber, we need to give blanket ssm:DescribeParameters perms
+  # https://github.com/segmentio/chamber/blob/53baa2b77bb1ed279bea346533d50f4fb1c01ed1/store/ssmstore.go#L214-L217
+  # This should be okay because this is a list option and the permission won't allow you to read the secret values
+  # Without this, we'd get this error: The actions in your policy do not support resource-level permissions and require you to choose All resources
+  statement {
+    sid       = "ChamberSSMReadRequirement"
+    actions   = ["ssm:DescribeParameters"]
+    resources = ["arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/*"]
   }
 }
 
