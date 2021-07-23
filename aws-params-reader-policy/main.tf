@@ -29,6 +29,9 @@ data "aws_iam_policy_document" "policy" {
     actions   = ["kms:Decrypt"]
     resources = [data.aws_kms_alias.parameter_store_key.target_key_arn]
   }
+  statement {
+    actions = ["ssm:DescribeParameters"]
+  }
 }
 
 resource "aws_iam_role_policy" "policy" {
