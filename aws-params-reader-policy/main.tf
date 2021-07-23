@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "policy" {
   # This should be okay because this is a list option and the permission won't allow you to read the secret values
   # Without this, we'd get this error: The actions in your policy do not support resource-level permissions and require you to choose All resources
   statement {
-    sid = "ChamberSSMReadRequirement"
+    sid       = "ChamberSSMReadRequirement"
     actions   = ["ssm:DescribeParameters"]
     resources = ["arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/*"]
   }
