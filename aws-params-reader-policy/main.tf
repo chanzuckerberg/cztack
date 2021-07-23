@@ -37,7 +37,6 @@ data "aws_iam_policy_document" "policy" {
     sid = "ChamberSSMReadRequirement"
     actions   = ["ssm:DescribeParameters"]
     resources = ["arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/*"]
-    
   }
 }
 
