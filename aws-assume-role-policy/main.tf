@@ -1,4 +1,3 @@
-
 data "aws_iam_policy_document" "assume-role" {
   dynamic "statement" {
     for_each = var.source_account_ids
@@ -47,5 +46,4 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
-
 }
