@@ -1,4 +1,5 @@
 data "aws_iam_policy_document" "assume-role" {
+  # Allow the root of these accounts to assume role
   dynamic "statement" {
     for_each = var.source_account_ids
     content {
@@ -9,7 +10,7 @@ data "aws_iam_policy_document" "assume-role" {
       actions = ["sts:AssumeRole", "sts:TagSession"]
     }
   }
-
+  # Allow Assuming the role with a list of SAML ARNs
   dynamic "statement" {
     for_each = toset(var.saml_idp_arns)
     content {
@@ -25,7 +26,7 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
-
+  # Allow Assuming the role with a list of OIDC Configurations
   dynamic "statement" {
     for_each = var.oidc
     iterator = oidc
@@ -44,5 +45,4 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
-
 }

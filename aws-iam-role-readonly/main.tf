@@ -8,7 +8,7 @@ locals {
 }
 
 module "assume_role_policy" {
-  source "../aws-assume-role-policy"
+  source = "../aws-assume-role-policy"
   source_account_ids = var.source_account_ids
   saml_idp_arns = var.saml_idp_arns
   oidc = var.oidc
