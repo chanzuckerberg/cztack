@@ -1,5 +1,16 @@
+
 data "aws_iam_policy_document" "assume-role" {
-  # Allow the root of these accounts to assume role
+  dynamic "statement" {
+    for_each = compact([var.source_account_id])
+    content {
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${statement.value}:root"]
+      }
+      actions = ["sts:AssumeRole", "sts:TagSession"]
+    }
+  }
+
   dynamic "statement" {
     for_each = var.source_account_ids
     content {
@@ -10,15 +21,17 @@ data "aws_iam_policy_document" "assume-role" {
       actions = ["sts:AssumeRole", "sts:TagSession"]
     }
   }
-  # Allow Assuming the role with a list of SAML ARNs
+
   dynamic "statement" {
-    for_each = toset(var.saml_idp_arns)
+    for_each = compact([var.saml_idp_arn])
     content {
       principals {
         type        = "Federated"
-        identifiers = each.key
+        identifiers = [statement.value]
       }
+
       actions = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
+
       condition {
         test     = "StringEquals"
         variable = "SAML:aud"
@@ -26,7 +39,7 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
-  # Allow Assuming the role with a list of OIDC Configurations
+
   dynamic "statement" {
     for_each = var.oidc
     iterator = oidc
@@ -45,4 +58,5 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
+
 }
