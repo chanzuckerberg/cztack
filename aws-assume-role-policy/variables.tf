@@ -1,3 +1,8 @@
+variable "source_account_id" {
+  type        = list(string)
+  description = "The source AWS account ID to establish a trust relationship. Ignored if empty or not provided."
+}
+
 variable "source_account_ids" {
   type        = list(string)
   description = "The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided."
