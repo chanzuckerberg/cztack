@@ -17,9 +17,9 @@ func TestIAMRoleBless(t *testing.T) {
 			return tftest.Options(
 				tftest.IAMRegion,
 				map[string]interface{}{
-					"role_name":         random.UniqueId(),
-					"source_account_id": curAcct,
-					"bless_lambda_arns": []string{"arn:aws:lambda:us-west-2:111111111111:function:test"},
+					"role_name":          random.UniqueId(),
+					"source_account_ids": []string{curAcct},
+					"bless_lambda_arns":  []string{"arn:aws:lambda:us-west-2:111111111111:function:test"},
 				},
 			)
 		},
