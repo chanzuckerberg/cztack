@@ -16,7 +16,7 @@ module "assume_role_policy" {
 resource "aws_iam_role" "infraci" {
   name               = var.role_name
   path               = var.iam_path
-  assume_role_policy = module.assume-role-policy.json
+  assume_role_policy = module.assume_role_policy.json
   tags               = local.tags
 }
 
