@@ -20,7 +20,6 @@ module "client" {
   source_account_id  = var.source_account_id
   source_account_ids = var.source_account_ids
   saml_idp_arns      = var.saml_idp_arns
-  oidc               - var.oidc
   env                = var.env
   owner              = var.owner
   service            = var.service
