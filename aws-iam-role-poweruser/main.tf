@@ -17,7 +17,7 @@ module "assume_role_policy" {
 resource "aws_iam_role" "poweruser" {
   name                 = var.role_name
   path                 = var.iam_path
-  assume_role_policy   = module.assume-role.json
+  assume_role_policy   = module.assume_role_policy.json
   max_session_duration = var.max_session_duration
   tags                 = local.tags
 }
