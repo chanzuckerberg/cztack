@@ -34,10 +34,10 @@ variable "max_session_duration" {
   description = "The maximum amount of time, in seconds, that a principal can assume this role."
   default     = 3600
 }
-variable "saml_idp_arn" {
-  type        = string
-  default     = ""
-  description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
+variable "saml_idp_arns" {
+  type        = set(string)
+  default     = []
+  description = "The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided."
 }
 
 variable "role_name" {
