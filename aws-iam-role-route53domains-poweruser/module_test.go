@@ -40,8 +40,6 @@ func validateFunc(t *testing.T, options *terraform.Options) {
 	r.NotEmpty(region)
 	outputs := terraform.OutputAll(t, options)
 	r.NotEmpty(outputs)
-	roleName := outputs["role_name"].(string)
-	r.NotEmpty(roleName)
 	roleArn := outputs["arn"].(string)
 	r.NotEmpty(roleArn)
 	// TODO(anyone): figure out what it means to "test" this role
