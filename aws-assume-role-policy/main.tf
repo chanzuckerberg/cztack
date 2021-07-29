@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "assume-role" {
     content {
       principals {
         type        = "Federated"
-        identifiers = [each.key]
+        identifiers = [statement.value]
       }
 
       actions = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
