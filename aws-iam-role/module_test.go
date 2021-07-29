@@ -5,6 +5,7 @@ import (
 
 	"github.com/chanzuckerberg/go-misc/tftest"
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/stretchr/testify/require"
 )
 
 func TestAWSIAMRole(t *testing.T) {
@@ -31,8 +32,16 @@ func TestAWSIAMRole(t *testing.T) {
 			return options
 		},
 
-		Validate: func(t1 *testing.T, t2 *terraform.Options) {},
-		Cleanup:  func(t1 *testing.T, options *terraform.Options) {},
+		Validate: func(t1 *testing.T, options *terraform.Options) {
+			r := require.New(t)
+			region := options.EnvVars["AWS_DEFAULT_REGION"]
+			r.NotEmpty(region)
+			outputs := terraform.OutputAll(t, options)
+			r.NotEmpty(outputs)
+			roleName := outputs["role_name"].(string)
+			r.NotEmpty(roleName)
+		},
+		Cleanup: func(t1 *testing.T, options *terraform.Options) {},
 	}
 
 	test.Run(t)
