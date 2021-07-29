@@ -12,11 +12,11 @@ data "aws_iam_policy_document" "assume-role" {
 
   dynamic "statement" {
     for_each = var.saml_idp_arns
-    iterator = saml_arn
+
     content {
       principals {
         type        = "Federated"
-        identifiers = [saml_arn]
+        identifiers = [each.key]
       }
 
       actions = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
