@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
   }
 
   dynamic "statement" {
-    for_each = compact([var.saml_idp_arn])
+    for_each = var.saml_idp_arns
     content {
       principals {
         type        = "Federated"
