@@ -12,12 +12,6 @@ variable "terraform_state_lock_dynamodb_arns" {
   description = "ARNs of the state file DynamoDB tables"
 }
 
-variable "source_account_id" {
-  type        = string
-  default     = ""
-  description = "The source AWS account to establish a trust relationship. Ignored if empty or not provided. DEPRECATED: Pleaase use source_account_ids."
-}
-
 variable "source_account_ids" {
   type        = set(string)
   default     = []
