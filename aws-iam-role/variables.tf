@@ -34,6 +34,7 @@ variable "max_session_duration" {
   description = "The maximum amount of time, in seconds, that a principal can assume this role."
   default     = 3600
 }
+
 variable "saml_idp_arns" {
   type        = set(string)
   default     = []

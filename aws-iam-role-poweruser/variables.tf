@@ -18,6 +18,7 @@ variable "saml_idp_arns" {
 variable "iam_path" {
   type    = string
   default = "/"
+  description = "IAM path for the role."
 }
 
 variable "oidc" {
