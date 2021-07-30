@@ -9,17 +9,6 @@ locals {
 
 data "aws_iam_policy_document" "assume-role" {
   dynamic "statement" {
-    for_each = compact([var.source_account_id])
-    content {
-      principals {
-        type        = "AWS"
-        identifiers = ["arn:aws:iam::${statement.value}:root"]
-      }
-      actions = ["sts:AssumeRole"]
-    }
-  }
-
-  dynamic "statement" {
     for_each = var.source_account_ids
     content {
       principals {

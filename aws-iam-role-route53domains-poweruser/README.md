@@ -52,7 +52,6 @@ No modules.
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | n/a | `string` | `"route53domains-poweruser"` | no |
 | <a name="input_saml_idp_arn"></a> [saml\_idp\_arn](#input\_saml\_idp\_arn) | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_source_account_id"></a> [source\_account\_id](#input\_source\_account\_id) | The source AWS account to establish a trust relationship. Ignored if empty or not provided. DEPRECATED: Please use source\_account\_ids. | `string` | `""` | no |
 | <a name="input_source_account_ids"></a> [source\_account\_ids](#input\_source\_account\_ids) | The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided. | `set(string)` | `[]` | no |
 
 ## Outputs

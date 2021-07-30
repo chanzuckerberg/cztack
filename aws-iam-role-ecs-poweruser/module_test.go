@@ -18,8 +18,8 @@ func TestAWSIAMRoleEcsPoweruser(t *testing.T) {
 				tftest.IAMRegion,
 
 				map[string]interface{}{
-					"role_name":         random.UniqueId(),
-					"source_account_id": curAcct,
+					"role_name":          random.UniqueId(),
+					"source_account_ids": []string{curAcct},
 				},
 			)
 		},
