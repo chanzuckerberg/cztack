@@ -49,7 +49,7 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | <a name="input_authorize_iam"></a> [authorize\_iam](#input\_authorize\_iam) | Indicates if we should augment the PowerUserAccess policy with certain IAM actions. | `bool` | `true` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | n/a | `string` | `"/"` | no |
+| <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | IAM path for the role. | `string` | `"/"` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | The maximum session duration (in seconds) for the role. | `number` | `3600` | no |
 | <a name="input_oidc"></a> [oidc](#input\_oidc) | A list of AWS OIDC IDPs to establish a trust relationship for this role. | <pre>list(object(<br>    {<br>      idp_arn : string,          # the AWS IAM IDP arn<br>      client_ids : list(string), # a list of oidc client ids<br>      provider : string          # your provider url, such as foo.okta.com<br>    }<br>  ))</pre> | `[]` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |

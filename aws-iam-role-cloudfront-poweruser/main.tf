@@ -11,6 +11,10 @@ module "assume_role_policy" {
   source             = "../aws-assume-role-policy"
   source_account_ids = var.source_account_ids
   saml_idp_arns      = var.saml_idp_arns
+  env                = var.env
+  owner              = var.owner
+  service            = var.service
+  project            = var.project
 }
 
 resource "aws_iam_role" "role" {

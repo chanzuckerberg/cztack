@@ -12,6 +12,10 @@ module "assume_role_policy" {
   source_account_ids = var.source_account_ids
   saml_idp_arns      = var.saml_idp_arns
   oidc               = var.oidc
+  env                = var.env
+  owner              = var.owner
+  service            = var.service
+  project            = var.project
 }
 
 resource "aws_iam_role" "poweruser" {
