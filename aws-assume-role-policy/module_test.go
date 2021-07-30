@@ -16,8 +16,7 @@ type oidc struct {
 
 func TestAWSAssumeRolePolicy(t *testing.T) {
 	curAcct := tftest.AWSCurrentAccountID(t)
-	oidcCfg := []interface{}
-	oidcOptions := []oidc{
+	oidcCfg := []oidc{
 		{
 			idp_arn:    "oidcARN1",
 			client_ids: []string{"clientID1", "clientID2", "clientID3"},
@@ -25,13 +24,6 @@ func TestAWSAssumeRolePolicy(t *testing.T) {
 		},
 	}
 
-	for _, v := oidcOptions {
-		oidcCfg = append(oidcCfg, interface{
-			"idp_arn": v.idp_arn,
-			"client_ids": v.client_ids,
-			"provider": v.provider,
-		})
-	}
 	test := tftest.Test{
 		Setup: func(t *testing.T) *terraform.Options {
 			options := tftest.Options(
@@ -39,7 +31,7 @@ func TestAWSAssumeRolePolicy(t *testing.T) {
 				map[string]interface{}{
 					"source_account_ids": []string{curAcct},
 					"saml_idp_arns":      []string{"samlARN1", "samlARN2"},
-					"oidc":               oidcOptions,
+					"oidc":               oidcCfg,
 				},
 			)
 
