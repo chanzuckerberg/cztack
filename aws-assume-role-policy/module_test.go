@@ -16,7 +16,7 @@ type oidc struct {
 
 func TestAWSAssumeRolePolicy(t *testing.T) {
 	curAcct := tftest.AWSCurrentAccountID(t)
-	oidcCfg := []interface{}{}
+	oidcCfg := []interface{}
 	oidcOptions := []oidc{
 		{
 			idp_arn:    "oidcARN1",
