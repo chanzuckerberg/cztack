@@ -16,7 +16,7 @@ func TestAwsSinglePageStaticSite(t *testing.T) {
 			route53ZoneID := tftest.EnvVar(tftest.EnvRoute53ZoneID)
 
 			options := tftest.Options(
-				tftest.DefaultRegion, // us-east-1
+				"us-east-1", // tftest.DefaultRegion is us-west-2, so we have to hardcode this value
 				map[string]interface{}{
 					"subdomain":           subdomain,
 					"aws_route53_zone_id": route53ZoneID,
