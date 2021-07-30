@@ -41,7 +41,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_aws-cloudfront-logs-bucket"></a> [aws-cloudfront-logs-bucket](#module\_aws-cloudfront-logs-bucket) | ../aws-s3-private-bucket | n/a |
+| <a name="module_aws-cloudfront-logs-bucket"></a> [aws-cloudfront-logs-bucket](#module\_aws-cloudfront-logs-bucket) | ../aws-s3-private-bucket |  |
 
 ## Resources
 

@@ -22,9 +22,9 @@ func TestAWSParamsSecretReaderPolicy(t *testing.T) {
 	setupTerraformOptions := tftest.Options(
 		tftest.IAMRegion,
 		map[string]interface{}{
-			"role_name":         random.UniqueId(),
-			"iam_path":          fmt.Sprintf("/%s/", random.UniqueId()),
-			"source_account_id": curAcct,
+			"role_name":          random.UniqueId(),
+			"iam_path":           fmt.Sprintf("/%s/", random.UniqueId()),
+			"source_account_ids": []string{curAcct},
 		},
 	)
 	setupTerraformOptions.TerraformDir = "../aws-iam-role-crossacct"

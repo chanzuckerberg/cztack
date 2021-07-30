@@ -44,7 +44,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_aurora"></a> [aurora](#module\_aurora) | ../aws-aurora | n/a |
+| <a name="module_aurora"></a> [aurora](#module\_aurora) | ../aws-aurora |  |
 
 ## Resources
 

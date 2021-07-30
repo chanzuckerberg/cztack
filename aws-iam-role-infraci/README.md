@@ -39,8 +39,6 @@ No modules.
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | n/a | `string` | `"infraci"` | no |
 | <a name="input_saml_idp_arn"></a> [saml\_idp\_arn](#input\_saml\_idp\_arn) | The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided. | `string` | `""` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_source_account_id"></a> [source\_account\_id](#input\_source\_account\_id) | The source AWS account to establish a trust relationship. Ignored if empty or not provided. DEPRECATED: Pleaase use source\_account\_ids. | `string` | `""` | no |
-| <a name="input_source_account_ids"></a> [source\_account\_ids](#input\_source\_account\_ids) | The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided. | `set(string)` | `[]` | no |
 | <a name="input_terraform_state_lock_dynamodb_arns"></a> [terraform\_state\_lock\_dynamodb\_arns](#input\_terraform\_state\_lock\_dynamodb\_arns) | ARNs of the state file DynamoDB tables | `list(string)` | `[]` | no |
 
 ## Outputs

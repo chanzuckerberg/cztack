@@ -3,11 +3,6 @@ variable "role_name" {
   description = "The name for the role"
 }
 
-variable "source_account_id" {
-  type        = string
-  description = "The source aws account id to allow sts:AssumeRole. DEPRECATED: Please use source_account_ids"
-}
-
 variable "source_account_ids" {
   type        = set(string)
   default     = []

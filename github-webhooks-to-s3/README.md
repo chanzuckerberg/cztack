@@ -39,9 +39,9 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_attach-logs"></a> [attach-logs](#module\_attach-logs) | ../aws-iam-policy-cwlogs | n/a |
-| <a name="module_bucket"></a> [bucket](#module\_bucket) | ../aws-s3-private-bucket | n/a |
-| <a name="module_github_secret"></a> [github\_secret](#module\_github\_secret) | ../aws-ssm-params | n/a |
+| <a name="module_attach-logs"></a> [attach-logs](#module\_attach-logs) | ../aws-iam-policy-cwlogs |  |
+| <a name="module_bucket"></a> [bucket](#module\_bucket) | ../aws-s3-private-bucket |  |
+| <a name="module_github_secret"></a> [github\_secret](#module\_github\_secret) | ../aws-ssm-params |  |
 
 ## Resources
 
