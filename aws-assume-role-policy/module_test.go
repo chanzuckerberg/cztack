@@ -8,12 +8,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// type oidc struct {
-// 	idp_arn    string
-// 	client_ids []string
-// 	provider   string
-// }
-
 func TestAWSAssumeRolePolicy(t *testing.T) {
 	curAcct := tftest.AWSCurrentAccountID(t)
 	oidcCfg := []map[string]interface{}{
