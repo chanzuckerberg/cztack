@@ -9,7 +9,7 @@ locals {
 
 data "aws_iam_policy_document" "assume-role" {
   dynamic "statement" {
-    for_each = compact([var.source_account_id])
+    for_each = var.source_account_ids
     content {
       principals {
         type        = "AWS"
