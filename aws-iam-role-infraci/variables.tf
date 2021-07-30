@@ -18,6 +18,12 @@ variable "saml_idp_arn" {
   description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
 }
 
+variable "source_account_ids" {
+  type        = set(string)
+  default     = []
+  description = "The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided."
+}
+
 variable "project" {
   type        = string
   description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
