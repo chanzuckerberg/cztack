@@ -7,61 +7,21 @@ locals {
   }
 }
 
-data "aws_iam_policy_document" "assume-role" {
-  dynamic "statement" {
-    for_each = var.source_account_ids
-    content {
-      principals {
-        type        = "AWS"
-        identifiers = ["arn:aws:iam::${statement.value}:root"]
-      }
-      actions = ["sts:AssumeRole", "sts:TagSession"]
-    }
-  }
-
-  dynamic "statement" {
-    for_each = compact([var.saml_idp_arn])
-    content {
-      principals {
-        type        = "Federated"
-        identifiers = [statement.value]
-      }
-
-      actions = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
-
-      condition {
-        test     = "StringEquals"
-        variable = "SAML:aud"
-        values   = ["https://signin.aws.amazon.com/saml"]
-      }
-    }
-  }
-
-  dynamic "statement" {
-    for_each = var.oidc
-    iterator = oidc
-
-    content {
-      principals {
-        type        = "Federated"
-        identifiers = [oidc.value["idp_arn"]]
-      }
-
-      actions = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
-      condition {
-        test     = "StringEquals"
-        variable = "${oidc.value["provider"]}:aud"
-        values   = oidc.value["client_ids"]
-      }
-    }
-  }
-
+module "assume_role_policy" {
+  source             = "../aws-assume-role-policy"
+  source_account_ids = var.source_account_ids
+  saml_idp_arns      = var.saml_idp_arns
+  oidc               = var.oidc
+  env                = var.env
+  owner              = var.owner
+  service            = var.service
+  project            = var.project
 }
 
 resource "aws_iam_role" "poweruser" {
   name                 = var.role_name
   path                 = var.iam_path
-  assume_role_policy   = data.aws_iam_policy_document.assume-role.json
+  assume_role_policy   = module.assume_role_policy.json
   max_session_duration = var.max_session_duration
   tags                 = local.tags
 }

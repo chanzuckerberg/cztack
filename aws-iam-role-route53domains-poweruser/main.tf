@@ -7,41 +7,20 @@ locals {
   }
 }
 
-data "aws_iam_policy_document" "assume-role" {
-  dynamic "statement" {
-    for_each = var.source_account_ids
-    content {
-      principals {
-        type        = "AWS"
-        identifiers = ["arn:aws:iam::${statement.value}:root"]
-      }
-      actions = ["sts:AssumeRole"]
-    }
-  }
-
-  dynamic "statement" {
-    for_each = compact([var.saml_idp_arn])
-    content {
-      principals {
-        type        = "Federated"
-        identifiers = [statement.value]
-      }
-
-      actions = ["sts:AssumeRoleWithSAML"]
-
-      condition {
-        test     = "StringEquals"
-        variable = "SAML:aud"
-        values   = ["https://signin.aws.amazon.com/saml"]
-      }
-    }
-  }
+module "assume_role_policy" {
+  source             = "../aws-assume-role-policy"
+  source_account_ids = var.source_account_ids
+  saml_idp_arns      = var.saml_idp_arns
+  env                = var.env
+  owner              = var.owner
+  service            = var.service
+  project            = var.project
 }
 
 resource "aws_iam_role" "route53domains-poweruser" {
   name               = var.role_name
   path               = var.iam_path
-  assume_role_policy = data.aws_iam_policy_document.assume-role.json
+  assume_role_policy = module.assume_role_policy.json
   tags               = local.tags
 }
 

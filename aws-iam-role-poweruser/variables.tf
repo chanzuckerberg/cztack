@@ -9,15 +9,16 @@ variable "source_account_ids" {
   description = "The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided."
 }
 
-variable "saml_idp_arn" {
-  type        = string
-  default     = ""
-  description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
+variable "saml_idp_arns" {
+  type        = set(string)
+  default     = []
+  description = "The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided."
 }
 
 variable "iam_path" {
-  type    = string
-  default = "/"
+  type        = string
+  default     = "/"
+  description = "IAM path for the role."
 }
 
 variable "oidc" {

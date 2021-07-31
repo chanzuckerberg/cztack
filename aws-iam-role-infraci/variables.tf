@@ -12,16 +12,16 @@ variable "terraform_state_lock_dynamodb_arns" {
   description = "ARNs of the state file DynamoDB tables"
 }
 
-variable "saml_idp_arn" {
-  type        = string
-  default     = ""
-  description = "The AWS SAML IDP arn to establish a trust relationship. Ignored if empty or not provided."
-}
-
 variable "source_account_ids" {
   type        = set(string)
   default     = []
   description = "The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided."
+}
+
+variable "saml_idp_arns" {
+  type        = set(string)
+  default     = []
+  description = "The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided."
 }
 
 variable "project" {
