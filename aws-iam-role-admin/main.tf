@@ -1,10 +1,10 @@
 module "role" {
-  source                = "../aws-iam-role-crossacct"
-  role_name             = var.role_name
-  iam_path              = var.iam_path
-  source_account_ids    = var.source_account_ids
-  saml_idp_arns         = var.saml_idp_arns
-  oidc                  = var.oidc
+  source             = "../aws-iam-role-crossacct"
+  role_name          = var.role_name
+  iam_path           = var.iam_path
+  source_account_ids = var.source_account_ids
+  saml_idp_arns      = var.saml_idp_arns
+  oidc               = var.oidc
 
   project = var.project
   env     = var.env

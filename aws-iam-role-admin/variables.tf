@@ -4,7 +4,7 @@ variable "role_name" {
 }
 
 variable "source_account_ids" {
-  type        = set)string)
+  type        = set(string)
   description = "A set of accounts which are allowed to assume this role."
   default     = []
 }
