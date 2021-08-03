@@ -10,7 +10,7 @@ variable "source_account_ids" {
 }
 
 variable "saml_idp_arns" {
-  type        = string
+  type        = set(string)
   description = "A set of IDP SAML arns allowed to assume this role."
   default     = []
 }
