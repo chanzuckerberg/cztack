@@ -37,6 +37,7 @@ variable "iam_path" {
 variable "all" {
   type    = bool
   default = false
+  description = "Whether this role should be attached to the AdministratorAccess policy"
 }
 
 variable "readonly" {
@@ -61,6 +62,8 @@ variable "kms" {
   type = bool
 
   default = false
+  description = "Whether this role should be attached to the AWSKeyManagementServicePowerUser policy"
+
 }
 
 variable "config" {
@@ -73,6 +76,7 @@ variable "acm" {
   type = bool
 
   default = false
+  description = "Whether this role should be attached to the AWSCertificateManagerFullAccess policy"
 }
 
 variable "cloudwatch" {

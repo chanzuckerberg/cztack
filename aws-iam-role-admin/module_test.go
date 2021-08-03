@@ -16,7 +16,7 @@ func TestAWSIAMRoleAdmin(t *testing.T) {
 		{
 			"idp_arn":    "oidcARN1",
 			"client_ids": []string{"clientID1", "clientID2", "clientID3"},
-			"provider":   "testProvider",
+			"provider":   "testProvider.okta.com",
 		},
 	}
 	singleSourceAcct := map[string]interface{}{
