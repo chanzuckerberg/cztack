@@ -24,7 +24,8 @@ variable "source_account_ids" {
 }
 
 variable "saml_idp_arns" {
-  type        = list(string)
+  type        = set(string)
+  default     = []
   description = "The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided."
 }
 
