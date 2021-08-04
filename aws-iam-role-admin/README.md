@@ -42,8 +42,8 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acm"></a> [acm](#input\_acm) | n/a | `bool` | `false` | no |
-| <a name="input_all"></a> [all](#input\_all) | n/a | `bool` | `false` | no |
+| <a name="input_acm"></a> [acm](#input\_acm) | Whether this role should be attached to the AWSCertificateManagerFullAccess policy | `bool` | `false` | no |
+| <a name="input_all"></a> [all](#input\_all) | Whether this role should be attached to the AdministratorAccess policy | `bool` | `false` | no |
 | <a name="input_cloudtrail"></a> [cloudtrail](#input\_cloudtrail) | n/a | `bool` | `false` | no |
 | <a name="input_cloudwatch"></a> [cloudwatch](#input\_cloudwatch) | n/a | `bool` | `false` | no |
 | <a name="input_config"></a> [config](#input\_config) | n/a | `bool` | `false` | no |
@@ -53,7 +53,7 @@ No requirements.
 | <a name="input_iam"></a> [iam](#input\_iam) | Permit IAMFullAccess (iam:*) for this role. | `bool` | `false` | no |
 | <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | IAM path under which to create the role. | `string` | `"/"` | no |
 | <a name="input_kinesis"></a> [kinesis](#input\_kinesis) | n/a | `bool` | `false` | no |
-| <a name="input_kms"></a> [kms](#input\_kms) | n/a | `bool` | `false` | no |
+| <a name="input_kms"></a> [kms](#input\_kms) | Whether this role should be attached to the AWSKeyManagementServicePowerUser policy | `bool` | `false` | no |
 | <a name="input_lambda"></a> [lambda](#input\_lambda) | n/a | `bool` | `false` | no |
 | <a name="input_oidc"></a> [oidc](#input\_oidc) | A list of AWS OIDC IDPs to establish a trust relationship for this role. | <pre>list(object(<br>    {<br>      idp_arn : string,          # the AWS IAM IDP arn<br>      client_ids : list(string), # a list of oidc client ids<br>      provider : string          # your provider url, such as foo.okta.com<br>    }<br>  ))</pre> | `[]` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | n/a | `string` | n/a | yes |
@@ -61,7 +61,7 @@ No requirements.
 | <a name="input_readonly"></a> [readonly](#input\_readonly) | Permit readonly access (across all services). | `bool` | `true` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The name of the role to create. | `string` | n/a | yes |
 | <a name="input_route53"></a> [route53](#input\_route53) | Permit Route53 (route53:*) for this role. | `bool` | `false` | no |
-| <a name="input_saml_idp_arns"></a> [saml\_idp\_arns](#input\_saml\_idp\_arns) | A set of IDP SAML arns allowed to assume this role. | `string` | `[]` | no |
+| <a name="input_saml_idp_arns"></a> [saml\_idp\_arns](#input\_saml\_idp\_arns) | A set of IDP SAML arns allowed to assume this role. | `set(string)` | `[]` | no |
 | <a name="input_secretsmanager"></a> [secretsmanager](#input\_secretsmanager) | n/a | `bool` | `false` | no |
 | <a name="input_securityhub"></a> [securityhub](#input\_securityhub) | n/a | `bool` | `false` | no |
 | <a name="input_service"></a> [service](#input\_service) | n/a | `string` | n/a | yes |
