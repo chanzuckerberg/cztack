@@ -35,8 +35,8 @@ variable "iam_path" {
 }
 
 variable "all" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Whether this role should be attached to the AdministratorAccess policy"
 }
 
@@ -61,7 +61,7 @@ variable "route53" {
 variable "kms" {
   type = bool
 
-  default = false
+  default     = false
   description = "Whether this role should be attached to the AWSKeyManagementServicePowerUser policy"
 
 }
@@ -75,7 +75,7 @@ variable "config" {
 variable "acm" {
   type = bool
 
-  default = false
+  default     = false
   description = "Whether this role should be attached to the AWSCertificateManagerFullAccess policy"
 }
 
