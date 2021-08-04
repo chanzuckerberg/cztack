@@ -12,19 +12,11 @@ import (
 
 func TestAWSIAMRoleAdmin(t *testing.T) {
 	curAcct := tftest.AWSCurrentAccountID(t)
-	oidcCfg := []map[string]interface{}{
-		{
-			"idp_arn":    "oidcARN1",
-			"client_ids": []string{"clientID1", "clientID2", "clientID3"},
-			"provider":   "testProvider.okta.com",
-		},
-	}
 	singleSourceAcct := map[string]interface{}{
 		"role_name":          random.UniqueId(),
 		"source_account_ids": []string{curAcct},
 		"iam_path":           fmt.Sprintf("/%s/", random.UniqueId()),
 		"saml_idp_arns":      []string{"samlARN1", "samlARN2"},
-		"oidc":               oidcCfg,
 	}
 	// TODO(anyone): see if we need a legit account ID or if we can put in "12345" for a second source account
 	testList := []tftest.Test{
