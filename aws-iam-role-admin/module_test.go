@@ -16,7 +16,6 @@ func TestAWSIAMRoleAdmin(t *testing.T) {
 		"role_name":          random.UniqueId(),
 		"source_account_ids": []string{curAcct},
 		"iam_path":           fmt.Sprintf("/%s/", random.UniqueId()),
-		"saml_idp_arns":      []string{"samlARN1", "samlARN2"},
 	}
 	// TODO(anyone): see if we need a legit account ID or if we can put in "12345" for a second source account
 	testList := []tftest.Test{
