@@ -43,9 +43,11 @@ variable "oidc" {
 
 variable "ci_manager" {
   type = list(object(
-    sts_external_id : string, 
-    caller_account_id : string,
+    {
+      sts_external_id : string,
+      caller_account_id : string
+    }
   ))
-  default = []
-  description = "If this is a CI manager, include the external ID value (name of the service) and its account ID"
+  default     = []
+  description = "If this role will manage CI profiles, include the external ID value (name of the service) and its account ID"
 }
