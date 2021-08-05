@@ -53,14 +53,14 @@ data "aws_iam_policy_document" "assume-role" {
     content {
       principals {
         type        = "AWS"
-        identifiers = ["arn:aws:iam::${var.ci_manager.account_id}:root"]
+        identifiers = ["arn:aws:iam::${statement.value.account_id}:root"]
       }
       actions = ["sts:AssumeRole"]
       effect  = "Allow"
       condition {
         test     = "StringEquals"
         variable = "sts:ExternalId"
-        values   = [var.sts_external_id]
+        values   = [statement.value.sts_external_id]
       }
     }
   }

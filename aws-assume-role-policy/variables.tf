@@ -42,10 +42,10 @@ variable "oidc" {
 }
 
 variable "ci_manager" {
-  type = object(
+  type = list(object(
     sts_external_id : string, 
     caller_account_id : string,
-  )
-  default = {}
+  ))
+  default = []
   description = "If this is a CI manager, include the external ID value (name of the service) and its account ID"
 }
