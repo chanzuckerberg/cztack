@@ -65,20 +65,3 @@ data "aws_iam_policy_document" "assume-role" {
     }
   }
 }
-
-statement {
-  sid     = "ExternalPartyAssume"
-  effect  = "Allow"
-  actions = ["sts:AssumeRole"]
-
-  principals {
-    type        = "AWS"
-    identifiers = ["arn:aws:iam::${var.caller_account_id}:root"]
-  }
-
-  condition {
-    test     = "StringEquals"
-    variable = "sts:ExternalId"
-    values   = [var.sts_external_id]
-  }
-}
