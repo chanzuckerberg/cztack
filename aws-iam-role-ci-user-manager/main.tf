@@ -7,6 +7,12 @@ module assume_role_policy {
   owner              = var.owner
   service            = var.service
   project            = var.project
+  ci_manager = [
+    {
+      sts_external_id   = var.sts_external_id
+      caller_account_id = var.caller_account_id
+    }
+  ]
 }
 
 resource "aws_iam_role" "ci-manager" {
@@ -46,20 +52,6 @@ data "aws_iam_policy_document" "ci-manager" {
     ]
 
     resources = ["*"] // list all users to be able to use the console
-  }
-
-  statement {
-    sid = "ExternalPartyAssume"
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.caller_account_id}:root"]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "sts:ExternalId"
-      values   = [var.sts_external_id]
-    }
   }
 }
 

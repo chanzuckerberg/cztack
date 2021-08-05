@@ -47,4 +47,21 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.ci_manager
+    content {
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${statement.value.caller_account_id}:root"]
+      }
+      actions = ["sts:AssumeRole"]
+      effect  = "Allow"
+      condition {
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = [statement.value.sts_external_id]
+      }
+    }
+  }
 }
