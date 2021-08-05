@@ -7,10 +7,12 @@ module assume_role_policy {
   owner              = var.owner
   service            = var.service
   project            = var.project
-  ci_manager = {
-    sts_external_id   = var.sts_external_id
-    caller_account_id = var.caller_account_id
-  }
+  ci_manager = [
+    {
+      sts_external_id   = var.sts_external_id
+      caller_account_id = var.caller_account_id
+    }
+  ]
 }
 
 resource "aws_iam_role" "ci-manager" {
