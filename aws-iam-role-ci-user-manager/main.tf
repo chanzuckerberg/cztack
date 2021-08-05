@@ -50,6 +50,9 @@ data "aws_iam_policy_document" "ci-manager" {
 
   statement {
     sid = "ExternalPartyAssume"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    
     principals {
       type        = "AWS"
       identifiers = ["arn:aws:iam::${var.caller_account_id}:root"]
