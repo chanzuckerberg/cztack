@@ -47,4 +47,38 @@ data "aws_iam_policy_document" "assume-role" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.ci_manager
+    content {
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${var.ci_manager.account_id}:root"]
+      }
+      actions = ["sts:AssumeRole"]
+      effect  = "Allow"
+      condition {
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = [var.sts_external_id]
+      }
+    }
+  }
 }
+
+statement {
+    sid = "ExternalPartyAssume"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${var.caller_account_id}:root"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "sts:ExternalId"
+      values   = [var.sts_external_id]
+    }
+  }
