@@ -47,8 +47,12 @@ variable "saml_idps" {
     saml_auds : list(string)
   }))
   default     = []
-  description = "The AWS SAML IDPs to establish a trust relationship. Ignored if empty or missing."
+  description = <<EOF
+  The AWS SAML IDPs to establish a trust relationship.
+  Ignored if empty or missing."
+  If unsure, saml_auds would typically be ["https://signin.aws.amazon.com/saml"].
 
+  EOF
 }
 
 variable "role_name" {
