@@ -13,7 +13,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_role"></a> [role](#module\_role) | ../aws-iam-role-crossacct |  |
+| <a name="module_role"></a> [role](#module\_role) | ../aws-iam-role-crossacct | n/a |
 
 ## Resources
 

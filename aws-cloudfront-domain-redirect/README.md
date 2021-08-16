@@ -45,8 +45,8 @@ module domain-redirect {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cert"></a> [cert](#module\_cert) | ../aws-acm-certificate |  |
-| <a name="module_security_headers_lambda"></a> [security\_headers\_lambda](#module\_security\_headers\_lambda) | ../aws-lambda-edge-add-security-headers |  |
+| <a name="module_cert"></a> [cert](#module\_cert) | ../aws-acm-certificate | n/a |
+| <a name="module_security_headers_lambda"></a> [security\_headers\_lambda](#module\_security\_headers\_lambda) | ../aws-lambda-edge-add-security-headers | n/a |
 
 ## Resources
 

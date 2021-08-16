@@ -34,7 +34,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_client"></a> [client](#module\_client) | ../aws-iam-role-crossacct |  |
+| <a name="module_client"></a> [client](#module\_client) | ../aws-iam-role-crossacct | n/a |
 
 ## Resources
 
