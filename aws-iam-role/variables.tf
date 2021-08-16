@@ -35,10 +35,20 @@ variable "max_session_duration" {
   default     = 3600
 }
 
+// DEPRECATED: use saml_idps instead
 variable "saml_idp_arns" {
   type        = set(string)
   default     = []
   description = "The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided."
+}
+variable "saml_idps" {
+  type = list(object({
+    saml_idp_arns : list(string),
+    saml_auds : list(string)
+  }))
+  default     = []
+  description = "The AWS SAML IDPs to establish a trust relationship. Ignored if empty or missing."
+
 }
 
 variable "role_name" {

@@ -110,8 +110,8 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function |  |
-| <a name="module_logs_policy"></a> [logs\_policy](#module\_logs\_policy) | ../aws-iam-policy-cwlogs |  |
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function | n/a |
+| <a name="module_logs_policy"></a> [logs\_policy](#module\_logs\_policy) | ../aws-iam-policy-cwlogs | n/a |
 
 ## Resources
 
