@@ -6,7 +6,7 @@ This module creates a bucket indented for non-public traffic. It can be made pub
 
 ```hcl
 module "s3-bucket" {
-  source      = "github.com/chanzuckerberg/cztack/aws-s3-private-bucket?ref=v0.33.1"
+  source      = "github.com/chanzuckerberg/cztack//aws-s3-private-bucket?ref=v0.43.1"
   bucket_name = "..."
   env         = var.env
   owner       = var.owner
