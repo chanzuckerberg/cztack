@@ -38,7 +38,7 @@ output "alb_http_listener_arn" {
 
 output "ecs_service_arn" {
   description = "The ARN of the ECS services that is created"
-  value       = ont(aws_ecs_service.*.id)
+  value       = one(aws_ecs_service.*.id)
 }
   
 
