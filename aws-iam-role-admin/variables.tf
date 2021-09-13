@@ -15,7 +15,7 @@ variable "saml_idp_arns" {
   default     = []
 }
 
-variable oidc {
+variable "oidc" {
   type = list(object(
     {
       idp_arn : string,          # the AWS IAM IDP arn

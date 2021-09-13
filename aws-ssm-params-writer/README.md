@@ -19,30 +19,20 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_ssm_parameter.parameter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
-| [aws_kms_key.key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/kms_key) | data source |
+| aws | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| <a name="input_parameters"></a> [parameters](#input\_parameters) | Map from parameter names to values to set. | `map(string)` | n/a | yes |
-| <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| parameters | Map from parameter names to values to set. | `map(string)` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+No output.
+
 <!-- END -->

@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-module assume_role_policy {
+module "assume_role_policy" {
   source             = "../aws-assume-role-policy"
   source_account_ids = toset([data.aws_caller_identity.current.account_id])
   env                = var.env

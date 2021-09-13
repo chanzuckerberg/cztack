@@ -19,23 +19,14 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_iam_account_password_policy.strict](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_password_policy) | resource |
+| aws | n/a |
 
 ## Inputs
 
-No inputs.
+No input.
 
 ## Outputs
 
-No outputs.
+No output.
+
 <!-- END -->
