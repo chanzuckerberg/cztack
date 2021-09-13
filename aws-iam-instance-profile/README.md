@@ -37,37 +37,25 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_iam_instance_profile.profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
-| [aws_iam_role.role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.cloudwatch-agent](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_policy_document.assume-role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| aws | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Creates a role for use with the instance profile. | `bool` | `true` | no |
-| <a name="input_existing_role_name"></a> [existing\_role\_name](#input\_existing\_role\_name) | Use existing role with the given name instead of creating a new role. Attaches all standard policies to given role. Only used if create\_role is false. | `string` | `null` | no |
-| <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | The IAM path to the role. | `string` | `"/"` | no |
-| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | `string` | n/a | yes |
-| <a name="input_role_description"></a> [role\_description](#input\_role\_description) | The description of the IAM role. | `string` | `""` | no |
+| create\_role | Creates a role for use with the instance profile. | `bool` | `true` | no |
+| existing\_role\_name | Use existing role with the given name instead of creating a new role. Attaches all standard policies to given role. Only used if create\_role is false. | `string` | `null` | no |
+| iam\_path | The IAM path to the role. | `string` | `"/"` | no |
+| name\_prefix | Creates a unique name for both the role and instance profile beginning with the specified prefix. Max 32 characters long. | `string` | n/a | yes |
+| role\_description | The description of the IAM role. | `string` | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_profile_arn"></a> [profile\_arn](#output\_profile\_arn) | The ARN assigned by AWS to the instance profile. |
-| <a name="output_profile_name"></a> [profile\_name](#output\_profile\_name) | The instance profile's name. |
-| <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | The Amazon Resource Name (ARN) specifying the role. |
-| <a name="output_role_name"></a> [role\_name](#output\_role\_name) | The name of the role. |
+| profile\_arn | The ARN assigned by AWS to the instance profile. |
+| profile\_name | The instance profile's name. |
+| role\_arn | The Amazon Resource Name (ARN) specifying the role. |
+| role\_name | The name of the role. |
+
 <!-- END -->

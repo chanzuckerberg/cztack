@@ -24,29 +24,18 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy_attachment.attach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy_attachment) | resource |
-| [aws_iam_policy_document.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| aws | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | n/a | `string` | `"/"` | no |
-| <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The role to which this policy should be attached. | `string` | n/a | yes |
-| <a name="input_secrets_arns"></a> [secrets\_arns](#input\_secrets\_arns) | List of secrets ARNs for reading. | `list(string)` | n/a | yes |
+| iam\_path | n/a | `string` | `"/"` | no |
+| role\_name | The role to which this policy should be attached. | `string` | n/a | yes |
+| secrets\_arns | List of secrets ARNs for reading. | `list(string)` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+No output.
+
 <!-- END -->

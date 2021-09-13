@@ -102,52 +102,28 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_bless"></a> [bless](#provider\_bless) | n/a |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
-
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function | n/a |
-| <a name="module_logs_policy"></a> [logs\_policy](#module\_logs\_policy) | ../aws-iam-policy-cwlogs | n/a |
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_iam_role.bless](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
-| [aws_kms_alias.bless](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
-| [aws_kms_alias.bless_kms_auth](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
-| [aws_kms_key.bless](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
-| [aws_kms_key.bless_kms_auth](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
-| [bless_ca.bless](https://registry.terraform.io/providers/hashicorp/bless/latest/docs/resources/ca) | resource |
-| [random_id.path](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.kmsauth](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [bless_lambda.code](https://registry.terraform.io/providers/hashicorp/bless/latest/docs/data-sources/lambda) | data source |
+| aws | n/a |
+| bless | n/a |
+| random | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_authorized_users"></a> [authorized\_users](#input\_authorized\_users) | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | `list(any)` | `[]` | no |
-| <a name="input_bless_logging_level"></a> [bless\_logging\_level](#input\_bless\_logging\_level) | Bless lambda logging level. | `string` | `"INFO"` | no |
-| <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | The IAM path under which the Bless lambda will be run. | `string` | `"/"` | no |
-| <a name="input_kmsauth_iam_group_name_format"></a> [kmsauth\_iam\_group\_name\_format](#input\_kmsauth\_iam\_group\_name\_format) | Formatting string to tell bless which IAM groups are relevant when checking SSH certificate principal validity. | `string` | `"{}"` | no |
-| <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| authorized\_users | A list of IAM users authorized ot invoke bless and the corresponding kmsauth key. | `list(any)` | `[]` | no |
+| bless\_logging\_level | Bless lambda logging level. | `string` | `"INFO"` | no |
+| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| iam\_path | The IAM path under which the Bless lambda will be run. | `string` | `"/"` | no |
+| kmsauth\_iam\_group\_name\_format | Formatting string to tell bless which IAM groups are relevant when checking SSH certificate principal validity. | `string` | `"{}"` | no |
+| owner | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ca_public_key"></a> [ca\_public\_key](#output\_ca\_public\_key) | n/a |
-| <a name="output_lambda_arn"></a> [lambda\_arn](#output\_lambda\_arn) | n/a |
+| ca\_public\_key | n/a |
+| lambda\_arn | n/a |
+
 <!-- END -->

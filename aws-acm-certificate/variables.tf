@@ -20,7 +20,7 @@ variable "validation_record_ttl" {
   description = "TTL value of DNS validation records"
 }
 
-variable tags {
+variable "tags" {
   type        = object({ project : string, env : string, service : string, owner : string, managedBy : string })
   description = "Tags to apply to certificate"
 }
