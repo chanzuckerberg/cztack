@@ -35,3 +35,8 @@ output "alb_http_listener_arn" {
   description = "ALB HTTP listener ARN, only if HTTPS forwarding is disabled"
   value       = var.disable_http_redirect ? aws_lb_listener.http.arn : null
 }
+
+output "ecs_service_arn" {
+  description = "The ARN of the ECS service that is created"
+  value       = aws_ecs_service.id
+}
