@@ -11,7 +11,7 @@ locals {
   }
 }
 
-resource aws_lambda_function lambda {
+resource "aws_lambda_function" "lambda" {
   s3_bucket = var.source_s3_bucket
   s3_key    = var.source_s3_key
 
@@ -52,7 +52,7 @@ resource aws_lambda_function lambda {
   tags = local.tags
 }
 
-data aws_iam_policy_document lambda_role_policy {
+data "aws_iam_policy_document" "lambda_role_policy" {
   statement {
     principals {
       type = "Service"
@@ -65,7 +65,7 @@ data aws_iam_policy_document lambda_role_policy {
   }
 }
 
-resource aws_iam_role role {
+resource "aws_iam_role" "role" {
   name               = local.name
   path               = var.lambda_role_path
   assume_role_policy = data.aws_iam_policy_document.lambda_role_policy.json
