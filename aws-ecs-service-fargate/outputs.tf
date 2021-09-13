@@ -36,9 +36,12 @@ output "alb_http_listener_arn" {
   value       = var.disable_http_redirect ? aws_lb_listener.http.arn : null
 }
 
-output "ecs_service_arn" {
-  description = "The ARN of the ECS services that is created"
-  value       = one(aws_ecs_service.*.id)
+output "ecs_service_job_arn" {
+  description = "The ARN of the ECS managed service that is created"
+  value       = one(aws_ecs_service.job[*].id)
 }
   
-
+output "ecs_service_unmanaged_job_arn" {
+  description = "The ARN of the ECS unmanaged service that is created"
+  value       = one(aws_ecs_service.unmanaged-job[*].id)
+}
