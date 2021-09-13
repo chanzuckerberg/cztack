@@ -38,5 +38,5 @@ output "alb_http_listener_arn" {
 
 output "ecs_service_arn" {
   description = "The ARN of the ECS unmanaged service that is created"
-  value       = var.manage_task_definition ? aws_ecs_service.managed[0].id : aws_ecs_service.unmanaged[0].id
+  value       = var.manage_task_definition ? aws_ecs_service.job[0].id : aws_ecs_service.unmanaged-job[0].id
 }
