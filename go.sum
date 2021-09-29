@@ -300,8 +300,8 @@ github.com/gruntwork-io/go-commons v0.8.0 h1:k/yypwrPqSeYHevLlEDmvmgQzcyTwrlZGRa
 github.com/gruntwork-io/go-commons v0.8.0/go.mod h1:gtp0yTtIBExIZp7vyIV9I0XQkVwiQZze678hvDXof78=
 github.com/gruntwork-io/gruntwork-cli v0.5.1/go.mod h1:IBX21bESC1/LGoV7jhXKUnTQTZgQ6dYRsoj/VqxUSZQ=
 github.com/gruntwork-io/terratest v0.29.0/go.mod h1:aVz7181EP4okz7LMx6BLpiF7bL8wkq+h57V6uicvoc0=
-github.com/gruntwork-io/terratest v0.37.2 h1:qHf2y9YjshwVbkQ88RqoqvW9v7QSYXYlpCWomXFpkuw=
-github.com/gruntwork-io/terratest v0.37.2/go.mod h1:CSHpZNJdqYQ+TUrigM100jcahRUV5X6w7K2kZJ8iylY=
+github.com/gruntwork-io/terratest v0.37.11 h1:IXRDF4PtvYLgH2K5B97nLZCaWsLd+IGgoetOwMs429s=
+github.com/gruntwork-io/terratest v0.37.11/go.mod h1:CSHpZNJdqYQ+TUrigM100jcahRUV5X6w7K2kZJ8iylY=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-cleanhttp v0.5.0/go.mod h1:JpRdi6/HCYpAwUzNwuwqhbovhLtngrth3wmdIIUrZ80=
