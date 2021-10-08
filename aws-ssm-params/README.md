@@ -32,21 +32,30 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_ssm_parameter.secret](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| env | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| parameters | Set of names of secrets. | `set(string)` | n/a | yes |
-| project | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| service | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | Set of names of secrets. | `set(string)` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| values | Map from keys to corresponding values stored in the SSM Parameter Store. |
-
+| <a name="output_values"></a> [values](#output\_values) | Map from keys to corresponding values stored in the SSM Parameter Store. |
 <!-- END -->
