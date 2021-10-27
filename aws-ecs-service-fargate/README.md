@@ -225,7 +225,7 @@ No requirements.
 | <a name="input_task_egress_security_group_ids"></a> [task\_egress\_security\_group\_ids](#input\_task\_egress\_security\_group\_ids) | Security groups the task is allowed to communicate with for outbound traffic. Only used if awsvpc\_network is true. | `list(string)` | `[]` | no |
 | <a name="input_task_role_arn"></a> [task\_role\_arn](#input\_task\_role\_arn) | n/a | `string` | n/a | yes |
 | <a name="input_task_subnets"></a> [task\_subnets](#input\_task\_subnets) | List of subnets in which to deploy the task for awsvpc networking mode. | `list(string)` | `[]` | no |
-| <a name="input_volumes"></a> [volumes](#input\_volumes) | Volumes defined per the efs task definition [docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#volume) | `list` | `[]` | no |
+| <a name="input_volumes"></a> [volumes](#input\_volumes) | Volumes defined per the efs task definition [docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#volume) | `list(any)` | `[]` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | n/a | `string` | n/a | yes |
 | <a name="input_with_service_discovery"></a> [with\_service\_discovery](#input\_with\_service\_discovery) | Register the service with ECS service discovery. Adds a sub-zone to the given route53\_zone\_id. | `bool` | `false` | no |
 
