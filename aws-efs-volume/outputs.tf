@@ -10,8 +10,3 @@ output "dns_name" {
 output "security_group" {
   value = aws_security_group.efs.id
 }
-
-output "ecs_volume_config" {
-  description = "Volume configuration to satisfy ECS Volume requirements. Learn more https://docs.aws.amazon.com/AmazonECS/latest/userguide/efs-volumes.html"
-  value       = local.ecs_input_config
-}
