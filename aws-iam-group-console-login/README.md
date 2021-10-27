@@ -26,19 +26,31 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_iam_group.login](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
+| [aws_iam_group_policy_attachment.self-iam](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_policy.self-iam](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy_document.self-iam](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| group\_name | Name of the group to be created. | `string` | `"console-login"` | no |
-| iam\_path | IAM path under which resources will be created. | `string` | `"/"` | no |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | Name of the group to be created. | `string` | `"console-login"` | no |
+| <a name="input_iam_path"></a> [iam\_path](#input\_iam\_path) | IAM path under which resources will be created. | `string` | `"/"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| group\_name | n/a |
-
+| <a name="output_group_name"></a> [group\_name](#output\_group\_name) | n/a |
 <!-- END -->
