@@ -6,12 +6,12 @@ locals {
     owner     = var.owner
     managedBy = "terraform"
   }
-  
+
   # Configuration pulled from here: https://docs.aws.amazon.com/AmazonECS/latest/userguide/efs-volumes.html
   ecs_input_config = {
-    "file_system_id": aws_efs_file_system.efs.id,
-    "root_directory": "/",
-    "transit_encryption": "ENABLED",
+    "file_system_id" : aws_efs_file_system.efs.id,
+    "root_directory" : "/",
+    "transit_encryption" : "ENABLED",
     # "transitEncryptionPort": var.transit_encryption_port,
     # "authorization_config": var.authorization_config,
   }

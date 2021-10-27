@@ -8,7 +8,7 @@ locals {
     canonical_user_id = lookup(grant, "canonical_user_id", null)
     uri               = lookup(grant, "uri", null)
     permissions       = grant.permissions
-    } if !(
+    } if ! (
     (lookup(grant, "canonical_user_id", null) != null && lookup(grant, "uri", null) != null) ||
     (lookup(grant, "canonical_user_id", null) == null && lookup(grant, "uri", null) == null)
     )

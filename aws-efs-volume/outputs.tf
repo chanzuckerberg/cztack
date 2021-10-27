@@ -13,5 +13,5 @@ output "security_group" {
 
 output "ecs_volume_config" {
   description = "Volume configuration to satisfy ECS Volume requirements. Learn more https://docs.aws.amazon.com/AmazonECS/latest/userguide/efs-volumes.html"
-  value = local.ecs_input_config
+  value       = local.ecs_input_config
 }
