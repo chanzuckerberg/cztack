@@ -12,8 +12,6 @@ locals {
     "file_system_id" : aws_efs_file_system.efs.id,
     "root_directory" : "/",
     "transit_encryption" : "ENABLED",
-    # "transitEncryptionPort": var.transit_encryption_port,
-    # "authorization_config": var.authorization_config,
   }
 }
 
