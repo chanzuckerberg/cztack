@@ -5,7 +5,6 @@ locals {
     service   = var.service
     owner     = var.owner
     managedBy = "terraform"
-    Name      = var.volume_name 
   }
 }
 
@@ -28,25 +27,21 @@ resource "aws_security_group" "efs" {
   description = "Allows NFS traffic from instances in a given security group."
   vpc_id      = var.vpc_id
 
-  ingress = [
-    {
-      from_port       = 2049
-      to_port         = 2049
-      protocol        = "tcp"
-      security_groups = var.security_groups
-      cidr_blocks     = var.cidr_blocks
-    }
-  ]
+  ingress {
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
+    security_groups = var.security_groups
+    cidr_blocks     = var.cidr_blocks
+  }
 
-  egress = [
-    {
-      from_port       = 2049
-      to_port         = 2049
-      protocol        = "tcp"
-      security_groups = var.security_groups
-      cidr_blocks     = var.cidr_blocks
-    }
-  ]
+  egress {
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
+    security_groups = var.security_groups
+    cidr_blocks     = var.cidr_blocks
+  }
 
   tags = local.tags
 }
