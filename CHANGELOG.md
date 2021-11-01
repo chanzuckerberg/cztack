@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.43.3](https://www.github.com/chanzuckerberg/cztack/compare/v0.43.2...v0.43.3) (2021-11-01)
+
+
+### Bug Fixes
+
+* release-please version pin ([#345](https://www.github.com/chanzuckerberg/cztack/issues/345)) ([14ac3b6](https://www.github.com/chanzuckerberg/cztack/commit/14ac3b66b1b236d2361797a4aed438017b107a9f))
+
 ## 0.42.0 2021-07-20
 
 * [8e3894ed](../../commit/8e3894edcdcaf5a7e8b40cba6de80d90e3452355) aws-single-page-static-site remove region from provider
