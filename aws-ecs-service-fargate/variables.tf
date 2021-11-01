@@ -202,3 +202,9 @@ variable "ordered_placement_strategy" {
   default     = []
   description = "Placement strategy for the task instances."
 }
+
+variable "volumes" {
+  type        = list(any)
+  default     = []
+  description = "Volumes defined per the efs task definition [docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#volume)"
+}
