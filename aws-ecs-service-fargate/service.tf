@@ -157,4 +157,21 @@ resource "aws_ecs_task_definition" "job" {
   memory                   = var.memory
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.task_execution_role.arn
+  # Fargate only supports Bind Mounts (no dockerVolumeConfiguration & efs volume configuration) and EFS.
+  # https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+  dynamic "volume" {
+    for_each = var.volumes
+    content {
+      name      = volume.value.name
+      host_path = try(volume.value.host_path, null)
+      dynamic "efs_volume_configuration" {
+        for_each = try(volume.value.efs_volume_configuration, [])
+        content {
+          file_system_id = try(efs_volume_configuration.value.file_system_id, null)
+          root_directory = try(efs_volume_configuration.value.root_directory, null)
+          # transit_encryption = try(efs_volume_configuration.value.transit_encryption, null)
+        }
+      }
+    }
+  }
 }
