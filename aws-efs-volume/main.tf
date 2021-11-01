@@ -35,9 +35,6 @@ resource "aws_security_group" "efs" {
       protocol          = "tcp"
       security_groups   = var.security_groups
       cidr_blocks       = var.cidr_blocks
-      ipv6_cidr_blocks  = null
-      prefix_list_ids   = []
-      self              = false
     }
   ]
   egress = [
@@ -48,9 +45,6 @@ resource "aws_security_group" "efs" {
       protocol          = "tcp"
       security_groups   = var.security_groups
       cidr_blocks       = var.cidr_blocks
-      ipv6_cidr_blocks  = null
-      prefix_list_ids   = []
-      self              = false
     }
   ]
   tags = local.tags
