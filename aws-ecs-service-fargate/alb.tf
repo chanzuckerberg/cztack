@@ -15,6 +15,7 @@ resource "aws_lb_target_group" "service" {
   target_type = "ip"
 
   deregistration_delay = 60
+  slow_start           = var.slow_start
 
   health_check {
     path     = var.health_check_path
