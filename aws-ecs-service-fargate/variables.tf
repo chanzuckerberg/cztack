@@ -208,3 +208,9 @@ variable "volumes" {
   default     = []
   description = "Volumes defined per the efs task definition [docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#volume)"
 }
+
+variable "slow_start" {
+  description = "Seconds for targets to warm up before the load balancer sends them a full share of requests. 30-900 seconds or 0 to disable."
+  type        = number
+  default     = 60
+}

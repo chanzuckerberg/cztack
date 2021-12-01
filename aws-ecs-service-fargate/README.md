@@ -217,6 +217,7 @@ No requirements.
 | <a name="input_registry_secretsmanager_arn"></a> [registry\_secretsmanager\_arn](#input\_registry\_secretsmanager\_arn) | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | `null` | no |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Zone in which to create an alias record to the ALB. | `string` | n/a | yes |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_slow_start"></a> [slow\_start](#input\_slow\_start) | Seconds for targets to warm up before the load balancer sends them a full share of requests. 30-900 seconds or 0 to disable. | `number` | `60` | no |
 | <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | ELB policy to determine which SSL/TLS encryption protocols are enabled. Probably don't touch this. | `string` | `null` | no |
 | <a name="input_subdomain"></a> [subdomain](#input\_subdomain) | Subdomain in the zone. Final domain name will be subdomain.zone | `string` | n/a | yes |
 | <a name="input_tag_service"></a> [tag\_service](#input\_tag\_service) | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
