@@ -22,7 +22,7 @@ module "lambda" {
   filename         = data.archive_file.lambda.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
   handler          = "index.handler"
-  runtime          = "nodejs10.x"
+  runtime          = "nodejs14.x"
   at_edge          = true
   publish_lambda   = true
 
