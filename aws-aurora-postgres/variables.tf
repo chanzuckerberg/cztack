@@ -136,3 +136,8 @@ variable "auto_minor_version_upgrade" {
   description = "Set the databases to automatically upgrade minor versions. WARNING - if this is enabled, make sure engine_version is set to a *prefix* rather that a specific version so that TF won't try to downgrade DB's that have been auto-upgraded. Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version"
   default     = false
 }
+
+variable "db_deletion_protection" {
+  type    = string
+  default = false
+}
