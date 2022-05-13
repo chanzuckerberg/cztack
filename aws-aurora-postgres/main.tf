@@ -4,7 +4,7 @@ locals {
   # name omits the minor version e.g. "aurora-postgresql10". We parse the
   # engine version to distinguish the 2 cases.
   split_engine_version  = split(".", var.engine_version)
-  params_engine_version = local.split_engine_version[0] == "9" ? join(".", slice(local.split_engine_version, 0, 2)) : local.split_engine_version[0]
+  params_engine_version = local.split_engine_version[0] == "9" ? var.engine_version : local.split_engine_version[0]
 }
 
 module "aurora" {
