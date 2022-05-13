@@ -1,10 +1,7 @@
 locals {
-  # For Aurora postgres, the parameter group names before Postgres version 10
-  # are named like "aurora-postgresql9.6", but for version 10 and above the
-  # name omits the minor version e.g. "aurora-postgresql10". We parse the
-  # engine version to distinguish the 2 cases.
+  # For version 10 and above the name omits the minor version e.g. "aurora-postgresql10".
   split_engine_version  = split(".", var.engine_version)
-  params_engine_version = local.split_engine_version[0] == "9" ? var.engine_version : local.split_engine_version[0]
+  params_engine_version = local.split_engine_version[0]
 }
 
 module "aurora" {
