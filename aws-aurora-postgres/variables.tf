@@ -139,5 +139,5 @@ variable "auto_minor_version_upgrade" {
 
 variable "db_deletion_protection" {
   type    = string
-  default = true
+  default = false
 }
