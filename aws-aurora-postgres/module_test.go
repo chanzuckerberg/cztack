@@ -15,7 +15,7 @@ func TestAWSAuroraPostgresInit(t *testing.T) {
 }
 
 func TestAWSAuroraPostgresDefaults(t *testing.T) {
-	versions := []string{"9.6", "10.12", "11.7"}
+	versions := []string{"10.14", "11.15"}
 
 	for _, version := range versions {
 		v := version
