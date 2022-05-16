@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.44.0](https://github.com/chanzuckerberg/cztack/compare/v0.43.3...v0.44.0) (2022-05-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* Delete deprecated aws-acm-cert module (#379)
+
+### Features
+
+* adding conventional commit requirement ([#394](https://github.com/chanzuckerberg/cztack/issues/394)) ([39b962c](https://github.com/chanzuckerberg/cztack/commit/39b962cf109cc26431d7cc9b68e4f91ad9bc964b))
+* Update `aws-aurora` module to not use `params_engine_version` ([#396](https://github.com/chanzuckerberg/cztack/issues/396)) ([d560e42](https://github.com/chanzuckerberg/cztack/commit/d560e423636864960f7027846e0e099a87c1211b))
+* Variablize deletion_protection for aurora-postgres module ([#385](https://github.com/chanzuckerberg/cztack/issues/385)) ([6aea3cb](https://github.com/chanzuckerberg/cztack/commit/6aea3cb0f0b935e1b32967bb53c2c3732f4516da))
+
+
+### Bug Fixes
+
+* broken deps ([56247fd](https://github.com/chanzuckerberg/cztack/commit/56247fdc65790a6f1315ce8160aed4e48bd699e3))
+* Generate docs ([#390](https://github.com/chanzuckerberg/cztack/issues/390)) ([eb1c5e2](https://github.com/chanzuckerberg/cztack/commit/eb1c5e2148aab0304a5899feb9d0ee10d1d74f93))
+* linting dep on hard coded token ([#389](https://github.com/chanzuckerberg/cztack/issues/389)) ([8560dc1](https://github.com/chanzuckerberg/cztack/commit/8560dc1ab3b18328f8fc07fef44b824de822f2fe))
+* mods not needed anymore ([#392](https://github.com/chanzuckerberg/cztack/issues/392)) ([68dd94f](https://github.com/chanzuckerberg/cztack/commit/68dd94f62dc5fd70673d3d44206da0795dca878a))
+* release-please version and token ([#388](https://github.com/chanzuckerberg/cztack/issues/388)) ([b1d87d2](https://github.com/chanzuckerberg/cztack/commit/b1d87d22541d7c979d73ad253331f608931b7b70))
+* remove dep on buildbot token ([#387](https://github.com/chanzuckerberg/cztack/issues/387)) ([dcce3cc](https://github.com/chanzuckerberg/cztack/commit/dcce3cca7148ced512c979bd87da8a39d921631a))
+* update go version to fix tests breaking ([#393](https://github.com/chanzuckerberg/cztack/issues/393)) ([253aadc](https://github.com/chanzuckerberg/cztack/commit/253aadc1e9bb6d476bafe4c05edbcc1f19f092a0))
+
+
+### Miscellaneous Chores
+
+* Delete deprecated aws-acm-cert module ([#379](https://github.com/chanzuckerberg/cztack/issues/379)) ([1c75374](https://github.com/chanzuckerberg/cztack/commit/1c753748233e10e4c03662ef9c207be8f5183366))
+
 ### [0.43.3](https://www.github.com/chanzuckerberg/cztack/compare/v0.43.2...v0.43.3) (2021-11-01)
 
 
