@@ -7,8 +7,16 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v2.33.0
+      - name: Generate token
+        id: generate_token
+        uses: chanzuckerberg/github-app-token@v1.1.4
+        with:
+          app_id: ${{ secrets.CZI_RELEASE_PLEASE_APP_ID }}
+          private_key: ${{ secrets.CZI_RELEASE_PLEASE_PK }}
+      - name: release please
+        uses: google-github-actions/release-please-action@v3.0.0
+        id: release
         with:
           release-type: simple
-          package-name: release-please-action
-          token: ${{secrets.PRODSEC_RELEASE_KEY_1PASS}} # find this secret in the ProdSec 1password
+          token: ${{ steps.generate_token.outputs.token }}
+          bump-minor-pre-major: true
