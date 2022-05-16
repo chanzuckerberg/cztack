@@ -74,7 +74,6 @@ No resources.
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances to create in this cluster. | `string` | `1` | no |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | If provided, storage will be encrypted with this key, otherwise an AWS-managed key is used. (Encryption is always on). | `string` | `""` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| <a name="input_params_engine_version"></a> [params\_engine\_version](#input\_params\_engine\_version) | The engine version to be appended to the parameter group family. | `string` | `"5.7"` | no |
 | <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | n/a | `string` | `false` | no |
 | <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_publicly_accessible"></a> [publicly\_accessible](#input\_publicly\_accessible) | Avoid doing this - it gives access to the open internet. | `string` | `false` | no |

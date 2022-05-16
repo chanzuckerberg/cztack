@@ -9,6 +9,10 @@ locals {
     service   = var.service
     owner     = var.owner
   }
+
+  # For version 10 and above the name omits the minor version e.g. "aurora-postgresql10".
+  split_engine_version  = split(".", var.engine_version)
+  params_engine_version = local.split_engine_version[0]
 }
 
 resource "aws_security_group" "rds" {
@@ -98,7 +102,7 @@ resource "aws_rds_cluster_instance" "db" {
 
 resource "aws_rds_cluster_parameter_group" "db" {
   name        = local.name
-  family      = "${var.engine}${var.params_engine_version}"
+  family      = "${var.engine}${local.params_engine_version}"
   description = "RDS default cluster parameter group"
 
   dynamic "parameter" {
@@ -115,7 +119,7 @@ resource "aws_rds_cluster_parameter_group" "db" {
 
 resource "aws_db_parameter_group" "db" {
   name   = local.name
-  family = "${var.engine}${var.params_engine_version}"
+  family = "${var.engine}${local.params_engine_version}"
 
   dynamic "parameter" {
     for_each = var.db_parameters

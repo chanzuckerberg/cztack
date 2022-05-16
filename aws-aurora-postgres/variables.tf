@@ -138,6 +138,7 @@ variable "auto_minor_version_upgrade" {
 }
 
 variable "db_deletion_protection" {
-  type    = string
-  default = false
+  type        = string
+  description = "If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true"
+  default     = false
 }

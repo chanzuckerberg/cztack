@@ -5,10 +5,9 @@ locals {
 }
 
 module "aurora" {
-  source                = "../aws-aurora"
-  engine                = "aurora-postgresql"
-  engine_version        = var.engine_version
-  params_engine_version = local.params_engine_version
+  source         = "../aws-aurora"
+  engine         = "aurora-postgresql"
+  engine_version = var.engine_version
 
   project = var.project
   env     = var.env
