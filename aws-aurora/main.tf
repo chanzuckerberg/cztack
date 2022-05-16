@@ -12,7 +12,7 @@ locals {
 
   # For version 10 and above the name omits the minor version e.g. "aurora-postgresql10".
   split_engine_version  = split(".", var.engine_version)
-  params_engine_version = local.split_engine_version[0]
+  params_engine_version = var.engine != "aurora-mysql" ? local.split_engine_version[0] : var.engine_version
 }
 
 resource "aws_security_group" "rds" {

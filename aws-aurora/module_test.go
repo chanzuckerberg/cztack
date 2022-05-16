@@ -13,11 +13,10 @@ func TestAWSAurora(t *testing.T) {
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-					"database_name":  tftest.UniqueID(),
-					"engine_version": "10.7",
-					"port":           "5432",
-					"engine":         "aurora-postgresql",
-					"vpc_id":         "vpc-12345",
+					"database_name": tftest.UniqueID(),
+					"port":          "5432",
+					"engine":        "aurora-postgresql",
+					"vpc_id":        "vpc-12345",
 
 					"project":               tftest.UniqueID(),
 					"service":               tftest.UniqueID(),
