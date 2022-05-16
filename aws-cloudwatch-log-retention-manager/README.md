@@ -29,7 +29,7 @@ module log-retention-manager {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function |  |
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../aws-lambda-function | n/a |
 
 ## Resources
 
