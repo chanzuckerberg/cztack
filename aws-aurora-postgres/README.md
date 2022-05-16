@@ -61,7 +61,7 @@ No resources.
 | <a name="input_database_password"></a> [database\_password](#input\_database\_password) | Password for user that will be created. | `string` | n/a | yes |
 | <a name="input_database_subnet_group"></a> [database\_subnet\_group](#input\_database\_subnet\_group) | The name of an existing database subnet group to use. | `string` | n/a | yes |
 | <a name="input_database_username"></a> [database\_username](#input\_database\_username) | Default user to be created. | `string` | n/a | yes |
-| <a name="input_db_deletion_protection"></a> [db\_deletion\_protection](#input\_db\_deletion\_protection) | n/a | `string` | `false` | no |
+| <a name="input_db_deletion_protection"></a> [db\_deletion\_protection](#input\_db\_deletion\_protection) | If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true | `string` | `false` | no |
 | <a name="input_db_parameters"></a> [db\_parameters](#input\_db\_parameters) | Instance params you can set. [Doc](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Reference.html#AuroraPostgreSQL.Reference.Parameters.Instance) | `list(any)` | `[]` | no |
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of Postgres to use. This should be a *prefix* if auto version upgrades are enabled. (Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version) | `string` | `"10"` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |

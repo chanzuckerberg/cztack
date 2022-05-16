@@ -112,13 +112,10 @@ variable "engine_version" {
   type = string
 }
 
-variable "params_engine_version" {
-  type = string
-}
-
 variable "iam_database_authentication_enabled" {
-  type    = string
-  default = true
+  type        = string
+  description = "Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled."
+  default     = true
 }
 
 variable "enabled_cloudwatch_logs_exports" {

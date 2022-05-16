@@ -24,7 +24,6 @@ func TestAWSAuroraMysqlDefaults(t *testing.T) {
 			return tftest.Options(
 				tftest.DefaultRegion,
 				map[string]interface{}{
-
 					"vpc_id":                vpc,
 					"database_subnet_group": databaseSubnetGroup,
 					"database_password":     databasePassword,
