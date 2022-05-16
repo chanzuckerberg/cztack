@@ -14,7 +14,7 @@ func TestAWSAurora(t *testing.T) {
 				tftest.DefaultRegion,
 				map[string]interface{}{
 					"database_name":  tftest.UniqueID(),
-					"engine_version": "8.0",
+					"engine_version": "10.7",
 					"port":           "5432",
 					"engine":         "aurora-postgresql",
 					"vpc_id":         "vpc-12345",
