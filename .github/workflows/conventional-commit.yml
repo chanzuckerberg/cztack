@@ -1,0 +1,15 @@
+name: Ensure all PRs have conventional commit titles
+on:
+  pull_request:
+    types:
+      - edited
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  conventional_commit_title:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chanzuckerberg/github-actions/.github/actions/conventional-commits@v1.1.0
