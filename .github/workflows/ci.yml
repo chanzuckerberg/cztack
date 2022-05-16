@@ -35,7 +35,7 @@ jobs:
       - name: setup
         run: make setup
       - env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         name: linters
         run: make lint-ci
   test:
