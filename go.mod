@@ -3,7 +3,7 @@ module github.com/chanzuckerberg/cztack
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.44.14
+	github.com/aws/aws-sdk-go v1.44.24
 	github.com/chanzuckerberg/go-misc v0.0.0-20220511162418-977461fac2a3
 	github.com/davecgh/go-spew v1.1.1
 	github.com/gruntwork-io/terratest v0.40.8
