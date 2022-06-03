@@ -7,7 +7,7 @@ require (
 	github.com/apache/arrow/go/arrow v0.0.0-20201215190046-cbb1ed5d39f1 // indirect
 	github.com/apparentlymart/go-cidr v1.1.0 // indirect
 	github.com/chanzuckerberg/go-misc v0.0.0-20201208181439-ea3e3e39e194
-	github.com/chanzuckerberg/terraform-provider-snowflake v0.20.0
+	github.com/Snowflake-Labs/terraform-provider-snowflake v0.20.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/fatih/color v1.10.0 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
