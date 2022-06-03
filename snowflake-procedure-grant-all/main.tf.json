@@ -3,12 +3,17 @@
   "variable": {
     "arguments": {
       "type": "list(object({ name = string, type = string }))",
-      "description": "List of the arguments for the procedure (must be present if procedure_name is present)",
+      "description": "List of the arguments for the procedure (must be present if procedure has arguments and procedure_name is present)",
       "default": null
     },
     "database_name": {
       "type": "string",
       "description": "The name of the database containing the current or future procedures on which to grant privileges.",
+      "default": null
+    },
+    "enable_multiple_grants": {
+      "type": "bool",
+      "description": "When this is set to true, multiple grants of the same type can be created. This will cause Terraform to not revoke grants applied to roles and objects outside Terraform.",
       "default": null
     },
     "on_future": {
@@ -63,6 +68,7 @@
       "all": {
         "arguments": "${var.arguments}",
         "database_name": "${var.database_name}",
+        "enable_multiple_grants": "${var.enable_multiple_grants}",
         "for_each": "${toset(local.privileges)}",
         "on_future": "${var.on_future}",
         "privilege": "${each.value}",
@@ -78,7 +84,7 @@
   "terraform": {
     "required_providers": {
       "snowflake": {
-        "source": "chanzuckerberg/snowflake",
+        "source": "Snowflake-Labs/snowflake",
         "version": "\u003e= 0.20.0"
       }
     }

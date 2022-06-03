@@ -128,7 +128,7 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		Terraform: map[string]map[string]map[string]string{
 			"required_providers": {
 				"snowflake": map[string]string{
-					"source":  "chanzuckerberg/snowflake",
+					"source":  "Snowflake-Labs/snowflake",
 					"version": snowflakeProviderVersion,
 				},
 			},
