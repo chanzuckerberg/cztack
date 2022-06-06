@@ -198,7 +198,6 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 				)}`, defaultPrivType)
 		default:
 			resourceAll[elementName] = fmt.Sprintf("${var.%s}", elementName)
-
 		}
 	}
 	m.Resources = map[string]map[string]map[string]interface{}{
