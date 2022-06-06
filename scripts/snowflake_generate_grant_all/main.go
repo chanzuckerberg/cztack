@@ -240,7 +240,3 @@ func reverseType(s *schema.Schema) (string, error) {
 		return "", errors.Newf("Unrecognized type %s", t.String())
 	}
 }
-
-func optString(s string) *string {
-	return &s
-}
