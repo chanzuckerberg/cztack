@@ -35,13 +35,13 @@ func ensureCI(names []string) error {
 	matrix := strategy["matrix"].(map[string]interface{})
 
 	modules := sets.NewStringSet().Add(names...)
-  if _, ok := matrix["module"].([]interface{}); ok {
-	  for _, module := range matrix["module"].([]interface{}) {
-	  	modules.Add(module.(string))
-  }
-  } else {
-	  	modules.Add(matrix["module"].(string))
-  }
+	if _, ok := matrix["module"].([]interface{}); ok {
+		for _, module := range matrix["module"].([]interface{}) {
+			modules.Add(module.(string))
+		}
+	} else {
+		modules.Add(matrix["module"].(string))
+	}
 	module := modules.List()
 	sort.Strings(module)
 
