@@ -46,7 +46,7 @@ lint:
 	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode diff_context -diff "git diff main"
 .PHONY: lint
 
-lint-ci:
+lint-ci: setup
 	terraform fmt -check -diff -recursive
 	@for m in $(MODULES); do \
 		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main"  -fail-on-error -reporter github-pr-review -filter-mode diff_context; \
