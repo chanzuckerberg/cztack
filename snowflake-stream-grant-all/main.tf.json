@@ -6,6 +6,11 @@
       "description": "The name of the database containing the current or future streams on which to grant privileges.",
       "default": null
     },
+    "enable_multiple_grants": {
+      "type": "bool",
+      "description": "When this is set to true, multiple grants of the same type can be created. This will cause Terraform to not revoke grants applied to roles and objects outside Terraform.",
+      "default": null
+    },
     "on_future": {
       "type": "bool",
       "description": "When this is set to true and a schema_name is provided, apply this grant on all future streams in the given schema. When this is true and no schema_name is provided apply this grant on all future streams in the given database. The stream_name field must be unset in order to use on_future.",
@@ -47,6 +52,7 @@
     "snowflake_stream_grant": {
       "all": {
         "database_name": "${var.database_name}",
+        "enable_multiple_grants": "${var.enable_multiple_grants}",
         "for_each": "${toset(local.privileges)}",
         "on_future": "${var.on_future}",
         "privilege": "${each.value}",
@@ -60,7 +66,7 @@
   "terraform": {
     "required_providers": {
       "snowflake": {
-        "source": "chanzuckerberg/snowflake",
+        "source": "Snowflake-Labs/snowflake",
         "version": "\u003e= 0.20.0"
       }
     }

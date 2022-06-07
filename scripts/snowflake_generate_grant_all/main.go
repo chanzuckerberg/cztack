@@ -9,8 +9,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/chanzuckerberg/terraform-provider-snowflake/pkg/provider"
-	"github.com/chanzuckerberg/terraform-provider-snowflake/pkg/resources"
+	"github.com/Snowflake-Labs/terraform-provider-snowflake/pkg/provider"
+	"github.com/Snowflake-Labs/terraform-provider-snowflake/pkg/resources"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/errgo.v2/fmt/errors"
@@ -128,7 +128,7 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 		Terraform: map[string]map[string]map[string]string{
 			"required_providers": {
 				"snowflake": map[string]string{
-					"source":  "chanzuckerberg/snowflake",
+					"source":  "Snowflake-Labs/snowflake",
 					"version": snowflakeProviderVersion,
 				},
 			},
@@ -198,7 +198,6 @@ func generateModule(name string, grant *resources.TerraformGrantResource) ([]byt
 				)}`, defaultPrivType)
 		default:
 			resourceAll[elementName] = fmt.Sprintf("${var.%s}", elementName)
-
 		}
 	}
 	m.Resources = map[string]map[string]map[string]interface{}{
@@ -239,8 +238,4 @@ func reverseType(s *schema.Schema) (string, error) {
 	default:
 		return "", errors.Newf("Unrecognized type %s", t.String())
 	}
-}
-
-func optString(s string) *string {
-	return &s
 }

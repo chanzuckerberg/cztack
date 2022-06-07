@@ -14,7 +14,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-const vars string = "{\"database_name\":\"database\",\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\",\"stage_name\":\"stage\"}"
+const vars string = "{\"database_name\":\"database\",\"roles\":[\"role_a\",\"role_b\",\"role_c\"],\"schema_name\":\"schema\",\"task_name\":\"task\"}"
 
 func TestModule(t *testing.T) {
 	test := tftest.Test{

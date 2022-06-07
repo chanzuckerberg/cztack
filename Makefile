@@ -19,7 +19,7 @@ all: clean fmt docs lint test
 setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/main/download.sh | sh
 	curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
-	curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
+	curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/main/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
 	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
 	curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh
 	sh .download-tflint.sh latest
@@ -46,7 +46,7 @@ lint:
 	./bin/reviewdog -conf .reviewdog.yml -tee -fail-on-error -filter-mode diff_context -diff "git diff main"
 .PHONY: lint
 
-lint-ci:
+lint-ci: setup
 	terraform fmt -check -diff -recursive
 	@for m in $(MODULES); do \
 		./bin/tflint --format=checkstyle -c .tflint.hcl $$m | ./bin/reviewdog -f=checkstyle -name="tflint" --diff "git diff main"  -fail-on-error -reporter github-pr-review -filter-mode diff_context; \

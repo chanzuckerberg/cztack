@@ -6,6 +6,11 @@
       "description": "The name of the database containing the current or future external tables on which to grant privileges.",
       "default": null
     },
+    "enable_multiple_grants": {
+      "type": "bool",
+      "description": "When this is set to true, multiple grants of the same type can be created. This will cause Terraform to not revoke grants applied to roles and objects outside Terraform.",
+      "default": null
+    },
     "external_table_name": {
       "type": "string",
       "description": "The name of the external table on which to grant privileges immediately (only valid if on_future is false).",
@@ -45,6 +50,7 @@
   "locals": {
     "privileges": [
       "OWNERSHIP",
+      "REFERENCES",
       "SELECT"
     ]
   },
@@ -52,6 +58,7 @@
     "snowflake_external_table_grant": {
       "all": {
         "database_name": "${var.database_name}",
+        "enable_multiple_grants": "${var.enable_multiple_grants}",
         "external_table_name": "${var.external_table_name}",
         "for_each": "${toset(local.privileges)}",
         "on_future": "${var.on_future}",
@@ -66,7 +73,7 @@
   "terraform": {
     "required_providers": {
       "snowflake": {
-        "source": "chanzuckerberg/snowflake",
+        "source": "Snowflake-Labs/snowflake",
         "version": "\u003e= 0.20.0"
       }
     }
