@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.44.1](https://github.com/chanzuckerberg/cztack/compare/v0.44.0...v0.44.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* Update Snowflake Terraform provider source to Snowflake-Labs ([#400](https://github.com/chanzuckerberg/cztack/issues/400)) ([fb7b329](https://github.com/chanzuckerberg/cztack/commit/fb7b329dc5a7eccc63fd267eb1e0dc6a9dc8c44f))
+
 ## [0.44.0](https://github.com/chanzuckerberg/cztack/compare/v0.43.3...v0.44.0) (2022-05-16)
 
 
