@@ -60,6 +60,7 @@ resource "aws_ecs_service" "unmanaged-job" {
   network_configuration {
     subnets         = var.task_subnets
     security_groups = var.security_group_ids
+    assign_public_ip = var.assign_public_ip
   }
 
   dynamic "ordered_placement_strategy" {
