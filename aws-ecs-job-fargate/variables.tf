@@ -104,6 +104,6 @@ variable "ordered_placement_strategy" {
 
 variable "assign_public_ip" {
   description = "If true the ECS task will get a public IP"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }

@@ -29,8 +29,8 @@ resource "aws_ecs_service" "job" {
   scheduling_strategy                = "REPLICA"
 
   network_configuration {
-    subnets         = var.task_subnets
-    security_groups = var.security_group_ids
+    subnets          = var.task_subnets
+    security_groups  = var.security_group_ids
     assign_public_ip = var.assign_public_ip
   }
 
@@ -58,8 +58,8 @@ resource "aws_ecs_service" "unmanaged-job" {
   scheduling_strategy                = "REPLICA"
 
   network_configuration {
-    subnets         = var.task_subnets
-    security_groups = var.security_group_ids
+    subnets          = var.task_subnets
+    security_groups  = var.security_group_ids
     assign_public_ip = var.assign_public_ip
   }
 
