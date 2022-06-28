@@ -101,3 +101,9 @@ variable "ordered_placement_strategy" {
   default     = []
   description = "Placement strategy for the task instances."
 }
+
+variable "assign_public_ip" {
+  description = "If true the ECS task will get a public IP"
+  type = bool
+  default = false
+}
