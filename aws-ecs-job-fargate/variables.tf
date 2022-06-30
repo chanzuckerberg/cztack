@@ -101,3 +101,9 @@ variable "ordered_placement_strategy" {
   default     = []
   description = "Placement strategy for the task instances."
 }
+
+variable "ssm_arn" {
+  type        = string
+  default     = null
+  description = "Parameter Store ARN"
+}

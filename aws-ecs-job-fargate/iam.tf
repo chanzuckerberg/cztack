@@ -41,3 +41,26 @@ resource "aws_iam_role_policy" "task_execution_role_secretsmanager" {
   role   = aws_iam_role.task_execution_role.name
   policy = data.aws_iam_policy_document.registry_secretsmanager[0].json
 }
+
+data "aws_iam_policy_document" "ssm_permission" {
+  count = var.ssm_arn != null ? 1 : 0
+
+  statement {
+    actions = [
+      "ssm:GetParameters",
+    ]
+
+    resources = [var.ssm_arn]
+  }
+}
+
+resource "aws_iam_policy" "task_execution_role_ssm_permission" {
+  count  = var.ssm_arn != null ? 1 : 0
+  policy = data.aws_iam_policy_document.ssm_permission[0].json
+}
+
+resource "aws_iam_role_policy_attachment" "task_execution_role_ssm_attachment" {
+  count      = var.ssm_arn != null ? 1 : 0
+  role       = aws_iam_role.task_execution_role.name
+  policy_arn = aws_iam_policy.task_execution_role_ssm_permission[0].arn
+}
