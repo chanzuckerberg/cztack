@@ -101,3 +101,9 @@ variable "ordered_placement_strategy" {
   default     = []
   description = "Placement strategy for the task instances."
 }
+
+variable "ssm_parameter_store_arns" {
+  type        = list(string)
+  default     = null
+  description = "List of SSM Parameter Store ARNs. If present, allows ECS task to make ssm:GetParameters call."
+}
