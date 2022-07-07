@@ -72,11 +72,11 @@ No modules.
 | <a name="input_registry_secretsmanager_arn"></a> [registry\_secretsmanager\_arn](#input\_registry\_secretsmanager\_arn) | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | `null` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security group to use for the Fargate task. | `list(string)` | `[]` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
-| <a name="input_ssm_arn"></a> [ssm\_arn](#input\_ssm\_arn) | Parameter Store ARN | `string` | `null` | no |
 | <a name="input_tag_service"></a> [tag\_service](#input\_tag\_service) | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
 | <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | `null` | no |
 | <a name="input_task_role_arn"></a> [task\_role\_arn](#input\_task\_role\_arn) | n/a | `string` | n/a | yes |
 | <a name="input_task_subnets"></a> [task\_subnets](#input\_task\_subnets) | Subnets to launch Fargate task in. | `list(string)` | `[]` | no |
+| <a name="input_var.ssm_parameter_store_arns"></a> [var.ssm\_parameter\_store\_arns](#input\_var.ssm\_parameter\_store\_arns) | List of SSM Parameter Store ARNs. If present, allows ECS task to make ssm:GetParameters call. | `list(string)` | `null` | no |
 
 ## Outputs
 
