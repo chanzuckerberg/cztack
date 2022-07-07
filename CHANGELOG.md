@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://github.com/chanzuckerberg/cztack/compare/v0.44.1...v0.45.0) (2022-07-07)
+
+
+### Features
+
+* Attach ssm permissions to ecs fargate job module ([#407](https://github.com/chanzuckerberg/cztack/issues/407)) ([5696d1d](https://github.com/chanzuckerberg/cztack/commit/5696d1db18ded14983fcd5c480468753c20eef53))
+
 ### [0.44.1](https://github.com/chanzuckerberg/cztack/compare/v0.44.0...v0.44.1) (2022-06-07)
 
 
