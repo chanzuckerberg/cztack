@@ -7,8 +7,8 @@ require (
 	github.com/aws/aws-sdk-go v1.44.66
 	github.com/chanzuckerberg/go-misc v0.0.0-20220531221311-0af926911811
 	github.com/davecgh/go-spew v1.1.1
-	github.com/gruntwork-io/terratest v0.40.19
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
+	github.com/gruntwork-io/terratest v0.40.20
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.21.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.8.0
 	gopkg.in/errgo.v2 v2.1.0
@@ -62,16 +62,16 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320 // indirect
 	github.com/hashicorp/go-getter v1.6.1 // indirect
-	github.com/hashicorp/go-hclog v1.2.0 // indirect
+	github.com/hashicorp/go-hclog v1.2.1 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-safetemp v1.0.0 // indirect
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
-	github.com/hashicorp/go-version v1.5.0 // indirect
-	github.com/hashicorp/hcl/v2 v2.12.0 // indirect
+	github.com/hashicorp/go-version v1.6.0 // indirect
+	github.com/hashicorp/hcl/v2 v2.13.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-json v0.14.0 // indirect
-	github.com/hashicorp/terraform-plugin-go v0.9.1 // indirect
-	github.com/hashicorp/terraform-plugin-log v0.4.0 // indirect
+	github.com/hashicorp/terraform-plugin-go v0.14.0 // indirect
+	github.com/hashicorp/terraform-plugin-log v0.7.0 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/jinzhu/copier v0.3.2 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
@@ -121,8 +121,8 @@ require (
 	google.golang.org/api v0.82.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20220602131408-e326c6e8e9c8 // indirect
-	google.golang.org/grpc v1.47.0 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/grpc v1.48.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/api v0.22.2 // indirect
