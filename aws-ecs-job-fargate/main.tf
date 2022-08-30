@@ -100,4 +100,7 @@ resource "aws_ecs_task_definition" "job" {
   memory                   = var.memory
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.task_execution_role.arn
+  ephemeral_storage = {
+    size_in_gib = var.ephemeral_storage_size
+  }
 }
