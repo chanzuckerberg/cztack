@@ -64,6 +64,7 @@ No modules.
 | <a name="input_deployment_minimum_healthy_percent"></a> [deployment\_minimum\_healthy\_percent](#input\_deployment\_minimum\_healthy\_percent) | (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. | `number` | `100` | no |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | n/a | `number` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_ephemeral_storage_size"></a> [ephemeral\_storage\_size](#input\_ephemeral\_storage\_size) | The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB. | `number` | `21` | no |
 | <a name="input_manage_task_definition"></a> [manage\_task\_definition](#input\_manage\_task\_definition) | If false, Terraform will not touch the task definition for the ECS service after initial creation | `bool` | `true` | no |
 | <a name="input_memory"></a> [memory](#input\_memory) | Memory in megabytes for Fargate task. Used if task\_definition provided, or for initial stub task if externally managed. | `number` | `512` | no |
 | <a name="input_ordered_placement_strategy"></a> [ordered\_placement\_strategy](#input\_ordered\_placement\_strategy) | Placement strategy for the task instances. | `list(object({ type = string, field = string }))` | `[]` | no |
@@ -72,11 +73,11 @@ No modules.
 | <a name="input_registry_secretsmanager_arn"></a> [registry\_secretsmanager\_arn](#input\_registry\_secretsmanager\_arn) | ARN for AWS Secrets Manager secret for credentials to private registry | `string` | `null` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security group to use for the Fargate task. | `list(string)` | `[]` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
+| <a name="input_ssm_parameter_store_arns"></a> [ssm\_parameter\_store\_arns](#input\_ssm\_parameter\_store\_arns) | List of SSM Parameter Store ARNs. If present, allows ECS task to make ssm:GetParameters call. | `list(string)` | `null` | no |
 | <a name="input_tag_service"></a> [tag\_service](#input\_tag\_service) | Apply cost tags to the ECS service. Only specify false for backwards compatibility with old ECS services. | `bool` | `true` | no |
 | <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | JSON to describe task. If omitted, defaults to a stub task that is expected to be managed outside of Terraform. | `string` | `null` | no |
 | <a name="input_task_role_arn"></a> [task\_role\_arn](#input\_task\_role\_arn) | n/a | `string` | n/a | yes |
 | <a name="input_task_subnets"></a> [task\_subnets](#input\_task\_subnets) | Subnets to launch Fargate task in. | `list(string)` | `[]` | no |
-| <a name="input_var.ssm_parameter_store_arns"></a> [var.ssm\_parameter\_store\_arns](#input\_var.ssm\_parameter\_store\_arns) | List of SSM Parameter Store ARNs. If present, allows ECS task to make ssm:GetParameters call. | `list(string)` | `null` | no |
 
 ## Outputs
 

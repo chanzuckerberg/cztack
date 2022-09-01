@@ -107,3 +107,9 @@ variable "ssm_parameter_store_arns" {
   default     = null
   description = "List of SSM Parameter Store ARNs. If present, allows ECS task to make ssm:GetParameters call."
 }
+
+variable "ephemeral_storage_size" {
+  type        = number
+  default     = 21
+  description = "The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB."
+}
