@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.46.0](https://github.com/chanzuckerberg/cztack/compare/v0.45.0...v0.46.0) (2022-09-06)
+
+
+### Features
+
+* Add ability to pass size of ephemeral storage to ECS ([#417](https://github.com/chanzuckerberg/cztack/issues/417)) ([d87e56e](https://github.com/chanzuckerberg/cztack/commit/d87e56e4f968b7b1c57f90c6cbdba98d682f33b0))
+* limit the number of character to the maximum 32 chars ([#420](https://github.com/chanzuckerberg/cztack/issues/420)) ([f0aa9d3](https://github.com/chanzuckerberg/cztack/commit/f0aa9d33869f00e73f674c1f85d167099945fb52))
+
 ## [0.45.0](https://github.com/chanzuckerberg/cztack/compare/v0.44.1...v0.45.0) (2022-07-07)
 
 
