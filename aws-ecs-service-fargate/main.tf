@@ -1,5 +1,5 @@
 locals {
-  name = "${var.project}-${var.env}-${var.service}"
+  name = format("%.32s", "${var.project}-${var.env}-${var.service}")
 
   default_tags = {
     managedBy = "terraform"
