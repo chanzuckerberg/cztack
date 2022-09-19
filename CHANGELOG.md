@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.0](https://github.com/chanzuckerberg/cztack/compare/v0.46.0...v0.47.0) (2022-09-19)
+
+
+### Features
+
+* add source role arns ([#423](https://github.com/chanzuckerberg/cztack/issues/423)) ([965da8f](https://github.com/chanzuckerberg/cztack/commit/965da8fe1033c5e39d22878fe6f19af05f1aaa45))
+
 ## [0.46.0](https://github.com/chanzuckerberg/cztack/compare/v0.45.0...v0.46.0) (2022-09-06)
 
 
