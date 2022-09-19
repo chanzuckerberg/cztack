@@ -42,6 +42,9 @@ func TestAWSAssumeRolePolicy(t *testing.T) {
 			r.NotEmpty(outputs)
 			policy := outputs["json"].(string)
 			r.NotEmpty(policy)
+			r.Contains(policy, "okta-czi-admin")                      // check that role arns are working
+			r.Contains(policy, "samlARN1")                            // check that saml is working
+			r.Contains(policy, fmt.Sprintf("%s:%s", curAcct, "root")) // check that source accounts are working
 		},
 		Cleanup: func(t1 *testing.T, options *terraform.Options) {},
 	}
