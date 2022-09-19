@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/chanzuckerberg/go-misc/tftest"
@@ -24,6 +25,7 @@ func TestAWSAssumeRolePolicy(t *testing.T) {
 				tftest.IAMRegion,
 				map[string]interface{}{
 					"source_account_ids": []string{curAcct},
+					"source_role_arns":   []string{fmt.Sprintf("arn:aws:iam::%s:role/okta-czi-admin", curAcct)},
 					"saml_idp_arns":      []string{"samlARN1", "samlARN2"},
 					"oidc":               oidcCfg,
 				},

@@ -11,6 +11,17 @@ data "aws_iam_policy_document" "assume-role" {
   }
 
   dynamic "statement" {
+    for_each = var.source_role_arns
+    content {
+      principals {
+        type        = "AWS"
+        identifiers = [statement.value]
+      }
+      actions = ["sts:AssumeRole", "sts:TagSession"]
+    }
+  }
+
+  dynamic "statement" {
     for_each = var.saml_idp_arns
 
     content {

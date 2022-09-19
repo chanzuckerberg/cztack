@@ -20,6 +20,12 @@ variable "saml_idp_arns" {
   description = "The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided."
 }
 
+variable "source_role_arns" {
+  type        = list(string)
+  description = "The source AWS roles to establish a trust relationship. Ignored if empty or not provided."
+  default = []
+}
+
 variable "oidc" {
   type = list(object(
     {

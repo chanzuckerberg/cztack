@@ -23,6 +23,11 @@ variable "source_account_ids" {
   description = "The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided."
 }
 
+variable "source_role_arns" {
+  type        = list(string)
+  description = "The source AWS roles to establish a trust relationship. Ignored if empty or not provided."
+}
+
 variable "saml_idp_arns" {
   type        = set(string)
   default     = []
