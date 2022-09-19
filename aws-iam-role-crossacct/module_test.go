@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/chanzuckerberg/go-misc/tftest"
@@ -20,6 +21,7 @@ func TestAWSIAMRoleCrossAcct(t *testing.T) {
 				map[string]interface{}{
 					"role_name":          random.UniqueId(),
 					"source_account_ids": []string{curAcct},
+					"source_role_arns":   []string{fmt.Sprintf("arn:aws:iam::%s:role/okta-czi-admin", curAcct)},
 				},
 			)
 		},
