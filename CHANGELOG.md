@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.0](https://github.com/chanzuckerberg/cztack/compare/v0.47.0...v0.48.0) (2022-10-17)
+
+
+### Features
+
+* update github release to 3.5.0 ([#431](https://github.com/chanzuckerberg/cztack/issues/431)) ([24955b7](https://github.com/chanzuckerberg/cztack/commit/24955b7f6845ff5cd3ffc48902dad0e55acf0851))
+
 ## [0.47.0](https://github.com/chanzuckerberg/cztack/compare/v0.46.0...v0.47.0) (2022-09-19)
 
 
