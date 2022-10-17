@@ -14,7 +14,7 @@ jobs:
           app_id: ${{ secrets.CZI_RELEASE_PLEASE_APP_ID }}
           private_key: ${{ secrets.CZI_RELEASE_PLEASE_PK }}
       - name: release please
-        uses: google-github-actions/release-please-action@v3.0.0
+        uses: google-github-actions/release-please-action@v3.5.0
         id: release
         with:
           release-type: simple
