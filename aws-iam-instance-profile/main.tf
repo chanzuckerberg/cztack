@@ -31,6 +31,11 @@ resource "aws_iam_role_policy_attachment" "cloudwatch-agent" {
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
+resource "aws_iam_role_policy_attachment" "ssm-agent" {
+  role       = local.role_name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 resource "aws_iam_instance_profile" "profile" {
   name_prefix = var.name_prefix
   path        = var.iam_path
