@@ -15,7 +15,7 @@ func TestAWSAuroraPostgresInit(t *testing.T) {
 }
 
 func TestAWSAuroraPostgresDefaults(t *testing.T) {
-	versions := []string{"10.14", "11.15"}
+	versions := []string{"11.15", "14.3"}
 
 	for _, version := range versions {
 		v := version
@@ -51,6 +51,7 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 							"database_name":         databaseName,
 							"skip_final_snapshot":   true,
 							"engine_version":        v,
+							"instance_class":        "db.t3.medium",
 						},
 					)
 				},
