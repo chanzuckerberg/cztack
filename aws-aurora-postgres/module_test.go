@@ -51,6 +51,7 @@ func TestAWSAuroraPostgresDefaults(t *testing.T) {
 							"database_name":         databaseName,
 							"skip_final_snapshot":   true,
 							"engine_version":        v,
+							"instance_class":        "db.t3.micro",
 						},
 					)
 				},
