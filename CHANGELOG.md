@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.0](https://github.com/chanzuckerberg/cztack/compare/v0.48.0...v0.49.0) (2022-11-03)
+
+
+### Features
+
+* add db user and pw to outputs ([#434](https://github.com/chanzuckerberg/cztack/issues/434)) ([9232175](https://github.com/chanzuckerberg/cztack/commit/92321759b70387533c11528cd901c907249f66d1))
+
 ## [0.48.0](https://github.com/chanzuckerberg/cztack/compare/v0.47.0...v0.48.0) (2022-10-17)
 
 
