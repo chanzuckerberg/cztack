@@ -2,6 +2,14 @@ output "database_name" {
   value = module.aurora.database_name
 }
 
+output "master_username" {
+  value = module.aurora.database_username
+}
+
+output "master_password" {
+  value = module.aurora.database_password
+}
+
 output "endpoint" {
   value = module.aurora.endpoint
 }

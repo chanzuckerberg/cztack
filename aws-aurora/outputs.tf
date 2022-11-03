@@ -2,6 +2,14 @@ output "database_name" {
   value = aws_rds_cluster.db.database_name
 }
 
+output "master_username" {
+  value = var.database_username
+}
+
+output "master_password" {
+  value = var.database_password
+}
+
 output "endpoint" {
   value = aws_rds_cluster.db.endpoint
 }
