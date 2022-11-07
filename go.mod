@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/Snowflake-Labs/terraform-provider-snowflake v0.34.0
-	github.com/aws/aws-sdk-go v1.44.126
+	github.com/aws/aws-sdk-go v1.44.131
 	github.com/chanzuckerberg/go-misc v0.0.0-20220531221311-0af926911811
 	github.com/davecgh/go-spew v1.1.1
 	github.com/gruntwork-io/terratest v0.40.21
@@ -111,11 +111,11 @@ require (
 	github.com/zclconf/go-cty v1.10.0 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
-	golang.org/x/net v0.0.0-20220531201128-c960675eff93 // indirect
+	golang.org/x/net v0.1.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220524215830-622c5d57e401 // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
-	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/term v0.1.0 // indirect
+	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac // indirect
 	golang.org/x/xerrors v0.0.0-20220517211312-f3a8303e98df // indirect
 	google.golang.org/api v0.82.0 // indirect
