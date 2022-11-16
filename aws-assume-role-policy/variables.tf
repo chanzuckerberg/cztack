@@ -25,6 +25,7 @@ variable "source_account_ids" {
 
 variable "source_role_arns" {
   type        = list(string)
+  default     = []
   description = "The source AWS roles to establish a trust relationship. Ignored if empty or not provided."
 }
 
