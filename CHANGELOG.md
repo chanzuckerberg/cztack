@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.1](https://github.com/chanzuckerberg/cztack/compare/v0.49.0...v0.49.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* Add mission permission to allow ECS Fargate container exec ([#440](https://github.com/chanzuckerberg/cztack/issues/440)) ([24b3036](https://github.com/chanzuckerberg/cztack/commit/24b30369d02ec60682158b76be7cea1d21e5a5b5))
+
 ## [0.49.0](https://github.com/chanzuckerberg/cztack/compare/v0.48.0...v0.49.0) (2022-11-03)
 
 
