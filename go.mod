@@ -10,7 +10,7 @@ require (
 	github.com/gruntwork-io/terratest v0.40.21
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.21.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	gopkg.in/errgo.v2 v2.1.0
 	gopkg.in/yaml.v3 v3.0.1
 )
