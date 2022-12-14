@@ -56,3 +56,9 @@ variable "require_tls" {
   description = "Require TLS to read objects from this bucket."
   default     = true
 }
+
+variable "logging_bucket" {
+  type        = object({ name = string, prefix = string })
+  description = "Log bucket name and prefix to enable logs for this bucket"
+  default     = null
+}
