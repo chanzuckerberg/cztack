@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.2](https://github.com/chanzuckerberg/cztack/compare/v0.49.1...v0.49.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* pin snowflake to 0.53.0 pt 2 ([#447](https://github.com/chanzuckerberg/cztack/issues/447)) ([7146e6f](https://github.com/chanzuckerberg/cztack/commit/7146e6fed280b898bfbbc6594a29fb41c6e8ae40))
+
 ## [0.49.1](https://github.com/chanzuckerberg/cztack/compare/v0.49.0...v0.49.1) (2022-11-16)
 
 
