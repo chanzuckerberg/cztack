@@ -53,7 +53,7 @@ jobs:
         run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
         name: Install Snowflake provider
-        run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d v0.53.0
+        run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-snowflake/main/download.sh | bash -s -- v0.53.0 -b $HOME/.terraform.d/plugins/ -d
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
         name: Check Snowflake provider
         run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
