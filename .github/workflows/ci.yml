@@ -6,14 +6,14 @@ jobs:
       matrix: ${{steps.list_dirs.outputs.matrix}}
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: list_dirs
         run: echo "::set-output name=matrix::$(ls -d */|sed -e 's/\///'|grep -v 'bless-ca\|scripts'|jq -cnR '[inputs | select(length>0)]')"
   lint:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.14.5
@@ -29,7 +29,7 @@ jobs:
     needs: get-modules
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: filter
         uses: dorny/paths-filter@v2
         with:
