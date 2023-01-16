@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.166
 	github.com/chanzuckerberg/go-misc v1.0.1
 	github.com/davecgh/go-spew v1.1.1
-	github.com/gruntwork-io/terratest v0.41.7
+	github.com/gruntwork-io/terratest v0.41.9
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
