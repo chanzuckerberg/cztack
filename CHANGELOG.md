@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.50.0](https://github.com/chanzuckerberg/cztack/compare/v0.49.2...v0.50.0) (2023-02-15)
+
+
+### Features
+
+* configure log retention in aws-lambda-edge-add-security-headers module ([#454](https://github.com/chanzuckerberg/cztack/issues/454)) ([3cf7dc1](https://github.com/chanzuckerberg/cztack/commit/3cf7dc14539d73cc84e09d9530486c41f98784f2))
+
 ## [0.49.2](https://github.com/chanzuckerberg/cztack/compare/v0.49.1...v0.49.2) (2022-12-14)
 
 
