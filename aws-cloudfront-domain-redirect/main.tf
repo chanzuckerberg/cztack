@@ -20,6 +20,8 @@ resource "aws_s3_bucket" "redirect_bucket" {
 module "security_headers_lambda" {
   source = "../aws-lambda-edge-add-security-headers"
 
+  lambda_cloudwatch_log_retention_in_days = var.lambda_cloudwatch_log_retention_in_days
+
   project = var.project
   owner   = var.owner
   env     = var.env

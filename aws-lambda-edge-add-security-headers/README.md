@@ -63,6 +63,7 @@ resource aws_cloudfront_distribution cf {
 |------|-------------|------|---------|:--------:|
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_function_name"></a> [function\_name](#input\_function\_name) | The name for the lambda function. | `string` | `null` | no |
+| <a name="input_lambda_cloudwatch_log_retention_in_days"></a> [lambda\_cloudwatch\_log\_retention\_in\_days](#input\_lambda\_cloudwatch\_log\_retention\_in\_days) | Retention policy (in days) for Lambda function's logs in Cloudwatch | `number` | `null` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
