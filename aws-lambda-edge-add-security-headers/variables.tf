@@ -23,3 +23,9 @@ variable "function_name" {
   description = "The name for the lambda function."
   default     = null
 }
+
+variable "lambda_cloudwatch_log_retention_in_days" {
+  type        = number
+  description = "Retention policy (in days) for Lambda function's logs in Cloudwatch"
+  default     = null
+}

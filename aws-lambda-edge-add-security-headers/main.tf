@@ -18,13 +18,14 @@ data "archive_file" "lambda" {
 module "lambda" {
   source = "../aws-lambda-function"
 
-  function_name    = var.function_name != null ? var.function_name : replace("${var.project}-${var.env}-${var.service}-security-headers", ".", "-")
-  filename         = data.archive_file.lambda.output_path
-  source_code_hash = data.archive_file.lambda.output_base64sha256
-  handler          = "index.handler"
-  runtime          = "nodejs14.x"
-  at_edge          = true
-  publish_lambda   = true
+  function_name         = var.function_name != null ? var.function_name : replace("${var.project}-${var.env}-${var.service}-security-headers", ".", "-")
+  filename              = data.archive_file.lambda.output_path
+  source_code_hash      = data.archive_file.lambda.output_base64sha256
+  handler               = "index.handler"
+  runtime               = "nodejs14.x"
+  at_edge               = true
+  publish_lambda        = true
+  log_retention_in_days = var.lambda_cloudwatch_log_retention_in_days
 
   env     = var.env
   owner   = var.owner
