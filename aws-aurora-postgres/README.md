@@ -87,6 +87,8 @@ No resources.
 |------|-------------|
 | <a name="output_database_name"></a> [database\_name](#output\_database\_name) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
+| <a name="output_master_password"></a> [master\_password](#output\_master\_password) | n/a |
+| <a name="output_master_username"></a> [master\_username](#output\_master\_username) | n/a |
 | <a name="output_port"></a> [port](#output\_port) | n/a |
 | <a name="output_reader_endpoint"></a> [reader\_endpoint](#output\_reader\_endpoint) | n/a |
 <!-- END -->

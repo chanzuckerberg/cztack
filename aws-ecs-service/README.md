@@ -231,6 +231,7 @@ No requirements.
 | <a name="output_alb_https_listener_arn"></a> [alb\_https\_listener\_arn](#output\_alb\_https\_listener\_arn) | ALB HTTPS listener ARN |
 | <a name="output_alb_route53_zone_id"></a> [alb\_route53\_zone\_id](#output\_alb\_route53\_zone\_id) | n/a |
 | <a name="output_container_security_group_id"></a> [container\_security\_group\_id](#output\_container\_security\_group\_id) | Security group id for the container. |
+| <a name="output_ecs_albs"></a> [ecs\_albs](#output\_ecs\_albs) | Application Load Balancer (ALB) ARNs for the ECS Deployment |
 | <a name="output_ecs_task_definition_family"></a> [ecs\_task\_definition\_family](#output\_ecs\_task\_definition\_family) | The family of the task definition defined for the given/generated container definition. |
 | <a name="output_private_service_discovery_domain"></a> [private\_service\_discovery\_domain](#output\_private\_service\_discovery\_domain) | Domain name for service discovery, if with\_service\_discovery=true. Only resolvable within the VPC. |
 <!-- END -->
