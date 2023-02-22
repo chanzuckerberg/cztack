@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.50.1](https://github.com/chanzuckerberg/cztack/compare/v0.50.0...v0.50.1) (2023-02-22)
+
+
+### Bug Fixes
+
+* update docs and add ALB ARNs to ECS services ([#457](https://github.com/chanzuckerberg/cztack/issues/457)) ([f052fd6](https://github.com/chanzuckerberg/cztack/commit/f052fd6a5ae8683030e40f3f4e690d8f87f4b8a6))
+
 ## [0.50.0](https://github.com/chanzuckerberg/cztack/compare/v0.49.2...v0.50.0) (2023-02-15)
 
 
