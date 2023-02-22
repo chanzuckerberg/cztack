@@ -6,6 +6,11 @@ output "alb_route53_zone_id" {
   value = aws_lb.service.zone_id
 }
 
+output "ecs_albs" {
+  value       = [aws_lb.service.arn]
+  description = "Application Load Balancer (ALB) ARNs for the ECS Deployment"
+}
+
 output "ecs_task_definition_family" {
   description = "The family of the task definition defined for the given/generated container definition."
   value       = aws_ecs_task_definition.job.family

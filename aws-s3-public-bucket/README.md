@@ -30,6 +30,7 @@ No modules.
 | <a name="input_bucket_policy"></a> [bucket\_policy](#input\_bucket\_policy) | A policy to attach to this bucket. | `string` | `""` | no |
 | <a name="input_enable_versioning"></a> [enable\_versioning](#input\_enable\_versioning) | Keep old versions of objects in this bucket. | `bool` | `true` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. | `string` | n/a | yes |
+| <a name="input_logging_bucket"></a> [logging\_bucket](#input\_logging\_bucket) | Log bucket name and prefix to enable logs for this bucket | `object({ name = string, prefix = string })` | `null` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. | `string` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. | `string` | n/a | yes |
 | <a name="input_public_read_justification"></a> [public\_read\_justification](#input\_public\_read\_justification) | Describe why this bucket must be public and what it is being used for. | `string` | n/a | yes |

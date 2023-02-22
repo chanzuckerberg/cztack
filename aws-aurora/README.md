@@ -69,6 +69,8 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_database_name"></a> [database\_name](#output\_database\_name) | n/a |
+| <a name="output_database_password"></a> [database\_password](#output\_database\_password) | n/a |
+| <a name="output_database_username"></a> [database\_username](#output\_database\_username) | n/a |
 | <a name="output_db_parameter_group_name"></a> [db\_parameter\_group\_name](#output\_db\_parameter\_group\_name) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
 | <a name="output_port"></a> [port](#output\_port) | n/a |

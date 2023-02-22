@@ -53,6 +53,7 @@ No requirements.
 | <a name="input_saml_idp_arns"></a> [saml\_idp\_arns](#input\_saml\_idp\_arns) | The AWS SAML IDP arns to establish a trust relationship. Ignored if empty or not provided. | `set(string)` | `[]` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_source_account_ids"></a> [source\_account\_ids](#input\_source\_account\_ids) | The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided. | `set(string)` | `[]` | no |
+| <a name="input_source_role_arns"></a> [source\_role\_arns](#input\_source\_role\_arns) | The source AWS roles to establish a trust relationship. Ignored if empty or not provided. | `list(string)` | `[]` | no |
 
 ## Outputs
 
