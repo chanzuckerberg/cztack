@@ -15,9 +15,9 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = local.bucket_name
-
-  policy = data.aws_iam_policy_document.bucket_policy.json
+  bucket        = local.bucket_name
+  force_destroy = var.force_destroy
+  policy        = data.aws_iam_policy_document.bucket_policy.json
 
   versioning {
     enabled = var.enable_versioning

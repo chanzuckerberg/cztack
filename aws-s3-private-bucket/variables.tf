@@ -2,6 +2,12 @@ variable "bucket_name" {
   type = string
 }
 
+variable "force_destroy" {
+  type        = bool
+  description = "Allow objects to be deleted when the bucket is destroyed without errors."
+  default     = false
+}
+
 variable "bucket_policy" {
   type    = string
   default = ""

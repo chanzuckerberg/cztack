@@ -23,6 +23,11 @@ variable "bucket_name" {
   description = "The name of the bucket. Note that `-public` will be appended to `bucket_name`s that don't contain a `public` substring. This module will output the computed `bucket_name`."
 }
 
+variable "force_destroy" {
+  type    = bool
+  default = false
+}
+
 variable "allow_public_list" {
   type        = bool
   description = "Allow public to list bucket contents."
