@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.0](https://github.com/chanzuckerberg/cztack/compare/v0.50.1...v0.51.0) (2023-03-05)
+
+
+### Features
+
+* add module for ecr repository ([#462](https://github.com/chanzuckerberg/cztack/issues/462)) ([dead0af](https://github.com/chanzuckerberg/cztack/commit/dead0af183db9d3c92e1489705307f351fe65755))
+
 ## [0.50.1](https://github.com/chanzuckerberg/cztack/compare/v0.50.0...v0.50.1) (2023-02-22)
 
 
