@@ -24,8 +24,9 @@ variable "bucket_name" {
 }
 
 variable "force_destroy" {
-  type    = bool
-  default = false
+  type        = bool
+  description = "Allow objects to be deleted when the bucket is destroyed without errors."
+  default     = false
 }
 
 variable "allow_public_list" {
