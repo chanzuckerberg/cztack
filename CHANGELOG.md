@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.1](https://github.com/chanzuckerberg/cztack/compare/v0.51.0...v0.51.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* Upgrade github runner ([#465](https://github.com/chanzuckerberg/cztack/issues/465)) ([7c00bf8](https://github.com/chanzuckerberg/cztack/commit/7c00bf874edb0af26e3cdd8ac8ef461c4370dea9))
+
 ## [0.51.0](https://github.com/chanzuckerberg/cztack/compare/v0.50.1...v0.51.0) (2023-03-05)
 
 
