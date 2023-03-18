@@ -24,7 +24,8 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = var.bucket_name
+  bucket        = var.bucket_name
+  force_destroy = var.force_destroy
   # `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
 
   # Using canned ACL will conflict with using grant ACL
