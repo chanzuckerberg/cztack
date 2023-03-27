@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.0](https://github.com/chanzuckerberg/cztack/compare/v0.51.1...v0.52.0) (2023-03-18)
+
+
+### Features
+
+* allow force_destroy option on s3 buckets ([#461](https://github.com/chanzuckerberg/cztack/issues/461)) ([3a0b34f](https://github.com/chanzuckerberg/cztack/commit/3a0b34f28663e66381c29fac665522b9916cb17b))
+
 ## [0.51.1](https://github.com/chanzuckerberg/cztack/compare/v0.51.0...v0.51.1) (2023-03-06)
 
 
