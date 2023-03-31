@@ -1,9 +1,10 @@
 locals {
   tags = {
-    env     = var.env
-    owner   = var.owner
-    service = var.service
-    project = var.project
+    env             = var.env
+    owner           = var.owner
+    service         = var.service
+    project         = var.project
+    datadog_enabled = var.datadog_enabled // In AWS integration, turn on "Optionally limit resource collection" for Lambdas with tag: "datadog_enabled:true"
   }
 }
 
