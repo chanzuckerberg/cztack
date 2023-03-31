@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/chanzuckerberg/cztack/compare/v0.52.0...v0.53.0) (2023-03-31)
+
+
+### Features
+
+* Allow lambda resource collection to be turned off (per account) - [CCIE-1198] ([#471](https://github.com/chanzuckerberg/cztack/issues/471)) ([1882eb8](https://github.com/chanzuckerberg/cztack/commit/1882eb86cffd9382dc75c0c5d5b89116324fb87f))
+
 ## [0.52.0](https://github.com/chanzuckerberg/cztack/compare/v0.51.1...v0.52.0) (2023-03-18)
 
 
