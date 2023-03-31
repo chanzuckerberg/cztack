@@ -8,7 +8,7 @@ locals {
     owner           = var.owner
     service         = var.service
     owner           = var.owner
-    datadog_enabled = convert(var.datadog_enabled, string) // In AWS integration, turn on "Optionally limit resource collection" for Lambdas with tag: "datadog_enabled:true"
+    datadog_enabled = var.datadog_enabled ? "true" : "false" // In AWS integration, turn on "Optionally limit resource collection" for Lambdas with tag: "datadog_enabled:true"
   }
 }
 
