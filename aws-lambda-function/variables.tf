@@ -124,3 +124,9 @@ variable "memory_size" {
   description = "Amount of memory to allocate to the lambda"
   default     = 128
 }
+
+variable "datadog_enabled" {
+  type        = bool
+  default     = true
+  description = "Indicates if Datadog integration is enabled (see https://www.datadoghq.com/blog/monitoring-aws-lambda-with-datadog/ for details)."
+}

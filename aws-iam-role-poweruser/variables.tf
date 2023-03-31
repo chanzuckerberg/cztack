@@ -65,9 +65,3 @@ variable "owner" {
   type        = string
   description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)"
 }
-
-variable "datadog_enabled" {
-  type        = bool
-  default     = true
-  description = "Indicates if Datadog integration is enabled (see https://www.datadoghq.com/blog/monitoring-aws-lambda-with-datadog/ for details)."
-}

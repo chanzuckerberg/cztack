@@ -2,12 +2,13 @@ locals {
   name = var.function_name != null ? var.function_name : "${var.project}-${var.env}-${var.service}"
 
   tags = {
-    managedBy = "terraform"
-    Name      = local.name
-    env       = var.env
-    owner     = var.owner
-    service   = var.service
-    owner     = var.owner
+    managedBy       = "terraform"
+    Name            = local.name
+    env             = var.env
+    owner           = var.owner
+    service         = var.service
+    owner           = var.owner
+    datadog_enabled = convert(var.datadog_enabled, string) // In AWS integration, turn on "Optionally limit resource collection" for Lambdas with tag: "datadog_enabled:true"
   }
 }
 
