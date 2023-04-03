@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/Snowflake-Labs/terraform-provider-snowflake v0.55.0
-	github.com/aws/aws-sdk-go v1.44.224
+	github.com/aws/aws-sdk-go v1.44.234
 	github.com/chanzuckerberg/go-misc v1.0.6
 	github.com/davecgh/go-spew v1.1.1
 	github.com/gruntwork-io/terratest v0.41.12
