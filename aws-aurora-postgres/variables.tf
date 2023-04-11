@@ -38,7 +38,7 @@ variable "ingress_security_groups" {
 variable "instance_class" {
   type        = string
   description = "See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html)"
-  default     = "db.r4.large"
+  default     = "db.r5.large"
 }
 
 variable "instance_count" {
@@ -112,7 +112,7 @@ variable "kms_key_id" {
 variable "engine_version" {
   type        = string
   description = "The version of Postgres to use. This should be a *prefix* if auto version upgrades are enabled. (Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version)"
-  default     = "10"
+  default     = "15.2"
 }
 
 variable "performance_insights_enabled" {
