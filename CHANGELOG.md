@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.1](https://github.com/chanzuckerberg/cztack/compare/v0.53.0...v0.53.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* remove lock file ([eafedd3](https://github.com/chanzuckerberg/cztack/commit/eafedd30375dbc90588047d98bca263098a4cae5))
+
 ## [0.53.0](https://github.com/chanzuckerberg/cztack/compare/v0.52.0...v0.53.0) (2023-03-31)
 
 
