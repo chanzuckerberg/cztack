@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.2](https://github.com/chanzuckerberg/cztack/compare/v0.53.1...v0.53.2) (2023-04-21)
+
+
+### Bug Fixes
+
+* bump version ([58486a4](https://github.com/chanzuckerberg/cztack/commit/58486a4852566791707d868eaba7146e1b2c00a7))
+
 ## [0.53.1](https://github.com/chanzuckerberg/cztack/compare/v0.53.0...v0.53.1) (2023-04-18)
 
 
