@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"path"
 	"sort"
@@ -19,7 +18,7 @@ func ensureCI(names []string) error {
 	}
 
 	ciPath := path.Join(cwd, "..", "..", ".github", "workflows", "ci.yml")
-	ciFile, err := ioutil.ReadFile(ciPath)
+	ciFile, err := os.ReadFile(ciPath)
 	if err != nil {
 		return err
 	}
@@ -57,5 +56,5 @@ func ensureCI(names []string) error {
 		return err
 	}
 
-	return ioutil.WriteFile(ciPath, out, 0644)
+	return os.WriteFile(ciPath, out, 0644)
 }

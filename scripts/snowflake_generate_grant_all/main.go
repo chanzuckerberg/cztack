@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"sort"
@@ -99,13 +98,13 @@ func writeModule(name string, tf []byte, testCode []byte) error {
 	}
 
 	// write the file terraform file
-	err = ioutil.WriteFile(path.Join(moduleDir, "main.tf.json"), tf, 0644)
+	err = os.WriteFile(path.Join(moduleDir, "main.tf.json"), tf, 0644)
 	if err != nil {
 		return err
 	}
 
 	// write the file terraform file
-	return ioutil.WriteFile(path.Join(moduleDir, "module_test.go"), testCode, 0644)
+	return os.WriteFile(path.Join(moduleDir, "module_test.go"), testCode, 0644)
 }
 
 func generateModule(name string, grant *resources.TerraformGrantResource) ([]byte, error) {
