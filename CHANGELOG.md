@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.54.0](https://github.com/chanzuckerberg/cztack/compare/v0.53.2...v0.54.0) (2023-04-25)
+
+
+### Features
+
+* make github CI role opensource ([#480](https://github.com/chanzuckerberg/cztack/issues/480)) ([746d5a9](https://github.com/chanzuckerberg/cztack/commit/746d5a969ad79325fdf451e9e41df88b779ba49b))
+
 ## [0.53.2](https://github.com/chanzuckerberg/cztack/compare/v0.53.1...v0.53.2) (2023-04-21)
 
 
