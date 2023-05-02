@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.55.0](https://github.com/chanzuckerberg/cztack/compare/v0.54.0...v0.55.0) (2023-05-02)
+
+
+### Features
+
+* add dynamodb policy ([#482](https://github.com/chanzuckerberg/cztack/issues/482)) ([9858f8d](https://github.com/chanzuckerberg/cztack/commit/9858f8d5fa535d562a4f632f5a5d398d9d155816))
+
 ## [0.54.0](https://github.com/chanzuckerberg/cztack/compare/v0.53.2...v0.54.0) (2023-04-25)
 
 
