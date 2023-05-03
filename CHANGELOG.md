@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.55.1](https://github.com/chanzuckerberg/cztack/compare/v0.55.0...v0.55.1) (2023-05-03)
+
+
+### Bug Fixes
+
+* sid alphanumeric ([#484](https://github.com/chanzuckerberg/cztack/issues/484)) ([2266f9d](https://github.com/chanzuckerberg/cztack/commit/2266f9d0b607869a7c6ebc3defb9dba32f4e9e24))
+
 ## [0.55.0](https://github.com/chanzuckerberg/cztack/compare/v0.54.0...v0.55.0) (2023-05-02)
 
 
