@@ -7,7 +7,7 @@ resource "random_pet" "this" {
 
 data "aws_iam_policy_document" "this" {
   statement {
-    sid = "dynamodb-rw"
+    sid = "dynamodbrw"
 
     actions = [
       "dynamodb:GetItem",
