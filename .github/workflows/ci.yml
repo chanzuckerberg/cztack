@@ -28,6 +28,9 @@ jobs:
     name: test ${{ matrix.module }}
     needs: get-modules
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
       - id: filter
@@ -59,11 +62,9 @@ jobs:
         run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
         name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-region: us-west-2
-          aws-access-key-id: ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }}
           role-duration-seconds: 1200
           role-session-name: cztackCICDModuleTests
     strategy:
