@@ -63,8 +63,7 @@ jobs:
       #   run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
       # - if: github.event == 'push' || steps.filter.outputs.module == 'true'
       #   run: aws --profile cztack-ci-1 sts get-caller-identity
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: us-west-2
