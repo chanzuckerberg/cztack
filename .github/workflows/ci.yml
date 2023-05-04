@@ -58,19 +58,14 @@ jobs:
         name: Check Snowflake provider
         run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: aws configure set aws_access_key_id ${{ secrets.CI1_AWS_ACCESS_KEY_ID }} --profile cztack-ci-1
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: aws configure set aws_secret_access_key ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-1
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: aws --profile cztack-ci-1 sts get-caller-identity
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: aws configure set aws_access_key_id ${{ secrets.CI2_AWS_ACCESS_KEY_ID }} --profile cztack-ci-2
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: aws configure set aws_secret_access_key ${{ secrets.CI2_AWS_SECRET_ACCESS_KEY }} --profile cztack-ci-2
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: aws --profile cztack-ci-2 sts get-caller-identity
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        run: make test-ci TEST=./${{ matrix.module }}
+        name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-west-2
+          aws-access-key-id: ${{ secrets.CI1_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CI1_AWS_SECRET_ACCESS_KEY }}
+          role-duration-seconds: 1200
+          role-session-name: cztackCICDModuleTests
     strategy:
       fail-fast: false
       matrix:
