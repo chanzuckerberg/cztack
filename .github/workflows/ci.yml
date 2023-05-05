@@ -60,8 +60,8 @@ jobs:
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
         name: Check Snowflake provider
         run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
-      #- if: github.event == 'push' || steps.filter.outputs.module == 'true'
-      - name: Configure AWS Credentials
+      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+        name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-region: us-west-2
