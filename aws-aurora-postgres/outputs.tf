@@ -21,3 +21,11 @@ output "reader_endpoint" {
 output "port" {
   value = module.aurora.port
 }
+
+output "cluster_resource_id" {
+  value = module.aurora.cluster_resource_id
+}
+
+output "cluster_id" {
+  value = module.aurora.rds_cluster_id
+}
