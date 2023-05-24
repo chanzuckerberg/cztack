@@ -130,6 +130,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
 
 # `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
 resource "aws_s3_bucket_acl" "bucket_acl" {
+  bucket = aws_s3_bucket.bucket.id
   depends_on = [aws_s3_bucket_ownership_controls.ownership_config]
 
   # Using canned ACL will conflict with using grant ACL
