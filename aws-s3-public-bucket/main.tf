@@ -17,7 +17,6 @@ locals {
 resource "aws_s3_bucket" "bucket" {
   bucket        = local.bucket_name
   force_destroy = var.force_destroy
-  policy        = data.aws_iam_policy_document.bucket_policy.json
 
   versioning {
     enabled = var.enable_versioning
@@ -39,6 +38,24 @@ resource "aws_s3_bucket" "bucket" {
     }
   }
   tags = local.tags
+}
+
+# Disable public access block on the bucket
+# https://repost.aws/knowledge-center/s3-block-public-access-setting
+resource "aws_s3_bucket_public_access_block" "remove_public_access" {
+  bucket = aws_s3_bucket.bucket.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_policy" "public_bucket_policy" {
+  bucket = aws_s3_bucket.bucket.id
+  policy = data.aws_iam_policy_document.bucket_policy.json
+  # Wait for the public access block to be applied before applying the bucket policy
+  depends_on = [ aws_s3_bucket_public_access_block.remove_public_access ]
 }
 
 data "aws_iam_policy_document" "bucket_policy" {
