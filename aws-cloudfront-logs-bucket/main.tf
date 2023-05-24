@@ -32,3 +32,12 @@ module "aws-cloudfront-logs-bucket" {
   public_access_block                    = var.public_access_block
   lifecycle_rules                        = var.lifecycle_rules
 }
+
+# The default BucketOwnerEnforced blocks cloudfront's ability to write logs.
+resource "aws_s3_bucket_ownership_controls" "example" {
+  bucket = module.aws-cloudfront-logs-bucket.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
