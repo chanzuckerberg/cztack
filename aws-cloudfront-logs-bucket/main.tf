@@ -29,27 +29,7 @@ module "aws-cloudfront-logs-bucket" {
   bucket_policy                          = var.bucket_policy
   enable_versioning                      = var.enable_versioning
   abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
-  public_access_block                    = false  # TODO FIXME just for debugging.
+  public_access_block                    = false
   lifecycle_rules                        = var.lifecycle_rules
-}
-
-# The default BucketOwnerEnforced blocks cloudfront's ability to write logs.
-# https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
-resource "aws_s3_bucket_ownership_controls" "example" {
-  bucket = module.aws-cloudfront-logs-bucket.id
-
-  rule {
-    object_ownership = "ObjectWriter"
-  }
-}
-
-# Disable public access block on the bucket
-# https://repost.aws/knowledge-center/s3-block-public-access-setting
-resource "aws_s3_bucket_public_access_block" "remove_public_access" {
-  bucket = aws_s3_bucket.bucket.id
-
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  object_ownership_mode                  = "BucketOwnerPreferred"
 }

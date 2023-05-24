@@ -26,10 +26,6 @@ locals {
 resource "aws_s3_bucket" "bucket" {
   bucket        = var.bucket_name
   force_destroy = var.force_destroy
-  # `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
-
-  # Using canned ACL will conflict with using grant ACL
-  acl = local.acl
 
   dynamic "grant" {
     for_each = local.valid_grants
@@ -129,15 +125,30 @@ resource "aws_s3_bucket" "bucket" {
   tags = local.tags
 }
 
-resource "aws_s3_bucket_public_access_block" "bucket" {
-  count = var.public_access_block ? 1 : 0
 
+# `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
+resource "aws_s3_bucket_acl" "bucket_acl" {
+  depends_on = [aws_s3_bucket_ownership_controls.ownership_config]
+
+  # Using canned ACL will conflict with using grant ACL
+  acl = local.acl
+}
+
+resource "aws_s3_bucket_ownership_controls" "ownership_config" {
+  bucket = module.aws-cloudfront-logs-bucket.id
+
+  rule {
+    object_ownership = var.object_ownership_mode
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "bucket" {
   bucket = aws_s3_bucket.bucket.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = var.public_access_block
+  block_public_policy     = var.public_access_block
+  ignore_public_acls      = var.public_access_block
+  restrict_public_buckets = var.public_access_block
 }
 
 data "aws_iam_policy_document" "bucket_policy" {

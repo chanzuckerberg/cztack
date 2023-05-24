@@ -99,3 +99,9 @@ variable "acl" {
   default     = "private"
   description = "Canned ACL to use if grants object is not given. See https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl"
 }
+
+variable "object_ownership_mode" {
+  type = string
+  default = "BucketOwnerEnforced"
+  description = "Enforce object ownership and en/disable ACL's. Ref: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html"
+}
