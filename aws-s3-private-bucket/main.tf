@@ -115,16 +115,18 @@ resource "aws_s3_bucket" "bucket" {
     }
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
   tags = local.tags
 }
 
+resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+  bucket = aws_s3_bucket.bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+    }
+  }
+}
 
 # `grant` and `acl` conflict with each other - https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#acl
 resource "aws_s3_bucket_acl" "bucket_acl" {
@@ -135,7 +137,7 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "ownership_config" {
-  bucket = module.aws-cloudfront-logs-bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   rule {
     object_ownership = var.object_ownership_mode
