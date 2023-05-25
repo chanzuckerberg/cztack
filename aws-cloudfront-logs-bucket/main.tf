@@ -37,7 +37,7 @@ resource "aws_s3_bucket_ownership_controls" "cloudfront-owner-preferred" {
   bucket = module.aws-cloudfront-logs-bucket.id
 
   rule {
-    object_ownership = "BucketOwnerEnforced"
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
