@@ -2,7 +2,6 @@ data "aws_canonical_user_id" "current_user" {}
 
 module "aws-cloudfront-logs-bucket" {
   source                                 = "../aws-s3-private-bucket"
-  //grants                                 = local.grants
   env                                    = var.env
   owner                                  = var.owner
   project                                = var.project
