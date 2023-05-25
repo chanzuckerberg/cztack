@@ -51,7 +51,7 @@ resource "aws_s3_bucket_acl" "cloudfront-owner-grant" {
         id   =  data.aws_canonical_user_id.current_user.id
         type = "CanonicalUser"
       }
-      permission = ["FULL_CONTROL"]
+      permission = "FULL_CONTROL"
     }
 
     grant {
@@ -59,7 +59,7 @@ resource "aws_s3_bucket_acl" "cloudfront-owner-grant" {
         id   = "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0" # AWS log delivery group's canonical user id
         type = "CanonicalUser"
       }
-      permission = ["FULL_CONTROL"]
+      permission = "FULL_CONTROL"
     }
 
     owner {
