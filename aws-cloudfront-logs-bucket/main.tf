@@ -1,21 +1,3 @@
-# locals {
-#   # Define the grant ACL for the Cloudfront logging S3 bucket,
-#   # In order for the awslogsdelivery account to write log files to the bucket,
-#   # we need to grant the AWS log delivery group the FULL_CONTROL access to the logging bucket
-#   grants = [
-#     {
-#       canonical_user_id : data.aws_canonical_user_id.current_user.id
-#       permissions : ["FULL_CONTROL"]
-
-#     },
-#     {
-#       canonical_user_id : "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0" # AWS log delivery group's canonical user id
-#       permissions : ["FULL_CONTROL"]
-
-#     }
-#   ]
-# }
-
 data "aws_canonical_user_id" "current_user" {}
 
 module "aws-cloudfront-logs-bucket" {
