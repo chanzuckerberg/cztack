@@ -96,7 +96,7 @@ data "aws_iam_policy_document" "policy" {
     }
   }
 
-  source_json = var.ecr_resource_policy
+  source_policy_documents = [var.ecr_resource_policy]
 }
 
 resource "aws_ecr_lifecycle_policy" "lifecycle" {
