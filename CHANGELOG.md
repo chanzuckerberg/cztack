@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.56.0](https://github.com/chanzuckerberg/cztack/compare/v0.55.1...v0.56.0) (2023-05-26)
+
+
+### Features
+
+* output additional info from aws-aurora-postgres ([#491](https://github.com/chanzuckerberg/cztack/issues/491)) ([4d131c5](https://github.com/chanzuckerberg/cztack/commit/4d131c57bf039e9a08416819ab2eb0829fa7d5c4))
+
+
+### Bug Fixes
+
+* address issue with public access block on public s3 bucket ([#492](https://github.com/chanzuckerberg/cztack/issues/492)) ([e1c5c5c](https://github.com/chanzuckerberg/cztack/commit/e1c5c5ca30f09ead473b98cc9f011f94479a8d34))
+* cut out cztack-ci-2 from workflow, use standard way to authorize cztack-ci-1 ([#486](https://github.com/chanzuckerberg/cztack/issues/486)) ([ce8e47b](https://github.com/chanzuckerberg/cztack/commit/ce8e47b3463fc5caa1ee7f1798f21a890d6a27ae))
+* fixing acl issue on cloudfront buckets ([#493](https://github.com/chanzuckerberg/cztack/issues/493)) ([22187dd](https://github.com/chanzuckerberg/cztack/commit/22187ddf3b23ef26ae0a33c6e9de554c8d075962))
+* rotator deprecation - oidc auth to aws in cztack workflow runs ([#488](https://github.com/chanzuckerberg/cztack/issues/488)) ([c72fa79](https://github.com/chanzuckerberg/cztack/commit/c72fa7929d456c6bbda97c3e57fa34bf9ed295ad))
+* Source_json is removed in aws provider 5.0.x ([#494](https://github.com/chanzuckerberg/cztack/issues/494)) ([70a6dae](https://github.com/chanzuckerberg/cztack/commit/70a6dae5ef46704a608df0c1f81ee1002686f845))
+
 ## [0.55.1](https://github.com/chanzuckerberg/cztack/compare/v0.55.0...v0.55.1) (2023-05-03)
 
 
