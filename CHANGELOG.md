@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.56.1](https://github.com/chanzuckerberg/cztack/compare/v0.56.0...v0.56.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* Replace a deprecated source_json attribute ([#495](https://github.com/chanzuckerberg/cztack/issues/495)) ([93381a4](https://github.com/chanzuckerberg/cztack/commit/93381a40c697599591fa7872618f0d580c9ca4e4))
+
 ## [0.56.0](https://github.com/chanzuckerberg/cztack/compare/v0.55.1...v0.56.0) (2023-05-26)
 
 
