@@ -142,7 +142,7 @@ resource "aws_s3_bucket_public_access_block" "bucket" {
 
 data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
-  source_json = var.bucket_policy
+  source_policy_documents = [var.bucket_policy]
 
   statement {
     sid     = "EnforceTLS"
