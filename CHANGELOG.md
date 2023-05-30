@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.56.2](https://github.com/chanzuckerberg/cztack/compare/v0.56.1...v0.56.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* Handle empty and blank source policies ([#498](https://github.com/chanzuckerberg/cztack/issues/498)) ([6ac0451](https://github.com/chanzuckerberg/cztack/commit/6ac0451a649afc5048fabc6da2aac6b36c16fa04))
+
 ## [0.56.1](https://github.com/chanzuckerberg/cztack/compare/v0.56.0...v0.56.1) (2023-05-30)
 
 
