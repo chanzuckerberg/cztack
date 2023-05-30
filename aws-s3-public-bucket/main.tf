@@ -60,7 +60,7 @@ resource "aws_s3_bucket_policy" "public_bucket_policy" {
 
 data "aws_iam_policy_document" "bucket_policy" {
   # Deny access to bucket if it's not accessed through HTTPS
-  source_json = var.bucket_policy
+  source_policy_documents = [var.bucket_policy]
 
   dynamic "statement" {
     for_each = var.require_tls ? ["enabled"] : []
