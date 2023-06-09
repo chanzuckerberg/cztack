@@ -88,6 +88,7 @@ resource "aws_ecs_service" "unmanaged-job" {
   task_definition                   = local.task_definition
   desired_count                     = var.desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  enable_execute_command =  true
 
   network_configuration {
     subnets         = var.task_subnets
