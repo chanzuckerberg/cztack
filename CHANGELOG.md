@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.2](https://github.com/chanzuckerberg/cztack/compare/v0.57.1...v0.57.2) (2023-06-12)
+
+
+### Bug Fixes
+
+* default value comparison ([#506](https://github.com/chanzuckerberg/cztack/issues/506)) ([0e9e2d4](https://github.com/chanzuckerberg/cztack/commit/0e9e2d4c08e18f4e1a0970fab497233f27db8dbb))
+
 ## [0.57.1](https://github.com/chanzuckerberg/cztack/compare/v0.57.0...v0.57.1) (2023-06-12)
 
 
