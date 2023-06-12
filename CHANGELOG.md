@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.0](https://github.com/chanzuckerberg/cztack/compare/v0.56.2...v0.57.0) (2023-06-12)
+
+
+### Features
+
+* aws-s3-private-bucket Allow specifying bucket object blanket ownership ([#502](https://github.com/chanzuckerberg/cztack/issues/502)) ([f7f45b8](https://github.com/chanzuckerberg/cztack/commit/f7f45b854cd8297bca40d4bad19ed1a3e834e31f))
+
 ## [0.56.2](https://github.com/chanzuckerberg/cztack/compare/v0.56.1...v0.56.2) (2023-05-30)
 
 
