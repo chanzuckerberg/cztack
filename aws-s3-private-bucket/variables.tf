@@ -106,7 +106,7 @@ variable "object_ownership" {
   description = "Set default owner of all objects within bucket (e.g., bucket vs. object owner)"
 
   validation {
-    condition     = contains([null, "BucketOwnerEnforced", "BucketOwnerPreferred", "ObjectWriter"], var.object_ownership)
+    condition     = contains(["BucketOwnerEnforced", "BucketOwnerPreferred", "ObjectWriter"], var.object_ownership) || var.object_ownership == null
     error_message = "Valid values for var.object_ownership are ('BucketOwnerEnforced', 'BucketOwnerPreferred', 'ObjectWriter')."
 
   }
