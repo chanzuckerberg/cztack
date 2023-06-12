@@ -176,3 +176,12 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
   // https://github.com/terraform-providers/terraform-provider-aws/issues/7628
   depends_on = [aws_s3_bucket_public_access_block.bucket]
 }
+
+resource "aws_s3_bucket_ownership_controls" "bucket" {
+  count = var.object_ownership != null ? 1 : 0
+
+  bucket = aws_s3_bucket.bucket
+  rule {
+    object_ownership = var.object_ownership
+  }
+}
