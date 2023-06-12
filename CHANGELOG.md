@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.3](https://github.com/chanzuckerberg/cztack/compare/v0.57.2...v0.57.3) (2023-06-12)
+
+
+### Bug Fixes
+
+* Ternary operator for variable validation check against null ([#508](https://github.com/chanzuckerberg/cztack/issues/508)) ([e25a681](https://github.com/chanzuckerberg/cztack/commit/e25a68166c2cbdd257b1201dd52c88ebb1763cdf))
+
 ## [0.57.2](https://github.com/chanzuckerberg/cztack/compare/v0.57.1...v0.57.2) (2023-06-12)
 
 
