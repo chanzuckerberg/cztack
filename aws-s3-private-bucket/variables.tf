@@ -99,3 +99,15 @@ variable "acl" {
   default     = "private"
   description = "Canned ACL to use if grants object is not given. See https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl"
 }
+
+variable "object_ownership" {
+  type        = string
+  default     = null
+  description = "Set default owner of all objects within bucket (e.g., bucket vs. object owner)"
+
+  validation {
+    condition     = contains(["BucketOwnerEnforced", "BucketOwnerPreferred", "ObjectWriter"], var.object_ownership)
+    error_message = "Valid values for var.object_ownership are ('BucketOwnerEnforced', 'BucketOwnerPreferred', 'ObjectWriter')."
+
+  }
+}
