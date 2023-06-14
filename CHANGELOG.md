@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.4](https://github.com/chanzuckerberg/cztack/compare/v0.57.3...v0.57.4) (2023-06-14)
+
+
+### Bug Fixes
+
+* Use id and not resource itself as value ([#510](https://github.com/chanzuckerberg/cztack/issues/510)) ([c039cf6](https://github.com/chanzuckerberg/cztack/commit/c039cf60861c72cc5b82096e4d72d3a1c447b398))
+
 ## [0.57.3](https://github.com/chanzuckerberg/cztack/compare/v0.57.2...v0.57.3) (2023-06-12)
 
 
