@@ -180,7 +180,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 resource "aws_s3_bucket_ownership_controls" "bucket" {
   count = var.object_ownership != null ? 1 : 0
 
-  bucket = aws_s3_bucket.bucket
+  bucket = aws_s3_bucket.bucket.id
   rule {
     object_ownership = var.object_ownership
   }
