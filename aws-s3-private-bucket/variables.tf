@@ -112,3 +112,20 @@ variable "object_ownership" {
 
   }
 }
+
+variable "kms_encryption" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether the bucket will be encrypted using a new customer-managed KMS key. Default behavior is no, and SSE-S3 is used instead. KMS is required for direct cross-account access (as opposed to via an assumed role in the target account)"
+}
+
+variable "kms_key_type" {
+  type        = string
+  default     = "SYMMETRIC_DEFAULT"
+  description = "KMS key type with which to encrypt bucket"
+  validation {
+    condition     = var.kms_key_type == null ? true : contains(["SYMMETRIC_DEFAULT", "RSA_2048", "RSA_3072", "RSA_4096", "HMAC_256", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1"], var.kms_key_type)
+    error_message = "Valid values for var.kms_key_type are ('SYMMETRIC_DEFAULT', 'RSA_2048', 'RSA_3072', 'RSA_4096', 'HMAC_256', 'ECC_NIST_P256', 'ECC_NIST_P384', 'ECC_NIST_P521', 'ECC_SECG_P256K1')."
+
+  }
+}

@@ -14,3 +14,7 @@ output "arn" {
 output "id" {
   value = aws_s3_bucket.bucket.id
 }
+
+output "bucket_kms_encryption_key_arn" {
+  value = one(aws_kms_key.bucket_kms_key[*].arn)
+}
