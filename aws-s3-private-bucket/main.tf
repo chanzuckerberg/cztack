@@ -192,7 +192,12 @@ resource "aws_kms_key" "bucket_kms_key" {
   description              = "This key is used to encrypt bucket objects for bucket ${var.bucket_name}"
   customer_master_key_spec = var.kms_key_type
   tags                     = {
-    
+    project   = var.project
+    env       = var.env
+    service   = var.service
+    owner     = var.owner
+    bucket    = var.bucket_name
+    managedBy = "terraform"
   }
 }
 
