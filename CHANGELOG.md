@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.58.0](https://github.com/chanzuckerberg/cztack/compare/v0.57.4...v0.58.0) (2023-06-28)
+
+
+### Features
+
+* AWS provider version bump to support BucketOwnerEnforced object ownership value ([#512](https://github.com/chanzuckerberg/cztack/issues/512)) ([9053640](https://github.com/chanzuckerberg/cztack/commit/9053640a832b66f87752dd5a6c144726e0aff7e5))
+* CDI-1607 Add KMS encryption key var to s3 bucket ([#514](https://github.com/chanzuckerberg/cztack/issues/514)) ([c946dd0](https://github.com/chanzuckerberg/cztack/commit/c946dd059746626f3aa0bc65fe266cce5e4171cd))
+
 ## [0.57.4](https://github.com/chanzuckerberg/cztack/compare/v0.57.3...v0.57.4) (2023-06-14)
 
 
