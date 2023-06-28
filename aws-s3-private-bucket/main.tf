@@ -185,3 +185,31 @@ resource "aws_s3_bucket_ownership_controls" "bucket" {
     object_ownership = var.object_ownership
   }
 }
+
+resource "aws_kms_key" "bucket_kms_key" {
+  count = var.kms_encryption != null ? 1 : 0
+
+  description              = "This key is used to encrypt bucket objects for bucket ${var.bucket_name}"
+  customer_master_key_spec = var.kms_key_type
+  tags                     = {
+    project   = var.project
+    env       = var.env
+    service   = var.service
+    owner     = var.owner
+    bucket    = var.bucket_name
+    managedBy = "terraform"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_kms_encryption" {
+  count = var.kms_encryption != null ? 1 : 0
+
+  bucket = aws_s3_bucket.bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.bucket_kms_key[0].arn
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
