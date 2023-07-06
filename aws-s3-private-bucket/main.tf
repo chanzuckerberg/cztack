@@ -119,14 +119,17 @@ resource "aws_s3_bucket" "bucket" {
     }
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+  tags = local.tags
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "enc" {
+  bucket = aws_s3_bucket.bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "AES256"
     }
   }
-  tags = local.tags
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket" {
