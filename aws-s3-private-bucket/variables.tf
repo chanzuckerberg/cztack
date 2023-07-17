@@ -115,7 +115,7 @@ variable "object_ownership" {
 
 variable "kms_encryption" {
   type        = bool
-  default     = false
+  default     = null
   description = "Flag to indicate whether the bucket will be encrypted using a new customer-managed KMS key. Default behavior is no, and SSE-S3 is used instead. KMS is required for direct cross-account access (as opposed to via an assumed role in the target account)"
 }
 
