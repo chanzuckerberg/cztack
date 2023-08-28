@@ -54,3 +54,15 @@ variable "force_delete" {
   description = "Allows this ECR repo to be automated deleted with terraform destroy. False by default"
   default     = false
 }
+
+variable "allow_tag_mutability" {
+  type        = bool
+  description = "Whether to allow tag mutability"
+  default     = true
+}
+
+variable "enable_image_scan_on_push" {
+  type        = bool
+  description = "Whether to enable image scan on push"
+  default     = false
+}

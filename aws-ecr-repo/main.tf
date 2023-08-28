@@ -22,6 +22,12 @@ resource "aws_ecr_repository" "repo" {
   name         = var.name
   tags         = var.tags
   force_delete = var.force_delete
+
+  image_tag_mutability = var.allow_tag_mutability ? "MUTABLE" : "IMMUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = var.enable_image_scan_on_push
+  }
   lifecycle {
     ignore_changes = [name]
   }
