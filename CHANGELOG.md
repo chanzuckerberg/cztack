@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.0](https://github.com/chanzuckerberg/cztack/compare/v0.58.0...v0.59.0) (2023-08-28)
+
+
+### Features
+
+* Support image tag mutability and scan settings ([#517](https://github.com/chanzuckerberg/cztack/issues/517)) ([64e5e47](https://github.com/chanzuckerberg/cztack/commit/64e5e479124da2b3626c9d0e52e2f94f60cfea19))
+
 ## [0.58.0](https://github.com/chanzuckerberg/cztack/compare/v0.57.4...v0.58.0) (2023-06-28)
 
 
