@@ -73,6 +73,8 @@ No modules.
 | <a name="input_public_access_block"></a> [public\_access\_block](#input\_public\_access\_block) | n/a | `bool` | `true` | no |
 | <a name="input_service"></a> [service](#input\_service) | n/a | `string` | n/a | yes |
 | <a name="input_transfer_acceleration"></a> [transfer\_acceleration](#input\_transfer\_acceleration) | n/a | `bool` | `false` | no |
+| <a name="kms_encryption"></a> [kms\_encryption](#kms\_encryption) | Use KMS encryption instead of the default (SSE) | `bool` | `false` | no |
+| <a name="kms_key_type"></a> [kms\_encryption](#kms\_key\_type) | KMS encryption key type, if `kms_encryption`` is set to true| `string` | `SYMMETRIC_DEFAULT` | no |
 
 ## Outputs
 
