@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.1](https://github.com/chanzuckerberg/cztack/compare/v0.60.0...v0.60.1) (2023-10-03)
+
+
+### Bug Fixes
+
+* trigger release for S3 default KMS encryption fix ([#521](https://github.com/chanzuckerberg/cztack/issues/521)) ([8bf754e](https://github.com/chanzuckerberg/cztack/commit/8bf754e85495d19181c410c08d4f365c14ca36f9))
+
 ## [0.60.0](https://github.com/chanzuckerberg/cztack/compare/v0.59.0...v0.60.0) (2023-09-22)
 
 
