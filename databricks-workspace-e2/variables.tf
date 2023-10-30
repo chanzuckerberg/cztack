@@ -53,7 +53,6 @@ variable "object_ownership" {
 
 variable "audit_log_bucket_name" {
   type        = string
-  default     = "czi-audit-logs"
   description = "Name of bucket to write cluster logs to - also where the audit logs go, too"
 }
 
