@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.0](https://github.com/chanzuckerberg/cztack/compare/v0.60.1...v0.61.0) (2023-10-30)
+
+
+### Features
+
+* all more options when creating the trust relationship ([#525](https://github.com/chanzuckerberg/cztack/issues/525)) ([edfff23](https://github.com/chanzuckerberg/cztack/commit/edfff23a634152c02a75c78246d5784b0c2f75db))
+
 ## [0.60.1](https://github.com/chanzuckerberg/cztack/compare/v0.60.0...v0.60.1) (2023-10-03)
 
 
