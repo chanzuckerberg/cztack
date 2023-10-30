@@ -8,9 +8,23 @@ locals {
 // https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws
 data "aws_iam_policy_document" "assume_role" {
   dynamic "statement" {
+    for_each = var.authorized_aws_accounts
+
+    content {
+      sid = "AllowAssumeRoleFrom${statement.key}"
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${statement.value}:root"]
+      }
+      actions = ["sts:AssumeRole", "sts:TagSession"]
+      effect  = "Allow"
+    }
+  }
+  dynamic "statement" {
     for_each = var.authorized_github_repos
 
     content {
+      sid = "AllowGithubActionsToAssumeRole"
       principals {
         type        = "Federated"
         identifiers = [local.idp_arn]

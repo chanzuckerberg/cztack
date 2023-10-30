@@ -25,3 +25,9 @@ variable "tags" {
 
   description = "Standard tagging."
 }
+
+variable "authorized_aws_accounts" {
+  type        = map(string)
+  description = "The map of authorized AWS accounts to assume the created role."
+  default     = {}
+}
