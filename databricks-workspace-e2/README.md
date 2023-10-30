@@ -12,11 +12,11 @@
     extra_vars:
       databricks_external_id: value-for-external-id
 ```
-To get the `databricks_external_id`, ask the Databricks point of contact (Taha Syed has been our POC for TLP and Meta: taha@databricks.com). It is [this value](https://databrickslabs.github.io/terraform-provider-databricks/resources/mws_workspaces/).
+To get the `databricks_external_id`, ask the Databricks point of contact. It is [this value](https://databrickslabs.github.io/terraform-provider-databricks/resources/mws_workspaces/).
 
-5. Run `fogg apply` at the root.
-6. In the newly created component, create a file called `cloud-env.tf` and copy what you see in `terraform/envs/meta-prod/databricks-workspace/cloud-env.tf`. Replace the values for `database_subnet_cidrs`, `private_subnet_cidrs`, `public_subnet_cidrs`, and `vpc_cidr` with the output that you created in `outputs.tf`.
-7. At minimum, you'll need something like this in `main.tf`
+1. Run `fogg apply` at the root.
+2. In the newly created component, create a file called `cloud-env.tf` and copy what you see in `terraform/envs/meta-prod/databricks-workspace/cloud-env.tf`. Replace the values for `database_subnet_cidrs`, `private_subnet_cidrs`, `public_subnet_cidrs`, and `vpc_cidr` with the output that you created in `outputs.tf`.
+3. At minimum, you'll need something like this in `main.tf`
 ```terraform
   module databricks-workspace {
     source                 = "../../../modules/databricks-workspace-e2"
@@ -31,7 +31,7 @@ To get the `databricks_external_id`, ask the Databricks point of contact (Taha S
 ```
 where the `databricks_external_id` is value you specified in the `databricks-workspace` component in `fogg.yml`.
 
-8. Add a new file called `provider.tf`. To authenticate to Databricks, we use `basic_auth` with environment variables `DATABRICKS_USERNAME` and `DATABRICKS_PASSWORD`. We store these as environment variables in the TFE workspace you're working in. They have to be named exactly those words to have the `basic_auth` pick them up. This is the default provider for Databricks:
+1. Add a new file called `provider.tf`. To authenticate to Databricks, we use `basic_auth` with environment variables `DATABRICKS_USERNAME` and `DATABRICKS_PASSWORD`. We store these as environment variables in the TFE workspace you're working in. They have to be named exactly those words to have the `basic_auth` pick them up. This is the default provider for Databricks:
 ```terraform
   provider "databricks" {
     version = "v0.2.3"
