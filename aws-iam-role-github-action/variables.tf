@@ -31,3 +31,9 @@ variable "authorized_aws_accounts" {
   description = "The map of authorized AWS accounts to assume the created role."
   default     = {}
 }
+
+variable "additional_assume_role_policies_json" {
+  type        = string
+  description = "The JSON string of any other additional assume role policies to add to the Github Actions role"
+  default     = ""
+}
