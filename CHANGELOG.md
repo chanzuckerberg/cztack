@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.62.0](https://github.com/chanzuckerberg/cztack/compare/v0.61.0...v0.62.0) (2023-10-31)
+
+
+### Features
+
+* CDI-2182 Add databricks-default-cluster-policy module ([#531](https://github.com/chanzuckerberg/cztack/issues/531)) ([4c70f29](https://github.com/chanzuckerberg/cztack/commit/4c70f295cefb5013590e6533b6ae6e09efc52a0c))
+* CDI-2183 Add databricks-cluster-log-permissions module ([#532](https://github.com/chanzuckerberg/cztack/issues/532)) ([2e5974a](https://github.com/chanzuckerberg/cztack/commit/2e5974a61defa36d339a1a28ce7c90a17bd22685))
+
+
+### Bug Fixes
+
+* update readmes and trigger release ([#534](https://github.com/chanzuckerberg/cztack/issues/534)) ([7fef82a](https://github.com/chanzuckerberg/cztack/commit/7fef82aa47a9dcc5b9e897072406f080e4ddef1f))
+
 ## [0.61.0](https://github.com/chanzuckerberg/cztack/compare/v0.60.1...v0.61.0) (2023-10-30)
 
 
