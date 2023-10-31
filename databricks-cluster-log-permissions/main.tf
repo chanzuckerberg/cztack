@@ -3,8 +3,8 @@
 
 ###
 locals {
-  default_role_name    = "cluster_log_cluster_role" # standard role for clusters - allows writing cluster logs
-  read_write_role_name = "cluster_log_rw_role"      # special role for just ie - allows both writing and reading cluster logs
+  default_role_name    = "cluster_log_cluster_role" # standard role for clusters - allows both writing and reading cluster logs for only the same workspace
+  read_write_role_name = "cluster_log_rw_role"      # special role - allows both writing and reading cluster logs for all workspaces
   path                 = "/databricks/"
 
   # hacky way to validate if this workspace/cluster should have read permissions
@@ -93,7 +93,7 @@ resource "aws_iam_role_policy_attachment" "write_access_attachment_rw_role" {
   role       = local.read_write_role_name
 }
 
-## (non-standard - only for ie) read access
+## non-standard global-read access
 
 data "aws_iam_policy_document" "cluster_log_bucket_read_access" {
   count = var.add_reader == true ? 1 : 0
