@@ -41,6 +41,8 @@
 | <a name="input_additional_instance_profile_arns"></a> [additional\_instance\_profile\_arns](#input\_additional\_instance\_profile\_arns) | Additional instance profiles to allow clusters to run on | `list(string)` | `[]` | no |
 | <a name="input_databricks_host"></a> [databricks\_host](#input\_databricks\_host) | Databricks host name for tagging | `string` | n/a | yes |
 | <a name="input_databricks_workspace_id"></a> [databricks\_workspace\_id](#input\_databricks\_workspace\_id) | Databricks workspace\_id for tagging | `string` | n/a | yes |
+| <a name="input_databricks_log_bucket"></a> [databricks\_log\_bucket](#input\_databricks\_log\_bucket) | Name of S3 bucket to store Databricks logs | `string` | n/a | yes |
+| <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | Prefix for policy names | `string` | n/a | no |
 
 ## Outputs
 
