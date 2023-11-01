@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.1](https://github.com/chanzuckerberg/cztack/compare/v0.62.0...v0.62.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* remove unused databricks-workspace-e2 variable ([#535](https://github.com/chanzuckerberg/cztack/issues/535)) ([a21509b](https://github.com/chanzuckerberg/cztack/commit/a21509bda6d4bbeb81aaa2afc5fb9bd19f4f86f8))
+
 ## [0.62.0](https://github.com/chanzuckerberg/cztack/compare/v0.61.0...v0.62.0) (2023-10-31)
 
 
