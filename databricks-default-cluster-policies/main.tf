@@ -156,7 +156,7 @@ module "job_compute_cluster_policy" {
   grantees = [local.power_user_group_name]
 }
 
-module "job_compute_cluster_policy" {
+module "small_job_compute_cluster_policy" {
   source = "../databricks-cluster-policy"
 
   databricks_host         = var.databricks_host
