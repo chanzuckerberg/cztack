@@ -151,6 +151,19 @@ module "job_compute_cluster_policy" {
   policy_name             = "${var.policy_name_prefix}Job Compute"
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
+  policy_overrides = local.logging_override
+
+  grantees = [local.power_user_group_name]
+}
+
+module "job_compute_cluster_policy" {
+  source = "../databricks-cluster-policy"
+
+  databricks_host         = var.databricks_host
+  databricks_workspace_id = var.databricks_workspace_id
+  policy_name             = "${var.policy_name_prefix}Small Job Compute"
+  policy_family_id        = local.default_policy_family_ids["job_compute"]
+
   policy_overrides = merge(local.logging_override, {
     "spark_conf.spark.databricks.cluster.profile" : {
       "type" : "unlimited",
