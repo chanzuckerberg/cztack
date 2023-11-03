@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.2](https://github.com/chanzuckerberg/cztack/compare/v0.62.1...v0.62.2) (2023-11-03)
+
+
+### Bug Fixes
+
+* Split out job compute policy between single and multi node ([#537](https://github.com/chanzuckerberg/cztack/issues/537)) ([770b19e](https://github.com/chanzuckerberg/cztack/commit/770b19e544cca18a6f6e7f3f59800e84f16c1393))
+
 ## [0.62.1](https://github.com/chanzuckerberg/cztack/compare/v0.62.0...v0.62.1) (2023-10-31)
 
 
