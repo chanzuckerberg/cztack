@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.3](https://github.com/chanzuckerberg/cztack/compare/v0.62.2...v0.62.3) (2023-11-03)
+
+
+### Bug Fixes
+
+* module name fix ([42b328d](https://github.com/chanzuckerberg/cztack/commit/42b328dd1edf200e9672ecd48dba743c0b053500))
+
 ## [0.62.2](https://github.com/chanzuckerberg/cztack/compare/v0.62.1...v0.62.2) (2023-11-03)
 
 
