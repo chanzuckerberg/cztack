@@ -60,4 +60,5 @@ resource "aws_elasticache_cluster" "default" {
   apply_immediately    = var.apply_immediately
   availability_zone    = var.availability_zone
   tags                 = local.tags
+  transit_encryption_enabled = true
 }
