@@ -85,7 +85,7 @@ module "personal_compute_cluster_policy" {
     },
     "instance_pool_id" : {
       "type": "allowlist",
-      "values": ["small-personal-compute"],
+      "values": ["i3-xlarge-pool"],
       "hidden": false
     }
   })
