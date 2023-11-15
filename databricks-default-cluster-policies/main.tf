@@ -396,7 +396,3 @@ module "superset_compute_cluster_policy" {
     },
   })
 }
-
-module "shared_always_on_policy" {
-
-}
