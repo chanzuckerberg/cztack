@@ -83,6 +83,11 @@ module "personal_compute_cluster_policy" {
       "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
       "hidden" : false
     },
+    "instance_pool_id" : {
+      "type": "allowlist",
+      "values": ["i3-xlarge-pool"],
+      "hidden": false
+    }
   })
   grantees = [local.all_users_group_name]
 }
@@ -390,4 +395,8 @@ module "superset_compute_cluster_policy" {
       "defaultValue" : "superset_pool"
     },
   })
+}
+
+module "shared_always_on_policy" {
+
 }
