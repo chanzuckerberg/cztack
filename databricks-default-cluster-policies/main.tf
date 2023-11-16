@@ -36,6 +36,13 @@ locals {
       "defaultValue" : local.default_cluster_instance_profile_arn
     }
   }
+  personal_instance_pools = var.personal_compute_pool_ids != [] ? {
+    "instance_pool_id" : {
+      "type" : "allowlist",
+      "isOptional": true,
+      "values" : var.personal_compute_pool_ids
+    }
+  } : {}
 }
 
 resource "databricks_group" "power_user_group" {
@@ -82,12 +89,8 @@ module "personal_compute_cluster_policy" {
       "type" : "regex",
       "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
       "hidden" : false
-    },
-    "instance_pool_id" : {
-      type: "allowlist",
-      values: ["i3-xlarge-pool"]
     }
-  })
+  }, local.personal_instance_pools)
   grantees = [local.all_users_group_name]
 }
 
