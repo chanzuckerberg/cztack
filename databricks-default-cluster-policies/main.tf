@@ -36,6 +36,18 @@ locals {
       "defaultValue" : local.default_cluster_instance_profile_arn
     }
   }
+  personal_instance_pools = var.personal_compute_pool_ids != [] ? {
+    "instance_pool_id" : {
+      "type" : "allowlist",
+      "isOptional": true,
+      "values" : var.personal_compute_pool_ids
+    },
+    "driver_node_type_id": {
+      "type" : "allowlist",
+      "isOptional": true,
+      "values" : var.personal_compute_pool_ids
+    }
+  } : {}
 }
 
 resource "databricks_group" "power_user_group" {
@@ -68,7 +80,7 @@ module "personal_compute_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Personal Compute"
   policy_family_id        = local.default_policy_family_ids["personal_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.personal_instance_pools, {
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
@@ -86,6 +98,19 @@ module "personal_compute_cluster_policy" {
     "instance_pool_id" : {
       "type": "allowlist",
       "values": ["i3-xlarge-pool"],
+      "hidden": false
+    },
+    "aws_attributes.availability": {
+      "type": "allowlist",
+      "values": [
+        "ON_DEMAND",
+        "SPOT_WITH_FALLBACK"
+      ],
+      "hidden": false
+    },
+    "runtime_engine": {
+      "type": "unlimited",
+      "defaultValue": "STANDARD",
       "hidden": false
     }
   })

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.63.1](https://github.com/chanzuckerberg/cztack/compare/v0.63.0...v0.63.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* personal instance pools var for databricks compute policies ([#543](https://github.com/chanzuckerberg/cztack/issues/543)) ([541f8d3](https://github.com/chanzuckerberg/cztack/commit/541f8d393351d9492e55cbaa452ff0187106fed0))
+
+## [0.63.0](https://github.com/chanzuckerberg/cztack/compare/v0.62.3...v0.63.0) (2023-11-15)
+
+
+### Features
+
+* add pool use to personal compute Databricks policy ([#542](https://github.com/chanzuckerberg/cztack/issues/542)) ([9d4cd22](https://github.com/chanzuckerberg/cztack/commit/9d4cd22daedfcfa9e5f125f6650ec547bcd35e4c))
+
 ## [0.62.3](https://github.com/chanzuckerberg/cztack/compare/v0.62.2...v0.62.3) (2023-11-03)
 
 

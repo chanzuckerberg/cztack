@@ -24,3 +24,9 @@ variable "policy_name_prefix" {
   type = string
   default = ""
 }
+
+variable "personal_compute_pool_ids" {
+  description = "List of personal compute pool ids allowed"
+  type = list(string)
+  default = []
+}
