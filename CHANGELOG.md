@@ -1,5 +1,60 @@
 # Changelog
 
+## [0.63.1](https://github.com/chanzuckerberg/cztack/compare/v0.63.0...v0.63.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* personal instance pools var for databricks compute policies ([#543](https://github.com/chanzuckerberg/cztack/issues/543)) ([541f8d3](https://github.com/chanzuckerberg/cztack/commit/541f8d393351d9492e55cbaa452ff0187106fed0))
+
+## [0.63.0](https://github.com/chanzuckerberg/cztack/compare/v0.62.3...v0.63.0) (2023-11-15)
+
+
+### Features
+
+* add pool use to personal compute Databricks policy ([#542](https://github.com/chanzuckerberg/cztack/issues/542)) ([9d4cd22](https://github.com/chanzuckerberg/cztack/commit/9d4cd22daedfcfa9e5f125f6650ec547bcd35e4c))
+
+## [0.62.3](https://github.com/chanzuckerberg/cztack/compare/v0.62.2...v0.62.3) (2023-11-03)
+
+
+### Bug Fixes
+
+* module name fix ([42b328d](https://github.com/chanzuckerberg/cztack/commit/42b328dd1edf200e9672ecd48dba743c0b053500))
+
+## [0.62.2](https://github.com/chanzuckerberg/cztack/compare/v0.62.1...v0.62.2) (2023-11-03)
+
+
+### Bug Fixes
+
+* Split out job compute policy between single and multi node ([#537](https://github.com/chanzuckerberg/cztack/issues/537)) ([770b19e](https://github.com/chanzuckerberg/cztack/commit/770b19e544cca18a6f6e7f3f59800e84f16c1393))
+
+## [0.62.1](https://github.com/chanzuckerberg/cztack/compare/v0.62.0...v0.62.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* remove unused databricks-workspace-e2 variable ([#535](https://github.com/chanzuckerberg/cztack/issues/535)) ([a21509b](https://github.com/chanzuckerberg/cztack/commit/a21509bda6d4bbeb81aaa2afc5fb9bd19f4f86f8))
+
+## [0.62.0](https://github.com/chanzuckerberg/cztack/compare/v0.61.0...v0.62.0) (2023-10-31)
+
+
+### Features
+
+* CDI-2182 Add databricks-default-cluster-policy module ([#531](https://github.com/chanzuckerberg/cztack/issues/531)) ([4c70f29](https://github.com/chanzuckerberg/cztack/commit/4c70f295cefb5013590e6533b6ae6e09efc52a0c))
+* CDI-2183 Add databricks-cluster-log-permissions module ([#532](https://github.com/chanzuckerberg/cztack/issues/532)) ([2e5974a](https://github.com/chanzuckerberg/cztack/commit/2e5974a61defa36d339a1a28ce7c90a17bd22685))
+
+
+### Bug Fixes
+
+* update readmes and trigger release ([#534](https://github.com/chanzuckerberg/cztack/issues/534)) ([7fef82a](https://github.com/chanzuckerberg/cztack/commit/7fef82aa47a9dcc5b9e897072406f080e4ddef1f))
+
+## [0.61.0](https://github.com/chanzuckerberg/cztack/compare/v0.60.1...v0.61.0) (2023-10-30)
+
+
+### Features
+
+* all more options when creating the trust relationship ([#525](https://github.com/chanzuckerberg/cztack/issues/525)) ([edfff23](https://github.com/chanzuckerberg/cztack/commit/edfff23a634152c02a75c78246d5784b0c2f75db))
+
 ## [0.60.1](https://github.com/chanzuckerberg/cztack/compare/v0.60.0...v0.60.1) (2023-10-03)
 
 
