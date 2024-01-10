@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.3](https://github.com/chanzuckerberg/cztack/compare/v0.63.2...v0.63.3) (2024-01-10)
+
+
+### Bug Fixes
+
+* remove deprecated overwrite param in this module ([#548](https://github.com/chanzuckerberg/cztack/issues/548)) ([a47c396](https://github.com/chanzuckerberg/cztack/commit/a47c3968f435fec09c829650f125ff9be33546e8))
+
 ## [0.63.1](https://github.com/chanzuckerberg/cztack/compare/v0.63.0...v0.63.1) (2023-11-16)
 
 
