@@ -73,6 +73,10 @@ module "legacy_shared_compute_cluster_policy" {
   })
 }
 
+## Before addinging new policies, please create an account-level user group to use
+## for assigning permissions. This prevents users from being removed from policies
+## when the workspaces are updated by TFE.
+
 module "personal_compute_cluster_policy" {
   source = "../databricks-cluster-policy"
 
