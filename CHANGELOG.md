@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.4](https://github.com/chanzuckerberg/cztack/compare/v0.63.3...v0.63.4) (2024-01-19)
+
+
+### Bug Fixes
+
+* [ONCALL-693] Trigger release of databricks-default-cluster-policies ([#552](https://github.com/chanzuckerberg/cztack/issues/552)) ([3080122](https://github.com/chanzuckerberg/cztack/commit/3080122f6c7805947d38f720545c8ab5e8a0969f))
+
 ## [0.63.3](https://github.com/chanzuckerberg/cztack/compare/v0.63.2...v0.63.3) (2024-01-10)
 
 
