@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.1](https://github.com/chanzuckerberg/cztack/compare/v0.65.0...v0.65.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* ref to cluster instance ([#559](https://github.com/chanzuckerberg/cztack/issues/559)) ([bdaf441](https://github.com/chanzuckerberg/cztack/commit/bdaf441f0e4788adff6aafac97b2443a73070804))
+
 ## [0.65.0](https://github.com/chanzuckerberg/cztack/compare/v0.64.0...v0.65.0) (2024-01-26)
 
 
