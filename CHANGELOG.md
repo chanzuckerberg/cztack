@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.2](https://github.com/chanzuckerberg/cztack/compare/v0.65.1...v0.65.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* Index endpoint ([#561](https://github.com/chanzuckerberg/cztack/issues/561)) ([6bde265](https://github.com/chanzuckerberg/cztack/commit/6bde2659e5b63e029d6d56797cb1f607e2f3eb60))
+
 ## [0.65.1](https://github.com/chanzuckerberg/cztack/compare/v0.65.0...v0.65.1) (2024-01-26)
 
 
