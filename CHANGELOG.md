@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.64.0](https://github.com/chanzuckerberg/cztack/compare/v0.63.4...v0.64.0) (2024-01-26)
+
+
+### Features
+
+* Fix download of snowflake terraform provider ([#556](https://github.com/chanzuckerberg/cztack/issues/556)) ([4fcc1e0](https://github.com/chanzuckerberg/cztack/commit/4fcc1e05a58069f63d81126fd1b03b77c77e8ea8))
+* Output aurora db instance ([#554](https://github.com/chanzuckerberg/cztack/issues/554)) ([e226871](https://github.com/chanzuckerberg/cztack/commit/e22687186e7290f348b647634b1573f248383a90))
+
 ## [0.63.4](https://github.com/chanzuckerberg/cztack/compare/v0.63.3...v0.63.4) (2024-01-19)
 
 
