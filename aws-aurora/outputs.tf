@@ -35,5 +35,5 @@ output "cluster_resource_id" {
 }
 
 output "aws_rds_cluster_instance_endpoint" {
-  value = aws_rds_cluster_instance.db.endpoint
+  value = aws_rds_cluster_instance.db[0].endpoint
 }
