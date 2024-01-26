@@ -39,5 +39,5 @@ output "cluster_id" {
 }
 
 output "aws_rds_cluster_instance" {
-  value = module.aurora.aws_rds_cluster_instance
+  value = module.aurora.aws_rds_cluster_instance.db
 }
