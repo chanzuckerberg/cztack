@@ -54,12 +54,13 @@ jobs:
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
         name: Check bless provider
         run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Install Snowflake provider
-        run: curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d v0.53.0
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Check Snowflake provider
-        run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
+      # TODO: This file no longer exists in the terraform provider
+      # - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+      #   name: Install Snowflake provider
+      #   run: curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d v0.53.0
+      # - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+      #   name: Check Snowflake provider
+      #   run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
       - if: github.event == 'push' || steps.filter.outputs.module == 'true'
         name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
