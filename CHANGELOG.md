@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.0](https://github.com/chanzuckerberg/cztack/compare/v0.64.0...v0.65.0) (2024-01-26)
+
+
+### Features
+
+* Export aws_rds_cluster_instance in aurora postgres module ([#557](https://github.com/chanzuckerberg/cztack/issues/557)) ([e2ef7d0](https://github.com/chanzuckerberg/cztack/commit/e2ef7d0262b34a784cc31982e744d19ac04ae940))
+
 ## [0.64.0](https://github.com/chanzuckerberg/cztack/compare/v0.63.4...v0.64.0) (2024-01-26)
 
 
