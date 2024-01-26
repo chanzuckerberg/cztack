@@ -33,3 +33,7 @@ output "db_parameter_group_name" {
 output "cluster_resource_id" {
   value = aws_rds_cluster.db.cluster_resource_id
 }
+
+output "aws_rds_cluster_instance" {
+  value = aws_rds_cluster_instance.db
+}
