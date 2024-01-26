@@ -38,6 +38,6 @@ output "cluster_id" {
   sensitive = false
 }
 
-output "aws_rds_cluster_instance" {
-  value = module.aurora.aws_rds_cluster_instance
+output "aws_rds_cluster_instance_endpoint" {
+  value = module.aurora.aws_rds_cluster_instance_endpoint
 }
