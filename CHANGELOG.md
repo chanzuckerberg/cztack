@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.3](https://github.com/chanzuckerberg/cztack/compare/v0.65.2...v0.65.3) (2024-03-07)
+
+
+### Bug Fixes
+
+* CDI-2604 Databricks cluster policy permission grants not being applied correctly ([#563](https://github.com/chanzuckerberg/cztack/issues/563)) ([d85282f](https://github.com/chanzuckerberg/cztack/commit/d85282f022ff7141d007bd2b9015c04325df8f72))
+
 ## [0.65.2](https://github.com/chanzuckerberg/cztack/compare/v0.65.1...v0.65.2) (2024-01-26)
 
 
