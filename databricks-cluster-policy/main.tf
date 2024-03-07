@@ -36,7 +36,8 @@ resource "databricks_cluster_policy" "inherited_cluster_policy" {
 
 resource "databricks_permissions" "can_use_inherited_cluster_policy" {
   cluster_policy_id = databricks_cluster_policy.inherited_cluster_policy[0].id
-  
+
+  # TF provider requires a dynamic block rather than a for_each - for_each will override permissions
   dynamic "access_control" {
     for_each = local.inherited_cluster_policy_grantees
     content {
@@ -57,6 +58,7 @@ resource "databricks_cluster_policy" "custom_cluster_policy" {
 resource "databricks_permissions" "can_use_custom_cluster_policy" {
   cluster_policy_id = databricks_cluster_policy.custom_cluster_policy[0].id
 
+  # TF provider requires a dynamic block rather than a for_each - for_each will override permissions
   dynamic "access_control" {
     for_each = local.custom_cluster_policy_grantees
     content {
