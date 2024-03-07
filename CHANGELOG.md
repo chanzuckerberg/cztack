@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.4](https://github.com/chanzuckerberg/cztack/compare/v0.65.3...v0.65.4) (2024-03-07)
+
+
+### Bug Fixes
+
+* add counter to resource ([0ab051a](https://github.com/chanzuckerberg/cztack/commit/0ab051aab7c11e550fcab20c4eaeef562c4d3e39))
+
 ## [0.65.3](https://github.com/chanzuckerberg/cztack/compare/v0.65.2...v0.65.3) (2024-03-07)
 
 
