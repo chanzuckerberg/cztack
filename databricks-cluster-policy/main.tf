@@ -35,12 +35,16 @@ resource "databricks_cluster_policy" "inherited_cluster_policy" {
 }
 
 resource "databricks_permissions" "can_use_inherited_cluster_policy" {
-  for_each = local.inherited_cluster_policy_grantees
-
+  count = length(local.inherited_cluster_policy_grantees) > 0 ? 1 : 0
   cluster_policy_id = databricks_cluster_policy.inherited_cluster_policy[0].id
-  access_control {
-    group_name       = each.value
-    permission_level = "CAN_USE"
+
+  # TF provider requires a dynamic block rather than a for_each - for_each will override permissions
+  dynamic "access_control" {
+    for_each = local.inherited_cluster_policy_grantees
+    content {
+      group_name       = access_control.value
+      permission_level = "CAN_USE"
+    }
   }
 }
 
@@ -53,11 +57,15 @@ resource "databricks_cluster_policy" "custom_cluster_policy" {
 }
 
 resource "databricks_permissions" "can_use_custom_cluster_policy" {
-  for_each = local.custom_cluster_policy_grantees
-
+  count = length(local.custom_cluster_policy_grantees) > 0 ? 1 : 0
   cluster_policy_id = databricks_cluster_policy.custom_cluster_policy[0].id
-  access_control {
-    group_name       = each.value
-    permission_level = "CAN_USE"
+
+  # TF provider requires a dynamic block rather than a for_each - for_each will override permissions
+  dynamic "access_control" {
+    for_each = local.custom_cluster_policy_grantees
+    content {
+      group_name       = access_control.value
+      permission_level = "CAN_USE"
+    }
   }
 }

@@ -1,5 +1,62 @@
 # Changelog
 
+## [0.65.4](https://github.com/chanzuckerberg/cztack/compare/v0.65.3...v0.65.4) (2024-03-07)
+
+
+### Bug Fixes
+
+* add counter to resource ([0ab051a](https://github.com/chanzuckerberg/cztack/commit/0ab051aab7c11e550fcab20c4eaeef562c4d3e39))
+
+## [0.65.3](https://github.com/chanzuckerberg/cztack/compare/v0.65.2...v0.65.3) (2024-03-07)
+
+
+### Bug Fixes
+
+* CDI-2604 Databricks cluster policy permission grants not being applied correctly ([#563](https://github.com/chanzuckerberg/cztack/issues/563)) ([d85282f](https://github.com/chanzuckerberg/cztack/commit/d85282f022ff7141d007bd2b9015c04325df8f72))
+
+## [0.65.2](https://github.com/chanzuckerberg/cztack/compare/v0.65.1...v0.65.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* Index endpoint ([#561](https://github.com/chanzuckerberg/cztack/issues/561)) ([6bde265](https://github.com/chanzuckerberg/cztack/commit/6bde2659e5b63e029d6d56797cb1f607e2f3eb60))
+
+## [0.65.1](https://github.com/chanzuckerberg/cztack/compare/v0.65.0...v0.65.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* ref to cluster instance ([#559](https://github.com/chanzuckerberg/cztack/issues/559)) ([bdaf441](https://github.com/chanzuckerberg/cztack/commit/bdaf441f0e4788adff6aafac97b2443a73070804))
+
+## [0.65.0](https://github.com/chanzuckerberg/cztack/compare/v0.64.0...v0.65.0) (2024-01-26)
+
+
+### Features
+
+* Export aws_rds_cluster_instance in aurora postgres module ([#557](https://github.com/chanzuckerberg/cztack/issues/557)) ([e2ef7d0](https://github.com/chanzuckerberg/cztack/commit/e2ef7d0262b34a784cc31982e744d19ac04ae940))
+
+## [0.64.0](https://github.com/chanzuckerberg/cztack/compare/v0.63.4...v0.64.0) (2024-01-26)
+
+
+### Features
+
+* Fix download of snowflake terraform provider ([#556](https://github.com/chanzuckerberg/cztack/issues/556)) ([4fcc1e0](https://github.com/chanzuckerberg/cztack/commit/4fcc1e05a58069f63d81126fd1b03b77c77e8ea8))
+* Output aurora db instance ([#554](https://github.com/chanzuckerberg/cztack/issues/554)) ([e226871](https://github.com/chanzuckerberg/cztack/commit/e22687186e7290f348b647634b1573f248383a90))
+
+## [0.63.4](https://github.com/chanzuckerberg/cztack/compare/v0.63.3...v0.63.4) (2024-01-19)
+
+
+### Bug Fixes
+
+* [ONCALL-693] Trigger release of databricks-default-cluster-policies ([#552](https://github.com/chanzuckerberg/cztack/issues/552)) ([3080122](https://github.com/chanzuckerberg/cztack/commit/3080122f6c7805947d38f720545c8ab5e8a0969f))
+
+## [0.63.3](https://github.com/chanzuckerberg/cztack/compare/v0.63.2...v0.63.3) (2024-01-10)
+
+
+### Bug Fixes
+
+* remove deprecated overwrite param in this module ([#548](https://github.com/chanzuckerberg/cztack/issues/548)) ([a47c396](https://github.com/chanzuckerberg/cztack/commit/a47c3968f435fec09c829650f125ff9be33546e8))
+
 ## [0.63.1](https://github.com/chanzuckerberg/cztack/compare/v0.63.0...v0.63.1) (2023-11-16)
 
 

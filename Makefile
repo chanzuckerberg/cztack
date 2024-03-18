@@ -18,7 +18,7 @@ all: clean fmt docs lint test
 setup: ## setup development dependencies
 	curl -L https://raw.githubusercontent.com/chanzuckerberg/bff/main/download.sh | sh
 	curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d
-	curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/main/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d v0.53.0
+	curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/v0.53.0/download.sh | bash -s -- -b $(HOME)/.terraform.d/plugins -d v0.53.0
 	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
 	curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh
 	sh .download-tflint.sh latest

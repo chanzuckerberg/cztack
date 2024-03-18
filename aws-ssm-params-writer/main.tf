@@ -13,7 +13,6 @@ resource "aws_ssm_parameter" "parameter" {
 
   type      = "SecureString"
   key_id    = data.aws_kms_key.key.id
-  overwrite = true
 
   tags = {
     managedBy = "terraform"

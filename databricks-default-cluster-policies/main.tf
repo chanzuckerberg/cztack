@@ -73,6 +73,10 @@ module "legacy_shared_compute_cluster_policy" {
   })
 }
 
+## Before addinging new policies, please create an account-level user group to use
+## for assigning permissions. This prevents users from being removed from policies
+## when the workspaces are updated by TFE.
+
 module "personal_compute_cluster_policy" {
   source = "../databricks-cluster-policy"
 
@@ -135,6 +139,7 @@ module "large_personal_compute_cluster_policy" {
       "hidden" : false
     },
   })
+  grantees = ["CZI - Large Personal Compute"]
 }
 
 module "power_user_compute_cluster_policy" {
@@ -166,7 +171,7 @@ module "power_user_compute_cluster_policy" {
     },
   })
 
-  grantees = [local.power_user_group_name]
+  grantees = [local.power_user_group_name, "CZI - Power User Compute"]
 }
 module "job_compute_cluster_policy" {
   source = "../databricks-cluster-policy"
@@ -178,7 +183,7 @@ module "job_compute_cluster_policy" {
 
   policy_overrides = local.logging_override
 
-  grantees = [local.power_user_group_name]
+  grantees = [local.power_user_group_name, "CZI - Job Compute"]
 }
 
 module "small_job_compute_cluster_policy" {
@@ -197,7 +202,7 @@ module "small_job_compute_cluster_policy" {
     }
   })
 
-  grantees = [local.power_user_group_name]
+  grantees = [local.power_user_group_name, "CZI - Small Job Compute"]
 }
 
 ## Fully custom policies
@@ -246,6 +251,7 @@ module "large_gpu_large_clusters_cluster_policy" {
       "defaultValue" : "g4dn.xlarge"
     },
   })
+  grantees = ["CZI - Large GPU Large Clusters"]
 }
 
 module "large_gpu_personal_cluster_policy" {
@@ -281,6 +287,7 @@ module "large_gpu_personal_cluster_policy" {
       "defaultValue" : "g4dn.xlarge"
     },
   })
+  grantees = ["CZI - Large GPU Personal"]
 }
 
 module "large_gpu_small_clusters_cluster_policy" {
@@ -328,6 +335,7 @@ module "large_gpu_small_clusters_cluster_policy" {
       "defaultValue" : "g4dn.xlarge"
     },
   })
+  grantees = ["CZI - Large GPU Small Clusters"]
 }
 
 module "small_clusters" {
@@ -380,6 +388,7 @@ module "small_clusters" {
       "hidden" : false
     },
   })
+  grantees = ["CZI - Small Clusters"]
 }
 
 module "superset_compute_cluster_policy" {
@@ -415,4 +424,5 @@ module "superset_compute_cluster_policy" {
       "defaultValue" : "superset_pool"
     },
   })
+  grantees = ["CZI - Superset Compute"]
 }
