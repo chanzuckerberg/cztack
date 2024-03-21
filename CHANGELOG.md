@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.5](https://github.com/chanzuckerberg/cztack/compare/v0.65.4...v0.65.5) (2024-03-21)
+
+
+### Bug Fixes
+
+* Choose one type of encryption for buckets ([#568](https://github.com/chanzuckerberg/cztack/issues/568)) ([125b37b](https://github.com/chanzuckerberg/cztack/commit/125b37becdb8868bb77431b85b9a064f83140dbf))
+
 ## [0.65.4](https://github.com/chanzuckerberg/cztack/compare/v0.65.3...v0.65.4) (2024-03-07)
 
 
