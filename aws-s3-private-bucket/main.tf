@@ -194,7 +194,7 @@ resource "aws_kms_key" "bucket_kms_key" {
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "enc" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_sse_encryption" {
   count = var.kms_encryption != null ? 0 : 1
 
   bucket = aws_s3_bucket.bucket.id
