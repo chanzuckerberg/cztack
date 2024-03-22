@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.66.0](https://github.com/chanzuckerberg/cztack/compare/v0.65.5...v0.66.0) (2024-03-22)
+
+
+### Features
+
+* Add kms_encryption variable to cloudfront logs bucket ([#570](https://github.com/chanzuckerberg/cztack/issues/570)) ([eea7209](https://github.com/chanzuckerberg/cztack/commit/eea72096c132d14c20648be3c1a807c087ee0506))
+
 ## [0.65.5](https://github.com/chanzuckerberg/cztack/compare/v0.65.4...v0.65.5) (2024-03-21)
 
 
