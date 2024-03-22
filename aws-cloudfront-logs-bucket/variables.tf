@@ -62,3 +62,8 @@ variable "public_access_block" {
   type    = bool
   default = true
 }
+
+variable "kms_encryption" {
+  type = bool
+  default = false
+}
