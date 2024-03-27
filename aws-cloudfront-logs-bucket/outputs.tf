@@ -16,5 +16,5 @@ output "id" {
 }
 
 output "bucket_kms_encryption_key_arn" {
-  value = one(module.aws-cloudfront-logs-bucket.bucket_kms_encryption_key_arn)
+  value = module.aws-cloudfront-logs-bucket.bucket_kms_encryption_key_arn
 }
