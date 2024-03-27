@@ -14,3 +14,7 @@ output "arn" {
 output "id" {
   value = module.aws-cloudfront-logs-bucket.id
 }
+
+output "bucket_kms_encryption_key_arn" {
+  value = module.aws-cloudfront-logs-bucket.bucket_kms_encryption_key_arn
+}
