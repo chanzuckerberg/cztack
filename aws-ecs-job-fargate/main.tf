@@ -27,6 +27,7 @@ resource "aws_ecs_service" "job" {
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   scheduling_strategy                = "REPLICA"
+  enable_execute_command             = true
 
   network_configuration {
     subnets         = var.task_subnets
