@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.67.0](https://github.com/chanzuckerberg/cztack/compare/v0.66.0...v0.67.0) (2024-03-27)
+
+
+### Features
+
+* Export kms key arn ([#572](https://github.com/chanzuckerberg/cztack/issues/572)) ([ec0aea5](https://github.com/chanzuckerberg/cztack/commit/ec0aea5167b9ae64529cdac2441a59b67424f040))
+
 ## [0.66.0](https://github.com/chanzuckerberg/cztack/compare/v0.65.5...v0.66.0) (2024-03-22)
 
 
