@@ -6,45 +6,19 @@ locals {
     owner     = var.owner
     managedBy = "terraform"
   }
-  all_saml_idps = concat(
-    var.saml_idps,
-    // NOTE(el): by default, these assume SAML assertions signed for AWS specifically.
-    [for aws_saml_idp_arn in var.saml_idp_arns : {
-      saml_idp_arn = [aws_saml_idp_arn],
-      saml_aud     = ["https://signin.aws.amazon.com/saml"]
-  }])
 }
 
-data "aws_iam_policy_document" "assume_role_policy" {
-  statement {
-    dynamic "principals" {
-      for_each = var.principals
-      content {
-        type        = principals.value.type
-        identifiers = principals.value.identifiers
-      }
-    }
-    actions = ["sts:AssumeRole"]
-  }
-
-  dynamic "statement" {
-    for_each = local.all_saml_idps
-    content {
-      principals {
-        type        = "Federated"
-        identifiers = statement.value.saml_idp_arns
-      }
-
-      actions = ["sts:AssumeRoleWithSAML"]
-
-      condition {
-        test     = "StringEquals"
-        variable = "SAML:aud"
-        values   = statement.value.saml_auds
-      }
-    }
-  }
+module "assume_role_policy" {
+  source             = "../aws-assume-role-policy"
+  source_account_ids = var.source_account_ids
+  saml_idp_arns      = toset(var.saml_idps.saml_idp_arns)
+  oidc               = var.oidc
+  env                = var.env
+  owner              = var.owner
+  service            = var.service
+  project            = var.project
 }
+
 
 resource "aws_iam_role" "role" {
   name               = var.role_name

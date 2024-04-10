@@ -68,6 +68,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aws_rds_cluster_instance_endpoint"></a> [aws\_rds\_cluster\_instance\_endpoint](#output\_aws\_rds\_cluster\_instance\_endpoint) | n/a |
+| <a name="output_cluster_resource_id"></a> [cluster\_resource\_id](#output\_cluster\_resource\_id) | n/a |
 | <a name="output_database_name"></a> [database\_name](#output\_database\_name) | n/a |
 | <a name="output_database_password"></a> [database\_password](#output\_database\_password) | n/a |
 | <a name="output_database_username"></a> [database\_username](#output\_database\_username) | n/a |

@@ -22,14 +22,16 @@ NOTE: this module doesn't manage the role's permissions. Users of this module sh
 <!-- START -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.45 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_assert"></a> [assert](#provider\_assert) | n/a |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.45 |
 
 ## Modules
 
@@ -40,15 +42,17 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_role.role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [assert_test.authorized_github_org](https://registry.terraform.io/providers/bwoznicki/assert/latest/docs/data-sources/test) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_authorized_github_repos"></a> [authorized\_github\_repos](#input\_authorized\_github\_repos) | A map that specifies the authorized repos to assume the created role.<br>  Keys specify the name of the GitHub org.<br>  Values specify the authorized repos within that org.<br><br>  NOTE: "chanzuckerberg" is, currently, the only authorized GitHub org. | `map(list(string))` | n/a | yes |
+| <a name="input_additional_assume_role_policies_json"></a> [additional\_assume\_role\_policies\_json](#input\_additional\_assume\_role\_policies\_json) | The JSON string of any other additional assume role policies to add to the Github Actions role | `string` | `""` | no |
+| <a name="input_authorized_aws_accounts"></a> [authorized\_aws\_accounts](#input\_authorized\_aws\_accounts) | The map of authorized AWS accounts to assume the created role. | `map(string)` | `{}` | no |
+| <a name="input_authorized_github_repos"></a> [authorized\_github\_repos](#input\_authorized\_github\_repos) | A map that specifies the authorized repos to assume the created role.<br>  Keys specify the name of the GitHub org.<br>  Values specify the authorized repos within that org. | `map(list(string))` | n/a | yes |
 | <a name="input_role"></a> [role](#input\_role) | Configure the AWS IAM Role. | <pre>object({<br>    name : string,<br>  })</pre> | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Standard tagging. | <pre>object({<br>    env : string,<br>    owner : string,<br>    managedBy : string,<br>    project : string<br>    service : string<br>  })</pre> | n/a | yes |
 

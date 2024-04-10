@@ -55,6 +55,20 @@ variable "saml_idps" {
   EOF
 }
 
+
+variable "oidc" {
+  type = list(object(
+    {
+      idp_arn : string,          # the AWS IAM IDP arn
+      client_ids : list(string), # a list of oidc client ids
+      provider : string          # your provider url, such as foo.okta.com
+    }
+  ))
+
+  default     = []
+  description = "A list of AWS OIDC IDPs to establish a trust relationship for this role."
+}
+
 variable "role_name" {
   type        = string
   description = "IAM role name."
@@ -76,4 +90,10 @@ variable "attached_policies_names_arns" {
   type        = map(string)
   description = "Map of policy names to the respective ARNs to be attached to the IAM role."
   default     = {}
+}
+
+variable "source_account_ids" {
+  type        = set(string)
+  default     = []
+  description = "The source AWS account IDs to establish a trust relationship. Ignored if empty or not provided."
 }
