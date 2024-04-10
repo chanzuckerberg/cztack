@@ -61,7 +61,6 @@ No requirements.
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | The maximum amount of time, in seconds, that a principal can assume this role. | `number` | `3600` | no |
 | <a name="input_oidc"></a> [oidc](#input\_oidc) | A list of AWS OIDC IDPs to establish a trust relationship for this role. | <pre>list(object(<br>    {<br>      idp_arn : string,          # the AWS IAM IDP arn<br>      client_ids : list(string), # a list of oidc client ids<br>      provider : string          # your provider url, such as foo.okta.com<br>    }<br>  ))</pre> | `[]` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
-| <a name="input_principals"></a> [principals](#input\_principals) | AWS IAM Principals which will be able to assume this role. | `list(object({ type = string, identifiers = list(string) }))` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | IAM role description. | `string` | `null` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | IAM role name. | `string` | n/a | yes |

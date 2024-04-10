@@ -24,11 +24,6 @@ variable "iam_path" {
   default     = null
 }
 
-variable "principals" {
-  type        = list(object({ type = string, identifiers = list(string) }))
-  description = "AWS IAM Principals which will be able to assume this role."
-}
-
 variable "max_session_duration" {
   type        = number
   description = "The maximum amount of time, in seconds, that a principal can assume this role."
