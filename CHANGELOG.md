@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.67.1](https://github.com/chanzuckerberg/cztack/compare/v0.67.0...v0.67.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* make aws-iam-role adaptable to oidc & saml changes ([#574](https://github.com/chanzuckerberg/cztack/issues/574)) ([173f2da](https://github.com/chanzuckerberg/cztack/commit/173f2da3ba6e0cf280126680f7d5791618d16823))
+
 ## [0.67.0](https://github.com/chanzuckerberg/cztack/compare/v0.66.0...v0.67.0) (2024-03-27)
 
 
