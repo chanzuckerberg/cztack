@@ -4,14 +4,14 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_aws.czi-logs"></a> [aws.czi-logs](#provider\_aws.czi-logs) | n/a |
+| <a name="provider_aws.logs_destination"></a> [aws.logs\_destination](#provider\_aws.logs\_destination) | n/a |
 | <a name="provider_databricks"></a> [databricks](#provider\_databricks) | n/a |
 
 ## Modules
@@ -48,14 +48,13 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_add_reader"></a> [add\_reader](#input\_add\_reader) | Flag to add reader role for logs - should only be invoked for the ie workspace | `bool` | `false` | no |
 | <a name="input_bucket_kms_encryption_key_arn"></a> [bucket\_kms\_encryption\_key\_arn](#input\_bucket\_kms\_encryption\_key\_arn) | ARN for KMS key used to encrypt bucket for cluster logs | `string` | n/a | yes |
-| <a name="input_env"></a> [env](#input\_env) | Environment name | `string` | n/a | yes |
-| <a name="input_existing_role_names"></a> [existing\_role\_names](#input\_existing\_role\_names) | List of other existing instance policy roles on the workspace for which to add cluster log write permissions | `list(string)` | `[]` | no |
-| <a name="input_databricks_logs_bucket_name"></a> [databricks\_logs\_bucke\_name](#input\_databricks\_logs\_bucket\_name) | Name of the bucket to store cluster logs | `string` | n/a | yes |
-| <a name="input_global_reader_env"></a> [global\_reader\_env](#input\_global\_reader\_env) | Name of env to grant global logs reader access to | `string` | n/a | yes |
+| <a name="input_databricks_logs_bucket_name"></a> [databricks\_logs\_bucket\_name](#input\_databricks\_logs\_bucket\_name) | Name of the bucket to store cluster logs | `string` | n/a | yes |
+| <a name="input_destination_account_assume_role_name"></a> [destination\_account\_assume\_role\_name](#input\_destination\_account\_assume\_role\_name) | Role name to assume in the logs destination AWS account | `string` | n/a | yes |
 | <a name="input_destination_account_id"></a> [destination\_account\_id](#input\_destination\_account\_id) | Account ID for the logs destination AWS account | `string` | n/a | yes |
 | <a name="input_destination_account_region"></a> [destination\_account\_region](#input\_destination\_account\_region) | Region for the logs destination AWS account | `string` | n/a | yes |
-| <a name="input_destination_account_assume_role_name"></a> [destination\_account\_assume\_role\_name](#input\_destination\_account\_assume\_role_name) | Role name to assume in the logs destination AWS account | `string` | n/a | yes |
-
+| <a name="input_env"></a> [env](#input\_env) | Environment name | `string` | n/a | yes |
+| <a name="input_existing_role_names"></a> [existing\_role\_names](#input\_existing\_role\_names) | List of other existing instance policy roles on the workspace for which to add cluster log write permissions | `list(string)` | `[]` | no |
+| <a name="input_global_reader_env"></a> [global\_reader\_env](#input\_global\_reader\_env) | Name of env to grant global logs reader access to | `string` | n/a | yes |
 
 ## Outputs
 

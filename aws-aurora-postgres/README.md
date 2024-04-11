@@ -85,6 +85,9 @@ No resources.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aws_rds_cluster_instance_endpoint"></a> [aws\_rds\_cluster\_instance\_endpoint](#output\_aws\_rds\_cluster\_instance\_endpoint) | n/a |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | n/a |
+| <a name="output_cluster_resource_id"></a> [cluster\_resource\_id](#output\_cluster\_resource\_id) | n/a |
 | <a name="output_database_name"></a> [database\_name](#output\_database\_name) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
 | <a name="output_master_password"></a> [master\_password](#output\_master\_password) | n/a |

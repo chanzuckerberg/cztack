@@ -57,6 +57,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_at_edge"></a> [at\_edge](#input\_at\_edge) | Is this lambda going to be used with a Cloufront distribution? If you set this, you will not have control over log retention, and you cannot include environment variables. | `bool` | `false` | no |
+| <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Indicates if Datadog integration is enabled (see https://www.datadoghq.com/blog/monitoring-aws-lambda-with-datadog/ for details). | `bool` | `true` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Map of environment variables. | `map(string)` | `{}` | no |
 | <a name="input_filename"></a> [filename](#input\_filename) | n/a | `string` | `null` | no |
