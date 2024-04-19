@@ -39,12 +39,12 @@ locals {
   personal_instance_pools = var.personal_compute_pool_ids != [] ? {
     "instance_pool_id" : {
       "type" : "allowlist",
-      "isOptional": true,
+      "isOptional" : true,
       "values" : var.personal_compute_pool_ids
     },
-    "driver_node_type_id": {
+    "driver_node_type_id" : {
       "type" : "allowlist",
-      "isOptional": true,
+      "isOptional" : true,
       "values" : var.personal_compute_pool_ids
     }
   } : {}
@@ -99,18 +99,18 @@ module "personal_compute_cluster_policy" {
       "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
       "hidden" : false
     },
-    "aws_attributes.availability": {
-      "type": "allowlist",
-      "values": [
+    "aws_attributes.availability" : {
+      "type" : "allowlist",
+      "values" : [
         "ON_DEMAND",
         "SPOT_WITH_FALLBACK"
       ],
-      "hidden": false
+      "hidden" : false
     },
-    "runtime_engine": {
-      "type": "unlimited",
-      "defaultValue": "STANDARD",
-      "hidden": false
+    "runtime_engine" : {
+      "type" : "unlimited",
+      "defaultValue" : "STANDARD",
+      "hidden" : false
     },
   })
   grantees = [local.all_users_group_name]
@@ -173,6 +173,7 @@ module "power_user_compute_cluster_policy" {
 
   grantees = [local.power_user_group_name, "CZI - Power User Compute"]
 }
+
 module "job_compute_cluster_policy" {
   source = "../databricks-cluster-policy"
 
@@ -181,7 +182,16 @@ module "job_compute_cluster_policy" {
   policy_name             = "${var.policy_name_prefix}Job Compute"
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
-  policy_overrides = local.logging_override
+  policy_overrides = merge(local.logging_override, {
+    "aws_attributes.availability" : {
+      "type" : "allowlist",
+      "values" : [
+        "ON_DEMAND",
+        "SPOT_WITH_FALLBACK"
+      ],
+      "hidden" : false
+    }
+  })
 
   grantees = [local.power_user_group_name, "CZI - Job Compute"]
 }
@@ -223,7 +233,7 @@ module "large_gpu_large_clusters_cluster_policy" {
     "autoscale.min_workers" : {
       "type" : "range",
       "minValue" : 1,
-      "maxValue" : 3,
+      "maxValue" : 64,
       "defaultValue" : 1
     },
     "autotermination_minutes" : {
@@ -240,13 +250,13 @@ module "large_gpu_large_clusters_cluster_policy" {
         "g4dn.12xlarge",
         "g4dn.16xlarge",
         "g5.xlarge",
-        "g5.8xlarge",
-        "g5.4xlarge",
-        "g5.48xlarge",
         "g5.2xlarge",
-        "g5.24xlarge",
+        "g5.4xlarge",
+        "g5.8xlarge",
+        "g5.12xlarge",
         "g5.16xlarge",
-        "g5.12xlarge"
+        "g5.24xlarge",
+        "g5.48xlarge"
       ],
       "defaultValue" : "g4dn.xlarge"
     },
