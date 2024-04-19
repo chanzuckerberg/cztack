@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.68.0](https://github.com/chanzuckerberg/cztack/compare/v0.67.1...v0.68.0) (2024-04-19)
+
+
+### Features
+
+* Allowing on demand instances for Job Compoute databricks compute policy ([#577](https://github.com/chanzuckerberg/cztack/issues/577)) ([639a9ac](https://github.com/chanzuckerberg/cztack/commit/639a9ac4f7741cdfc6104c20fc59e518eb69e6a8))
+
 ## [0.67.1](https://github.com/chanzuckerberg/cztack/compare/v0.67.0...v0.67.1) (2024-04-11)
 
 
