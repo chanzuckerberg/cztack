@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.0](https://github.com/chanzuckerberg/cztack/compare/v0.68.0...v0.69.0) (2024-04-23)
+
+
+### Features
+
+* Add a new single node policy to databricks-default-cluster-policies ([#579](https://github.com/chanzuckerberg/cztack/issues/579)) ([2723df6](https://github.com/chanzuckerberg/cztack/commit/2723df6cccf9217e4aa217f96b37fd472e3f37d5))
+
 ## [0.68.0](https://github.com/chanzuckerberg/cztack/compare/v0.67.1...v0.68.0) (2024-04-19)
 
 
