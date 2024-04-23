@@ -122,16 +122,6 @@ resource "aws_s3_bucket" "bucket" {
   tags = local.tags
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "enc" {
-  bucket = aws_s3_bucket.bucket.id
-
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm     = "AES256"
-    }
-  }
-}
-
 resource "aws_s3_bucket_public_access_block" "bucket" {
   count = var.public_access_block ? 1 : 0
 
@@ -201,6 +191,18 @@ resource "aws_kms_key" "bucket_kms_key" {
     owner     = var.owner
     bucket    = var.bucket_name
     managedBy = "terraform"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_sse_encryption" {
+  count = var.kms_encryption != null ? 0 : 1
+
+  bucket = aws_s3_bucket.bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "AES256"
+    }
   }
 }
 

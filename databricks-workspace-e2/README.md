@@ -6,7 +6,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 
 ## Providers
 
@@ -42,7 +42,6 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_audit_log_bucket_name"></a> [audit\_log\_bucket\_name](#input\_audit\_log\_bucket\_name) | Name of bucket to write cluster logs to - also where the audit logs go, too | `string` | `"czi-audit-logs"` | no |
 | <a name="input_databricks_external_id"></a> [databricks\_external\_id](#input\_databricks\_external\_id) | The ID of a Databricks root account. | `string` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | The environment / stage. Aka staging, dev, prod. | `string` | n/a | yes |
 | <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | Set default owner of all objects within bucket (e.g., bucket vs. object owner) | `string` | `null` | no |

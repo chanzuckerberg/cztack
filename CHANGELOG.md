@@ -1,5 +1,47 @@
 # Changelog
 
+## [0.68.0](https://github.com/chanzuckerberg/cztack/compare/v0.67.1...v0.68.0) (2024-04-19)
+
+
+### Features
+
+* Allowing on demand instances for Job Compoute databricks compute policy ([#577](https://github.com/chanzuckerberg/cztack/issues/577)) ([639a9ac](https://github.com/chanzuckerberg/cztack/commit/639a9ac4f7741cdfc6104c20fc59e518eb69e6a8))
+
+## [0.67.1](https://github.com/chanzuckerberg/cztack/compare/v0.67.0...v0.67.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* make aws-iam-role adaptable to oidc & saml changes ([#574](https://github.com/chanzuckerberg/cztack/issues/574)) ([173f2da](https://github.com/chanzuckerberg/cztack/commit/173f2da3ba6e0cf280126680f7d5791618d16823))
+
+## [0.67.0](https://github.com/chanzuckerberg/cztack/compare/v0.66.0...v0.67.0) (2024-03-27)
+
+
+### Features
+
+* Export kms key arn ([#572](https://github.com/chanzuckerberg/cztack/issues/572)) ([ec0aea5](https://github.com/chanzuckerberg/cztack/commit/ec0aea5167b9ae64529cdac2441a59b67424f040))
+
+## [0.66.0](https://github.com/chanzuckerberg/cztack/compare/v0.65.5...v0.66.0) (2024-03-22)
+
+
+### Features
+
+* Add kms_encryption variable to cloudfront logs bucket ([#570](https://github.com/chanzuckerberg/cztack/issues/570)) ([eea7209](https://github.com/chanzuckerberg/cztack/commit/eea72096c132d14c20648be3c1a807c087ee0506))
+
+## [0.65.5](https://github.com/chanzuckerberg/cztack/compare/v0.65.4...v0.65.5) (2024-03-21)
+
+
+### Bug Fixes
+
+* Choose one type of encryption for buckets ([#568](https://github.com/chanzuckerberg/cztack/issues/568)) ([125b37b](https://github.com/chanzuckerberg/cztack/commit/125b37becdb8868bb77431b85b9a064f83140dbf))
+
+## [0.65.4](https://github.com/chanzuckerberg/cztack/compare/v0.65.3...v0.65.4) (2024-03-07)
+
+
+### Bug Fixes
+
+* add counter to resource ([0ab051a](https://github.com/chanzuckerberg/cztack/commit/0ab051aab7c11e550fcab20c4eaeef562c4d3e39))
+
 ## [0.65.3](https://github.com/chanzuckerberg/cztack/compare/v0.65.2...v0.65.3) (2024-03-07)
 
 

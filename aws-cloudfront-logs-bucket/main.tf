@@ -12,6 +12,7 @@ module "aws-cloudfront-logs-bucket" {
   abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
   public_access_block                    = var.public_access_block
   lifecycle_rules                        = var.lifecycle_rules
+  kms_encryption                         = var.kms_encryption
 }
 
 resource "aws_s3_bucket_ownership_controls" "cloudfront-owner-preferred" {

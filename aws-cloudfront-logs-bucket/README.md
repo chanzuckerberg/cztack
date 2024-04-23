@@ -47,6 +47,8 @@ No requirements.
 
 | Name | Type |
 |------|------|
+| [aws_s3_bucket_acl.cloudfront-owner-grant](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_ownership_controls.cloudfront-owner-preferred](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls) | resource |
 | [aws_canonical_user_id.current_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/canonical_user_id) | data source |
 
 ## Inputs
@@ -58,6 +60,7 @@ No requirements.
 | <a name="input_bucket_policy"></a> [bucket\_policy](#input\_bucket\_policy) | n/a | `string` | `""` | no |
 | <a name="input_enable_versioning"></a> [enable\_versioning](#input\_enable\_versioning) | Keep old versions of overwritten S3 objects. | `bool` | `true` | no |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
+| <a name="input_kms_encryption"></a> [kms\_encryption](#input\_kms\_encryption) | n/a | `bool` | `false` | no |
 | <a name="input_lifecycle_rules"></a> [lifecycle\_rules](#input\_lifecycle\_rules) | List of maps containing configuration of object lifecycle management. | `any` | <pre>[<br>  {<br>    "enabled": true,<br>    "expiration": {<br>      "expired_object_delete_marker": true<br>    },<br>    "noncurrent_version_expiration": {<br>      "days": 365<br>    },<br>    "noncurrent_version_transition": {<br>      "days": 30,<br>      "storage_class": "STANDARD_IA"<br>    }<br>  }<br>]</pre> | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | n/a | `string` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | n/a | `string` | n/a | yes |
@@ -69,6 +72,7 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | <a name="output_arn"></a> [arn](#output\_arn) | n/a |
+| <a name="output_bucket_kms_encryption_key_arn"></a> [bucket\_kms\_encryption\_key\_arn](#output\_bucket\_kms\_encryption\_key\_arn) | n/a |
 | <a name="output_domain_name"></a> [domain\_name](#output\_domain\_name) | n/a |
 | <a name="output_id"></a> [id](#output\_id) | n/a |
 | <a name="output_name"></a> [name](#output\_name) | HACK(el): we do this to hint TF dependency graph since modules can't depend\_on |
