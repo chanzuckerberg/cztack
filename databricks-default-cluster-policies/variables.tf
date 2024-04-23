@@ -22,7 +22,6 @@ variable "databricks_log_bucket" {
 variable "policy_name_prefix" {
   description = "Prefix for policy names"
   type = string
-  default = ""
 }
 
 variable "personal_compute_pool_ids" {
