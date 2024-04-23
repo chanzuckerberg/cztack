@@ -139,7 +139,7 @@ module "large_personal_compute_cluster_policy" {
       "hidden" : false
     },
   })
-  grantees = ["CZI - Large Personal Compute"]
+  grantees = ["${var.policy_name_prefix}Large Personal Compute"]
 }
 
 module "power_user_compute_cluster_policy" {
@@ -171,7 +171,7 @@ module "power_user_compute_cluster_policy" {
     },
   })
 
-  grantees = [local.power_user_group_name, "CZI - Power User Compute"]
+  grantees = [local.power_user_group_name, "${var.policy_name_prefix}Power User Compute"]
 }
 module "job_compute_cluster_policy" {
   source = "../databricks-cluster-policy"
@@ -183,7 +183,7 @@ module "job_compute_cluster_policy" {
 
   policy_overrides = local.logging_override
 
-  grantees = [local.power_user_group_name, "CZI - Job Compute"]
+  grantees = [local.power_user_group_name, "${var.policy_name_prefix}Job Compute"]
 }
 
 module "small_job_compute_cluster_policy" {
@@ -202,7 +202,7 @@ module "small_job_compute_cluster_policy" {
     }
   })
 
-  grantees = [local.power_user_group_name, "CZI - Small Job Compute"]
+  grantees = [local.power_user_group_name, "${var.policy_name_prefix}Small Job Compute"]
 }
 
 ## Fully custom policies
@@ -251,7 +251,7 @@ module "large_gpu_large_clusters_cluster_policy" {
       "defaultValue" : "g4dn.xlarge"
     },
   })
-  grantees = ["CZI - Large GPU Large Clusters"]
+  grantees = ["${var.policy_name_prefix}Large GPU Large Clusters"]
 }
 
 module "large_gpu_personal_cluster_policy" {
@@ -287,7 +287,7 @@ module "large_gpu_personal_cluster_policy" {
       "defaultValue" : "g4dn.xlarge"
     },
   })
-  grantees = ["CZI - Large GPU Personal"]
+  grantees = ["${var.policy_name_prefix}Large GPU Personal"]
 }
 
 module "large_gpu_small_clusters_cluster_policy" {
@@ -335,7 +335,7 @@ module "large_gpu_small_clusters_cluster_policy" {
       "defaultValue" : "g4dn.xlarge"
     },
   })
-  grantees = ["CZI - Large GPU Small Clusters"]
+  grantees = ["${var.policy_name_prefix}Large GPU Small Clusters"]
 }
 
 module "small_clusters" {
@@ -388,7 +388,7 @@ module "small_clusters" {
       "hidden" : false
     },
   })
-  grantees = ["CZI - Small Clusters"]
+  grantees = ["${var.policy_name_prefix}Small Clusters"]
 }
 
 module "superset_compute_cluster_policy" {
@@ -424,5 +424,69 @@ module "superset_compute_cluster_policy" {
       "defaultValue" : "superset_pool"
     },
   })
-  grantees = ["CZI - Superset Compute"]
+  grantees = ["${var.policy_name_prefix}Superset Compute"]
+}
+
+module "single_node_cluster_policy" {
+  source = "../databricks-cluster-policy"
+
+  databricks_host         = var.databricks_host
+  databricks_workspace_id = var.databricks_workspace_id
+  policy_name             = "${var.policy_name_prefix}Single Node Job Compute"
+  policy_overrides = merge(local.logging_override, {
+    "autotermination_minutes" : {
+      "type" : "fixed",
+      "value" : 120
+    },
+    "driver_node_type_id" : {
+      "type" : "regex",
+      "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
+      "hidden" : false
+    },
+    "aws_attributes.availability": {
+      "type": "allowlist",
+      "values": [
+        "ON_DEMAND",
+        "SPOT_WITH_FALLBACK"
+      ],
+      "hidden": false
+    },
+    "runtime_engine": {
+      "type": "unlimited",
+      "defaultValue": "STANDARD",
+      "hidden": false
+    },
+    "autoscale.max_workers" : {
+      "type" : "fixed",
+      "value" : 0,
+      "hidden" : true
+    },
+    "autoscale.min_workers" : {
+      "type" : "fixed",
+      "value" : 0,
+      "hidden" : true
+    },
+    "data_security_mode" : {
+      "type" : "whitelist",
+      "values" : [
+        "USER_ISOLATION",
+        "SINGLE_USER"
+      ]
+    },
+    "driver_node_type_id" : {
+      "type" : "regex",
+      "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
+      "hidden" : false
+    },
+    "enable_elastic_disk" : {
+      "type" : "fixed",
+      "value" : false,
+      "hidden" : true
+    },
+    "instance_pool_id" : {
+      "type" : "forbidden",
+      "hidden" : true
+    },
+  })
+  grantees = ["${var.policy_name_prefix}Single Node Job Compute"]
 }
