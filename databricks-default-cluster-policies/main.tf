@@ -444,13 +444,9 @@ module "single_node_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Single Node Job Compute"
   policy_overrides = merge(local.logging_override, {
-    "autotermination_minutes" : {
-      "type" : "fixed",
-      "value" : 120
-    },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
+      "pattern" : "([mrcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
       "hidden" : false
     },
     "aws_attributes.availability": {
@@ -485,7 +481,7 @@ module "single_node_cluster_policy" {
     },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
+      "pattern" : "([mrcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
       "hidden" : false
     },
     "enable_elastic_disk" : {
