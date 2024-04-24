@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.1](https://github.com/chanzuckerberg/cztack/compare/v0.69.0...v0.69.1) (2024-04-24)
+
+
+### Bug Fixes
+
+* update custom job policy to work with jobs ([#581](https://github.com/chanzuckerberg/cztack/issues/581)) ([2539942](https://github.com/chanzuckerberg/cztack/commit/2539942613365bd7b6c711f25ad454f90abfcc35))
+
 ## [0.69.0](https://github.com/chanzuckerberg/cztack/compare/v0.68.0...v0.69.0) (2024-04-23)
 
 
