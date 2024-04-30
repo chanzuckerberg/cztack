@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "assume_role" {
     for_each = var.authorized_github_repos
 
     content {
-      sid = "AllowGithubActionsToAssumeRole"
+      sid = "AllowGithubActionsToAssumeRole${statement.key}"
       principals {
         type        = "Federated"
         identifiers = [local.idp_arn]
