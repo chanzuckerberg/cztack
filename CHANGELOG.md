@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.2](https://github.com/chanzuckerberg/cztack/compare/v0.69.1...v0.69.2) (2024-04-30)
+
+
+### Bug Fixes
+
+* key the sid so they are unique ([219cc4c](https://github.com/chanzuckerberg/cztack/commit/219cc4c55e6cf4af2e9a6d03091422c8564a20c2))
+
 ## [0.69.1](https://github.com/chanzuckerberg/cztack/compare/v0.69.0...v0.69.1) (2024-04-24)
 
 
