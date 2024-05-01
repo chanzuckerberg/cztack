@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.3](https://github.com/chanzuckerberg/cztack/compare/v0.69.2...v0.69.3) (2024-05-01)
+
+
+### Bug Fixes
+
+* don't allow dashes in sids ([7959ea0](https://github.com/chanzuckerberg/cztack/commit/7959ea0c3e716be46f6e10ec3ec02ba7cd5bdfa4))
+
 ## [0.69.2](https://github.com/chanzuckerberg/cztack/compare/v0.69.1...v0.69.2) (2024-04-30)
 
 
