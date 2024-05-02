@@ -462,16 +462,15 @@ module "single_node_cluster_policy" {
       "defaultValue": "STANDARD",
       "hidden": false
     },
-    "autoscale.max_workers" : {
-      "type" : "fixed",
-      "value" : 0,
-      "hidden" : true
+    "spark_conf.spark.databricks.cluster.profile":{
+      "type":"fixed",
+      "value":"singleNode",
+      "hidden":true
     },
-    "autoscale.min_workers" : {
-      "type" : "fixed",
-      "value" : 0,
-      "hidden" : true
-    },
+    "num_workers":{
+      "type":"range",
+      "maxValue":0
+    }
     "data_security_mode" : {
       "type" : "whitelist",
       "values" : [
