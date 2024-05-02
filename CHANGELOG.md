@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.4](https://github.com/chanzuckerberg/cztack/compare/v0.69.3...v0.69.4) (2024-05-02)
+
+
+### Bug Fixes
+
+* Add more tags for single node ([#587](https://github.com/chanzuckerberg/cztack/issues/587)) ([a71d74c](https://github.com/chanzuckerberg/cztack/commit/a71d74c0d72a3631696e47207b50ba54e6ef5e77))
+
 ## [0.69.3](https://github.com/chanzuckerberg/cztack/compare/v0.69.2...v0.69.3) (2024-05-01)
 
 
