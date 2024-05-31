@@ -135,8 +135,8 @@ variable "db_deletion_protection" {
 
 variable "ca_cert_identifier" {
   type        = string
-  description = "Identifier for the certificate authority. Use rds-ca-2019 for anything new."
-  default     = "rds-ca-2019"
+  description = "Identifier for the certificate authority. Use rds-ca-ecc384-g1 for anything new."
+  default     = "rds-ca-ecc384-g1"
 }
 
 variable "auto_minor_version_upgrade" {
