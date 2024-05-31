@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.70.0](https://github.com/chanzuckerberg/cztack/compare/v0.69.4...v0.70.0) (2024-05-31)
+
+
+### Features
+
+* Upgrade RDS CAs to rds-ca-ecc384-g1 ([#589](https://github.com/chanzuckerberg/cztack/issues/589)) ([5f5e7b4](https://github.com/chanzuckerberg/cztack/commit/5f5e7b48176332f5855dae2cc81afa7983d00b23))
+
 ## [0.69.4](https://github.com/chanzuckerberg/cztack/compare/v0.69.3...v0.69.4) (2024-05-02)
 
 
