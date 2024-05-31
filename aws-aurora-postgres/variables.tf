@@ -128,7 +128,7 @@ variable "iam_database_authentication_enabled" {
 variable "ca_cert_identifier" {
   type        = string
   description = "Identifier for the certificate authority."
-  default     = "rds-ca-2019"
+  default     = "rds-ca-ecc384-g1"
 }
 
 variable "auto_minor_version_upgrade" {
