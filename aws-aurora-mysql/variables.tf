@@ -177,8 +177,8 @@ variable "engine_version" {
 
 variable "ca_cert_identifier" {
   type        = string
-  description = "Identifier for the certificate authority. rds-ca-ecc384-g1 is the latest available version."
-  default     = "rds-ca-ecc384-g1"
+  description = "Identifier for the certificate authority. rds-ca-rsa2048-g1 is the latest available version."
+  default     = "rds-ca-rsa2048-g1"
 }
 
 variable "auto_minor_version_upgrade" {
