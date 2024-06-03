@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.71.0](https://github.com/chanzuckerberg/cztack/compare/v0.70.0...v0.71.0) (2024-06-03)
+
+
+### Features
+
+* Update default CA identifier for aws-aurora modules to rds-ca-rsa2048-g1 ([#591](https://github.com/chanzuckerberg/cztack/issues/591)) ([61cf124](https://github.com/chanzuckerberg/cztack/commit/61cf124e8721bf43a6c78f181c1f05d1da8a57a0))
+
 ## [0.70.0](https://github.com/chanzuckerberg/cztack/compare/v0.69.4...v0.70.0) (2024-05-31)
 
 
