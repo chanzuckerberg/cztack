@@ -22,8 +22,9 @@ jobs:
         run: make setup
       - uses: golangci/golangci-lint-action@v3
         with:
-          version: latest
+          version: v1.56.2
           args: --timeout=5m
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   test:
     name: test ${{ matrix.module }}
     needs: get-modules

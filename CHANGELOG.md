@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.71.0](https://github.com/chanzuckerberg/cztack/compare/v0.70.0...v0.71.0) (2024-06-03)
+
+
+### Features
+
+* Update default CA identifier for aws-aurora modules to rds-ca-rsa2048-g1 ([#591](https://github.com/chanzuckerberg/cztack/issues/591)) ([61cf124](https://github.com/chanzuckerberg/cztack/commit/61cf124e8721bf43a6c78f181c1f05d1da8a57a0))
+
+## [0.70.0](https://github.com/chanzuckerberg/cztack/compare/v0.69.4...v0.70.0) (2024-05-31)
+
+
+### Features
+
+* Upgrade RDS CAs to rds-ca-ecc384-g1 ([#589](https://github.com/chanzuckerberg/cztack/issues/589)) ([5f5e7b4](https://github.com/chanzuckerberg/cztack/commit/5f5e7b48176332f5855dae2cc81afa7983d00b23))
+
+## [0.69.4](https://github.com/chanzuckerberg/cztack/compare/v0.69.3...v0.69.4) (2024-05-02)
+
+
+### Bug Fixes
+
+* Add more tags for single node ([#587](https://github.com/chanzuckerberg/cztack/issues/587)) ([a71d74c](https://github.com/chanzuckerberg/cztack/commit/a71d74c0d72a3631696e47207b50ba54e6ef5e77))
+
+## [0.69.3](https://github.com/chanzuckerberg/cztack/compare/v0.69.2...v0.69.3) (2024-05-01)
+
+
+### Bug Fixes
+
+* don't allow dashes in sids ([7959ea0](https://github.com/chanzuckerberg/cztack/commit/7959ea0c3e716be46f6e10ec3ec02ba7cd5bdfa4))
+
+## [0.69.2](https://github.com/chanzuckerberg/cztack/compare/v0.69.1...v0.69.2) (2024-04-30)
+
+
+### Bug Fixes
+
+* key the sid so they are unique ([219cc4c](https://github.com/chanzuckerberg/cztack/commit/219cc4c55e6cf4af2e9a6d03091422c8564a20c2))
+
 ## [0.69.1](https://github.com/chanzuckerberg/cztack/compare/v0.69.0...v0.69.1) (2024-04-24)
 
 
