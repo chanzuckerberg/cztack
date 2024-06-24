@@ -2,9 +2,9 @@
 
 // https://docs.databricks.com/administration-guide/multiworkspace/iam-role.html#language-Your%C2%A0VPC,%C2%A0custom
 locals {
-  unity_aws_role_name      = "${var.catalog_name}-${var.volume_name}-unity"
-  catalog_name             = replace(var.catalog_name, "-", "_") # SQL don't work with hyphens
-  schema_name              = replace(var.volume_name, "-", "_")  # SQL don't work with hyphens
+  unity_aws_role_name = "${var.catalog_name}-${var.volume_name}-unity"
+  catalog_name        = replace(var.catalog_name, "-", "_") # SQL don't work with hyphens
+  schema_name         = replace(var.volume_name, "-", "_")  # SQL don't work with hyphens
 
   path                   = "/databricks/"
   databricks_aws_account = "414351767826"                                                                      # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
@@ -22,7 +22,7 @@ resource "databricks_storage_credential" "volume" {
     module.databricks_bucket
   ]
 
-  name = "${local.catalog_name}"
+  name = local.catalog_name
   aws_iam_role {
     role_arn = aws_iam_role.dbx_unity_aws_role.arn
   }
@@ -30,7 +30,7 @@ resource "databricks_storage_credential" "volume" {
 }
 
 resource "databricks_external_location" "volume" {
-  name            = "${local.catalog_name}"
+  name            = local.catalog_name
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.volume.name
   comment         = "Managed by Terraform - access for ${var.volume_name}"

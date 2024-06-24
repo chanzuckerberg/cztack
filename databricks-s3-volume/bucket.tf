@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "databricks-s3" {
     sid    = "dbxBucketAccess"
     effect = "Allow"
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = local.standard_grant_principals
     }
     actions = [
@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "databricks-s3" {
     sid    = "dbxObjAccess"
     effect = "Allow"
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = local.standard_grant_principals
     }
     actions = [
