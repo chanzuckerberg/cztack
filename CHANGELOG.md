@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.72.1](https://github.com/chanzuckerberg/cztack/compare/v0.72.0...v0.72.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* add wait for race condition and clean up names ([#595](https://github.com/chanzuckerberg/cztack/issues/595)) ([61c5437](https://github.com/chanzuckerberg/cztack/commit/61c543776ce487f9b9cd5456fcd0321eb6c79240))
+
 ## [0.72.0](https://github.com/chanzuckerberg/cztack/compare/v0.71.0...v0.72.0) (2024-06-25)
 
 
