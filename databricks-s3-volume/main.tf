@@ -2,7 +2,7 @@
 
 // https://docs.databricks.com/administration-guide/multiworkspace/iam-role.html#language-Your%C2%A0VPC,%C2%A0custom
 locals {
-  unity_aws_role_name = "${var.catalog_name}-${var.volume_name}-unity"
+  unity_aws_role_name = "${var.catalog_name}-unity"
   catalog_name        = replace(var.catalog_name, "-", "_") # SQL don't work with hyphens
   schema_name         = replace(var.volume_name, "-", "_")  # SQL don't work with hyphens
 
@@ -26,14 +26,23 @@ resource "databricks_storage_credential" "volume" {
   aws_iam_role {
     role_arn = aws_iam_role.dbx_unity_aws_role.arn
   }
-  comment = "Managed by Terraform - access for ${var.volume_name}"
+  comment = "Managed by Terraform - access for ${var.catalog_name}"
+}
+
+# upstream external location sometimes takes a moment to register
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [databricks_storage_credential.volume]
+
+  create_duration = "30s"
 }
 
 resource "databricks_external_location" "volume" {
+  depends_on      = [time_sleep.wait_30_seconds]
+
   name            = local.catalog_name
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.volume.name
-  comment         = "Managed by Terraform - access for ${var.volume_name}"
+  comment         = "Managed by Terraform - access for ${var.catalog_name}"
 }
 
 # New catalog, schema, and volume
