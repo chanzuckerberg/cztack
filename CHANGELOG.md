@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.72.0](https://github.com/chanzuckerberg/cztack/compare/v0.71.0...v0.72.0) (2024-06-25)
+
+
+### Features
+
+* CDI-3103 - New databricks volume module ([#593](https://github.com/chanzuckerberg/cztack/issues/593)) ([2d72a6c](https://github.com/chanzuckerberg/cztack/commit/2d72a6cf5a4d50f3d24bb6108b4c03ced39c79aa))
+
 ## [0.71.0](https://github.com/chanzuckerberg/cztack/compare/v0.70.0...v0.71.0) (2024-06-03)
 
 
