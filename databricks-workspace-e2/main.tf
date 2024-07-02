@@ -46,3 +46,13 @@ resource "databricks_mws_workspaces" "databricks" {
   storage_configuration_id = databricks_mws_storage_configurations.databricks.storage_configuration_id
   network_id               = databricks_mws_networks.networking.network_id
 }
+
+data "databricks_user" "tfe_service_principal" {
+  user_name = var.tfe_service_principal_name
+}
+
+resource "databricks_mws_permission_assignment" {
+  workspace_id = databricks_mws_workspaces.databricks.workspace_id
+  principal_id = databricks_user.tfe_service_principal.id
+  permissions  = ["ADMIN"]
+}
