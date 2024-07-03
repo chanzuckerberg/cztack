@@ -57,8 +57,8 @@ variable "workspace_name_override" {
   description = "Override the workspace name. If not set, the workspace name will be set to the project, env, and service."
 }
 
-variable "tfe_service_principal_name" {
+variable "tfe_service_principal_id" {
   type        = string
   default     = null
-  description = "Name for the service principal for Terraform Enterprise, if available. Will be added as a workspace admin"
+  description = "ID for the service principal for Terraform Enterprise, if available. Will be added as a workspace admin"
 }
