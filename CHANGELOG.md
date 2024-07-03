@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.73.1](https://github.com/chanzuckerberg/cztack/compare/v0.73.0...v0.73.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* resource block name missing ([#600](https://github.com/chanzuckerberg/cztack/issues/600)) ([0c43eeb](https://github.com/chanzuckerberg/cztack/commit/0c43eeb7f5e93692e7d5831dc6031f8794b48265))
+
 ## [0.73.0](https://github.com/chanzuckerberg/cztack/compare/v0.72.1...v0.73.0) (2024-07-02)
 
 
