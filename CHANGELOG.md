@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.73.0](https://github.com/chanzuckerberg/cztack/compare/v0.72.1...v0.73.0) (2024-07-02)
+
+
+### Features
+
+* add service principal to workspace module ([#598](https://github.com/chanzuckerberg/cztack/issues/598)) ([e9ea41a](https://github.com/chanzuckerberg/cztack/commit/e9ea41a2993d0751c8ee0fbb653ab3e5cb4b726e))
+
 ## [0.72.1](https://github.com/chanzuckerberg/cztack/compare/v0.72.0...v0.72.1) (2024-06-25)
 
 
