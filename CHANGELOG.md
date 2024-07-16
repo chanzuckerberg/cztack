@@ -1,5 +1,47 @@
 # Changelog
 
+## [0.73.3](https://github.com/chanzuckerberg/cztack/compare/v0.73.2...v0.73.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* CDI-3123 - fix service principal TF type ([#604](https://github.com/chanzuckerberg/cztack/issues/604)) ([06858ca](https://github.com/chanzuckerberg/cztack/commit/06858ca3a6602416743198fbf5c683bc87471790))
+
+## [0.73.2](https://github.com/chanzuckerberg/cztack/compare/v0.73.1...v0.73.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* dbx service principal ref ([#602](https://github.com/chanzuckerberg/cztack/issues/602)) ([8929d7a](https://github.com/chanzuckerberg/cztack/commit/8929d7a8e6e07bd9bc052601c75f5b85376e4e6e))
+
+## [0.73.1](https://github.com/chanzuckerberg/cztack/compare/v0.73.0...v0.73.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* resource block name missing ([#600](https://github.com/chanzuckerberg/cztack/issues/600)) ([0c43eeb](https://github.com/chanzuckerberg/cztack/commit/0c43eeb7f5e93692e7d5831dc6031f8794b48265))
+
+## [0.73.0](https://github.com/chanzuckerberg/cztack/compare/v0.72.1...v0.73.0) (2024-07-02)
+
+
+### Features
+
+* add service principal to workspace module ([#598](https://github.com/chanzuckerberg/cztack/issues/598)) ([e9ea41a](https://github.com/chanzuckerberg/cztack/commit/e9ea41a2993d0751c8ee0fbb653ab3e5cb4b726e))
+
+## [0.72.1](https://github.com/chanzuckerberg/cztack/compare/v0.72.0...v0.72.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* add wait for race condition and clean up names ([#595](https://github.com/chanzuckerberg/cztack/issues/595)) ([61c5437](https://github.com/chanzuckerberg/cztack/commit/61c543776ce487f9b9cd5456fcd0321eb6c79240))
+
+## [0.72.0](https://github.com/chanzuckerberg/cztack/compare/v0.71.0...v0.72.0) (2024-06-25)
+
+
+### Features
+
+* CDI-3103 - New databricks volume module ([#593](https://github.com/chanzuckerberg/cztack/issues/593)) ([2d72a6c](https://github.com/chanzuckerberg/cztack/commit/2d72a6cf5a4d50f3d24bb6108b4c03ced39c79aa))
+
 ## [0.71.0](https://github.com/chanzuckerberg/cztack/compare/v0.70.0...v0.71.0) (2024-06-03)
 
 
