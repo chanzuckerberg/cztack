@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.73.3](https://github.com/chanzuckerberg/cztack/compare/v0.73.2...v0.73.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* CDI-3123 - fix service principal TF type ([#604](https://github.com/chanzuckerberg/cztack/issues/604)) ([06858ca](https://github.com/chanzuckerberg/cztack/commit/06858ca3a6602416743198fbf5c683bc87471790))
+
+## [0.73.2](https://github.com/chanzuckerberg/cztack/compare/v0.73.1...v0.73.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* dbx service principal ref ([#602](https://github.com/chanzuckerberg/cztack/issues/602)) ([8929d7a](https://github.com/chanzuckerberg/cztack/commit/8929d7a8e6e07bd9bc052601c75f5b85376e4e6e))
+
 ## [0.73.1](https://github.com/chanzuckerberg/cztack/compare/v0.73.0...v0.73.1) (2024-07-03)
 
 
