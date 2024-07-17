@@ -45,7 +45,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_rw_bucket_grant_arns"></a> [additional\_rw\_bucket\_grant\_arns](#input\_additional\_rw\_bucket\_grant\_arns) | (Optional) Additional AWS ARNs to grant read/write permissions to on the bucket (may be necessary for service principals, instance profiles, or users | `list(string)` | `[]` | no |
+| <a name="input_additional_rw_bucket_grant_arns"></a> [additional\_rw\_bucket\_grant\_arns](#input\_additional\_rw\_bucket\_grant\_arns) | (Optional) Additional AWS ARNs to grant read/write permissions to on the bucket (may be necessary for service principals, instance profiles, or users) | `list(string)` | `[]` | no |
 | <a name="input_bucket_object_ownership"></a> [bucket\_object\_ownership](#input\_bucket\_object\_ownership) | Set default owner of all objects within bucket (e.g., bucket vs. object owner) | `string` | `null` | no |
 | <a name="input_catalog_name"></a> [catalog\_name](#input\_catalog\_name) | Name of the Databricks existing catalog to add the volume to | `string` | n/a | yes |
 | <a name="input_catalog_owner"></a> [catalog\_owner](#input\_catalog\_owner) | User or group name of the catalog owner | `string` | n/a | yes |
