@@ -1,8 +1,15 @@
+locals {
+  # Only set the grant principals if the catalog and/or schema doesn't already exist
+  catalog_r_grant_principals = var.create_catalog ? var.catalog_r_grant_principals : []
+  catalog_rw_grant_principals = var.create_catalog ? var.catalog_rw_grant_principals : []
+  schema_r_grant_principals = var.create_schema ? var.schema_r_grant_principals : []
+  schema_rw_grant_principals = var.create_schema ? var.schema_rw_grant_principals : []
+}
+
 # catalog
 resource "databricks_grant" "catalog_r" {
-  count = var.create_catalog ? 1 : 0
   depends_on = [databricks_catalog[0].volume]
-  for_each   = toset(var.catalog_r_grant_principals)
+  for_each   = toset(local.catalog_r_grant_principals)
 
   catalog    = local.catalog_name
   principal  = each.value
@@ -10,9 +17,8 @@ resource "databricks_grant" "catalog_r" {
 }
 
 resource "databricks_grant" "catalog_rw" {
-  count = var.create_catalog ? 1 : 0
   depends_on = [databricks_catalog[0].volume]
-  for_each  = toset(var.catalog_rw_grant_principals)
+  for_each  = toset(local.catalog_rw_grant_principals)
 
   catalog   = local.catalog_name
   principal = "Data Scientists"
@@ -35,9 +41,8 @@ resource "databricks_grant" "catalog_rw" {
 
 # schema
 resource "databricks_grant" "schema_r" {
-  count = var.create_schema ? 1 : 0
   depends_on = [databricks_schema[0].volume]
-  for_each   = toset(var.schema_r_grant_principals)
+  for_each   = toset(local.schema_r_grant_principals)
 
   schema     = local.schema_name
   principal  = each.value
@@ -45,9 +50,8 @@ resource "databricks_grant" "schema_r" {
 }
 
 resource "databricks_grant" "schema_rw" {
-  count = var.create_schema ? 1 : 0
   depends_on = [databricks_schema[0].volume]
-  for_each  = toset(var.schema_rw_grant_principals)
+  for_each  = toset(local.schema_rw_grant_principals)
 
   schema    = local.schema_name
   principal = each.value
