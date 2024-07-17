@@ -56,7 +56,7 @@ resource "databricks_external_location" "volume" {
 resource "databricks_catalog" "volume" {
   count = var.create_catalog ? 1 : 0
 
-  depends_on   = [databricks_external_location[0].volume]
+  depends_on   = [databricks_external_location.volume[0]]
   name         = local.catalog_name
   metastore_id = var.metastore_id
   owner        = var.catalog_owner
