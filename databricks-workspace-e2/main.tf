@@ -47,12 +47,12 @@ resource "databricks_mws_workspaces" "databricks" {
   network_id               = databricks_mws_networks.networking.network_id
 }
 
-data "databricks_user" "tfe_service_principal" {
-  user_name = var.tfe_service_principal_name
+data "databricks_service_principal" "tfe_service_principal" {
+  application_id = var.tfe_service_principal_id
 }
 
 resource "databricks_mws_permission_assignment" "tfe_service_principal_admin" {
   workspace_id = databricks_mws_workspaces.databricks.workspace_id
-  principal_id = databricks_user.tfe_service_principal.id
+  principal_id = data.databricks_service_principal.tfe_service_principal.id
   permissions  = ["ADMIN"]
 }
