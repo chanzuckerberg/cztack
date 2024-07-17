@@ -1,14 +1,18 @@
 # catalog
 resource "databricks_grant" "catalog_r" {
+  depends_on = [databricks_catalog.volume]
   for_each   = toset(var.catalog_r_grant_principals)
-  catalog    = databricks_catalog.volume.name
+
+  catalog    = local.catalog_name
   principal  = each.value
   privileges = ["USE_CATALOG", "USE_SCHEMA", "SELECT"]
 }
 
 resource "databricks_grant" "catalog_rw" {
+  depends_on = [databricks_catalog.volume]
   for_each  = toset(var.catalog_rw_grant_principals)
-  catalog   = databricks_catalog.volume.name
+
+  catalog   = local.catalog_name
   principal = "Data Scientists"
   privileges = [
     "APPLY_TAG",
@@ -29,15 +33,19 @@ resource "databricks_grant" "catalog_rw" {
 
 # schema
 resource "databricks_grant" "schema_r" {
+  depends_on = [databricks_schema.volume]
   for_each   = toset(var.schema_r_grant_principals)
-  schema     = databricks_schema.volume.id
+
+  schema     = local.schema_name
   principal  = each.value
   privileges = ["USE_SCHEMA", "SELECT", "READ_VOLUME"]
 }
 
 resource "databricks_grant" "schema_rw" {
+  depends_on = [databricks_schema.volume]
   for_each  = toset(var.schema_rw_grant_principals)
-  schema    = databricks_schema.volume.id
+
+  schema    = local.schema_name
   principal = each.value
   privileges = [
     "APPLY_TAG",

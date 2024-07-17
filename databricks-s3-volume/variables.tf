@@ -14,9 +14,24 @@ variable "catalog_owner" {
   type        = string
 }
 
+variable "create_catalog" {
+  description = "Flag to create a new catalog or look for an existing one with the given name"
+  type        = bool
+}
+
 variable "metastore_id" {
   description = "ID of metastore to create catalog in"
   type        = string
+}
+
+variable "schema_name" {
+  description = "Name of the Databricks schema to add the volume to"
+  type        = string
+}
+
+variable "create_schema" {
+  description = "Flag to create a new catalog or look for an existing one with the given name"
+  type        = bool
 }
 
 variable "volume_name" {
