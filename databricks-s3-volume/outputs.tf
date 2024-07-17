@@ -7,5 +7,5 @@ output "volume_specific_bucket_name" {
 }
 
 output "volume_path" {
-  value = "${databricks_catalog.volume.name}.${databricks_schema.volume.name}.${databricks_volume.volume.name}"
+  value = "${local.catalog_name}.${local.schema_name}.${local.volume_name}"
 }
