@@ -8,7 +8,7 @@ locals {
 
 # catalog
 resource "databricks_grant" "catalog_r" {
-  depends_on = [databricks_catalog[0].volume]
+  depends_on = [databricks_catalog.volume[0]]
   for_each   = toset(local.catalog_r_grant_principals)
 
   catalog    = local.catalog_name
@@ -17,7 +17,7 @@ resource "databricks_grant" "catalog_r" {
 }
 
 resource "databricks_grant" "catalog_rw" {
-  depends_on = [databricks_catalog[0].volume]
+  depends_on = [databricks_catalog.volume[0]]
   for_each  = toset(local.catalog_rw_grant_principals)
 
   catalog   = local.catalog_name
@@ -41,7 +41,7 @@ resource "databricks_grant" "catalog_rw" {
 
 # schema
 resource "databricks_grant" "schema_r" {
-  depends_on = [databricks_schema[0].volume]
+  depends_on = [databricks_schema.volume[0]]
   for_each   = toset(local.schema_r_grant_principals)
 
   schema     = local.schema_name
@@ -50,7 +50,7 @@ resource "databricks_grant" "schema_r" {
 }
 
 resource "databricks_grant" "schema_rw" {
-  depends_on = [databricks_schema[0].volume]
+  depends_on = [databricks_schema.volume[0]]
   for_each  = toset(local.schema_rw_grant_principals)
 
   schema    = local.schema_name
