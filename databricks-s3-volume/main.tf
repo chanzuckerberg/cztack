@@ -19,6 +19,8 @@ locals {
 ### NOTE: 
 
 resource "databricks_storage_credential" "volume" {
+  count = var.create_catalog ? 1 : 0
+
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
     resource.aws_iam_role_policy_attachment.dbx_unity_aws_access,
@@ -27,24 +29,25 @@ resource "databricks_storage_credential" "volume" {
 
   name = local.catalog_name
   aws_iam_role {
-    role_arn = aws_iam_role.dbx_unity_aws_role.arn
+    role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
   }
   comment = "Managed by Terraform - access for ${var.catalog_name}"
 }
 
 # upstream external location sometimes takes a moment to register
 resource "time_sleep" "wait_30_seconds" {
-  depends_on = [databricks_storage_credential.volume]
+  depends_on = [databricks_storage_credential.volume[0]]
 
   create_duration = "30s"
 }
 
 resource "databricks_external_location" "volume" {
+  count = var.create_catalog ? 1 : 0
   depends_on      = [time_sleep.wait_30_seconds]
 
   name            = local.catalog_name
   url             = "s3://${local.bucket_name}"
-  credential_name = databricks_storage_credential.volume.name
+  credential_name = databricks_storage_credential.volume[0].name
   comment         = "Managed by Terraform - access for ${var.catalog_name}"
 }
 
@@ -53,7 +56,7 @@ resource "databricks_external_location" "volume" {
 resource "databricks_catalog" "volume" {
   count = var.create_catalog ? 1 : 0
 
-  depends_on   = [databricks_external_location.volume]
+  depends_on   = [databricks_external_location[0].volume]
   name         = local.catalog_name
   metastore_id = var.metastore_id
   owner        = var.catalog_owner
