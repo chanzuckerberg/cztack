@@ -83,7 +83,7 @@ resource "databricks_volume" "volume" {
   depends_on       = [databricks_external_location.volume, databricks_schema.volume]
   name             = "${local.volume_name}"
   catalog_name     = local.catalog_name
-  schema_name      = local.catalog_name
+  schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
   storage_location = "s3://${local.bucket_name}/${local.schema_name}"
   owner            = var.catalog_owner
