@@ -1,5 +1,5 @@
 output "dbx_unity_aws_role_arn" {
-  value = aws_iam_role.dbx_unity_aws_role.arn
+  value = length(aws_iam_role.dbx_unity_aws_role) > 0 ? aws_iam_role.dbx_unity_aws_role[0].arn : null
 }
 
 output "volume_specific_bucket_name" {
@@ -7,5 +7,5 @@ output "volume_specific_bucket_name" {
 }
 
 output "volume_path" {
-  value = "${databricks_catalog.volume.name}.${databricks_schema.volume.name}.${databricks_volume.volume.name}"
+  value = "${local.catalog_name}.${local.schema_name}.${local.volume_name}"
 }

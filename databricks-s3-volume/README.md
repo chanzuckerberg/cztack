@@ -45,13 +45,16 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_rw_bucket_grant_arns"></a> [additional\_rw\_bucket\_grant\_arns](#input\_additional\_rw\_bucket\_grant\_arns) | (Optional) Additional AWS ARNs to grant read/write permissions to on the bucket (may be necessary for service principals, instance profiles, or users | `list(string)` | `[]` | no |
+| <a name="input_additional_rw_bucket_grant_arns"></a> [additional\_rw\_bucket\_grant\_arns](#input\_additional\_rw\_bucket\_grant\_arns) | (Optional) Additional AWS ARNs to grant read/write permissions to on the bucket (may be necessary for service principals, instance profiles, or users) | `list(string)` | `[]` | no |
 | <a name="input_bucket_object_ownership"></a> [bucket\_object\_ownership](#input\_bucket\_object\_ownership) | Set default owner of all objects within bucket (e.g., bucket vs. object owner) | `string` | `null` | no |
 | <a name="input_catalog_name"></a> [catalog\_name](#input\_catalog\_name) | Name of the Databricks existing catalog to add the volume to | `string` | n/a | yes |
 | <a name="input_catalog_owner"></a> [catalog\_owner](#input\_catalog\_owner) | User or group name of the catalog owner | `string` | n/a | yes |
+| <a name="input_create_catalog"></a> [create\_catalog](#input\_create\_catalog) | Flag to create a new catalog or look for an existing one with the given name | `bool` | n/a | yes |
 | <a name="input_catalog_r_grant_principals"></a> [catalog\_r\_grant\_principals](#input\_catalog\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the catalog | `list(string)` | `[]` | no |
 | <a name="input_catalog_rw_grant_principals"></a> [catalog\_rw\_grant\_principals](#input\_catalog\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the catalog | `list(string)` | `[]` | no |
 | <a name="input_metastore_id"></a> [metastore\_id](#input\_metastore\_id) | ID of metastore to create catalog in | `string` | n/a | yes |
+| <a name="input_create_schema"></a> [create\_schema](#input\_create\_schema) | Flag to create a new schema or look for an existing one with the given name | `bool` | n/a | yes |
+| <a name="input_schema_name"></a> [schema\_name](#input\_schema\_name) | Name of the Databricks existing schema to add the volume to | `string` | n/a | yes |
 | <a name="input_schema_r_grant_principals"></a> [schema\_r\_grant\_principals](#input\_schema\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the schema | `list(string)` | `[]` | no |
 | <a name="input_schema_rw_grant_principals"></a> [schema\_rw\_grant\_principals](#input\_schema\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the schema | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | REQUIRED: Tags to include for this environment. | <pre>object({<br>    project : string<br>    env : string<br>    service : string<br>    owner : string<br>    managedBy : string<br>  })</pre> | n/a | yes |

@@ -5,6 +5,8 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
+  count = var.create_catalog ? 1 : 0
+
   statement {
     principals {
       type        = "AWS"
@@ -35,13 +37,17 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
+  count = var.create_catalog ? 1 : 0
+
   name               = local.unity_aws_role_name
   path               = local.path
-  assume_role_policy = data.aws_iam_policy_document.dbx_unity_aws_role_assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.dbx_unity_aws_role_assume_role[0].json
 }
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
+  count = var.create_catalog ? 1 : 0
+
   depends_on = [
     module.databricks_bucket
   ]
@@ -84,10 +90,14 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access.json
+  count = var.create_catalog ? 1 : 0
+
+  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[0].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  policy_arn = aws_iam_policy.dbx_unity_access_policy.arn
-  role       = aws_iam_role.dbx_unity_aws_role.name
+  count = var.create_catalog ? 1 : 0
+
+  policy_arn = aws_iam_policy.dbx_unity_access_policy[0].arn
+  role       = aws_iam_role.dbx_unity_aws_role[0].name
 }
