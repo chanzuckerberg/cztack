@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.74.0](https://github.com/chanzuckerberg/cztack/compare/v0.73.3...v0.74.0) (2024-07-18)
+
+
+### Features
+
+* CDI-3149 - Allow use of existing catalogs and schemas for databricks volumes ([#606](https://github.com/chanzuckerberg/cztack/issues/606)) ([7735218](https://github.com/chanzuckerberg/cztack/commit/7735218680130e8fc94d00f392c9537f45b6c1e8))
+
 ## [0.73.3](https://github.com/chanzuckerberg/cztack/compare/v0.73.2...v0.73.3) (2024-07-03)
 
 
