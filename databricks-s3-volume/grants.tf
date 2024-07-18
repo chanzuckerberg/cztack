@@ -44,7 +44,7 @@ resource "databricks_grant" "schema_r" {
   depends_on = [databricks_schema.volume[0]]
   for_each   = toset(local.schema_r_grant_principals)
 
-  schema     = local.schema_name
+  schema     = "${local.catalog_name}.${local.schema_name}"
   principal  = each.value
   privileges = ["USE_SCHEMA", "SELECT", "READ_VOLUME"]
 }
@@ -53,7 +53,7 @@ resource "databricks_grant" "schema_rw" {
   depends_on = [databricks_schema.volume[0]]
   for_each  = toset(local.schema_rw_grant_principals)
 
-  schema    = local.schema_name
+  schema    = "${local.catalog_name}.${local.schema_name}"
   principal = each.value
   privileges = [
     "APPLY_TAG",
