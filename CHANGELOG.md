@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.76.0](https://github.com/chanzuckerberg/cztack/compare/v0.75.0...v0.76.0) (2024-07-24)
+
+
+### Features
+
+* add condition_operator field to allow overriding StringEquals with StringLike ([#610](https://github.com/chanzuckerberg/cztack/issues/610)) ([86bab99](https://github.com/chanzuckerberg/cztack/commit/86bab991235dba69305970153f88d650dfa65802))
+
 ## [0.75.0](https://github.com/chanzuckerberg/cztack/compare/v0.74.0...v0.75.0) (2024-07-24)
 
 
