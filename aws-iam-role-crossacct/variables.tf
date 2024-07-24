@@ -29,10 +29,11 @@ variable "source_role_arns" {
 variable "oidc" {
   type = list(object(
     {
-      idp_arn : string,               # the AWS IAM IDP arn
-      client_ids : list(string),      # a list of oidc client ids
-      provider : string,              # your provider url, such as foo.okta.com
-      jwt_condition: optional(string) # the condition to allow the JWT token
+      idp_arn : string,                      # the AWS IAM IDP arn
+      client_ids : list(string),             # a list of oidc client ids
+      provider : string,                     # your provider url, such as foo.okta.com
+      jwt_condition : optional(string),      # the condition to allow the JWT token
+      condition_operator : optional(string), # the condition operator for the iam statement
     }
   ))
 

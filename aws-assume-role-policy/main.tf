@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "assume-role" {
 
       actions = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
       condition {
-        test     = "StringEquals"
+        test     = "${oidc.value["condition_operator"]}"
         variable = "${oidc.value["provider"]}:${oidc.value["jwt_condition"]}"
         values   = oidc.value["client_ids"]
       }
