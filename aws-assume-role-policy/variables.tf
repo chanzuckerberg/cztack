@@ -38,9 +38,10 @@ variable "saml_idp_arns" {
 variable "oidc" {
   type = list(object(
     {
-      idp_arn : string,          # the AWS IAM IDP arn
-      client_ids : list(string), # a list of oidc client ids
-      provider : string          # your provider url, such as foo.okta.com
+      idp_arn : string,                      # the AWS IAM IDP arn
+      client_ids : list(string),             # a list of oidc client ids
+      provider : string,                     # your provider url, such as foo.okta.com
+      jwt_condition: optional(string, "aud") # the condition to allow the JWT token
     }
   ))
   default     = []
