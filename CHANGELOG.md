@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.75.0](https://github.com/chanzuckerberg/cztack/compare/v0.74.0...v0.75.0) (2024-07-24)
+
+
+### Features
+
+* add jwt_condition option to oidc variable for IAM trust relationships ([#608](https://github.com/chanzuckerberg/cztack/issues/608)) ([5320504](https://github.com/chanzuckerberg/cztack/commit/5320504677c9fda2447b61229ed1831b24f36074))
+
 ## [0.74.0](https://github.com/chanzuckerberg/cztack/compare/v0.73.3...v0.74.0) (2024-07-18)
 
 
