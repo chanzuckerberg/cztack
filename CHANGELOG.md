@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.76.0](https://github.com/chanzuckerberg/cztack/compare/v0.75.0...v0.76.0) (2024-07-24)
+
+
+### Features
+
+* add condition_operator field to allow overriding StringEquals with StringLike ([#610](https://github.com/chanzuckerberg/cztack/issues/610)) ([86bab99](https://github.com/chanzuckerberg/cztack/commit/86bab991235dba69305970153f88d650dfa65802))
+
+## [0.75.0](https://github.com/chanzuckerberg/cztack/compare/v0.74.0...v0.75.0) (2024-07-24)
+
+
+### Features
+
+* add jwt_condition option to oidc variable for IAM trust relationships ([#608](https://github.com/chanzuckerberg/cztack/issues/608)) ([5320504](https://github.com/chanzuckerberg/cztack/commit/5320504677c9fda2447b61229ed1831b24f36074))
+
+## [0.74.0](https://github.com/chanzuckerberg/cztack/compare/v0.73.3...v0.74.0) (2024-07-18)
+
+
+### Features
+
+* CDI-3149 - Allow use of existing catalogs and schemas for databricks volumes ([#606](https://github.com/chanzuckerberg/cztack/issues/606)) ([7735218](https://github.com/chanzuckerberg/cztack/commit/7735218680130e8fc94d00f392c9537f45b6c1e8))
+
 ## [0.73.3](https://github.com/chanzuckerberg/cztack/compare/v0.73.2...v0.73.3) (2024-07-03)
 
 
