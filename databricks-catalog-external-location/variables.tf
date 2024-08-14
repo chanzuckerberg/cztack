@@ -12,3 +12,17 @@ variable "databricks_external_id" {
   description = "ID of the databricks external location"
   type        = string
 }
+
+variable "catalogs" {
+  description = "List of catalogs to create with their cooresponding attributes"
+  type = list(
+    object({
+      name                    = string
+      isolation_mode          = string
+      owner                   = string
+      all_privileges_groups   = list(string)
+      read_privileges_groups  = list(string)
+      write_privileges_groups = list(string)
+  }))
+  default = []
+}
