@@ -4,6 +4,10 @@ data "aws_caller_identity" "current" {
 
 locals {
   path = "/databricks/"
+  name = "${var.tags.project}-${var.tags.env}"
+  external_location_name = "external-${local.name}"
+  bucket_name = "${local.name}-dbx-catalog-bucket"
+  iam_role_name = "external_location_dbx_${var.tags.env}_aws_role"
 }
 
 ## Bucket and policy
@@ -44,7 +48,7 @@ data "aws_iam_policy_document" "catalog_bucket_access" {
 
 module "catalog_bucket" {
   source        = "github.com/chanzuckerberg/cztack//aws-s3-private-bucket?ref=v0.60.1"
-  bucket_name   = var.bucket_name
+  bucket_name   = local.bucket_name
   bucket_policy = data.aws_iam_policy_document.catalog_bucket_access.json
   project       = var.tags.project
   env           = var.tags.env
@@ -71,7 +75,7 @@ data "aws_iam_policy_document" "databricks_external_location_assume_role" {
 }
 
 resource "aws_iam_role" "databricks_external_location_iam_role" {
-  name               = var.databricks_external_location_iam_role
+  name               = local.iam_role_name
   path               = local.path
   assume_role_policy = data.aws_iam_policy_document.databricks_external_location_assume_role.json
 }
@@ -129,7 +133,7 @@ resource "databricks_grants" "databricks_credential_grants" {
   ]
   storage_credential = databricks_storage_credential.external.id
   dynamic "grant" {
-    for_each = toset(var.group_names)
+    for_each = toset(var.all_privileges_groups)
     content {
       principal = grant.value
       privileges = [
@@ -143,8 +147,8 @@ resource "databricks_external_location" "external_locations" {
   depends_on = [
     resource.databricks_storage_credential.external
   ]
-  name            = "external-${var.name_prefix}"
-  url             = "s3://${var.bucket_name}"
+  name            = local.external_location_name
+  url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.external.id
   comment         = "Managed by Terraform"
 }
@@ -152,7 +156,7 @@ resource "databricks_external_location" "external_locations" {
 resource "databricks_grants" "databricks_external_location_grants" {
   external_location = databricks_external_location.external_locations.id
   dynamic "grant" {
-    for_each = toset(var.group_names)
+    for_each = toset(var.all_privileges_groups)
     content {
       principal = grant.value
       privileges = [

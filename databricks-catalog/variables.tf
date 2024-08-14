@@ -17,7 +17,6 @@ variable "isolation_mode" {
 variable "catalog_owner" {
   description = "Owner of the catalog"
   type        = string
-  default     = ""
 }
 
 variable "all_privileges_groups" {
