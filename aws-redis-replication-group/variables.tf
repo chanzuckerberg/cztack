@@ -1,22 +1,7 @@
-variable "project" {
-  type        = string
-  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
-}
 
-variable "env" {
-  type        = string
-  description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
-}
-
-variable "service" {
-  type        = string
-  description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
-  default     = "redis"
-}
-
-variable "owner" {
-  type        = string
-  description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
+variable "tags" {
+  type        = object({ project : string, env : string, service : string, owner : string, managedBy : string })
+  description = "Tags to apply"
 }
 
 variable "subnets" {
@@ -24,7 +9,7 @@ variable "subnets" {
   description = "List of subnets to which this EC instance should be attached. They should probably be private."
 }
 
-variable "availability_zones" {
+variable "preferred_cache_cluster_azs" {
   type        = list(string)
   description = "Availability zone in which this instance should run."
   default     = null
@@ -86,17 +71,22 @@ variable "number_cache_clusters" {
 
 variable "at_rest_encryption_enabled" {
   type        = bool
-  description = "Whether to enable encryption at rest. Default: false."
-  default     = false
+  description = "Whether to enable encryption at rest. Default: true."
+  default     = true
 }
 
 variable "transit_encryption_enabled" {
   type        = bool
-  description = "Whether to enable encryption in transit. Default: false."
-  default     = false
+  description = "Whether to enable encryption in transit. Default: true."
+  default     = true
 }
 
-variable "replication_group_description" {
+variable "description" {
   type        = string
   description = "A user-created description for the replication group."
+}
+
+variable "auth_token" {
+  type        = string
+  description = "The password used to access a password protected server."
 }
