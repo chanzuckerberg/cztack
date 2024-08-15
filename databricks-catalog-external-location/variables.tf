@@ -18,11 +18,10 @@ variable "catalogs" {
   type = list(
     object({
       name                    = string
-      isolation_mode          = string
+      isolation_mode          = optional(string, "ISOLATED")
       owner                   = string
       all_privileges_groups   = list(string)
-      read_privileges_groups  = list(string)
-      write_privileges_groups = list(string)
+      read_privileges_groups  = optional(list(string), [])
+      write_privileges_groups = optional(list(string), [])
   }))
-  default = []
 }
