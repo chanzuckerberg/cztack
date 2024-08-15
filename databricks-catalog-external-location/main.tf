@@ -123,7 +123,8 @@ resource "databricks_storage_credential" "external" {
   aws_iam_role {
     role_arn = aws_iam_role.databricks_external_location_iam_role.arn
   }
-  comment = "Managed by Terraform"
+  isolation_mode = "ISOLATION_MODE_ISOLATED"
+  comment        = "Managed by Terraform"
 }
 
 ## user/group Grants to an external storage
@@ -150,6 +151,7 @@ resource "databricks_external_location" "external_locations" {
   name            = local.external_location_name
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.external.id
+  isolation_mode  = "ISOLATION_MODE_ISOLATED"
   comment         = "Managed by Terraform"
 }
 
