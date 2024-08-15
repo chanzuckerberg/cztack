@@ -9,7 +9,7 @@ resource "databricks_catalog" "catalog" {
 
 resource "databricks_grants" "grants" {
   for_each = { for idx, catalog in var.catalogs : catalog.name => catalog }
-  catalog  = databricks_catalog.catalog.name
+  catalog  = each.value.name
 
   depends_on = [
     databricks_catalog.catalog
