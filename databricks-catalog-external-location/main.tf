@@ -5,7 +5,6 @@ data "aws_caller_identity" "current" {
 locals {
   path                   = "/databricks/"
   name                   = "${var.tags.project}-${var.tags.env}"
-  external_location_name = "external-${local.name}"
   bucket_name            = "${local.name}-dbx-catalog-bucket"
   iam_role_name          = "external_location_dbx_${var.tags.env}_aws_role"
 }
