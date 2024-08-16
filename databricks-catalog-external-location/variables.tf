@@ -13,6 +13,12 @@ variable "databricks_external_id" {
   type        = string
 }
 
+variable "external_location_name" {
+  description = "Name of the external location"
+  type        = string
+  default     = local.external_location_name
+}
+
 variable "catalogs" {
   description = "List of catalogs to create with their cooresponding attributes"
   type = list(

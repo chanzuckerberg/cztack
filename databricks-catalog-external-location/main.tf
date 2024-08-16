@@ -148,7 +148,7 @@ resource "databricks_external_location" "external_locations" {
   depends_on = [
     resource.databricks_storage_credential.external
   ]
-  name            = local.external_location_name
+  name            = var.external_location_name
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.external.id
   isolation_mode  = "ISOLATION_MODE_ISOLATED"

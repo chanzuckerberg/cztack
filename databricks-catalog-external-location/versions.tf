@@ -4,7 +4,7 @@ terraform {
       source = "hashicorp/aws"
     }
     databricks = {
-      source = "databricks/databricks"
+      source  = "databricks/databricks"
       version = "1.49.1"
     }
   }
