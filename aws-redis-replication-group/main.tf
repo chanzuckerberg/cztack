@@ -1,5 +1,5 @@
 locals {
-  name = "${var.project}-${var.env}-${var.service}"
+  name = "${var.tags.project}-${var.tags.env}-${var.tags.service}"
 }
 
 module "sg" {
