@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.77.0](https://github.com/chanzuckerberg/cztack/compare/v0.76.0...v0.77.0) (2024-08-19)
+
+
+### Features
+
+* Create databricks catalog ext loc modules ([#614](https://github.com/chanzuckerberg/cztack/issues/614)) ([8b47a1c](https://github.com/chanzuckerberg/cztack/commit/8b47a1cfc0708bbd7ef3a877821e8af3bb10ffcc))
+
+
+### Bug Fixes
+
+* Make github-app-token one version ([#615](https://github.com/chanzuckerberg/cztack/issues/615)) ([ce5296c](https://github.com/chanzuckerberg/cztack/commit/ce5296c51ca5d56948451c563824eb34f78999a7))
+
 ## [0.76.0](https://github.com/chanzuckerberg/cztack/compare/v0.75.0...v0.76.0) (2024-07-24)
 
 
