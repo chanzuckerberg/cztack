@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.77.1](https://github.com/chanzuckerberg/cztack/compare/v0.77.0...v0.77.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* missing dollar sign for text interpolation ([#617](https://github.com/chanzuckerberg/cztack/issues/617)) ([2f27356](https://github.com/chanzuckerberg/cztack/commit/2f273564251a98a8c8418ef39dd9656a737f0ee4))
+
 ## [0.77.0](https://github.com/chanzuckerberg/cztack/compare/v0.76.0...v0.77.0) (2024-08-19)
 
 
