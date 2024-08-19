@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.77.2](https://github.com/chanzuckerberg/cztack/compare/v0.77.1...v0.77.2) (2024-08-19)
+
+
+### Bug Fixes
+
+* Allow dbx storage credentials roles to be self-assuming ([#620](https://github.com/chanzuckerberg/cztack/issues/620)) ([47970b3](https://github.com/chanzuckerberg/cztack/commit/47970b36a5220c917605ad1a872acf7f2596f554))
+
 ## [0.77.1](https://github.com/chanzuckerberg/cztack/compare/v0.77.0...v0.77.1) (2024-08-19)
 
 
