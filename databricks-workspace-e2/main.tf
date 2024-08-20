@@ -31,7 +31,14 @@ resource "databricks_mws_storage_configurations" "databricks" {
   bucket_name                = module.databricks_bucket.id
 }
 
+# Delay the creation of the databricks_mws_credentials resource to allow the IAM role to be created first
+resource time_sleep {
+  depends_on = [aws_iam_role.databricks]
+  create_duration = "30s"
+}
+
 resource "databricks_mws_credentials" "databricks" {
+  depends_on = [sleep]
   account_id       = var.databricks_external_id
   credentials_name = local.name
   role_arn         = aws_iam_role.databricks.arn
