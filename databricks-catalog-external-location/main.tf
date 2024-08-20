@@ -71,6 +71,21 @@ data "aws_iam_policy_document" "databricks_external_location_assume_role" {
       values = [var.databricks_external_id]
     }
   }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+    }
+
+    actions = ["sts:AssumeRole"]
+    condition {
+      test     = "ArnEquals"
+      variable = "aws:PrincipalArn"
+
+      values = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"]
+    }
+  }
 }
 
 resource "aws_iam_role" "databricks_external_location_iam_role" {
@@ -96,6 +111,17 @@ data "aws_iam_policy_document" "databricks_external_location_bucket_access" {
     resources = [
       "${module.catalog_bucket.arn}/*",
       module.catalog_bucket.arn,
+    ]
+  }
+
+  statement {
+    sid    = "databricksAssumeRole"
+    effect = "Allow"
+    actions = [
+      "sts:AssumeRole"
+    ]
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
     ]
   }
 }
