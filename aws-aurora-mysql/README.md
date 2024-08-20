@@ -30,6 +30,13 @@ module "db" {
 }
 ```
 
+### Upgrading the engine
+To upgrade the engine, you may have trouble applying the changes directly through Terraform. General steps:
+1. Go to the RDS page and find the instance type--upgrade it to db.t3.medium or higher
+2. Go to the cluster settings and upgrade the db engine, which should upgrade the parameter group too.
+3. Make the corresponding changes in Terraform so the state matches
+
+
 <!-- START -->
 ## Requirements
 
