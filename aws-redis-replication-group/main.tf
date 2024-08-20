@@ -5,7 +5,7 @@ locals {
 module "sg" {
   source      = "terraform-aws-modules/security-group/aws"
   version     = "5.1.2"
-  name        = local.name
+  name        = var.resource_name != "" ? var.resource_name : local.name
   description = "Allow traffic to Redis."
   vpc_id      = var.vpc_id
   tags        = var.tags
@@ -29,7 +29,7 @@ resource "aws_elasticache_subnet_group" "default" {
 }
 
 resource "aws_elasticache_parameter_group" "redis_parameter_group" {
-  name   = local.name
+  name   = var.resource_name != "" ? var.resource_name : local.name
   family = var.parameter_group_family
 
   dynamic "parameter" {
