@@ -28,6 +28,21 @@ resource "aws_elasticache_subnet_group" "default" {
   subnet_ids = var.subnets
 }
 
+resource "aws_elasticache_parameter_group" "redis_parameter_group" {
+  name   = local.name
+  family = var.parameter_group_family
+
+  dynamic "parameter" {
+    for_each = var.parameters
+
+    content {
+      name  = parameter.value.name
+      value = parameter.value.value
+    }
+  }
+}
+
+
 resource "aws_elasticache_replication_group" "default" {
   replication_group_id        = var.resource_name != "" ? var.resource_name : local.name
   description                 = var.description
@@ -36,7 +51,7 @@ resource "aws_elasticache_replication_group" "default" {
   node_type                   = var.instance_type
   port                        = var.port
   num_cache_clusters          = var.number_cache_clusters
-  parameter_group_name        = var.parameter_group_name
+  parameter_group_name        = aws_elasticache_parameter_group.redis_parameter_group.name
   subnet_group_name           = aws_elasticache_subnet_group.default.name
   security_group_ids          = [module.sg.security_group_id]
   apply_immediately           = var.apply_immediately

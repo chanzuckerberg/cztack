@@ -41,7 +41,7 @@ variable "parameter_group_name" {
 variable "engine_version" {
   type        = string
   description = "The version of Redis to run. See [supported versions](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html)"
-  default     = "5.0.5"
+  default     = "7.0"
 }
 
 variable "apply_immediately" {
@@ -65,8 +65,8 @@ variable "vpc_id" {
 
 variable "number_cache_clusters" {
   type        = number
-  description = "Number of cache clusters. Default 1."
-  default     = 1
+  description = "Number of cache clusters. Default 2 because if Multi-AZ is enabled, the number of nodes needs to be exactly 2 to avoid sharding across different nodes."
+  default     = 2
 }
 
 variable "at_rest_encryption_enabled" {
@@ -89,4 +89,16 @@ variable "description" {
 variable "auth_token" {
   type        = string
   description = "The password used to access a password protected server."
+}
+
+variable "parameter_group_family" {
+  type        = string
+  description = "The cluster's parameter group family. Redis options [here](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html)"
+  default     = "redis7"
+}
+
+variable "parameters" {
+  type        = list(map(any))
+  default     = []
+  description = "Redis database parameters in name-value pairs. Use the parameter group family to find parameters [here](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html)"
 }
