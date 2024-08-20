@@ -1,22 +1,7 @@
-variable "project" {
-  type        = string
-  description = "Project for tagging and naming. See [doc](../README.md#consistent-tagging)"
-}
 
-variable "env" {
-  type        = string
-  description = "Env for tagging and naming. See [doc](../README.md#consistent-tagging)."
-}
-
-variable "service" {
-  type        = string
-  description = "Service for tagging and naming. See [doc](../README.md#consistent-tagging)"
-  default     = "redis"
-}
-
-variable "owner" {
-  type        = string
-  description = "Owner for tagging and naming. See [doc](../README.md#consistent-tagging)."
+variable "tags" {
+  type        = object({ project : string, env : string, service : string, owner : string, managedBy : string })
+  description = "Tags to apply"
 }
 
 variable "subnets" {
@@ -24,7 +9,7 @@ variable "subnets" {
   description = "List of subnets to which this EC instance should be attached. They should probably be private."
 }
 
-variable "availability_zones" {
+variable "preferred_cache_cluster_azs" {
   type        = list(string)
   description = "Availability zone in which this instance should run."
   default     = null
@@ -56,7 +41,7 @@ variable "parameter_group_name" {
 variable "engine_version" {
   type        = string
   description = "The version of Redis to run. See [supported versions](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html)"
-  default     = "5.0.5"
+  default     = "7.0"
 }
 
 variable "apply_immediately" {
@@ -80,23 +65,35 @@ variable "vpc_id" {
 
 variable "number_cache_clusters" {
   type        = number
-  description = "Number of cache clusters. Default 1."
-  default     = 1
+  description = "Number of cache clusters. Default 2 because if Multi-AZ is enabled, the number of nodes needs to be exactly 2 to avoid sharding across different nodes."
+  default     = 2
 }
 
 variable "at_rest_encryption_enabled" {
   type        = bool
-  description = "Whether to enable encryption at rest. Default: false."
-  default     = false
+  description = "Whether to enable encryption at rest. Default: true."
+  default     = true
 }
 
 variable "transit_encryption_enabled" {
   type        = bool
-  description = "Whether to enable encryption in transit. Default: false."
-  default     = false
+  description = "Whether to enable encryption in transit. Default: true."
+  default     = true
 }
 
-variable "replication_group_description" {
+variable "description" {
   type        = string
   description = "A user-created description for the replication group."
+}
+
+variable "parameter_group_family" {
+  type        = string
+  description = "The cluster's parameter group family. Redis options [here](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html)"
+  default     = "redis7"
+}
+
+variable "parameters" {
+  type        = list(map(any))
+  default     = []
+  description = "Redis database parameters in name-value pairs. Use the parameter group family to find parameters [here](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html)"
 }

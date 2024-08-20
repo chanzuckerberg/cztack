@@ -33,19 +33,22 @@ func TestAWSRedisReplicationGroup(t *testing.T) {
 
 			return tftest.Options(tftest.DefaultRegion,
 				map[string]interface{}{
-					"project": project,
-					"env":     env,
-					"service": service,
-					"owner":   owner,
+					"tags": map[string]string{
+						"project":   project,
+						"env":       env,
+						"service":   service,
+						"owner":     owner,
+						"managedBy": "terraform",
+					},
 
-					"availability_zones":         []string{az},
-					"subnets":                    privateSubnets,
-					"ingress_security_group_ids": []string{sg},
-					"vpc_id":                     vpc,
+					"preferred_cache_cluster_azs": []string{az},
+					"subnets":                     privateSubnets,
+					"ingress_security_group_ids":  []string{sg},
+					"vpc_id":                      vpc,
 
-					"replication_group_description": replication_group_description,
-					"transit_encryption_enabled":    transit_encryption_enabled,
-					"at_rest_encryption_enabled":    at_rest_encryption_enabled,
+					"description":                replication_group_description,
+					"transit_encryption_enabled": transit_encryption_enabled,
+					"at_rest_encryption_enabled": at_rest_encryption_enabled,
 				},
 			)
 		},
