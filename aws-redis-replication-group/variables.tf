@@ -86,11 +86,6 @@ variable "description" {
   description = "A user-created description for the replication group."
 }
 
-variable "auth_token" {
-  type        = string
-  description = "The password used to access a password protected server."
-}
-
 variable "parameter_group_family" {
   type        = string
   description = "The cluster's parameter group family. Redis options [here](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html)"
