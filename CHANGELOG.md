@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.78.0](https://github.com/chanzuckerberg/cztack/compare/v0.77.2...v0.78.0) (2024-08-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update redis replication group to use new aws provider (#613)
+
+### Features
+
+* update redis replication group to use new aws provider ([#613](https://github.com/chanzuckerberg/cztack/issues/613)) ([eca5fd0](https://github.com/chanzuckerberg/cztack/commit/eca5fd0d6b1f670346d6eb07a5839ad00086f654))
+
+
+### Bug Fixes
+
+* mysql cluster defaults ([#619](https://github.com/chanzuckerberg/cztack/issues/619)) ([7891044](https://github.com/chanzuckerberg/cztack/commit/789104478df33f5908a0833a9fc45b5d17832b79))
+
 ## [0.77.2](https://github.com/chanzuckerberg/cztack/compare/v0.77.1...v0.77.2) (2024-08-19)
 
 
