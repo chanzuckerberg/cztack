@@ -32,13 +32,13 @@ resource "databricks_mws_storage_configurations" "databricks" {
 }
 
 # Delay the creation of the databricks_mws_credentials resource to allow the IAM role to be created first
-resource time_sleep {
+resource time_sleep_role {
   depends_on = [aws_iam_role.databricks]
   create_duration = "30s"
 }
 
 resource "databricks_mws_credentials" "databricks" {
-  depends_on = [sleep]
+  depends_on = [time_sleep_role]
   account_id       = var.databricks_external_id
   credentials_name = local.name
   role_arn         = aws_iam_role.databricks.arn
@@ -58,7 +58,15 @@ data "databricks_service_principal" "tfe_service_principal" {
   application_id = var.tfe_service_principal_id
 }
 
+# Delay the creation of the databricks_mws_credentials resource to allow the IAM role to be created first
+resource time_sleep_sp {
+  depends_on = [databricks_mws_workspaces.databricks]
+  create_duration = "30s"
+}
+
 resource "databricks_mws_permission_assignment" "tfe_service_principal_admin" {
+  depends_on = [time_sleep_sp]
+
   workspace_id = databricks_mws_workspaces.databricks.workspace_id
   principal_id = data.databricks_service_principal.tfe_service_principal.id
   permissions  = ["ADMIN"]
