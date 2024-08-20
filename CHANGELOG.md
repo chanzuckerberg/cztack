@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.77.2](https://github.com/chanzuckerberg/cztack/compare/v0.77.1...v0.77.2) (2024-08-19)
+
+
+### Bug Fixes
+
+* Allow dbx storage credentials roles to be self-assuming ([#620](https://github.com/chanzuckerberg/cztack/issues/620)) ([47970b3](https://github.com/chanzuckerberg/cztack/commit/47970b36a5220c917605ad1a872acf7f2596f554))
+
+## [0.77.1](https://github.com/chanzuckerberg/cztack/compare/v0.77.0...v0.77.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* missing dollar sign for text interpolation ([#617](https://github.com/chanzuckerberg/cztack/issues/617)) ([2f27356](https://github.com/chanzuckerberg/cztack/commit/2f273564251a98a8c8418ef39dd9656a737f0ee4))
+
+## [0.77.0](https://github.com/chanzuckerberg/cztack/compare/v0.76.0...v0.77.0) (2024-08-19)
+
+
+### Features
+
+* Create databricks catalog ext loc modules ([#614](https://github.com/chanzuckerberg/cztack/issues/614)) ([8b47a1c](https://github.com/chanzuckerberg/cztack/commit/8b47a1cfc0708bbd7ef3a877821e8af3bb10ffcc))
+
+
+### Bug Fixes
+
+* Make github-app-token one version ([#615](https://github.com/chanzuckerberg/cztack/issues/615)) ([ce5296c](https://github.com/chanzuckerberg/cztack/commit/ce5296c51ca5d56948451c563824eb34f78999a7))
+
 ## [0.76.0](https://github.com/chanzuckerberg/cztack/compare/v0.75.0...v0.76.0) (2024-07-24)
 
 

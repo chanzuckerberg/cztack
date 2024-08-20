@@ -38,7 +38,7 @@ variable "ingress_security_groups" {
 variable "instance_class" {
   type        = string
   description = "See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Performance.html)"
-  default     = "db.t2.small"
+  default     = "db.t3.medium"
 }
 
 variable "instance_count" {
@@ -172,7 +172,7 @@ variable "db_deletion_protection" {
 variable "engine_version" {
   type        = string
   description = "The version of the engine to be used for aurora-mysql."
-  default     = "5.7"
+  default     = "8.0"
 }
 
 variable "ca_cert_identifier" {
