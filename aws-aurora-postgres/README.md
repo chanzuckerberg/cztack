@@ -17,7 +17,7 @@ module "db" {
   database_name         = "..."
   database_subnet_group = "..."
   database_password     = "..."
-  
+
   vpc_id              = "..."
   ingress_cidr_blocks = "...
 
@@ -66,6 +66,7 @@ No resources.
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of Postgres to use. This should be a *prefix* if auto version upgrades are enabled. (Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version) | `string` | `"10"` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | <a name="input_iam_database_authentication_enabled"></a> [iam\_database\_authentication\_enabled](#input\_iam\_database\_authentication\_enabled) | n/a | `string` | `false` | no |
+| <a name="iam_roles"></a> [iam\_roles](#input\_iam\roles) | A list of IAM roles to associate with the RDS cluster. | `list(string)` | `[]` | no |
 | <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | `list(string)` | `[]` | no |
 | <a name="input_ingress_security_groups"></a> [ingress\_security\_groups](#input\_ingress\_security\_groups) | A list of security groups that should be allowed to communicate with this Aurora cluster. | `list(string)` | `[]` | no |
 | <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html) | `string` | `"db.r4.large"` | no |
