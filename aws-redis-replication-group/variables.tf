@@ -97,3 +97,9 @@ variable "parameters" {
   default     = []
   description = "Redis database parameters in name-value pairs. Use the parameter group family to find parameters [here](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html)"
 }
+
+variable "auth_token"{
+  type        = string
+  description = "Token for accessing the elasticache cluster"
+  sensitive   = true
+}
