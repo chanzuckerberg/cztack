@@ -120,7 +120,7 @@ variable "iam_database_authentication_enabled" {
 
 variable "iam_roles" {
     type        = list(string)
-    description = "A list of IAM roles to associate with the RDS cluster."
+    description = "A list of ARNs for the IAM roles to associate to the RDS Cluster."
     default     = []
 }
 
