@@ -42,11 +42,6 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
   }
 }
 
-resource "random_password" "redis_db" {
-  length  = 32
-  special = false
-}
-
 resource "aws_elasticache_replication_group" "default" {
   replication_group_id        = var.resource_name != "" ? var.resource_name : local.name
   description                 = var.description
@@ -62,6 +57,6 @@ resource "aws_elasticache_replication_group" "default" {
   at_rest_encryption_enabled  = var.at_rest_encryption_enabled
   transit_encryption_enabled  = var.transit_encryption_enabled
   preferred_cache_cluster_azs = var.preferred_cache_cluster_azs
-  auth_token                  = random_password.redis_db.result
+  auth_token                  = var.auth_token
   tags                        = var.tags
 }
