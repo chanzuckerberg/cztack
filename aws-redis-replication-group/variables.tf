@@ -99,7 +99,7 @@ variable "parameters" {
 }
 
 variable "auth_token"{
-  type = string
+  type        = string
   description = "Token for accessing the elasticache cluster"
-  sensitive = true
+  sensitive   = true
 }
