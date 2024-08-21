@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.78.2](https://github.com/chanzuckerberg/cztack/compare/v0.78.1...v0.78.2) (2024-08-21)
+
+
+### Bug Fixes
+
+* update READMEs for aws-aurora, aws-aurora-postgres, aws-aurora-mysql ([#626](https://github.com/chanzuckerberg/cztack/issues/626)) ([7eed8f0](https://github.com/chanzuckerberg/cztack/commit/7eed8f0559b7f4bffc26d95929a2479f049a0239))
+
 ## [0.78.1](https://github.com/chanzuckerberg/cztack/compare/v0.78.0...v0.78.1) (2024-08-21)
 
 
