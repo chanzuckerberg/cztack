@@ -164,6 +164,12 @@ variable "iam_database_authentication_enabled" {
   default = false
 }
 
+variable "iam_roles" {
+    type        = list(string)
+    description = "A list of IAM roles to associate with the RDS cluster."
+    default     = []
+}
+
 variable "db_deletion_protection" {
   type    = string
   default = false
