@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.78.1](https://github.com/chanzuckerberg/cztack/compare/v0.78.0...v0.78.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* move the auth token generation out of the redis module for integration reasons ([#623](https://github.com/chanzuckerberg/cztack/issues/623)) ([a3c33dd](https://github.com/chanzuckerberg/cztack/commit/a3c33dd419d4a7934883fc20fd4c4124ba356824))
+
 ## [0.78.0](https://github.com/chanzuckerberg/cztack/compare/v0.77.2...v0.78.0) (2024-08-20)
 
 
