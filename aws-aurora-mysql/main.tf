@@ -16,6 +16,7 @@ module "aurora" {
   db_deletion_protection              = var.db_deletion_protection
   rds_cluster_parameters              = var.rds_cluster_parameters
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
+  iam_roles                           = var.iam_roles
   performance_insights_enabled        = var.performance_insights_enabled
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery"]
   ca_cert_identifier                  = var.ca_cert_identifier

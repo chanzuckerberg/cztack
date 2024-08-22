@@ -1,5 +1,42 @@
 # Changelog
 
+## [0.78.2](https://github.com/chanzuckerberg/cztack/compare/v0.78.1...v0.78.2) (2024-08-21)
+
+
+### Bug Fixes
+
+* update READMEs for aws-aurora, aws-aurora-postgres, aws-aurora-mysql ([#626](https://github.com/chanzuckerberg/cztack/issues/626)) ([7eed8f0](https://github.com/chanzuckerberg/cztack/commit/7eed8f0559b7f4bffc26d95929a2479f049a0239))
+
+## [0.78.1](https://github.com/chanzuckerberg/cztack/compare/v0.78.0...v0.78.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* move the auth token generation out of the redis module for integration reasons ([#623](https://github.com/chanzuckerberg/cztack/issues/623)) ([a3c33dd](https://github.com/chanzuckerberg/cztack/commit/a3c33dd419d4a7934883fc20fd4c4124ba356824))
+
+## [0.78.0](https://github.com/chanzuckerberg/cztack/compare/v0.77.2...v0.78.0) (2024-08-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* update redis replication group to use new aws provider (#613)
+
+### Features
+
+* update redis replication group to use new aws provider ([#613](https://github.com/chanzuckerberg/cztack/issues/613)) ([eca5fd0](https://github.com/chanzuckerberg/cztack/commit/eca5fd0d6b1f670346d6eb07a5839ad00086f654))
+
+
+### Bug Fixes
+
+* mysql cluster defaults ([#619](https://github.com/chanzuckerberg/cztack/issues/619)) ([7891044](https://github.com/chanzuckerberg/cztack/commit/789104478df33f5908a0833a9fc45b5d17832b79))
+
+## [0.77.2](https://github.com/chanzuckerberg/cztack/compare/v0.77.1...v0.77.2) (2024-08-19)
+
+
+### Bug Fixes
+
+* Allow dbx storage credentials roles to be self-assuming ([#620](https://github.com/chanzuckerberg/cztack/issues/620)) ([47970b3](https://github.com/chanzuckerberg/cztack/commit/47970b36a5220c917605ad1a872acf7f2596f554))
+
 ## [0.77.1](https://github.com/chanzuckerberg/cztack/compare/v0.77.0...v0.77.1) (2024-08-19)
 
 

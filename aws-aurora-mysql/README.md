@@ -30,6 +30,13 @@ module "db" {
 }
 ```
 
+### Upgrading the engine
+To upgrade the engine, you may have trouble applying the changes directly through Terraform. General steps:
+1. Go to the RDS page and find the instance type--upgrade it to db.t3.medium or higher
+2. Go to the cluster settings and upgrade the db engine, which should upgrade the parameter group too.
+3. Make the corresponding changes in Terraform so the state matches
+
+
 <!-- START -->
 ## Requirements
 
@@ -68,6 +75,7 @@ No resources.
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of the engine to be used for aurora-mysql. | `string` | `"5.7"` | no |
 | <a name="input_env"></a> [env](#input\_env) | Env for tagging and naming. See [doc](../README.md#consistent-tagging). | `string` | n/a | yes |
 | <a name="input_iam_database_authentication_enabled"></a> [iam\_database\_authentication\_enabled](#input\_iam\_database\_authentication\_enabled) | n/a | `string` | `false` | no |
+| <a name="iam_roles"></a> [iam\_roles](#input\_iam\roles) | A list of ARNs for the IAM roles to associate to the RDS Cluster. | `list(string)` | `[]` | no |
 | <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | A list of CIDR blocks that should be allowed to communicate with this Aurora cluster. | `list(string)` | `[]` | no |
 | <a name="input_ingress_security_groups"></a> [ingress\_security\_groups](#input\_ingress\_security\_groups) | A list of security groups that should be allowed to communicate with this Aurora cluster. | `list(string)` | `[]` | no |
 | <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | See valid instance types [here](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Performance.html) | `string` | `"db.t2.small"` | no |

@@ -125,6 +125,12 @@ variable "iam_database_authentication_enabled" {
   default = false
 }
 
+variable "iam_roles" {
+    type        = list(string)
+    description = "A list of ARNs for the IAM roles to associate to the RDS Cluster."
+    default     = []
+}
+
 variable "ca_cert_identifier" {
   type        = string
   description = "Identifier for the certificate authority."
