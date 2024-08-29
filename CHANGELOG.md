@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.80.0](https://github.com/chanzuckerberg/cztack/compare/v0.79.0...v0.80.0) (2024-08-27)
+
+
+### Features
+
+* Catalog prefix option ([#631](https://github.com/chanzuckerberg/cztack/issues/631)) ([44b9e6b](https://github.com/chanzuckerberg/cztack/commit/44b9e6b239d32c3698b001ec9aba4027db32de9c))
+
+## [0.79.0](https://github.com/chanzuckerberg/cztack/compare/v0.78.2...v0.79.0) (2024-08-22)
+
+
+### Features
+
+* trigger release and fix docs ([#629](https://github.com/chanzuckerberg/cztack/issues/629)) ([730a6d5](https://github.com/chanzuckerberg/cztack/commit/730a6d50328c566f93b3161599d7fa4390d5a494))
+
 ## [0.78.2](https://github.com/chanzuckerberg/cztack/compare/v0.78.1...v0.78.2) (2024-08-21)
 
 
