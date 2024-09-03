@@ -33,6 +33,7 @@ resource "databricks_grants" "grants" {
         "USE_CATALOG",
         "USE_SCHEMA",
         "SELECT",
+        "BROWSE",
       ]
     }
   }
@@ -48,6 +49,7 @@ resource "databricks_grants" "grants" {
         "CREATE_TABLE",
         "CREATE_SCHEMA",
         "MODIFY",
+        "BROWSE",
       ]
     }
   }

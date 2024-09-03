@@ -13,7 +13,7 @@ resource "databricks_grant" "catalog_r" {
 
   catalog    = local.catalog_name
   principal  = each.value
-  privileges = ["USE_CATALOG", "USE_SCHEMA", "SELECT"]
+  privileges = ["USE_CATALOG", "USE_SCHEMA", "SELECT", "BROWSE"]
 }
 
 resource "databricks_grant" "catalog_rw" {
@@ -36,6 +36,7 @@ resource "databricks_grant" "catalog_rw" {
     "READ_VOLUME",
     "WRITE_VOLUME",
     "USE_SCHEMA",
+    "BROWSE",
   ]
 }
 
