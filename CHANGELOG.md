@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.82.0](https://github.com/chanzuckerberg/cztack/compare/v0.81.0...v0.82.0) (2024-09-03)
+
+
+### Features
+
+* create service account role module for EKS ([#636](https://github.com/chanzuckerberg/cztack/issues/636)) ([d6ecfd3](https://github.com/chanzuckerberg/cztack/commit/d6ecfd31589857f1abfd819a059a7a61e19fddeb))
+
 ## [0.81.0](https://github.com/chanzuckerberg/cztack/compare/v0.80.0...v0.81.0) (2024-09-03)
 
 
