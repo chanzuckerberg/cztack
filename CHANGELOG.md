@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.81.0](https://github.com/chanzuckerberg/cztack/compare/v0.80.0...v0.81.0) (2024-09-03)
+
+
+### Features
+
+* Add BROWSE to catalog perms ([#634](https://github.com/chanzuckerberg/cztack/issues/634)) ([041c3e9](https://github.com/chanzuckerberg/cztack/commit/041c3e96cd28d482bf8678f62f406ed183767e7d))
+
 ## [0.80.0](https://github.com/chanzuckerberg/cztack/compare/v0.79.0...v0.80.0) (2024-08-27)
 
 
