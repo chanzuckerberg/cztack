@@ -36,17 +36,6 @@ variable "max_session_duration" {
   default     = 3600
 }
 
-variable "aws_iam_policies_json" {
-  type        = list(string)
-  description = "The additional AWS IAM policies to give to the pod. Backward compatibility with aws_iam_policy_json"
-  default     = []
-}
-
-variable "aws_iam_policy_json" {
-  type        = string
-  description = "The AWS IAM policy to give to the pod."
-}
-
 variable "service_account_name" {
   type        = string
   default     = ""
