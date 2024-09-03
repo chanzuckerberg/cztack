@@ -1,8 +1,7 @@
 locals {
   iam_path             = coalesce(var.iam_path, "/${var.eks_cluster.cluster_id}/")
   oidc_provider_url    = replace(var.eks_cluster.cluster_oidc_issuer_url, "https://", "")
-  service_account_name = coalesce(var.service_account_name, "*")
-  name                 = coalesce(var.service_account_name, "${var.tags.service}-${var.tags.env}-${var.tags.project}")
+  name                 = "${var.tags.service}-${var.tags.env}-${var.tags.project}"
 }
 
 data "aws_iam_policy_document" "assume-role" {
@@ -15,7 +14,7 @@ data "aws_iam_policy_document" "assume-role" {
     condition {
       test     = "StringLike"
       variable = "${local.oidc_provider_url}:sub"
-      values   = ["system:serviceaccount:${var.k8s_namespace}:${local.service_account_name}"]
+      values   = ["system:serviceaccount:${var.k8s_namespace}:${var.service_account_name}"]
     }
 
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -31,13 +30,3 @@ resource "aws_iam_role" "role" {
   permissions_boundary = var.role_permissions_boundary_arn
 }
 
-resource "kubernetes_service_account" "service_account" {
-  metadata {
-    name      = local.name
-    namespace = var.k8s_namespace
-    annotations = {
-      "eks.amazonaws.com/role-arn" = aws_iam_role.role.arn
-    }
-  }
-  automount_service_account_token = true
-}

@@ -38,7 +38,7 @@ variable "max_session_duration" {
 
 variable "service_account_name" {
   type        = string
-  default     = ""
+  default     = "*"
   description = "Specified Service Account Name in case you want to customize it"
 }
 
