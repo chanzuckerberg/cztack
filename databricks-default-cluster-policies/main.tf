@@ -68,7 +68,7 @@ module "legacy_shared_compute_cluster_policy" {
     "data_security_mode" : {
       "type" : "fixed",
       "hidden" : true,
-      "value" : "USER_ISOLATION"
+      "value" : "NONE"
     }
   })
 }
@@ -241,23 +241,9 @@ module "large_gpu_large_clusters_cluster_policy" {
       "value" : 120
     },
     "node_type_id" : {
-      "type" : "allowlist",
-      "values" : [
-        "g4dn.xlarge",
-        "g4dn.2xlarge",
-        "g4dn.4xlarge",
-        "g4dn.8xlarge",
-        "g4dn.12xlarge",
-        "g4dn.16xlarge",
-        "g5.xlarge",
-        "g5.2xlarge",
-        "g5.4xlarge",
-        "g5.8xlarge",
-        "g5.12xlarge",
-        "g5.16xlarge",
-        "g5.24xlarge",
-        "g5.48xlarge"
-      ],
+      "type" : "regex",
+      "pattern" : "([gp]+[4-6]+[dn]*\\.[0-48]{0,1}xlarge)",
+      "hidden" : false
       "defaultValue" : "g4dn.xlarge"
     },
   })
@@ -277,23 +263,9 @@ module "large_gpu_personal_cluster_policy" {
       "value" : 120
     }
     "node_type_id" : {
-      "type" : "allowlist",
-      "values" : [
-        "g4dn.xlarge",
-        "g4dn.2xlarge",
-        "g4dn.4xlarge",
-        "g4dn.8xlarge",
-        "g4dn.12xlarge",
-        "g4dn.16xlarge",
-        "g5.xlarge",
-        "g5.8xlarge",
-        "g5.4xlarge",
-        "g5.48xlarge",
-        "g5.2xlarge",
-        "g5.24xlarge",
-        "g5.16xlarge",
-        "g5.12xlarge"
-      ],
+      "type" : "regex",
+      "pattern" : "([gp]+[4-6]+[dn]*\\.[0-48]{0,1}xlarge)",
+      "hidden" : false
       "defaultValue" : "g4dn.xlarge"
     },
   })
@@ -325,23 +297,9 @@ module "large_gpu_small_clusters_cluster_policy" {
       "value" : 120
     },
     "node_type_id" : {
-      "type" : "allowlist",
-      "values" : [
-        "g4dn.xlarge",
-        "g4dn.2xlarge",
-        "g4dn.4xlarge",
-        "g4dn.8xlarge",
-        "g4dn.12xlarge",
-        "g4dn.16xlarge",
-        "g5.xlarge",
-        "g5.8xlarge",
-        "g5.4xlarge",
-        "g5.48xlarge",
-        "g5.2xlarge",
-        "g5.24xlarge",
-        "g5.16xlarge",
-        "g5.12xlarge"
-      ],
+      "type" : "regex",
+      "pattern" : "([gp]+[4-6]+[dn]*\\.[0-48]{0,1}xlarge)",
+      "hidden" : false
       "defaultValue" : "g4dn.xlarge"
     },
   })
@@ -354,7 +312,7 @@ module "small_clusters" {
   databricks_host         = var.databricks_host
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Small Clusters"
-  policy_family_id        = local.default_policy_family_ids["personal_compute"]
+
   policy_overrides = merge(local.logging_override, {
     "autoscale.max_workers" : {
       "type" : "range",
