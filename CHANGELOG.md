@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.82.1](https://github.com/chanzuckerberg/cztack/compare/v0.82.0...v0.82.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* resolve small clusters compute policy and legacy shared policy ([#639](https://github.com/chanzuckerberg/cztack/issues/639)) ([cc3643b](https://github.com/chanzuckerberg/cztack/commit/cc3643be94e4d4dbd753bfc3a58cea751a6d436a))
+
 ## [0.82.0](https://github.com/chanzuckerberg/cztack/compare/v0.81.0...v0.82.0) (2024-09-03)
 
 
