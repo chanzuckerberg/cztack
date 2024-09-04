@@ -68,7 +68,7 @@ module "legacy_shared_compute_cluster_policy" {
     "data_security_mode" : {
       "type" : "fixed",
       "hidden" : true,
-      "value" : "USER_ISOLATION"
+      "value" : "NONE"
     }
   })
 }
@@ -354,7 +354,7 @@ module "small_clusters" {
   databricks_host         = var.databricks_host
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Small Clusters"
-  policy_family_id        = local.default_policy_family_ids["personal_compute"]
+  policy_family_id        = local.default_policy_family_ids["power_user_compute"]
   policy_overrides = merge(local.logging_override, {
     "autoscale.max_workers" : {
       "type" : "range",
