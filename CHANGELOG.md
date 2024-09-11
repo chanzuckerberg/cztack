@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.82.2](https://github.com/chanzuckerberg/cztack/compare/v0.82.1...v0.82.2) (2024-09-11)
+
+
+### Bug Fixes
+
+* Add depends_on to databricks_catalog ([#641](https://github.com/chanzuckerberg/cztack/issues/641)) ([dac9a81](https://github.com/chanzuckerberg/cztack/commit/dac9a81a3df791d43b4a64ae1a1d8e02c1c2b86c))
+
 ## [0.82.1](https://github.com/chanzuckerberg/cztack/compare/v0.82.0...v0.82.1) (2024-09-04)
 
 
