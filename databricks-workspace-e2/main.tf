@@ -49,6 +49,10 @@ resource "databricks_mws_workspaces" "databricks" {
 
 data "databricks_service_principal" "tfe_service_principal" {
   application_id = var.tfe_service_principal_id
+
+  depends_on = [
+    databricks_mws_workspaces.databricks
+  ]
 }
 
 resource "databricks_mws_permission_assignment" "tfe_service_principal_admin" {
