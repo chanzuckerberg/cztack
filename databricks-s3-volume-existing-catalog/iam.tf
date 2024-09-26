@@ -53,7 +53,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:PutLifecycleConfiguration"
     ]
     resources = [
-      "arn:aws:s3:::${var.volume_bucket}"
+      for bucket in var.volume_buckets : "arn:aws:s3:::${bucket}"
     ]
   }
   statement {
@@ -65,7 +65,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      "arn:aws:s3:::${var.volume_bucket}/*"
+      for bucket in var.volume_buckets : "arn:aws:s3:::${bucket}/*"
     ]
   }
   statement {

@@ -13,15 +13,9 @@ variable "schema_name" {
   type        = string
 }
 
-variable "volume_name" {
-  description = "Name of the Databricks volume to create"
-  type        = string
-  default     = var.volume_bucket
-}
-
-variable "volume_bucket" {
+variable "volume_buckets" {
   description = "Name of the S3 bucket to use for the volume"
-  type        = string
+  type        = list(string)
 }
 
 variable "volume_r_grant_principals" {

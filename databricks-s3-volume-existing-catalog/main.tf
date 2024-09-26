@@ -19,11 +19,11 @@ resource "databricks_storage_credential" "volume" {
     resource.aws_iam_role_policy_attachment.volume_dbx_unity_aws_access
   ]
 
-  name = local.dbx_volume_storage_credential_name
+  name = "${var.catalog_name}-volumes-role"
   aws_iam_role {
     role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
   }
-  comment = "Managed by Terraform - access for the volume named ${var.volume_name} in ${var.catalog_name}"
+  comment = "Managed by Terraform - access for the volumes in ${var.catalog_name}"
 }
 
 # upstream external location sometimes takes a moment to register
@@ -34,23 +34,24 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "volume" {
+  for_each = var.volume_buckets
   depends_on      = [time_sleep.wait_30_seconds]
 
-  name            = var.volume_name
-  url             = "s3://${var.volume_bucket}"
+  name            = "${each.key}-external-location"
+  url             = "s3://${each.key}"
   credential_name = databricks_storage_credential.volume.name
-  comment         = "Managed by Terraform - access for the volume named ${var.volume_name} in ${var.catalog_name}"
+  comment         = "Managed by Terraform - access for the volume named ${each.key} in ${var.catalog_name}"
 }
 
 # New volume
-
 resource "databricks_volume" "volume" {
+  for_each         = var.volume_buckets
   depends_on       = [databricks_external_location.volume]
-  name             = var.volume_name
+  name             = each.key
   catalog_name     = var.catalog_name
   schema_name      = var.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${var.volume_bucket}/${var.schema_name}"
+  storage_location = "s3://${each.key}/${var.schema_name}"
   owner            = var.catalog_owner
-  comment         = "Managed by Terraform - access for the volume named ${var.volume_name} in ${var.catalog_name}"
+  comment         = "Managed by Terraform - access for the volume named ${each.key} in ${var.catalog_name}"
 }
