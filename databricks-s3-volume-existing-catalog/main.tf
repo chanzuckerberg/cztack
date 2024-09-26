@@ -2,6 +2,7 @@
 
 // https://docs.databricks.com/administration-guide/multiworkspace/iam-role.html#language-Your%C2%A0VPC,%C2%A0custom
 locals {
+  dbx_volume_aws_role_name = "${var.catalog_name}-volumes-role"
   path                   = "/databricks/"
   databricks_aws_account = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
 }
