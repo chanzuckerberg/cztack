@@ -16,7 +16,7 @@ locals {
 resource "databricks_storage_credential" "volume" {
   depends_on = [
     resource.aws_iam_role.volume_dbx_unity_aws_role,
-    resource.aws_iam_role_policy_attachment.volume_bucket_dbx_unity_access
+    resource.aws_iam_role_policy_attachment.volume_dbx_unity_aws_access
   ]
 
   name = local.dbx_volume_storage_credential_name
