@@ -1,9 +1,3 @@
-
-variable "workspace_name" {
-  description = "Name of the Databricks catalog to add the volume to"
-  type        = string
-}
-
 variable "catalog_name" {
   description = "Name of the Databricks existing catalog to add the volume to"
   type        = string
