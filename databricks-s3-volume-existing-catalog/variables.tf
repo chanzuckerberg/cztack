@@ -16,6 +16,7 @@ variable "schema_name" {
 variable "volume_name" {
   description = "Name of the Databricks volume to create"
   type        = string
+  default     = var.volume_bucket
 }
 
 variable "volume_bucket" {

@@ -46,7 +46,7 @@ resource "databricks_external_location" "volume" {
 
 resource "databricks_volume" "volume" {
   depends_on       = [databricks_external_location.volume]
-  name             = "${var.volume_name}"
+  name             = var.volume_name
   catalog_name     = var.catalog_name
   schema_name      = var.schema_name
   volume_type      = "EXTERNAL"
