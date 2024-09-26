@@ -86,5 +86,5 @@ resource "aws_iam_policy" "volume_dbx_unity_access_policy" {
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
   policy_arn = aws_iam_policy.volume_dbx_unity_access_policy.arn
-  role       = aws_iam_role.dbx_volume_aws_role_name.name
+  role       = aws_iam_role.volume_dbx_unity_aws_role.name
 }
