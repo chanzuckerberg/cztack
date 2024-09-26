@@ -37,7 +37,7 @@ resource "databricks_external_location" "volume" {
   depends_on      = [time_sleep.wait_30_seconds]
 
   name            = var.volume_name
-  url             = "s3://${var.volume_name}"
+  url             = "s3://${var.volume_bucket}"
   credential_name = databricks_storage_credential.volume.name
   comment         = "Managed by Terraform - access for the volume named ${var.volume_name} in ${var.catalog_name}"
 }
@@ -50,7 +50,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = var.catalog_name
   schema_name      = var.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${var.volume_name}/${var.schema_name}"
+  storage_location = "s3://${var.volume_bucket}/${var.schema_name}"
   owner            = var.catalog_owner
   comment         = "Managed by Terraform - access for the volume named ${var.volume_name} in ${var.catalog_name}"
 }

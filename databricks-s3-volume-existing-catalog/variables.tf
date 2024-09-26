@@ -24,6 +24,11 @@ variable "volume_name" {
   type        = string
 }
 
+variable "volume_bucket" {
+  description = "Name of the S3 bucket to use for the volume"
+  type        = string
+}
+
 variable "volume_r_grant_principals" {
   description = "(Optional) Databricks groups to grant read-only permissions to on the volume"
   type        = list(string)
