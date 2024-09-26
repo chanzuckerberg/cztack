@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
-  count = var.create_catalog ? 1 : 0
+  count = (var.create_catalog || var.volume_bucket) ? 1 : 0
 
   statement {
     principals {
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
-  count = var.create_catalog ? 1 : 0
+  count = (var.create_catalog || var.volume_bucket) ? 1 : 0
 
   name               = local.unity_aws_role_name
   path               = local.path
@@ -63,6 +63,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
     ]
     resources = [
       "arn:aws:s3:::${local.bucket_name}",
+      var.volume_bucket != null ? "arn:aws:s3:::${var.volume_bucket}" : null,
     ]
   }
   statement {
@@ -75,6 +76,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
     ]
     resources = [
       "arn:aws:s3:::${local.bucket_name}/*",
+      var.volume_bucket != null ? "arn:aws:s3:::${var.volume_bucket}/*" : null
     ]
   }
   statement {
@@ -90,7 +92,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  count = var.create_catalog ? 1 : 0
+  count = var.create_catalog? 1 : 0
 
   policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[0].json
 }
