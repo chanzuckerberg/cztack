@@ -18,6 +18,11 @@ locals {
 ### NOTE: names need to be unique across an account, not just a workspace
 ### NOTE: 
 
+data "databricks_storage_credential" "catalog" {
+  count = var.create_catalog ? 0 : 1
+  name = local.catalog_name
+}
+
 resource "databricks_storage_credential" "volume" {
   count = var.create_catalog ? 1 : 0
 
@@ -36,7 +41,7 @@ resource "databricks_storage_credential" "volume" {
 
 # upstream external location sometimes takes a moment to register
 resource "time_sleep" "wait_30_seconds" {
-  depends_on = [databricks_storage_credential.volume[0]]
+  depends_on = [var.create_catalog ? databricks_storage_credential.volume[0].name : data.databricks_storage_credential.catalog.name]
 
   create_duration = "30s"
 }
@@ -47,7 +52,7 @@ resource "databricks_external_location" "volume" {
 
   name            = local.catalog_name
   url             = "s3://${local.bucket_name}"
-  credential_name = databricks_storage_credential.volume[0].name
+  credential_name = var.create_catalog ? databricks_storage_credential.volume[0].name : data.databricks_storage_credential.catalog.name
   comment         = "Managed by Terraform - access for ${var.catalog_name}"
 }
 
