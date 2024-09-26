@@ -34,21 +34,21 @@ resource "databricks_external_location" "volume" {
   for_each = var.volume_buckets
   depends_on      = [time_sleep.wait_30_seconds]
 
-  name            = "${each.key}-external-location"
-  url             = "s3://${each.key}"
+  name            = "${each.value.bucket_name}-external-location"
+  url             = "s3://${each.value.bucket_name}"
   credential_name = databricks_storage_credential.volume.name
-  comment         = "Managed by Terraform - access for the volume named ${each.key} in ${var.catalog_name}"
+  comment         = "Managed by Terraform - access for the volume named ${each.value.bucket_name} in ${var.catalog_name}"
 }
 
 # New volume
 resource "databricks_volume" "volume" {
   for_each         = var.volume_buckets
   depends_on       = [databricks_external_location.volume]
-  name             = each.key
+  name             = each.value.bucket_name
   catalog_name     = var.catalog_name
   schema_name      = var.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${each.key}/${var.schema_name}"
+  storage_location = "s3://${each.value.bucket_name}/${var.schema_name}"
   owner            = var.catalog_owner
-  comment         = "Managed by Terraform - access for the volume named ${each.key} in ${var.catalog_name}"
+  comment         = "Managed by Terraform - access for the volume named ${each.value.bucket_name} in ${var.catalog_name}"
 }
