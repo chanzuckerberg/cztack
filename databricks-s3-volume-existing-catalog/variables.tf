@@ -14,11 +14,6 @@ variable "catalog_owner" {
   type        = string
 }
 
-variable "metastore_id" {
-  description = "ID of metastore to create catalog in"
-  type        = string
-}
-
 variable "schema_name" {
   description = "Name of the Databricks schema to add the volume to"
   type        = string
