@@ -14,20 +14,12 @@ variable "schema_name" {
 }
 
 variable "volume_buckets" {
-  description = "Name of the S3 bucket to use for the volume"
-  type        = list(string)
-}
-
-variable "volume_r_grant_principals" {
-  description = "(Optional) Databricks groups to grant read-only permissions to on the volume"
-  type        = list(string)
-  default     = []
-}
-
-variable "volume_rw_grant_principals" {
-  description = "(Optional) Databricks groups to grant read/write permissions to on the volume"
-  type        = list(string)
-  default     = []
+  description = "List of external buckets and their corresponding groups that should have r/rw access to it"
+  type        = list(object({
+    bucket_name : string
+    volume_r_grant_principals: optional(list(string), [])
+    volume_rw_grant_principals: optional(list(string), [])
+  }))
 }
 
 variable "tags" {
