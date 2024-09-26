@@ -42,7 +42,7 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "volume" {
-  count = (var.create_catalog || var.volume_bucket) ? 1 : 0
+  count = (var.create_catalog || var.volume_bucket != null) ? 1 : 0
   depends_on      = [time_sleep.wait_30_seconds]
 
   name            = local.catalog_name
