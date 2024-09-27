@@ -48,7 +48,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = var.catalog_name
   schema_name      = var.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${each.value.bucket_name}${each.value.bucket_prefix}"
+  storage_location = "s3://${each.value.bucket_name}${each.value.bucket_prefix != "" ? "/${each.value.bucket_prefix}" : ""}"
   owner            = var.catalog_owner
   comment         = "Managed by Terraform - access for the volume named ${each.value.bucket_name} in ${var.catalog_name}"
 }
