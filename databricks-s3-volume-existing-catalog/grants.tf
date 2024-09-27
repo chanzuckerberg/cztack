@@ -25,6 +25,8 @@ resource "databricks_grant" "volume_r" {
   volume     = each.value.bucket_name
   principal  = each.value.principal
   privileges = ["READ_VOLUME"]
+
+  depends_on = [databricks_volume.volume]
 }
 
 # Read/write access grants
@@ -34,4 +36,6 @@ resource "databricks_grant" "volume_rw" {
   volume     = each.value.bucket_name
   principal  = each.value.principal
   privileges = ["READ_VOLUME", "WRITE_VOLUME"]
+
+  depends_on = [databricks_volume.volume]
 }
