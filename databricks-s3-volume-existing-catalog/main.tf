@@ -16,7 +16,7 @@ resource "databricks_storage_credential" "volume" {
     resource.aws_iam_role_policy_attachment.volume_dbx_unity_aws_access
   ]
 
-  name = "${var.catalog_name}-volumes-role"
+  name = "${var.catalog_name}-volumes-storage-credential"
   aws_iam_role {
     role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
   }
