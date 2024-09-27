@@ -44,7 +44,7 @@ resource "databricks_external_location" "volume" {
 resource "databricks_volume" "volume" {
   for_each         = { for bucket in var.volume_buckets : bucket.bucket_name => bucket }
   depends_on       = [databricks_external_location.volume]
-  name             = each.value.bucket_name
+  name             = replace(each.value.bucket_name, "-", "_")
   catalog_name     = var.catalog_name
   schema_name      = var.schema_name
   volume_type      = "EXTERNAL"
