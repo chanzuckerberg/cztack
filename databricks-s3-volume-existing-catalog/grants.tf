@@ -22,7 +22,7 @@ locals {
 resource "databricks_grant" "volume_r" {
   for_each = { for idx, grant in local.volume_r_grants : "${grant.bucket_name}-${grant.principal}" => grant }
 
-  volume     = databricks_volume.volume[each.value.volume_name].id
+  volume     = databricks_volume.volume[each.value.bucket_name].id
   principal  = each.value.principal
   privileges = ["READ_VOLUME"]
 
@@ -33,7 +33,7 @@ resource "databricks_grant" "volume_r" {
 resource "databricks_grant" "volume_rw" {
   for_each = { for idx, grant in local.volume_rw_grants : "${grant.bucket_name}-${grant.principal}" => grant }
 
-  volume     = databricks_volume.volume[each.value.volume_name].id
+  volume     = databricks_volume.volume[each.value.bucket_name].id
   principal  = each.value.principal
   privileges = ["READ_VOLUME", "WRITE_VOLUME"]
 
