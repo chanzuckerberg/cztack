@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.83.0](https://github.com/chanzuckerberg/cztack/compare/v0.82.2...v0.83.0) (2024-10-01)
+
+
+### Features
+
+* New module volumes on existing catalogs ([#645](https://github.com/chanzuckerberg/cztack/issues/645)) ([ae60a9c](https://github.com/chanzuckerberg/cztack/commit/ae60a9c7ecd9ad4d136eba7881a0ab25aa5a279d))
+
 ## [0.82.2](https://github.com/chanzuckerberg/cztack/compare/v0.82.1...v0.82.2) (2024-09-11)
 
 
