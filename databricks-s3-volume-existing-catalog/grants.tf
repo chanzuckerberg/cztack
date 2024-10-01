@@ -20,7 +20,7 @@ locals {
 
 # Read-only access grants
 resource "databricks_grant" "volume_r" {
-  for_each = length(local.volume_r_grants) > 0 ? { for grant in local.volume_r_grants : grant.volume_name => grant } : {}
+  for_each = { for grant in local.volume_r_grants : grant.volume_name => grant if length(local.volume_r_grants) > 0 }
 
   volume     = databricks_volume.volume[each.value.volume_name].id
   principal  = each.value.principal
@@ -31,7 +31,7 @@ resource "databricks_grant" "volume_r" {
 
 # Read/write access grants
 resource "databricks_grant" "volume_rw" {
-  for_each = length(local.volume_r_grants) > 0 ? { for grant in local.volume_rw_grants : grant.volume_name => grant } : {}
+  for_each = { for grant in local.volume_rw_grants : grant.volume_name => grant if length(local.volume_rw_grants) > 0 }
 
   volume     = databricks_volume.volume[each.value.volume_name].id
   principal  = each.value.principal
