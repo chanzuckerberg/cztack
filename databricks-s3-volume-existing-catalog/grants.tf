@@ -1,17 +1,17 @@
 locals {
   volume_r_grants = flatten([
-    for bucket in var.volume_buckets : [
-      for principal in bucket.volume_r_grant_principals : {
-        bucket_name = bucket.bucket_name
+    for volume in var.volume_buckets : [
+      for principal in volume.volume_r_grant_principals : {
+        volume_name = volume.volume_name
         principal   = principal
       }
     ]
   ])
 
   volume_rw_grants = flatten([
-    for bucket in var.volume_buckets : [
-      for principal in bucket.volume_rw_grant_principals : {
-        bucket_name = bucket.bucket_name
+    for volume in var.volume_buckets : [
+      for principal in volume.volume_rw_grant_principals : {
+        bucket_name = volume.volume_name
         principal   = principal
       }
     ]
@@ -20,7 +20,7 @@ locals {
 
 # Read-only access grants
 resource "databricks_grant" "volume_r" {
-  for_each = { for grant in local.volume_r_grants : grant.volume_name => grant if length(local.volume_r_grants) > 0 }
+  for_each = { for grant in local.volume_r_grants : grant.volume_name => grant }
 
   volume     = databricks_volume.volume[each.value.volume_name].id
   principal  = each.value.principal
@@ -31,7 +31,7 @@ resource "databricks_grant" "volume_r" {
 
 # Read/write access grants
 resource "databricks_grant" "volume_rw" {
-  for_each = { for grant in local.volume_rw_grants : grant.volume_name => grant if length(local.volume_rw_grants) > 0 }
+  for_each = { for grant in local.volume_rw_grants : grant.volume_name => grant }
 
   volume     = databricks_volume.volume[each.value.volume_name].id
   principal  = each.value.principal
