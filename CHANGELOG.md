@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.83.1](https://github.com/chanzuckerberg/cztack/compare/v0.83.0...v0.83.1) (2024-10-01)
+
+
+### Bug Fixes
+
+* Conditionally create grant ([#647](https://github.com/chanzuckerberg/cztack/issues/647)) ([f068b40](https://github.com/chanzuckerberg/cztack/commit/f068b40c646e521acc84818f4f9014e629ab3925))
+
 ## [0.83.0](https://github.com/chanzuckerberg/cztack/compare/v0.82.2...v0.83.0) (2024-10-01)
 
 
