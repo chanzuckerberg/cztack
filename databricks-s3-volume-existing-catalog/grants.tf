@@ -20,7 +20,7 @@ locals {
 
 # Read-only access grants
 resource "databricks_grant" "volume_r" {
-  for_each = { for grant in local.volume_rw_grants : grant.volume_name => grant }
+  for_each = { for grant in local.volume_r_grants : grant.volume_name => grant }
 
   volume     = databricks_volume.volume[each.value.volume_name].id
   principal  = each.value.principal
