@@ -21,7 +21,7 @@ resource "databricks_grant" "catalog_rw" {
   for_each  = toset(local.catalog_rw_grant_principals)
 
   catalog   = local.catalog_name
-  principal = "Data Scientists"
+  principal = each.value
   privileges = [
     "APPLY_TAG",
     "CREATE_CONNECTION",
