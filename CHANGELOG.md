@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.83.2](https://github.com/chanzuckerberg/cztack/compare/v0.83.1...v0.83.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* fix volume catalog grant principal ([#649](https://github.com/chanzuckerberg/cztack/issues/649)) ([5447969](https://github.com/chanzuckerberg/cztack/commit/5447969fd35416d36e4932a7d99dbc5889521c9e))
+
 ## [0.83.1](https://github.com/chanzuckerberg/cztack/compare/v0.83.0...v0.83.1) (2024-10-01)
 
 
