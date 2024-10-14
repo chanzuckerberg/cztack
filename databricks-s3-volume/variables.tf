@@ -112,6 +112,12 @@ variable "additional_rw_bucket_grant_arns" {
   default     = []
 }
 
+variable "override_policy_documents" {
+  description = "(Optional) Additional bucket policies to apply to the bucket. These should already be in JSON"
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "REQUIRED: Tags to include for this environment."
   type = object({
