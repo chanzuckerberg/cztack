@@ -118,6 +118,18 @@ variable "override_policy_documents" {
   default     = []
 }
 
+variable "create_storage_credential" {
+  description = "(Optional) Flag to create a new Databricks storage credential or look for an existing one for the given bucket_name"
+  type        = bool
+  default     = true
+}
+
+variable "override_bucket_name" {
+  description = "(Optional) Name of the S3 bucket to create or use for Databricks volume, overriding the default"
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "REQUIRED: Tags to include for this environment."
   type = object({
