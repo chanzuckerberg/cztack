@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.83.3](https://github.com/chanzuckerberg/cztack/compare/v0.83.2...v0.83.3) (2024-10-14)
+
+
+### Bug Fixes
+
+* refine and downscope UC grants for volume ([#651](https://github.com/chanzuckerberg/cztack/issues/651)) ([617cb81](https://github.com/chanzuckerberg/cztack/commit/617cb81a68ede7cc051f181786c1f0d9d4a522d2))
+
 ## [0.83.2](https://github.com/chanzuckerberg/cztack/compare/v0.83.1...v0.83.2) (2024-10-11)
 
 
