@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.83.4](https://github.com/chanzuckerberg/cztack/compare/v0.83.3...v0.83.4) (2024-10-14)
+
+
+### Bug Fixes
+
+* remove read_file permissions from dbx volume ([#653](https://github.com/chanzuckerberg/cztack/issues/653)) ([3ef78e5](https://github.com/chanzuckerberg/cztack/commit/3ef78e52e596457d4dadaed7067b9e3aba3374cb))
+
 ## [0.83.3](https://github.com/chanzuckerberg/cztack/compare/v0.83.2...v0.83.3) (2024-10-14)
 
 
