@@ -70,8 +70,6 @@ resource "databricks_grant" "volume_rw" {
   principal  = each.value
   privileges = [
     "READ_VOLUME",
-    "READ_FILES",
     "WRITE_VOLUME",
-    "WRITE_FILES",
   ]
 }
