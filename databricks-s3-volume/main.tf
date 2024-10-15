@@ -61,7 +61,7 @@ resource "databricks_catalog" "volume" {
   depends_on   = [databricks_external_location.volume[0]]
   name         = local.catalog_name
   metastore_id = var.metastore_id
-  owner        = var.catalog_owner
+  owner        = var.owner
   storage_root = "s3://${local.bucket_name}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
@@ -77,7 +77,7 @@ resource "databricks_schema" "volume" {
   catalog_name = local.catalog_name
   name         = local.schema_name
   comment      = "This schema is managed by Terraform - ${var.volume_comment}"
-  owner        = var.catalog_owner
+  owner        = var.owner
   properties   = var.volume_schema_properties
 }
 
@@ -88,6 +88,6 @@ resource "databricks_volume" "volume" {
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
   storage_location = "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
-  owner            = var.catalog_owner
+  owner            = var.owner
   comment          = "This volume is managed by Terraform - ${var.volume_comment}"
 }
