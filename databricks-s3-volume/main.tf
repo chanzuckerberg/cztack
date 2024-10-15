@@ -12,7 +12,7 @@ locals {
   path                   = "/databricks/"
   databricks_aws_account = "414351767826"                                                                      # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
   bucket_name            = var.volume_bucket != null ? var.volume_bucket : (
-    var.override_bucket_name != null ? var. override_bucket_name : replace(var.catalog_name, "_", "-") # buckets don't work with underscores
+    var.override_bucket_name != null ? var.override_bucket_name : replace(var.catalog_name, "_", "-") # buckets don't work with underscores
   )
 }
 
