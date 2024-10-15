@@ -9,8 +9,8 @@ variable "catalog_name" {
   type        = string
 }
 
-variable "catalog_owner" {
-  description = "User or group name of the catalog owner"
+variable "owner" {
+  description = "User or group name of the owner - will be applied to the catalog, schema, and volume, if applicable"
   type        = string
 }
 
