@@ -32,5 +32,8 @@ variable "personal_compute_pool_ids" {
 
 variable "policy_map" {
   description = "Map of policy names to groups"
-  type = list(map(string))
+  type = list(object({
+    name   = string
+    groups = list(string)
+  }))
 }
