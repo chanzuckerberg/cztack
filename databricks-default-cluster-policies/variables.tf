@@ -29,3 +29,8 @@ variable "personal_compute_pool_ids" {
   type = list(string)
   default = []
 }
+
+variable "policy_map" {
+  description = "Map of policy names to groups"
+  type = list(map(list(string)))
+}
