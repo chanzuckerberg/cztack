@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.84.0](https://github.com/chanzuckerberg/cztack/compare/v0.83.5...v0.84.0) (2024-10-16)
+
+
+### Features
+
+* Add groups to databricks-default-cluster-policies module ([#655](https://github.com/chanzuckerberg/cztack/issues/655)) ([94ed7e5](https://github.com/chanzuckerberg/cztack/commit/94ed7e51176c5b5f5d6168768ef98beebb2a58e4))
+
 ## [0.83.5](https://github.com/chanzuckerberg/cztack/compare/v0.83.4...v0.83.5) (2024-10-16)
 
 
