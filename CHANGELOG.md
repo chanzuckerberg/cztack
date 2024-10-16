@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.83.5](https://github.com/chanzuckerberg/cztack/compare/v0.83.4...v0.83.5) (2024-10-16)
+
+
+### Bug Fixes
+
+* CDI-3452 - Fix references for dbx volumes to allow creating volume on existing catalog and bucket ([#656](https://github.com/chanzuckerberg/cztack/issues/656)) ([09ad9c8](https://github.com/chanzuckerberg/cztack/commit/09ad9c8b09146e261b552c8fa1cee308a1e47ce3))
+
 ## [0.83.4](https://github.com/chanzuckerberg/cztack/compare/v0.83.3...v0.83.4) (2024-10-14)
 
 
