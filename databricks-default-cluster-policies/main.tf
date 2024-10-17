@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {
   provider = aws
 }
 locals {
-  power_user_group_name = "Power Users"
+  power_user_group_name = var.power_user_group_name
   all_users_group_name  = "users"
 
   default_policy_family_ids = {
@@ -48,12 +48,6 @@ locals {
       "values" : var.personal_compute_pool_ids
     }
   } : {}
-}
-
-resource "databricks_group" "power_user_group" {
-  display_name               = local.power_user_group_name
-  allow_cluster_create       = true
-  allow_instance_pool_create = false
 }
 
 ## Modified Databricks defaults
