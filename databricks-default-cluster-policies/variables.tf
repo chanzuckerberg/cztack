@@ -34,3 +34,9 @@ variable "policy_map" {
   description = "Map of policy names to groups"
   type = list(map(list(string)))
 }
+
+variable "power_user_group_name" {
+  description = "Name of the power user group"
+  type = string
+  default = "Power Users"
+}
