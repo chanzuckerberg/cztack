@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.84.1](https://github.com/chanzuckerberg/cztack/compare/v0.84.0...v0.84.1) (2024-10-17)
+
+
+### Bug Fixes
+
+* Move out power user group ([#659](https://github.com/chanzuckerberg/cztack/issues/659)) ([68a0747](https://github.com/chanzuckerberg/cztack/commit/68a0747eb2ec472a1bd14ea96d85a310144b76f0))
+
 ## [0.84.0](https://github.com/chanzuckerberg/cztack/compare/v0.83.5...v0.84.0) (2024-10-16)
 
 
