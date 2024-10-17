@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {
   provider = aws
 }
 locals {
-  power_user_group_name = "Power Users"
+  power_user_group_name = var.power_user_group_name
   all_users_group_name  = "users"
 
   default_policy_family_ids = {
@@ -48,12 +48,6 @@ locals {
       "values" : var.personal_compute_pool_ids
     }
   } : {}
-}
-
-resource "databricks_group" "power_user_group" {
-  display_name               = local.power_user_group_name
-  allow_cluster_create       = true
-  allow_instance_pool_create = false
 }
 
 ## Modified Databricks defaults
@@ -312,7 +306,7 @@ module "small_clusters" {
   databricks_host         = var.databricks_host
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Small Clusters"
-
+  policy_family_id        = local.default_policy_family_ids["power_user_compute"]
   policy_overrides = merge(local.logging_override, {
     "autoscale.max_workers" : {
       "type" : "range",

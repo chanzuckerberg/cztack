@@ -5,6 +5,8 @@ locals {
 data "aws_iam_policy_document" "databricks-s3" {
   count = var.volume_bucket != null ? 0 : 1
 
+  override_policy_documents = var.override_policy_documents
+
   # standard UC access
   statement {
     sid    = "dbxBucketAccess"

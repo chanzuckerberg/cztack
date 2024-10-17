@@ -1,5 +1,75 @@
 # Changelog
 
+## [0.84.1](https://github.com/chanzuckerberg/cztack/compare/v0.84.0...v0.84.1) (2024-10-17)
+
+
+### Bug Fixes
+
+* Move out power user group ([#659](https://github.com/chanzuckerberg/cztack/issues/659)) ([68a0747](https://github.com/chanzuckerberg/cztack/commit/68a0747eb2ec472a1bd14ea96d85a310144b76f0))
+
+## [0.84.0](https://github.com/chanzuckerberg/cztack/compare/v0.83.5...v0.84.0) (2024-10-16)
+
+
+### Features
+
+* Add groups to databricks-default-cluster-policies module ([#655](https://github.com/chanzuckerberg/cztack/issues/655)) ([94ed7e5](https://github.com/chanzuckerberg/cztack/commit/94ed7e51176c5b5f5d6168768ef98beebb2a58e4))
+
+## [0.83.5](https://github.com/chanzuckerberg/cztack/compare/v0.83.4...v0.83.5) (2024-10-16)
+
+
+### Bug Fixes
+
+* CDI-3452 - Fix references for dbx volumes to allow creating volume on existing catalog and bucket ([#656](https://github.com/chanzuckerberg/cztack/issues/656)) ([09ad9c8](https://github.com/chanzuckerberg/cztack/commit/09ad9c8b09146e261b552c8fa1cee308a1e47ce3))
+
+## [0.83.4](https://github.com/chanzuckerberg/cztack/compare/v0.83.3...v0.83.4) (2024-10-14)
+
+
+### Bug Fixes
+
+* remove read_file permissions from dbx volume ([#653](https://github.com/chanzuckerberg/cztack/issues/653)) ([3ef78e5](https://github.com/chanzuckerberg/cztack/commit/3ef78e52e596457d4dadaed7067b9e3aba3374cb))
+
+## [0.83.3](https://github.com/chanzuckerberg/cztack/compare/v0.83.2...v0.83.3) (2024-10-14)
+
+
+### Bug Fixes
+
+* refine and downscope UC grants for volume ([#651](https://github.com/chanzuckerberg/cztack/issues/651)) ([617cb81](https://github.com/chanzuckerberg/cztack/commit/617cb81a68ede7cc051f181786c1f0d9d4a522d2))
+
+## [0.83.2](https://github.com/chanzuckerberg/cztack/compare/v0.83.1...v0.83.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* fix volume catalog grant principal ([#649](https://github.com/chanzuckerberg/cztack/issues/649)) ([5447969](https://github.com/chanzuckerberg/cztack/commit/5447969fd35416d36e4932a7d99dbc5889521c9e))
+
+## [0.83.1](https://github.com/chanzuckerberg/cztack/compare/v0.83.0...v0.83.1) (2024-10-01)
+
+
+### Bug Fixes
+
+* Conditionally create grant ([#647](https://github.com/chanzuckerberg/cztack/issues/647)) ([f068b40](https://github.com/chanzuckerberg/cztack/commit/f068b40c646e521acc84818f4f9014e629ab3925))
+
+## [0.83.0](https://github.com/chanzuckerberg/cztack/compare/v0.82.2...v0.83.0) (2024-10-01)
+
+
+### Features
+
+* New module volumes on existing catalogs ([#645](https://github.com/chanzuckerberg/cztack/issues/645)) ([ae60a9c](https://github.com/chanzuckerberg/cztack/commit/ae60a9c7ecd9ad4d136eba7881a0ab25aa5a279d))
+
+## [0.82.2](https://github.com/chanzuckerberg/cztack/compare/v0.82.1...v0.82.2) (2024-09-11)
+
+
+### Bug Fixes
+
+* Add depends_on to databricks_catalog ([#641](https://github.com/chanzuckerberg/cztack/issues/641)) ([dac9a81](https://github.com/chanzuckerberg/cztack/commit/dac9a81a3df791d43b4a64ae1a1d8e02c1c2b86c))
+
+## [0.82.1](https://github.com/chanzuckerberg/cztack/compare/v0.82.0...v0.82.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* resolve small clusters compute policy and legacy shared policy ([#639](https://github.com/chanzuckerberg/cztack/issues/639)) ([cc3643b](https://github.com/chanzuckerberg/cztack/commit/cc3643be94e4d4dbd753bfc3a58cea751a6d436a))
+
 ## [0.82.0](https://github.com/chanzuckerberg/cztack/compare/v0.81.0...v0.82.0) (2024-09-03)
 
 

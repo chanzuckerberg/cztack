@@ -13,7 +13,7 @@ resource "databricks_grant" "catalog_r" {
 
   catalog    = local.catalog_name
   principal  = each.value
-  privileges = ["USE_CATALOG", "USE_SCHEMA", "SELECT", "BROWSE"]
+  privileges = ["USE_CATALOG", "BROWSE"]
 }
 
 resource "databricks_grant" "catalog_rw" {
@@ -21,22 +21,12 @@ resource "databricks_grant" "catalog_rw" {
   for_each  = toset(local.catalog_rw_grant_principals)
 
   catalog   = local.catalog_name
-  principal = "Data Scientists"
+  principal = each.value
   privileges = [
-    "APPLY_TAG",
-    "CREATE_CONNECTION",
-    "CREATE_SCHEMA",
     "USE_CATALOG",
-    "CREATE_FUNCTION",
-    "CREATE_TABLE",
-    "EXECUTE",
-    "MODIFY",
-    "REFRESH",
-    "SELECT",
-    "READ_VOLUME",
-    "WRITE_VOLUME",
-    "USE_SCHEMA",
     "BROWSE",
+    "APPLY_TAG",
+    "CREATE_SCHEMA",
   ]
 }
 
@@ -47,7 +37,7 @@ resource "databricks_grant" "schema_r" {
 
   schema     = "${local.catalog_name}.${local.schema_name}"
   principal  = each.value
-  privileges = ["USE_SCHEMA", "SELECT", "READ_VOLUME"]
+  privileges = ["USE_SCHEMA", "SELECT", "EXECUTE"]
 }
 
 resource "databricks_grant" "schema_rw" {
@@ -57,17 +47,15 @@ resource "databricks_grant" "schema_rw" {
   schema    = "${local.catalog_name}.${local.schema_name}"
   principal = each.value
   privileges = [
+    "USE_SCHEMA",
+    "SELECT",
+    "EXECUTE",
+    "REFRESH",
     "APPLY_TAG",
     "CREATE_FUNCTION",
     "CREATE_TABLE",
     "CREATE_VOLUME",
-    "USE_SCHEMA",
-    "EXECUTE",
-    "MODIFY",
-    "REFRESH",
-    "SELECT",
-    "READ_VOLUME",
-    "WRITE_VOLUME"
+    "CREATE_MATERIALIZED_VIEW",
   ]
 }
 
@@ -76,12 +64,15 @@ resource "databricks_grant" "volume_r" {
   for_each   = toset(var.volume_r_grant_principals)
   volume     = databricks_volume.volume.id
   principal  = each.value
-  privileges = ["READ_VOLUME"]
+  privileges = ["READ_VOLUME", "READ_FILES"]
 }
 
 resource "databricks_grant" "volume_rw" {
   for_each   = toset(var.volume_rw_grant_principals)
   volume     = databricks_volume.volume.id
   principal  = each.value
-  privileges = ["READ_VOLUME", "WRITE_VOLUME"]
+  privileges = [
+    "READ_VOLUME",
+    "WRITE_VOLUME",
+  ]
 }

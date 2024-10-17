@@ -5,6 +5,8 @@ resource "databricks_catalog" "catalog" {
   comment        = "this catalog is managed by terraform"
   isolation_mode = each.value.isolation_mode
   owner          = each.value.owner
+
+  depends_on = [databricks_external_location.external_locations]
 }
 
 resource "databricks_grants" "grants" {
