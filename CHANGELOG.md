@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.85.0](https://github.com/chanzuckerberg/cztack/compare/v0.84.1...v0.85.0) (2024-10-17)
+
+
+### Features
+
+* trigger release please ([#662](https://github.com/chanzuckerberg/cztack/issues/662)) ([9d80dd2](https://github.com/chanzuckerberg/cztack/commit/9d80dd27581444dbd336edef281777d335a0af55))
+
 ## [0.84.1](https://github.com/chanzuckerberg/cztack/compare/v0.84.0...v0.84.1) (2024-10-17)
 
 
