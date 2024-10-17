@@ -37,7 +37,7 @@ resource "databricks_grant" "schema_r" {
 
   schema     = "${local.catalog_name}.${local.schema_name}"
   principal  = each.value
-  privileges = ["USE_SCHEMA"]
+  privileges = ["USE_SCHEMA", "SELECT", "EXECUTE"]
 }
 
 resource "databricks_grant" "schema_rw" {
@@ -48,6 +48,9 @@ resource "databricks_grant" "schema_rw" {
   principal = each.value
   privileges = [
     "USE_SCHEMA",
+    "SELECT",
+    "EXECUTE",
+    "REFRESH",
     "APPLY_TAG",
     "CREATE_FUNCTION",
     "CREATE_TABLE",
