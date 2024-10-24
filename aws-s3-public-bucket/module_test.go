@@ -111,9 +111,10 @@ func TestPublicBucketDefaults(t *testing.T) {
 			}
 
 			for _, test := range sims {
-				resp := tftest.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
-				fmt.Println("Testing ", test.action, " with https enabled=", test.secureTransport)
-				r.Equal(test.result, *resp.EvalDecision)
+				t.Run(fmt.Sprintf("Testing %s with https enabled=%t", test.action, test.secureTransport), func(t *testing.T) {
+					resp := tftest.S3SimulateRequest(t, region, test.action, test.arn, bucketPolicy, test.secureTransport)
+					r.Equal(test.result, *resp.EvalDecision)
+				})
 			}
 		},
 	}

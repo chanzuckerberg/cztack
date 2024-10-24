@@ -11,20 +11,30 @@ jobs:
         run: echo "::set-output name=matrix::$(ls -d */|sed -e 's/\///'|grep -v 'bless-ca\|scripts'|jq -cnR '[inputs | select(length>0)]')"
   lint:
     name: lint
-    runs-on: ubuntu-latest
+    runs-on: [ARM64, self-hosted, Linux]
     steps:
-      - uses: actions/checkout@v3
-      - uses: hashicorp/setup-terraform@v1
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v2
         with:
-          terraform_version: 0.14.5
-          terraform_wrapper: "false"
-      - name: setup
-        run: make setup
-      - uses: golangci/golangci-lint-action@v3
+          app_id: ${{ secrets.CZI_GITHUB_HELPER_APP_ID }}
+          private_key: ${{ secrets.CZI_GITHUB_HELPER_PK }}
+      - uses: actions/checkout@v4
         with:
-          version: v1.56.2
-          args: --timeout=5m
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: |
+            go.sum
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.60.3
+          github-token: ${{ secrets.GITHUB_TOKEN }}  
+
   test:
     name: test ${{ matrix.module }}
     needs: get-modules
