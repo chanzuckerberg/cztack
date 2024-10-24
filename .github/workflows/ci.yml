@@ -23,6 +23,13 @@ jobs:
         with:
           token: ${{ steps.generate_token.outputs.token }}
           ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: |
+            go.sum
+        
       # - uses: hashicorp/setup-terraform@v1
       #   with:
       #     terraform_version: 0.14.5
@@ -33,7 +40,7 @@ jobs:
         uses: golangci/golangci-lint-action@v6
         with:
           version: v1.60.3
-          github-token: ${{ secrets.GITHUB_TOKEN }}      
+          github-token: ${{ secrets.GITHUB_TOKEN }}  
 
   test:
     name: test ${{ matrix.module }}
