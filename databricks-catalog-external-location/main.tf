@@ -60,7 +60,10 @@ data "aws_iam_policy_document" "databricks_external_location_assume_role" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"]
+      identifiers = [
+        "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
+      ]
     }
 
     actions = ["sts:AssumeRole"]
