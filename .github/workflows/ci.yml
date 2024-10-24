@@ -29,13 +29,6 @@ jobs:
           cache: true
           cache-dependency-path: |
             go.sum
-        
-      # - uses: hashicorp/setup-terraform@v1
-      #   with:
-      #     terraform_version: 0.14.5
-      #     terraform_wrapper: "false"
-      # - name: setup
-      #   run: make setup
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
         with:
