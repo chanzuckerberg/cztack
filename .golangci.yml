@@ -9,4 +9,10 @@ linters:
     - gofmt
     - whitespace
     - unparam
-    - scopelint
+    - forbidigo
+    - gocritic
+
+output:
+  formats:
+    - format: tab
+  show-stats: true
