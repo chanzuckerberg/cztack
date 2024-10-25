@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.86.0](https://github.com/chanzuckerberg/cztack/compare/v0.85.0...v0.86.0) (2024-10-24)
+
+
+### Features
+
+* update go lint ([#665](https://github.com/chanzuckerberg/cztack/issues/665)) ([eb4a894](https://github.com/chanzuckerberg/cztack/commit/eb4a89415b1e61d66bba5fafac44695b4a11837e))
+
+
+### Bug Fixes
+
+* databricks-catalog-external-location - Make role self-assuming ([#664](https://github.com/chanzuckerberg/cztack/issues/664)) ([7ff6b93](https://github.com/chanzuckerberg/cztack/commit/7ff6b93aa8aaa1ed843079c75d26bbd9861e4806))
+
 ## [0.85.0](https://github.com/chanzuckerberg/cztack/compare/v0.84.1...v0.85.0) (2024-10-17)
 
 
