@@ -3,11 +3,12 @@ data "aws_caller_identity" "current" {
 }
 
 locals {
-  path                   = "/databricks/"
-  name                   = "${var.tags.project}-${var.tags.env}"
-  bucket_name            = "${local.name}-dbx-catalog-bucket"
-  iam_role_name          = "external_location_dbx_${var.tags.env}_aws_role"
-  iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
+  iam_role_prefix = "databricks"
+  path            = "/${local.iam_role_prefix}/"
+  name            = "${var.tags.project}-${var.tags.env}"
+  bucket_name     = "${local.name}-dbx-catalog-bucket"
+  iam_role_name   = "external_location_dbx_${var.tags.env}_aws_role"
+  iam_role_arn    = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
 }
 
 ## Bucket and policy
