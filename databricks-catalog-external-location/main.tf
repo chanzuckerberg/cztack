@@ -138,8 +138,8 @@ resource "aws_iam_role_policy_attachment" "databricks_external_location_bucket_a
 
 resource "aws_iam_role_policy" "databricks_external_location_access_role_policy" {
   name_prefix = local.iam_role_prefix
-  role = aws_iam_role.databricks_external_location_iam_role
-  policy = data.aws_iam_policy_document.databricks_external_location_bucket_access
+  role        = aws_iam_role.databricks_external_location_iam_role.id
+  policy      = data.aws_iam_policy_document.databricks_external_location_bucket_access.json
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
