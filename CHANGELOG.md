@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.86.1](https://github.com/chanzuckerberg/cztack/compare/v0.86.0...v0.86.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* Ensure Databricks external location role exists before making it self-referential ([#667](https://github.com/chanzuckerberg/cztack/issues/667)) ([6834b5b](https://github.com/chanzuckerberg/cztack/commit/6834b5bd2bcecdb8231b054c6fb4b37105e28aaa))
+
 ## [0.86.0](https://github.com/chanzuckerberg/cztack/compare/v0.85.0...v0.86.0) (2024-10-24)
 
 
