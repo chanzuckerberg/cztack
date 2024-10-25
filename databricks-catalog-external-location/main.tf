@@ -7,6 +7,7 @@ locals {
   name                   = "${var.tags.project}-${var.tags.env}"
   bucket_name            = "${local.name}-dbx-catalog-bucket"
   iam_role_name          = "external_location_dbx_${var.tags.env}_aws_role"
+  iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
 }
 
 ## Bucket and policy
@@ -61,8 +62,7 @@ data "aws_iam_policy_document" "databricks_external_location_assume_role" {
     principals {
       type        = "AWS"
       identifiers = [
-        "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL",
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
+        "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"
       ]
     }
 
@@ -86,7 +86,7 @@ data "aws_iam_policy_document" "databricks_external_location_assume_role" {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
 
-      values = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"]
+      values = [local.iam_role_arn]
     }
   }
 }
@@ -119,13 +119,8 @@ data "aws_iam_policy_document" "databricks_external_location_bucket_access" {
 
   statement {
     sid    = "databricksAssumeRole"
-    effect = "Allow"
-    actions = [
-      "sts:AssumeRole"
-    ]
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
-    ]
+    actions = ["sts:AssumeRole"]
+    resources = [local.iam_role_arn]
   }
 }
 
@@ -138,6 +133,12 @@ resource "aws_iam_policy" "databricks_external_location_bucket_access" {
 resource "aws_iam_role_policy_attachment" "databricks_external_location_bucket_access" {
   policy_arn = aws_iam_policy.databricks_external_location_bucket_access.arn
   role       = aws_iam_role.databricks_external_location_iam_role.name
+}
+
+resource "aws_iam_role_policy" "databricks_external_location_access_role_policy" {
+  name_prefix = local.path
+  role = aws_iam_role.databricks_external_location_iam_role
+  policy = data.aws_iam_policy_document.databricks_external_location_bucket_access
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
