@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.87.0](https://github.com/chanzuckerberg/cztack/compare/v0.86.1...v0.87.0) (2024-10-31)
+
+
+### Features
+
+* biohub s3 readonly role ([#669](https://github.com/chanzuckerberg/cztack/issues/669)) ([d64e240](https://github.com/chanzuckerberg/cztack/commit/d64e240f310286aa5b75c139ab235bbbbbf77b7f))
+
+
+### Bug Fixes
+
+* add oidc input to assume role policy ([#671](https://github.com/chanzuckerberg/cztack/issues/671)) ([4d41154](https://github.com/chanzuckerberg/cztack/commit/4d41154cc90fa37c729e2b1ae9ada3035d214ff4))
+
 ## [0.86.1](https://github.com/chanzuckerberg/cztack/compare/v0.86.0...v0.86.1) (2024-10-25)
 
 
