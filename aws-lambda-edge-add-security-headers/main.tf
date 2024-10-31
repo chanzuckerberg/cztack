@@ -22,7 +22,7 @@ module "lambda" {
   filename              = data.archive_file.lambda.output_path
   source_code_hash      = data.archive_file.lambda.output_base64sha256
   handler               = "index.handler"
-  runtime               = "nodejs14.x"
+  runtime               = "nodejs18.x"
   at_edge               = true
   publish_lambda        = true
   log_retention_in_days = var.lambda_cloudwatch_log_retention_in_days
