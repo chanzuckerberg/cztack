@@ -3,7 +3,7 @@ variable "role_name" {
   description = "Name of the role to create"
 }
 
-variable "s3_bucket_prefixes" {
+variable "s3_bucket_names" {
   type        = set(string)
   description = "Limits role permissions to buckets with specific prefixes. Empty for all buckets."
 

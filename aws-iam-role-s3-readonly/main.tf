@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "s3-bucket-readonly" {
       "s3:GetObjectVersionAcl",
       "s3:GetObjectVersion"
     ]
-    resources = formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_prefixes)
+    resources = formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_names)
   }
   statement {
     sid    = "ListBucket"
@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "s3-bucket-readonly" {
       "s3:GetBucketLocation",
       "s3:ListBucketMultipartUploads"
     ]
-    resources = formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_prefixes)
+    resources = formatlist("arn:aws:s3:::%s*/*", var.s3_bucket_names)
   }
   statement {
     sid    = "ShowAllowedBuckets"
@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "s3-bucket-readonly" {
     actions = [
       "s3:ListAllMyBuckets"
     ]
-    resources = toset(formatlist("arn:aws:s3:::%s", var.s3_bucket_prefixes), formatlist("arn:aws:s3:::%s/*", var.s3_bucket_prefixes))
+    resources = toset(formatlist("arn:aws:s3:::%s", var.s3_bucket_names), formatlist("arn:aws:s3:::%s/*", var.s3_bucket_prefixes))
   }
 }
 
