@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "s3-bucket-readonly" {
     actions = [
       "s3:ListAllMyBuckets"
     ]
-    resources = toset(formatlist("arn:aws:s3:::%s", var.s3_bucket_names), formatlist("arn:aws:s3:::%s/*", var.s3_bucket_prefixes))
+    resources = toset(formatlist("arn:aws:s3:::%s", var.s3_bucket_names), formatlist("arn:aws:s3:::%s/*", var.s3_bucket_names))
   }
 }
 
