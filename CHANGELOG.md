@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.87.2](https://github.com/chanzuckerberg/cztack/compare/v0.87.1...v0.87.2) (2024-11-01)
+
+
+### Bug Fixes
+
+* concat two list of strings then turn it into set ([#674](https://github.com/chanzuckerberg/cztack/issues/674)) ([8cd5290](https://github.com/chanzuckerberg/cztack/commit/8cd52908d7b812141cfa7b7298bd785f89370c27))
+
 ## [0.87.1](https://github.com/chanzuckerberg/cztack/compare/v0.87.0...v0.87.1) (2024-10-31)
 
 
