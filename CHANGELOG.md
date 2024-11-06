@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.87.3](https://github.com/chanzuckerberg/cztack/compare/v0.87.2...v0.87.3) (2024-11-06)
+
+
+### Bug Fixes
+
+* CDI-3508 - Databricks volume bucket name output ([#676](https://github.com/chanzuckerberg/cztack/issues/676)) ([c522ec8](https://github.com/chanzuckerberg/cztack/commit/c522ec84db33bc1d080599e8b0b931804f6d5668))
+
 ## [0.87.2](https://github.com/chanzuckerberg/cztack/compare/v0.87.1...v0.87.2) (2024-11-01)
 
 
