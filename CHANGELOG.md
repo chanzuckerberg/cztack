@@ -1,5 +1,57 @@
 # Changelog
 
+## [0.87.2](https://github.com/chanzuckerberg/cztack/compare/v0.87.1...v0.87.2) (2024-11-01)
+
+
+### Bug Fixes
+
+* concat two list of strings then turn it into set ([#674](https://github.com/chanzuckerberg/cztack/issues/674)) ([8cd5290](https://github.com/chanzuckerberg/cztack/commit/8cd52908d7b812141cfa7b7298bd785f89370c27))
+
+## [0.87.1](https://github.com/chanzuckerberg/cztack/compare/v0.87.0...v0.87.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* update s3 bucket name typo ([#672](https://github.com/chanzuckerberg/cztack/issues/672)) ([22affc7](https://github.com/chanzuckerberg/cztack/commit/22affc7de02f4c9a222462827aaeeb3291c64a8b))
+
+## [0.87.0](https://github.com/chanzuckerberg/cztack/compare/v0.86.1...v0.87.0) (2024-10-31)
+
+
+### Features
+
+* biohub s3 readonly role ([#669](https://github.com/chanzuckerberg/cztack/issues/669)) ([d64e240](https://github.com/chanzuckerberg/cztack/commit/d64e240f310286aa5b75c139ab235bbbbbf77b7f))
+
+
+### Bug Fixes
+
+* add oidc input to assume role policy ([#671](https://github.com/chanzuckerberg/cztack/issues/671)) ([4d41154](https://github.com/chanzuckerberg/cztack/commit/4d41154cc90fa37c729e2b1ae9ada3035d214ff4))
+
+## [0.86.1](https://github.com/chanzuckerberg/cztack/compare/v0.86.0...v0.86.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* Ensure Databricks external location role exists before making it self-referential ([#667](https://github.com/chanzuckerberg/cztack/issues/667)) ([6834b5b](https://github.com/chanzuckerberg/cztack/commit/6834b5bd2bcecdb8231b054c6fb4b37105e28aaa))
+
+## [0.86.0](https://github.com/chanzuckerberg/cztack/compare/v0.85.0...v0.86.0) (2024-10-24)
+
+
+### Features
+
+* update go lint ([#665](https://github.com/chanzuckerberg/cztack/issues/665)) ([eb4a894](https://github.com/chanzuckerberg/cztack/commit/eb4a89415b1e61d66bba5fafac44695b4a11837e))
+
+
+### Bug Fixes
+
+* databricks-catalog-external-location - Make role self-assuming ([#664](https://github.com/chanzuckerberg/cztack/issues/664)) ([7ff6b93](https://github.com/chanzuckerberg/cztack/commit/7ff6b93aa8aaa1ed843079c75d26bbd9861e4806))
+
+## [0.85.0](https://github.com/chanzuckerberg/cztack/compare/v0.84.1...v0.85.0) (2024-10-17)
+
+
+### Features
+
+* trigger release please ([#662](https://github.com/chanzuckerberg/cztack/issues/662)) ([9d80dd2](https://github.com/chanzuckerberg/cztack/commit/9d80dd27581444dbd336edef281777d335a0af55))
+
 ## [0.84.1](https://github.com/chanzuckerberg/cztack/compare/v0.84.0...v0.84.1) (2024-10-17)
 
 

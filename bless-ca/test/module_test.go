@@ -26,7 +26,7 @@ func TestBlessCAInitAndApply(t *testing.T) {
 			return tftest.Options(
 				region,
 				map[string]interface{}{
-					//test only
+					// test only
 					"region":                     region,
 					"bless_provider_aws_profile": tftest.EnvVar(tftest.EnvAWSProfile),
 					"test_user_name":             fmt.Sprintf("bless-%s", tftest.UniqueID()),
