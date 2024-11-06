@@ -72,5 +72,8 @@
 |------|-------------|
 | <a name="output_dbx_unity_aws_role_arn"></a> [dbx\_unity\_aws\_role\_arn](#output\_dbx\_unity\_aws\_role\_arn) | n/a |
 | <a name="output_volume_path"></a> [volume\_path](#output\_volume\_path) | n/a |
-| <a name="output_volume_specific_bucket_name"></a> [volume\_specific\_bucket\_name](#output\_volume\_specific\_bucket\_name) | n/a |
+| <a name="output_volume_bucket_name"></a> [volume\_bucket\_name](#output\_volume\_bucket\_name) | n/a |
+| <a name="output_catalog_name"></a> [catalog\_name](#output\_catalog\_name) | n/a |
+| <a name="output_schema_name"></a> [schema\_name](#output\_schema\_name) | n/a |
+| <a name="output_volume_name"></a> [volume\_name](#output\_volume\_name) | n/a |
 <!-- END -->
