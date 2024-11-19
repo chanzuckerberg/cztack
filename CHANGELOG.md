@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.87.4](https://github.com/chanzuckerberg/cztack/compare/v0.87.3...v0.87.4) (2024-11-19)
+
+
+### Bug Fixes
+
+* add an optional redirect bucket variable for the redirect module ([#678](https://github.com/chanzuckerberg/cztack/issues/678)) ([4e24726](https://github.com/chanzuckerberg/cztack/commit/4e247266ff718b5301aee636b2e89af7c6560dab))
+
 ## [0.87.3](https://github.com/chanzuckerberg/cztack/compare/v0.87.2...v0.87.3) (2024-11-06)
 
 
