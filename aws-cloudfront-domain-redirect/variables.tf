@@ -38,3 +38,9 @@ variable "lambda_cloudwatch_log_retention_in_days" {
   description = "Retention policy (in days) for Lambda function's logs in Cloudwatch"
   default     = null
 }
+
+variable "redirect_bucket_name" {
+  type        = string
+  description = "Unique name for the redirect bucket (provide if possible)."
+  default     = null
+}

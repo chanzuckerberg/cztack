@@ -9,7 +9,8 @@ locals {
 }
 
 resource "aws_s3_bucket" "redirect_bucket" {
-  bucket = "redirect-${var.source_domain}-to-${var.target_domain}"
+  bucket = (var.redirect_bucket_name == null) : "redirect-${var.source_domain}-to-${var.target_domain}" ? var.redirect_bucket_name
+  
   website {
     redirect_all_requests_to = "https://${var.target_domain}"
   }
