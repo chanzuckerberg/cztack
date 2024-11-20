@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.87.5](https://github.com/chanzuckerberg/cztack/compare/v0.87.4...v0.87.5) (2024-11-19)
+
+
+### Bug Fixes
+
+* use right if else ([#680](https://github.com/chanzuckerberg/cztack/issues/680)) ([019a7d9](https://github.com/chanzuckerberg/cztack/commit/019a7d9e6fb53d814aa897545d24b63d72b7575d))
+
 ## [0.87.4](https://github.com/chanzuckerberg/cztack/compare/v0.87.3...v0.87.4) (2024-11-19)
 
 
