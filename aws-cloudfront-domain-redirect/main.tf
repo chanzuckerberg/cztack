@@ -5,6 +5,8 @@ locals {
     service   = var.service
     project   = var.project
     managedBy = "terraform"
+    source_domain = var.source_domain
+    target_domain = var.target_domain
   }
 }
 
@@ -38,7 +40,7 @@ module "cert" {
 
 resource "aws_cloudfront_distribution" "cf" {
   enabled = true
-  comment = "Redirect requests from ${var.source_domain} to ${var.target_domain}."
+  comment = "Redirect requests--check the tags for the source & redirect domains."
 
   aliases = [var.source_domain]
   viewer_certificate {
