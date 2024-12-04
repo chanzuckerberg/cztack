@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.87.6](https://github.com/chanzuckerberg/cztack/compare/v0.87.5...v0.87.6) (2024-12-04)
+
+
+### Bug Fixes
+
+* add the source & target domains to tags, make comment shorter ([#682](https://github.com/chanzuckerberg/cztack/issues/682)) ([693d3da](https://github.com/chanzuckerberg/cztack/commit/693d3da662ce43030bef85b703a00803054514b6))
+* remove non-applicable permission from dbx volume grant and add all privileges group ([#684](https://github.com/chanzuckerberg/cztack/issues/684)) ([993fa7a](https://github.com/chanzuckerberg/cztack/commit/993fa7a60c6dd1cd265f9045575a4a5e0551065e))
+
 ## [0.87.5](https://github.com/chanzuckerberg/cztack/compare/v0.87.4...v0.87.5) (2024-11-19)
 
 
