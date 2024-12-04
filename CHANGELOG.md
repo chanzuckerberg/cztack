@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.87.7](https://github.com/chanzuckerberg/cztack/compare/v0.87.6...v0.87.7) (2024-12-04)
+
+
+### Bug Fixes
+
+* not allowed to change var ([#685](https://github.com/chanzuckerberg/cztack/issues/685)) ([5e76ad3](https://github.com/chanzuckerberg/cztack/commit/5e76ad331de3e03d20d5890c0213e30a4d8e1e0d))
+
 ## [0.87.6](https://github.com/chanzuckerberg/cztack/compare/v0.87.5...v0.87.6) (2024-12-04)
 
 
