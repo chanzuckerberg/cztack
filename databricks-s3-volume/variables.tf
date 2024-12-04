@@ -70,6 +70,12 @@ variable "bucket_object_ownership" {
   }
 }
 
+variable "catalog_all_priv_grant_principals" {
+  description = "(Optional) Databricks groups to grant all-privileges permission to on the catalog. Owner is included"
+  type        = list(string)
+  default     = []
+}
+
 variable "catalog_r_grant_principals" {
   description = "(Optional) Databricks groups to grant read-only permissions to on the catalog"
   type        = list(string)
