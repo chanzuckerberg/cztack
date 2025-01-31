@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.88.0](https://github.com/chanzuckerberg/cztack/compare/v0.87.7...v0.88.0) (2025-01-31)
+
+
+### Features
+
+* add availability zone selection to all dbx cluster compute policies ([#689](https://github.com/chanzuckerberg/cztack/issues/689)) ([d9eee69](https://github.com/chanzuckerberg/cztack/commit/d9eee690aca087574518981ea1cc3b258be38d06))
+
 ## [0.87.7](https://github.com/chanzuckerberg/cztack/compare/v0.87.6...v0.87.7) (2024-12-04)
 
 
