@@ -48,6 +48,13 @@ locals {
       "values" : var.personal_compute_pool_ids
     }
   } : {}
+  addtnl_global_overrides = {
+    # Allow users to specify the availability zone
+    "aws_attributes.zone_id": {
+      "type": "unlimited",
+      "hidden": false
+    }
+  }
 }
 
 ## Modified Databricks defaults
@@ -58,7 +65,7 @@ module "legacy_shared_compute_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Legacy Shared Compute"
   policy_family_id        = local.default_policy_family_ids["legacy_shared_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "data_security_mode" : {
       "type" : "fixed",
       "hidden" : true,
@@ -78,7 +85,7 @@ module "personal_compute_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Personal Compute"
   policy_family_id        = local.default_policy_family_ids["personal_compute"]
-  policy_overrides = merge(local.logging_override, local.personal_instance_pools, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, local.personal_instance_pools, {
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
@@ -117,7 +124,7 @@ module "large_personal_compute_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Large Personal Compute"
   policy_family_id        = local.default_policy_family_ids["personal_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
@@ -143,7 +150,7 @@ module "power_user_compute_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Power User Compute"
   policy_family_id        = local.default_policy_family_ids["power_user_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autoscale.max_workers" : {
       "type" : "range",
       "defaultValue" : 10,
@@ -176,7 +183,7 @@ module "job_compute_cluster_policy" {
   policy_name             = "${var.policy_name_prefix}Job Compute"
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "aws_attributes.availability" : {
       "type" : "allowlist",
       "values" : [
@@ -198,7 +205,7 @@ module "small_job_compute_cluster_policy" {
   policy_name             = "${var.policy_name_prefix}Small Job Compute"
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "spark_conf.spark.databricks.cluster.profile" : {
       "type" : "unlimited",
       "defaultValue" : "singleNode",
@@ -217,7 +224,7 @@ module "large_gpu_large_clusters_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Large GPU Large Clusters"
   policy_family_id        = local.default_policy_family_ids["power_user_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autoscale.max_workers" : {
       "type" : "range",
       "minValue" : 1,
@@ -265,7 +272,7 @@ module "large_gpu_personal_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Large GPU Personal"
   policy_family_id        = local.default_policy_family_ids["personal_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
@@ -301,7 +308,7 @@ module "large_gpu_small_clusters_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Large GPU Small Clusters"
   policy_family_id        = local.default_policy_family_ids["power_user_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autoscale.max_workers" : {
       "type" : "range",
       "minValue" : 1,
@@ -349,7 +356,7 @@ module "small_clusters" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Small Clusters"
   policy_family_id        = local.default_policy_family_ids["power_user_compute"]
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autoscale.max_workers" : {
       "type" : "range",
       "maxValue" : 3,
@@ -402,7 +409,7 @@ module "superset_compute_cluster_policy" {
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Superset Compute"
 
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 60
@@ -437,7 +444,7 @@ module "single_node_cluster_policy" {
   databricks_host         = var.databricks_host
   databricks_workspace_id = var.databricks_workspace_id
   policy_name             = "${var.policy_name_prefix}Single Node Job Compute"
-  policy_overrides = merge(local.logging_override, {
+  policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "driver_node_type_id" : {
       "type" : "regex",
       "pattern" : "([mrcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
