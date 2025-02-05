@@ -35,7 +35,7 @@ resource "databricks_storage_credential" "volume" {
     module.databricks_bucket
   ]
 
-  name = local.catalog_name
+  name = var.create_catalog ? local.catalog_name : local.volume_name
   aws_iam_role {
     role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
   }
