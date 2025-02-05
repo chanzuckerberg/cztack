@@ -14,6 +14,9 @@ locals {
   bucket_name            = var.volume_bucket != null ? var.volume_bucket : (
     var.override_bucket_name != null ? var.override_bucket_name : replace(var.catalog_name, "_", "-") # buckets don't work with underscores
   )
+
+  # Allow overriding the storage location in case of an existing bucket
+  storage_location = var.override_storage_location != null "s3://${local.bucket_name}${var.override_storage_location}" : "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
@@ -87,7 +90,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
+  storage_location = local.storage_location
   owner            = var.owner
   comment          = "This volume is managed by Terraform - ${var.volume_comment}"
 }
