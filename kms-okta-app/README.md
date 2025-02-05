@@ -1,4 +1,38 @@
-This is a module that creates an Okta app that's bounded to a KMS Key. You can use the KMS key to sign JWTs that are compatible with the Okta /token endpoints. 
+This is a module that creates an Okta app that's bounded to a KMS Key. You can use the KMS key to sign JWTs that are compatible with the Okta /token endpoints. After you create the Okta App, you can work with the Okta Token endpoint by roughly following these steps:
+1. Creating a header with this kind of structure: `{{"alg": "<algorithm>", "typ": "JWT"}}`. To identify algorithms. Here are the algorithm options as of Febuary 5, 2025:
+```
+signing_algs = (
+    ('RSASSA_PSS_SHA_256',        'PS256', 'sha256'),
+    ('RSASSA_PSS_SHA_384',        'PS384', 'sha384'),
+    ('RSASSA_PSS_SHA_512',        'PS512', 'sha512'),
+    ('RSASSA_PKCS1_V1_5_SHA_256', 'RS256', 'sha256'),
+    ('RSASSA_PKCS1_V1_5_SHA_384', 'RS384', 'sha384'),
+    ('RSASSA_PKCS1_V1_5_SHA_512', 'RS512', 'sha512'),
+    ('ECDSA_SHA_256',             'ES256', 'sha256'),
+    ('ECDSA_SHA_384',             'ES384', 'sha384'),
+    ('ECDSA_SHA_512',             'ES512', 'sha512'),
+    )
+```
+source: https://github.com/jmtapio/python-jwt-kms/blob/552668588c5eec5eff9346740660239baef22428/jwt_kms/jwa.py 
+So if your KMS key has type `RSASSA_PKCS1_V1_5_SHA_256`, your `alg` is `RS256`. If you want to dive deeper, you can look at the RFC section here: https://datatracker.ietf.org/doc/html/rfc7518#section-3.1
+
+2. Creating a payload with this kind of structure with this format:
+```json
+{
+    "exp": <future timestamp>,
+    "iat": <number of seconds>,
+    "iss": client_id,
+    "aud": [okta_token_endpoint],
+    "sub": client_id,
+    <you may add additional parameter here following the JWT spec>
+}
+```
+3. Base64-encode values from step #1 and #2 and strip out the equal signs (`=`). 
+4. Concatenate the values from step #3 with a header.payload format, then use the AWS KMS `sign` operation from whatever AWS SDK you use. If you used algorithm type `RS256`, then your KMS Sign operation should use SigningAlgorithm type `RSASSA_PKCS1_V1_5_SHA_256`. You should be able to parse out the "Signature" value from your kms `sign` output. 
+5. Construct the JWT in this way: base64header.base64payload.signature-from-step-4
+
+After you construct the JWT, you're ready to use it with the Okta Token endpoint here: https://developer.okta.com/docs/api/openapi/okta-oauth/guides/client-auth/#jwt-with-shared-key 
+you just need to set the JWT from step 5 to the "client_assertion" value while making the request.
 
 <!-- START -->
 ## Requirements
