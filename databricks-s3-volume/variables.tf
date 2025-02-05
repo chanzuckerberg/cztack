@@ -137,7 +137,7 @@ variable "override_bucket_name" {
 }
 
 variable "override_storage_location" {
-  description = "(Optional) Prefix to use for the storage location in case of an existing bucket (e.g. '' or '/prefix')"
+  description = "(Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix')"
   type        = string
   default     = null
 }

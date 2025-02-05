@@ -15,8 +15,11 @@ locals {
     var.override_bucket_name != null ? var.override_bucket_name : replace(var.catalog_name, "_", "-") # buckets don't work with underscores
   )
 
+  create_storage_credential = var.create_catalog ? true : (var.create_storage_credential ? true : false)
+
   # Allow overriding the storage location in case of an existing bucket
   storage_location = var.override_storage_location != null ? var.override_storage_location : "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
+
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
