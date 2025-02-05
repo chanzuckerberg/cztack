@@ -52,7 +52,9 @@ you just need to set the JWT from step 5 to the "client_assertion" value while m
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_params"></a> [params](#module\_params) | github.com/chanzuckerberg/cztack//aws-ssm-params-writer | v0.63.3 |
 
 ## Resources
 
@@ -70,10 +72,13 @@ No modules.
 | <a name="input_friendly_key_identifier"></a> [friendly\_key\_identifier](#input\_friendly\_key\_identifier) | A name for the key configuration in the okta app, something you will recognize for yourself and the project. | `string` | n/a | yes |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | The Key ID or alias of the AWS KMS Key. It has to be available in the same region and account as the configured provider. | `string` | n/a | yes |
 | <a name="input_okta_configuration"></a> [okta\_configuration](#input\_okta\_configuration) | Details needed to configure an okta app. Its token auth method is private\_key\_jwt | <pre>object({<br>    label          = string<br>    type           = string<br>    grant_types    = list(string)<br>    omit_secret    = bool<br>    response_types = list(string)<br>    pkce_required  = bool<br>  })</pre> | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | These values are used to derive the path in the param store where to write the Okta App Configuration metadata. | <pre>object({<br>    project = string,<br>    env     = string,<br>    service = string,<br>    owner   = string,<br>  })</pre> | n/a | yes |
+| <a name="input_write_metadata_to_params"></a> [write\_metadata\_to\_params](#input\_write\_metadata\_to\_params) | Whether you want to include the clientID and KMS Key Alias grouped together as securestring parameters in JSON format. If true, module will write these details to a path based on the env, project and service"<br>  They will be written following path:<br>    /<project>-<env>-<service>/client\_id<br>    /<project>-<env>-<service>/kms\_key\_id<br><br>  (the module may add secrets over time)<br><br>  Note that these values should correspond with the consuming service's tagset so secrets are placed in the path they expect. | `bool` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_client_id"></a> [client\_id](#output\_client\_id) | n/a |
+| <a name="output_kms_id"></a> [kms\_id](#output\_kms\_id) | n/a |
 <!-- END -->
