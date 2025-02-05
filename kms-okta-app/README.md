@@ -20,13 +20,14 @@ So if your KMS key has type `RSASSA_PKCS1_V1_5_SHA_256`, your `alg` is `RS256`. 
 ```json
 {
     "exp": <future timestamp>,
-    "iat": <number of seconds>,
+    "iat": <number of seconds since Jan 1, 1970 UTC>,
     "iss": client_id,
     "aud": [okta_token_endpoint],
     "sub": client_id,
-    <you may add additional parameter here following the JWT spec>
 }
 ```
+each attribute can be found here: https://developer.okta.com/docs/api/openapi/okta-oauth/guides/client-auth/#token-claims-for-client-authentication-with-client-secret-or-private-key-jwt
+
 3. Base64-encode values from step #1 and #2 and strip out the equal signs (`=`). 
 4. Concatenate the values from step #3 with a header.payload format, then use the AWS KMS `sign` operation from whatever AWS SDK you use. If you used algorithm type `RS256`, then your KMS Sign operation should use SigningAlgorithm type `RSASSA_PKCS1_V1_5_SHA_256`. You should be able to parse out the "Signature" value from your kms `sign` output. 
 5. Construct the JWT in this way: base64header.base64payload.signature-from-step-4
