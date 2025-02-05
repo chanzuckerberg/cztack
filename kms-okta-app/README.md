@@ -31,7 +31,7 @@ So if your KMS key has type `RSASSA_PKCS1_V1_5_SHA_256`, your `alg` is `RS256`. 
 4. Concatenate the values from step #3 with a header.payload format, then use the AWS KMS `sign` operation from whatever AWS SDK you use. If you used algorithm type `RS256`, then your KMS Sign operation should use SigningAlgorithm type `RSASSA_PKCS1_V1_5_SHA_256`. You should be able to parse out the "Signature" value from your kms `sign` output. 
 5. Construct the JWT in this way: base64header.base64payload.signature-from-step-4
 
-After you construct the JWT, you're ready to use it with the Okta Token endpoint here: https://developer.okta.com/docs/api/openapi/okta-oauth/guides/client-auth/#jwt-with-shared-key 
+After you construct the JWT, you're ready to use it with the Okta Token endpoint here: https://developer.okta.com/docs/api/openapi/okta-oauth/guides/client-auth/#jwt-with-private-key
 you just need to set the JWT from step 5 to the "client_assertion" value while making the request.
 
 <!-- START -->
