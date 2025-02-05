@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.0](https://github.com/chanzuckerberg/cztack/compare/v0.88.0...v0.89.0) (2025-02-05)
+
+
+### Features
+
+* create module for configuring an okta app with a kms key ([#691](https://github.com/chanzuckerberg/cztack/issues/691)) ([19ca30e](https://github.com/chanzuckerberg/cztack/commit/19ca30e4f43cc94e49733a91e68d8190f03af07c))
+
 ## [0.88.0](https://github.com/chanzuckerberg/cztack/compare/v0.87.7...v0.88.0) (2025-01-31)
 
 
