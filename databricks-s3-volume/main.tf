@@ -40,6 +40,7 @@ resource "databricks_storage_credential" "volume" {
     role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
   }
   comment = "Managed by Terraform - access for ${var.catalog_name}"
+  read_only       = var.read_only_volume
 }
 
 # upstream external location sometimes takes a moment to register
@@ -57,6 +58,7 @@ resource "databricks_external_location" "volume" {
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.volume[0].name
   comment         = "Managed by Terraform - access for ${var.catalog_name}"
+  read_only       = var.read_only_volume
 }
 
 # New catalog, schema, and volume
