@@ -53,7 +53,7 @@ resource "databricks_external_location" "volume" {
   count = var.create_storage_credential ? 1 : 0
   depends_on      = [time_sleep.wait_30_seconds]
 
-  name            = local.catalog_name
+  name            = var.create_catalog ? local.catalog_name : local.volume_name
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.volume[0].name
   comment         = "Managed by Terraform - access for ${var.catalog_name}"
