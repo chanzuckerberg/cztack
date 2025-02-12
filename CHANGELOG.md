@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.89.1](https://github.com/chanzuckerberg/cztack/compare/v0.89.0...v0.89.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* Update runs-on to use ARM64 or X64 ([#694](https://github.com/chanzuckerberg/cztack/issues/694)) ([71a6234](https://github.com/chanzuckerberg/cztack/commit/71a62349df6114e66f3561486e8b514c6efe0a5c))
+* use the boolean var to decide whether we write variables to param store or not ([#696](https://github.com/chanzuckerberg/cztack/issues/696)) ([c8f7d43](https://github.com/chanzuckerberg/cztack/commit/c8f7d430539678b5eb256cdfa30f3822e3b68664))
+
 ## [0.89.0](https://github.com/chanzuckerberg/cztack/compare/v0.88.0...v0.89.0) (2025-02-05)
 
 
