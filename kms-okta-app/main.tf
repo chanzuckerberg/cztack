@@ -22,6 +22,7 @@ resource "okta_app_oauth" "idp_api" {
 
 
 module "params" {
+  count   = (var.write_metadata_to_params) ? 1 : 0
   source  = "github.com/chanzuckerberg/cztack//aws-ssm-params-writer?ref=v0.63.3"
   project = var.tags.project
   env     = var.tags.env
