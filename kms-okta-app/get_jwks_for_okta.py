@@ -6,9 +6,10 @@ import sys
 aws_account_id = sys.argv[1]
 kms_key_id = sys.argv[2]
 region = sys.argv[3]
+assume_role_name = sys.argv[4]
 
 sts_client = boto3.client("sts", region_name=region)
-assume_role_client = sts_client.assume_role(RoleArn=f"arn:aws:iam::{aws_account_id}:role/tfe-si", RoleSessionName='FetchKMSInformation')
+assume_role_client = sts_client.assume_role(RoleArn=f"arn:aws:iam::{aws_account_id}:role/{assume_role_name}", RoleSessionName='FetchKMSInformation')
 credentials = assume_role_client["Credentials"]
 kms_session = boto3.Session(
     aws_access_key_id=credentials["AccessKeyId"],
