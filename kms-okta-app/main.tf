@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 # uses a key in core-platform-infra to generate credentials for this workspace
 data "external" "jwks_info" {
-  program = ["bash", "${path.module}/run.sh", path.module, data.aws_caller_identity.current.account_id, var.kms_key_id, data.aws_region.current.name]
+  program = ["bash", "${path.module}/run.sh", path.module, data.aws_caller_identity.current.account_id, var.kms_key_id, data.aws_region.current.name, var.assume_role_name]
 }
 
 resource "okta_app_oauth" "idp_api" {

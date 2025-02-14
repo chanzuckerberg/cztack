@@ -46,3 +46,8 @@ variable "tags" {
   These values are used to derive the path in the param store where to write the Okta App Configuration metadata.
   EOF
 }
+
+variable "assume_role_name" {
+  type = string
+  description = "Name of the role that your Terraform environment can assume."
+}
