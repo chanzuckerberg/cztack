@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.2](https://github.com/chanzuckerberg/cztack/compare/v0.89.1...v0.89.2) (2025-02-14)
+
+
+### Bug Fixes
+
+* make the KMS Okta App Integration module assume role part customizable ([#697](https://github.com/chanzuckerberg/cztack/issues/697)) ([1a31d4e](https://github.com/chanzuckerberg/cztack/commit/1a31d4ee0e1b39024733375a3985f0337df7f947))
+
 ## [0.89.1](https://github.com/chanzuckerberg/cztack/compare/v0.89.0...v0.89.1) (2025-02-12)
 
 
