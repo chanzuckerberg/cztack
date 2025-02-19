@@ -1,4 +1,6 @@
-This is a module that creates an Okta app that's bounded to a KMS Key. You can use the KMS key to sign JWTs that are compatible with the Okta /token endpoints. After you create the Okta App, you can work with the Okta Token endpoint by roughly following these steps:
+This is a module that creates an Okta app that's bounded to an asymmetric KMS Key. You can use the KMS key to sign JWTs that are compatible with the Okta /token endpoints. 
+
+After you create the Okta App, you can work with the Okta Token endpoint by roughly following these steps:
 1. Creating a header with this kind of structure: `{{"alg": "<algorithm>", "typ": "JWT"}}`. To identify algorithms. Here are the algorithm options as of Febuary 5, 2025:
 ```
 signing_algs = (
