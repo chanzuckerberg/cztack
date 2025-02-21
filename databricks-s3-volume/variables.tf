@@ -136,6 +136,12 @@ variable "override_bucket_name" {
   default     = null
 }
 
+variable "volume_storage_location" {
+  description = "S3 path where Storage Location should access from"
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "REQUIRED: Tags to include for this environment."
   type = object({

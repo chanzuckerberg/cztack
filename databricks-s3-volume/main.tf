@@ -8,6 +8,11 @@ locals {
   catalog_name        = var.create_catalog ? replace(var.catalog_name, "-", "_") : var.catalog_name
   schema_name         = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name         = replace(var.volume_name, "-", "_")
+  volume_storage_location = (
+    var.volume_storage_location == null
+    ? "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
+    : "s3://${var.volume_storage_location}
+  )
 
   path                   = "/databricks/"
   databricks_aws_account = "414351767826"                                                                      # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
@@ -18,7 +23,7 @@ locals {
 
 ### Databricks storage credential - allows workspace to access an external location.
 ### NOTE: names need to be unique across an account, not just a workspace
-### NOTE: 
+### NOTE:
 
 resource "databricks_storage_credential" "volume" {
   count = var.create_storage_credential ? 1 : 0
@@ -87,7 +92,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
+  storage_location = local.volume_storage_location
   owner            = var.owner
   comment          = "This volume is managed by Terraform - ${var.volume_comment}"
 }
