@@ -11,7 +11,7 @@ jobs:
         run: echo "::set-output name=matrix::$(ls -d */|sed -e 's/\///'|grep -v 'bless-ca\|scripts'|jq -cnR '[inputs | select(length>0)]')"
   lint:
     name: lint
-    runs-on: [ARM64, self-hosted, Linux]
+    runs-on: ARM64
     steps:
       - name: Generate token
         id: generate_token

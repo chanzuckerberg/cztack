@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.89.2](https://github.com/chanzuckerberg/cztack/compare/v0.89.1...v0.89.2) (2025-02-14)
+
+
+### Bug Fixes
+
+* make the KMS Okta App Integration module assume role part customizable ([#697](https://github.com/chanzuckerberg/cztack/issues/697)) ([1a31d4e](https://github.com/chanzuckerberg/cztack/commit/1a31d4ee0e1b39024733375a3985f0337df7f947))
+
+## [0.89.1](https://github.com/chanzuckerberg/cztack/compare/v0.89.0...v0.89.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* Update runs-on to use ARM64 or X64 ([#694](https://github.com/chanzuckerberg/cztack/issues/694)) ([71a6234](https://github.com/chanzuckerberg/cztack/commit/71a62349df6114e66f3561486e8b514c6efe0a5c))
+* use the boolean var to decide whether we write variables to param store or not ([#696](https://github.com/chanzuckerberg/cztack/issues/696)) ([c8f7d43](https://github.com/chanzuckerberg/cztack/commit/c8f7d430539678b5eb256cdfa30f3822e3b68664))
+
+## [0.89.0](https://github.com/chanzuckerberg/cztack/compare/v0.88.0...v0.89.0) (2025-02-05)
+
+
+### Features
+
+* create module for configuring an okta app with a kms key ([#691](https://github.com/chanzuckerberg/cztack/issues/691)) ([19ca30e](https://github.com/chanzuckerberg/cztack/commit/19ca30e4f43cc94e49733a91e68d8190f03af07c))
+
+## [0.88.0](https://github.com/chanzuckerberg/cztack/compare/v0.87.7...v0.88.0) (2025-01-31)
+
+
+### Features
+
+* add availability zone selection to all dbx cluster compute policies ([#689](https://github.com/chanzuckerberg/cztack/issues/689)) ([d9eee69](https://github.com/chanzuckerberg/cztack/commit/d9eee690aca087574518981ea1cc3b258be38d06))
+
 ## [0.87.7](https://github.com/chanzuckerberg/cztack/compare/v0.87.6...v0.87.7) (2024-12-04)
 
 
