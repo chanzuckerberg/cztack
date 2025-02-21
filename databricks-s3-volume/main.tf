@@ -9,9 +9,9 @@ locals {
   schema_name         = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name         = replace(var.volume_name, "-", "_")
   volume_storage_location = (
-    var.volume_storage_location == null
-    ? "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
-    : "s3://${var.volume_storage_location}
+    var.volume_storage_location == null ?
+    "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}" :
+    "s3://${var.volume_storage_location}
   )
 
   path                   = "/databricks/"
