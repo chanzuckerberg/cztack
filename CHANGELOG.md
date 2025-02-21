@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.89.3](https://github.com/chanzuckerberg/cztack/compare/v0.89.2...v0.89.3) (2025-02-21)
+
+
+### Bug Fixes
+
+* CDI-3817 - Add support for overriding volume storage path on bucket ([#692](https://github.com/chanzuckerberg/cztack/issues/692)) ([e0d9635](https://github.com/chanzuckerberg/cztack/commit/e0d96359ec2ba3e3da8063654e9bb5d0b1544f25))
+* specify asymmetric kms key here ([#699](https://github.com/chanzuckerberg/cztack/issues/699)) ([d0d121e](https://github.com/chanzuckerberg/cztack/commit/d0d121e098e2571fd8096781c93fb0b49649ca4e))
+
 ## [0.89.2](https://github.com/chanzuckerberg/cztack/compare/v0.89.1...v0.89.2) (2025-02-14)
 
 
