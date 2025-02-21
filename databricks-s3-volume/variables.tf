@@ -136,6 +136,18 @@ variable "override_bucket_name" {
   default     = null
 }
 
+variable "override_storage_location" {
+  description = "(Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix')"
+  type        = string
+  default     = null
+}
+
+variable "read_only_volume" {
+  description = "(Optional) Flag to set volume as read-only"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "REQUIRED: Tags to include for this environment."
   type = object({

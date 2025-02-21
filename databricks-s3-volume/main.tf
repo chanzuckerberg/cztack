@@ -14,6 +14,12 @@ locals {
   bucket_name            = var.volume_bucket != null ? var.volume_bucket : (
     var.override_bucket_name != null ? var.override_bucket_name : replace(var.catalog_name, "_", "-") # buckets don't work with underscores
   )
+
+  create_storage_credential = var.create_catalog ? true : (var.create_storage_credential ? true : false)
+
+  # Allow overriding the storage location in case of an existing bucket
+  storage_location = var.override_storage_location != null ? var.override_storage_location : "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
+
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
@@ -29,11 +35,12 @@ resource "databricks_storage_credential" "volume" {
     module.databricks_bucket
   ]
 
-  name = local.catalog_name
+  name = var.create_catalog ? local.catalog_name : local.volume_name
   aws_iam_role {
     role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
   }
   comment = "Managed by Terraform - access for ${var.catalog_name}"
+  read_only       = var.read_only_volume
 }
 
 # upstream external location sometimes takes a moment to register
@@ -47,10 +54,11 @@ resource "databricks_external_location" "volume" {
   count = var.create_storage_credential ? 1 : 0
   depends_on      = [time_sleep.wait_30_seconds]
 
-  name            = local.catalog_name
+  name            = var.create_catalog ? local.catalog_name : local.volume_name
   url             = "s3://${local.bucket_name}"
   credential_name = databricks_storage_credential.volume[0].name
   comment         = "Managed by Terraform - access for ${var.catalog_name}"
+  read_only       = var.read_only_volume
 }
 
 # New catalog, schema, and volume
@@ -87,7 +95,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = "s3://${local.bucket_name}/${local.schema_name}/${local.volume_name}"
+  storage_location = local.storage_location
   owner            = var.owner
   comment          = "This volume is managed by Terraform - ${var.volume_comment}"
 }
