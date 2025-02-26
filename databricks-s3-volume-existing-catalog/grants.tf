@@ -11,7 +11,7 @@ locals {
   volume_rw_grants = flatten([
     for volume in var.volume_buckets : [
       for principal in volume.volume_rw_grant_principals : {
-        bucket_name = volume.volume_name
+        volume_name = volume.volume_name
         principal   = principal
       }
     ]
