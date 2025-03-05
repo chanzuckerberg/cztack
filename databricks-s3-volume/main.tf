@@ -24,7 +24,7 @@ locals {
 
 ### Databricks storage credential - allows workspace to access an external location.
 ### NOTE: names need to be unique across an account, not just a workspace
-### NOTE: 
+### NOTE:
 
 resource "databricks_storage_credential" "volume" {
   count = var.create_storage_credential ? 1 : 0
