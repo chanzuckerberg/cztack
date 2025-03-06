@@ -8,14 +8,14 @@ locals {
   name                = "${var.tags.project}-${var.tags.env}"
   bucket_name_suffix  = "-dbx-catalog-bucket"
   bucket_name         = (
-    var.override_bucket_name_prefix != "" ?
+    var.override_bucket_name_prefix != null ?
     "${var.override_bucket_name_prefix}${local.bucket_name_suffix}" :
     "${local.name}${local.bucket_name_suffix}"
   )
 
   iam_role_name       = format(
     "external_location_dbx_%s_aws_role",
-    var.override_role_name_infix != "" ?
+    var.override_role_name_infix != null ?
     var.override_role_name_infix :
     var.tags.env
   )

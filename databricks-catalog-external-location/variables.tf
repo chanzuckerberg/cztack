@@ -24,6 +24,7 @@ variable "override_bucket_name_prefix" {
     Defaults to $${project}-$${env} (full name: $${project}-$${env}-dbx-catalog-bucket).
   EOT
   type        = string
+  default     = null
 }
 
 variable "override_role_name_infix" {
@@ -32,6 +33,7 @@ variable "override_role_name_infix" {
     Defaults to $${env} (full name: external_location_dbx_$${env}_aws_role)
   EOT
   type        = string
+  default     = null
 }
 
 variable "catalogs" {
