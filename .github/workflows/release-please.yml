@@ -2,21 +2,23 @@ on:
   push:
     branches:
       - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 name: release-please
 jobs:
   release-please:
-    runs-on: ubuntu-latest
+    runs-on: ARM64
     steps:
       - name: Generate token
+        uses: actions/create-github-app-token@v1
         id: generate_token
-        uses: tibdex/github-app-token@v2
         with:
-          app_id: ${{ secrets.CZI_RELEASE_PLEASE_APP_ID }}
-          private_key: ${{ secrets.CZI_RELEASE_PLEASE_PK }}
+          app-id: ${{ secrets.GH_ACTIONS_HELPER_APP_ID }}
+          private-key: ${{ secrets.GH_ACTIONS_HELPER_PK }}
       - name: release please
-        uses: google-github-actions/release-please-action@v3.5.0
+        uses: chanzuckerberg/github-actions/.github/actions/release-please-semvar@release-please-semvar-v0
         id: release
         with:
-          release-type: simple
-          token: ${{ steps.generate_token.outputs.token }}
-          bump-minor-pre-major: true
+            app_token: ${{ steps.generate_token.outputs.token }}
+            include_component_in_tag: true
