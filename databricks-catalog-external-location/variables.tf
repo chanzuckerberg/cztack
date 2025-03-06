@@ -18,6 +18,24 @@ variable "external_location_name" {
   type        = string
 }
 
+variable "override_bucket_name_prefix" {
+  description = <<-EOT
+    Override prefix of newly-created S3 bucket as the storage root of the catalog.
+    Defaults to $${project}-$${env} (full name: $${project}-$${env}-dbx-catalog-bucket).
+  EOT
+  type        = string
+  default     = null
+}
+
+variable "override_role_name_infix" {
+  description = <<-EOT
+    Override infix of IAM role used for accessing newly-created bucket.
+    Defaults to $${env} (full name: external_location_dbx_$${env}_aws_role)
+  EOT
+  type        = string
+  default     = null
+}
+
 variable "catalogs" {
   description = "List of catalogs to create with their cooresponding attributes"
   type = list(
