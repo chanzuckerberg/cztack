@@ -15,7 +15,7 @@ locals {
 
   iam_role_name_infix = coalesce(var.override_role_name_infix, var.tags.env)
   iam_role_name       = format("external_location_dbx_%s_aws_role", local.iam_role_name_infix)
-  iam_role_arn        = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
+  iam_role_arn        = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.iam_role_name}"
 }
 
 ## Bucket and policy
