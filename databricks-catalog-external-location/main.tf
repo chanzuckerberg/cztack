@@ -3,23 +3,19 @@ data "aws_caller_identity" "current" {
 }
 
 locals {
-  iam_role_prefix = "databricks"
-  path                = "/${local.iam_role_prefix}/"
-  name                = "${var.tags.project}-${var.tags.env}"
-  bucket_name_suffix  = "-dbx-catalog-bucket"
-  bucket_name         = (
-    var.override_bucket_name_prefix != null ?
-    "${var.override_bucket_name_prefix}${local.bucket_name_suffix}" :
-    "${local.name}${local.bucket_name_suffix}"
-  )
+  iam_role_namespace = "databricks"
+  iam_role_path      = "/${local.iam_role_namespace}/"
 
-  iam_role_name       = format(
-    "external_location_dbx_%s_aws_role",
-    var.override_role_name_infix != null ?
-    var.override_role_name_infix :
-    var.tags.env
+  bucket_name_prefix = coalesce(
+    var.override_bucket_name_prefix,
+    "${var.tags.project}-${var.tags.env}"
   )
-  iam_role_arn        = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.iam_role_name}"
+  bucket_name_suffix = "-dbx-catalog-bucket"
+  bucket_name        = "${local.bucket_name_prefix}${local.bucket_name_suffix}"
+
+  iam_role_name_infix = coalesce(var.override_role_name_infix, var.tags.env)
+  iam_role_name       = format("external_location_dbx_%s_aws_role", local.iam_role_name_infix)
+  iam_role_arn        = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.iam_role_name}"
 }
 
 ## Bucket and policy
@@ -72,7 +68,7 @@ module "catalog_bucket" {
 data "aws_iam_policy_document" "databricks_external_location_assume_role" {
   statement {
     principals {
-      type        = "AWS"
+      type = "AWS"
       identifiers = [
         "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"
       ]
@@ -105,7 +101,7 @@ data "aws_iam_policy_document" "databricks_external_location_assume_role" {
 
 resource "aws_iam_role" "databricks_external_location_iam_role" {
   name               = local.iam_role_name
-  path               = local.path
+  path               = local.iam_role_path
   assume_role_policy = data.aws_iam_policy_document.databricks_external_location_assume_role.json
 }
 
@@ -130,8 +126,8 @@ data "aws_iam_policy_document" "databricks_external_location_bucket_access" {
   }
 
   statement {
-    sid    = "databricksAssumeRole"
-    actions = ["sts:AssumeRole"]
+    sid       = "databricksAssumeRole"
+    actions   = ["sts:AssumeRole"]
     resources = [local.iam_role_arn]
   }
 }
@@ -148,7 +144,7 @@ resource "aws_iam_role_policy_attachment" "databricks_external_location_bucket_a
 }
 
 resource "aws_iam_role_policy" "databricks_external_location_access_role_policy" {
-  name_prefix = local.iam_role_prefix
+  name_prefix = local.iam_role_namespace
   role        = aws_iam_role.databricks_external_location_iam_role.id
   policy      = data.aws_iam_policy_document.databricks_external_location_bucket_access.json
 }
