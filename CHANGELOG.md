@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.4](https://github.com/chanzuckerberg/cztack/compare/v0.89.3...v0.89.4) (2025-03-07)
+
+
+### Bug Fixes
+
+* variable name ([#702](https://github.com/chanzuckerberg/cztack/issues/702)) ([d866ae8](https://github.com/chanzuckerberg/cztack/commit/d866ae89a1b3ccf7165e0a201c7f3358445df5cf))
+
 ## [0.89.3](https://github.com/chanzuckerberg/cztack/compare/v0.89.2...v0.89.3) (2025-02-21)
 
 
