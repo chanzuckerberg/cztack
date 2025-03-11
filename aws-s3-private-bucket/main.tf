@@ -184,7 +184,7 @@ resource "aws_kms_key" "bucket_kms_key" {
 
   description              = "This key is used to encrypt bucket objects for bucket ${var.bucket_name}"
   customer_master_key_spec = var.kms_key_type
-  tags                     = {
+  tags = {
     project   = var.project
     env       = var.env
     service   = var.service
@@ -201,7 +201,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_sse_encryp
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm     = "AES256"
+      sse_algorithm = "AES256"
     }
   }
 }

@@ -3,8 +3,8 @@
 // https://docs.databricks.com/administration-guide/multiworkspace/iam-role.html#language-Your%C2%A0VPC,%C2%A0custom
 locals {
   dbx_volume_aws_role_name = "${var.catalog_name}-volumes-role"
-  path                   = "/databricks/"
-  databricks_aws_account = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
+  path                     = "/databricks/"
+  databricks_aws_account   = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
@@ -31,8 +31,8 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "volume" {
-  for_each        = { for bucket in var.volume_buckets : bucket.volume_name => bucket }
-  depends_on      = [time_sleep.wait_30_seconds]
+  for_each   = { for bucket in var.volume_buckets : bucket.volume_name => bucket }
+  depends_on = [time_sleep.wait_30_seconds]
 
   name            = "${each.value.volume_name}-external-location"
   url             = "s3://${each.value.bucket_name}"

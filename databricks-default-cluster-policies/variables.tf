@@ -16,27 +16,27 @@ variable "additional_instance_profile_arns" {
 
 variable "databricks_log_bucket" {
   description = "Name of S3 bucket to store Databricks logs"
-  type = string
+  type        = string
 }
 
 variable "policy_name_prefix" {
   description = "Prefix for policy names"
-  type = string
+  type        = string
 }
 
 variable "personal_compute_pool_ids" {
   description = "List of personal compute pool ids allowed"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "policy_map" {
   description = "Map of policy names to groups"
-  type = list(map(list(string)))
+  type        = list(map(list(string)))
 }
 
 variable "power_user_group_name" {
   description = "Name of the power user group"
-  type = string
-  default = "Power Users"
+  type        = string
+  default     = "Power Users"
 }

@@ -55,7 +55,7 @@ resource "aws_s3_bucket_policy" "public_bucket_policy" {
   bucket = aws_s3_bucket.bucket.id
   policy = data.aws_iam_policy_document.bucket_policy.json
   # Wait for the public access block to be applied before applying the bucket policy
-  depends_on = [ aws_s3_bucket_public_access_block.remove_public_access ]
+  depends_on = [aws_s3_bucket_public_access_block.remove_public_access]
 }
 
 data "aws_iam_policy_document" "bucket_policy" {

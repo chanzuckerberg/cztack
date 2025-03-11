@@ -12,8 +12,8 @@ resource "aws_ssm_parameter" "parameter" {
   name  = "/${local.service_name}/${element(keys(var.parameters), count.index)}"
   value = lookup(var.parameters, element(keys(var.parameters), count.index))
 
-  type      = "SecureString"
-  key_id    = data.aws_kms_key.key.id
+  type   = "SecureString"
+  key_id = data.aws_kms_key.key.id
 
   tags = {
     managedBy = "terraform"
