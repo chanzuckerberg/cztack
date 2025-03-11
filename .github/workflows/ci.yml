@@ -34,7 +34,7 @@ jobs:
               uses: golangci/golangci-lint-action@v6
               with:
                 github-token: ${{ secrets.GITHUB_TOKEN }}
-                version: v1.60.3
+                version: v1.64.6
     test:
         name: test ${{ matrix.module }}
         needs: get-modules
