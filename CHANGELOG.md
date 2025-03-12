@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.5](https://github.com/chanzuckerberg/cztack/compare/v0.89.4...v0.89.5) (2025-03-12)
+
+
+### Bug Fixes
+
+* format all of the modules & upgraded golangci-lint for lint errors ([#707](https://github.com/chanzuckerberg/cztack/issues/707)) ([46ed8a2](https://github.com/chanzuckerberg/cztack/commit/46ed8a262a721a67354e012cc581fe3565765ad4))
+
 ## [0.89.4](https://github.com/chanzuckerberg/cztack/compare/v0.89.3...v0.89.4) (2025-03-07)
 
 
