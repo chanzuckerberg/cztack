@@ -3,8 +3,6 @@ env:
 jobs:
     get-modules:
         permissions:
-            contents: read
-            id-token: write
         outputs:
             matrix: ${{steps.list_dirs.outputs.matrix}}
         runs-on: ubuntu-20.04
