@@ -1,7 +1,7 @@
 locals {
-  iam_path             = coalesce(var.iam_path, "/${var.eks_cluster.cluster_id}/")
-  oidc_provider_url    = replace(var.eks_cluster.cluster_oidc_issuer_url, "https://", "")
-  name                 = "${var.tags.service}-${var.tags.env}-${var.tags.project}"
+  iam_path          = coalesce(var.iam_path, "/${var.eks_cluster.cluster_id}/")
+  oidc_provider_url = replace(var.eks_cluster.cluster_oidc_issuer_url, "https://", "")
+  name              = "${var.tags.service}-${var.tags.env}-${var.tags.project}"
 }
 
 data "aws_iam_policy_document" "assume-role" {

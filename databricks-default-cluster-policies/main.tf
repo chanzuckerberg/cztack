@@ -50,9 +50,9 @@ locals {
   } : {}
   addtnl_global_overrides = {
     # Allow users to specify the availability zone
-    "aws_attributes.zone_id": {
-      "type": "unlimited",
-      "hidden": false
+    "aws_attributes.zone_id" : {
+      "type" : "unlimited",
+      "hidden" : false
     }
   }
 }
@@ -450,27 +450,27 @@ module "single_node_cluster_policy" {
       "pattern" : "([mrcip]+[3-5]+[d]*\\.[0-1]{0,1}xlarge)",
       "hidden" : false
     },
-    "aws_attributes.availability": {
-      "type": "allowlist",
-      "values": [
+    "aws_attributes.availability" : {
+      "type" : "allowlist",
+      "values" : [
         "ON_DEMAND",
         "SPOT_WITH_FALLBACK"
       ],
-      "hidden": false
+      "hidden" : false
     },
-    "runtime_engine": {
-      "type": "unlimited",
-      "defaultValue": "STANDARD",
-      "hidden": false
+    "runtime_engine" : {
+      "type" : "unlimited",
+      "defaultValue" : "STANDARD",
+      "hidden" : false
     },
-    "spark_conf.spark.databricks.cluster.profile":{
-      "type":"fixed",
-      "value":"singleNode",
-      "hidden":true
+    "spark_conf.spark.databricks.cluster.profile" : {
+      "type" : "fixed",
+      "value" : "singleNode",
+      "hidden" : true
     },
-    "num_workers":{
-      "type":"range",
-      "maxValue":0
+    "num_workers" : {
+      "type" : "range",
+      "maxValue" : 0
     }
     "data_security_mode" : {
       "type" : "whitelist",

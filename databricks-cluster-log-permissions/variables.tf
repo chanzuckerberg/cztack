@@ -32,15 +32,15 @@ variable "global_reader_env" {
 
 variable "destination_account_id" {
   description = "Account ID for the logs destination AWS account"
-  type = string
+  type        = string
 }
 
 variable "destination_account_region" {
   description = "Region for the logs destination AWS account"
-  type = string
+  type        = string
 }
 
 variable "destination_account_assume_role_name" {
   description = "Role name to assume in the logs destination AWS account"
-  type = string
+  type        = string
 }

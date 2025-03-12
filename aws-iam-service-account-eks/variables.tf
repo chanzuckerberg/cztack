@@ -43,6 +43,6 @@ variable "service_account_name" {
 }
 
 variable "tags" {
-  type = object({ project : string, env : string, service : string, owner : string, managedBy : string })
+  type        = object({ project : string, env : string, service : string, owner : string, managedBy : string })
   description = "Basic metadata about the service account"
 }

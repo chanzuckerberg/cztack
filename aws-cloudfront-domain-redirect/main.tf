@@ -1,10 +1,10 @@
 locals {
   tags = {
-    env       = var.env
-    owner     = var.owner
-    service   = var.service
-    project   = var.project
-    managedBy = "terraform"
+    env           = var.env
+    owner         = var.owner
+    service       = var.service
+    project       = var.project
+    managedBy     = "terraform"
     source_domain = var.source_domain
     target_domain = var.target_domain
   }
@@ -12,7 +12,7 @@ locals {
 
 resource "aws_s3_bucket" "redirect_bucket" {
   bucket = (var.redirect_bucket_name == null) ? "redirect-${var.source_domain}-to-${var.target_domain}" : var.redirect_bucket_name
-  
+
   website {
     redirect_all_requests_to = "https://${var.target_domain}"
   }

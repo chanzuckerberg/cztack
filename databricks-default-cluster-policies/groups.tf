@@ -2,15 +2,15 @@ locals {
   ws_policy_name_prefixes = toset([
     var.policy_name_prefix,
   ])
-  
+
   # Define the policies with existing groups mapped to each policy
   policies = var.policy_map
 
   # Generate full workspace policy names by prefixing policy names
   all_ws_policy_names = flatten([
     for prefix in local.ws_policy_name_prefixes : [
-      for policy_map in local.policies : 
-        "${prefix}${keys(policy_map)[0]}"
+      for policy_map in local.policies :
+      "${prefix}${keys(policy_map)[0]}"
     ]
   ])
 

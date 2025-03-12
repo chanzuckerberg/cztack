@@ -165,9 +165,9 @@ variable "iam_database_authentication_enabled" {
 }
 
 variable "iam_roles" {
-    type        = list(string)
-    description = "A list of ARNs for the IAM roles to associate to the RDS Cluster."
-    default     = []
+  type        = list(string)
+  description = "A list of ARNs for the IAM roles to associate to the RDS Cluster."
+  default     = []
 }
 
 variable "db_deletion_protection" {

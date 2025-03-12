@@ -11,7 +11,7 @@ locals {
 module "assume_role_policy" {
   source             = "../aws-assume-role-policy"
   source_account_ids = var.source_account_ids
-  saml_idp_arns      = toset(flatten([for idp in var.saml_idps: idp.saml_idp_arns]))
+  saml_idp_arns      = toset(flatten([for idp in var.saml_idps : idp.saml_idp_arns]))
   oidc               = var.oidc
   env                = var.env
   owner              = var.owner

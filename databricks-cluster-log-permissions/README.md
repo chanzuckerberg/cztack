@@ -60,8 +60,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_dbx_instance_profile_id"></a> [dbx\_instance\_profile\_id](#output\_dbx\_instance\_profile\_id) | ID of the Databricks instance profile created for writing logs |
 | <a name="output_default_logging_role_arn"></a> [default\_logging\_role\_arn](#output\_default\_logging\_role\_arn) | ARN of the AWS IAM role created for default logs access |
 | <a name="output_rw_logging_role_arn"></a> [rw\_logging\_role\_arn](#output\_rw\_logging\_role\_arn) | ARN of the AWS IAM role created for read and write logs access |
 | <a name="output_rw_logging_role_instance_profile_arn"></a> [rw\_logging\_role\_instance\_profile\_arn](#output\_rw\_logging\_role\_instance\_profile\_arn) | ARN of the AWS instance profile created for read and write logs access |
-| <a name="output_dbx_instance_profile_id"></a> [rw\_dbx\_instance\_profile\_id](#output\_dbx\_instance\_profile\_id) | ID of the Databricks instance profile created for writing logs |
 <!-- END -->

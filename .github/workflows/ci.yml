@@ -1,114 +1,119 @@
 env:
-  AWS_EC2_METADATA_DISABLED: true
+    AWS_EC2_METADATA_DISABLED: true
 jobs:
-  get-modules:
-    outputs:
-      matrix: ${{steps.list_dirs.outputs.matrix}}
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - id: list_dirs
-        run: echo "::set-output name=matrix::$(ls -d */|sed -e 's/\///'|grep -v 'bless-ca\|scripts'|jq -cnR '[inputs | select(length>0)]')"
-  lint:
-    name: lint
-    runs-on: ARM64
-    steps:
-      - name: Generate token
-        id: generate_token
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ secrets.CZI_GITHUB_HELPER_APP_ID }}
-          private_key: ${{ secrets.CZI_GITHUB_HELPER_PK }}
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ steps.generate_token.outputs.token }}
-          ref: ${{ github.event.pull_request.head.ref }}
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-          cache: true
-          go-version: '>=1.19.0'
-          cache-dependency-path: |
-            go.sum
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          version: v1.60.3
-          github-token: ${{ secrets.GITHUB_TOKEN }}  
-
-  test:
-    name: test ${{ matrix.module }}
-    needs: get-modules
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v3
-      - id: filter
-        uses: dorny/paths-filter@v2
-        with:
-          filters: |
-            module:
-              - '${{ matrix.module }}/**'
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 0.14.5
-          terraform_wrapper: "false"
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.18
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Install bless provider
-        run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Check bless provider
-        run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Install Snowflake provider
-        run: curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/v0.53.0/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d v0.53.0
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Check Snowflake provider
-        run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
-      - if: github.event == 'push' || steps.filter.outputs.module == 'true'
-        name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: us-west-2
-          role-duration-seconds: 1200
-          role-session-name: cztackCICDModuleTests
-          role-to-assume: "arn:aws:iam::119435350371:role/ci/cztack-1"
-    strategy:
-      fail-fast: false
-      matrix:
-        module:
-          - ${{fromJson(needs.get-modules.outputs.matrix)}}
-          - snowflake-account-grant-all
-          - snowflake-database-grant-all
-          - snowflake-external-table-grant-all
-          - snowflake-file-format-grant-all
-          - snowflake-function-grant-all
-          - snowflake-integration-grant-all
-          - snowflake-masking-policy-grant-all
-          - snowflake-materialized-view-grant-all
-          - snowflake-pipe-grant-all
-          - snowflake-procedure-grant-all
-          - snowflake-resource-monitor-grant-all
-          - snowflake-row-access-policy-grant-all
-          - snowflake-schema-grant-all
-          - snowflake-sequence-grant-all
-          - snowflake-stage-grant-all
-          - snowflake-stream-grant-all
-          - snowflake-table-grant-all
-          - snowflake-task-grant-all
-          - snowflake-view-grant-all
-          - snowflake-warehouse-grant-all
-    timeout-minutes: 45
+    get-modules:
+        permissions: {}
+        outputs:
+            matrix: ${{steps.list_dirs.outputs.matrix}}
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v3
+            - id: list_dirs
+              run: echo "::set-output name=matrix::$(ls -d */|sed -e 's/\///'|grep -v 'bless-ca\|scripts'|jq -cnR '[inputs | select(length>0)]')"
+    lint:
+        name: lint
+        runs-on: ARM64
+        permissions:
+            contents: read
+            id-token: write
+        steps:
+            - id: generate_token
+              name: Generate token
+              uses: tibdex/github-app-token@v2
+              with:
+                app_id: ${{ secrets.CZI_GITHUB_HELPER_APP_ID }}
+                private_key: ${{ secrets.CZI_GITHUB_HELPER_PK }}
+            - uses: actions/checkout@v4
+              with:
+                ref: ${{ github.event.pull_request.head.ref }}
+                token: ${{ steps.generate_token.outputs.token }}
+            - uses: actions/setup-go@v5
+              with:
+                cache: true
+                cache-dependency-path: |
+                    go.sum
+                go-version: '>=1.19.0'
+                go-version-file: go.mod
+            - name: golangci-lint
+              uses: golangci/golangci-lint-action@v6
+              with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                version: v1.64.6
+    test:
+        name: test ${{ matrix.module }}
+        needs: get-modules
+        permissions:
+            contents: read
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - id: filter
+              uses: dorny/paths-filter@v2
+              with:
+                filters: |
+                    module:
+                      - '${{ matrix.module }}/**'
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: 0.14.5
+                terraform_wrapper: "false"
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              uses: actions/setup-go@v2
+              with:
+                go-version: 1.18
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Install bless provider
+              run: curl -s https://raw.githubusercontent.com/chanzuckerberg/terraform-provider-bless/main/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Check bless provider
+              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-bless*
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Install Snowflake provider
+              run: curl -s https://raw.githubusercontent.com/Snowflake-Labs/terraform-provider-snowflake/v0.53.0/download.sh | bash -s -- -b $HOME/.terraform.d/plugins/ -d v0.53.0
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Check Snowflake provider
+              run: ls -al $HOME/.terraform.d/plugins/terraform-provider-snowflake*
+            - if: github.event == 'push' || steps.filter.outputs.module == 'true'
+              name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                aws-region: us-west-2
+                role-duration-seconds: 1200
+                role-session-name: cztackCICDModuleTests
+                role-to-assume: arn:aws:iam::119435350371:role/ci/cztack-1
+        strategy:
+            fail-fast: false
+            matrix:
+                module:
+                    - ${{fromJson(needs.get-modules.outputs.matrix)}}
+                    - snowflake-account-grant-all
+                    - snowflake-database-grant-all
+                    - snowflake-external-table-grant-all
+                    - snowflake-file-format-grant-all
+                    - snowflake-function-grant-all
+                    - snowflake-integration-grant-all
+                    - snowflake-masking-policy-grant-all
+                    - snowflake-materialized-view-grant-all
+                    - snowflake-pipe-grant-all
+                    - snowflake-procedure-grant-all
+                    - snowflake-resource-monitor-grant-all
+                    - snowflake-row-access-policy-grant-all
+                    - snowflake-schema-grant-all
+                    - snowflake-sequence-grant-all
+                    - snowflake-stage-grant-all
+                    - snowflake-stream-grant-all
+                    - snowflake-table-grant-all
+                    - snowflake-tag-grant-all
+                    - snowflake-task-grant-all
+                    - snowflake-user-grant-all
+                    - snowflake-view-grant-all
+                    - snowflake-warehouse-grant-all
+        timeout-minutes: 45
 name: CI
 "on":
-  pull_request: null
-  push:
-    branches:
-      - main
+    pull_request: null
+    push:
+        branches:
+            - main

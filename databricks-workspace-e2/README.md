@@ -30,6 +30,7 @@
 | [aws_security_group.databricks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [databricks_mws_credentials.databricks](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_credentials) | resource |
 | [databricks_mws_networks.networking](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_networks) | resource |
+| [databricks_mws_permission_assignment.tfe_service_principal_admin](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_permission_assignment) | resource |
 | [databricks_mws_storage_configurations.databricks](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_storage_configurations) | resource |
 | [databricks_mws_workspaces.databricks](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
@@ -37,6 +38,7 @@
 | [aws_iam_policy_document.databricks-setup-assume-role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [databricks_service_principal.tfe_service_principal](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/service_principal) | data source |
 
 ## Inputs
 
@@ -50,6 +52,7 @@
 | <a name="input_private_subnets"></a> [private\_subnets](#input\_private\_subnets) | List of private subnets. | `list(string)` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | A high level name, typically the name of the site. | `string` | n/a | yes |
 | <a name="input_service"></a> [service](#input\_service) | The service. Aka databricks-workspace. | `string` | n/a | yes |
+| <a name="input_tfe_service_principal_id"></a> [tfe\_service\_principal\_id](#input\_tfe\_service\_principal\_id) | ID for the service principal for Terraform Enterprise, if available. Will be added as a workspace admin | `string` | `null` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the VPC. | `string` | n/a | yes |
 | <a name="input_workspace_name_override"></a> [workspace\_name\_override](#input\_workspace\_name\_override) | Override the workspace name. If not set, the workspace name will be set to the project, env, and service. | `string` | `null` | no |
 

@@ -5,13 +5,13 @@ locals {
   unity_aws_role_name = "${var.catalog_name}-unity"
 
   # Create non-hyphenated versions of the catalog and schema names if catalog and/or schema doesnt exist. Else, use the provided names
-  catalog_name        = var.create_catalog ? replace(var.catalog_name, "-", "_") : var.catalog_name
-  schema_name         = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
-  volume_name         = replace(var.volume_name, "-", "_")
+  catalog_name = var.create_catalog ? replace(var.catalog_name, "-", "_") : var.catalog_name
+  schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
+  volume_name  = replace(var.volume_name, "-", "_")
 
   path                   = "/databricks/"
-  databricks_aws_account = "414351767826"                                                                      # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
-  bucket_name            = var.volume_bucket != null ? var.volume_bucket : (
+  databricks_aws_account = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
+  bucket_name = var.volume_bucket != null ? var.volume_bucket : (
     var.override_bucket_name != null ? var.override_bucket_name : replace(var.catalog_name, "_", "-") # buckets don't work with underscores
   )
 
@@ -39,8 +39,8 @@ resource "databricks_storage_credential" "volume" {
   aws_iam_role {
     role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
   }
-  comment = "Managed by Terraform - access for ${var.catalog_name}"
-  read_only       = var.read_only_volume
+  comment   = "Managed by Terraform - access for ${var.catalog_name}"
+  read_only = var.read_only_volume
 }
 
 # upstream external location sometimes takes a moment to register
@@ -51,8 +51,8 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "volume" {
-  count = var.create_storage_credential ? 1 : 0
-  depends_on      = [time_sleep.wait_30_seconds]
+  count      = var.create_storage_credential ? 1 : 0
+  depends_on = [time_sleep.wait_30_seconds]
 
   name            = var.create_catalog ? local.catalog_name : local.volume_name
   url             = "s3://${local.bucket_name}"
@@ -91,7 +91,7 @@ resource "databricks_schema" "volume" {
 
 resource "databricks_volume" "volume" {
   depends_on       = [databricks_external_location.volume, databricks_schema.volume]
-  name             = "${local.volume_name}"
+  name             = local.volume_name
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"

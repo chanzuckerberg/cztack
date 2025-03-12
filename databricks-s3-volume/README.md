@@ -11,6 +11,7 @@
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 | <a name="provider_databricks"></a> [databricks](#provider\_databricks) | n/a |
+| <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Modules
 
@@ -27,6 +28,7 @@
 | [aws_iam_role_policy_attachment.dbx_unity_aws_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [databricks_catalog.volume](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/catalog) | resource |
 | [databricks_external_location.volume](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/external_location) | resource |
+| [databricks_grant.catalog_all_privileges](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/grant) | resource |
 | [databricks_grant.catalog_r](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/grant) | resource |
 | [databricks_grant.catalog_rw](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/grant) | resource |
 | [databricks_grant.schema_r](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/grant) | resource |
@@ -36,6 +38,7 @@
 | [databricks_schema.volume](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/schema) | resource |
 | [databricks_storage_credential.volume](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/storage_credential) | resource |
 | [databricks_volume.volume](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/volume) | resource |
+| [time_sleep.wait_30_seconds](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.databricks-s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.dbx_unity_aws_role_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -45,16 +48,22 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_rw_bucket_grant_arns"></a> [additional\_rw\_bucket\_grant\_arns](#input\_additional\_rw\_bucket\_grant\_arns) | (Optional) Additional AWS ARNs to grant read/write permissions to on the bucket (may be necessary for service principals, instance profiles, or users) | `list(string)` | `[]` | no |
+| <a name="input_additional_rw_bucket_grant_arns"></a> [additional\_rw\_bucket\_grant\_arns](#input\_additional\_rw\_bucket\_grant\_arns) | (Optional) Additional AWS ARNs to grant read/write permissions to on the bucket (may be necessary for service principals, instance profiles, or users | `list(string)` | `[]` | no |
 | <a name="input_bucket_object_ownership"></a> [bucket\_object\_ownership](#input\_bucket\_object\_ownership) | Set default owner of all objects within bucket (e.g., bucket vs. object owner) | `string` | `null` | no |
+| <a name="input_catalog_all_priv_grant_principals"></a> [catalog\_all\_priv\_grant\_principals](#input\_catalog\_all\_priv\_grant\_principals) | (Optional) Databricks groups to grant all-privileges permission to on the catalog. Owner is included | `list(string)` | `[]` | no |
 | <a name="input_catalog_name"></a> [catalog\_name](#input\_catalog\_name) | Name of the Databricks existing catalog to add the volume to | `string` | n/a | yes |
-| <a name="input_catalog_owner"></a> [catalog\_owner](#input\_catalog\_owner) | User or group name of the catalog owner | `string` | n/a | yes |
-| <a name="input_create_catalog"></a> [create\_catalog](#input\_create\_catalog) | Flag to create a new catalog or look for an existing one with the given name | `bool` | n/a | yes |
 | <a name="input_catalog_r_grant_principals"></a> [catalog\_r\_grant\_principals](#input\_catalog\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the catalog | `list(string)` | `[]` | no |
 | <a name="input_catalog_rw_grant_principals"></a> [catalog\_rw\_grant\_principals](#input\_catalog\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the catalog | `list(string)` | `[]` | no |
+| <a name="input_create_catalog"></a> [create\_catalog](#input\_create\_catalog) | Flag to create a new catalog or look for an existing one with the given name | `bool` | n/a | yes |
+| <a name="input_create_schema"></a> [create\_schema](#input\_create\_schema) | Flag to create a new catalog or look for an existing one with the given name | `bool` | n/a | yes |
+| <a name="input_create_storage_credential"></a> [create\_storage\_credential](#input\_create\_storage\_credential) | (Optional) Flag to create a new Databricks storage credential or look for an existing one for the given bucket\_name | `bool` | `true` | no |
 | <a name="input_metastore_id"></a> [metastore\_id](#input\_metastore\_id) | ID of metastore to create catalog in | `string` | n/a | yes |
-| <a name="input_create_schema"></a> [create\_schema](#input\_create\_schema) | Flag to create a new schema or look for an existing one with the given name | `bool` | n/a | yes |
-| <a name="input_schema_name"></a> [schema\_name](#input\_schema\_name) | Name of the Databricks existing schema to add the volume to | `string` | n/a | yes |
+| <a name="input_override_bucket_name"></a> [override\_bucket\_name](#input\_override\_bucket\_name) | (Optional) Name of the S3 bucket to create or use for Databricks volume, overriding the default | `string` | `null` | no |
+| <a name="input_override_policy_documents"></a> [override\_policy\_documents](#input\_override\_policy\_documents) | (Optional) Additional bucket policies to apply to the bucket. These should already be in JSON | `list(string)` | `[]` | no |
+| <a name="input_override_storage_location"></a> [override\_storage\_location](#input\_override\_storage\_location) | (Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix') | `string` | `null` | no |
+| <a name="input_owner"></a> [owner](#input\_owner) | User or group name of the owner - will be applied to the catalog, schema, and volume, if applicable | `string` | n/a | yes |
+| <a name="input_read_only_volume"></a> [read\_only\_volume](#input\_read\_only\_volume) | (Optional) Flag to set volume as read-only | `bool` | `false` | no |
+| <a name="input_schema_name"></a> [schema\_name](#input\_schema\_name) | Name of the Databricks schema to add the volume to | `string` | n/a | yes |
 | <a name="input_schema_r_grant_principals"></a> [schema\_r\_grant\_principals](#input\_schema\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the schema | `list(string)` | `[]` | no |
 | <a name="input_schema_rw_grant_principals"></a> [schema\_rw\_grant\_principals](#input\_schema\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the schema | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | REQUIRED: Tags to include for this environment. | <pre>object({<br>    project : string<br>    env : string<br>    service : string<br>    owner : string<br>    managedBy : string<br>  })</pre> | n/a | yes |
@@ -70,10 +79,10 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dbx_unity_aws_role_arn"></a> [dbx\_unity\_aws\_role\_arn](#output\_dbx\_unity\_aws\_role\_arn) | n/a |
-| <a name="output_volume_path"></a> [volume\_path](#output\_volume\_path) | n/a |
-| <a name="output_volume_bucket_name"></a> [volume\_bucket\_name](#output\_volume\_bucket\_name) | n/a |
 | <a name="output_catalog_name"></a> [catalog\_name](#output\_catalog\_name) | n/a |
+| <a name="output_dbx_unity_aws_role_arn"></a> [dbx\_unity\_aws\_role\_arn](#output\_dbx\_unity\_aws\_role\_arn) | n/a |
 | <a name="output_schema_name"></a> [schema\_name](#output\_schema\_name) | n/a |
+| <a name="output_volume_bucket_name"></a> [volume\_bucket\_name](#output\_volume\_bucket\_name) | n/a |
 | <a name="output_volume_name"></a> [volume\_name](#output\_volume\_name) | n/a |
+| <a name="output_volume_path"></a> [volume\_path](#output\_volume\_path) | n/a |
 <!-- END -->
