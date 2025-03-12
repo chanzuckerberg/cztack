@@ -21,7 +21,7 @@ variable "friendly_key_identifier" {
 }
 
 variable "write_metadata_to_params" {
-  type = bool
+  type        = bool
   description = <<EOF
   Whether you want to include the clientID and KMS Key Alias grouped together as securestring parameters in JSON format. If true, module will write these details to a path based on the env, project and service"
   They will be written following path:
@@ -48,6 +48,6 @@ variable "tags" {
 }
 
 variable "assume_role_name" {
-  type = string
+  type        = string
   description = "Name of the role that your Terraform environment can assume."
 }

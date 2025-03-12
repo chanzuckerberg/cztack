@@ -13,7 +13,7 @@ output "rw_logging_role_instance_profile_arn" {
   value       = one(aws_iam_instance_profile.cluster_log_cluster_rw[*].arn)
 }
 
-output "dbx_instance_profile_id"{
+output "dbx_instance_profile_id" {
   description = "ID of the Databricks instance profile created for writing logs"
   value       = databricks_instance_profile.cluster_log_cluster.id
 }

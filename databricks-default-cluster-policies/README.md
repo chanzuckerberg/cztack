@@ -24,6 +24,7 @@
 | <a name="module_legacy_shared_compute_cluster_policy"></a> [legacy\_shared\_compute\_cluster\_policy](#module\_legacy\_shared\_compute\_cluster\_policy) | ../databricks-cluster-policy | n/a |
 | <a name="module_personal_compute_cluster_policy"></a> [personal\_compute\_cluster\_policy](#module\_personal\_compute\_cluster\_policy) | ../databricks-cluster-policy | n/a |
 | <a name="module_power_user_compute_cluster_policy"></a> [power\_user\_compute\_cluster\_policy](#module\_power\_user\_compute\_cluster\_policy) | ../databricks-cluster-policy | n/a |
+| <a name="module_single_node_cluster_policy"></a> [single\_node\_cluster\_policy](#module\_single\_node\_cluster\_policy) | ../databricks-cluster-policy | n/a |
 | <a name="module_small_clusters"></a> [small\_clusters](#module\_small\_clusters) | ../databricks-cluster-policy | n/a |
 | <a name="module_small_job_compute_cluster_policy"></a> [small\_job\_compute\_cluster\_policy](#module\_small\_job\_compute\_cluster\_policy) | ../databricks-cluster-policy | n/a |
 | <a name="module_superset_compute_cluster_policy"></a> [superset\_compute\_cluster\_policy](#module\_superset\_compute\_cluster\_policy) | ../databricks-cluster-policy | n/a |
@@ -32,8 +33,10 @@
 
 | Name | Type |
 |------|------|
-| [databricks_group.power_user_group](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
+| [databricks_group.ws_policy_groups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
+| [databricks_group_member.ws_policy_group_members](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [databricks_group.groups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/group) | data source |
 
 ## Inputs
 
@@ -44,7 +47,9 @@
 | <a name="input_databricks_log_bucket"></a> [databricks\_log\_bucket](#input\_databricks\_log\_bucket) | Name of S3 bucket to store Databricks logs | `string` | n/a | yes |
 | <a name="input_databricks_workspace_id"></a> [databricks\_workspace\_id](#input\_databricks\_workspace\_id) | Databricks workspace\_id for tagging | `string` | n/a | yes |
 | <a name="input_personal_compute_pool_ids"></a> [personal\_compute\_pool\_ids](#input\_personal\_compute\_pool\_ids) | List of personal compute pool ids allowed | `list(string)` | `[]` | no |
-| <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | Prefix for policy names | `string` | `""` | no |
+| <a name="input_policy_map"></a> [policy\_map](#input\_policy\_map) | Map of policy names to groups | `list(map(list(string)))` | n/a | yes |
+| <a name="input_policy_name_prefix"></a> [policy\_name\_prefix](#input\_policy\_name\_prefix) | Prefix for policy names | `string` | n/a | yes |
+| <a name="input_power_user_group_name"></a> [power\_user\_group\_name](#input\_power\_user\_group\_name) | Name of the power user group | `string` | `"Power Users"` | no |
 
 ## Outputs
 
