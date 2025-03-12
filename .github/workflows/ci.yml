@@ -2,7 +2,7 @@ env:
     AWS_EC2_METADATA_DISABLED: true
 jobs:
     get-modules:
-        permissions:
+        permissions: {}
         outputs:
             matrix: ${{steps.list_dirs.outputs.matrix}}
         runs-on: ubuntu-20.04
