@@ -11,8 +11,8 @@ resource "aws_ssm_parameter" "parameter" {
   name     = "/${local.service_name}/${each.key}"
   value    = each.value
 
-  type      = "SecureString"
-  key_id    = data.aws_kms_key.key.id
+  type   = "SecureString"
+  key_id = data.aws_kms_key.key.id
 
   tags = {
     managedBy = "terraform"

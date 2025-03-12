@@ -72,6 +72,7 @@ you just need to set the JWT from step 5 to the "client_assertion" value while m
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_assume_role_name"></a> [assume\_role\_name](#input\_assume\_role\_name) | Name of the role that your Terraform environment can assume. | `string` | n/a | yes |
 | <a name="input_friendly_key_identifier"></a> [friendly\_key\_identifier](#input\_friendly\_key\_identifier) | A name for the key configuration in the okta app, something you will recognize for yourself and the project. | `string` | n/a | yes |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | The Key ID or alias of the AWS KMS Key. It has to be available in the same region and account as the configured provider. | `string` | n/a | yes |
 | <a name="input_okta_configuration"></a> [okta\_configuration](#input\_okta\_configuration) | Details needed to configure an okta app. Its token auth method is private\_key\_jwt | <pre>object({<br>    label          = string<br>    type           = string<br>    grant_types    = list(string)<br>    omit_secret    = bool<br>    response_types = list(string)<br>    pkce_required  = bool<br>  })</pre> | n/a | yes |

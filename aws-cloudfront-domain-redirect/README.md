@@ -65,6 +65,7 @@ module domain-redirect {
 | <a name="input_lambda_cloudwatch_log_retention_in_days"></a> [lambda\_cloudwatch\_log\_retention\_in\_days](#input\_lambda\_cloudwatch\_log\_retention\_in\_days) | Retention policy (in days) for Lambda function's logs in Cloudwatch | `number` | `null` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | Project for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
+| <a name="input_redirect_bucket_name"></a> [redirect\_bucket\_name](#input\_redirect\_bucket\_name) | Unique name for the redirect bucket (provide if possible). | `string` | `null` | no |
 | <a name="input_service"></a> [service](#input\_service) | Service for tagging and naming. See [doc](../README.md#consistent-tagging) | `string` | n/a | yes |
 | <a name="input_source_domain"></a> [source\_domain](#input\_source\_domain) | The domain that will be redirected from. | `string` | n/a | yes |
 | <a name="input_source_domain_zone_id"></a> [source\_domain\_zone\_id](#input\_source\_domain\_zone\_id) | Route53 zone id for the source domain. | `string` | n/a | yes |

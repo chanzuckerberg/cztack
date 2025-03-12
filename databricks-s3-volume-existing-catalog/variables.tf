@@ -15,12 +15,12 @@ variable "schema_name" {
 
 variable "volume_buckets" {
   description = "List of external buckets and their corresponding groups that should have r/rw access to it"
-  type        = list(object({
+  type = list(object({
     volume_name : string
     bucket_name : string
-    bucket_prefix: optional(string, "")
-    volume_r_grant_principals: optional(list(string), [])
-    volume_rw_grant_principals: optional(list(string), [])
+    bucket_prefix : optional(string, "")
+    volume_r_grant_principals : optional(list(string), [])
+    volume_rw_grant_principals : optional(list(string), [])
   }))
 }
 

@@ -30,7 +30,7 @@ module "params" {
   owner   = var.tags.owner
 
   parameters = {
-    "client_id"     = okta_app_oauth.idp_api.client_id
-    "kms_key_id"    = var.kms_key_id
+    "client_id"  = okta_app_oauth.idp_api.client_id
+    "kms_key_id" = var.kms_key_id
   }
 }
