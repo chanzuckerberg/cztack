@@ -12,6 +12,9 @@ jobs:
     lint:
         name: lint
         runs-on: ARM64
+        permissions:
+            contents: read
+            id-token: write
         steps:
             - id: generate_token
               name: Generate token
