@@ -142,6 +142,12 @@ variable "override_storage_location" {
   default     = null
 }
 
+variable "override_catalog_storage_root" {
+  description = "(Optional) Override storage root of catalog instead of using bucket name"
+  type        = string
+  default     = null
+}
+
 variable "read_only_volume" {
   description = "(Optional) Flag to set volume as read-only"
   type        = bool
