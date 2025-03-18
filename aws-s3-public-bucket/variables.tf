@@ -68,3 +68,9 @@ variable "logging_bucket" {
   description = "Log bucket name and prefix to enable logs for this bucket"
   default     = null
 }
+
+variable "append_public_suffix" {
+  type        = bool
+  description = "Whether to append -public at the end of the bucket name. Only set this to false for buckets that live in designated AWS accounts, like for AWS Open Data."
+  default     = true
+}
