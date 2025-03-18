@@ -59,6 +59,7 @@
 | <a name="input_create_storage_credential"></a> [create\_storage\_credential](#input\_create\_storage\_credential) | (Optional) Flag to create a new Databricks storage credential or look for an existing one for the given bucket\_name | `bool` | `true` | no |
 | <a name="input_metastore_id"></a> [metastore\_id](#input\_metastore\_id) | ID of metastore to create catalog in | `string` | n/a | yes |
 | <a name="input_override_bucket_name"></a> [override\_bucket\_name](#input\_override\_bucket\_name) | (Optional) Name of the S3 bucket to create or use for Databricks volume, overriding the default | `string` | `null` | no |
+| <a name="input_override_catalog_storage_root"></a> [override\_catalog\_storage\_root](#input\_override\_catalog\_storage\_root) | (Optional) Override storage root of catalog instead of using bucket name | `string` | `null` | no |
 | <a name="input_override_policy_documents"></a> [override\_policy\_documents](#input\_override\_policy\_documents) | (Optional) Additional bucket policies to apply to the bucket. These should already be in JSON | `list(string)` | `[]` | no |
 | <a name="input_override_storage_location"></a> [override\_storage\_location](#input\_override\_storage\_location) | (Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix') | `string` | `null` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | User or group name of the owner - will be applied to the catalog, schema, and volume, if applicable | `string` | n/a | yes |

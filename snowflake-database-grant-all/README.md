@@ -9,7 +9,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 0.20.0 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | 0.34.0 |
 
 ## Modules
 
