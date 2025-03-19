@@ -97,7 +97,7 @@ resource "databricks_external_location" "this" {
 
   name            = databricks_storage_credential.this[each.bucket_name].name
   url             = "s3://${each.store_location}"
-  credential_name = databricks_storage_credential.this[each.bucket_name]].name
+  credential_name = databricks_storage_credential.this[each.bucket_name].name
   comment         = "Managed by Terraform - access for ${each.bucket_name}"
   read_only       = var.read_only_volume
 }
