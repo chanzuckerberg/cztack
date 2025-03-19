@@ -3,7 +3,7 @@ output "dbx_unity_aws_role_arn" {
 }
 
 output "volume_bucket_name" {
-  value = local.bucket_name
+  value = local.volume_bucket_name
 }
 
 output "volume_path" {
