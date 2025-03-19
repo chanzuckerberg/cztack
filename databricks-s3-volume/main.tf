@@ -21,7 +21,7 @@ locals {
 
   create_storage_credential = var.create_catalog || var.create_storage_credential
   volume_storage_location = coalesce(
-    "s3://${var.volume_storage_location},
+    "s3://${var.volume_storage_location}",
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
   )
   storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}"
