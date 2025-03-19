@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
-  count = local.create_storage_credential ? 1 : 0
+  count = local.create_storage_credentials ? 1 : 0
 
   statement {
     principals {
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
-  count = local.create_storage_credential ? 1 : 0
+  count = local.create_storage_credentials ? 1 : 0
 
   name               = local.unity_aws_role_name
   path               = local.iam_role_path
@@ -46,7 +46,11 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
-  count = local.create_storage_credential ? 1 : 0
+  for_each = (
+    local.create_storage_credentials ?
+    [for resource in local.dbx_resource_storage_config : resource.bucket_name] :
+    []
+  )
 
   statement {
     sid    = "dbxSCBucketAccess"
@@ -58,7 +62,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:PutLifecycleConfiguration"
     ]
     resources = [
-      "arn:aws:s3:::${local.volume_bucket_name}",
+      "arn:aws:s3:::${each.key}",
     ]
   }
   statement {
@@ -70,7 +74,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      "arn:aws:s3:::${local.volume_bucket_name}/*",
+      "arn:aws:s3:::${each.key}/*",
     ]
   }
   statement {
@@ -86,13 +90,13 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  count = local.create_storage_credential ? 1 : 0
+  count = local.create_storage_credentials ? 1 : 0
 
   policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[0].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  count = local.create_storage_credential ? 1 : 0
+  count = local.create_storage_credentials ? 1 : 0
 
   policy_arn = aws_iam_policy.dbx_unity_access_policy[0].arn
   role       = aws_iam_role.dbx_unity_aws_role[0].name

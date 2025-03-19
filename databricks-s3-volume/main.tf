@@ -14,76 +14,111 @@ locals {
   volume_name  = replace(var.volume_name, "-", "_")
 
   volume_bucket_name = var.create_volume_bucket ? replace(var.volume_bucket_name, "_", "-") : var.volume_bucket_name
-  catalog_storage_root_bucket_name = coalesce(
-    replace(var.catalog_storage_root_bucket_name, "_", "-"),
+  catalog_bucket_name = coalesce(
+    replace(var.catalog_bucket_name, "_", "-"),
     local.catalog_name
   )
 
-  create_storage_credential = var.create_catalog || var.create_storage_credential
-  volume_storage_location = (
-    var.volume_storage_location != null ?
-    var.volume_storage_location :
+  create_storage_credentials = var.create_catalog || var.create_storage_credentials
+  volume_storage_location = coalesce(
+    var.volume_storage_location,
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
   )
-  storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}"
 
-  new_buckets = toset(compact([
-    var.create_volume_bucket ? local.volume_bucket_name : null,
-    var.create_catalog_bucket ? local.catalog_storage_root_bucket_name : null,
-  ]))
+  dbx_resource_storage_config = [
+    {
+      bucket_name = local.volume_bucket_name,
+      resource_name = local.volume_name,
+      storage_location = local.volume_storage_location,
+      storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
+    },
+    {
+      bucket_name = local.catalog_bucket_name,
+      resource_name = local.catalog_name,
+      storage_location = local.catalog_bucket_name,
+      storage_credential_name = "${local.catalog_name}-catalog",
+    }
+  ]
+
+  volume_storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}"
+
+  new_storage_locations = (
+    create_storage_locations != true ? [] : (
+      toset([
+        local.catalog_bucket_name,
+        local.volume_bucket_name == local.catalog_bucket_name ?
+          local.catalog_bucket_name :
+          local.volume_storage_location
+      ])
+    )
+  )
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
 ### NOTE: names need to be unique across an account, not just a workspace
 ### NOTE:
 
-resource "databricks_storage_credential" "volume" {
-  count = var.create_storage_credential ? 1 : 0
+resource "databricks_storage_credential" "this" {
+  for_each = (
+    local.create_storage_credentials == true ?
+    local.dbx_resource_storage_config :
+    []
+  )
 
   depends_on = [
-    resource.aws_iam_role.dbx_unity_aws_role,
+    resource.aws_iam_role.dbx_unity_aws_role[each.bucket_name],
     resource.aws_iam_role_policy_attachment.dbx_unity_aws_access,
     module.databricks_bucket
   ]
 
-  name = local.storage_credential_name
+  name = each.storage_credential_name
 
   aws_iam_role {
-    role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
+    role_arn = aws_iam_role.dbx_unity_aws_role[each.bucket_name].arn
   }
 
-  comment   = "Managed by Terraform - access for ${var.catalog_name}"
+  comment   = "Managed by Terraform - access for ${each.bucket_name}"
   read_only = var.read_only_volume
 }
 
 # upstream external location sometimes takes a moment to register
 resource "time_sleep" "wait_30_seconds" {
-  depends_on = [databricks_storage_credential.volume[0]]
+  depends_on = [databricks_storage_credential.this]
 
   create_duration = "30s"
 }
 
-resource "databricks_external_location" "volume" {
-  count      = var.create_storage_credential ? 1 : 0
-  depends_on = [time_sleep.wait_30_seconds]
+resource "databricks_external_location" "this" {
+  for_each = local.dbx_resource_storage_config
+  depends_on = [
+    time_sleep.wait_30_seconds,
+    databricks_storage_credential.this,
+  ]
 
-  name            = databricks_storage_credential.volume[0].name
-  url             = "s3://${local.volume_bucket_name}"
-  credential_name = databricks_storage_credential.volume[0].name
-  comment         = "Managed by Terraform - access for ${local.catalog_name}"
+  name            = databricks_storage_credential.this[each.bucket_name].name
+  url             = "s3://${each.store_location}"
+  credential_name = databricks_storage_credential.this[each.bucket_name]].name
+  comment         = "Managed by Terraform - access for ${each.bucket_name}"
   read_only       = var.read_only_volume
 }
 
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
-  count = var.create_catalog ? 1 : 0
+  for_each = (
+    var.create_catalog ?
+    [
+      for element in local.dbx_resource_storage_config :
+      element if element.resource_name == local.catalog_name
+    ] :
+    []
+  )
+  depends_on   = [databricks_external_location.this]
 
-  depends_on   = [databricks_external_location.volume[0]]
-  name         = local.catalog_name
+  name         = each.resource_name
   metastore_id = var.metastore_id
   owner        = var.owner
-  storage_root = "s3://${local.catalog_storage_root_bucket_name}"
+  storage_root = "s3://${each.catalog_bucket_name}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
     purpose = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"

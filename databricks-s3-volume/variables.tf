@@ -19,12 +19,16 @@ variable "create_volume_bucket" {
   default = false
 }
 
+variable "volume_bucket_name" {
+  type = string
+}
+
 variable "create_catalog_bucket" {
   type    = bool
   default = false
 }
 
-variable "catalog_storage_root_bucket_name" {
+variable "catalog_bucket_name" {
   description = "(Optional) Override storage root of catalog instead of using bucket name"
   type        = string
   default     = null
@@ -140,7 +144,7 @@ variable "override_policy_documents" {
   default     = []
 }
 
-variable "create_storage_credential" {
+variable "create_storage_credentials" {
   description = "(Optional) Flag to create a new Databricks storage credential or look for an existing one for the given bucket_name"
   type        = bool
   default     = true

@@ -6,7 +6,11 @@ locals {
 }
 
 data "aws_iam_policy_document" "databricks-s3" {
-  for_each = local.new_buckets
+  for_each = (
+    var.create_volume_bucket ?
+    [for element in local.dbx_resource_storage_config : element[bucket_name]] :
+    []
+  )
 
   override_policy_documents = var.override_policy_documents
 
