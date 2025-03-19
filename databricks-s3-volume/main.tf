@@ -96,7 +96,7 @@ resource "databricks_catalog" "volume" {
     var.create_catalog ?
     [
       for element in local.dbx_resource_storage_config :
-      element if element.resource_name == local.catalog_name
+      element if element.value.resource_name == local.catalog_name
     ] :
     []
   )
