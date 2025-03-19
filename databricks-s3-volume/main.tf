@@ -125,7 +125,7 @@ resource "databricks_schema" "volume" {
 }
 
 resource "databricks_volume" "volume" {
-  depends_on       = [databricks_external_location.volume, databricks_schema.volume]
+  depends_on       = [databricks_external_location.this, databricks_schema.volume]
   name             = local.volume_name
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
