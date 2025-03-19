@@ -39,19 +39,6 @@ locals {
       storage_credential_name = "${local.catalog_name}-catalog",
     }
   ]
-
-  volume_storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}"
-
-  new_storage_locations = (
-    create_storage_locations != true ? [] : (
-      toset([
-        local.catalog_bucket_name,
-        local.volume_bucket_name == local.catalog_bucket_name ?
-          local.catalog_bucket_name :
-          local.volume_storage_location
-      ])
-    )
-  )
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
