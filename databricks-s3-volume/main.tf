@@ -13,23 +13,24 @@ locals {
   schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name  = replace(var.volume_name, "-", "_")
 
-  volume_bucket_name  = var.create_volume_bucket ? replace(var.volume_bucket_name, "_", "-") : var.volume_bucket_name
+  volume_bucket_name = var.create_volume_bucket ? replace(var.volume_bucket_name, "_", "-") : var.volume_bucket_name
   catalog_storage_root_bucket_name = coalesce(
     replace(var.catalog_storage_root_bucket_name, "_", "-"),
     local.catalog_name
   )
 
   create_storage_credential = var.create_catalog || var.create_storage_credential
-  volume_storage_location = coalesce(
-    "s3://${var.volume_storage_location}",
+  volume_storage_location = (
+    var.volume_storage_location != null ?
+    var.volume_storage_location :
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
   )
   storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}"
 
-  new_buckets = compact([
+  new_buckets = toset(compact([
     var.create_volume_bucket ? local.volume_bucket_name : null,
     var.create_catalog_bucket ? local.catalog_storage_root_bucket_name : null,
-  ])
+  ]))
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
@@ -82,7 +83,7 @@ resource "databricks_catalog" "volume" {
   name         = local.catalog_name
   metastore_id = var.metastore_id
   owner        = var.owner
-  storage_root = "s3://${local.catalog_storage_root_bucket_name}"
+  storage_root = "s3://${local.catalog_storage_root}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
     purpose = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
@@ -107,7 +108,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = local.volume_storage_location
+  storage_location = local.storage_location
   owner            = var.owner
   comment          = "This volume is managed by Terraform - ${var.volume_comment}"
 }
