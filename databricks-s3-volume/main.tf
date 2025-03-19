@@ -58,13 +58,13 @@ resource "databricks_storage_credential" "this" {
     module.databricks_bucket
   ]
 
-  name = each.storage_credential_name
+  name = each.value.storage_credential_name
 
   aws_iam_role {
-    role_arn = aws_iam_role.dbx_unity_aws_role[each.bucket_name].arn
+    role_arn = aws_iam_role.dbx_unity_aws_role[each.value.bucket_name].arn
   }
 
-  comment   = "Managed by Terraform - access for ${each.bucket_name}"
+  comment   = "Managed by Terraform - access for ${each.value.bucket_name}"
   read_only = var.read_only_volume
 }
 
@@ -82,10 +82,10 @@ resource "databricks_external_location" "this" {
     databricks_storage_credential.this,
   ]
 
-  name            = databricks_storage_credential.this[each.bucket_name].name
-  url             = "s3://${each.store_location}"
-  credential_name = databricks_storage_credential.this[each.bucket_name].name
-  comment         = "Managed by Terraform - access for ${each.bucket_name}"
+  name            = databricks_storage_credential.this[each.value.bucket_name].name
+  url             = "s3://${each.value.store_location}"
+  credential_name = databricks_storage_credential.this[each.value.bucket_name].name
+  comment         = "Managed by Terraform - access for ${each.value.bucket_name}"
   read_only       = var.read_only_volume
 }
 
@@ -102,10 +102,10 @@ resource "databricks_catalog" "volume" {
   )
   depends_on   = [databricks_external_location.this]
 
-  name         = each.resource_name
+  name         = each.value.resource_name
   metastore_id = var.metastore_id
   owner        = var.owner
-  storage_root = "s3://${each.catalog_bucket_name}"
+  storage_root = "s3://${each.value.catalog_bucket_name}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
     purpose = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
