@@ -19,10 +19,6 @@ variable "create_volume_bucket" {
   default = false
 }
 
-variable "volume_bucket_name" {
-  type = string
-}
-
 variable "create_catalog_bucket" {
   type    = bool
   default = false
