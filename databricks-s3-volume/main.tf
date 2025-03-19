@@ -66,7 +66,7 @@ resource "databricks_storage_credential" "this" {
   )
 
   depends_on = [
-    resource.aws_iam_role.dbx_unity_aws_role[each.bucket_name],
+    resource.aws_iam_role.dbx_unity_aws_role,
     resource.aws_iam_role_policy_attachment.dbx_unity_aws_access,
     module.databricks_bucket
   ]
