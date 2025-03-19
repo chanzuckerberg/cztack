@@ -4,19 +4,39 @@ variable "workspace_name" {
   type        = string
 }
 
+variable "create_catalog" {
+  description = "Flag to create a new catalog or look for an existing one with the given name"
+  type        = bool
+}
+
 variable "catalog_name" {
   description = "Name of the Databricks existing catalog to add the volume to"
   type        = string
 }
 
+variable "create_volume_bucket" {
+  type    = bool
+  default = false
+}
+
+variable "volume_bucket_name" {
+  type = string
+}
+
+variable "create_catalog_bucket" {
+  type    = bool
+  default = false
+}
+
+variable "catalog_storage_root_bucket_name" {
+  description = "(Optional) Override storage root of catalog instead of using bucket name"
+  type        = string
+  default     = null
+}
+
 variable "owner" {
   description = "User or group name of the owner - will be applied to the catalog, schema, and volume, if applicable"
   type        = string
-}
-
-variable "create_catalog" {
-  description = "Flag to create a new catalog or look for an existing one with the given name"
-  type        = bool
 }
 
 variable "metastore_id" {
@@ -39,8 +59,8 @@ variable "volume_name" {
   type        = string
 }
 
-variable "volume_bucket" {
-  description = "(Optional) Name of an existing S3 bucket to use for Databricks volume. NOTE: if provided, you will need to update the bucket policy whereever it is defined to allow Databricks access"
+variable "volume_bucket_name" {
+  description = "(Optional) Name of S3 bucket to use for Databricks volume. NOTE: if provided, you will need to update the bucket policy whereever it is defined to allow Databricks access"
   type        = string
   default     = null
 }
@@ -130,20 +150,8 @@ variable "create_storage_credential" {
   default     = true
 }
 
-variable "override_bucket_name" {
-  description = "(Optional) Name of the S3 bucket to create or use for Databricks volume, overriding the default"
-  type        = string
-  default     = null
-}
-
-variable "override_storage_location" {
+variable "volume_storage_location" {
   description = "(Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix')"
-  type        = string
-  default     = null
-}
-
-variable "override_catalog_storage_root" {
-  description = "(Optional) Override storage root of catalog instead of using bucket name"
   type        = string
   default     = null
 }

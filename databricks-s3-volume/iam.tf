@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
     condition {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.unity_aws_role_name}"]
+      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"]
     }
   }
 }
@@ -40,7 +40,7 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
   count = local.create_storage_credential ? 1 : 0
 
   name               = local.unity_aws_role_name
-  path               = local.path
+  path               = local.iam_role_path
   assume_role_policy = data.aws_iam_policy_document.dbx_unity_aws_role_assume_role[0].json
 }
 
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:PutLifecycleConfiguration"
     ]
     resources = [
-      "arn:aws:s3:::${local.bucket_name}",
+      "arn:aws:s3:::${local.volume_bucket_name}",
     ]
   }
   statement {
@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      "arn:aws:s3:::${local.bucket_name}/*",
+      "arn:aws:s3:::${local.volume_bucket_name}/*",
     ]
   }
   statement {
@@ -80,7 +80,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "sts:AssumeRole"
     ]
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.unity_aws_role_name}"
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"
     ]
   }
 }
