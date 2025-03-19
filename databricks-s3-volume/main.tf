@@ -25,7 +25,7 @@ locals {
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
   )
 
-  dbx_resource_storage_config = [
+  dbx_resource_storage_config = toset([
     {
       bucket_name = local.volume_bucket_name,
       resource_name = local.volume_name,
@@ -38,7 +38,7 @@ locals {
       storage_location = local.catalog_bucket_name,
       storage_credential_name = "${local.catalog_name}-catalog",
     }
-  ]
+  ])
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
