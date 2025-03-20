@@ -90,9 +90,13 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  count = local.create_storage_credentials ? 1 : 0
+  for_each = (
+    local.create_storage_credentials ?
+    toset([for resource in local.dbx_resource_storage_config : resource["bucket_name"]]) :
+    toset([])
+  )
 
-  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[0].json
+  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
