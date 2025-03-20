@@ -8,8 +8,8 @@ locals {
 data "aws_iam_policy_document" "databricks-s3" {
   for_each = length(
     var.create_volume_bucket ?
-    [for element in local.dbx_resource_storage_config : element["bucket_name"]] :
-    []
+    toset([for element in local.dbx_resource_storage_config : element["bucket_name"]]) :
+    toset([])
   )
 
   override_policy_documents = var.override_policy_documents
@@ -108,8 +108,8 @@ data "aws_iam_policy_document" "databricks-s3" {
 module "databricks_bucket" {
   for_each = (
     var.create_volume_bucket ?
-    [for element in local.dbx_resource_storage_config : element["bucket_name"]] :
-    []
+    toset([for element in local.dbx_resource_storage_config : element["bucket_name"]]) :
+    toset([])
   )
   depends_on = [
     aws_iam_role.dbx_unity_aws_role
