@@ -48,7 +48,7 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
   for_each = (
     local.create_storage_credentials ?
-    [for resource in local.dbx_resource_storage_config : resource.key.bucket_name] :
+    [for resource in local.dbx_resource_storage_config : resource.value["bucket_name"]] :
     []
   )
 
