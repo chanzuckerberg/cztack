@@ -79,16 +79,19 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = local.dbx_resource_storage_config
+  for_each = {
+    for e in local.dbx_resource_storage_config :
+    e["bucket_name"] => e["storage_location"]
+  }
   depends_on = [
     time_sleep.wait_30_seconds,
     databricks_storage_credential.this,
   ]
 
-  name            = databricks_storage_credential.this[each.value.bucket_name].name
-  url             = "s3://${each.value.store_location}"
-  credential_name = databricks_storage_credential.this[each.value.bucket_name].name
-  comment         = "Managed by Terraform - access for ${each.value.bucket_name}"
+  name            = databricks_storage_credential.this[each.key].name
+  url             = "s3://${each.value}"
+  credential_name = databricks_storage_credential.this[each.key].name
+  comment         = "Managed by Terraform - access for ${each.key}"
   read_only       = var.read_only_volume
 }
 
