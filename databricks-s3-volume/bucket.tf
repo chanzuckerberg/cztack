@@ -8,7 +8,7 @@ locals {
 data "aws_iam_policy_document" "databricks-s3" {
   for_each = (
     var.create_volume_bucket ?
-    [for element in local.dbx_resource_storage_config : element.value.bucket_name] :
+    [for element in local.dbx_resource_storage_config : element.key.bucket_name] :
     []
   )
 
@@ -108,7 +108,7 @@ data "aws_iam_policy_document" "databricks-s3" {
 module "databricks_bucket" {
   for_each = (
     var.create_volume_bucket ?
-    [for element in local.dbx_resource_storage_config : element.value.bucket_name] :
+    [for element in local.dbx_resource_storage_config : element.key.bucket_name] :
     []
   )
   depends_on = [
