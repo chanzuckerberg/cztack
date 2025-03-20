@@ -94,18 +94,19 @@ resource "databricks_external_location" "this" {
 resource "databricks_catalog" "volume" {
   for_each = (
     var.create_catalog ?
-    [
+    {
       for element in local.dbx_resource_storage_config :
-      element if element.value.resource_name == local.catalog_name
-    ] :
-    []
+      element["resource_name"] => element["catalog_bucket_name"]
+      if element["resource_name"] == local.catalog_name
+    } :
+    {}
   )
   depends_on   = [databricks_external_location.this]
 
-  name         = each.value.resource_name
+  name         = each.key
   metastore_id = var.metastore_id
   owner        = var.owner
-  storage_root = "s3://${each.value.catalog_bucket_name}"
+  storage_root = "s3://${each.value}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
     purpose = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
