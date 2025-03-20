@@ -47,9 +47,12 @@ locals {
 
 resource "databricks_storage_credential" "this" {
   for_each = (
-    local.create_storage_credentials == true ?
-    toset([for element in local.dbx_resource_storage_config : element.storage_credential_name]) :
-    toset([])
+    local.create_storage_credentials ?
+    {
+      for element in local.dbx_resource_storage_config :
+      element["bucket_name"] => element["storage_credential_name"]
+    } :
+    {}
   )
 
   depends_on = [
@@ -58,13 +61,13 @@ resource "databricks_storage_credential" "this" {
     module.databricks_bucket
   ]
 
-  name = each.value.storage_credential_name
+  name = each.value
 
   aws_iam_role {
-    role_arn = aws_iam_role.dbx_unity_aws_role[each.value.bucket_name].arn
+    role_arn = aws_iam_role.dbx_unity_aws_role[each.key].arn
   }
 
-  comment   = "Managed by Terraform - access for ${each.value.bucket_name}"
+  comment   = "Managed by Terraform - access for ${each.key}"
   read_only = var.read_only_volume
 }
 
