@@ -1,5 +1,5 @@
 output "dbx_unity_aws_role_arn" {
-  value = length(aws_iam_role.dbx_unity_aws_role) > 0 ? aws_iam_role.dbx_unity_aws_role[0].arn : null
+  value = aws_iam_role.dbx_unity_aws_role[*].arn
 }
 
 output "volume_bucket_name" {
