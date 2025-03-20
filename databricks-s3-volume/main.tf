@@ -48,8 +48,8 @@ locals {
 resource "databricks_storage_credential" "this" {
   for_each = (
     local.create_storage_credentials == true ?
-    local.dbx_resource_storage_config :
-    []
+    toset([for element in local.dbx_resource_storage_config : element.storage_credential_name]) :
+    toset([])
   )
 
   depends_on = [
