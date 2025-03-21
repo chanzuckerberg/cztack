@@ -107,5 +107,5 @@ resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
   )
 
   policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
-  role       = aws_iam_role.dbx_unity_aws_role.name
+  role       = aws_iam_role.dbx_unity_aws_role[0].name
 }
