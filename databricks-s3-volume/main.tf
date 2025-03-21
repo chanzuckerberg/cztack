@@ -64,7 +64,7 @@ resource "databricks_storage_credential" "this" {
   name = each.value
 
   aws_iam_role {
-    role_arn = aws_iam_role.dbx_unity_aws_role[each.key].arn
+    role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
   }
 
   comment   = "Managed by Terraform - access for ${each.key}"
