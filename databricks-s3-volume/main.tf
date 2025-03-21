@@ -100,9 +100,10 @@ resource "databricks_external_location" "this" {
 resource "databricks_catalog" "volume" {
   for_each = (
     var.create_catalog ?
+    # get the catalog-related entry (not the volume one)
     {
       for element in local.dbx_resource_storage_config :
-      element["resource_name"] => element["catalog_bucket_name"]
+      element["resource_name"] => element["bucket_name"]
       if element["resource_name"] == local.catalog_name
     } :
     {}

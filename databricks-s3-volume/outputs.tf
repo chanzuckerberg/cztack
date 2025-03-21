@@ -1,5 +1,5 @@
-output "dbx_unity_aws_role_arn" {
-  value = aws_iam_role.dbx_unity_aws_role[*].arn
+output "dbx_unity_aws_role_arns" {
+  value = values(aws_iam_role.dbx_unity_aws_role)[*].arn)
 }
 
 output "volume_bucket_name" {
