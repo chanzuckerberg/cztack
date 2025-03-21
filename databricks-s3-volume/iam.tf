@@ -37,11 +37,7 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
-  for_each = (
-    local.create_storage_credentials ?
-    toset([for resource in local.dbx_resource_storage_config : resource["bucket_name"]]) :
-    toset([])
-  )
+  count = local.create_storage_credentials ? 1 : 0
 
   name               = local.unity_aws_role_name
   path               = local.iam_role_path
@@ -111,5 +107,5 @@ resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
   )
 
   policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
-  role       = aws_iam_role.dbx_unity_aws_role[each.key].name
+  role       = aws_iam_role.dbx_unity_aws_role.name
 }
