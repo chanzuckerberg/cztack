@@ -35,7 +35,7 @@ locals {
     {
       bucket_name = local.catalog_bucket_name,
       resource_name = local.catalog_name,
-      storage_location = local.catalog_bucket_name,
+      storage_location = "s3://${local.catalog_bucket_name}",
       storage_credential_name = "${local.catalog_name}-catalog",
     }
   ])
@@ -89,7 +89,7 @@ resource "databricks_external_location" "this" {
   ]
 
   name            = databricks_storage_credential.this[each.key].name
-  url             = "s3://${each.value}"
+  url             = each.value
   credential_name = databricks_storage_credential.this[each.key].name
   comment         = "Managed by Terraform - access for ${each.key}"
   read_only       = var.read_only_volume
