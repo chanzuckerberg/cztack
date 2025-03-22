@@ -85,6 +85,7 @@ resource "databricks_external_location" "this" {
   }
   depends_on = [
     time_sleep.wait_30_seconds,
+    resource.aws_iam_role.dbx_unity_aws_role,
     databricks_storage_credential.this,
   ]
 
