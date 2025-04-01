@@ -25,20 +25,44 @@ locals {
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
   )
 
-  dbx_resource_storage_config = toset([
-    {
-      bucket_name = local.volume_bucket_name,
-      resource_name = local.volume_name,
-      storage_location = local.volume_storage_location,
+  dbx_resource_storage_config = {
+    "VOLUME" : {
+      bucket_name             = local.volume_bucket_name,
+      create_bucket           = var.create_volume_bucket,
+      resource_name           = local.volume_name,
+      storage_location        = local.volume_storage_location,
       storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
     },
-    {
-      bucket_name = local.catalog_bucket_name,
-      resource_name = local.catalog_name,
-      storage_location = "s3://${local.catalog_bucket_name}",
+    "CATALOG" : {
+      bucket_name             = local.catalog_bucket_name,
+      create_bucket           = var.create_catalog_bucket
+      resource_name           = local.catalog_name,
+      storage_location        = "s3://${local.catalog_bucket_name}",
       storage_credential_name = "${local.catalog_name}-catalog",
     }
-  ])
+  }
+
+  creating_storage_credentials = (
+    create_storage_credentials == true ? {
+      for k, v in local.dbx_resource_storage_config :
+      v["bucket_name"] => v["storage_credential_name"]
+      if v["create_bucket"] == true
+    } : {}
+  )
+  creating_external_locations = {
+    for k, v in local.dbx_resource_storage_config : v["bucket_name"] => v["storage_location"]
+  }
+
+  creating_databricks_catalogs = (
+    var.create_catalog == true ? {
+      local.dbx_resource_storage_config["CATALOG"]["resource_name"] = local.dbx_resource_storage_config["CATALOG"]["bucket_name"]
+    } : {}
+  )
+
+  creating_s3_buckets = toset(compact([
+    var.create_volume_bucket ? local.dbx_resource_storage_config["VOLUME"]["bucket_name"] : null,
+    var.create_catalog_bucket ? local.dbx_resource_storage_config["CATALOG"]["bucket_name"] : null,
+  ]))
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
@@ -46,14 +70,7 @@ locals {
 ### NOTE:
 
 resource "databricks_storage_credential" "this" {
-  for_each = (
-    local.create_storage_credentials ?
-    {
-      for element in local.dbx_resource_storage_config :
-      element["bucket_name"] => element["storage_credential_name"]
-    } :
-    {}
-  )
+  for_each = local.creating_storage_credentials
 
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
@@ -79,10 +96,8 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = {
-    for e in local.dbx_resource_storage_config :
-    e["bucket_name"] => e["storage_location"]
-  }
+  for_each = local.creating_external_locations
+
   depends_on = [
     time_sleep.wait_30_seconds,
     resource.aws_iam_role.dbx_unity_aws_role,
@@ -99,17 +114,8 @@ resource "databricks_external_location" "this" {
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
-  for_each = (
-    var.create_catalog ?
-    # get the catalog-related entry (not the volume one)
-    {
-      for element in local.dbx_resource_storage_config :
-      element["resource_name"] => element["bucket_name"]
-      if element["resource_name"] == local.catalog_name
-    } :
-    {}
-  )
-  depends_on   = [databricks_external_location.this]
+  for_each   = local.creating_databricks_catalogs
+  depends_on = [databricks_external_location.this]
 
   name         = each.key
   metastore_id = var.metastore_id

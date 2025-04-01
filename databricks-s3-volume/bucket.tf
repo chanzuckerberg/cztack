@@ -6,12 +6,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "databricks-s3" {
-  for_each = (
-    var.create_volume_bucket ?
-    toset([for element in local.dbx_resource_storage_config : element["bucket_name"]]) :
-    toset([])
-  )
-
+  for_each                  = local.creating_s3_buckets
   override_policy_documents = var.override_policy_documents
 
   # standard UC access
@@ -106,11 +101,7 @@ data "aws_iam_policy_document" "databricks-s3" {
 }
 
 module "databricks_bucket" {
-  for_each = (
-    var.create_volume_bucket ?
-    toset([for element in local.dbx_resource_storage_config : element["bucket_name"]]) :
-    toset([])
-  )
+  for_each = local.creating_s3_buckets
   depends_on = [
     aws_iam_role.dbx_unity_aws_role
   ]
