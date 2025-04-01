@@ -43,7 +43,7 @@ locals {
   }
 
   creating_storage_credentials = (
-    create_storage_credentials == true ? {
+    var.create_storage_credentials == true ? {
       for k, v in local.dbx_resource_storage_config :
       v["bucket_name"] => v["storage_credential_name"]
       if v["create_bucket"] == true
