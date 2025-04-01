@@ -55,7 +55,7 @@ locals {
 
   creating_databricks_catalogs = (
     var.create_catalog == true ? {
-      local.dbx_resource_storage_config["CATALOG"]["resource_name"] = local.dbx_resource_storage_config["CATALOG"]["bucket_name"]
+      (local.dbx_resource_storage_config["CATALOG"]["resource_name"]) = local.dbx_resource_storage_config["CATALOG"]["bucket_name"]
     } : {}
   )
 
