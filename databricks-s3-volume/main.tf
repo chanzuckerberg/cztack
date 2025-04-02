@@ -2,7 +2,6 @@
 
 // https://docs.databricks.com/administration-guide/multiworkspace/iam-role.html#language-Your%C2%A0VPC,%C2%A0custom
 locals {
-  unity_aws_role_name    = "${var.catalog_name}-unity"
   iam_role_path          = "/databricks/"
   databricks_aws_account = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
 
@@ -12,6 +11,8 @@ locals {
   catalog_name = var.create_catalog ? replace(var.catalog_name, "-", "_") : var.catalog_name
   schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name  = replace(var.volume_name, "-", "_")
+
+  unity_aws_role_name    = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-unity"
 
   volume_bucket_name = var.create_volume_bucket ? replace(var.volume_bucket_name, "_", "-") : var.volume_bucket_name
   catalog_bucket_name = coalesce(
