@@ -1,10 +1,12 @@
 locals {
-  standard_grant_principals = concat(["arn:aws:iam::${local.databricks_aws_account}:root"], var.additional_rw_bucket_grant_arns)
+  standard_grant_principals = concat(
+    ["arn:aws:iam::${local.databricks_aws_account}:root"],
+    var.additional_rw_bucket_grant_arns
+  )
 }
 
 data "aws_iam_policy_document" "databricks-s3" {
-  count = var.volume_bucket != null ? 0 : 1
-
+  for_each                  = local.creating_s3_buckets
   override_policy_documents = var.override_policy_documents
 
   # standard UC access
@@ -21,9 +23,9 @@ data "aws_iam_policy_document" "databricks-s3" {
       "s3:GetLifecycleConfiguration",
       "s3:PutLifecycleConfiguration",
     ]
-    resources = [
-      "arn:aws:s3:::${local.bucket_name}",
-    ]
+    resources = distinct([
+      "arn:aws:s3:::${each.key}",
+    ])
   }
   statement {
     sid    = "dbxObjAccess"
@@ -38,9 +40,9 @@ data "aws_iam_policy_document" "databricks-s3" {
       "s3:PutObject",
       "s3:DeleteObject",
     ]
-    resources = [
-      "arn:aws:s3:::${local.bucket_name}/*" # root access
-    ]
+    resources = distinct([
+      "arn:aws:s3:::${each.key}/*" # root access
+    ])
   }
   # storage credential access - uses string to avoid race condition of role v. bucket creation
   statement {
@@ -56,7 +58,7 @@ data "aws_iam_policy_document" "databricks-s3" {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
       values = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.unity_aws_role_name}",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}",
       ]
     }
     actions = [
@@ -65,9 +67,9 @@ data "aws_iam_policy_document" "databricks-s3" {
       "s3:GetLifecycleConfiguration",
       "s3:PutLifecycleConfiguration",
     ]
-    resources = [
-      "arn:aws:s3:::${local.bucket_name}",
-    ]
+    resources = distinct([
+      "arn:aws:s3:::${each.key}",
+    ])
   }
   statement {
     sid    = "dbxSCObjAccess"
@@ -82,7 +84,7 @@ data "aws_iam_policy_document" "databricks-s3" {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
       values = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.unity_aws_role_name}",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}",
       ]
     }
     actions = [
@@ -91,22 +93,22 @@ data "aws_iam_policy_document" "databricks-s3" {
       "s3:PutObject",
       "s3:DeleteObject",
     ]
-    resources = [
-      "arn:aws:s3:::${local.bucket_name}/*"
-    ]
+    resources = distinct([
+      "arn:aws:s3:::${each.key}/*"
+    ])
   }
 
 }
 
 module "databricks_bucket" {
-  count = var.volume_bucket != null ? 0 : 1
+  for_each = local.creating_s3_buckets
   depends_on = [
     aws_iam_role.dbx_unity_aws_role
   ]
 
   source           = "github.com/chanzuckerberg/cztack//aws-s3-private-bucket?ref=v0.71.0"
-  bucket_name      = local.bucket_name
-  bucket_policy    = data.aws_iam_policy_document.databricks-s3[0].json
+  bucket_name      = each.key
+  bucket_policy    = data.aws_iam_policy_document.databricks-s3[each.key].json
   project          = var.tags["project"]
   env              = var.tags["env"]
   service          = var.tags["service"]

@@ -54,25 +54,27 @@
 | <a name="input_catalog_name"></a> [catalog\_name](#input\_catalog\_name) | Name of the Databricks existing catalog to add the volume to | `string` | n/a | yes |
 | <a name="input_catalog_r_grant_principals"></a> [catalog\_r\_grant\_principals](#input\_catalog\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the catalog | `list(string)` | `[]` | no |
 | <a name="input_catalog_rw_grant_principals"></a> [catalog\_rw\_grant\_principals](#input\_catalog\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the catalog | `list(string)` | `[]` | no |
+| <a name="input_catalog_storage_root_bucket_name"></a> [catalog\_storage\_root\_bucket\_name](#input\_catalog\_storage\_root\_bucket\_name) | (Optional) Override storage root of catalog instead of using bucket name | `string` | `null` | no |
 | <a name="input_create_catalog"></a> [create\_catalog](#input\_create\_catalog) | Flag to create a new catalog or look for an existing one with the given name | `bool` | n/a | yes |
+| <a name="input_create_catalog_bucket"></a> [create\_catalog\_bucket](#input\_create\_catalog\_bucket) | n/a | `bool` | `false` | no |
 | <a name="input_create_schema"></a> [create\_schema](#input\_create\_schema) | Flag to create a new catalog or look for an existing one with the given name | `bool` | n/a | yes |
 | <a name="input_create_storage_credential"></a> [create\_storage\_credential](#input\_create\_storage\_credential) | (Optional) Flag to create a new Databricks storage credential or look for an existing one for the given bucket\_name | `bool` | `true` | no |
+| <a name="input_create_volume_bucket"></a> [create\_volume\_bucket](#input\_create\_volume\_bucket) | n/a | `bool` | `false` | no |
 | <a name="input_metastore_id"></a> [metastore\_id](#input\_metastore\_id) | ID of metastore to create catalog in | `string` | n/a | yes |
-| <a name="input_override_bucket_name"></a> [override\_bucket\_name](#input\_override\_bucket\_name) | (Optional) Name of the S3 bucket to create or use for Databricks volume, overriding the default | `string` | `null` | no |
 | <a name="input_override_policy_documents"></a> [override\_policy\_documents](#input\_override\_policy\_documents) | (Optional) Additional bucket policies to apply to the bucket. These should already be in JSON | `list(string)` | `[]` | no |
-| <a name="input_override_storage_location"></a> [override\_storage\_location](#input\_override\_storage\_location) | (Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix') | `string` | `null` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | User or group name of the owner - will be applied to the catalog, schema, and volume, if applicable | `string` | n/a | yes |
 | <a name="input_read_only_volume"></a> [read\_only\_volume](#input\_read\_only\_volume) | (Optional) Flag to set volume as read-only | `bool` | `false` | no |
 | <a name="input_schema_name"></a> [schema\_name](#input\_schema\_name) | Name of the Databricks schema to add the volume to | `string` | n/a | yes |
 | <a name="input_schema_r_grant_principals"></a> [schema\_r\_grant\_principals](#input\_schema\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the schema | `list(string)` | `[]` | no |
 | <a name="input_schema_rw_grant_principals"></a> [schema\_rw\_grant\_principals](#input\_schema\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the schema | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | REQUIRED: Tags to include for this environment. | <pre>object({<br>    project : string<br>    env : string<br>    service : string<br>    owner : string<br>    managedBy : string<br>  })</pre> | n/a | yes |
-| <a name="input_volume_bucket"></a> [volume\_bucket](#input\_volume\_bucket) | (Optional) Name of an existing S3 bucket to use for Databricks volume. NOTE: if provided, you will need to update the bucket policy whereever it is defined to allow Databricks access | `string` | `null` | no |
+| <a name="input_volume_bucket_name"></a> [volume\_bucket\_name](#input\_volume\_bucket\_name) | (Optional) Name of S3 bucket to use for Databricks volume. NOTE: if provided, you will need to update the bucket policy whereever it is defined to allow Databricks access | `string` | `null` | no |
 | <a name="input_volume_comment"></a> [volume\_comment](#input\_volume\_comment) | (Optional) Comment to add to the Databricks volume | `string` | `"Managed by Terraform - this is a default volume for the Databricks workspace"` | no |
 | <a name="input_volume_name"></a> [volume\_name](#input\_volume\_name) | Name of the Databricks volume to create | `string` | n/a | yes |
 | <a name="input_volume_r_grant_principals"></a> [volume\_r\_grant\_principals](#input\_volume\_r\_grant\_principals) | (Optional) Databricks groups to grant read-only permissions to on the volume | `list(string)` | `[]` | no |
 | <a name="input_volume_rw_grant_principals"></a> [volume\_rw\_grant\_principals](#input\_volume\_rw\_grant\_principals) | (Optional) Databricks groups to grant read/write permissions to on the volume | `list(string)` | `[]` | no |
 | <a name="input_volume_schema_properties"></a> [volume\_schema\_properties](#input\_volume\_schema\_properties) | Properties of the Databricks schema to add the volume to | `map(string)` | `{}` | no |
+| <a name="input_volume_storage_location"></a> [volume\_storage\_location](#input\_volume\_storage\_location) | (Optional) Prefix to use for the storage location in case of an existing bucket (e.g. 's3://bucket' or 's3://bucket/prefix') | `string` | `null` | no |
 | <a name="input_workspace_name"></a> [workspace\_name](#input\_workspace\_name) | Name of the Databricks catalog to add the volume to | `string` | n/a | yes |
 
 ## Outputs
