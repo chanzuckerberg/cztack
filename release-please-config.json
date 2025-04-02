@@ -1,0 +1,25 @@
+{
+  "release-type": "simple",
+  "pull-request-title-pattern": "chore${scope}: release${component} ${version}",
+  "bump-minor-pre-major": true,
+  "changelog-sections": [
+    {
+      "type": "feat",
+      "section": "Features",
+      "hidden": false
+    },
+    {
+      "type": "fix",
+      "section": "Bug Fixes",
+      "hidden": false
+    },
+    {
+      "type": "chore",
+      "section": "Misc",
+      "hidden": false
+    }
+  ],
+  "packages": {
+    ".": {}
+  }
+}
