@@ -48,7 +48,7 @@ locals {
       local.dbx_resource_storage_config["CATALOG"]["catalog_bucket_name"] = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
     } : {}
   )
-  creating_storage_credentials = merge(catalog_storage_credentials, (
+  creating_storage_credentials = merge(local.catalog_storage_credentials, (
     var.create_volume_storage_credentials == true ? {
       local.dbx_resource_storage_config["VOLUME"]["catalog_bucket_name"] = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
     } : {}
