@@ -54,9 +54,16 @@ locals {
     } : {}
   ))
 
-  creating_external_locations = {
-    for k, v in local.dbx_resource_storage_config : v["bucket_name"] => v["storage_location"]
-  }
+  catalog_external_locations = (
+    local.create_catalog_storage_credentials == true ? {
+      (local.dbx_resource_storage_config["CATALOG"]["bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_location"]
+    } : {}
+  )
+  external_locations_to_create = merge(local.catalog_external_locations, (
+    var.create_volume_storage_credentials == true ? {
+      (local.dbx_resource_storage_config["VOLUME"]["bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_location"]
+    } : {}
+  ))
 
   creating_databricks_catalogs = (
     var.create_catalog == true ? {
@@ -101,7 +108,7 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = local.creating_external_locations
+  for_each = local.external_locations_to_create
 
   depends_on = [
     time_sleep.wait_30_seconds,
