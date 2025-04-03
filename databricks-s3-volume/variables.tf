@@ -140,8 +140,14 @@ variable "override_policy_documents" {
   default     = []
 }
 
-variable "create_storage_credentials" {
-  description = "(Optional) Flag to create a new Databricks storage credential or look for an existing one for the given bucket_name"
+variable "create_volume_storage_credentials" {
+  description = "(Optional) Flag to create a new Databricks storage credential for the volume or look for an existing one for the given bucket_name"
+  type        = bool
+  default     = true
+}
+
+variable "create_catalog_storage_credentials" {
+  description = "(Optional) Flag to create a new Databricks storage credential for the catalog or look for an existing one for the given bucket_name"
   type        = bool
   default     = true
 }
