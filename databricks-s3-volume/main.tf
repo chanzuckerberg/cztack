@@ -2,7 +2,6 @@
 
 // https://docs.databricks.com/administration-guide/multiworkspace/iam-role.html#language-Your%C2%A0VPC,%C2%A0custom
 locals {
-  unity_aws_role_name    = "${var.catalog_name}-unity"
   iam_role_path          = "/databricks/"
   databricks_aws_account = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
 
@@ -13,13 +12,15 @@ locals {
   schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name  = replace(var.volume_name, "-", "_")
 
+  unity_aws_role_name    = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
+
   volume_bucket_name = var.create_volume_bucket ? replace(var.volume_bucket_name, "_", "-") : var.volume_bucket_name
   catalog_bucket_name = coalesce(
     replace(var.catalog_bucket_name, "_", "-"),
     local.catalog_name
   )
 
-  create_storage_credentials = var.create_catalog || var.create_storage_credentials
+  create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
   volume_storage_location = coalesce(
     var.volume_storage_location,
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
@@ -42,16 +43,27 @@ locals {
     }
   }
 
-  creating_storage_credentials = (
-    var.create_storage_credentials == true ? {
-      for k, v in local.dbx_resource_storage_config :
-      v["bucket_name"] => v["storage_credential_name"]
-      if v["create_bucket"] == true
+  catalog_storage_credentials = (
+    local.create_catalog_storage_credentials == true ? {
+      (local.dbx_resource_storage_config["CATALOG"]["bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
     } : {}
   )
-  creating_external_locations = {
-    for k, v in local.dbx_resource_storage_config : v["bucket_name"] => v["storage_location"]
-  }
+  storage_credentials_to_create = merge(local.catalog_storage_credentials, (
+    var.create_volume_storage_credentials == true ? {
+      (local.dbx_resource_storage_config["VOLUME"]["bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
+    } : {}
+  ))
+
+  catalog_external_locations = (
+    local.create_catalog_storage_credentials == true ? {
+      (local.dbx_resource_storage_config["CATALOG"]["bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_location"]
+    } : {}
+  )
+  external_locations_to_create = merge(local.catalog_external_locations, (
+    var.create_volume_storage_credentials == true ? {
+      (local.dbx_resource_storage_config["VOLUME"]["bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_location"]
+    } : {}
+  ))
 
   creating_databricks_catalogs = (
     var.create_catalog == true ? {
@@ -70,7 +82,7 @@ locals {
 ### NOTE:
 
 resource "databricks_storage_credential" "this" {
-  for_each = local.creating_storage_credentials
+  for_each = local.storage_credentials_to_create
 
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
@@ -96,7 +108,7 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = local.creating_external_locations
+  for_each = local.external_locations_to_create
 
   depends_on = [
     time_sleep.wait_30_seconds,
