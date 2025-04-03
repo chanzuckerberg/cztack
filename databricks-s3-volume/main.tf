@@ -48,7 +48,7 @@ locals {
       local.dbx_resource_storage_config["CATALOG"]["catalog_bucket_name"] = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
     } : {}
   )
-  creating_storage_credentials = merge(local.catalog_storage_credentials, (
+  storage_credentials_to_create = merge(local.catalog_storage_credentials, (
     var.create_volume_storage_credentials == true ? {
       local.dbx_resource_storage_config["VOLUME"]["catalog_bucket_name"] = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
     } : {}
@@ -75,7 +75,7 @@ locals {
 ### NOTE:
 
 resource "databricks_storage_credential" "this" {
-  for_each = local.creating_storage_credentials
+  for_each = local.storage_credentials_to_create
 
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
