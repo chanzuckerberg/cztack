@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.91.1](https://github.com/chanzuckerberg/cztack/compare/v0.91.0...v0.91.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* CDI-3949 fix dbx volume storage credentials ([#714](https://github.com/chanzuckerberg/cztack/issues/714)) ([be13c4f](https://github.com/chanzuckerberg/cztack/commit/be13c4fd72f7b0cf03cf41d78e7a79a8b1b3812a))
+
 ## [0.91.0](https://github.com/chanzuckerberg/cztack/compare/v0.90.0...v0.91.0) (2025-04-02)
 
 
