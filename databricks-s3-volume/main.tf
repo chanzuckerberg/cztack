@@ -20,7 +20,7 @@ locals {
     local.catalog_name
   )
 
-  create_storage_credentials = var.create_catalog || var.create_storage_credentials
+  create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
   volume_storage_location = coalesce(
     var.volume_storage_location,
     "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
@@ -44,11 +44,16 @@ locals {
   }
 
   creating_storage_credentials = (
-    var.create_storage_credentials == true ? {
-      for k, v in local.dbx_resource_storage_config :
-      v["bucket_name"] => v["storage_credential_name"]
+    local.create_catalog_storage_credentials == true ? {
+      local.dbx_resource_storage_config["CATALOG"]["catalog_bucket_name"] = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
     } : {}
   )
+  creating_storage_credentials = merge(creating_storage_credentials, (
+    var.create_volume_storage_credentials == true ? {
+      local.dbx_resource_storage_config["VOLUME"]["catalog_bucket_name"] = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
+    } : {}
+  ))
+
   creating_external_locations = {
     for k, v in local.dbx_resource_storage_config : v["bucket_name"] => v["storage_location"]
   }
