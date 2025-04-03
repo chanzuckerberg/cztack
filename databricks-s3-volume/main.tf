@@ -45,12 +45,12 @@ locals {
 
   catalog_storage_credentials = (
     local.create_catalog_storage_credentials == true ? {
-      (local.dbx_resource_storage_config["CATALOG"]["catalog_bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
+      (local.dbx_resource_storage_config["CATALOG"]["bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
     } : {}
   )
   storage_credentials_to_create = merge(local.catalog_storage_credentials, (
     var.create_volume_storage_credentials == true ? {
-      (local.dbx_resource_storage_config["VOLUME"]["catalog_bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
+      (local.dbx_resource_storage_config["VOLUME"]["bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
     } : {}
   ))
 
