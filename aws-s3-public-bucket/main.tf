@@ -10,8 +10,8 @@ locals {
     bucket_contents           = var.bucket_contents
   }
 
-  // make sure we have public in the name
-  bucket_name = replace(var.bucket_name, "public", "") == var.bucket_name ? "${var.bucket_name}-public" : var.bucket_name
+  // make sure we have public in the name (but only if append_public_suffix is true)
+  bucket_name = (replace(var.bucket_name, "public", "") == var.bucket_name && var.append_public_suffix) ? "${var.bucket_name}-public" : var.bucket_name
 }
 
 resource "aws_s3_bucket" "bucket" {
