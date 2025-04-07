@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
-  count = local.create_storage_credential ? 1 : 0
+  count = length(keys(local.storage_credentials_to_create)) > 0 ? 1 : 0
 
   statement {
     principals {
@@ -31,22 +31,22 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
     condition {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.unity_aws_role_name}"]
+      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"]
     }
   }
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
-  count = local.create_storage_credential ? 1 : 0
+  count = length(keys(local.storage_credentials_to_create)) > 0 ? 1 : 0
 
   name               = local.unity_aws_role_name
-  path               = local.path
+  path               = local.iam_role_path
   assume_role_policy = data.aws_iam_policy_document.dbx_unity_aws_role_assume_role[0].json
 }
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
-  count = local.create_storage_credential ? 1 : 0
+  for_each = local.storage_credentials_to_create
 
   statement {
     sid    = "dbxSCBucketAccess"
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:PutLifecycleConfiguration"
     ]
     resources = [
-      "arn:aws:s3:::${local.bucket_name}",
+      "arn:aws:s3:::${each.key}",
     ]
   }
   statement {
@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      "arn:aws:s3:::${local.bucket_name}/*",
+      "arn:aws:s3:::${each.key}/*",
     ]
   }
   statement {
@@ -80,20 +80,20 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "sts:AssumeRole"
     ]
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.unity_aws_role_name}"
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"
     ]
   }
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  count = local.create_storage_credential ? 1 : 0
+  for_each = local.storage_credentials_to_create
 
-  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[0].json
+  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  count = local.create_storage_credential ? 1 : 0
+  for_each = local.storage_credentials_to_create
 
-  policy_arn = aws_iam_policy.dbx_unity_access_policy[0].arn
+  policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
   role       = aws_iam_role.dbx_unity_aws_role[0].name
 }
