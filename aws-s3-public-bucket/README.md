@@ -29,6 +29,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_public_list"></a> [allow\_public\_list](#input\_allow\_public\_list) | Allow public to list bucket contents. | `bool` | `false` | no |
+| <a name="input_append_public_suffix"></a> [append\_public\_suffix](#input\_allow\_public\_list) | Appends the `-public` suffix to the bucket name. | `bool` | `true` | no |
 | <a name="input_bucket_contents"></a> [bucket\_contents](#input\_bucket\_contents) | Describe the data within this bucket. | `string` | n/a | yes |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the bucket. Note that `-public` will be appended to `bucket_name`s that don't contain a `public` substring. This module will output the computed `bucket_name`. | `string` | n/a | yes |
 | <a name="input_bucket_policy"></a> [bucket\_policy](#input\_bucket\_policy) | A policy to attach to this bucket. | `string` | `""` | no |
