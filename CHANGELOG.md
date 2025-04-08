@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.92.0](https://github.com/chanzuckerberg/cztack/compare/v0.91.1...v0.92.0) (2025-04-08)
+
+
+### Features
+
+* update aws-s3-public-bucket documentation ([#716](https://github.com/chanzuckerberg/cztack/issues/716)) ([04c6642](https://github.com/chanzuckerberg/cztack/commit/04c66420ee88e7850e4542b67c33295407b1ba4a))
+
+
+### Bug Fixes
+
+* gh runner deprecated ([#717](https://github.com/chanzuckerberg/cztack/issues/717)) ([c222ea1](https://github.com/chanzuckerberg/cztack/commit/c222ea1149bfc91cfa84e2948adb4442f2b49e2d))
+
 ## [0.91.1](https://github.com/chanzuckerberg/cztack/compare/v0.91.0...v0.91.1) (2025-04-03)
 
 
