@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.92.1](https://github.com/chanzuckerberg/cztack/compare/v0.92.0...v0.92.1) (2025-04-15)
+
+
+### Misc
+
+* bump golang.org/x/crypto to 0.35.0 ([#719](https://github.com/chanzuckerberg/cztack/issues/719)) ([1c4f649](https://github.com/chanzuckerberg/cztack/commit/1c4f649079b41d2260d6f82fb58b42f588e312e1))
+
 ## [0.92.0](https://github.com/chanzuckerberg/cztack/compare/v0.91.1...v0.92.0) (2025-04-08)
 
 
