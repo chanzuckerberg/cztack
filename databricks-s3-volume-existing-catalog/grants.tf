@@ -1,25 +1,5 @@
-locals {
-  volume_r_grants = flatten([
-    for volume in var.volume_buckets : [
-      for principal in volume.volume_r_grant_principals : {
-        volume_name = volume.volume_name
-        principal   = principal
-      }
-    ]
-  ])
-
-  volume_rw_grants = flatten([
-    for volume in var.volume_buckets : [
-      for principal in volume.volume_rw_grant_principals : {
-        volume_name = volume.volume_name
-        principal   = principal
-      }
-    ]
-  ])
-}
-
 resource "databricks_grants" "volume" {
-  for_each = toset([bucket.volume_name for bucket in var.volume_buckets])
+  for_each = toset([for bucket in var.volume_buckets : bucket.volume_name])
 
   volume = each.value
 
