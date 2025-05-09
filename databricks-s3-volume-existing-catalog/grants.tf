@@ -1,23 +1,41 @@
-resource "databricks_grants" "volume" {
-  for_each = toset([for bucket in var.volume_buckets : bucket.volume_name => bucket])
+locals {
+  volume_r_grants = flatten([
+    for volume in var.volume_buckets : [
+      for principal in volume.volume_r_grant_principals : {
+        volume_name = volume.volume_name
+        principal   = principal
+      }
+    ]
+  ])
 
-  volume = each.value
+  volume_rw_grants = flatten([
+    for volume in var.volume_buckets : [
+      for principal in volume.volume_rw_grant_principals : {
+        volume_name = volume.volume_name
+        principal   = principal
+      }
+    ]
+  ])
+}
 
-  # Read-only access grants
-  dynamic "grant" {
-    for_each = toset(each.value.volume_r_grant_principals)
-    content {
-      principal = grant.value
-      privileges = ["READ_VOLUME"]
-    }
-  }
+# Read-only access grants
+resource "databricks_grant" "volume_r" {
+  for_each = { for i, grant in local.volume_r_grants : i => grant }
 
-  # Read/write access grants
-  dynamic "grant" {
-    for_each = toset(each.value.volume_rw_grant_principals)
-    content {
-      principal = grant.value
-      privileges = ["READ_VOLUME", "WRITE_VOLUME"]
-    }
-  }
+  volume     = databricks_volume.volume[each.value.volume_name].id
+  principal  = each.value.principal
+  privileges = ["READ_VOLUME"]
+
+  depends_on = [databricks_volume.volume]
+}
+
+# Read/write access grants
+resource "databricks_grant" "volume_rw" {
+  for_each = { for i, grant in local.volume_rw_grants : i => grant }
+
+  volume     = databricks_volume.volume[each.value.volume_name].id
+  principal  = each.value.principal
+  privileges = ["READ_VOLUME", "WRITE_VOLUME"]
+
+  depends_on = [databricks_volume.volume]
 }
