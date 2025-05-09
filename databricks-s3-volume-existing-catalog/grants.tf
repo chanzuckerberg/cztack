@@ -19,9 +19,9 @@ locals {
 }
 
 resource "databricks_grants" "volume" {
-  for_each = var.volume_buckets
+  for_each = toset([bucket.volume_name for bucket in var.volume_buckets])
 
-  volume = each.value.volume_name
+  volume = each.value
 
   # Read-only access grants
   dynamic "grant" {
