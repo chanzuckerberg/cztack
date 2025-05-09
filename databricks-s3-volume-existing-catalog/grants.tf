@@ -18,24 +18,26 @@ locals {
   ])
 }
 
-# Read-only access grants
-resource "databricks_grant" "volume_r" {
-  for_each = { for grant in local.volume_r_grants : grant.volume_name => grant }
+resource "databricks_grants" "volume" {
+  for_each = var.volume_buckets
 
-  volume     = databricks_volume.volume[each.value.volume_name].id
-  principal  = each.value.principal
-  privileges = ["READ_VOLUME"]
+  volume = each.value.volume_name
 
-  depends_on = [databricks_volume.volume]
-}
+  # Read-only access grants
+  dynamic "grant" {
+    for_each = each.value.volume_r_grant_principals
+    content {
+      principal = grant.value
+      privileges = ["READ_VOLUME"]
+    }
+  }
 
-# Read/write access grants
-resource "databricks_grant" "volume_rw" {
-  for_each = { for grant in local.volume_rw_grants : grant.volume_name => grant }
-
-  volume     = databricks_volume.volume[each.value.volume_name].id
-  principal  = each.value.principal
-  privileges = ["READ_VOLUME", "WRITE_VOLUME"]
-
-  depends_on = [databricks_volume.volume]
+  # Read/write access grants
+  dynamic "grant" {
+    for_each = each.value.volume_rw_grant_principals
+    content {
+      principal = grant.value
+      privileges = ["READ_VOLUME", "WRITE_VOLUME"]
+    }
+  }
 }
