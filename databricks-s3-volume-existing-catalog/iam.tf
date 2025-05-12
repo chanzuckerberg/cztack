@@ -22,7 +22,9 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+      identifiers = [
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
+      ]
     }
 
     actions = ["sts:AssumeRole"]
@@ -30,6 +32,21 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
       values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.dbx_volume_aws_role_name}"]
+    }
+  }
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = [
+        "arn:aws:iam::445567094889:root",
+      ]
+    }
+
+    actions = ["sts:AssumeRole"]
+    condition {
+      test     = "ArnEquals"
+      variable = "aws:PrincipalArn"
+      values   = ["arn:aws:iam::445567094889:role${local.path}${local.dbx_volume_aws_role_name}"]
     }
   }
 }
