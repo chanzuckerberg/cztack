@@ -8,7 +8,7 @@ locals {
     : [ for policy_suffix, groups_names in merge(var.policy_map...)
       : [ for group_name in groups_names
         : "${prefix} - ${policy_suffix}" => {
-            policy : "${prefix}${policy_suffix}" = "${group_name}",
+            policy : "${prefix}${policy_suffix}",
             group : group_name
         }
       ]
