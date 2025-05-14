@@ -11,11 +11,14 @@ locals {
       ]
     ]
   ])
+
+  ws_cluster_policy_names = toset(flatten([for pair in local.policy_group_membership_list : keys(pair)]))
+  usergroups_names = toset(flatten([for pair in local.policy_group_membership_list : flatten(values(pair))]))
 }
 
 # Create Databricks groups for each policy name
 resource "databricks_group" "ws_policy_groups" {
-  for_each = toset(keys(local.policy_group_membership_list))
+  for_each = local.ws_cluster_policy_names
 
   display_name     = each.key
   workspace_access = true
@@ -23,7 +26,7 @@ resource "databricks_group" "ws_policy_groups" {
 
 # Retrieve the existing Databricks usergroups that need to be assigned
 data "databricks_group" "usergroups" {
-  for_each = toset(values(local.policy_group_membership_list))
+  for_each = local.usergroups_names
 
   display_name = each.value
 }
