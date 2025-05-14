@@ -1,7 +1,16 @@
 ## Databricks external location and IAM
-
 data "aws_caller_identity" "current" {
   provider = aws
+}
+
+locals {
+  aws_principal_account_ids = toset([
+    data.aws_caller_identity.current.account_id
+  ])
+  aws_resource_account_id = data.aws_caller_identity.current.account_id
+  external_ids = [
+    "4a2f419c-ae7a-49f1-b774-8f3113d9834d"
+  ]
 }
 
 data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
@@ -15,15 +24,16 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
     condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"
-
-      values = ["4a2f419c-ae7a-49f1-b774-8f3113d9834d"]
+      values = local.external_ids
     }
   }
+
   statement {
     principals {
       type        = "AWS"
       identifiers = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
+        for account_id in locals.aws_principal_account_ids
+        : "arn:aws:iam::${account_id}:root",
       ]
     }
 
@@ -31,22 +41,9 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
     condition {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.path}${local.dbx_volume_aws_role_name}"]
-    }
-  }
-  statement {
-    principals {
-      type        = "AWS"
-      identifiers = [
-        "arn:aws:iam::445567094889:root",
+      values   = [
+        "arn:aws:iam::${local.aws_resource_account_id}:role${local.path}${local.dbx_volume_aws_role_name}"
       ]
-    }
-
-    actions = ["sts:AssumeRole"]
-    condition {
-      test     = "ArnEquals"
-      variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::445567094889:role${local.path}${local.dbx_volume_aws_role_name}"]
     }
   }
 }

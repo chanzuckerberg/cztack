@@ -18,8 +18,8 @@ resource "databricks_storage_credential" "volume" {
 
   name = "${var.catalog_name}-volumes-storage-credential"
   aws_iam_role {
-    #role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
-    role_arn = "arn:aws:iam::445567094889:role/databricks/databricks_sci_data_logs_buckets_reader"
+    role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
+    #role_arn = "arn:aws:iam::445567094889:role/databricks/databricks_sci_data_logs_buckets_reader"
   }
   comment = "Managed by Terraform - access for the volumes in ${var.catalog_name}"
 }
