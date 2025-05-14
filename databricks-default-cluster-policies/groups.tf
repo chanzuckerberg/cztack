@@ -17,7 +17,7 @@ locals {
 }
 
 # Create Databricks groups for each policy name
-resource "databricks_group" "ws_policy_groups" {
+resource "databricks_group" "ws_cluster_policy_groups" {
   for_each = local.ws_cluster_policy_names
 
   display_name     = each.key
@@ -35,6 +35,6 @@ data "databricks_group" "usergroups" {
 resource "databricks_group_member" "ws_policy_group_members" {
   for_each = local.policy_group_membership_list
 
-  group_id = data.databricks_group.ws_policy_groups[each.key]
-  member_id = data.databricks_group.groups[each.value].id
+  group_id = databricks_group.ws_cluster_policy_groups[each.key]
+  member_id = data.databricks_group.usergroups[each.value].id
 }
