@@ -19,7 +19,7 @@ resource "databricks_group" "ws_policy_groups" {
   workspace_access = true
 }
 
-# Retrieve the existing Databricks groups that need to be assigned
+# Retrieve the existing Databricks usergroups that need to be assigned
 data "databricks_group" "usergroups" {
   for_each = toset(values(local.policy_group_membership_list))
 
