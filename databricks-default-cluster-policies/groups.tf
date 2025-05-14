@@ -34,7 +34,8 @@ data "databricks_group" "usergroups" {
 # Assign user groups to policy groups per policy-usergroup pair
 resource "databricks_group_member" "ws_policy_group_members" {
   for_each = {
-    for i, definition in local.policy_group_membership_list
+    for i, e in local.policy_group_membership_list
+    : i => e
   }
 
   group_id = databricks_group.ws_cluster_policy_groups[each.value.key]
