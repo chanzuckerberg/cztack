@@ -7,13 +7,16 @@ locals {
     for prefix in local.ws_policy_name_prefixes
     : [ for policy_suffix, groups_names in merge(var.policy_map...)
       : [ for group_name in groups_names
-        : {"${prefix}${policy_suffix}" = "${group_name}"}
+        : "${prefix} - ${policy_suffix}" => {
+            policy : "${prefix}${policy_suffix}" = "${group_name}",
+            group : group_name
+        }
       ]
     ]
   ]))
 
-  ws_cluster_policy_names = toset(flatten([for pair in local.policy_group_membership_list : keys(pair)]))
-  usergroups_names = toset(flatten([for pair in local.policy_group_membership_list : flatten(values(pair))]))
+  ws_cluster_policy_names = toset(flatten([for _, pair in local.policy_group_membership_list : pair.policy]))
+  usergroups_names = toset(flatten([for _, pair in local.policy_group_membership_list : pair.group]))
 }
 
 # Create Databricks groups for each policy name
@@ -34,10 +37,10 @@ data "databricks_group" "usergroups" {
 # Assign user groups to policy groups per policy-usergroup pair
 resource "databricks_group_member" "ws_policy_group_members" {
   for_each = {
-    for i, e in tolist(local.policy_group_membership_list)
-    : i => {
-      policy: keys(e)[0],
-      group: values(e)[0],
+    for _, pair in local.policy_group_membership_list
+    : _ => {
+      policy: pair.policy,
+      group: pair.group,
     }
   }
 
