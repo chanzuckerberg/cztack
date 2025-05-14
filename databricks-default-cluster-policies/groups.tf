@@ -5,9 +5,11 @@ locals {
 
   policy_group_membership_list = toset([
     for prefix in local.ws_policy_name_prefixes
-    : for policy_suffix, groups_names in var.policy_map
-      : for group_name in groups_names
+    : [ for policy_suffix, groups_names in var.policy_map
+      : [ for group_name in groups_names
         : "${prefix}${policy_suffix}" => "${group_name}"
+      ]
+    ]
   ])
 }
 
