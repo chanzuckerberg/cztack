@@ -43,6 +43,6 @@ resource "databricks_group_member" "ws_policy_group_members" {
     }
   }
 
-  group_id  = databricks_group.ws_cluster_policy_groups[each.value.policy].id
+  group_id  = databricks_group.ws_policy_groups[each.value.policy].id
   member_id = data.databricks_group.usergroups[each.value.group].id
 }
