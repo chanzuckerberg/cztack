@@ -3,17 +3,6 @@ locals {
     var.policy_name_prefix,
   ])
 
-  #policy_group_membership_list = toset(flatten([
-  #  for prefix in local.ws_policy_name_prefixes
-  #  : [ for policy_suffix, groups_names in merge(var.policy_map...)
-  #    : [ for group_name in groups_names
-  #      : "${prefix} - ${policy_suffix} - ${group_name}" = {
-  #          policy : "${prefix}${policy_suffix}",
-  #          group : group_name
-  #      }
-  #    ]
-  #  ]
-  #]))
   policy_group_memberships = flatten([
     for prefix in local.ws_policy_name_prefixes : [
       for policy_suffix, groups_names in merge(var.policy_map...) : [
