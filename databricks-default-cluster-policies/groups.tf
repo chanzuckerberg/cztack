@@ -25,8 +25,8 @@ locals {
     ]
   ])
 
-  ws_cluster_policy_names = flatten([for pair in local.policy_group_memberships : pair.policy])
-  usergroups_names        = flatten([for pair in local.policy_group_memberships : pair.group])
+  ws_cluster_policy_names = toset(flatten([for pair in local.policy_group_memberships : pair.policy]))
+  usergroups_names        = toset(flatten([for pair in local.policy_group_memberships : pair.group]))
 }
 
 # Create Databricks groups for each policy name
