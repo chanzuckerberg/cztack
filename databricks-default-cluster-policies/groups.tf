@@ -48,7 +48,7 @@ data "databricks_group" "usergroups" {
 resource "databricks_group_member" "ws_policy_group_members" {
   for_each = {
     for pair in local.policy_group_memberships :
-    "${pair.policy}+${group}" => {
+    "${pair.policy}+${pair.roup}" => {
       policy : pair.policy,
       group : pair.group,
     }
