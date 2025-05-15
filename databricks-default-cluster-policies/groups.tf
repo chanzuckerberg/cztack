@@ -18,8 +18,8 @@ locals {
   usergroups_names        = toset(flatten([for pair in local.policy_group_memberships : pair.group]))
 }
 
-# Create Databricks groups for each policy name
-resource "databricks_group" "ws_cluster_policy_groups" {
+# Create Databricks groups for each cluster policy name
+resource "databricks_group" "ws_policy_groups" {
   for_each = local.ws_cluster_policy_names
 
   display_name     = each.key
