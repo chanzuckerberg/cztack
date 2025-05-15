@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.92.3](https://github.com/chanzuckerberg/cztack/compare/v0.92.2...v0.92.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* Assign all listed Databricks usergroups to associated Databricks cluster policy groups ([#728](https://github.com/chanzuckerberg/cztack/issues/728)) ([3b8667f](https://github.com/chanzuckerberg/cztack/commit/3b8667f111df30703254f8b5cddb5021de634b70))
+
 ## [0.92.2](https://github.com/chanzuckerberg/cztack/compare/v0.92.1...v0.92.2) (2025-05-12)
 
 
