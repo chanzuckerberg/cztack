@@ -21,6 +21,7 @@ variable "volume_buckets" {
     bucket_prefix : optional(string, "")
     volume_r_grant_principals : optional(list(string), [])
     volume_rw_grant_principals : optional(list(string), [])
+    bucket_aws_account_id : optional(string, "")
   }))
 }
 
