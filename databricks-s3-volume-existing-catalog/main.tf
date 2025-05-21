@@ -7,20 +7,41 @@ data "aws_caller_identity" "current" {
 }
 
 locals {
-  dbx_volume_aws_role_name = "${var.catalog_name}-volumes-role"
-  databricks_aws_account   = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
+  databricks_aws_account = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
 
-  volume_buckets = [
-    for bucket in var.volume_buckets : merge(
+  # ensure bucket_aws_account_id is set
+  volume_buckets = {
+    for bucket in var.volume_buckets :
+    bucket.volume_name => merge(
       bucket,
       {
         bucket_aws_account_id = coalesce(
           bucket.bucket_aws_account_id,
           data.aws_caller_identity.current.account_id,
+        ),
+        bucket_access_role_arn = join(
+          ":", [
+            "arn",
+            "aws",
+            "iam",
+            "",
+            bucket.bucket_aws_account_id,
+            join("/", ["role", "databricks", replace("${var.catalog_name}-${bucket.volume_name}-vol-ax-role", "-", "_")])
+          ]
+        ),
+        bucket_arn = join(
+          ":", [
+            "arn",
+            "aws",
+            "s3",
+            "",
+            "",
+            bucket.bucket_name
+          ]
         )
       },
     )
-  ]
+  }
 }
 
 ### Databricks storage credential - allows workspace to access an external location.
@@ -31,8 +52,9 @@ resource "databricks_storage_credential" "volume" {
     #resource.aws_iam_role.volume_dbx_unity_aws_role,
     resource.aws_iam_role_policy_attachment.volume_dbx_unity_aws_access
   ]
+  for_each = local.volume_buckets_map
 
-  name = "${var.catalog_name}-volumes-storage-credential"
+  name = replace("${var.catalog_name}-${each.key}-volume-storage-credential", "_", "-")
   aws_iam_role {
     role_arn = local.bucket_access_role_arn
     # is really
@@ -41,7 +63,7 @@ resource "databricks_storage_credential" "volume" {
     #role_arn = "arn:aws:iam::445567094889:role/databricks/databricks_sci_data_logs_buckets_reader"
   }
   force_update = true
-  comment = "Managed by Terraform - access for the volumes in ${var.catalog_name}"
+  comment      = "Managed by Terraform - access for the volumes in ${var.catalog_name}"
 }
 
 # upstream external location sometimes takes a moment to register
@@ -52,18 +74,18 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "volume" {
-  for_each   = { for bucket in var.volume_buckets : bucket.volume_name => bucket }
+  for_each   = { for bucket in local.volume_buckets : bucket.volume_name => bucket }
   depends_on = [time_sleep.wait_30_seconds]
 
-  name            = "${each.value.volume_name}-external-location"
+  name            = replace("${each.value.volume_name}-external-location", "_", "-")
   url             = "s3://${each.value.bucket_name}"
-  credential_name = databricks_storage_credential.volume.name
+  credential_name = databricks_storage_credential.volume[each.key]
   comment         = "Managed by Terraform - access for the volume named ${each.value.bucket_name} in ${var.catalog_name}"
 }
 
 # New volume
 resource "databricks_volume" "volume" {
-  for_each         = { for bucket in var.volume_buckets : bucket.volume_name => bucket }
+  for_each         = { for bucket in local.volume_buckets : bucket.volume_name => bucket }
   depends_on       = [databricks_external_location.volume]
   name             = each.value.volume_name
   catalog_name     = var.catalog_name

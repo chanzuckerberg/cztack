@@ -4,64 +4,92 @@ locals {
   aws_principal_account_ids = toset(compact(
     concat(
       [data.aws_caller_identity.current.account_id],
-      [for bucket in var.volume_buckets : bucket.bucket_aws_account_id]
+      [for bucket in local.volume_buckets : bucket.bucket_aws_account_id]
     )
   ))
 
-  bucket_access_role_name = join("/", ["role", "databricks", local.dbx_volume_aws_role_name])
-  bucket_access_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:${local.bucket_access_role_name}"
-
-  external_ids = [
-    "4a2f419c-ae7a-49f1-b774-8f3113d9834d", # CZI Databricks account id
+  principal_external_ids = toset([
     databricks_storage_credential.volume.storage_credential_id,
-  ]
+  ])
 }
 
 data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
+  for_each = local.volume_buckets
+
   statement {
     principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"]
+      type = "AWS"
+      identifiers = toset(concat([
+        "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"
+        ],
+        [
+          for account_id in [
+            data.aws_caller_identity.current.account_id,
+            each.value.bucket_aws_acount_id,
+          ]
+          : "arn:aws:iam::${account_id}:root"
+        ],
+      ))
     }
 
     actions = ["sts:AssumeRole"]
+
     condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"
-      values   = local.external_ids
+      values = [
+        "4a2f419c-ae7a-49f1-b774-8f3113d9834d", # CZI Databricks account id
+        databricks_storage_credential.volume[each.key].storage_credential_id,
+      ]
+
     }
   }
 
   statement {
     principals {
       type = "AWS"
-      identifiers = [
-        for account_id in local.aws_principal_account_ids
-        : "arn:aws:iam::${account_id}:root"
-      ]
+      identifiers = concat(
+        # account roots
+        [
+          for account_id in toset([
+            data.aws_caller_identity.current.account_id,
+            each.value.bucket_aws_acount_id,
+          ])
+          : "arn:aws:iam::${account_id}:root"
+        ],
+        # role self-assumption
+        [
+          bucket.bucket_access_role_arn
+          # should match result of aws_iam_role.volume_dbx_unity_aws_role.arn
+        ]
+      )
     }
 
     actions = ["sts:AssumeRole"]
+
     condition {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
-      values = [
-        for bucket in var.volume_buckets :
-        "arn:aws:iam::${bucket.bucket_aws_account_id}:${local.bucket_access_role_name}"
-      ]
+      values = toset([
+        for bucket in local.volume_buckets :
+        bucket.bucket_access_role_arn
+      ])
     }
   }
 }
 
 resource "aws_iam_role" "volume_dbx_unity_aws_role" {
-  name               = local.dbx_volume_aws_role_name
-  path               = "/databricks/"
-  assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role.json
+  for_each           = local.volume_buckets
+  name               = element(split("/", each.value.bucket_access_role_arn))[-1]
+  path               = element(split("/", each.value.bucket_access_role_arn))[-2]
+  assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role[each.key].json
 }
 
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
+  for_each = local.volume_buckets
+
   statement {
     sid    = "dbxSCBucketAccess"
     effect = "Allow"
@@ -72,7 +100,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:PutLifecycleConfiguration"
     ]
     resources = [
-      for bucket in var.volume_buckets : "arn:aws:s3:::${bucket.bucket_name}"
+      each.value.bucket_arn
     ]
   }
   statement {
@@ -84,7 +112,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      for bucket in var.volume_buckets : "arn:aws:s3:::${bucket.bucket_name}/*"
+      "${each.value.bucket_arn}/*"
     ]
   }
   statement {
@@ -95,18 +123,20 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
     ]
     resources = [
       #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:${local.bucket_access_role_name}"
-      for bucket in var.volume_buckets :
-      "arn:aws:iam::${bucket.bucket_aws_account_id}:${local.bucket_access_role_name}"
+      each.value.bucket_access_role_arn,
     ]
   }
 }
 
 resource "aws_iam_policy" "volume_dbx_unity_access_policy" {
-  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access.json
+  for_each = local.volume_buckets
+
+  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "volume_dbx_unity_aws_access" {
-  policy_arn = aws_iam_policy.volume_dbx_unity_access_policy.arn
-  role       = local.dbx_volume_aws_role_name
-  #role       = aws_iam_role.volume_dbx_unity_aws_role.name
+  for_each = local.volume_buckets
+
+  policy_arn = aws_iam_policy.volume_dbx_unity_access_policy[each.key].arn
+  role       = aws_iam_role.volume_dbx_unity_aws_role[each.key].name
 }
