@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
         [
           for account_id in toset([
             data.aws_caller_identity.current.account_id,
-            each.value.bucket_aws_acount_id,
+            each.value.bucket_aws_account_id,
           ])
           : "arn:aws:iam::${account_id}:root"
         ],
