@@ -49,7 +49,6 @@ locals {
 #}
 
 resource "aws_iam_role" "volume_dbx_unity_aws_role" {
-  depends_on = [databricks_storage_credential.volume]
   name               = local.dbx_volume_aws_role_name
   path               = local.path
   #assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role.json
