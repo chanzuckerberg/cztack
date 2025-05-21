@@ -52,22 +52,22 @@ resource "aws_iam_role" "volume_dbx_unity_aws_role" {
   name               = local.dbx_volume_aws_role_name
   path               = local.path
   #assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role.json
-  assume_role_policy = jsonencode({
-    statement {
-      principals {
+  assume_role_policy = {
+    statement = {
+      principals = {
         type        = "AWS"
         identifiers = ["arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"]
       }
 
       actions = ["sts:AssumeRole"]
-      condition {
+      condition = {
         test     = "StringEquals"
         variable = "sts:ExternalId"
         values   = local.external_ids }
     }
 
-    statement {
-      principals {
+    statement = {
+      principals = {
         type = "AWS"
         identifiers = [
           for account_id in local.aws_principal_account_ids
@@ -76,7 +76,7 @@ resource "aws_iam_role" "volume_dbx_unity_aws_role" {
       }
 
       actions = ["sts:AssumeRole"]
-      condition {
+      condition = {
         test     = "ArnEquals"
         variable = "aws:PrincipalArn"
         values = [
@@ -86,7 +86,7 @@ resource "aws_iam_role" "volume_dbx_unity_aws_role" {
         ]
       }
     }
-})
+  }
 }
 
 
