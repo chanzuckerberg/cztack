@@ -19,7 +19,7 @@ locals {
           bucket.bucket_aws_account_id,
           data.aws_caller_identity.current.account_id,
         ),
-        bucket_access_role_name = replace("${var.catalog_name}-${bucket.volume_name}-vol-ax-role"),
+        bucket_access_role_name = replace("${var.catalog_name}-${bucket.volume_name}-vol-ax-role", "-", "_"),
         bucket_access_role_arn = join(
           ":", [
             "arn",
@@ -27,7 +27,7 @@ locals {
             "iam",
             "",
             bucket.bucket_aws_account_id,
-            join("/", ["role", "databricks", bucket.bucket_access_role_name], "-", "_")
+            join("/", ["role", "databricks", bucket.bucket_access_role_name])
           ]
         ),
         bucket_arn = join(
