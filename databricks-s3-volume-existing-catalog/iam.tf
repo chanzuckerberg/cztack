@@ -136,5 +136,5 @@ resource "aws_iam_role_policy_attachment" "volume_dbx_unity_aws_access" {
   for_each = local.volume_buckets
 
   policy_arn = aws_iam_policy.volume_dbx_unity_access_policy[each.key].arn
-  role       = element(split("/", each.value.bucket_access_role_arn), -1)
+  role       = each.value.bucket_access_role_name
 }
