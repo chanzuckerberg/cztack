@@ -40,6 +40,7 @@ resource "databricks_storage_credential" "volume" {
     # but using string to avoid circular dependency
     #role_arn = "arn:aws:iam::445567094889:role/databricks/databricks_sci_data_logs_buckets_reader"
   }
+  force_update = true
   comment = "Managed by Terraform - access for the volumes in ${var.catalog_name}"
 }
 
