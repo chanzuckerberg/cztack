@@ -4,7 +4,8 @@ locals {
   aws_principal_account_ids = toset([
     data.aws_caller_identity.current.account_id
   ])
-  bucket_access_role = join("/", ["role", "databricks", local.dbx_volume_aws_role_name])
+  bucket_access_role_name = join("/", ["role", "databricks", local.dbx_volume_aws_role_name])
+  bucket_access_role_arn = "arn:aws:iam::${data.aws_caller_identity.current}:${local.bucket_access_role_name}"
   external_ids = [
     "4a2f419c-ae7a-49f1-b774-8f3113d9834d", # CZI Databricks account id
     databricks_storage_credential.volume.storage_credential_id,
@@ -41,7 +42,7 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
       variable = "aws:PrincipalArn"
       values = [
         for bucket in var.volume_buckets :
-        "arn:aws:iam::${bucket.bucket_aws_account_id}:${local.bucket_access_role}"
+        "arn:aws:iam::${bucket.bucket_aws_account_id}:${local.bucket_access_role_name}"
       ]
     }
   }
@@ -88,9 +89,9 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "sts:AssumeRole"
     ]
     resources = [
-      #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:${local.bucket_access_role}"
+      #"arn:aws:iam::${data.aws_caller_identity.current.account_id}:${local.bucket_access_role_name}"
       for bucket in var.volume_buckets :
-      "arn:aws:iam::${bucket.bucket_aws_account_id}:${local.bucket_access_role}"
+      "arn:aws:iam::${bucket.bucket_aws_account_id}:${local.bucket_access_role_name}"
     ]
   }
 }

@@ -34,9 +34,9 @@ resource "databricks_storage_credential" "volume" {
 
   name = "${var.catalog_name}-volumes-storage-credential"
   aws_iam_role {
-    role_arn = local.dbx_volume_aws_role_name
+    role_arn = local.bucket_access_role_arn
     # is really
-    # role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
+    role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
     # but using string to avoid circular dependency
     #role_arn = "arn:aws:iam::445567094889:role/databricks/databricks_sci_data_logs_buckets_reader"
   }
