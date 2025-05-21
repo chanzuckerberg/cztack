@@ -7,10 +7,6 @@ locals {
       [for bucket in local.volume_buckets : bucket.bucket_aws_account_id]
     )
   ))
-
-  principal_external_ids = toset([
-    databricks_storage_credential.volume.storage_credential_id,
-  ])
 }
 
 data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
@@ -59,7 +55,7 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
         ],
         # role self-assumption
         [
-          bucket.bucket_access_role_arn
+          each.value.bucket_access_role_arn
           # should match result of aws_iam_role.volume_dbx_unity_aws_role.arn
         ]
       )
@@ -81,8 +77,8 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
 resource "aws_iam_role" "volume_dbx_unity_aws_role" {
   for_each           = local.volume_buckets
 
-  name               = element(split("/", each.value.bucket_access_role_arn))[-1]
-  path               = element(split("/", each.value.bucket_access_role_arn))[-2]
+  name               = element(split("/", each.value.bucket_access_role_arn), -1)
+  path               = element(split("/", each.value.bucket_access_role_arn), -2)
   assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role[each.key].json
 }
 
@@ -139,5 +135,5 @@ resource "aws_iam_role_policy_attachment" "volume_dbx_unity_aws_access" {
   for_each = local.volume_buckets
 
   policy_arn = aws_iam_policy.volume_dbx_unity_access_policy[each.key].arn
-  role       = element(split("/", each.value.bucket_access_role_arn))[-1]
+  role       = element(split("/", each.value.bucket_access_role_arn), -1)
 }
