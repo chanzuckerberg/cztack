@@ -4,7 +4,7 @@ locals {
   aws_principal_account_ids = toset([
     data.aws_caller_identity.current.account_id
   ])
-  bucket_access_role = join("/", "role", "databricks", local.dbx_volume_aws_role_name)
+  bucket_access_role = join("/", ["role", "databricks", local.dbx_volume_aws_role_name])
   external_ids = [
     "4a2f419c-ae7a-49f1-b774-8f3113d9834d", # CZI Databricks account id
     databricks_storage_credential.volume.storage_credential_id,

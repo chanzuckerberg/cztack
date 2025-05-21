@@ -11,7 +11,7 @@ locals {
   databricks_aws_account   = "414351767826" # Databricks' own AWS account, not CZI's. See https://docs.databricks.com/en/administration-guide/account-settings-e2/credentials.html#step-1-create-a-cross-account-iam-role
 
   volume_buckets = [
-    for bucket in volume_buckets : merge(
+    for bucket in var.volume_buckets : merge(
       bucket,
       {
         bucket_aws_account_id = coalesce(
