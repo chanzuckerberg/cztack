@@ -48,15 +48,11 @@ locals {
 ### NOTE: names need to be unique across an account, not just a workspace
 
 resource "databricks_storage_credential" "volume" {
-  depends_on = [
-    #resource.aws_iam_role.volume_dbx_unity_aws_role,
-    resource.aws_iam_role_policy_attachment.volume_dbx_unity_aws_access
-  ]
-  for_each = local.volume_buckets_map
+  for_each = local.volume_buckets
 
   name = replace("${var.catalog_name}-${each.key}-volume-storage-credential", "_", "-")
   aws_iam_role {
-    role_arn = local.bucket_access_role_arn
+    role_arn = each.value.bucket_access_role_arn
     # is really
     #role_arn = aws_iam_role.volume_dbx_unity_aws_role.arn
     # but using string to avoid circular dependency

@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
         [
           for account_id in [
             data.aws_caller_identity.current.account_id,
-            each.value.bucket_aws_acount_id,
+            each.value.bucket_aws_account_id,
           ]
           : "arn:aws:iam::${account_id}:root"
         ],
@@ -80,6 +80,7 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
 
 resource "aws_iam_role" "volume_dbx_unity_aws_role" {
   for_each           = local.volume_buckets
+
   name               = element(split("/", each.value.bucket_access_role_arn))[-1]
   path               = element(split("/", each.value.bucket_access_role_arn))[-2]
   assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role[each.key].json
@@ -138,5 +139,5 @@ resource "aws_iam_role_policy_attachment" "volume_dbx_unity_aws_access" {
   for_each = local.volume_buckets
 
   policy_arn = aws_iam_policy.volume_dbx_unity_access_policy[each.key].arn
-  role       = aws_iam_role.volume_dbx_unity_aws_role[each.key].name
+  role       = element(split("/", each.value.bucket_access_role_arn))[-1]
 }
