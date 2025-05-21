@@ -75,10 +75,11 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
 }
 
 resource "aws_iam_role" "volume_dbx_unity_aws_role" {
-  for_each           = local.volume_buckets
+  for_each = local.volume_buckets
 
-  name               = element(split("/", each.value.bucket_access_role_arn), -1)
-  path               = element(split("/", each.value.bucket_access_role_arn), -2)
+  name = each.value.bucket_access_role_name
+  path = "/databricks/"
+
   assume_role_policy = data.aws_iam_policy_document.volume_dbx_unity_aws_role_assume_role[each.key].json
 }
 
