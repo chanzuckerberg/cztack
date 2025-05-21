@@ -84,7 +84,7 @@ resource "databricks_external_location" "volume" {
 
   name            = replace("${each.value.volume_name}-external-location", "_", "-")
   url             = "s3://${each.value.bucket_name}"
-  credential_name = databricks_storage_credential.volume[each.key]
+  credential_name = databricks_storage_credential.volume[each.key].name
   comment         = "Managed by Terraform - access for the volume named ${each.value.bucket_name} in ${var.catalog_name}"
 }
 
