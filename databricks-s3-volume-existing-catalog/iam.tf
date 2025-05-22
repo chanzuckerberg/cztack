@@ -86,6 +86,8 @@ resource "aws_iam_role" "volume_dbx_unity_aws_role" {
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
+  depends_on = [aws_iam_role.volume_dbx_unity_aws_role]
+
   for_each = local.volume_buckets
 
   statement {
