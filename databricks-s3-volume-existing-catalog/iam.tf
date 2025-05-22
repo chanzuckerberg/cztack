@@ -52,12 +52,12 @@ data "aws_iam_policy_document" "volume_dbx_unity_aws_role_assume_role" {
             each.value.bucket_aws_account_id,
           ])
           : "arn:aws:iam::${account_id}:root"
-        ],
-        # role self-assumption
-        [
-          each.value.bucket_access_role_arn
-          # should match result of aws_iam_role.volume_dbx_unity_aws_role.arn
         ]
+        ## role self-assumption
+        #[
+        #  each.value.bucket_access_role_arn
+        #  # should match result of aws_iam_role.volume_dbx_unity_aws_role.arn
+        #]
       )
     }
 
