@@ -80,7 +80,10 @@ resource "time_sleep" "wait_30_seconds" {
 
 resource "databricks_external_location" "volume" {
   for_each   = { for bucket in local.volume_buckets : bucket.volume_name => bucket }
-  depends_on = [time_sleep.wait_30_seconds]
+  depends_on = [
+    aws_iam_role.volume_dbx_unity_aws_role,
+    time_sleep.wait_30_seconds
+  ]
 
   name            = replace("${each.value.volume_name}-external-location", "_", "-")
   url             = "s3://${each.value.bucket_name}"
