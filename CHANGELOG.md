@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.92.4](https://github.com/chanzuckerberg/cztack/compare/v0.92.3...v0.92.4) (2025-06-03)
+
+
+### Misc
+
+* CCIE-4332 use GH_ACTIONS_HELPER_* ([#730](https://github.com/chanzuckerberg/cztack/issues/730)) ([88f308b](https://github.com/chanzuckerberg/cztack/commit/88f308b552bae04291eaac6ed283f98ee937d183))
+
 ## [0.92.3](https://github.com/chanzuckerberg/cztack/compare/v0.92.2...v0.92.3) (2025-05-15)
 
 
