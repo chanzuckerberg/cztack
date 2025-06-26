@@ -21,8 +21,8 @@ jobs:
               name: Generate token
               uses: actions/create-github-app-token@v1
               with:
-                app-id: ${{ secrets.CZI_GITHUB_HELPER_APP_ID }}
-                private-key: ${{ secrets.CZI_GITHUB_HELPER_PK }}
+                app-id: ${{ secrets.GH_ACTIONS_HELPER_APP_ID }}
+                private-key: ${{ secrets.GH_ACTIONS_HELPER_PK }}
             - uses: actions/checkout@v4
               with:
                 ref: ${{ github.event.pull_request.head.ref }}

@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.92.3](https://github.com/chanzuckerberg/cztack/compare/v0.92.2...v0.92.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* Assign all listed Databricks usergroups to associated Databricks cluster policy groups ([#728](https://github.com/chanzuckerberg/cztack/issues/728)) ([3b8667f](https://github.com/chanzuckerberg/cztack/commit/3b8667f111df30703254f8b5cddb5021de634b70))
+
+## [0.92.2](https://github.com/chanzuckerberg/cztack/compare/v0.92.1...v0.92.2) (2025-05-12)
+
+
+### Bug Fixes
+
+* Use index as key instead of volume name for grants iterator for Databricks Volume creation ([#727](https://github.com/chanzuckerberg/cztack/issues/727)) ([36061df](https://github.com/chanzuckerberg/cztack/commit/36061dfae097b024a49a1da6f825a4bf7353feba))
+
+
+### Misc
+
+* bump github.com/dvsekhvalnov/jose2go from 1.5.0 to 1.6.0 ([#547](https://github.com/chanzuckerberg/cztack/issues/547)) ([a8d1765](https://github.com/chanzuckerberg/cztack/commit/a8d1765a814eb247a600a5c6930dc4517b3231c1))
+* CCIE-4313 replace tibdex/github-app-token ([#725](https://github.com/chanzuckerberg/cztack/issues/725)) ([e26314c](https://github.com/chanzuckerberg/cztack/commit/e26314c2d90c4516cbe1312c89eac442057155ef))
+
 ## [0.92.1](https://github.com/chanzuckerberg/cztack/compare/v0.92.0...v0.92.1) (2025-04-15)
 
 
