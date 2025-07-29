@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.93.0](https://github.com/chanzuckerberg/cztack/compare/v0.92.3...v0.93.0) (2025-07-29)
+
+
+### Features
+
+* Create amp-role module ([#734](https://github.com/chanzuckerberg/cztack/issues/734)) ([863f20b](https://github.com/chanzuckerberg/cztack/commit/863f20b9b1a3f31f7a11e661c7742f1350a592b8))
+
+
+### Misc
+
+* CCIE-4332 use GH_ACTIONS_HELPER_* ([#730](https://github.com/chanzuckerberg/cztack/issues/730)) ([88f308b](https://github.com/chanzuckerberg/cztack/commit/88f308b552bae04291eaac6ed283f98ee937d183))
+* **deps:** bump golang.org/x/net from 0.33.0 to 0.38.0 ([#721](https://github.com/chanzuckerberg/cztack/issues/721)) ([fff1715](https://github.com/chanzuckerberg/cztack/commit/fff1715f35903df4538b01abbbc3dbf519f0c27e))
+* **deps:** bump golang.org/x/oauth2 from 0.7.0 to 0.27.0 ([#733](https://github.com/chanzuckerberg/cztack/issues/733)) ([165efd3](https://github.com/chanzuckerberg/cztack/commit/165efd354069f1190a0395b8c2fc4782fce52b4c))
+
 ## [0.92.3](https://github.com/chanzuckerberg/cztack/compare/v0.92.2...v0.92.3) (2025-05-15)
 
 
