@@ -58,7 +58,7 @@ resource "aws_iam_policy" "amp" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy" "amp-policy" {
-  role   = aws_iam_role.amp.name
-  policy = aws_iam_policy.amp.policy
+resource "aws_iam_role_policy_attachment" "amp-policy-attachment" {
+  role       = aws_iam_role.amp.name
+  policy_arn = aws_iam_policy.amp.arn
 }
