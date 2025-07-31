@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.93.1](https://github.com/chanzuckerberg/cztack/compare/v0.93.0...v0.93.1) (2025-07-31)
+
+
+### Misc
+
+* CCIE-4984 conform to open sourcing guidelines ([#735](https://github.com/chanzuckerberg/cztack/issues/735)) ([ff501c3](https://github.com/chanzuckerberg/cztack/commit/ff501c3ca5062e373171ff9f6d2579c616ede3b7))
+
 ## [0.93.0](https://github.com/chanzuckerberg/cztack/compare/v0.92.3...v0.93.0) (2025-07-29)
 
 
