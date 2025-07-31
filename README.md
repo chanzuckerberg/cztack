@@ -31,3 +31,9 @@ A few notes on writing test for this repo. Note that this is new ground for us, 
 * [go](https://golang.org/doc/install)
 * [terraform](https://www.terraform.io/intro/getting-started/install.html)
 * [terraform-provider-bless](https://github.com/chanzuckerberg/terraform-provider-bless/releases) - Place it in the same directory as your terraform executable. `dirname \`which terraform\``
+
+## Code of Conduct
+
+This project adheres to the Contributor Covenant [code of conduct](https://github.com/chanzuckerberg/.github/blob/master/CODE_OF_CONDUCT.md).
+By participating, you are expected to uphold this code. 
+Please report unacceptable behavior to [opensource@chanzuckerberg.com](mailto:opensource@chanzuckerberg.com).
