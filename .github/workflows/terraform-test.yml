@@ -1,8 +1,11 @@
-name: Terraform Test
+name: Terraform
 on:
   pull_request:
-    branches:
-      - nshao/*
+    types:
+      - edited
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   test:
