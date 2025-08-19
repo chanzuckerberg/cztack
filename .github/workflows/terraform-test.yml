@@ -2,7 +2,7 @@ name: Terraform Test
 on:
   pull_request:
     branches:
-      - nshao/sqs-module
+      - nshao/*
 
 jobs:
   test:
@@ -25,14 +25,24 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-west-2
-          role-to-assume: arn:aws:iam::416703108729:role/argus-infra-stacks-ci
-          role-session-name: CztackTerraformTest
+          role-to-assume: arn:aws:iam::471112759938:role/cztack-ci
+          role-session-name: TerraformTest
 
       - name: Install `terraform-test`
         run: |
           go install github.com/hashicorp/terraform-test@latest
 
-      - name: Run Terraform Tests
-        id: test
-        run: terraform test
-        working-directory: ./aws-sqs/sqs_queue_test.tftest.hcl
+      - name: Run Terraform Tests for All Modules
+        run: |
+          MODULES=$(find . -type f -name "*.tftest.hcl" -exec dirname {} \; | sort -u)
+
+          for module in $MODULES; do
+          echo "--- Running tests in: $module ---"
+          cd "$module"
+
+          # Run terraform test in the subdirectory
+          terraform test
+
+          # Navigate back to the root to find the next module
+          cd -
+          done
