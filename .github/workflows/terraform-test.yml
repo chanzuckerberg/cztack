@@ -1,0 +1,38 @@
+name: Terraform Test
+on:
+  pull_request:
+    branches:
+      - nshao/sqs-module
+
+jobs:
+  test:
+    name: Run Terraform Unit Tests
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+          terraform_version: 1.9.8
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::416703108729:role/argus-infra-stacks-ci
+          role-session-name: CztackTerraformTest
+
+      - name: Install `terraform-test`
+        run: |
+          go install github.com/hashicorp/terraform-test@latest
+
+      - name: Run Terraform Tests
+        id: test
+        run: terraform test
+        working-directory: ./aws-sqs/sqs_queue_test.tftest.hcl
