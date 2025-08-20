@@ -45,6 +45,7 @@ jobs:
             if find "$module" -maxdepth 1 -name "*.tf" | read; then
                 echo "--- Running tests in: $module ---"
                 cd "$module"
+                terraform init
                 
                 # Run the tests
                 terraform test
