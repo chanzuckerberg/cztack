@@ -26,10 +26,6 @@ jobs:
           role-to-assume: arn:aws:iam::471112759938:role/cztack-ci
           role-session-name: TerraformTest
 
-      - name: Install `terraform-test`
-        run: |
-          go install github.com/hashicorp/terraform-test@latest
-
       - name: Run Terraform Tests for All Modules
         run: |
           CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
