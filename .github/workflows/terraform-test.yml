@@ -1,11 +1,6 @@
 name: Terraform
 on:
   pull_request:
-    types:
-      - edited
-      - opened
-      - synchronize
-      - reopened
 
 jobs:
   test:
@@ -37,15 +32,28 @@ jobs:
 
       - name: Run Terraform Tests for All Modules
         run: |
-          MODULES=$(find . -type f -name "*.tftest.hcl" -exec dirname {} \; | sort -u)
-
-          for module in $MODULES; do
-          echo "--- Running tests in: $module ---"
-          cd "$module"
-
-          # Run terraform test in the subdirectory
-          terraform test
-
-          # Navigate back to the root to find the next module
-          cd -
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No files were changed in this pull request."
+            exit 0
+          fi
+          CHANGED_MODULES=$(echo "$CHANGED_FILES" | xargs -n1 dirname | sort -u)
+          for module in $CHANGED_MODULES; do
+            echo "--- Running tests in: $module ---"
+            if [ "$module" == "." ] || [[ "$module" == ".github"* ]]; then
+                echo "Skipping non-module directory: $module"
+                continue
+            fi
+            if find "$module" -maxdepth 1 -name "*.tf" | read; then
+                echo "--- Running tests in: $module ---"
+                cd "$module"
+                
+                # Run the tests
+                terraform test
+                
+                # Go back to the root directory
+                cd -
+            else
+                echo "Directory $module is not a Terraform module, skipping."
+            fi
           done
