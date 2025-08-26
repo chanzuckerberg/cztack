@@ -1,0 +1,58 @@
+name: Terraform
+on:
+  pull_request:
+
+jobs:
+  test:
+    name: Run Terraform Unit Tests
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+          terraform_version: 1.9.8
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::471112759938:role/cztack-ci
+          role-session-name: TerraformTest
+
+      - name: Run Terraform Tests for All Modules
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No files were changed in this pull request."
+            exit 0
+          fi
+          CHANGED_MODULES=$(echo "$CHANGED_FILES" | xargs -n1 dirname | sort -u)
+          for module in $CHANGED_MODULES; do
+            echo "--- Running tests in: $module ---"
+            if [ "$module" == "." ] || [[ "$module" == ".github"* ]]; then
+                echo "Skipping non-module directory: $module"
+                continue
+            fi
+            if find "$module" -maxdepth 1 -name "*.tf" | read; then
+                echo "--- Running tests in: $module ---"
+                cd "$module"
+                terraform init
+                
+                # Run the tests
+                terraform test
+                
+                # Go back to the root directory
+                cd -
+            else
+                echo "Directory $module is not a Terraform module, skipping."
+            fi
+          done
