@@ -34,7 +34,7 @@ resource "databricks_external_location" "volume" {
   for_each   = { for bucket in var.volume_buckets : bucket.volume_name => bucket }
   depends_on = [time_sleep.wait_30_seconds]
 
-  name            = "${each.value.volume_name}-external-location"
+  name            = "${replace(var.catalog_name, "_", "-")}-${each.value.volume_name}-external-location"
   url             = "s3://${each.value.bucket_name}"
   credential_name = databricks_storage_credential.volume.name
   comment         = "Managed by Terraform - access for the volume named ${each.value.bucket_name} in ${var.catalog_name}"
