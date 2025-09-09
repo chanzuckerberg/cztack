@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.94.0](https://github.com/chanzuckerberg/cztack/compare/v0.93.0...v0.94.0) (2025-09-09)
+
+
+### Features
+
+* sqs module with tests ([#741](https://github.com/chanzuckerberg/cztack/issues/741)) ([79ad1d4](https://github.com/chanzuckerberg/cztack/commit/79ad1d4628f37e008913e5bdd318c7d1bf9b3615))
+
+
+### Bug Fixes
+
+* Make generated Databricks storage credential name more unique ([#744](https://github.com/chanzuckerberg/cztack/issues/744)) ([2fea3b8](https://github.com/chanzuckerberg/cztack/commit/2fea3b88e3849f8ec9daae3e305496b488d849c7))
+
+
+### Misc
+
+* CCIE-4984 conform to open sourcing guidelines ([#735](https://github.com/chanzuckerberg/cztack/issues/735)) ([ff501c3](https://github.com/chanzuckerberg/cztack/commit/ff501c3ca5062e373171ff9f6d2579c616ede3b7))
+* CCIE-4984 conform to open sourcing guidelines ([#739](https://github.com/chanzuckerberg/cztack/issues/739)) ([7eed0d1](https://github.com/chanzuckerberg/cztack/commit/7eed0d15948d542aa465d590e1108d9a597c34d2))
+* **deps:** bump github.com/hashicorp/go-getter from 1.7.5 to 1.7.9 ([#742](https://github.com/chanzuckerberg/cztack/issues/742)) ([8286ad8](https://github.com/chanzuckerberg/cztack/commit/8286ad8d50486d527209f2c70917a20e6e9b6612))
+* Remove aps role module ([#740](https://github.com/chanzuckerberg/cztack/issues/740)) ([5189145](https://github.com/chanzuckerberg/cztack/commit/518914563c31e922f30572e2d9f8291494da6828))
+
 ## [0.93.0](https://github.com/chanzuckerberg/cztack/compare/v0.92.3...v0.93.0) (2025-07-29)
 
 
