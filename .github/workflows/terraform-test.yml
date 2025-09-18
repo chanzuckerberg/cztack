@@ -25,7 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-west-2
-          role-to-assume: arn:aws:iam::471112759938:role/cztack-ci
+          role-to-assume: arn:aws:iam::471112759938:role/gh-actions-ci
           role-session-name: TerraformTest
 
       - name: Run Terraform Tests for All Modules
