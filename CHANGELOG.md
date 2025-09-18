@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.95.0](https://github.com/chanzuckerberg/cztack/compare/v0.94.0...v0.95.0) (2025-09-18)
+
+
+### Features
+
+* [databricks-s3-volume] Allow configuring manage privilege for catalogs ([#745](https://github.com/chanzuckerberg/cztack/issues/745)) ([856216a](https://github.com/chanzuckerberg/cztack/commit/856216a297f8345c727b9ad69056616e8db335d0))
+
+
+### Bug Fixes
+
+* renamed github action role for terraform test ([#746](https://github.com/chanzuckerberg/cztack/issues/746)) ([4dbf7a1](https://github.com/chanzuckerberg/cztack/commit/4dbf7a1bb9ff6117668a416636a7a55dfa8fa96e))
+
 ## [0.94.0](https://github.com/chanzuckerberg/cztack/compare/v0.93.0...v0.94.0) (2025-09-09)
 
 
