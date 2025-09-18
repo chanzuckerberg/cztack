@@ -1,5 +1,9 @@
 locals {
   # Only set the grant principals if the catalog and/or schema doesn't already exist
+  catalog_manage_priv_grant_principals = concat(
+    var.owner,
+    var.create_catalog ? var.catalog_manage_priv_grant_principals : []
+  )
   _catalog_all_priv_grant_principals = var.create_catalog ? var.catalog_all_priv_grant_principals : []
   catalog_all_priv_grant_principals  = concat(local._catalog_all_priv_grant_principals, [var.owner])
   catalog_r_grant_principals         = var.create_catalog ? var.catalog_r_grant_principals : []
