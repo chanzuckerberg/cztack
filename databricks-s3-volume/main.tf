@@ -12,7 +12,23 @@ locals {
   schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name  = replace(var.volume_name, "-", "_")
 
-  unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
+  # shorten if >64 chars
+  # TODO: could probably clean up by getting a list of full strings choosing
+  #       every n characters, and then just filter/pick out of those
+  _unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
+  unity_aws_role_name = (
+    length(local._unity_aws_role_name) <= 64
+    ? local._unity_aws_role_name
+    : join(
+        "",
+        [
+          for i, c in split(
+            "",
+            local._unity_aws_role_name,
+          ) : c if i % 2 == 0 # get every even index
+        ] # join every even character into string
+      )
+  )
 
   _catalog_bucket_name = coalesce(var.catalog_bucket_name, local.catalog_name)
   catalog_bucket_name  = local._catalog_bucket_name != null ? replace(local._catalog_bucket_name, "_", "-") : null
