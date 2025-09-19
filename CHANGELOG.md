@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.95.1](https://github.com/chanzuckerberg/cztack/compare/v0.95.0...v0.95.1) (2025-09-19)
+
+
+### Bug Fixes
+
+* typing, naming fixes ([#748](https://github.com/chanzuckerberg/cztack/issues/748)) ([18c423f](https://github.com/chanzuckerberg/cztack/commit/18c423f7b399bd2c9bfcce2c1fce0720c85201d1))
+
 ## [0.95.0](https://github.com/chanzuckerberg/cztack/compare/v0.94.0...v0.95.0) (2025-09-18)
 
 
