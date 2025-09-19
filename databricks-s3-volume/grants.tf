@@ -8,10 +8,10 @@ locals {
     [var.owner],
     var.create_catalog ? var.catalog_all_priv_grant_principals : []
   )
-  catalog_r_grant_principals         = var.create_catalog ? var.catalog_r_grant_principals : []
-  catalog_rw_grant_principals        = var.create_catalog ? var.catalog_rw_grant_principals : []
-  schema_r_grant_principals          = var.create_schema ? var.schema_r_grant_principals : []
-  schema_rw_grant_principals         = var.create_schema ? var.schema_rw_grant_principals : []
+  catalog_r_grant_principals  = var.create_catalog ? var.catalog_r_grant_principals : []
+  catalog_rw_grant_principals = var.create_catalog ? var.catalog_rw_grant_principals : []
+  schema_r_grant_principals   = var.create_schema ? var.schema_r_grant_principals : []
+  schema_rw_grant_principals  = var.create_schema ? var.schema_rw_grant_principals : []
 }
 
 # catalog
