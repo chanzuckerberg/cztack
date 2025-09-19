@@ -15,7 +15,7 @@ locals {
   unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
 
   _catalog_bucket_name = coalesce(var.catalog_bucket_name, local.catalog_name)
-  catalog_bucket_name = catalog_bucket_name != null ? replace(local._catalog_bucket_name, "_", "-") : null
+  catalog_bucket_name  = local._catalog_bucket_name != null ? replace(local._catalog_bucket_name, "_", "-") : null
   volume_bucket_name = (
     var.create_volume_bucket == true
     ? replace(var.volume_bucket_name, "_", "-")
