@@ -8,6 +8,10 @@ locals {
   # catalog and schema use underscores
   # bucket names use hyphens
 
+  catalog_name = var.create_catalog ? replace(var.catalog_name, "-", "_") : var.catalog_name
+  schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
+  volume_name  = replace(var.volume_name, "-", "_")
+
   # shorten if >64 chars
   _unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
   _unity_aws_candidate_role_names = [
@@ -31,7 +35,7 @@ locals {
     # if bucket created externally, it already shouldn't have any `_`
     : coalesce(var.volume_bucket_name, local.catalog_bucket_name)
   )
-
+bc3ab73
   create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
   volume_storage_location = coalesce(
     var.volume_storage_location,
