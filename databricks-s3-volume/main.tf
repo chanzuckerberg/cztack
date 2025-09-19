@@ -35,7 +35,7 @@ locals {
     # if bucket created externally, it already shouldn't have any `_`
     : coalesce(var.volume_bucket_name, local.catalog_bucket_name)
   )
-bc3ab73
+
   create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
   volume_storage_location = coalesce(
     var.volume_storage_location,
