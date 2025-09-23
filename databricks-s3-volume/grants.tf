@@ -16,6 +16,15 @@ locals {
 
 # catalog
 
+resource "databricks_grant" "catalog_manage_privileges" {
+  depends_on = [databricks_catalog.volume[0]]
+  for_each   = toset(local.catalog_manage_grant_principals)
+
+  catalog    = local.catalog_name
+  principal  = each.value
+  privileges = ["MANAGE"]
+}
+
 resource "databricks_grant" "catalog_all_privileges" {
   depends_on = [databricks_catalog.volume[0]]
   for_each   = toset(local.catalog_all_priv_grant_principals)
