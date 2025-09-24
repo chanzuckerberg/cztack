@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
-  count = length(keys(local.resource_access_config)) > 0 ? 1 : 0
+  count = length(local.resource_access_config) > 0 ? 1 : 0
 
   statement {
     principals {
