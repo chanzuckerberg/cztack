@@ -133,7 +133,7 @@ resource "databricks_catalog" "volume" {
   for_each   = toset([
     for resource_type, resource_config in local.dbx_resource_storage_config :
     resource_config["resource_name"]
-    if resource_type == "CATALOG" && create_resource == true
+    if resource_type == "CATALOG" && resource_config.create_resource == true
   ])
   depends_on = [databricks_external_location.this]
 
