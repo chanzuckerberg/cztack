@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
-  count = length(keys(local.storage_credentials_to_create)) > 0 ? 1 : 0
+  count = length(local.resource_access_config) > 0 ? 1 : 0
 
   name               = local.unity_aws_role_name
   path               = local.iam_role_path
