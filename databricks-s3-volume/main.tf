@@ -20,7 +20,7 @@ locals {
       "",
       [
         for j, c in split("", local._unity_aws_role_name) :
-        c if j % (i - 1) == 0 # get every ith character; choice is basically c = string[j]
+        c if j % (i + 1) == 0 # get every ith character; choice is basically c = string[j]
       ]                       # join list of characters to a string
     )
   ]
