@@ -14,15 +14,16 @@ locals {
 
   # shorten if >64 chars
   _unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
+  _vowel_list = ["y", "u", "i", "o", "a", "e"]
+  _vowel_lists = [
+    for j in range(length(local._vowel_list)) : [
+      slice(local._vowel_list, 0, j)
+    ]
+  ]
+
   _unity_aws_candidate_role_names = [
-    for i in range(64) :
-    join(
-      "",
-      [
-        for j, c in split("", local._unity_aws_role_name) :
-        c if j % (i + 1) == 0 # get every ith character; choice is basically c = string[j]
-      ]                       # join list of characters to a string
-    )
+    for vowel_list in local._vowel_lists :
+      trim(local._unity_aws_role_name, join("", vowel_list))
   ]
 
   unity_aws_role_name = element([for i, s in local._unity_aws_candidate_role_names : s if 0 <= length(s) && length(s) <= 64], 0)
