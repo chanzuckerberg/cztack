@@ -14,15 +14,15 @@ locals {
 
   # shorten if >64 chars
   _unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
-  _vowel_list = ["y", "u", "i", "o", "a", "e"]
+  _vowel_list          = ["y", "u", "i", "o", "a", "e"]
   _vowel_lists = [
     for j in range(length(local._vowel_list)) :
-      slice(local._vowel_list, 0, j)
+    slice(local._vowel_list, 0, j)
   ]
 
   _unity_aws_candidate_role_names = [
     for vowel_list in local._vowel_lists :
-      trim(local._unity_aws_role_name, join("", vowel_list))
+    trim(local._unity_aws_role_name, join("", vowel_list))
   ]
 
   unity_aws_role_name = element([for i, s in local._unity_aws_candidate_role_names : s if 0 <= length(s) && length(s) <= 64], 0)
@@ -36,58 +36,46 @@ locals {
     : coalesce(var.volume_bucket_name, local.catalog_bucket_name)
   )
 
-  create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
-  volume_storage_location = coalesce(
-    var.volume_storage_location,
-    "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
-  )
-
   dbx_resource_storage_config = {
     "VOLUME" : {
-      bucket_name             = local.volume_bucket_name,
-      create_bucket           = var.create_volume_bucket,
-      resource_name           = local.volume_name,
-      storage_location        = local.volume_storage_location,
+      resource_name   = local.volume_name,
+      create_resource = true
+
+      create_bucket = var.create_volume_bucket,
+      bucket_name   = local.volume_bucket_name,
+
+      create_storage_credential = var.create_volume_storage_credentials,
+      storage_location = coalesce(
+        var.volume_storage_location,
+        "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
+      ),
       storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
     },
     "CATALOG" : {
-      bucket_name             = local.catalog_bucket_name,
-      create_bucket           = var.create_catalog_bucket
-      resource_name           = local.catalog_name,
-      storage_location        = "s3://${local.catalog_bucket_name}",
-      storage_credential_name = "${local.catalog_name}-catalog",
+      resource_name   = var.create_catalog == true ? local.catalog_name : local.catalog_bucket_name,
+      create_resource = var.create_catalog
+
+      bucket_name   = local.catalog_bucket_name,
+      create_bucket = var.create_catalog_bucket
+
+      create_storage_credential = var.create_catalog || var.create_catalog_storage_credentials,
+      storage_location          = "s3://${local.catalog_bucket_name}",
+      storage_credential_name   = "${local.catalog_name}-catalog",
     }
   }
 
-  catalog_storage_credentials = (
-    local.create_catalog_storage_credentials == true ? {
-      (local.dbx_resource_storage_config["CATALOG"]["bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_credential_name"]
-    } : {}
-  )
-  storage_credentials_to_create = merge(local.catalog_storage_credentials, (
-    var.create_volume_storage_credentials == true ? {
-      (local.dbx_resource_storage_config["VOLUME"]["bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_credential_name"]
-    } : {}
-  ))
+  # project into lists per
 
-  catalog_external_locations = (
-    local.create_catalog_storage_credentials == true ? {
-      (local.dbx_resource_storage_config["CATALOG"]["bucket_name"]) = local.dbx_resource_storage_config["CATALOG"]["storage_location"]
-    } : {}
-  )
-  external_locations_to_create = merge(local.catalog_external_locations, (
-    var.create_volume_storage_credentials == true ? {
-      (local.dbx_resource_storage_config["VOLUME"]["bucket_name"]) = local.dbx_resource_storage_config["VOLUME"]["storage_location"]
-    } : {}
-  ))
+  resource_access_config = [
+    for storage_type, config in local.dbx_resource_storage_config : {
+      for config_key in config :
+      config_key => config
+      if contains(["resource_name", "storage_location", "storage_credential_name"], config_key)
+          && config.create_storage_credential == true
+    }
+  ]
 
-  creating_databricks_catalogs = (
-    var.create_catalog == true ? {
-      (local.dbx_resource_storage_config["CATALOG"]["resource_name"]) = local.dbx_resource_storage_config["CATALOG"]["bucket_name"]
-    } : {}
-  )
-
-  creating_s3_buckets = toset(compact([
+  resource_s3_buckets = toset(compact([
     var.create_volume_bucket ? local.dbx_resource_storage_config["VOLUME"]["bucket_name"] : null,
     var.create_catalog_bucket ? local.dbx_resource_storage_config["CATALOG"]["bucket_name"] : null,
   ]))
@@ -98,7 +86,7 @@ locals {
 ### NOTE:
 
 resource "databricks_storage_credential" "this" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for _, config in local.dbx_resource_storage_config : config["storage_credential_name"]])
 
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
@@ -106,7 +94,7 @@ resource "databricks_storage_credential" "this" {
     module.databricks_bucket
   ]
 
-  name = each.value
+  name = each.key
 
   aws_iam_role {
     role_arn = aws_iam_role.dbx_unity_aws_role[0].arn
@@ -124,7 +112,7 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = local.external_locations_to_create
+  for_each = local.dbx_resource_storage_config
 
   depends_on = [
     time_sleep.wait_30_seconds,
@@ -132,17 +120,21 @@ resource "databricks_external_location" "this" {
     databricks_storage_credential.this,
   ]
 
-  name            = databricks_storage_credential.this[each.key].name
-  url             = each.value
-  credential_name = databricks_storage_credential.this[each.key].name
-  comment         = "Managed by Terraform - access for ${each.key}"
+  name            = databricks_storage_credential.this[each.value.storage_credential_name].name
+  url             = each.value.storage_location
+  credential_name = databricks_storage_credential.this[each.value.storage_credential_name].name
+  comment         = "Managed by Terraform - access for ${each.value.storage_credential_name}"
   read_only       = var.read_only_volume
 }
 
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
-  for_each   = local.creating_databricks_catalogs
+  for_each   = toset([
+    for resource_type, resource_config in local.dbx_resource_storage_config :
+    resource_config["resource_name"]
+    if resource_type == "CATALOG" && create_resource == true
+  ])
   depends_on = [databricks_external_location.this]
 
   name         = each.key
@@ -173,7 +165,7 @@ resource "databricks_volume" "volume" {
   catalog_name     = local.catalog_name
   schema_name      = local.schema_name
   volume_type      = "EXTERNAL"
-  storage_location = local.volume_storage_location
+  storage_location = local.dbx_resource_storage_config["VOLUME"]["storage_location"]
   owner            = var.owner
   comment          = "This volume is managed by Terraform - ${var.volume_comment}"
 }

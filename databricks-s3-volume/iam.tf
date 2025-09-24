@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
-  count = length(keys(local.storage_credentials_to_create)) > 0 ? 1 : 0
+  count = length(keys(local.resource_access_config)) > 0 ? 1 : 0
 
   statement {
     principals {
@@ -46,7 +46,7 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for _, config in local.resource_access_config : config["bucket_name"]])
 
   statement {
     sid    = "dbxSCBucketAccess"
@@ -86,13 +86,13 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for _, config in local.resource_access_config : config["bucket_name"]])
 
   policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for _, config in local.resource_access_config : config["bucket_name"]])
 
   policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
   role       = aws_iam_role.dbx_unity_aws_role[0].name

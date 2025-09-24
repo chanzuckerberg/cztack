@@ -6,7 +6,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "databricks-s3" {
-  for_each                  = local.creating_s3_buckets
+  for_each                  = local.resource_s3_buckets
   override_policy_documents = var.override_policy_documents
 
   # standard UC access
