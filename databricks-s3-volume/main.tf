@@ -100,7 +100,10 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = local.dbx_resource_storage_config
+  for_each = {
+    for config in values(local.dbx_resource_storage_config) :
+    config.storage_credential_name => config
+  }
 
   depends_on = [
     time_sleep.wait_30_seconds,
