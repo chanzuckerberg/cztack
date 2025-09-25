@@ -22,7 +22,7 @@ locals {
 
   _unity_aws_candidate_role_names = [
     for vowel_list in local._vowel_lists :
-    trim(local._unity_aws_role_name, join("", vowel_list))
+    replace(local._unity_aws_role_name, "/[${join("", vowel_list)}]/", "")
   ]
 
   unity_aws_role_name = element([for i, s in local._unity_aws_candidate_role_names : s if 0 <= length(s) && length(s) <= 64], 0)
