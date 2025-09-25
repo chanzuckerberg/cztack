@@ -17,9 +17,9 @@ locals {
   _vowel_list          = ["y", "u", "i", "o", "a", "e"]
   _unity_aws_candidate_role_names = [
     for j in range(1, length(local._vowel_list) + 1) :
-    replace(local._unity_aws_role_name, "[${join("", slice(local._vowel_list, 0, j))}]", "")
+    replace(local._unity_aws_role_name, "/[${join("", slice(local._vowel_list, 0, j))}]/", "")
   ]
-
+  # [ for j in range(1, length(["y", "u", "i", "o", "a", "e"]) + 1) : replace("<string>", "/[${join("", slice(["y", "u", "i", "o", "a", "e"], 0, j))}]/", "") ]
   unity_aws_role_name = element([for i, s in local._unity_aws_candidate_role_names : s if 0 <= length(s) && length(s) <= 64], 0)
 
   _catalog_bucket_name = coalesce(var.catalog_bucket_name, local.catalog_name)
