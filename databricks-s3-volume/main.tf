@@ -121,17 +121,13 @@ resource "databricks_external_location" "this" {
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
-  for_each   = toset([
-    for resource_type, resource_config in local.dbx_resource_storage_config :
-    resource_config["resource_name"]
-    if resource_type == "CATALOG" && resource_config.create_resource == true
-  ])
+  count      = local.dbx_resource_storage_config.CATALOG.create_reosurce == true ? 1 : 0
   depends_on = [databricks_external_location.this]
 
-  name         = each.key
+  name         = local.dbx_resource_storage_config.CATALOG.resource_name
   metastore_id = var.metastore_id
   owner        = var.owner
-  storage_root = "s3://${each.value}"
+  storage_root = "s3://${local.dbx_resource_storage_config.CATALOG.resource_name}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
     purpose = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
