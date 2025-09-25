@@ -65,7 +65,7 @@ locals {
     for storage_type, config in local.dbx_resource_storage_config : {
       for config_key in config :
       config_key => config
-      if contains(["resource_name", "storage_location", "storage_credential_name"], config_key)
+      if contains(["resource_name", "bucket_name", "storage_location", "storage_credential_name"], config_key)
           && config.create_storage_credential == true
     }
   ]
