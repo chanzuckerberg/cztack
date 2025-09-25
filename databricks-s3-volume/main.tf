@@ -121,7 +121,7 @@ resource "databricks_external_location" "this" {
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
-  count      = local.dbx_resource_storage_config.CATALOG.create_reosurce == true ? 1 : 0
+  count      = local.dbx_resource_storage_config.CATALOG.create_resource == true ? 1 : 0
   depends_on = [databricks_external_location.this]
 
   name         = local.dbx_resource_storage_config.CATALOG.resource_name
