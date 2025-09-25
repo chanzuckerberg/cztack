@@ -46,7 +46,7 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
-  for_each = toset([for config in local.resource_access_config : config["bucket_name"]])
+  for_each = {for config in local.resource_access_config : config.bucket_name => cfg}
 
   statement {
     sid    = "dbxSCBucketAccess"
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:PutLifecycleConfiguration"
     ]
     resources = [
-      "arn:aws:s3:::${each.value}",
+      "arn:aws:s3:::${each.key}",
     ]
   }
   statement {
@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      "arn:aws:s3:::${each.value}/*",
+      "arn:aws:s3:::${each.key}/*",
     ]
   }
   statement {
@@ -86,14 +86,14 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  for_each = toset([for config in local.resource_access_config : config["bucket_name"]])
+  for_each = {for config in local.resource_access_config : config.bucket_name => cfg}
 
-  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.value].json
+  policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  for_each = toset([for config in local.resource_access_config : config["bucket_name"]])
+  for_each = {for config in local.resource_access_config : config.bucket_name => cfg}
 
-  policy_arn = aws_iam_policy.dbx_unity_access_policy[each.value].arn
+  policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
   role       = aws_iam_role.dbx_unity_aws_role[0].name
 }

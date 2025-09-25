@@ -61,14 +61,7 @@ locals {
 
   # project into lists per
 
-  resource_access_config = [
-    for storage_type, config in local.dbx_resource_storage_config : {
-      for config_key in config :
-      config_key => config
-      if contains(["resource_name", "bucket_name", "storage_location", "storage_credential_name"], config_key)
-          && config.create_storage_credential == true
-    }
-  ]
+  resource_access_config = [for _, config in local.dbx_resource_storage_config : config if config.create_storage_credential == true]
 
   resource_s3_buckets = toset(compact([
     var.create_volume_bucket ? local.dbx_resource_storage_config["VOLUME"]["bucket_name"] : null,
