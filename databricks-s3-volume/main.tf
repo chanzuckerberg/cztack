@@ -16,7 +16,7 @@ locals {
   _unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
   _vowel_list          = ["y", "u", "i", "o", "a", "e"]
   _unity_aws_candidate_role_names = [
-    for j in range(1, length(local._vowel_list) + 1)
+    for j in range(1, length(local._vowel_list) + 1) :
     replace(local._unity_aws_role_name, "[${join("", slice(local._vowel_list, 0, j))}]", "")
   ]
 
