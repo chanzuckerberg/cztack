@@ -127,7 +127,7 @@ resource "databricks_catalog" "volume" {
   name         = local.dbx_resource_storage_config.CATALOG.resource_name
   metastore_id = var.metastore_id
   owner        = var.owner
-  storage_root = "s3://${local.dbx_resource_storage_config.CATALOG.resource_name}"
+  storage_root = "s3://${local.dbx_resource_storage_config.CATALOG.bucket_name}"
   comment      = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
   properties = {
     purpose = "this catalog is managed by terraform - default volume catalog for Databricks workspace ${var.workspace_name}"
