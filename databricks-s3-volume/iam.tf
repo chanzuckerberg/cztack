@@ -46,7 +46,7 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
-  for_each = {for config in local.resource_access_config : config.bucket_name => cfg}
+  for_each = {for config in local.resource_access_config : config.bucket_name => config}
 
   statement {
     sid    = "dbxSCBucketAccess"
@@ -86,13 +86,13 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  for_each = {for config in local.resource_access_config : config.bucket_name => cfg}
+  for_each = {for config in local.resource_access_config : config.bucket_name => config}
 
   policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  for_each = {for config in local.resource_access_config : config.bucket_name => cfg}
+  for_each = {for config in local.resource_access_config : config.bucket_name => config}
 
   policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
   role       = aws_iam_role.dbx_unity_aws_role[0].name
