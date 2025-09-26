@@ -54,7 +54,7 @@ locals {
       storage_credential_name = (
         local.volume_bucket_name == local.catalog_bucket_name
         ? local._catalog_storage_credential_name
-        : "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
+        : "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume"
       )
     },
     "CATALOG" : {
