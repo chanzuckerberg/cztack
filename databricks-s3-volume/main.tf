@@ -37,13 +37,16 @@ locals {
       resource_name   = local.volume_name,
       create_resource = true
 
-      create_bucket = var.create_volume_bucket,
+      # don't create bucket if subsumed by catalog bucket
+      create_bucket = var.create_volume_bucket == true && local.volume_bucket_name != local.catalog_bucket_name,
       bucket_name   = local.volume_bucket_name,
 
       create_storage_credential = var.create_volume_storage_credentials,
-      storage_location = coalesce(
-        var.volume_storage_location,
-        "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
+      # use catalog storage location if it parents volume storage location
+      storage_location = (
+        local.volume_bucket_name != local.catalog_bucket_name
+        ? coalesce(var.volume_storage_location, "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}")
+        :
       ),
       storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
     },
@@ -65,8 +68,8 @@ locals {
   resource_access_config = [for _, config in local.dbx_resource_storage_config : config if config.create_storage_credential == true]
 
   resource_s3_buckets = toset(compact([
-    var.create_volume_bucket ? local.dbx_resource_storage_config["VOLUME"]["bucket_name"] : null,
-    var.create_catalog_bucket ? local.dbx_resource_storage_config["CATALOG"]["bucket_name"] : null,
+    local.dbx_resource_storage_config.VOLUME.create_bucket ? local.dbx_resource_storage_config["VOLUME"]["bucket_name"] : null,
+    local.dbx_resource_storage_config.CATALOG.create_bucket ? local.dbx_resource_storage_config["CATALOG"]["bucket_name"] : null,
   ]))
 }
 
