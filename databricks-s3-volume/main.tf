@@ -88,7 +88,6 @@ locals {
 
 resource "databricks_storage_credential" "this" {
   for_each = toset([for _, config in local.dbx_resource_storage_config : config["storage_credential_name"]])
-  for_each
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
     resource.aws_iam_role_policy_attachment.dbx_unity_aws_access,
