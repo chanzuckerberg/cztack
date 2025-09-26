@@ -31,6 +31,7 @@ locals {
     # if bucket created externally, it already shouldn't have any `_`
     : coalesce(var.volume_bucket_name, local.catalog_bucket_name)
   )
+  _catalog_storage_credential_name = "${local.catalog_name}-catalog",
 
   dbx_resource_storage_config = {
     "VOLUME" : {
@@ -46,7 +47,15 @@ locals {
         var.volume_storage_location,
         "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
       ),
-      storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
+      # use same storage credential/external location if same bucket between
+      # catalog and volume
+      # keep storage_location distinct so the volume can differentiate between
+      # which to point to between catalog and volume
+      storage_credential_name = (
+        local.volume_bucket_name == local.catalog_bucket_name
+        ? local._catalog_storage_credential_name
+        : "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
+      )
     },
     "CATALOG" : {
       resource_name   = var.create_catalog == true ? local.catalog_name : local.catalog_bucket_name,
@@ -57,7 +66,7 @@ locals {
 
       create_storage_credential = var.create_catalog || var.create_catalog_storage_credentials,
       storage_location          = "s3://${local.catalog_bucket_name}",
-      storage_credential_name   = "${local.catalog_name}-catalog",
+      storage_credential_name   = local._catalog_storage_credential_name
     }
   }
 
