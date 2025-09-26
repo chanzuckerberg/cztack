@@ -42,11 +42,9 @@ locals {
       bucket_name   = local.volume_bucket_name,
 
       create_storage_credential = var.create_volume_storage_credentials,
-      # use catalog storage location if it parents volume storage location
-      storage_location = (
-        local.volume_bucket_name != local.catalog_bucket_name
-        ? coalesce(var.volume_storage_location, "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}")
-        :
+      storage_location = coalesce(
+        var.volume_storage_location,
+        "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
       ),
       storage_credential_name = "${local.catalog_name}-${local.schema_name}-${local.volume_name}-volume",
     },
