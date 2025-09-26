@@ -5,12 +5,16 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
-  count = length(keys(local.storage_credentials_to_create)) > 0 ? 1 : 0
+  count = length(local.resource_access_config) > 0 ? 1 : 0
 
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"]
+      identifiers = [
+        "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL",
+        # permitting role self-assumption
+        local.unity_aws_role_arn
+      ]
     }
 
     actions = ["sts:AssumeRole"]
@@ -18,7 +22,12 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
       test     = "StringEquals"
       variable = "sts:ExternalId"
 
-      values = ["4a2f419c-ae7a-49f1-b774-8f3113d9834d"]
+      # Value is generated from
+      # databricks_storage_credential.this[<storage_credential_name>].
+      # It cannot be referred dynamically here as it would create a cycle.
+      # Currently it needs to be set after the storage credential has been
+      # created in a separate plan.
+      values = ["26ad507e-cd0d-41a8-aa61-b1cd8dcd183a"]
     }
   }
   statement {
@@ -31,13 +40,13 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
     condition {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"]
+      values   = [local.unity_aws_role_arn]
     }
   }
 }
 
 resource "aws_iam_role" "dbx_unity_aws_role" {
-  count = length(keys(local.storage_credentials_to_create)) > 0 ? 1 : 0
+  count = length(local.resource_access_config) > 0 ? 1 : 0
 
   name               = local.unity_aws_role_name
   path               = local.iam_role_path
@@ -46,7 +55,7 @@ resource "aws_iam_role" "dbx_unity_aws_role" {
 
 ### Policy document to access default volume bucket and assume role
 data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for config in local.resource_access_config : config.bucket_name])
 
   statement {
     sid    = "dbxSCBucketAccess"
@@ -86,13 +95,13 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
 }
 
 resource "aws_iam_policy" "dbx_unity_access_policy" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for config in local.resource_access_config : config.bucket_name])
 
   policy = data.aws_iam_policy_document.volume_bucket_dbx_unity_access[each.key].json
 }
 
 resource "aws_iam_role_policy_attachment" "dbx_unity_aws_access" {
-  for_each = local.storage_credentials_to_create
+  for_each = toset([for config in local.resource_access_config : config.bucket_name])
 
   policy_arn = aws_iam_policy.dbx_unity_access_policy[each.key].arn
   role       = aws_iam_role.dbx_unity_aws_role[0].name

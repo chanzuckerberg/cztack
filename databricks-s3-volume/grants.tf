@@ -8,13 +8,22 @@ locals {
     [var.owner],
     var.create_catalog ? var.catalog_all_priv_grant_principals : []
   )
-  catalog_r_grant_principals         = var.create_catalog ? var.catalog_r_grant_principals : []
-  catalog_rw_grant_principals        = var.create_catalog ? var.catalog_rw_grant_principals : []
-  schema_r_grant_principals          = var.create_schema ? var.schema_r_grant_principals : []
-  schema_rw_grant_principals         = var.create_schema ? var.schema_rw_grant_principals : []
+  catalog_r_grant_principals  = var.create_catalog ? var.catalog_r_grant_principals : []
+  catalog_rw_grant_principals = var.create_catalog ? var.catalog_rw_grant_principals : []
+  schema_r_grant_principals   = var.create_schema ? var.schema_r_grant_principals : []
+  schema_rw_grant_principals  = var.create_schema ? var.schema_rw_grant_principals : []
 }
 
 # catalog
+
+resource "databricks_grant" "catalog_manage_privileges" {
+  depends_on = [databricks_catalog.volume[0]]
+  for_each   = toset(local.catalog_manage_grant_principals)
+
+  catalog    = local.catalog_name
+  principal  = each.value
+  privileges = ["MANAGE"]
+}
 
 resource "databricks_grant" "catalog_all_privileges" {
   depends_on = [databricks_catalog.volume[0]]
