@@ -42,11 +42,13 @@ locals {
       create_bucket = var.create_volume_bucket == true && local.volume_bucket_name != local.catalog_bucket_name,
       bucket_name   = local.volume_bucket_name,
 
-      create_storage_credential = var.create_volume_storage_credentials,
+      # create only if volume doesn't overlap catalog
+      create_storage_credential = var.create_volume_storage_credentials == true && local.volume_bucket_name != local.catalog_bucket_name,
       storage_location = coalesce(
         var.volume_storage_location,
         "s3://${local.volume_bucket_name}/${local.schema_name}/${local.volume_name}"
       ),
+
       # use same storage credential/external location if same bucket between
       # catalog and volume
       # keep storage_location distinct so the volume can differentiate between
@@ -86,7 +88,7 @@ locals {
 
 resource "databricks_storage_credential" "this" {
   for_each = toset([for _, config in local.dbx_resource_storage_config : config["storage_credential_name"]])
-
+  for_each
   depends_on = [
     resource.aws_iam_role.dbx_unity_aws_role,
     resource.aws_iam_role_policy_attachment.dbx_unity_aws_access,
@@ -112,7 +114,7 @@ resource "time_sleep" "wait_30_seconds" {
 
 resource "databricks_external_location" "this" {
   for_each = {
-    for config in values(local.dbx_resource_storage_config) :
+    for config in values(local.resource_access_config) :
     config.storage_credential_name => config
   }
 
