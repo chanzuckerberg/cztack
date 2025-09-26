@@ -113,7 +113,7 @@ resource "time_sleep" "wait_30_seconds" {
 
 resource "databricks_external_location" "this" {
   for_each = {
-    for config in values(local.resource_access_config) :
+    for config in local.resource_access_config :
     config.storage_credential_name => config
   }
 
