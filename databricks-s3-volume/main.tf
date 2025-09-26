@@ -31,7 +31,7 @@ locals {
     # if bucket created externally, it already shouldn't have any `_`
     : coalesce(var.volume_bucket_name, local.catalog_bucket_name)
   )
-  _catalog_storage_credential_name = "${local.catalog_name}-catalog",
+  _catalog_storage_credential_name = "${local.catalog_name}-catalog"
 
   dbx_resource_storage_config = {
     "VOLUME" : {
