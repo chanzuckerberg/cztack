@@ -21,6 +21,7 @@ locals {
   ]
   # [ for j in range(1, length(["y", "u", "i", "o", "a", "e"]) + 1) : replace("<string>", "/[${join("", slice(["y", "u", "i", "o", "a", "e"], 0, j))}]/", "") ]
   unity_aws_role_name = element([for i, s in local._unity_aws_candidate_role_names : s if 0 <= length(s) && length(s) <= 64], 0)
+  unity_aws_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"
 
   _catalog_bucket_name = coalesce(var.catalog_bucket_name, local.catalog_name)
   catalog_bucket_name  = local._catalog_bucket_name != null ? replace(local._catalog_bucket_name, "_", "-") : null

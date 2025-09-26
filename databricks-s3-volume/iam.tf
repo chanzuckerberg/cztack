@@ -10,7 +10,11 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"]
+      identifiers = [
+        "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL",
+        # permitting role self-assumption
+        local.unity_aws_role_arn
+      ]
     }
 
     actions = ["sts:AssumeRole"]
@@ -18,7 +22,12 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
       test     = "StringEquals"
       variable = "sts:ExternalId"
 
-      values = ["4a2f419c-ae7a-49f1-b774-8f3113d9834d"]
+      # Value is generated from
+      # databricks_storage_credential.this[<storage_credential_name>].
+      # It cannot be referred dynamically here as it would create a cycle.
+      # Currently it needs to be set after the storage credential has been
+      # created in a separate plan.
+      values = ["26ad507e-cd0d-41a8-aa61-b1cd8dcd183a"]
     }
   }
   statement {
@@ -31,7 +40,7 @@ data "aws_iam_policy_document" "dbx_unity_aws_role_assume_role" {
     condition {
       test     = "ArnEquals"
       variable = "aws:PrincipalArn"
-      values   = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${local.iam_role_path}${local.unity_aws_role_name}"]
+      values   = [local.unity_aws_role_arn]
     }
   }
 }
