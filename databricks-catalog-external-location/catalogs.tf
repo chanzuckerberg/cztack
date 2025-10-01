@@ -1,10 +1,11 @@
 resource "databricks_catalog" "catalog" {
-  for_each       = { for idx, catalog in var.catalogs : catalog.name => catalog }
-  name           = each.value.name
-  storage_root   = "s3://${module.catalog_bucket.name}/${each.value.catalog_prefix != "" ? each.value.catalog_prefix : each.value.name}"
-  comment        = "this catalog is managed by terraform"
-  isolation_mode = each.value.isolation_mode
-  owner          = each.value.owner
+  for_each                       = { for idx, catalog in var.catalogs : catalog.name => catalog }
+  name                           = each.value.name
+  storage_root                   = "s3://${module.catalog_bucket.name}/${each.value.catalog_prefix != "" ? each.value.catalog_prefix : each.value.name}"
+  comment                        = "this catalog is managed by terraform"
+  isolation_mode                 = each.value.isolation_mode
+  enable_predictive_optimization = each.value.enable_predictive_optimization
+  owner                          = each.value.owner
 
   depends_on = [databricks_external_location.external_locations]
 }
