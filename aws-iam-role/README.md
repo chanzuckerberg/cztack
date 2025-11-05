@@ -11,10 +11,10 @@ module iam-role {
   role_description             = "description"
   attached_policies_names_arns = [aws_iam_policy.policy.arn]
 
-  owner   = var.owner
-  project = var.project
-  service = var.component
-  env     = var.env
+  owner   = vars.tags.owner
+  project = vars.tags.project
+  service = vars.tags.service
+  env     = vars.tags.env
 }
 ```
 
