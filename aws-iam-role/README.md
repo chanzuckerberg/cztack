@@ -7,21 +7,14 @@ A module for creating an IAM role with the inline policies and managed policies 
 module iam-role {
   source = "github.com/chanzuckerberg/cztack//aws-iam-role?ref=..."
 
-  principals = [
-    {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
-    }
-  ]
+  role_name                    = "role_name"
+  role_description             = "description"
+  attached_policies_names_arns = [aws_iam_policy.policy.arn]
 
-  role_name              = "..."
-  role_description       = "...."
-  attached_policies_arns = [aws_iam_policy.policy.arn]
-
-  owner   = var.owner
-  project = var.project
-  service = var.component
-  env     = var.env
+  owner   = vars.tags.owner
+  project = vars.tags.project
+  service = vars.tags.service
+  env     = vars.tags.env
 }
 ```
 
