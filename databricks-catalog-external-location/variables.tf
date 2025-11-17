@@ -47,6 +47,7 @@ variable "catalogs" {
       all_privileges_groups          = list(string)
       read_privileges_groups         = optional(list(string), [])
       write_privileges_groups        = optional(list(string), [])
+      use_privileges_groups          = optional(list(string), [])
       catalog_prefix                 = optional(string, "")
   }))
 }

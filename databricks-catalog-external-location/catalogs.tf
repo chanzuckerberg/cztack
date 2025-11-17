@@ -56,4 +56,14 @@ resource "databricks_grants" "grants" {
       ]
     }
   }
+
+  dynamic "grant" {
+    for_each = toset(each.value.use_privileges_groups)
+    content {
+      principal = grant.value
+      privileges = [
+        "USE_CATALOG",
+      ]
+    }
+  }
 }
