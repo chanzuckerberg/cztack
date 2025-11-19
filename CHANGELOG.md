@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.96.0](https://github.com/chanzuckerberg/cztack/compare/v0.95.1...v0.96.0) (2025-11-19)
+
+
+### Features
+
+* add option for predictive optimization to catalog config ([#751](https://github.com/chanzuckerberg/cztack/issues/751)) ([d43bfc2](https://github.com/chanzuckerberg/cztack/commit/d43bfc22e5a32e269210bf72b0901574dcf1a433))
+* add use / manage privilege groups. expose external location and catalogs as output ([#755](https://github.com/chanzuckerberg/cztack/issues/755)) ([5d225f5](https://github.com/chanzuckerberg/cztack/commit/5d225f581e95575b8f3b8422e3d181258419eaa9))
+* updated module to make m2m auth for okta ([#756](https://github.com/chanzuckerberg/cztack/issues/756)) ([27ac6c8](https://github.com/chanzuckerberg/cztack/commit/27ac6c8796f887be692eb87efddd34f087a0051c))
+
+
+### Bug Fixes
+
+* docs iam role ([#753](https://github.com/chanzuckerberg/cztack/issues/753)) ([194c628](https://github.com/chanzuckerberg/cztack/commit/194c62800aa00ee3d67758f1a8918a93c6ea4065))
+
+
+### Misc
+
+* **deps:** bump github.com/dvsekhvalnov/jose2go from 1.6.0 to 1.7.0 ([#754](https://github.com/chanzuckerberg/cztack/issues/754)) ([3543048](https://github.com/chanzuckerberg/cztack/commit/354304819b635f9d4821c779e36efcba76c7cdbd))
+
 ## [0.95.1](https://github.com/chanzuckerberg/cztack/compare/v0.95.0...v0.95.1) (2025-09-19)
 
 
