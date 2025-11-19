@@ -16,7 +16,7 @@ data "jwks_from_key" "jwks" {
 }
 locals {
   jwks  = jsondecode(data.jwks_from_key.jwks.jwks)
-  label = "${var.label_prefix}-okta-m2m-service-account"
+  label = "${var.label_prefix}-okta-m2ms-service-account"
 }
 
 resource "okta_app_oauth" "app" {
