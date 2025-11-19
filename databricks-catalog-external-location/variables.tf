@@ -45,8 +45,10 @@ variable "catalogs" {
       enable_predictive_optimization = optional(string, "INHERIT")
       owner                          = string
       all_privileges_groups          = list(string)
+      manage_privileges_groups       = optional(list(string), [])
       read_privileges_groups         = optional(list(string), [])
       write_privileges_groups        = optional(list(string), [])
+      use_privileges_groups          = optional(list(string), [])
       catalog_prefix                 = optional(string, "")
   }))
 }

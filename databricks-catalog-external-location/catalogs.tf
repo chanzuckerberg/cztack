@@ -19,11 +19,38 @@ resource "databricks_grants" "grants" {
   ]
 
   dynamic "grant" {
+    for_each = toset(each.value.manage_privileges_groups)
+    content {
+      principal = grant.value
+      privileges = [
+        "ALL_PRIVILEGES",
+        "MANAGE",
+      ]
+    }
+  }
+
+  dynamic "grant" {
     for_each = toset(each.value.all_privileges_groups)
     content {
       principal = grant.value
       privileges = [
         "ALL_PRIVILEGES",
+      ]
+    }
+  }
+
+  dynamic "grant" {
+    for_each = toset(each.value.write_privileges_groups)
+    content {
+      principal = grant.value
+      privileges = [
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "SELECT",
+        "CREATE_TABLE",
+        "CREATE_SCHEMA",
+        "MODIFY",
+        "BROWSE",
       ]
     }
   }
@@ -42,17 +69,11 @@ resource "databricks_grants" "grants" {
   }
 
   dynamic "grant" {
-    for_each = toset(each.value.write_privileges_groups)
+    for_each = toset(each.value.use_privileges_groups)
     content {
       principal = grant.value
       privileges = [
         "USE_CATALOG",
-        "USE_SCHEMA",
-        "SELECT",
-        "CREATE_TABLE",
-        "CREATE_SCHEMA",
-        "MODIFY",
-        "BROWSE",
       ]
     }
   }
