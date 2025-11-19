@@ -2,15 +2,15 @@ terraform {
   required_providers {
     okta = {
       source  = "okta/okta"
-      version = "~> 4.0"
+      version = "~> 6.0"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 5.14"
+      version = "~> 6.0"
     }
     jwks = {
       source  = "iwarapter/jwks"
-      version = ">= 0.0.3"
+      version = "~> 0.0"
     }
   }
 

@@ -9,12 +9,6 @@ variable "tags" {
   })
 }
 
-variable "okta_tenant" {
-  type        = string
-  description = "The Okta tenant to create the authorization server."
-  default     = "czi-prod"
-}
-
 variable "scopes" {
   description = "Map of scope names to their configurations"
   type = map(object({
