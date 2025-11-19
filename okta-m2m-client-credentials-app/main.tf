@@ -1,22 +1,36 @@
 resource "aws_kms_key" "service_user" {
+  count = var.jwks == null ? 1 : 0
+
   description              = local.label
   key_usage                = "SIGN_VERIFY"
   customer_master_key_spec = "RSA_4096"
 }
+
 resource "aws_kms_alias" "service_user" {
+  count = var.jwks == null ? 1 : 0
+
   name_prefix   = "alias/${local.label}"
-  target_key_id = aws_kms_key.service_user.key_id
+  target_key_id = aws_kms_key.service_user[0].key_id
 }
+
 data "aws_kms_public_key" "service_user" {
-  key_id = aws_kms_key.service_user.key_id
+  count = var.jwks == null ? 1 : 0
+
+  key_id = aws_kms_key.service_user[0].key_id
 }
+
 data "jwks_from_key" "jwks" {
-  key = data.aws_kms_public_key.service_user.public_key_pem
-  kid = aws_kms_key.service_user.key_id
+  count = var.jwks == null ? 1 : 0
+
+  key = data.aws_kms_public_key.service_user[0].public_key_pem
+  kid = aws_kms_key.service_user[0].key_id
 }
+
 locals {
-  jwks  = jsondecode(data.jwks_from_key.jwks.jwks)
-  label = "${var.label_prefix}-okta-m2ms-service-account"
+  label = var.label != "" ? var.label : "${var.tags.project}-${var.tags.env}-${var.tags.service}-okta-m2m-service-account"
+  
+  # Use provided JWKS values if available, otherwise use KMS-generated values
+  jwks = var.jwks != null ? var.jwks : jsondecode(data.jwks_from_key.jwks[0].jwks)
 }
 
 resource "okta_app_oauth" "app" {
