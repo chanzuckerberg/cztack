@@ -104,13 +104,6 @@ resource "databricks_group_member" "volume_manage" {
   member_id = each.value
 }
 
-resource "databricks_group_member" "volume_manage" {
-  provider = databricks.mws
-  for_each = locals.volume_manage_grant_principals
-  group_id  = databricks_group.volume["manage"].id
-  member_id = each.value
-}
-
 resource "databricks_group_member" "volume_all" {
   provider = databricks.mws
   for_each = locals.volume_all_grant_principals
