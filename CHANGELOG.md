@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.96.1](https://github.com/chanzuckerberg/cztack/compare/v0.96.0...v0.96.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* CDI-4624 - dbx s3 volume override policy handling ([#759](https://github.com/chanzuckerberg/cztack/issues/759)) ([86845db](https://github.com/chanzuckerberg/cztack/commit/86845db2c1f49cab59c3a931e675742192fb36c3))
+
 ## [0.96.0](https://github.com/chanzuckerberg/cztack/compare/v0.95.1...v0.96.0) (2025-11-19)
 
 
