@@ -20,6 +20,7 @@ locals {
 resource "databricks_group" "catalog" {
   depends_on = [databricks_catalog.volume[0]]
   for_each   = toset(local.group_types)
+  provider = databricks.mws
 
   display_name = "${local.catalog_name}_${each.value}"
   description  = "Group for ${each.value} access to catalog ${local.catalog_name}. Created via TF"
@@ -28,6 +29,7 @@ resource "databricks_group" "catalog" {
 resource "databricks_group" "schema" {
   depends_on = [databricks_schema.volume[0]]
   for_each   = toset(local.group_types)
+  provider = databricks.mws
 
   display_name = "${local.schema_name}_${each.value}"
   description  = "Group for ${each.value} access to schema ${local.schema_name}. Created via TF"
@@ -35,6 +37,7 @@ resource "databricks_group" "schema" {
 
 resource "databricks_group" "volume" {
   for_each   = toset(local.group_types)
+  provider = databricks.mws
 
   display_name = "${databricks_volume.volume.name}_${each.value}"
   description  = "Group for ${each.value} access to volume ${databricks_volume.volume.name}. Created via TF"
@@ -42,15 +45,17 @@ resource "databricks_group" "volume" {
 
 # group memberships
 resource "databricks_group_member" "catalog_manage" {
-  provider = databricks.mws
   for_each = locals.catalog_manage_grant_principals
+  provider = databricks.mws
+
   group_id  = databricks_group.catalog["manage"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "catalog_all" {
-  provider = databricks.mws
   for_each = locals.catalog_all_priv_grant_principals
+  provider = databricks.mws
+
   group_id  = databricks_group.catalog["all"].id
   member_id = each.value
 }
@@ -58,6 +63,7 @@ resource "databricks_group_member" "catalog_all" {
 resource "databricks_group_member" "catalog_r" {
   provider = databricks.mws
   for_each = locals.catalog_r_grant_principals
+
   group_id  = databricks_group.catalog["read"].id
   member_id = each.value
 }
@@ -65,6 +71,7 @@ resource "databricks_group_member" "catalog_r" {
 resource "databricks_group_member" "catalog_rw" {
   provider = databricks.mws
   for_each = locals.catalog_rw_grant_principals
+
   group_id  = databricks_group.catalog["write"].id
   member_id = each.value
 }
@@ -72,6 +79,7 @@ resource "databricks_group_member" "catalog_rw" {
 resource "databricks_group_member" "schema_manage" {
   provider = databricks.mws
   for_each = locals.schema_manage_grant_principals
+
   group_id  = databricks_group.schema["manage"].id
   member_id = each.value
 }
@@ -79,6 +87,7 @@ resource "databricks_group_member" "schema_manage" {
 resource "databricks_group_member" "schema_all" {
   provider = databricks.mws
   for_each = locals.schema_all_priv_grant_principals
+
   group_id  = databricks_group.schema["all"].id
   member_id = each.value
 }
@@ -86,6 +95,7 @@ resource "databricks_group_member" "schema_all" {
 resource "databricks_group_member" "schema_r" {
   provider = databricks.mws
   for_each = locals.schema_r_grant_principals
+
   group_id  = databricks_group.schema["read"].id
   member_id = each.value
 }
@@ -93,6 +103,7 @@ resource "databricks_group_member" "schema_r" {
 resource "databricks_group_member" "schema_rw" {
   provider = databricks.mws
   for_each = locals.schema_rw_grant_principals
+
   group_id  = databricks_group.schema["write"].id
   member_id = each.value
 }
@@ -100,6 +111,7 @@ resource "databricks_group_member" "schema_rw" {
 resource "databricks_group_member" "volume_manage" {
   provider = databricks.mws
   for_each = locals.volume_manage_grant_principals
+
   group_id  = databricks_group.volume["manage"].id
   member_id = each.value
 }
@@ -107,6 +119,7 @@ resource "databricks_group_member" "volume_manage" {
 resource "databricks_group_member" "volume_all" {
   provider = databricks.mws
   for_each = locals.volume_all_grant_principals
+
   group_id  = databricks_group.volume["all"].id
   member_id = each.value
 }
@@ -114,6 +127,7 @@ resource "databricks_group_member" "volume_all" {
 resource "databricks_group_member" "volume_r" {
   provider = databricks.mws
   for_each = locals.volume_r_grant_principals
+
   group_id  = databricks_group.volume["read"].id
   member_id = each.value
 }
@@ -121,12 +135,14 @@ resource "databricks_group_member" "volume_r" {
 resource "databricks_group_member" "volume_rw" {
   provider = databricks.mws
   for_each = locals.volume_rw_grant_principals
+
   group_id  = databricks_group.volume["write"].id
   member_id = each.value
 }
 
 # catalog grants
 resource "databricks_grant" "catalog_all_privileges" {
+  provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
   for_each   = toset(local.catalog_all_priv_grant_principals)
 
@@ -136,6 +152,7 @@ resource "databricks_grant" "catalog_all_privileges" {
 }
 
 resource "databricks_grant" "catalog_r" {
+  provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
   for_each   = toset(local.catalog_r_grant_principals)
 
@@ -145,6 +162,7 @@ resource "databricks_grant" "catalog_r" {
 }
 
 resource "databricks_grant" "catalog_rw" {
+  provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
   for_each   = toset(local.catalog_rw_grant_principals)
 
@@ -160,6 +178,7 @@ resource "databricks_grant" "catalog_rw" {
 
 # schema grants
 resource "databricks_grant" "schema_r" {
+  provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
   for_each   = toset(local.schema_r_grant_principals)
 
@@ -169,6 +188,7 @@ resource "databricks_grant" "schema_r" {
 }
 
 resource "databricks_grant" "schema_rw" {
+  provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
   for_each   = toset(local.schema_rw_grant_principals)
 
@@ -189,14 +209,18 @@ resource "databricks_grant" "schema_rw" {
 
 # volume grants
 resource "databricks_grant" "volume_r" {
+  provider = databricks.workspace
   for_each   = toset(var.volume_r_grant_principals)
+
   volume     = databricks_volume.volume.id
   principal  = each.value
   privileges = ["READ_VOLUME"]
 }
 
 resource "databricks_grant" "volume_rw" {
+  provider = databricks.workspace
   for_each  = toset(var.volume_rw_grant_principals)
+  
   volume    = databricks_volume.volume.id
   principal = each.value
   privileges = [
