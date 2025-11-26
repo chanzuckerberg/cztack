@@ -23,7 +23,6 @@ resource "databricks_group" "catalog" {
   provider = databricks.mws
 
   display_name = "${local.catalog_name}_${each.value}"
-  description  = "Group for ${each.value} access to catalog ${local.catalog_name}. Created via TF"
 }
 
 resource "databricks_group" "schema" {
@@ -32,7 +31,6 @@ resource "databricks_group" "schema" {
   provider = databricks.mws
 
   display_name = "${local.schema_name}_${each.value}"
-  description  = "Group for ${each.value} access to schema ${local.schema_name}. Created via TF"
 }
 
 resource "databricks_group" "volume" {
@@ -40,7 +38,6 @@ resource "databricks_group" "volume" {
   provider = databricks.mws
 
   display_name = "${databricks_volume.volume.name}_${each.value}"
-  description  = "Group for ${each.value} access to volume ${databricks_volume.volume.name}. Created via TF"
 }
 
 # group memberships
