@@ -4,9 +4,9 @@ locals {
     [var.owner],
     var.create_catalog ? var.catalog_manage_grant_principals : []
   )
-  catalog_all_priv_grant_principals = concat(
+  catalog_all_grant_principals = concat(
     [var.owner],
-    var.create_catalog ? var.catalog_all_priv_grant_principals : []
+    var.create_catalog ? var.catalog_all_grant_principals : []
   )
   catalog_r_grant_principals         = var.create_catalog ? var.catalog_r_grant_principals : []
   catalog_rw_grant_principals        = var.create_catalog ? var.catalog_rw_grant_principals : []
@@ -16,9 +16,9 @@ locals {
     [var.owner],
     var.create_schema ? var.schema_manage_grant_principals : []
   )
-  schema_all_priv_grant_principals = concat(
+  schema_all_grant_principals = concat(
     [var.owner],
-    var.create_schema ? var.schema_all_priv_grant_principals : []
+    var.create_schema ? var.schema_all_grant_principals : []
   )
   schema_r_grant_principals          = var.create_schema ? var.schema_r_grant_principals : []
   schema_rw_grant_principals         = var.create_schema ? var.schema_rw_grant_principals : []
@@ -61,7 +61,7 @@ resource "databricks_group_member" "catalog_manage" {
 }
 
 resource "databricks_group_member" "catalog_all" {
-  for_each = locals.catalog_all_priv_grant_principals
+  for_each = locals.catalog_all_grant_principals
   provider = databricks.mws
 
   group_id  = databricks_group.catalog["all"].id
@@ -94,7 +94,7 @@ resource "databricks_group_member" "schema_manage" {
 
 resource "databricks_group_member" "schema_all" {
   provider = databricks.mws
-  for_each = locals.schema_all_priv_grant_principals
+  for_each = locals.schema_all_grant_principals
 
   group_id  = databricks_group.schema["all"].id
   member_id = each.value

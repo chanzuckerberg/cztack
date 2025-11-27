@@ -92,7 +92,7 @@ variable "catalog_manage_grant_principals" {
   default     = []
 }
 
-variable "catalog_all_priv_grant_principals" {
+variable "catalog_all_grant_principals" {
   description = "(Optional) Databricks groups to grant all-privileges permission to on the catalog. Owner is included"
   type        = list(string)
   default     = []
@@ -122,7 +122,7 @@ variable "schema_manage_grant_principals" {
   default     = []
 }
 
-variable "schema_all_priv_grant_principals" {
+variable "schema_all_grant_principals" {
   description = "(Optional) Databricks groups to grant all-privileges permission to on the schema. Owner is included"
   type        = list(string)
   default     = []
@@ -140,7 +140,7 @@ variable "schema_rw_grant_principals" {
   default     = []
 }
 
-variable "schema_usage_priv_grant_principals" {
+variable "schema_usage_grant_principals" {
   description = "(Optional) Databricks groups to grant usage permission to on the schema"
   type        = list(string)
   default     = []
@@ -152,7 +152,7 @@ variable "volume_manage_grant_principals" {
   default     = []
 }
 
-variable "volume_all_priv_grant_principals" {
+variable "volume_all_grant_principals" {
   description = "(Optional) Databricks groups to grant all-privileges permission to on the volume. Owner is included"
   type        = list(string)
   default     = []
