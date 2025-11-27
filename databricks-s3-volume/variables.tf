@@ -110,7 +110,7 @@ variable "catalog_rw_grant_principals" {
   default     = []
 }
 
-variable "catalog_usage_priv_grant_principals" {
+variable "catalog_usage_grant_principals" {
   description = "(Optional) Databricks groups to grant usage permission to on the catalog"
   type        = list(string)
   default     = []
