@@ -19,13 +19,13 @@ locals {
         for group_type in local.group_types : {
           catalog = catalog.name
           group_type   = group_type
-          group_name = "${var.workspace_shorthand}_${catalog.name}_${group_type}"
+          group_name = "${catalog.name}_${group_type}"
           group_members = lookup(catalog, "${group_type}_privileges_members", [])
         }
     ]
   ]))
   catalog_group_map = {for idx, catalog in var.catalogs : catalog.name => {
-    for group_type in local.group_types : group_type => "${var.workspace_shorthand}_${catalog.name}_${group_type}"
+    for group_type in local.group_types : group_type => "${catalog.name}_${group_type}"
   }}
   flattened_catalog_group_memberships = toset(flatten([
     for group in local.flattened_catalog_groups : [
