@@ -82,6 +82,7 @@ locals {
 ### NOTE:
 
 resource "databricks_storage_credential" "this" {
+  provider = databricks.workspace
   for_each = local.storage_credentials_to_create
 
   depends_on = [
@@ -108,6 +109,7 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
+  provider = databricks.workspace
   for_each = local.external_locations_to_create
 
   depends_on = [
@@ -126,6 +128,7 @@ resource "databricks_external_location" "this" {
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
+  provider = databricks.workspace
   for_each   = local.creating_databricks_catalogs
   depends_on = [databricks_external_location.this]
 
@@ -141,6 +144,7 @@ resource "databricks_catalog" "volume" {
 }
 
 resource "databricks_schema" "volume" {
+  provider = databricks.workspace
   count = var.create_schema ? 1 : 0
 
   depends_on   = [databricks_catalog.volume]
@@ -152,6 +156,7 @@ resource "databricks_schema" "volume" {
 }
 
 resource "databricks_volume" "volume" {
+  provider = databricks.workspace
   depends_on       = [databricks_external_location.this, databricks_schema.volume]
   name             = local.volume_name
   catalog_name     = local.catalog_name
