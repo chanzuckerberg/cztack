@@ -57,58 +57,48 @@ resource "databricks_grants" "grants" {
   ]
 
   grant {
-    content {
-      principal = each.value["manage"]
-      privileges = [
-        "ALL_PRIVILEGES",
-        "MANAGE",
-      ]
-    }
+    principal = each.value["manage"]
+    privileges = [
+      "ALL_PRIVILEGES",
+      "MANAGE",
+    ]
   }
 
   grant {
-    content {
-      principal = each.value["all"]
-      privileges = [
-        "ALL_PRIVILEGES",
-      ]
-    }
+    principal = each.value["all"]
+    privileges = [
+      "ALL_PRIVILEGES",
+    ]
   }
 
   grant {
-    content {
-      principal = each.value["write"]
-      privileges = [
-        "USE_CATALOG",
-        "USE_SCHEMA",
-        "SELECT",
-        "CREATE_TABLE",
-        "CREATE_SCHEMA",
-        "MODIFY",
-        "BROWSE",
-      ]
-    }
+    principal = each.value["write"]
+    privileges = [
+      "USE_CATALOG",
+      "USE_SCHEMA",
+      "SELECT",
+      "CREATE_TABLE",
+      "CREATE_SCHEMA",
+      "MODIFY",
+      "BROWSE",
+    ]
   }
 
   grant {
-    content {
-      principal = each.value["read"]
-      privileges = [
-        "USE_CATALOG",
-        "USE_SCHEMA",
-        "SELECT",
-        "BROWSE",
-      ]
-    }
+    principal = each.value["read"]
+    privileges = [
+      "USE_CATALOG",
+      "USE_SCHEMA",
+      "SELECT",
+      "BROWSE",
+    ]
   }
 
   grant {
-    content {
-      principal = each.value["use"]
-      privileges = [
-        "USE_CATALOG",
-      ]
-    }
+    principal = each.value["use"]
+    privileges = [
+      "USE_CATALOG",
+    ]
   }
 
 }
