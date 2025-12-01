@@ -41,8 +41,8 @@ locals {
 
 resource "databricks_group" "catalog_groups" {
   provider = databricks.mws
-  for_each                       = toset([for group in local.flattened_catalog_groups : group])
-  display_name                   = each.value.group_name
+  for_each                       = toset([for group in local.flattened_catalog_groups : group.group_name])
+  display_name                   = each.value
 }
 
 # NOTE: Authoritative membership management for catalog groups. Permissions set out outside of this will be overwritten.
