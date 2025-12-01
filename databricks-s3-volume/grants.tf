@@ -53,7 +53,7 @@ resource "databricks_group" "volume" {
 
 # group memberships
 resource "databricks_group_member" "catalog_manage" {
-  for_each = local.catalog_manage_grant_principals
+  for_each = toset(local.catalog_manage_grant_principals)
   provider = databricks.mws
 
   group_id  = databricks_group.catalog["manage"].id
@@ -61,7 +61,7 @@ resource "databricks_group_member" "catalog_manage" {
 }
 
 resource "databricks_group_member" "catalog_all" {
-  for_each = local.catalog_all_grant_principals
+  for_each = toset(local.catalog_all_grant_principals)
   provider = databricks.mws
 
   group_id  = databricks_group.catalog["all"].id
@@ -70,7 +70,7 @@ resource "databricks_group_member" "catalog_all" {
 
 resource "databricks_group_member" "catalog_r" {
   provider = databricks.mws
-  for_each = local.catalog_r_grant_principals
+  for_each = toset(local.catalog_r_grant_principals)
 
   group_id  = databricks_group.catalog["read"].id
   member_id = each.value
@@ -78,7 +78,7 @@ resource "databricks_group_member" "catalog_r" {
 
 resource "databricks_group_member" "catalog_rw" {
   provider = databricks.mws
-  for_each = local.catalog_rw_grant_principals
+  for_each = toset(local.catalog_rw_grant_principals)
 
   group_id  = databricks_group.catalog["write"].id
   member_id = each.value
@@ -86,7 +86,7 @@ resource "databricks_group_member" "catalog_rw" {
 
 resource "databricks_group_member" "schema_manage" {
   provider = databricks.mws
-  for_each = local.schema_manage_grant_principals
+  for_each = toset(local.schema_manage_grant_principals)
 
   group_id  = databricks_group.schema["manage"].id
   member_id = each.value
@@ -94,7 +94,7 @@ resource "databricks_group_member" "schema_manage" {
 
 resource "databricks_group_member" "schema_all" {
   provider = databricks.mws
-  for_each = local.schema_all_grant_principals
+  for_each = toset(local.schema_all_grant_principals)
 
   group_id  = databricks_group.schema["all"].id
   member_id = each.value
@@ -102,7 +102,7 @@ resource "databricks_group_member" "schema_all" {
 
 resource "databricks_group_member" "schema_r" {
   provider = databricks.mws
-  for_each = local.schema_r_grant_principals
+  for_each = toset(local.schema_r_grant_principals)
 
   group_id  = databricks_group.schema["read"].id
   member_id = each.value
@@ -110,7 +110,7 @@ resource "databricks_group_member" "schema_r" {
 
 resource "databricks_group_member" "schema_rw" {
   provider = databricks.mws
-  for_each = local.schema_rw_grant_principals
+  for_each = toset(local.schema_rw_grant_principals)
 
   group_id  = databricks_group.schema["write"].id
   member_id = each.value
@@ -118,7 +118,7 @@ resource "databricks_group_member" "schema_rw" {
 
 resource "databricks_group_member" "volume_manage" {
   provider = databricks.mws
-  for_each = var.volume_manage_grant_principals
+  for_each = toset(var.volume_manage_grant_principals)
 
   group_id  = databricks_group.volume["manage"].id
   member_id = each.value
@@ -126,7 +126,7 @@ resource "databricks_group_member" "volume_manage" {
 
 resource "databricks_group_member" "volume_all" {
   provider = databricks.mws
-  for_each = var.volume_all_grant_principals
+  for_each = toset(var.volume_all_grant_principals)
 
   group_id  = databricks_group.volume["all"].id
   member_id = each.value
@@ -134,7 +134,7 @@ resource "databricks_group_member" "volume_all" {
 
 resource "databricks_group_member" "volume_r" {
   provider = databricks.mws
-  for_each = var.volume_r_grant_principals
+  for_each = toset(var.volume_r_grant_principals)
 
   group_id  = databricks_group.volume["read"].id
   member_id = each.value
@@ -142,7 +142,7 @@ resource "databricks_group_member" "volume_r" {
 
 resource "databricks_group_member" "volume_rw" {
   provider = databricks.mws
-  for_each = var.volume_rw_grant_principals
+  for_each = toset(var.volume_rw_grant_principals)
 
   group_id  = databricks_group.volume["write"].id
   member_id = each.value
