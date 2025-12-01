@@ -166,6 +166,7 @@ resource "databricks_storage_credential" "external" {
 
 ## user/group Grants to an external storage
 resource "databricks_grants" "databricks_credential_grants" {
+  count = (length(var.all_privileges_groups) > 0 ) ? 1 : 0
   provider = databricks.workspace
   depends_on = [
     resource.databricks_storage_credential.external
@@ -195,6 +196,7 @@ resource "databricks_external_location" "external_locations" {
 }
 
 resource "databricks_grants" "databricks_external_location_grants" {
+  count = (length(var.all_privileges_groups) > 0 ) ? 1 : 0
   provider = databricks.workspace
   external_location = databricks_external_location.external_locations.id
   dynamic "grant" {
