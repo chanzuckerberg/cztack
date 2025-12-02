@@ -1,16 +1,11 @@
-data "databricks_user" "owner" {
-  provider = databricks.mws
-  user_name = var.owner
-}
-
 locals {
   # Only set the grant principals if the catalog and/or schema doesn't already exist
   catalog_manage_grant_principals = concat(
-    [data.databricks_user.owner.id],
+    [var.owner],
     var.create_catalog ? var.catalog_manage_grant_principals : []
   )
   catalog_all_grant_principals = concat(
-    [data.databricks_user.owner.id],
+    [var.owner],
     var.create_catalog ? var.catalog_all_grant_principals : []
   )
   catalog_r_grant_principals         = var.create_catalog ? var.catalog_r_grant_principals : []
@@ -18,11 +13,11 @@ locals {
   catalog_usage_grant_principals        = var.create_catalog ? var.catalog_usage_grant_principals : []
 
   schema_manage_grant_principals = concat(
-    [data.databricks_user.owner.id],
+    [var.owner],
     var.create_schema ? var.schema_manage_grant_principals : []
   )
   schema_all_grant_principals = concat(
-    [data.databricks_user.owner.id],
+    [var.owner],
     var.create_schema ? var.schema_all_grant_principals : []
   )
   schema_r_grant_principals          = var.create_schema ? var.schema_r_grant_principals : []
