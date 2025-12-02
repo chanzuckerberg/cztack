@@ -49,7 +49,7 @@ resource "databricks_group" "catalog_groups" {
 resource "databricks_grants" "grants" { 
   provider = databricks.workspace
   for_each = local.catalog_group_map
-  catalog  = each.value.name
+  catalog  = each.key
 
   depends_on = [
     databricks_catalog.catalog,
