@@ -41,14 +41,14 @@ resource "databricks_group" "schema" {
   for_each   = toset(local.group_types)
   provider = databricks.mws
 
-  display_name = "${local.schema_name}_${each.value}"
+  display_name = "${local.catalog_name}_${local.schema_name}_${each.value}"
 }
 
 resource "databricks_group" "volume" {
   for_each   = toset(local.group_types)
   provider = databricks.mws
 
-  display_name = "${databricks_volume.volume.name}_${each.value}"
+  display_name = "${local.catalog_name}_${local.schema_name}_${databricks_volume.volume.name}_${each.value}"
 }
 
 # group memberships
@@ -203,7 +203,7 @@ resource "databricks_grant" "catalog_use" {
   depends_on = [databricks_catalog.volume[0]]
 
   catalog    = local.catalog_name
-  principal  = databricks_group.catalog["use"].id
+  principal  = databricks_group.catalog["use"].display_name
   privileges = ["USE_CATALOG"]
 }
 
@@ -213,7 +213,7 @@ resource "databricks_grant" "schema_all" {
   depends_on = [databricks_schema.volume[0]]
 
   schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["all"].id
+  principal  = databricks_group.schema["all"].display_name
   privileges = ["ALL_PRIVILEGES"]
 }
 
@@ -222,7 +222,7 @@ resource "databricks_grant" "schema_manage" {
   depends_on = [databricks_schema.volume[0]]
 
   schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["manage"].id
+  principal  = databricks_group.schema["manage"].display_name
   privileges = ["ALL_PRIVILEGES", "MANAGE"]
 }
 
@@ -231,7 +231,7 @@ resource "databricks_grant" "schema_r" {
   depends_on = [databricks_schema.volume[0]]
 
   schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["read"].id
+  principal  = databricks_group.schema["read"].display_name
   privileges = ["USE_SCHEMA", "SELECT", "EXECUTE"]
 }
 
@@ -240,7 +240,7 @@ resource "databricks_grant" "schema_rw" {
   depends_on = [databricks_schema.volume[0]]
 
   schema    = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["write"].id
+  principal  = databricks_group.schema["write"].display_name
   privileges = [
     "USE_SCHEMA",
     "SELECT",
@@ -259,7 +259,7 @@ resource "databricks_grant" "schema_use" {
   depends_on = [databricks_schema.volume[0]]
   
   schema    = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["use"].id
+  principal  = databricks_group.schema["use"].display_name
   privileges = ["USE_SCHEMA"]
 }
 
@@ -268,7 +268,7 @@ resource "databricks_grant" "volume_all" {
   provider = databricks.workspace
 
   volume     = databricks_volume.volume.id
-  principal  = databricks_group.volume["all"].id
+  principal  = databricks_group.volume["all"].display_name
   privileges = ["ALL_PRIVILEGES"]
 }
 
@@ -276,7 +276,7 @@ resource "databricks_grant" "volume_manage" {
   provider = databricks.workspace
 
   volume     = databricks_volume.volume.id
-  principal  = databricks_group.volume["manage"].id
+  principal  = databricks_group.volume["manage"].display_name
   privileges = ["ALL_PRIVILEGES", "MANAGE"]
 }
 
@@ -284,7 +284,7 @@ resource "databricks_grant" "volume_r" {
   provider = databricks.workspace
 
   volume     = databricks_volume.volume.id
-  principal  = databricks_group.volume["read"].id
+  principal  = databricks_group.volume["read"].display_name
   privileges = ["READ_VOLUME"]
 }
 
@@ -292,7 +292,7 @@ resource "databricks_grant" "volume_rw" {
   provider = databricks.workspace
   
   volume    = databricks_volume.volume.id
-  principal = databricks_group.volume["write"].id
+  principal = databricks_group.volume["write"].display_name
   privileges = [
     "READ_VOLUME",
     "WRITE_VOLUME",
