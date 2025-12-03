@@ -7,7 +7,7 @@ locals {
 
 data "aws_iam_policy_document" "databricks-s3" {
   for_each                  = local.creating_s3_buckets
-  override_policy_documents = var.override_policy_documents
+  override_policy_documents = lookup(var.override_policy_documents, each.key, [])
 
   # standard UC access
   statement {

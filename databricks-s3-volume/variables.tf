@@ -182,9 +182,9 @@ variable "additional_rw_bucket_grant_arns" {
 }
 
 variable "override_policy_documents" {
-  description = "(Optional) Additional bucket policies to apply to the bucket. These should already be in JSON"
-  type        = list(string)
-  default     = []
+  description = "(Optional) Additional bucket policies to apply to the buckets. Mapped by bucket name. These should already be in JSON"
+  type        = map(list(string))
+  default     = {}
 }
 
 variable "create_volume_storage_credentials" {
