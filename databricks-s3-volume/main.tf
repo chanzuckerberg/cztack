@@ -14,10 +14,13 @@ locals {
 
   unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
 
-  volume_bucket_name = var.create_volume_bucket ? replace(var.volume_bucket_name, "_", "-") : var.volume_bucket_name
+  volume_bucket_name = coalesce(
+    (var.volume_bucket_name != null ? replace(var.volume_bucket_name, "_", "-") : null),
+    replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}", "_", "-")
+  )
   catalog_bucket_name = coalesce(
-    replace(var.catalog_bucket_name, "_", "-"),
-    local.catalog_name
+    (var.catalog_bucket_name != null ? replace(var.catalog_bucket_name, "_", "-") : null),
+    replace(local.catalog_name, "_", "-")
   )
 
   create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
@@ -82,6 +85,7 @@ locals {
 ### NOTE:
 
 resource "databricks_storage_credential" "this" {
+  provider = databricks.workspace
   for_each = local.storage_credentials_to_create
 
   depends_on = [
@@ -108,12 +112,14 @@ resource "time_sleep" "wait_30_seconds" {
 }
 
 resource "databricks_external_location" "this" {
+  provider = databricks.workspace
   for_each = local.external_locations_to_create
 
   depends_on = [
     time_sleep.wait_30_seconds,
     resource.aws_iam_role.dbx_unity_aws_role,
     databricks_storage_credential.this,
+    module.databricks_bucket,
   ]
 
   name            = databricks_storage_credential.this[each.key].name
@@ -126,6 +132,7 @@ resource "databricks_external_location" "this" {
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
+  provider = databricks.workspace
   for_each   = local.creating_databricks_catalogs
   depends_on = [databricks_external_location.this]
 
@@ -141,6 +148,7 @@ resource "databricks_catalog" "volume" {
 }
 
 resource "databricks_schema" "volume" {
+  provider = databricks.workspace
   count = var.create_schema ? 1 : 0
 
   depends_on   = [databricks_catalog.volume]
@@ -152,6 +160,7 @@ resource "databricks_schema" "volume" {
 }
 
 resource "databricks_volume" "volume" {
+  provider = databricks.workspace
   depends_on       = [databricks_external_location.this, databricks_schema.volume]
   name             = local.volume_name
   catalog_name     = local.catalog_name

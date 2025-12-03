@@ -35,6 +35,11 @@ variable "owner" {
   type        = string
 }
 
+variable "owner_id" {
+  description = "User or group id of the owner - will be applied to the catalog, schema, and volume, if applicable"
+  type        = string
+}
+
 variable "metastore_id" {
   description = "ID of metastore to create catalog in"
   type        = string
@@ -87,12 +92,12 @@ variable "bucket_object_ownership" {
 }
 
 variable "catalog_manage_grant_principals" {
-  description = "(Optional) Databricks groups to grant MANAGE permission to on the catalog. Owner is included"
+  description = "(Optional) Databricks groups to grant MANAGE permission to on the catalog."
   type        = list(string)
   default     = []
 }
 
-variable "catalog_all_priv_grant_principals" {
+variable "catalog_all_grant_principals" {
   description = "(Optional) Databricks groups to grant all-privileges permission to on the catalog. Owner is included"
   type        = list(string)
   default     = []
@@ -110,6 +115,24 @@ variable "catalog_rw_grant_principals" {
   default     = []
 }
 
+variable "catalog_usage_grant_principals" {
+  description = "(Optional) Databricks groups to grant usage permission to on the catalog"
+  type        = list(string)
+  default     = []
+}
+
+variable "schema_manage_grant_principals" {
+  description = "(Optional) Databricks groups to grant MANAGE permission to on the schema. Owner is included"
+  type        = list(string)
+  default     = []
+}
+
+variable "schema_all_grant_principals" {
+  description = "(Optional) Databricks groups to grant all-privileges permission to on the schema. Owner is included"
+  type        = list(string)
+  default     = []
+}
+
 variable "schema_r_grant_principals" {
   description = "(Optional) Databricks groups to grant read-only permissions to on the schema"
   type        = list(string)
@@ -118,6 +141,24 @@ variable "schema_r_grant_principals" {
 
 variable "schema_rw_grant_principals" {
   description = "(Optional) Databricks groups to grant read/write permissions to on the schema"
+  type        = list(string)
+  default     = []
+}
+
+variable "schema_usage_grant_principals" {
+  description = "(Optional) Databricks groups to grant usage permission to on the schema"
+  type        = list(string)
+  default     = []
+}
+
+variable "volume_manage_grant_principals" {
+  description = "(Optional) Databricks groups to grant MANAGE permission to on the volume. Owner is included"
+  type        = list(string)
+  default     = []
+}
+
+variable "volume_all_grant_principals" {
+  description = "(Optional) Databricks groups to grant all-privileges permission to on the volume. Owner is included"
   type        = list(string)
   default     = []
 }

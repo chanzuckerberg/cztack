@@ -44,11 +44,11 @@ variable "catalogs" {
       isolation_mode                 = optional(string, "ISOLATED")
       enable_predictive_optimization = optional(string, "INHERIT")
       owner                          = string
-      all_privileges_groups          = list(string)
-      manage_privileges_groups       = optional(list(string), [])
-      read_privileges_groups         = optional(list(string), [])
-      write_privileges_groups        = optional(list(string), [])
-      use_privileges_groups          = optional(list(string), [])
+      all_privileges_members          = optional(list(string), [])
+      manage_privileges_members       = optional(list(string), [])
+      read_privileges_members         = optional(list(string), [])
+      write_privileges_members        = optional(list(string), [])
+      use_privileges_members          = optional(list(string), [])
       catalog_prefix                 = optional(string, "")
   }))
 }

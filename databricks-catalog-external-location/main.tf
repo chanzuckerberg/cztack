@@ -152,6 +152,7 @@ resource "aws_iam_role_policy" "databricks_external_location_access_role_policy"
 ### Databricks storage credential - allows workspace to access an external location.
 ### NOTE: names need to be unique across an account, not just a workspace
 resource "databricks_storage_credential" "external" {
+  provider = databricks.workspace
   depends_on = [
     resource.aws_iam_role.databricks_external_location_iam_role,
     module.catalog_bucket
@@ -166,6 +167,8 @@ resource "databricks_storage_credential" "external" {
 
 ## user/group Grants to an external storage
 resource "databricks_grants" "databricks_credential_grants" {
+  count = (length(var.all_privileges_groups) > 0 ) ? 1 : 0
+  provider = databricks.workspace
   depends_on = [
     resource.databricks_storage_credential.external
   ]
@@ -182,6 +185,7 @@ resource "databricks_grants" "databricks_credential_grants" {
 }
 
 resource "databricks_external_location" "external_locations" {
+  provider = databricks.workspace
   depends_on = [
     resource.databricks_storage_credential.external
   ]
@@ -193,6 +197,8 @@ resource "databricks_external_location" "external_locations" {
 }
 
 resource "databricks_grants" "databricks_external_location_grants" {
+  count = (length(var.all_privileges_groups) > 0 ) ? 1 : 0
+  provider = databricks.workspace
   external_location = databricks_external_location.external_locations.id
   dynamic "grant" {
     for_each = toset(var.all_privileges_groups)
