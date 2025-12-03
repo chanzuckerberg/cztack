@@ -30,7 +30,7 @@ locals {
 # groups
 resource "databricks_group" "catalog" {
   depends_on = [databricks_catalog.volume[0]]
-  for_each   = toset(local.group_types)
+  for_each   = toset(var.create_catalog ? local.group_types: [])
   provider = databricks.mws
 
   display_name = "${local.catalog_name}_${each.value}"
@@ -38,7 +38,7 @@ resource "databricks_group" "catalog" {
 
 resource "databricks_group" "schema" {
   depends_on = [databricks_schema.volume[0]]
-  for_each   = toset(local.group_types)
+  for_each   = toset(var.create_schema ? local.group_types: [])
   provider = databricks.mws
 
   display_name = "${local.catalog_name}_${local.schema_name}_${each.value}"
