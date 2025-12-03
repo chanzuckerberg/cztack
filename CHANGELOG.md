@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.97.0](https://github.com/chanzuckerberg/cztack/compare/v0.96.1...v0.97.0) (2025-12-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* CDI-4581 - refactor dbx catalog module to create permission groups ([#758](https://github.com/chanzuckerberg/cztack/issues/758))
+
+### Features
+
+* CDI-4581 - refactor dbx catalog module to create permission groups ([#758](https://github.com/chanzuckerberg/cztack/issues/758)) ([17821ee](https://github.com/chanzuckerberg/cztack/commit/17821ee16921aa55ff42e5238d5fa68c2a46b97f))
+
 ## [0.96.1](https://github.com/chanzuckerberg/cztack/compare/v0.96.0...v0.96.1) (2025-11-25)
 
 
