@@ -35,6 +35,11 @@ variable "owner" {
   type        = string
 }
 
+variable "owner_id" {
+  description = "User or group id of the owner - will be applied to the catalog, schema, and volume, if applicable"
+  type        = string
+}
+
 variable "metastore_id" {
   description = "ID of metastore to create catalog in"
   type        = string
