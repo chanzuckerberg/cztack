@@ -154,7 +154,7 @@ resource "databricks_grant" "catalog_all" {
   depends_on = [databricks_catalog.volume[0]]
 
   catalog    = local.catalog_name
-  principal  = databricks_group.catalog["all"].id
+  principal  = databricks_group.catalog["all"].display_name
   privileges = ["ALL_PRIVILEGES"]
 }
 
@@ -163,7 +163,7 @@ resource "databricks_grant" "catalog_manage" {
   depends_on = [databricks_catalog.volume[0]]
 
   catalog    = local.catalog_name
-  principal  = databricks_group.catalog["manage"].id
+  principal  = databricks_group.catalog["manage"].display_name
   privileges = ["ALL_PRIVILEGES", "MANAGE"]
 }
 
@@ -172,7 +172,7 @@ resource "databricks_grant" "catalog_read" {
   depends_on = [databricks_catalog.volume[0]]
 
   catalog    = local.catalog_name
-  principal  = databricks_group.catalog["read"].id
+  principal  = databricks_group.catalog["read"].display_name
   privileges = [
     "USE_CATALOG",
     "USE_SCHEMA",
@@ -186,7 +186,7 @@ resource "databricks_grant" "catalog_write" {
   depends_on = [databricks_catalog.volume[0]]
 
   catalog    = local.catalog_name
-  principal  = databricks_group.catalog["write"].id
+  principal  = databricks_group.catalog["write"].display_name
   privileges = [
     "USE_CATALOG",
     "USE_SCHEMA",
