@@ -16,11 +16,11 @@ locals {
 
   volume_bucket_name = coalesce(
     (var.volume_bucket_name != null ? replace(var.volume_bucket_name, "_", "-") : null),
-    "${local.catalog_name}-${local.schema_name}-${local.volume_name}"
+    replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}", "_", "-")
   )
   catalog_bucket_name = coalesce(
     (var.catalog_bucket_name != null ? replace(var.catalog_bucket_name, "_", "-") : null),
-    local.catalog_name
+    replace(local.catalog_name, "_", "-")
   )
 
   create_catalog_storage_credentials = var.create_catalog || var.create_catalog_storage_credentials
