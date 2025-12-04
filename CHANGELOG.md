@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.97.1](https://github.com/chanzuckerberg/cztack/compare/v0.97.0...v0.97.1) (2025-12-04)
+
+
+### Bug Fixes
+
+* CDI-4621 - Only create UC groups if resource is to be created as well ([#762](https://github.com/chanzuckerberg/cztack/issues/762)) ([d9261b5](https://github.com/chanzuckerberg/cztack/commit/d9261b583607c0b31f9d0dea46d90a779aac1fb6))
+
 ## [0.97.0](https://github.com/chanzuckerberg/cztack/compare/v0.96.1...v0.97.0) (2025-12-03)
 
 
