@@ -35,3 +35,15 @@ variable "jwks" {
   default   = null
   sensitive = true
 }
+
+variable "create_kms_key" {
+  description = "Whether to create a new KMS key for JWKS generation. If false, 'jwks' variable must be provided."
+  type        = bool
+  default     = true
+
+  // if this variable is true, jwks must not be null
+  validation {
+    condition     = (var.create_kms_key == false && var.jwks != null) || var.create_kms_key == true
+    error_message = "If 'create_kms_key' is false, 'jwks' must be something."
+  }
+}
