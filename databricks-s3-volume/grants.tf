@@ -1,25 +1,21 @@
 locals {
   # Only set the grant principals if the catalog and/or schema doesn't already exist
-  catalog_manage_grant_principals = concat(
-    [var.owner_id],
-    var.create_catalog ? var.catalog_manage_grant_principals : []
-  )
-  catalog_all_grant_principals = concat(
-    [var.owner_id],
-    var.create_catalog ? var.catalog_all_grant_principals : []
-  )
+  catalog_manage_grant_principals = var.create_catalog ? concat(
+    [var.owner_id], var.catalog_manage_grant_principals
+  ) : []
+  catalog_all_grant_principals = var.create_catalog ? concat(
+    [var.owner_id], var.catalog_all_grant_principals
+  ) : []
   catalog_r_grant_principals         = var.create_catalog ? var.catalog_r_grant_principals : []
   catalog_rw_grant_principals        = var.create_catalog ? var.catalog_rw_grant_principals : []
   catalog_usage_grant_principals        = var.create_catalog ? var.catalog_usage_grant_principals : []
 
-  schema_manage_grant_principals = concat(
-    [var.owner_id],
-    var.create_schema ? var.schema_manage_grant_principals : []
-  )
-  schema_all_grant_principals = concat(
-    [var.owner_id],
-    var.create_schema ? var.schema_all_grant_principals : []
-  )
+  schema_manage_grant_principals = var.create_schema ? concat(
+        [var.owner_id], var.schema_manage_grant_principals
+  ) : []
+  schema_all_grant_principals = var.create_schema ? concat(
+    [var.owner_id], var.schema_all_grant_principals
+  ) : []
   schema_r_grant_principals          = var.create_schema ? var.schema_r_grant_principals : []
   schema_rw_grant_principals         = var.create_schema ? var.schema_rw_grant_principals : []
   schema_usage_grant_principals        = var.create_schema ? var.schema_usage_grant_principals : []
@@ -30,7 +26,7 @@ locals {
 # groups
 resource "databricks_group" "catalog" {
   depends_on = [databricks_catalog.volume[0]]
-  for_each   = toset(local.group_types)
+  for_each   = toset(var.create_catalog ? local.group_types: [])
   provider = databricks.mws
 
   display_name = "${local.catalog_name}_${each.value}"
@@ -38,7 +34,7 @@ resource "databricks_group" "catalog" {
 
 resource "databricks_group" "schema" {
   depends_on = [databricks_schema.volume[0]]
-  for_each   = toset(local.group_types)
+  for_each   = toset(var.create_schema ? local.group_types: [])
   provider = databricks.mws
 
   display_name = "${local.catalog_name}_${local.schema_name}_${each.value}"
@@ -53,16 +49,16 @@ resource "databricks_group" "volume" {
 
 # group memberships
 resource "databricks_group_member" "catalog_manage" {
-  for_each = toset(local.catalog_manage_grant_principals)
   provider = databricks.mws
+  for_each = toset(local.catalog_manage_grant_principals)
 
   group_id  = databricks_group.catalog["manage"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "catalog_all" {
-  for_each = toset(local.catalog_all_grant_principals)
   provider = databricks.mws
+  for_each = toset(local.catalog_all_grant_principals)
 
   group_id  = databricks_group.catalog["all"].id
   member_id = each.value
@@ -150,6 +146,7 @@ resource "databricks_group_member" "volume_rw" {
 
 # catalog grants #############################
 resource "databricks_grant" "catalog_all" {
+  count = var.create_catalog ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
 
@@ -159,6 +156,7 @@ resource "databricks_grant" "catalog_all" {
 }
 
 resource "databricks_grant" "catalog_manage" {
+  count = var.create_catalog ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
 
@@ -168,6 +166,7 @@ resource "databricks_grant" "catalog_manage" {
 }
 
 resource "databricks_grant" "catalog_read" {
+  count = var.create_catalog ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
 
@@ -182,6 +181,7 @@ resource "databricks_grant" "catalog_read" {
 }
 
 resource "databricks_grant" "catalog_write" {
+  count = var.create_catalog ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
 
@@ -199,6 +199,7 @@ resource "databricks_grant" "catalog_write" {
 }
 
 resource "databricks_grant" "catalog_use" {
+  count = var.create_catalog ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_catalog.volume[0]]
 
@@ -209,6 +210,7 @@ resource "databricks_grant" "catalog_use" {
 
 # schema grants
 resource "databricks_grant" "schema_all" {
+  count = var.create_schema ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
 
@@ -218,6 +220,7 @@ resource "databricks_grant" "schema_all" {
 }
 
 resource "databricks_grant" "schema_manage" {
+  count = var.create_schema ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
 
@@ -227,6 +230,7 @@ resource "databricks_grant" "schema_manage" {
 }
 
 resource "databricks_grant" "schema_r" {
+  count = var.create_schema ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
 
@@ -236,6 +240,7 @@ resource "databricks_grant" "schema_r" {
 }
 
 resource "databricks_grant" "schema_rw" {
+  count = var.create_schema ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
 
@@ -255,6 +260,7 @@ resource "databricks_grant" "schema_rw" {
 }
 
 resource "databricks_grant" "schema_use" {
+  count = var.create_schema ? 1 : 0
   provider = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
   
