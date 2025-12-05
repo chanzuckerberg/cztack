@@ -29,7 +29,7 @@ locals {
   }}
   flattened_catalog_group_memberships = toset(flatten([
     for group in local.flattened_catalog_groups : [
-      for member in group.group_members : "${group.catalog}_${group.group_type}_${member}" => {
+      for member in group.group_members : "${group.group_name}_${member}" => {
         catalog     = group.catalog
         group_type  = group.group_type
         group_name  = group.group_name
