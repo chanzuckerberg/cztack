@@ -29,7 +29,7 @@ locals {
   }}
   flattened_catalog_group_memberships = toset(flatten([
     for group in local.flattened_catalog_groups : [
-      for member in group.group_members : {
+      for member in group.group_members : "${group.catalog}_${group.group_type}_${member}" => {
         catalog     = group.catalog
         group_type  = group.group_type
         group_name  = group.group_name
@@ -106,6 +106,6 @@ resource "databricks_grants" "grants" {
 resource "databricks_group_member" "catalog_group_memberships" {
   provider = databricks.mws
   for_each = local.flattened_catalog_group_memberships
-  group_id  = databricks_group.catalog_groups[each.key].id
+  group_id  = databricks_group.catalog_groups[each.value.group_name].id
   member_id = each.value.member
 }
