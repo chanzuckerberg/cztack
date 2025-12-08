@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.99.0](https://github.com/chanzuckerberg/cztack/compare/v0.98.1...v0.99.0) (2025-12-08)
+
+
+### Features
+
+* add workspace groups for dbx workspaces ([#769](https://github.com/chanzuckerberg/cztack/issues/769)) ([1090607](https://github.com/chanzuckerberg/cztack/commit/10906070bb5dc2d9fe5369de7d932917caef89d2))
+
 ## [0.98.1](https://github.com/chanzuckerberg/cztack/compare/v0.98.0...v0.98.1) (2025-12-08)
 
 
