@@ -105,7 +105,10 @@ resource "databricks_grants" "grants" {
 
 resource "databricks_group_member" "catalog_group_memberships" {
   provider = databricks.mws
-  for_each = local.flattened_catalog_group_memberships
-  group_id  = databricks_group.catalog_groups[each.key].id
+  for_each = {for group in local.flattened_catalog_group_memberships: "${group.group_name}_${group.member}" => {
+    group_name = group.group_name
+    member     = group.member
+  }}
+  group_id  = databricks_group.catalog_groups[each.value.group_name].id
   member_id = each.value.member
 }
