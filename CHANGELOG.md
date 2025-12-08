@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.98.1](https://github.com/chanzuckerberg/cztack/compare/v0.98.0...v0.98.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* CDI-4641 - Dbx catalog group assignment ([#767](https://github.com/chanzuckerberg/cztack/issues/767)) ([762dbf8](https://github.com/chanzuckerberg/cztack/commit/762dbf8661a481e2ae45f2b7ee0ad813aec38598))
+
 ## [0.98.0](https://github.com/chanzuckerberg/cztack/compare/v0.97.1...v0.98.0) (2025-12-04)
 
 
