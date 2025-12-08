@@ -62,3 +62,15 @@ variable "tfe_service_principal_id" {
   default     = null
   description = "ID for the service principal for Terraform Enterprise, if available. Will be added as a workspace admin"
 }
+
+variable "workspace_users" {
+  type        = list(string)
+  default     = []
+  description = "List of principal IDs to be added to the workspace users group."
+}
+
+variable "workspace_admins" {
+  type        = list(string)
+  default     = []
+  description = "List of principal IDs to be added to the workspace admins group."
+}
