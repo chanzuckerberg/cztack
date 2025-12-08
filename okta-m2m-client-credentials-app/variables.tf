@@ -35,3 +35,9 @@ variable "jwks" {
   default   = null
   sensitive = true
 }
+
+variable "create_kms_key" {
+  description = "Whether to create a new KMS key for JWKS generation. If false, 'jwks' variable must be provided."
+  type        = bool
+  default     = true
+}
