@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.99.1](https://github.com/chanzuckerberg/cztack/compare/v0.99.0...v0.99.1) (2025-12-11)
+
+
+### Misc
+
+* remove references to cztack-ci-1 ([#771](https://github.com/chanzuckerberg/cztack/issues/771)) ([ea771ef](https://github.com/chanzuckerberg/cztack/commit/ea771ef07602c13713aab64783ea2271d4561c26))
+
 ## [0.99.0](https://github.com/chanzuckerberg/cztack/compare/v0.98.1...v0.99.0) (2025-12-08)
 
 
