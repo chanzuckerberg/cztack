@@ -1,5 +1,109 @@
 # Changelog
 
+## [0.99.0](https://github.com/chanzuckerberg/cztack/compare/v0.98.1...v0.99.0) (2025-12-08)
+
+
+### Features
+
+* add workspace groups for dbx workspaces ([#769](https://github.com/chanzuckerberg/cztack/issues/769)) ([1090607](https://github.com/chanzuckerberg/cztack/commit/10906070bb5dc2d9fe5369de7d932917caef89d2))
+
+## [0.98.1](https://github.com/chanzuckerberg/cztack/compare/v0.98.0...v0.98.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* CDI-4641 - Dbx catalog group assignment ([#767](https://github.com/chanzuckerberg/cztack/issues/767)) ([762dbf8](https://github.com/chanzuckerberg/cztack/commit/762dbf8661a481e2ae45f2b7ee0ad813aec38598))
+
+## [0.98.0](https://github.com/chanzuckerberg/cztack/compare/v0.97.1...v0.98.0) (2025-12-04)
+
+
+### Features
+
+* variable to create or not create kms key ([#764](https://github.com/chanzuckerberg/cztack/issues/764)) ([cff5d21](https://github.com/chanzuckerberg/cztack/commit/cff5d216ea874ae71bb93732b099d1bbeb391807))
+
+## [0.97.1](https://github.com/chanzuckerberg/cztack/compare/v0.97.0...v0.97.1) (2025-12-04)
+
+
+### Bug Fixes
+
+* CDI-4621 - Only create UC groups if resource is to be created as well ([#762](https://github.com/chanzuckerberg/cztack/issues/762)) ([d9261b5](https://github.com/chanzuckerberg/cztack/commit/d9261b583607c0b31f9d0dea46d90a779aac1fb6))
+
+## [0.97.0](https://github.com/chanzuckerberg/cztack/compare/v0.96.1...v0.97.0) (2025-12-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* CDI-4581 - refactor dbx catalog module to create permission groups ([#758](https://github.com/chanzuckerberg/cztack/issues/758))
+
+### Features
+
+* CDI-4581 - refactor dbx catalog module to create permission groups ([#758](https://github.com/chanzuckerberg/cztack/issues/758)) ([17821ee](https://github.com/chanzuckerberg/cztack/commit/17821ee16921aa55ff42e5238d5fa68c2a46b97f))
+
+## [0.96.1](https://github.com/chanzuckerberg/cztack/compare/v0.96.0...v0.96.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* CDI-4624 - dbx s3 volume override policy handling ([#759](https://github.com/chanzuckerberg/cztack/issues/759)) ([86845db](https://github.com/chanzuckerberg/cztack/commit/86845db2c1f49cab59c3a931e675742192fb36c3))
+
+## [0.96.0](https://github.com/chanzuckerberg/cztack/compare/v0.95.1...v0.96.0) (2025-11-19)
+
+
+### Features
+
+* add option for predictive optimization to catalog config ([#751](https://github.com/chanzuckerberg/cztack/issues/751)) ([d43bfc2](https://github.com/chanzuckerberg/cztack/commit/d43bfc22e5a32e269210bf72b0901574dcf1a433))
+* add use / manage privilege groups. expose external location and catalogs as output ([#755](https://github.com/chanzuckerberg/cztack/issues/755)) ([5d225f5](https://github.com/chanzuckerberg/cztack/commit/5d225f581e95575b8f3b8422e3d181258419eaa9))
+* updated module to make m2m auth for okta ([#756](https://github.com/chanzuckerberg/cztack/issues/756)) ([27ac6c8](https://github.com/chanzuckerberg/cztack/commit/27ac6c8796f887be692eb87efddd34f087a0051c))
+
+
+### Bug Fixes
+
+* docs iam role ([#753](https://github.com/chanzuckerberg/cztack/issues/753)) ([194c628](https://github.com/chanzuckerberg/cztack/commit/194c62800aa00ee3d67758f1a8918a93c6ea4065))
+
+
+### Misc
+
+* **deps:** bump github.com/dvsekhvalnov/jose2go from 1.6.0 to 1.7.0 ([#754](https://github.com/chanzuckerberg/cztack/issues/754)) ([3543048](https://github.com/chanzuckerberg/cztack/commit/354304819b635f9d4821c779e36efcba76c7cdbd))
+
+## [0.95.1](https://github.com/chanzuckerberg/cztack/compare/v0.95.0...v0.95.1) (2025-09-19)
+
+
+### Bug Fixes
+
+* typing, naming fixes ([#748](https://github.com/chanzuckerberg/cztack/issues/748)) ([18c423f](https://github.com/chanzuckerberg/cztack/commit/18c423f7b399bd2c9bfcce2c1fce0720c85201d1))
+
+## [0.95.0](https://github.com/chanzuckerberg/cztack/compare/v0.94.0...v0.95.0) (2025-09-18)
+
+
+### Features
+
+* [databricks-s3-volume] Allow configuring manage privilege for catalogs ([#745](https://github.com/chanzuckerberg/cztack/issues/745)) ([856216a](https://github.com/chanzuckerberg/cztack/commit/856216a297f8345c727b9ad69056616e8db335d0))
+
+
+### Bug Fixes
+
+* renamed github action role for terraform test ([#746](https://github.com/chanzuckerberg/cztack/issues/746)) ([4dbf7a1](https://github.com/chanzuckerberg/cztack/commit/4dbf7a1bb9ff6117668a416636a7a55dfa8fa96e))
+
+## [0.94.0](https://github.com/chanzuckerberg/cztack/compare/v0.93.0...v0.94.0) (2025-09-09)
+
+
+### Features
+
+* sqs module with tests ([#741](https://github.com/chanzuckerberg/cztack/issues/741)) ([79ad1d4](https://github.com/chanzuckerberg/cztack/commit/79ad1d4628f37e008913e5bdd318c7d1bf9b3615))
+
+
+### Bug Fixes
+
+* Make generated Databricks storage credential name more unique ([#744](https://github.com/chanzuckerberg/cztack/issues/744)) ([2fea3b8](https://github.com/chanzuckerberg/cztack/commit/2fea3b88e3849f8ec9daae3e305496b488d849c7))
+
+
+### Misc
+
+* CCIE-4984 conform to open sourcing guidelines ([#735](https://github.com/chanzuckerberg/cztack/issues/735)) ([ff501c3](https://github.com/chanzuckerberg/cztack/commit/ff501c3ca5062e373171ff9f6d2579c616ede3b7))
+* CCIE-4984 conform to open sourcing guidelines ([#739](https://github.com/chanzuckerberg/cztack/issues/739)) ([7eed0d1](https://github.com/chanzuckerberg/cztack/commit/7eed0d15948d542aa465d590e1108d9a597c34d2))
+* **deps:** bump github.com/hashicorp/go-getter from 1.7.5 to 1.7.9 ([#742](https://github.com/chanzuckerberg/cztack/issues/742)) ([8286ad8](https://github.com/chanzuckerberg/cztack/commit/8286ad8d50486d527209f2c70917a20e6e9b6612))
+* Remove aps role module ([#740](https://github.com/chanzuckerberg/cztack/issues/740)) ([5189145](https://github.com/chanzuckerberg/cztack/commit/518914563c31e922f30572e2d9f8291494da6828))
+
 ## [0.93.0](https://github.com/chanzuckerberg/cztack/compare/v0.92.3...v0.93.0) (2025-07-29)
 
 

@@ -64,3 +64,14 @@ resource "aws_iam_role_policy_attachment" "sqs_policy_attachment" {
   role       = aws_iam_role.sqs_queue_iam_role.name
   policy_arn = aws_iam_policy.sqs_queue_policy.arn
 }
+
+resource "aws_sqs_queue_redrive_allow_policy" "this" {
+  count = var.redrive_allow_policy != null ? 1 : 0
+
+  queue_url = aws_sqs_queue.sqs_queue.id
+
+  redrive_allow_policy = jsonencode({
+    redrivePermission = var.redrive_allow_policy.redrive_permission
+    sourceQueueArns   = var.redrive_allow_policy.source_queue_arns
+  })
+}
