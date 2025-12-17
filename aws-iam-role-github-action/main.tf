@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "assume_role" {
       }
       condition {
           test     = "StringEquals"
-          variable = "${local.idp}:aud"
+          variable = "${locals.idp}:aud"
           values   = ["sts.amazonaws.com"]
       }
     }
