@@ -52,11 +52,11 @@
   "aws-s3-public-bucket": "0.1.0",
   "aws-single-page-static-site": "0.1.0",
   "aws-sns-lambda": "0.1.0",
-  "aws-sqs": "0.1.0",
+  "aws-sqs": "0.2.0",
   "aws-ssm-params": "0.1.0",
   "aws-ssm-params-writer": "0.1.0",
   "bless-ca": "0.1.0",
-  "databricks-catalog-external-location": "0.1.0",
+  "databricks-catalog-external-location": "0.2.0",
   "databricks-cluster-log-permissions": "0.1.0",
   "databricks-cluster-policy": "0.1.0",
   "databricks-default-cluster-policies": "0.1.0",
@@ -89,5 +89,5 @@
   "snowflake-user-grant-all": "0.1.0",
   "snowflake-view-grant-all": "0.1.0",
   "snowflake-warehouse-grant-all": "0.1.0",
-  ".": "0.99.0"
+  ".": "0.100.0"
 }
