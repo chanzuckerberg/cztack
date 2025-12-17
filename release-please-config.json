@@ -1,7 +1,9 @@
 {
-  "release-type": "simple",
+  "commit-search-depth": 1,
   "pull-request-title-pattern": "chore${scope}: release${component} ${version}",
   "bump-minor-pre-major": true,
+  "monorepo-tags": true,
+  "prerelease": false,
   "changelog-sections": [
     {
       "type": "feat",
@@ -20,6 +22,368 @@
     }
   ],
   "packages": {
-    ".": {}
+    "aws-acm-certificate": {
+      "package-name": "aws-acm-certificate",
+      "release-type": "terraform-module"
+    },
+    "aws-assume-role-policy": {
+      "package-name": "aws-assume-role-policy",
+      "release-type": "terraform-module"
+    },
+    "aws-aurora": {
+      "package-name": "aws-aurora",
+      "release-type": "terraform-module"
+    },
+    "aws-aurora-mysql": {
+      "package-name": "aws-aurora-mysql",
+      "release-type": "terraform-module"
+    },
+    "aws-aurora-postgres": {
+      "package-name": "aws-aurora-postgres",
+      "release-type": "terraform-module"
+    },
+    "aws-cloudfront-domain-redirect": {
+      "package-name": "aws-cloudfront-domain-redirect",
+      "release-type": "terraform-module"
+    },
+    "aws-cloudfront-logs-bucket": {
+      "package-name": "aws-cloudfront-logs-bucket",
+      "release-type": "terraform-module"
+    },
+    "aws-cloudwatch-log-group": {
+      "package-name": "aws-cloudwatch-log-group",
+      "release-type": "terraform-module"
+    },
+    "aws-cloudwatch-log-retention-manager": {
+      "package-name": "aws-cloudwatch-log-retention-manager",
+      "release-type": "terraform-module"
+    },
+    "aws-default-vpc-security": {
+      "package-name": "aws-default-vpc-security",
+      "release-type": "terraform-module"
+    },
+    "aws-ecr-repo": {
+      "package-name": "aws-ecr-repo",
+      "release-type": "terraform-module"
+    },
+    "aws-ecs-job": {
+      "package-name": "aws-ecs-job",
+      "release-type": "terraform-module"
+    },
+    "aws-ecs-job-fargate": {
+      "package-name": "aws-ecs-job-fargate",
+      "release-type": "terraform-module"
+    },
+    "aws-ecs-service": {
+      "package-name": "aws-ecs-service",
+      "release-type": "terraform-module"
+    },
+    "aws-ecs-service-fargate": {
+      "package-name": "aws-ecs-service-fargate",
+      "release-type": "terraform-module"
+    },
+    "aws-efs-volume": {
+      "package-name": "aws-efs-volume",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-ecs-task-role": {
+      "package-name": "aws-iam-ecs-task-role",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-group-assume-role": {
+      "package-name": "aws-iam-group-assume-role",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-group-console-login": {
+      "package-name": "aws-iam-group-console-login",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-instance-profile": {
+      "package-name": "aws-iam-instance-profile",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-password-policy": {
+      "package-name": "aws-iam-password-policy",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-policy-cwlogs": {
+      "package-name": "aws-iam-policy-cwlogs",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-policy-dynamodb-rw": {
+      "package-name": "aws-iam-policy-dynamodb-rw",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role": {
+      "package-name": "aws-iam-role",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-admin": {
+      "package-name": "aws-iam-role-admin",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-bless": {
+      "package-name": "aws-iam-role-bless",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-ci-user-manager": {
+      "package-name": "aws-iam-role-ci-user-manager",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-cloudfront-poweruser": {
+      "package-name": "aws-iam-role-cloudfront-poweruser",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-crossacct": {
+      "package-name": "aws-iam-role-crossacct",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-ec2-poweruser": {
+      "package-name": "aws-iam-role-ec2-poweruser",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-ecs-poweruser": {
+      "package-name": "aws-iam-role-ecs-poweruser",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-github-action": {
+      "package-name": "aws-iam-role-github-action",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-infraci": {
+      "package-name": "aws-iam-role-infraci",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-poweruser": {
+      "package-name": "aws-iam-role-poweruser",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-readonly": {
+      "package-name": "aws-iam-role-readonly",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-route53domains-poweruser": {
+      "package-name": "aws-iam-role-route53domains-poweruser",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-s3-readonly": {
+      "package-name": "aws-iam-role-s3-readonly",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-role-security-audit": {
+      "package-name": "aws-iam-role-security-audit",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-secrets-reader-policy": {
+      "package-name": "aws-iam-secrets-reader-policy",
+      "release-type": "terraform-module"
+    },
+    "aws-iam-service-account-eks": {
+      "package-name": "aws-iam-service-account-eks",
+      "release-type": "terraform-module"
+    },
+    "aws-lambda-edge-add-security-headers": {
+      "package-name": "aws-lambda-edge-add-security-headers",
+      "release-type": "terraform-module"
+    },
+    "aws-lambda-function": {
+      "package-name": "aws-lambda-function",
+      "release-type": "terraform-module"
+    },
+    "aws-param": {
+      "package-name": "aws-param",
+      "release-type": "terraform-module"
+    },
+    "aws-params-reader-policy": {
+      "package-name": "aws-params-reader-policy",
+      "release-type": "terraform-module"
+    },
+    "aws-params-secrets-setup": {
+      "package-name": "aws-params-secrets-setup",
+      "release-type": "terraform-module"
+    },
+    "aws-params-writer": {
+      "package-name": "aws-params-writer",
+      "release-type": "terraform-module"
+    },
+    "aws-redis-node": {
+      "package-name": "aws-redis-node",
+      "release-type": "terraform-module"
+    },
+    "aws-redis-replication-group": {
+      "package-name": "aws-redis-replication-group",
+      "release-type": "terraform-module"
+    },
+    "aws-s3-account-public-access-block": {
+      "package-name": "aws-s3-account-public-access-block",
+      "release-type": "terraform-module"
+    },
+    "aws-s3-private-bucket": {
+      "package-name": "aws-s3-private-bucket",
+      "release-type": "terraform-module"
+    },
+    "aws-s3-public-bucket": {
+      "package-name": "aws-s3-public-bucket",
+      "release-type": "terraform-module"
+    },
+    "aws-single-page-static-site": {
+      "package-name": "aws-single-page-static-site",
+      "release-type": "terraform-module"
+    },
+    "aws-sns-lambda": {
+      "package-name": "aws-sns-lambda",
+      "release-type": "terraform-module"
+    },
+    "aws-sqs": {
+      "package-name": "aws-sqs",
+      "release-type": "terraform-module"
+    },
+    "aws-ssm-params": {
+      "package-name": "aws-ssm-params",
+      "release-type": "terraform-module"
+    },
+    "aws-ssm-params-writer": {
+      "package-name": "aws-ssm-params-writer",
+      "release-type": "terraform-module"
+    },
+    "bless-ca": {
+      "package-name": "bless-ca",
+      "release-type": "terraform-module"
+    },
+    "databricks-catalog-external-location": {
+      "package-name": "databricks-catalog-external-location",
+      "release-type": "terraform-module"
+    },
+    "databricks-cluster-log-permissions": {
+      "package-name": "databricks-cluster-log-permissions",
+      "release-type": "terraform-module"
+    },
+    "databricks-cluster-policy": {
+      "package-name": "databricks-cluster-policy",
+      "release-type": "terraform-module"
+    },
+    "databricks-default-cluster-policies": {
+      "package-name": "databricks-default-cluster-policies",
+      "release-type": "terraform-module"
+    },
+    "databricks-metastore": {
+      "package-name": "databricks-metastore",
+      "release-type": "terraform-module"
+    },
+    "databricks-s3-volume": {
+      "package-name": "databricks-s3-volume",
+      "release-type": "terraform-module"
+    },
+    "databricks-s3-volume-existing-catalog": {
+      "package-name": "databricks-s3-volume-existing-catalog",
+      "release-type": "terraform-module"
+    },
+    "databricks-workspace-e2": {
+      "package-name": "databricks-workspace-e2",
+      "release-type": "terraform-module"
+    },
+    "github-webhooks-to-s3": {
+      "package-name": "github-webhooks-to-s3",
+      "release-type": "terraform-module"
+    },
+    "kms-okta-app": {
+      "package-name": "kms-okta-app",
+      "release-type": "terraform-module"
+    },
+    "okta-m2m-client-credentials-app": {
+      "package-name": "okta-m2m-client-credentials-app",
+      "release-type": "terraform-module"
+    },
+    "snowflake-account-grant-all": {
+      "package-name": "snowflake-account-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-database-grant-all": {
+      "package-name": "snowflake-database-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-external-table-grant-all": {
+      "package-name": "snowflake-external-table-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-file-format-grant-all": {
+      "package-name": "snowflake-file-format-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-function-grant-all": {
+      "package-name": "snowflake-function-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-integration-grant-all": {
+      "package-name": "snowflake-integration-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-masking-policy-grant-all": {
+      "package-name": "snowflake-masking-policy-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-materialized-view-grant-all": {
+      "package-name": "snowflake-materialized-view-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-pipe-grant-all": {
+      "package-name": "snowflake-pipe-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-procedure-grant-all": {
+      "package-name": "snowflake-procedure-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-resource-monitor-grant-all": {
+      "package-name": "snowflake-resource-monitor-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-row-access-policy-grant-all": {
+      "package-name": "snowflake-row-access-policy-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-schema-grant-all": {
+      "package-name": "snowflake-schema-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-sequence-grant-all": {
+      "package-name": "snowflake-sequence-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-stage-grant-all": {
+      "package-name": "snowflake-stage-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-stream-grant-all": {
+      "package-name": "snowflake-stream-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-table-grant-all": {
+      "package-name": "snowflake-table-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-tag-grant-all": {
+      "package-name": "snowflake-tag-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-task-grant-all": {
+      "package-name": "snowflake-task-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-user-grant-all": {
+      "package-name": "snowflake-user-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-view-grant-all": {
+      "package-name": "snowflake-view-grant-all",
+      "release-type": "terraform-module"
+    },
+    "snowflake-warehouse-grant-all": {
+      "package-name": "snowflake-warehouse-grant-all",
+      "release-type": "terraform-module"
+    },
+    ".": {
+      "release-type": "simple"
+    }
   }
 }
