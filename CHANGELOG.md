@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.101.0](https://github.com/chanzuckerberg/cztack/compare/v0.100.0...v0.101.0) (2025-12-18)
+
+
+### Features
+
+* add dbx workspace group names to output ([#779](https://github.com/chanzuckerberg/cztack/issues/779)) ([97081bc](https://github.com/chanzuckerberg/cztack/commit/97081bce787a66501d499d3e424ce94bb2f82ec3))
+
 ## [0.100.0](https://github.com/chanzuckerberg/cztack/compare/v0.99.0...v0.100.0) (2025-12-17)
 
 
