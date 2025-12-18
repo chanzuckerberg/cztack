@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/chanzuckerberg/cztack/compare/databricks-workspace-e2-v0.2.0...databricks-workspace-e2-v0.2.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* CDI-4634 - dbx permission assignment ([#781](https://github.com/chanzuckerberg/cztack/issues/781)) ([dbc296b](https://github.com/chanzuckerberg/cztack/commit/dbc296b617bf7ecef96cfb9e70d28918b2827e10))
+
 ## [0.2.0](https://github.com/chanzuckerberg/cztack/compare/databricks-workspace-e2-v0.1.0...databricks-workspace-e2-v0.2.0) (2025-12-18)
 
 
