@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.101.0](https://github.com/chanzuckerberg/cztack/compare/v0.100.0...v0.101.0) (2025-12-18)
+
+
+### Features
+
+* add dbx workspace group names to output ([#779](https://github.com/chanzuckerberg/cztack/issues/779)) ([97081bc](https://github.com/chanzuckerberg/cztack/commit/97081bce787a66501d499d3e424ce94bb2f82ec3))
+
+## [0.100.0](https://github.com/chanzuckerberg/cztack/compare/v0.99.0...v0.100.0) (2025-12-17)
+
+
+### Features
+
+* add catalog group map output to dbx catalogs ([#774](https://github.com/chanzuckerberg/cztack/issues/774)) ([9b2d5f3](https://github.com/chanzuckerberg/cztack/commit/9b2d5f3b383803e3b798065180611f35881310e7))
+* Add redrive_allow_policy ([#773](https://github.com/chanzuckerberg/cztack/issues/773)) ([eda0c0f](https://github.com/chanzuckerberg/cztack/commit/eda0c0fbf54e6e45ed8282788741f499ad8a2ccd))
+* Release individual packages ([#775](https://github.com/chanzuckerberg/cztack/issues/775)) ([813e70d](https://github.com/chanzuckerberg/cztack/commit/813e70d2874efb636f7dddac979d2a3aa0427970))
+
+
+### Bug Fixes
+
+* Add missing runs-on / CI workflow ([#776](https://github.com/chanzuckerberg/cztack/issues/776)) ([c2827ca](https://github.com/chanzuckerberg/cztack/commit/c2827ca73d49f7a95675a168ea1c8378959efe3c))
+* Remove the test job ([#777](https://github.com/chanzuckerberg/cztack/issues/777)) ([9cb7573](https://github.com/chanzuckerberg/cztack/commit/9cb75730d3044d3dc777e7de5662258bb80ef436))
+
+
+### Misc
+
+* **deps:** bump github.com/sirupsen/logrus from 1.9.0 to 1.9.1 ([#766](https://github.com/chanzuckerberg/cztack/issues/766)) ([55a3ff8](https://github.com/chanzuckerberg/cztack/commit/55a3ff87080ee5f1d8eb32a44851aa2debc3e3ae))
+* **deps:** bump github.com/ulikunitz/xz from 0.5.11 to 0.5.14 ([#743](https://github.com/chanzuckerberg/cztack/issues/743)) ([b35cd2f](https://github.com/chanzuckerberg/cztack/commit/b35cd2fa5fbf7b24481b6b3df1782b237fe1b459))
+* **deps:** bump golang.org/x/crypto from 0.36.0 to 0.45.0 ([#757](https://github.com/chanzuckerberg/cztack/issues/757)) ([bfb5d7b](https://github.com/chanzuckerberg/cztack/commit/bfb5d7bb3226c0934800b057eb21785945868cf1))
+* remove references to cztack-ci-1 ([#771](https://github.com/chanzuckerberg/cztack/issues/771)) ([ea771ef](https://github.com/chanzuckerberg/cztack/commit/ea771ef07602c13713aab64783ea2271d4561c26))
+
 ## [0.99.0](https://github.com/chanzuckerberg/cztack/compare/v0.98.1...v0.99.0) (2025-12-08)
 
 
