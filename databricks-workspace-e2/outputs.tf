@@ -13,9 +13,19 @@ output "role_arn" {
   value       = aws_iam_role.databricks.arn
 }
 
+output "workspace_users_group_name" {
+  description = "Name of the workspace users group."
+  value       = databricks_group.workspace_users.display_name
+}
+
 output "workspace_users_group_id" {
   description = "ID of the workspace users group."
   value       = databricks_group.workspace_users.id
+}
+
+output "workspace_admins_group_name" {
+  description = "Name of the workspace admins group."
+  value       = databricks_group.workspace_admins.display_name
 }
 
 output "workspace_admins_group_id" {
