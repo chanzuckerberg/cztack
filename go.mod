@@ -1,8 +1,6 @@
 module github.com/chanzuckerberg/cztack
 
-go 1.23.0
-
-toolchain go1.23.8
+go 1.24.0
 
 require (
 	github.com/Snowflake-Labs/terraform-provider-snowflake v0.55.0
@@ -11,7 +9,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/gruntwork-io/terratest v0.41.12
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.1
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.1
 	github.com/stretchr/testify v1.8.3
 	gopkg.in/errgo.v2 v2.1.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -133,7 +131,7 @@ require (
 	github.com/snowflakedb/gosnowflake v1.6.19 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/tmccombs/hcl2json v0.3.6 // indirect
-	github.com/ulikunitz/xz v0.5.11 // indirect
+	github.com/ulikunitz/xz v0.5.14 // indirect
 	github.com/urfave/cli/v2 v2.24.3 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
 	github.com/vmihailenco/msgpack/v4 v4.3.12 // indirect
@@ -143,17 +141,18 @@ require (
 	github.com/zclconf/go-cty v1.12.1 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	golang.org/x/crypto v0.36.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
 	golang.org/x/exp v0.0.0-20230212135524-a684f29349b6 // indirect
-	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/net v0.38.0 // indirect
+	golang.org/x/mod v0.29.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sync v0.12.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/sync v0.18.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/telemetry v0.0.0-20251008203120-078029d740a8 // indirect
+	golang.org/x/term v0.37.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
-	golang.org/x/tools v0.21.1-0.20240508182429-e35e4ccd0d2d // indirect
+	golang.org/x/tools v0.38.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.114.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
