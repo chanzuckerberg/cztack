@@ -17,7 +17,7 @@ resource "databricks_mws_permission_assignment" "workspace_users" {
 resource "databricks_mws_permission_assignment" "workspace_admins" {
   workspace_id = databricks_mws_workspaces.databricks.workspace_id
   principal_id = databricks_group.workspace_admins.id
-  permissions  = ["USER", "ADMIN"]
+  permissions  = ["ADMIN"]
 }
 
 resource "databricks_group_member" "workspace_users" {
