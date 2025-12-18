@@ -17,7 +17,7 @@ resource "databricks_mws_permission_assignment" "workspace_users" {
 resource "databricks_mws_permission_assignment" "workspace_admins" {
   workspace_id = databricks_mws_workspaces.databricks.workspace_id
   principal_id = databricks_group.workspace_admins.id
-  permissions  = ["USER", "ADMIN"]
+  permissions  = ["ADMIN"]
 }
 
 resource "databricks_group_member" "workspace_users" {
@@ -30,4 +30,20 @@ resource "databricks_group_member" "workspace_admins" {
   for_each   = toset(var.workspace_admins)
   group_id   = databricks_group.workspace_admins.id
   member_id  = each.value
+}
+
+resource "databricks_entitlements" "workspace_users" {
+  depends_on = [databricks_mws_permission_assignment.workspace_users]
+
+  group_id = databricks_group.workspace_users.id
+  workspace_access = true
+  databricks_sql_access = true
+}
+
+resource "databricks_entitlements" "workspace_admins" {
+  depends_on = [databricks_mws_permission_assignment.workspace_admins]
+
+  group_id = databricks_group.workspace_admins.id
+  workspace_access = true
+  databricks_sql_access = true
 }
