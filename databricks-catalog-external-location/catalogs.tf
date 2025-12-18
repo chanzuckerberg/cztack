@@ -35,7 +35,7 @@ locals {
         group_name  = group.group_name
         member = member
       }
-    ]
+    ] if length(group.group_members) > 0
   ]))
 }
 
@@ -105,9 +105,9 @@ resource "databricks_grants" "grants" {
 
 resource "databricks_group_member" "catalog_group_memberships" {
   provider = databricks.mws
-  for_each = {for group in local.flattened_catalog_group_memberships: "${group.group_name}_${group.member}" => {
-    group_name = group.group_name
-    member     = group.member
+  for_each = {for membership in local.flattened_catalog_group_memberships: "${membership.group_name}_${membership.member}" => {
+    group_name = membership.group_name
+    member     = membership.member
   }}
   group_id  = databricks_group.catalog_groups[each.value.group_name].id
   member_id = each.value.member
