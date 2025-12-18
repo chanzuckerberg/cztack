@@ -31,19 +31,3 @@ resource "databricks_group_member" "workspace_admins" {
   group_id   = databricks_group.workspace_admins.id
   member_id  = each.value
 }
-
-resource "databricks_entitlements" "workspace_users" {
-  depends_on = [databricks_mws_permission_assignment.workspace_users]
-
-  group_id = databricks_group.workspace_users.id
-  workspace_access = true
-  databricks_sql_access = true
-}
-
-resource "databricks_entitlements" "workspace_admins" {
-  depends_on = [databricks_mws_permission_assignment.workspace_admins]
-
-  group_id = databricks_group.workspace_admins.id
-  workspace_access = true
-  databricks_sql_access = true
-}
