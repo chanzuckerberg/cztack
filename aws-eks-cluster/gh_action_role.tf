@@ -101,7 +101,7 @@ resource "aws_iam_role_policy" "ecr_scanner" {
 }
 
 module "autocreated_ecr_writer_policy" {
-  source   = "git@github.com:chanzuckerberg/shared-infra//terraform/modules/aws-iam-policy-ecr-writer?ref=v0.397.0"
+  source   = "./aws-iam-policy-ecr-writer"
   for_each = toset([for k in module.gh_actions_role : k.role.name])
 
   role_name = each.value
@@ -110,9 +110,5 @@ module "autocreated_ecr_writer_policy" {
     "arn:aws:ecr:us-west-2:533267185808:repository/*"
   ]
   policy_name = "gh_actions_ecr_push"
-
-  project = var.tags.project
-  env     = var.tags.env
-  service = var.tags.service
-  owner   = var.tags.owner
+  tags        = var.tags
 }
