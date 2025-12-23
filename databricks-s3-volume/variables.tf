@@ -211,6 +211,12 @@ variable "read_only_volume" {
   default     = false
 }
 
+variable "override_unity_aws_role_name" {
+  description = "(Optional) Override the default Unity Catalog AWS IAM role name used when creating storage credentials"
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "REQUIRED: Tags to include for this environment."
   type = object({
