@@ -5,7 +5,7 @@ locals {
 
 module "gh_actions_role" {
   count  = length(var.authorized_github_repos) + length(var.authorized_aws_accounts) == 0 ? 0 : 1
-  source = "git@github.com:chanzuckerberg/cztack//aws-iam-role-github-action?ref=v0.69.3"
+  source = "../aws-iam-role-github-action"
 
   role = {
     name = local.role_name
