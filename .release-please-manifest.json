@@ -14,6 +14,7 @@
   "aws-ecs-job-fargate": "0.1.0",
   "aws-ecs-service": "0.1.0",
   "aws-ecs-service-fargate": "0.1.0",
+  "aws-eks-cluster": "8.3.1",
   "aws-efs-volume": "0.1.0",
   "aws-iam-ecs-task-role": "0.1.0",
   "aws-iam-group-assume-role": "0.1.0",

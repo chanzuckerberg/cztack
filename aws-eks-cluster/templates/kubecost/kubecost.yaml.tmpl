@@ -1,0 +1,10 @@
+AmazonEKS:
+  enabled: true
+kubecostProductConfigs:
+  clusterName: ${cluster_name}
+prometheus:
+  kubeStateMetrics:
+    enabled: true
+  server:
+    persistentVolume:
+      storageClass: ""
