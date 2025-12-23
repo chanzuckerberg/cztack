@@ -62,7 +62,7 @@
   "databricks-cluster-policy": "0.1.0",
   "databricks-default-cluster-policies": "0.1.0",
   "databricks-metastore": "0.1.0",
-  "databricks-s3-volume": "0.1.0",
+  "databricks-s3-volume": "0.1.1",
   "databricks-s3-volume-existing-catalog": "0.1.0",
   "databricks-workspace-e2": "0.2.1",
   "github-webhooks-to-s3": "0.1.0",
@@ -90,5 +90,5 @@
   "snowflake-user-grant-all": "0.1.0",
   "snowflake-view-grant-all": "0.1.0",
   "snowflake-warehouse-grant-all": "0.1.0",
-  ".": "0.102.0"
+  ".": "0.102.1"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.102.1](https://github.com/chanzuckerberg/cztack/compare/v0.102.0...v0.102.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* allow overriding and having no unity_aws_role_name ([#785](https://github.com/chanzuckerberg/cztack/issues/785)) ([50192f9](https://github.com/chanzuckerberg/cztack/commit/50192f96abe5e1a724b8907314c6153394994117))
+
 ## [0.102.0](https://github.com/chanzuckerberg/cztack/compare/v0.101.1...v0.102.0) (2025-12-23)
 
 
