@@ -22,6 +22,10 @@
     }
   ],
   "packages": {
+    "aws-eks-cluster": {
+      "package-name": "aws-eks-cluster",
+      "release-type": "terraform-module"
+    },
     "aws-acm-certificate": {
       "package-name": "aws-acm-certificate",
       "release-type": "terraform-module"
