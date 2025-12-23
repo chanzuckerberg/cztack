@@ -107,8 +107,6 @@ locals {
   #!/bin/bash
   sed -i '/^KUBELET_EXTRA_ARGS=/a KUBELET_EXTRA_ARGS+=" --anonymous-auth=false"' /etc/eks/bootstrap.sh
   EOT
-      # enable_bootstrap_user_data = true
-      # bootstrap_extra_args       = module.cloud-init.script
       tags = merge(var.tags, {
         "k8s.io/cluster-autoscaler/${local.cluster_name}"                     = "owned"
         "k8s.io/cluster-autoscaler/enabled"                                   = "true"
@@ -130,26 +128,6 @@ locals {
   }
 }
 
-module "cloud-init" {
-  source = "../instance-cloud-init-script"
-
-
-  user_script = ""
-
-  // terraform-aws-modules/eks/aws does this for us
-  base64_encode = "false"
-  gzip          = "false"
-
-  users = var.ssh_users
-
-  project = var.tags.project
-  owner   = var.tags.owner
-  env     = var.tags.env
-  service = var.tags.service
-
-  datadog_api_key = var.datadog_api_key
-}
-
 resource "aws_kms_key" "secrets" {
   description = "Key used to encrypt Kubernetes secrets for ${local.cluster_name}"
 }
@@ -169,11 +147,6 @@ resource "aws_iam_role_policy" "secrets" {
   name   = "${local.name}-secrets"
   role   = aws_iam_role.cluster.name
   policy = data.aws_iam_policy_document.secrets.json
-}
-
-module "orgwide-secrets" {
-  source    = "../aws-iam-policy-orgwide-secrets"
-  role_name = aws_iam_role.node.id
 }
 
 module "cluster" {
@@ -333,11 +306,6 @@ resource "aws_iam_role_policy_attachment" "karpenter_node_policy" {
 
 resource "aws_iam_role_policy_attachment" "karpenter_node_ecr_pullthrough_cache" {
   policy_arn = aws_iam_policy.node_ecr_pullthrough_cache.arn
-  role       = aws_iam_role.karpenter_node.name
-}
-
-resource "aws_iam_role_policy_attachment" "karpenter_node_orgwide_secrets" {
-  policy_arn = module.orgwide-secrets.orgwide_secrets_policy_arn
   role       = aws_iam_role.karpenter_node.name
 }
 

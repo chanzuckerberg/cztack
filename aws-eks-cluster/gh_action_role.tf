@@ -101,7 +101,7 @@ resource "aws_iam_role_policy" "ecr_scanner" {
 }
 
 module "autocreated_ecr_writer_policy" {
-  source   = "./aws-iam-policy-ecr-writer"
+  source   = "../aws-iam-policy-ecr-writer"
   for_each = toset([for k in module.gh_actions_role : k.role.name])
 
   role_name = each.value
