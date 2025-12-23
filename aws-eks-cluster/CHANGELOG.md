@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.4.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.3.1...aws-eks-cluster-v8.4.0) (2025-12-23)
+
+
+### Features
+
+* move eks-cluster-v2 to cztack ([#783](https://github.com/chanzuckerberg/cztack/issues/783)) ([950a60c](https://github.com/chanzuckerberg/cztack/commit/950a60c67ecef8b7eb965874a5b322201cb27594))
+
 ## [8.3.1](https://github.com/chanzuckerberg/shared-infra/compare/eks-cluster-v2-v8.3.0...eks-cluster-v2-v8.3.1) (2025-10-02)
 
 
