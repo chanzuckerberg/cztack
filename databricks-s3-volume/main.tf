@@ -12,7 +12,10 @@ locals {
   schema_name  = var.create_schema ? replace(var.schema_name, "-", "_") : var.schema_name
   volume_name  = replace(var.volume_name, "-", "_")
 
-  unity_aws_role_name = replace("${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx", "_", "")
+  unity_aws_role_name = replace(
+    coalesce(var.override_unity_aws_role_name, "${local.catalog_name}-${local.schema_name}-${local.volume_name}-dbx")
+    , "_", ""
+  )
 
   volume_bucket_name = coalesce(
     (var.volume_bucket_name != null ? replace(var.volume_bucket_name, "_", "-") : null),
