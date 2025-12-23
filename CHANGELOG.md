@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.102.0](https://github.com/chanzuckerberg/cztack/compare/v0.101.1...v0.102.0) (2025-12-23)
+
+
+### Features
+
+* move eks-cluster-v2 to cztack ([#783](https://github.com/chanzuckerberg/cztack/issues/783)) ([950a60c](https://github.com/chanzuckerberg/cztack/commit/950a60c67ecef8b7eb965874a5b322201cb27594))
+
 ## [0.101.1](https://github.com/chanzuckerberg/cztack/compare/v0.101.0...v0.101.1) (2025-12-18)
 
 

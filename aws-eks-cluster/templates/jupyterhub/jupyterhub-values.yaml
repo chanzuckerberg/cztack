@@ -1,0 +1,170 @@
+hub:
+  db:
+    pvc:
+      storage: 50Gi
+      storageClassName: ${storage_class_name}
+  authenticatePrometheus: false
+  command: ["sh", "-c", "pip install boto3 && jupyterhub --config /usr/local/etc/jupyterhub/jupyterhub_config.py"]
+  livenessProbe: 
+    enabled: true
+    initialDelaySeconds: 300
+  config:
+    GenericOAuthenticator:
+      oauth_callback_url: ${callback_url}
+      client_id: ${client_id}
+      client_secret: ${client_secret}
+      authorize_url: ${authorize_url}
+      token_url: ${token_url}
+      scope:
+        - openid
+        - email
+        - aws.cognito.signin.user.admin
+        - profile
+      username_claim: "email"
+      claim_groups_key: "cognito:groups"
+      admin_groups: [${admin_groups}]
+      allowed_groups: [${allowed_groups}]
+      login_service : "AWS Cognito"
+      userdata_token_method: "POST"
+    JupyterHub:
+      authenticator_class: generic-oauth
+    KubeSpawner:
+      start_timeout: 1200
+      http_timeout: 1200
+    Authenticator:
+      enable_auth_state: True
+      userdata_from_id_token: True
+
+debug:
+  enabled: true
+
+proxy:
+  https:
+    enabled: false
+    type: offload
+  service:
+    type: ClusterIP
+
+singleuser:
+  startTimeout: 1200
+  extraAnnotations:
+    "karpenter.sh/do-not-disrupt": "true"
+  memory:
+    guarantee: "15G"  
+  profileList:
+    - display_name: Data Engineering (CPU) - Small
+      description: "PySpark Notebooks | 32GB Memory | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'karpenter.k8s.aws/instance-family': 'r5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '30G'
+        cpu_guarantee: 3
+      cmd: null
+      
+    - display_name: Data Engineering (CPU) - Medium
+      description: "PySpark Notebooks | 128GB Memory | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'karpenter.k8s.aws/instance-family': 'r5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '120G'
+        cpu_guarantee: 15
+      cmd: null
+      
+    - display_name: Data Engineering (CPU) - Large
+      description: "PySpark Notebooks | 512GB Memory | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'karpenter.k8s.aws/instance-family': 'r5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '480G'
+        cpu_guarantee: 60
+      cmd: null
+      
+    - display_name: Data Science ML (GPU) - Small
+      description: "PyTorch + CUDA | 16GB Memory + 1 GPU | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'node.kubernetes.io/instance-family': 'g5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '14G'
+        cpu_guarantee: 3
+      cmd: null
+      
+    - display_name: Data Science ML (GPU) - Medium
+      description: "PyTorch + CUDA | 64GB Memory + 1 GPU | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'node.kubernetes.io/instance-family': 'g5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '60G'
+        cpu_guarantee: 15
+      cmd: null
+      
+    - display_name: Data Science ML (GPU) - Large
+      description: "PyTorch + CUDA | 128GB Memory + 1 GPU | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'node.kubernetes.io/instance-family': 'g5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '120G'
+        cpu_guarantee: 30
+      cmd: null
+      
+    - display_name: Data Science Environment (CPU) - Medium
+      description: "Python, R, and Julia | 128GB Memory | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'karpenter.k8s.aws/instance-family': 'r5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '120G'
+        cpu_guarantee: 15
+        
+    - display_name: Data Science Environment (CPU) - Large
+      description: "Python, R, and Julia | 512GB Memory | Karpenter AutoScaling"
+      kubespawner_override:
+        image: ${additional_server_image}
+        node_selector: {'karpenter.k8s.aws/instance-family': 'r5', 'karpenter.sh/nodepool': 'jupyterhub'}
+        mem_guarantee: '480G'
+        cpu_guarantee: 60
+        
+  storage:
+    type: "static"
+    static:
+      pvcName: "efs-persist"
+      subPath: "home/{username}"
+    extraVolumes:
+    - name: jupyterhub-shared
+      persistentVolumeClaim:
+        claimName: efs-persist-shared
+    extraVolumeMounts:
+    - name: jupyterhub-shared
+      mountPath: /home/shared
+      readOnly: false
+  serviceAccountName: ${jupyter_single_user_sa_name}
+  allowPrivilegeEscalation: true
+  extraPodConfig: # This is needed for Jovyan user running in every single pod, access the Service Account
+    securityContext:
+        fsGroup: 100
+  extraEnv: # Sudo needed to configure the proper permissions to start the notebook instance
+    GRANT_SUDO: "yes"
+    NOTEBOOK_ARGS: "--allow-root"
+    CHOWN_HOME: "yes"
+    CHOWN_HOME_OPTS: "-R"
+    CHOWN_EXTRA: "/home/shared"
+  uid: 0
+  fsGid: 0
+  cmd: null
+
+# Optimizations configured according to this doc https://z2jh.jupyter.org/en/latest/administrator/optimization.html
+scheduling:
+  userScheduler:
+    enabled: true
+  podPriority:
+    enabled: true
+  userPlaceholder:
+    enabled: false
+    replicas: 1
+prePuller:
+  hook:
+    enabled: false
+  continuous:
+    # NOTE: if used with Karpenter, also add user-placeholders
+    enabled: false
+
+global:
+  safeToShowValues: false

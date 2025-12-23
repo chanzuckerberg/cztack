@@ -1,0 +1,18 @@
+txtOwnerId: '${txtOwnerId}'
+txtSuffix: '${txtSuffix}'
+txtPrefix: '${txtPrefix}'
+policy: '${policy}'
+aws:
+  zoneType: ''
+  zonesCacheDuration: '120s'
+logLevel: 'info'
+interval: '3m'
+image:
+  repository: 'registry.k8s.io/external-dns/external-dns'
+  tag: '${imageTag}'
+extraArgs:
+  - '--annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)'
+  - '--aws-api-retries=3'
+  - '--aws-batch-change-size=1000'
+  - '--aws-zones-cache-duration=120s'
+  - '--metrics-address=:7979'
