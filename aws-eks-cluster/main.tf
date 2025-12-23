@@ -54,11 +54,10 @@ resource "kubernetes_cluster_role_binding_v1" "eks-readonly" {
 }
 
 locals {
-  name             = "${var.tags.project}-${var.tags.env}-${var.tags.service}"
-  cluster_name     = coalesce(var.cluster_name, local.name)
-  eks_cluster_name = module.cluster.cluster_name
-  master_roles     = data.aws_iam_role.master_roles
-  cluster_version  = coalesce(var.cluster_version, "1.29")
+  name            = "${var.tags.project}-${var.tags.env}-${var.tags.service}"
+  cluster_name    = coalesce(var.cluster_name, local.name)
+  master_roles    = data.aws_iam_role.master_roles
+  cluster_version = coalesce(var.cluster_version, "1.29")
 
   defaults = {
     cluster_enabled_log_types = ["audit", "authenticator", "api", "controllerManager", "scheduler"]

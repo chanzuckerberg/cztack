@@ -14,12 +14,6 @@ variable "docker_storage_size" {
   description = "EBS Volume size in Gib that the ECS Instance uses for Docker images and metadata"
 }
 
-variable "datadog_api_key" {
-  type        = string
-  default     = ""
-  description = "A datadog api key to enable the datadog agent on the instance"
-}
-
 variable "map_accounts" {
   description = "Additional AWS account numbers to add to the aws-auth configmap. See examples/eks_test_fixture/variables.tf for example format."
   type        = list(string)
@@ -80,18 +74,6 @@ variable "cluster_version" {
   default     = "1.30"
   description = "EKS cluster version"
   type        = string
-}
-
-variable "ssh_users" {
-  description = "A list of ssh users to create on this server. Defaults to sudo enabled."
-  type        = list(object({ username : string, sudo_enabled : bool }))
-  default     = []
-}
-
-variable "bastion_security_group_id" {
-  description = "Security group ID of bastions, to allow access to workers"
-  type        = string
-  default     = null
 }
 
 variable "tags" {
