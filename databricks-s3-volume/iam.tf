@@ -66,6 +66,7 @@ data "aws_iam_policy_document" "volume_bucket_dbx_unity_access" {
     effect = "Allow"
     actions = [
       "s3:GetObject",
+      "s3:GetObjectVersion",
       "s3:PutObject",
       "s3:DeleteObject",
     ]
