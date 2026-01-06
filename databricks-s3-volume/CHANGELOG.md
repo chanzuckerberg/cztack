@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.1...databricks-s3-volume-v0.1.2) (2026-01-06)
+
+
+### Bug Fixes
+
+* Add s3:GetObjectVersion to Databricks Volume Unity Catalog IAM role ([#787](https://github.com/chanzuckerberg/cztack/issues/787)) ([c4f02bf](https://github.com/chanzuckerberg/cztack/commit/c4f02bff44398af82f9bd2dc88f49ef0a1baa535))
+
 ## [0.1.1](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.0...databricks-s3-volume-v0.1.1) (2025-12-23)
 
 
