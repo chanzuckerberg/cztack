@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.102.2](https://github.com/chanzuckerberg/cztack/compare/v0.102.1...v0.102.2) (2026-01-06)
+
+
+### Bug Fixes
+
+* Add s3:GetObjectVersion to Databricks Volume Unity Catalog IAM role ([#787](https://github.com/chanzuckerberg/cztack/issues/787)) ([c4f02bf](https://github.com/chanzuckerberg/cztack/commit/c4f02bff44398af82f9bd2dc88f49ef0a1baa535))
+
 ## [0.102.1](https://github.com/chanzuckerberg/cztack/compare/v0.102.0...v0.102.1) (2025-12-23)
 
 
