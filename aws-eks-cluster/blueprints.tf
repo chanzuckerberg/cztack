@@ -156,6 +156,10 @@ module "eks_addons" {
             memory = "256Mi"
           }
         }
+        podAnnotations = {
+          "prometheus.io/port" = "61678",
+          "prometheus.io/scrape" = "true"
+        }
       })
     }
 
