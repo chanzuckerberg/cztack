@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.103.0](https://github.com/chanzuckerberg/cztack/compare/v0.102.2...v0.103.0) (2026-01-07)
+
+
+### Features
+
+* enable stalebot on cztack ([#791](https://github.com/chanzuckerberg/cztack/issues/791)) ([c13694d](https://github.com/chanzuckerberg/cztack/commit/c13694dd3e68af204d3ddb5689cb691633b5ed6b))
+* Enable VPC CNI metric scraping ([#789](https://github.com/chanzuckerberg/cztack/issues/789)) ([29c5c37](https://github.com/chanzuckerberg/cztack/commit/29c5c3757ee3bb7a08f82404eca5bd86e61045f3))
+
+
+### Bug Fixes
+
+* set al2023 default with right aws ssm parameter path ([#792](https://github.com/chanzuckerberg/cztack/issues/792)) ([e5c55e9](https://github.com/chanzuckerberg/cztack/commit/e5c55e9c739fb5732a2e5d55ebd6d7614b27e778))
+
 ## [0.102.2](https://github.com/chanzuckerberg/cztack/compare/v0.102.1...v0.102.2) (2026-01-06)
 
 
