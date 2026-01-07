@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.2](https://github.com/chanzuckerberg/cztack/compare/tfe-management-v3.2.1...tfe-management-v3.2.2) (2026-01-07)
+
+
+### Misc
+
+* move tfe-management from shared-infra ([#793](https://github.com/chanzuckerberg/cztack/issues/793)) ([adb258f](https://github.com/chanzuckerberg/cztack/commit/adb258f33da624003373b7fa7428f8b821cc17e4))
+
 ## [3.2.1](https://github.com/chanzuckerberg/shared-infra/compare/tfe-management-v3.2.0...tfe-management-v3.2.1) (2025-04-15)
 
 
