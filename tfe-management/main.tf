@@ -211,9 +211,10 @@ resource "tfe_workspace" "ws" {
   force_delete                  = true
 
   vcs_repo {
-    identifier     = var.repo
-    oauth_token_id = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id
-    branch         = each.value.branch
+    identifier                 = var.repo
+    oauth_token_id             = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id
+    github_app_installation_id = data.tfe_workspace.tfe.vcs_repo[0].github_app_installation_id
+    branch                     = each.value.branch
   }
 }
 
