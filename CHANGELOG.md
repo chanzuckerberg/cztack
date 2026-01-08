@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.103.2](https://github.com/chanzuckerberg/cztack/compare/v0.103.1...v0.103.2) (2026-01-08)
+
+
+### Bug Fixes
+
+* allow tfe management to use gh apps ([#795](https://github.com/chanzuckerberg/cztack/issues/795)) ([533a7e4](https://github.com/chanzuckerberg/cztack/commit/533a7e44c35066d3827217e77fe6c02418622ba9))
+
 ## [0.103.1](https://github.com/chanzuckerberg/cztack/compare/v0.103.0...v0.103.1) (2026-01-07)
 
 
