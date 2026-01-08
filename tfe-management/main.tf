@@ -210,10 +210,22 @@ resource "tfe_workspace" "ws" {
   structured_run_output_enabled = false
   force_delete                  = true
 
-  vcs_repo {
-    identifier     = var.repo
-    oauth_token_id = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id
-    branch         = each.value.branch
+  dynamic "vcs_repo" {
+    for_each = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id != null && data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id != "" ? [1] : []
+    content {
+      identifier     = var.repo
+      oauth_token_id = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id
+      branch         = each.value.branch
+    }
+  }
+
+  dynamic "vcs_repo" {
+    for_each = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id == null || data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id == "" ? [1] : []
+    content {
+      identifier                 = var.repo
+      github_app_installation_id = data.tfe_workspace.tfe.vcs_repo[0].github_app_installation_id
+      branch                     = each.value.branch
+    }
   }
 }
 
