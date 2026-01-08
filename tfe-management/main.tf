@@ -211,7 +211,7 @@ resource "tfe_workspace" "ws" {
   force_delete                  = true
 
   dynamic "vcs_repo" {
-    for_each = coalesce(data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id, "") != "" ? [1] : []
+    for_each = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id != null && data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id != "" ? [1] : []
     content {
       identifier     = var.repo
       oauth_token_id = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id
@@ -220,7 +220,7 @@ resource "tfe_workspace" "ws" {
   }
 
   dynamic "vcs_repo" {
-    for_each = coalesce(data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id, "") == "" ? [1] : []
+    for_each = data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id == null || data.tfe_workspace.tfe.vcs_repo[0].oauth_token_id == "" ? [1] : []
     content {
       identifier                 = var.repo
       github_app_installation_id = data.tfe_workspace.tfe.vcs_repo[0].github_app_installation_id
