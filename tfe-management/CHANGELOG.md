@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.3](https://github.com/chanzuckerberg/cztack/compare/tfe-management-v3.2.2...tfe-management-v3.2.3) (2026-01-08)
+
+
+### Bug Fixes
+
+* allow tfe management to use gh apps ([#795](https://github.com/chanzuckerberg/cztack/issues/795)) ([533a7e4](https://github.com/chanzuckerberg/cztack/commit/533a7e44c35066d3827217e77fe6c02418622ba9))
+
 ## [3.2.2](https://github.com/chanzuckerberg/cztack/compare/tfe-management-v3.2.1...tfe-management-v3.2.2) (2026-01-07)
 
 
