@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.5.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.5.0...aws-eks-cluster-v8.5.1) (2026-01-08)
+
+
+### Bug Fixes
+
+* use AL2023 release version name instead of the AMI ID in eks module ([#797](https://github.com/chanzuckerberg/cztack/issues/797)) ([79842d5](https://github.com/chanzuckerberg/cztack/commit/79842d51df2319ebb8dc6975ef73113cbaf48dee))
+
 ## [8.5.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.4.0...aws-eks-cluster-v8.5.0) (2026-01-07)
 
 
