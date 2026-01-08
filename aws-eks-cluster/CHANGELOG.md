@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.5.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.4.0...aws-eks-cluster-v8.5.0) (2026-01-07)
+
+
+### Features
+
+* Enable VPC CNI metric scraping ([#789](https://github.com/chanzuckerberg/cztack/issues/789)) ([29c5c37](https://github.com/chanzuckerberg/cztack/commit/29c5c3757ee3bb7a08f82404eca5bd86e61045f3))
+
+
+### Bug Fixes
+
+* set al2023 default with right aws ssm parameter path ([#792](https://github.com/chanzuckerberg/cztack/issues/792)) ([e5c55e9](https://github.com/chanzuckerberg/cztack/commit/e5c55e9c739fb5732a2e5d55ebd6d7614b27e778))
+
 ## [8.4.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.3.1...aws-eks-cluster-v8.4.0) (2025-12-23)
 
 

@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.103.2](https://github.com/chanzuckerberg/cztack/compare/v0.103.1...v0.103.2) (2026-01-08)
+
+
+### Bug Fixes
+
+* allow tfe management to use gh apps ([#795](https://github.com/chanzuckerberg/cztack/issues/795)) ([533a7e4](https://github.com/chanzuckerberg/cztack/commit/533a7e44c35066d3827217e77fe6c02418622ba9))
+
+## [0.103.1](https://github.com/chanzuckerberg/cztack/compare/v0.103.0...v0.103.1) (2026-01-07)
+
+
+### Misc
+
+* move tfe-management from shared-infra ([#793](https://github.com/chanzuckerberg/cztack/issues/793)) ([adb258f](https://github.com/chanzuckerberg/cztack/commit/adb258f33da624003373b7fa7428f8b821cc17e4))
+
+## [0.103.0](https://github.com/chanzuckerberg/cztack/compare/v0.102.2...v0.103.0) (2026-01-07)
+
+
+### Features
+
+* enable stalebot on cztack ([#791](https://github.com/chanzuckerberg/cztack/issues/791)) ([c13694d](https://github.com/chanzuckerberg/cztack/commit/c13694dd3e68af204d3ddb5689cb691633b5ed6b))
+* Enable VPC CNI metric scraping ([#789](https://github.com/chanzuckerberg/cztack/issues/789)) ([29c5c37](https://github.com/chanzuckerberg/cztack/commit/29c5c3757ee3bb7a08f82404eca5bd86e61045f3))
+
+
+### Bug Fixes
+
+* set al2023 default with right aws ssm parameter path ([#792](https://github.com/chanzuckerberg/cztack/issues/792)) ([e5c55e9](https://github.com/chanzuckerberg/cztack/commit/e5c55e9c739fb5732a2e5d55ebd6d7614b27e778))
+
 ## [0.102.2](https://github.com/chanzuckerberg/cztack/compare/v0.102.1...v0.102.2) (2026-01-06)
 
 

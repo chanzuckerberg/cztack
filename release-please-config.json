@@ -386,6 +386,10 @@
       "package-name": "snowflake-warehouse-grant-all",
       "release-type": "terraform-module"
     },
+    "tfe-management": {
+      "package-name": "tfe-management",
+      "release-type": "terraform-module"
+    },
     ".": {
       "release-type": "simple"
     }
