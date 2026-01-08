@@ -12,7 +12,7 @@ resource "aws_placement_group" "az" {
 }
 
 data "aws_ssm_parameter" "ami_release_version" {
-  name = "/aws/service/eks/optimized-ami/${var.cluster_version}/amazon-linux-2023/arm64/standard/recommended/image_id"
+  name = "/aws/service/eks/optimized-ami/${var.cluster_version}/amazon-linux-2023/arm64/standard/recommended/release_version"
 }
 
 data "aws_iam_role" "master_roles" {
