@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.103.3](https://github.com/chanzuckerberg/cztack/compare/v0.103.2...v0.103.3) (2026-01-08)
+
+
+### Bug Fixes
+
+* use AL2023 release version name instead of the AMI ID in eks module ([#797](https://github.com/chanzuckerberg/cztack/issues/797)) ([79842d5](https://github.com/chanzuckerberg/cztack/commit/79842d51df2319ebb8dc6975ef73113cbaf48dee))
+
 ## [0.103.2](https://github.com/chanzuckerberg/cztack/compare/v0.103.1...v0.103.2) (2026-01-08)
 
 
