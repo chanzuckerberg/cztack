@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.5.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.5.1...aws-eks-cluster-v8.5.2) (2026-01-12)
+
+
+### Bug Fixes
+
+* use the addons variable flag for enabling and disabling external dns ([#799](https://github.com/chanzuckerberg/cztack/issues/799)) ([ece4dcd](https://github.com/chanzuckerberg/cztack/commit/ece4dcd4394e011e3011308000a22d420ed030a7))
+
 ## [8.5.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.5.0...aws-eks-cluster-v8.5.1) (2026-01-08)
 
 
