@@ -243,7 +243,7 @@ module "other_addons" {
     })]
   }
 
-  enable_external_dns = true
+  enable_external_dns = var.addons.enable_external_dns
   external_dns = {
     chart_version = var.addons.external_dns_config.chart_version
     create_role   = true
