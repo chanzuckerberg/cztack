@@ -33,10 +33,10 @@
 
 | Name | Type |
 |------|------|
-| [databricks_group.ws_policy_groups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
+| [databricks_group.ws_cluster_policy_groups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
 | [databricks_group_member.ws_policy_group_members](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [databricks_group.groups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/group) | data source |
+| [databricks_group.usergroups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/data-sources/group) | data source |
 
 ## Inputs
 
@@ -53,5 +53,7 @@
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_policy_group_memberships"></a> [policy\_group\_memberships](#output\_policy\_group\_memberships) | n/a |
 <!-- END -->

@@ -41,7 +41,7 @@ module "s3-bucket" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.17.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.76.1 |
 
 ## Modules
 

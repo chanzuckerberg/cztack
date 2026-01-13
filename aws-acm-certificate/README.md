@@ -40,7 +40,7 @@ module "cert" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.17.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0.0 |
 
 ## Modules
 
