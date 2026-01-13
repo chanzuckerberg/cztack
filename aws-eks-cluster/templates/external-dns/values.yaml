@@ -12,7 +12,7 @@ image:
   tag: '${imageTag}'
 sources:
   %{~ for source in sources ~}
-  - ${source}
+    - ${source}
   %{~ endfor ~}
 extraArgs:
   - '--annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)'
