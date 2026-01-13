@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.6.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.5.2...aws-eks-cluster-v8.6.0) (2026-01-13)
+
+
+### Features
+
+* add configurable sources options ([#801](https://github.com/chanzuckerberg/cztack/issues/801)) ([07d31dd](https://github.com/chanzuckerberg/cztack/commit/07d31ddb115f3c0ab5042863cff33d9dbbd87f0c))
+
 ## [8.5.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.5.1...aws-eks-cluster-v8.5.2) (2026-01-12)
 
 

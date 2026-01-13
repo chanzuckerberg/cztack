@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.104.0](https://github.com/chanzuckerberg/cztack/compare/v0.103.4...v0.104.0) (2026-01-13)
+
+
+### Features
+
+* add configurable sources options ([#801](https://github.com/chanzuckerberg/cztack/issues/801)) ([07d31dd](https://github.com/chanzuckerberg/cztack/commit/07d31ddb115f3c0ab5042863cff33d9dbbd87f0c))
+
 ## [0.103.4](https://github.com/chanzuckerberg/cztack/compare/v0.103.3...v0.103.4) (2026-01-12)
 
 
