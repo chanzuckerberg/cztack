@@ -1,11 +1,11 @@
 # Groups for workspace - managing access via Unified Login
 
 resource "databricks_group" "workspace_users" {
-  display_name                   = "workspace-${var.project}-${var.env}-users"
+  display_name = "workspace-${var.project}-${var.env}-users"
 }
 
 resource "databricks_group" "workspace_admins" {
-  display_name                   = "workspace-${var.project}-${var.env}-admins"
+  display_name = "workspace-${var.project}-${var.env}-admins"
 }
 
 resource "databricks_mws_permission_assignment" "workspace_users" {
@@ -21,13 +21,13 @@ resource "databricks_mws_permission_assignment" "workspace_admins" {
 }
 
 resource "databricks_group_member" "workspace_users" {
-  for_each   = toset(var.workspace_users)
-  group_id   = databricks_group.workspace_users.id
-  member_id  = each.value
+  for_each  = toset(var.workspace_users)
+  group_id  = databricks_group.workspace_users.id
+  member_id = each.value
 }
 
 resource "databricks_group_member" "workspace_admins" {
-  for_each   = toset(var.workspace_admins)
-  group_id   = databricks_group.workspace_admins.id
-  member_id  = each.value
+  for_each  = toset(var.workspace_admins)
+  group_id  = databricks_group.workspace_admins.id
+  member_id = each.value
 }

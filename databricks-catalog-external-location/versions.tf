@@ -4,9 +4,9 @@ terraform {
       source = "hashicorp/aws"
     }
     databricks = {
-      source  = "databricks/databricks"
-      version = "1.49.1"
-      configuration_aliases = [ databricks.mws, databricks.workspace ]
+      source                = "databricks/databricks"
+      version               = "1.49.1"
+      configuration_aliases = [databricks.mws, databricks.workspace]
     }
   }
   required_version = ">= 1.3.0"

@@ -28,9 +28,15 @@
 | [aws_iam_role.databricks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_security_group.databricks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [databricks_group.workspace_admins](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
+| [databricks_group.workspace_users](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
+| [databricks_group_member.workspace_admins](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
+| [databricks_group_member.workspace_users](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_mws_credentials.databricks](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_credentials) | resource |
 | [databricks_mws_networks.networking](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_networks) | resource |
 | [databricks_mws_permission_assignment.tfe_service_principal_admin](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_permission_assignment) | resource |
+| [databricks_mws_permission_assignment.workspace_admins](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_permission_assignment) | resource |
+| [databricks_mws_permission_assignment.workspace_users](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_permission_assignment) | resource |
 | [databricks_mws_storage_configurations.databricks](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_storage_configurations) | resource |
 | [databricks_mws_workspaces.databricks](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_workspaces) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
@@ -54,13 +60,19 @@
 | <a name="input_service"></a> [service](#input\_service) | The service. Aka databricks-workspace. | `string` | n/a | yes |
 | <a name="input_tfe_service_principal_id"></a> [tfe\_service\_principal\_id](#input\_tfe\_service\_principal\_id) | ID for the service principal for Terraform Enterprise, if available. Will be added as a workspace admin | `string` | `null` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the VPC. | `string` | n/a | yes |
+| <a name="input_workspace_admins"></a> [workspace\_admins](#input\_workspace\_admins) | List of principal IDs to be added to the workspace admins group. | `list(string)` | `[]` | no |
 | <a name="input_workspace_name_override"></a> [workspace\_name\_override](#input\_workspace\_name\_override) | Override the workspace name. If not set, the workspace name will be set to the project, env, and service. | `string` | `null` | no |
+| <a name="input_workspace_users"></a> [workspace\_users](#input\_workspace\_users) | List of principal IDs to be added to the workspace users group. | `list(string)` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | ARN of the AWS IAM role. |
+| <a name="output_workspace_admins_group_id"></a> [workspace\_admins\_group\_id](#output\_workspace\_admins\_group\_id) | ID of the workspace admins group. |
+| <a name="output_workspace_admins_group_name"></a> [workspace\_admins\_group\_name](#output\_workspace\_admins\_group\_name) | Name of the workspace admins group. |
 | <a name="output_workspace_id"></a> [workspace\_id](#output\_workspace\_id) | ID of the workspace. |
 | <a name="output_workspace_url"></a> [workspace\_url](#output\_workspace\_url) | Url of the deployed workspace. |
+| <a name="output_workspace_users_group_id"></a> [workspace\_users\_group\_id](#output\_workspace\_users\_group\_id) | ID of the workspace users group. |
+| <a name="output_workspace_users_group_name"></a> [workspace\_users\_group\_name](#output\_workspace\_users\_group\_name) | Name of the workspace users group. |
 <!-- END -->

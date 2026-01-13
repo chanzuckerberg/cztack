@@ -135,7 +135,7 @@ resource "databricks_external_location" "this" {
 # New catalog, schema, and volume
 
 resource "databricks_catalog" "volume" {
-  provider = databricks.workspace
+  provider   = databricks.workspace
   for_each   = local.creating_databricks_catalogs
   depends_on = [databricks_external_location.this]
 
@@ -152,7 +152,7 @@ resource "databricks_catalog" "volume" {
 
 resource "databricks_schema" "volume" {
   provider = databricks.workspace
-  count = var.create_schema ? 1 : 0
+  count    = var.create_schema ? 1 : 0
 
   depends_on   = [databricks_catalog.volume]
   catalog_name = local.catalog_name
@@ -163,7 +163,7 @@ resource "databricks_schema" "volume" {
 }
 
 resource "databricks_volume" "volume" {
-  provider = databricks.workspace
+  provider         = databricks.workspace
   depends_on       = [databricks_external_location.this, databricks_schema.volume]
   name             = local.volume_name
   catalog_name     = local.catalog_name
