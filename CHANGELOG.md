@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.103.4](https://github.com/chanzuckerberg/cztack/compare/v0.103.3...v0.103.4) (2026-01-12)
+
+
+### Bug Fixes
+
+* use the addons variable flag for enabling and disabling external dns ([#799](https://github.com/chanzuckerberg/cztack/issues/799)) ([ece4dcd](https://github.com/chanzuckerberg/cztack/commit/ece4dcd4394e011e3011308000a22d420ed030a7))
+
 ## [0.103.3](https://github.com/chanzuckerberg/cztack/compare/v0.103.2...v0.103.3) (2026-01-08)
 
 
