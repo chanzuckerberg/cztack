@@ -10,6 +10,10 @@ interval: '3m'
 image:
   repository: 'registry.k8s.io/external-dns/external-dns'
   tag: '${imageTag}'
+sources:
+  %{~ for source in sources ~}
+    - ${source}
+  %{~ endfor ~}
 extraArgs:
   - '--annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)'
   - '--aws-api-retries=3'

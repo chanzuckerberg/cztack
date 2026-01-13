@@ -242,6 +242,7 @@ variable "addons" {
       chart_version = optional(string, "1.18.0")
       image_tag     = optional(string, "v0.19.0")
       policy        = optional(string, "upsert-only")
+      sources = optional(list(string), ["service", "ingress", "gateway-httproute"])
     }), {})
     cert_manager_route53_hosted_zone_arns = optional(list(string), ["arn:aws:route53:::hostedzone/*"])
     cert_manager_config                   = optional(any, {})
