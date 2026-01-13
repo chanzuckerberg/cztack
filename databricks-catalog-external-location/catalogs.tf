@@ -1,5 +1,5 @@
 resource "databricks_catalog" "catalog" {
-  provider = databricks.workspace
+  provider                       = databricks.workspace
   for_each                       = { for idx, catalog in var.catalogs : catalog.name => catalog }
   name                           = each.value.name
   storage_root                   = "s3://${module.catalog_bucket.name}/${each.value.catalog_prefix != "" ? each.value.catalog_prefix : each.value.name}"
@@ -16,37 +16,37 @@ locals {
   # three representations of the same information for easier access later
   flattened_catalog_groups = toset(flatten([
     for idx, catalog in var.catalogs : [
-        for group_type in local.group_types : {
-          catalog = catalog.name
-          group_type   = group_type
-          group_name = "${catalog.name}_${group_type}"
-          group_members = lookup(catalog, "${group_type}_privileges_members", [])
-        }
+      for group_type in local.group_types : {
+        catalog       = catalog.name
+        group_type    = group_type
+        group_name    = "${catalog.name}_${group_type}"
+        group_members = lookup(catalog, "${group_type}_privileges_members", [])
+      }
     ]
   ]))
-  catalog_group_map = {for idx, catalog in var.catalogs : catalog.name => {
+  catalog_group_map = { for idx, catalog in var.catalogs : catalog.name => {
     for group_type in local.group_types : group_type => "${catalog.name}_${group_type}"
-  }}
+  } }
   flattened_catalog_group_memberships = toset(flatten([
     for group in local.flattened_catalog_groups : [
       for member in group.group_members : {
-        catalog     = group.catalog
-        group_type  = group.group_type
-        group_name  = group.group_name
-        member = member
+        catalog    = group.catalog
+        group_type = group.group_type
+        group_name = group.group_name
+        member     = member
       }
     ] if length(group.group_members) > 0
   ]))
 }
 
 resource "databricks_group" "catalog_groups" {
-  provider = databricks.mws
-  for_each                       = toset([for group in local.flattened_catalog_groups : group.group_name])
-  display_name                   = each.value
+  provider     = databricks.mws
+  for_each     = toset([for group in local.flattened_catalog_groups : group.group_name])
+  display_name = each.value
 }
 
 # NOTE: Authoritative membership management for catalog groups. Permissions set out outside of this will be overwritten.
-resource "databricks_grants" "grants" { 
+resource "databricks_grants" "grants" {
   provider = databricks.workspace
   for_each = local.catalog_group_map
   catalog  = each.key
@@ -105,10 +105,10 @@ resource "databricks_grants" "grants" {
 
 resource "databricks_group_member" "catalog_group_memberships" {
   provider = databricks.mws
-  for_each = {for membership in local.flattened_catalog_group_memberships: "${membership.group_name}_${membership.member}" => {
+  for_each = { for membership in local.flattened_catalog_group_memberships : "${membership.group_name}_${membership.member}" => {
     group_name = membership.group_name
     member     = membership.member
-  }}
+  } }
   group_id  = databricks_group.catalog_groups[each.value.group_name].id
   member_id = each.value.member
 }
