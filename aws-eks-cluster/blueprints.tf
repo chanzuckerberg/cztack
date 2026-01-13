@@ -253,6 +253,7 @@ module "other_addons" {
       txtPrefix  = ""
       imageTag   = var.addons.external_dns_config.image_tag
       policy     = var.addons.external_dns_config.policy
+      sources    = var.addons.external_dns_config.external_dns_sources
     })]
   }
   external_dns_route53_zone_arns = ["arn:aws:route53:::hostedzone/*"]

@@ -5,6 +5,11 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.99 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | ~> 1.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 3.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | ~> 0.0 |
 
 ## Providers
 
@@ -12,24 +17,22 @@
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.99 |
 | <a name="provider_aws.us-east-1"></a> [aws.us-east-1](#provider\_aws.us-east-1) | >= 5.99 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | n/a |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
-| <a name="provider_time"></a> [time](#provider\_time) | n/a |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | ~> 1.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 3.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | ~> 0.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_audit_log_ingest"></a> [audit\_log\_ingest](#module\_audit\_log\_ingest) | ../firehose-s3-archiver | n/a |
-| <a name="module_autocreated_ecr_writer_policy"></a> [autocreated\_ecr\_writer\_policy](#module\_autocreated\_ecr\_writer\_policy) | git@github.com:chanzuckerberg/shared-infra//terraform/modules/aws-iam-policy-ecr-writer | v0.397.0 |
-| <a name="module_cloud-init"></a> [cloud-init](#module\_cloud-init) | ../instance-cloud-init-script | n/a |
+| <a name="module_audit_log_ingest"></a> [audit\_log\_ingest](#module\_audit\_log\_ingest) | ../aws-firehose-s3-archiver | n/a |
+| <a name="module_autocreated_ecr_writer_policy"></a> [autocreated\_ecr\_writer\_policy](#module\_autocreated\_ecr\_writer\_policy) | ../aws-iam-policy-ecr-writer | n/a |
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | terraform-aws-modules/eks/aws | 19.16.0 |
 | <a name="module_eks_addons"></a> [eks\_addons](#module\_eks\_addons) | aws-ia/eks-blueprints-addons/aws | 1.22.0 |
 | <a name="module_eks_data_addons"></a> [eks\_data\_addons](#module\_eks\_data\_addons) | aws-ia/eks-data-addons/aws | 1.31.5 |
-| <a name="module_gh_actions_role"></a> [gh\_actions\_role](#module\_gh\_actions\_role) | git@github.com:chanzuckerberg/cztack//aws-iam-role-github-action | v0.69.3 |
+| <a name="module_gh_actions_role"></a> [gh\_actions\_role](#module\_gh\_actions\_role) | ../aws-iam-role-github-action | n/a |
 | <a name="module_karpenter_controller"></a> [karpenter\_controller](#module\_karpenter\_controller) | aws-ia/eks-blueprints-addons/aws | 1.22.0 |
-| <a name="module_orgwide-secrets"></a> [orgwide-secrets](#module\_orgwide-secrets) | ../aws-iam-policy-orgwide-secrets | n/a |
 | <a name="module_other_addons"></a> [other\_addons](#module\_other\_addons) | aws-ia/eks-blueprints-addons/aws | 1.22.0 |
 
 ## Resources
@@ -55,7 +58,6 @@
 | [aws_iam_role_policy.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.karpenter_node_ecr_pullthrough_cache](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.karpenter_node_orgwide_secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.karpenter_node_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.node](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.node_ecr_pullthrough_cache_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -103,17 +105,15 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_addons"></a> [addons](#input\_addons) | Map of addon definitions to create | <pre>object({<br>    enable_guardduty                    = optional(bool, false)<br>    enable_aws_load_balancer_controller = optional(bool, true)<br>    enable_metrics_server               = optional(bool, true)<br>    enable_cert_manager                 = optional(bool, true)<br>    enable_aws_for_fluentbit            = optional(bool, false)<br>    enable_external_dns                 = optional(bool, true)<br>    enable_karpenter                    = optional(bool, true)<br>    enable_default_karpenter_nodepool   = optional(bool, true)<br>    enable_default_karpenter_nodeclass  = optional(bool, true)<br>    enable_aws_efs_csi_driver           = optional(bool, true)<br>    enable_argocd                       = optional(bool, false)<br>    enable_aws_cloudwatch_metrics       = optional(bool, false)<br>    enable_external_secrets             = optional(bool, false)<br>    enable_fargate_fluentbit            = optional(bool, false)<br>    enable_ingress_nginx                = optional(bool, false)<br>    enable_kube_prometheus_stack        = optional(bool, false)<br>    enable_crossplane                   = optional(bool, false) // Deprecated, use crossplane module instead<br>    fluentbit_exclude_paths             = optional(list(string), [])<br>    aws_for_fluentbit_cw_log_group = optional(any, {<br>      create          = true<br>      retention       = 7<br>      use_name_prefix = false<br>    })<br>    external_secrets_config = optional(any, {<br>      service_account_name = "external-secrets-sa",<br>      namespace            = "external-secrets",<br>      wait                 = true<br>    })<br>    external_secrets_secrets_manager_arns = optional(list(string), ["arn:aws:secretsmanager:*:*:secret:/argus/*"])<br>    argocd_config                         = optional(any, {})<br>    argocd_child_config = optional(object({<br>      enabled = optional(bool, true)<br>      root_argo_aws_account_id_to_role = optional(map(string), {<br>        "533267185808" = "argo_root_core_platform_infra_prod_eks",<br>        "471112759938" = "argo_root_core_platform_infra_dev_eks",<br>      })<br>    }), {})<br>    karpenter_config = optional(any, {<br>      chart_version = "1.6.1"<br>    })<br>    external_dns_config = optional(object({<br>      chart_version = optional(string, "1.18.0")<br>      image_tag     = optional(string, "v0.19.0")<br>      policy        = optional(string, "upsert-only")<br>    }), {})<br>    cert_manager_route53_hosted_zone_arns = optional(list(string), ["arn:aws:route53:::hostedzone/*"])<br>    cert_manager_config                   = optional(any, {})<br>  })</pre> | `{}` | no |
+| <a name="input_addons"></a> [addons](#input\_addons) | Map of addon definitions to create | <pre>object({<br>    enable_guardduty                    = optional(bool, false)<br>    enable_aws_load_balancer_controller = optional(bool, true)<br>    enable_metrics_server               = optional(bool, true)<br>    enable_cert_manager                 = optional(bool, true)<br>    enable_aws_for_fluentbit            = optional(bool, false)<br>    enable_external_dns                 = optional(bool, true)<br>    enable_karpenter                    = optional(bool, true)<br>    enable_default_karpenter_nodepool   = optional(bool, true)<br>    enable_default_karpenter_nodeclass  = optional(bool, true)<br>    enable_aws_efs_csi_driver           = optional(bool, true)<br>    enable_argocd                       = optional(bool, false)<br>    enable_aws_cloudwatch_metrics       = optional(bool, false)<br>    enable_external_secrets             = optional(bool, false)<br>    enable_fargate_fluentbit            = optional(bool, false)<br>    enable_ingress_nginx                = optional(bool, false)<br>    enable_kube_prometheus_stack        = optional(bool, false)<br>    enable_crossplane                   = optional(bool, false) // Deprecated, use crossplane module instead<br>    fluentbit_exclude_paths             = optional(list(string), [])<br>    aws_for_fluentbit_cw_log_group = optional(any, {<br>      create          = true<br>      retention       = 7<br>      use_name_prefix = false<br>    })<br>    external_secrets_config = optional(any, {<br>      service_account_name = "external-secrets-sa",<br>      namespace            = "external-secrets",<br>      wait                 = true<br>    })<br>    external_secrets_secrets_manager_arns = optional(list(string), ["arn:aws:secretsmanager:*:*:secret:/argus/*"])<br>    argocd_config                         = optional(any, {})<br>    argocd_child_config = optional(object({<br>      enabled = optional(bool, true)<br>      root_argo_aws_account_id_to_role = optional(map(string), {<br>        "533267185808" = "argo_root_core_platform_infra_prod_eks",<br>        "471112759938" = "argo_root_core_platform_infra_dev_eks",<br>      })<br>    }), {})<br>    karpenter_config = optional(any, {<br>      chart_version = "1.6.1"<br>    })<br>    external_dns_config = optional(object({<br>      chart_version = optional(string, "1.18.0")<br>      image_tag     = optional(string, "v0.19.0")<br>      policy        = optional(string, "upsert-only")<br>      sources = optional(list(string), ["service", "ingress", "gateway-httproute"])<br>    }), {})<br>    cert_manager_route53_hosted_zone_arns = optional(list(string), ["arn:aws:route53:::hostedzone/*"])<br>    cert_manager_config                   = optional(any, {})<br>  })</pre> | `{}` | no |
 | <a name="input_addons_data"></a> [addons\_data](#input\_addons\_data) | Map of data addons to config to create | <pre>object({<br>    enable_kubecost = optional(bool, false)<br><br>    enable_jupyterhub = optional(bool, false)<br>    jupyterhub_helm_config = optional(object({<br>      callback_url : string,<br>      client_id : string,<br>      client_secret : string,<br>      authorize_url : string,<br>      token_url : string,<br>      allowed_groups : string,<br>      jupyter_single_user_sa_name : string,<br>      issuer : string,<br>      secret_name : string,<br>      storage_class_name : string,<br>      admin_groups : string,<br>      additional_server_image : string,<br>      }), {<br>      callback_url : "",<br>      client_id : "",<br>      client_secret : "",<br>      authorize_url : "",<br>      token_url : "",<br>      allowed_groups : "",<br>      jupyter_single_user_sa_name : "",<br>      issuer : "",<br>      secret_name : "",<br>      storage_class_name : "",<br>      admin_groups : "",<br>      additional_server_image : "",<br>    })<br>  })</pre> | `{}` | no |
 | <a name="input_ami_release_version"></a> [ami\_release\_version](#input\_ami\_release\_version) | AMI release version | `string` | `""` | no |
 | <a name="input_authorized_aws_accounts"></a> [authorized\_aws\_accounts](#input\_authorized\_aws\_accounts) | The map of authorized AWS accounts to assume the created role. | `map(string)` | `{}` | no |
 | <a name="input_authorized_github_repos"></a> [authorized\_github\_repos](#input\_authorized\_github\_repos) | Map of Github owner and repo identifiers that will be used to create a role for Github Actions to assume. Maps might look like {owner = ["reponame1", "reponame2"]} | `map(list(string))` | `{}` | no |
 | <a name="input_aws_org_id"></a> [aws\_org\_id](#input\_aws\_org\_id) | The org ID this cluster will be in. May be used in assume roles and pathfinding. | `string` | `"o-56v5gp5fcu"` | no |
-| <a name="input_bastion_security_group_id"></a> [bastion\_security\_group\_id](#input\_bastion\_security\_group\_id) | Security group ID of bastions, to allow access to workers | `string` | `null` | no |
 | <a name="input_cluster_enabled_log_types"></a> [cluster\_enabled\_log\_types](#input\_cluster\_enabled\_log\_types) | A list of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging documentation (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) | `list(any)` | `null` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Use this to set the eks cluster name directly. NOTE: if the `cluster_name` is not specified, you will not be able to use Karpenter. | `string` | `""` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | EKS cluster version | `string` | `"1.30"` | no |
-| <a name="input_datadog_api_key"></a> [datadog\_api\_key](#input\_datadog\_api\_key) | A datadog api key to enable the datadog agent on the instance | `string` | `""` | no |
 | <a name="input_docker_storage_size"></a> [docker\_storage\_size](#input\_docker\_storage\_size) | EBS Volume size in Gib that the ECS Instance uses for Docker images and metadata | `number` | `100` | no |
 | <a name="input_enable_audit_s3_ingest"></a> [enable\_audit\_s3\_ingest](#input\_enable\_audit\_s3\_ingest) | Whether you want to send the EKS Audit to an s3 bucket in czi-logs. | `bool` | `false` | no |
 | <a name="input_fargate_profiles"></a> [fargate\_profiles](#input\_fargate\_profiles) | Map of Fargate Profile definitions to create | `any` | `{}` | no |
@@ -127,7 +127,6 @@
 | <a name="input_owner_roles"></a> [owner\_roles](#input\_owner\_roles) | List of IAM roles that should be added to the aws-auth configmap with system:masters group. | `list(string)` | `[]` | no |
 | <a name="input_placement_group_strategy"></a> [placement\_group\_strategy](#input\_placement\_group\_strategy) | Placement group strategy for the EKS cluster (`cluster`, `partition` or `spread` are supported). Defaults to `partition` strategy. | `string` | `"partition"` | no |
 | <a name="input_read_only_roles"></a> [read\_only\_roles](#input\_read\_only\_roles) | List of IAM roles that should be added to the aws-auth configmap with read-only access. | `list(string)` | `[]` | no |
-| <a name="input_ssh_users"></a> [ssh\_users](#input\_ssh\_users) | A list of ssh users to create on this server. Defaults to sudo enabled. | `list(object({ username : string, sudo_enabled : bool }))` | `[]` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnets to place the EKS cluster and workers within. | `list(any)` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Typically fogg's var.tags | <pre>object({<br>    project : string,<br>    service : string,<br>    env : string,<br>    owner : string,<br>    managedBy : string,<br>  })</pre> | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC where the cluster and workers will be deployed. | `string` | n/a | yes |
