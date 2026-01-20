@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.104.2](https://github.com/chanzuckerberg/cztack/compare/v0.104.1...v0.104.2) (2026-01-16)
+
+
+### Bug Fixes
+
+* remove gateway-api in external dns ([#805](https://github.com/chanzuckerberg/cztack/issues/805)) ([e823a6d](https://github.com/chanzuckerberg/cztack/commit/e823a6dcfeb98bc956bb011174f9d5909d1f9fbf))
+
 ## [0.104.1](https://github.com/chanzuckerberg/cztack/compare/v0.104.0...v0.104.1) (2026-01-13)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.6.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.6.1...aws-eks-cluster-v8.6.2) (2026-01-16)
+
+
+### Bug Fixes
+
+* remove gateway-api in external dns ([#805](https://github.com/chanzuckerberg/cztack/issues/805)) ([e823a6d](https://github.com/chanzuckerberg/cztack/commit/e823a6dcfeb98bc956bb011174f9d5909d1f9fbf))
+
 ## [8.6.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.6.0...aws-eks-cluster-v8.6.1) (2026-01-13)
 
 
