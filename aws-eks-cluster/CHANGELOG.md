@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.7.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.6.2...aws-eks-cluster-v8.7.0) (2026-02-04)
+
+
+### Features
+
+* Allow default nodepool overrides in aws-eks-cluster ([#808](https://github.com/chanzuckerberg/cztack/issues/808)) ([3f858d6](https://github.com/chanzuckerberg/cztack/commit/3f858d6feb7ca510b54de1626fe1b544974fd147))
+
 ## [8.6.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.6.1...aws-eks-cluster-v8.6.2) (2026-01-16)
 
 

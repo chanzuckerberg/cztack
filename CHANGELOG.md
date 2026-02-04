@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.105.0](https://github.com/chanzuckerberg/cztack/compare/v0.104.2...v0.105.0) (2026-02-04)
+
+
+### Features
+
+* Allow default nodepool overrides in aws-eks-cluster ([#808](https://github.com/chanzuckerberg/cztack/issues/808)) ([3f858d6](https://github.com/chanzuckerberg/cztack/commit/3f858d6feb7ca510b54de1626fe1b544974fd147))
+
+
+### Misc
+
+* **deps:** bump github.com/stretchr/testify from 1.8.3 to 1.11.1 ([#807](https://github.com/chanzuckerberg/cztack/issues/807)) ([893c68c](https://github.com/chanzuckerberg/cztack/commit/893c68c7f4ba46587a9f9a6df2ae5426112e2669))
+
 ## [0.104.2](https://github.com/chanzuckerberg/cztack/compare/v0.104.1...v0.104.2) (2026-01-16)
 
 
