@@ -238,6 +238,7 @@ variable "addons" {
     karpenter_config = optional(any, {
       chart_version = "1.6.1"
     })
+    karpenter_nodepool_spec = optional(any, null)
     external_dns_config = optional(object({
       chart_version = optional(string, "1.18.0")
       image_tag     = optional(string, "v0.19.0")
