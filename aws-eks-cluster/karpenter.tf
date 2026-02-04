@@ -88,12 +88,17 @@ locals {
   }
 }
 
+locals {
+  nodepool_override        = try(var.addons.karpenter_nodepool_spec_override, null)
+  effective_node_pool_spec = local.nodepool_override != null ? merge(local.node_pool_spec, local.nodepool_override) : local.node_pool_spec
+}
+
 resource "random_id" "node_pool_name" {
   byte_length = 4
   prefix      = "nodepool-"
   keepers = {
     # Regenerate nodepool definition every time spec changes
-    version = yamlencode(local.node_pool_spec)
+    version = yamlencode(local.effective_node_pool_spec)
   }
   lifecycle {
     create_before_destroy = true
@@ -110,7 +115,7 @@ resource "kubectl_manifest" "karpenter_nodepool" {
     "metadata" = {
       "name" = random_id.node_pool_name.hex
     }
-    "spec" = local.node_pool_spec
+    "spec" = local.effective_node_pool_spec
   })
   force_new = true
   depends_on = [

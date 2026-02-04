@@ -206,6 +206,7 @@ variable "addons" {
     enable_external_dns                 = optional(bool, true)
     enable_karpenter                    = optional(bool, true)
     enable_default_karpenter_nodepool   = optional(bool, true)
+    karpenter_nodepool_spec_override    = optional(any, null)
     enable_default_karpenter_nodeclass  = optional(bool, true)
     enable_aws_efs_csi_driver           = optional(bool, true)
     enable_argocd                       = optional(bool, false)
