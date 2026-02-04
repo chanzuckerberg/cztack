@@ -89,8 +89,8 @@ locals {
 }
 
 locals {
-  nodepool_override        = try(var.addons.karpenter_nodepool_spec_override, null)
-  effective_node_pool_spec = local.nodepool_override != null ? merge(local.node_pool_spec, local.nodepool_override) : local.node_pool_spec
+  nodepool_spec            = try(var.addons.karpenter_nodepool_spec, null)
+  effective_node_pool_spec = local.nodepool_spec != null ? merge(local.node_pool_spec, local.nodepool_spec) : local.node_pool_spec
 }
 
 resource "random_id" "node_pool_name" {

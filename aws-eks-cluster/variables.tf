@@ -206,7 +206,6 @@ variable "addons" {
     enable_external_dns                 = optional(bool, true)
     enable_karpenter                    = optional(bool, true)
     enable_default_karpenter_nodepool   = optional(bool, true)
-    karpenter_nodepool_spec_override    = optional(any, null)
     enable_default_karpenter_nodeclass  = optional(bool, true)
     enable_aws_efs_csi_driver           = optional(bool, true)
     enable_argocd                       = optional(bool, false)
@@ -239,6 +238,7 @@ variable "addons" {
     karpenter_config = optional(any, {
       chart_version = "1.6.1"
     })
+    karpenter_nodepool_spec = optional(any, null)
     external_dns_config = optional(object({
       chart_version = optional(string, "1.18.0")
       image_tag     = optional(string, "v0.19.0")
