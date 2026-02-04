@@ -86,9 +86,7 @@ locals {
       }
     }
   }
-}
 
-locals {
   nodepool_spec            = try(var.addons.karpenter_nodepool_spec, null)
   effective_node_pool_spec = local.nodepool_spec != null ? local.nodepool_spec : local.node_pool_spec
 }
