@@ -1,5 +1,5 @@
 locals {
-  node_pool_spec = {
+  default_nodepool_spec = {
     "disruption" = {
       "consolidationPolicy" = "WhenEmptyOrUnderutilized"
       "consolidateAfter"    = "24h"
@@ -87,8 +87,8 @@ locals {
     }
   }
 
-  nodepool_spec            = try(var.addons.karpenter_nodepool_spec, null)
-  effective_node_pool_spec = local.nodepool_spec != null ? local.nodepool_spec : local.node_pool_spec
+  custom_nodepool_spec     = try(var.addons.karpenter_nodepool_spec, null)
+  effective_node_pool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 }
 
 resource "random_id" "node_pool_name" {
