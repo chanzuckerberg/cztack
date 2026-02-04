@@ -14,7 +14,7 @@
   "aws-ecs-job-fargate": "0.1.0",
   "aws-ecs-service": "0.1.0",
   "aws-ecs-service-fargate": "0.1.0",
-  "aws-eks-cluster": "8.6.2",
+  "aws-eks-cluster": "8.7.0",
   "aws-efs-volume": "0.1.1",
   "aws-iam-ecs-task-role": "0.1.0",
   "aws-iam-group-assume-role": "0.1.0",
@@ -91,5 +91,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.104.2"
+  ".": "0.105.0"
 }
