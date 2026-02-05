@@ -116,9 +116,9 @@ resource "kubectl_manifest" "karpenter_nodepool" {
     "spec" = local.effective_nodepool_spec
   })
   force_new = true
-  depends_on = [
-    module.karpenter_controller
-  ]
+  # depends_on = [
+  #   module.karpenter_controller
+  # ]
   lifecycle {
     create_before_destroy = true
   }
@@ -161,9 +161,9 @@ resource "kubectl_manifest" "karpenter_node_class" {
       "tags"                       = merge(var.tags, { "managedBy" = "karpenter" })
     }
   })
-  depends_on = [
-    module.karpenter_controller
-  ]
+  # depends_on = [
+  #   module.karpenter_controller
+  # ]
   lifecycle {
     create_before_destroy = true
   }
