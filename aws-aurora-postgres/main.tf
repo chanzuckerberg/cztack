@@ -37,9 +37,10 @@ module "aurora" {
   instance_count          = var.instance_count
 
   # backtrack_window not supported yet
-  backtrack_window    = 0
-  snapshot_identifier = var.snapshot_identifier
-  skip_final_snapshot = var.skip_final_snapshot
-  kms_key_id          = var.kms_key_id
-  apply_immediately   = var.apply_immediately
+  backtrack_window        = 0
+  snapshot_identifier     = var.snapshot_identifier
+  skip_final_snapshot     = var.skip_final_snapshot
+  backup_retention_period = var.backup_retention_period
+  kms_key_id              = var.kms_key_id
+  apply_immediately       = var.apply_immediately
 }
