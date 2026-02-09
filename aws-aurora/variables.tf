@@ -61,6 +61,12 @@ variable "skip_final_snapshot" {
   default = false
 }
 
+variable "backup_retention_period" {
+  type        = number
+  description = "Number of days to retain backups for."
+  default     = 28
+}
+
 variable "backtrack_window" {
   default = 0
 }
