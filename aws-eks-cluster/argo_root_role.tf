@@ -25,6 +25,7 @@ data "aws_iam_policy_document" "cluster_assume_role" {
         "system:serviceaccount:argocd:argocd-server",
         "system:serviceaccount:argocd:argocd-application-controller",
         "system:serviceaccount:argocd:argocd-applicationset-controller",
+        "system:serviceaccount:argocd:argocd-notifications-controller",
         "system:serviceaccount:core-platform-rdev:*",
         "system:serviceaccount:core-platform-staging:*",
         "system:serviceaccount:core-platform-prod:*",
@@ -66,4 +67,3 @@ resource "aws_iam_role_policy" "assume_role_to_argo_child" {
   name_prefix = "assume_role_to_argo_child_${local.namespace}"
   policy      = data.aws_iam_policy_document.assume_role_to_argo_child[0].json
 }
-
