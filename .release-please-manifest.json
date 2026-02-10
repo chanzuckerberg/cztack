@@ -3,7 +3,7 @@
   "aws-assume-role-policy": "0.1.0",
   "aws-aurora": "0.2.0",
   "aws-aurora-mysql": "0.1.0",
-  "aws-aurora-postgres": "0.1.0",
+  "aws-aurora-postgres": "0.2.0",
   "aws-cloudfront-domain-redirect": "0.1.1",
   "aws-cloudfront-logs-bucket": "0.1.1",
   "aws-cloudwatch-log-group": "0.1.1",
@@ -91,5 +91,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.106.0"
+  ".": "0.107.0"
 }
