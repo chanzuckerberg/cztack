@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.108.0](https://github.com/chanzuckerberg/cztack/compare/v0.107.0...v0.108.0) (2026-02-10)
+
+
+### Features
+
+* allow argocd notifications controller to assume the argocd root role ([#816](https://github.com/chanzuckerberg/cztack/issues/816)) ([7b5be75](https://github.com/chanzuckerberg/cztack/commit/7b5be759f2d97761e1e819d77f58821e01e3b2d9))
+
 ## [0.107.0](https://github.com/chanzuckerberg/cztack/compare/v0.106.0...v0.107.0) (2026-02-10)
 
 

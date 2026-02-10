@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.8.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.7.0...aws-eks-cluster-v8.8.0) (2026-02-10)
+
+
+### Features
+
+* allow argocd notifications controller to assume the argocd root role ([#816](https://github.com/chanzuckerberg/cztack/issues/816)) ([7b5be75](https://github.com/chanzuckerberg/cztack/commit/7b5be759f2d97761e1e819d77f58821e01e3b2d9))
+
 ## [8.7.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.6.2...aws-eks-cluster-v8.7.0) (2026-02-04)
 
 
