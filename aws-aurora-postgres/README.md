@@ -4,9 +4,9 @@ This module will created a robust and secure [AWS Aurora](https://aws.amazon.com
 
 A few things this module does for you–
 
-* ensures that data is encrypted at rest, either via an AWS managed key or if you supply `kms_key_id` a key that you control (via KMS).
-* tags all resources with our [consistent tags](../README.md#Consistent%20Tagging)
-* sets some sane defaults for database and cluster parameters
+- ensures that data is encrypted at rest, either via an AWS managed key or if you supply `kms_key_id` a key that you control (via KMS).
+- tags all resources with our [consistent tags](../README.md#Consistent%20Tagging)
+- sets some sane defaults for database and cluster parameters
 
 A simple example:
 
@@ -55,6 +55,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | If false changes will not be applied until next maintenance window. | `string` | `false` | no |
 | <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Set the databases to automatically upgrade minor versions. WARNING - if this is enabled, make sure engine\_version is set to a *prefix* rather that a specific version so that TF won't try to downgrade DB's that have been auto-upgraded. Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine_version | `bool` | `false` | no |
+| <a name="input_backup_retention_period"></a> [backup\_retention\_period](#input\_backup\_retention\_period) | Number of days to retain backups for. | `number` | `28` | no |
 | <a name="input_ca_cert_identifier"></a> [ca\_cert\_identifier](#input\_ca\_cert\_identifier) | Identifier for the certificate authority. | `string` | `"rds-ca-rsa2048-g1"` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | The name of the database to be created in the cluster. | `string` | n/a | yes |
 | <a name="input_database_password"></a> [database\_password](#input\_database\_password) | Password for user that will be created. | `string` | n/a | yes |

@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.108.0](https://github.com/chanzuckerberg/cztack/compare/v0.107.0...v0.108.0) (2026-02-10)
+
+
+### Features
+
+* allow argocd notifications controller to assume the argocd root role ([#816](https://github.com/chanzuckerberg/cztack/issues/816)) ([7b5be75](https://github.com/chanzuckerberg/cztack/commit/7b5be759f2d97761e1e819d77f58821e01e3b2d9))
+
+## [0.107.0](https://github.com/chanzuckerberg/cztack/compare/v0.106.0...v0.107.0) (2026-02-10)
+
+
+### Features
+
+* Allow for modifying the db backup retention period ([#812](https://github.com/chanzuckerberg/cztack/issues/812)) ([#814](https://github.com/chanzuckerberg/cztack/issues/814)) ([50764bb](https://github.com/chanzuckerberg/cztack/commit/50764bba0c2dbd6de15e570066eaae6a32da785d))
+
+## [0.106.0](https://github.com/chanzuckerberg/cztack/compare/v0.105.0...v0.106.0) (2026-02-09)
+
+
+### Features
+
+* Allow for modifying the db backup retention period ([#812](https://github.com/chanzuckerberg/cztack/issues/812)) ([7f1d443](https://github.com/chanzuckerberg/cztack/commit/7f1d4431691ae6f4bf1f6d5211f14a862e64053e))
+
 ## [0.105.0](https://github.com/chanzuckerberg/cztack/compare/v0.104.2...v0.105.0) (2026-02-04)
 
 

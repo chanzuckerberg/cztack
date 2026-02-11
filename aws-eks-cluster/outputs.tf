@@ -82,3 +82,13 @@ output "s3_csi_role_name" {
   description = "The name of the IAM role for the S3 CSI driver."
   value       = aws_iam_role.s3_csi.name
 }
+
+output "argocd_root_role_name" {
+  description = "Name of the ArgoCD service account IAM role"
+  value       = var.addons.enable_argocd ? aws_iam_role.argocd_sa_role[0].name : null
+}
+
+output "argocd_root_role_arn" {
+  description = "ARN of the ArgoCD service account IAM role"
+  value       = var.addons.enable_argocd ? aws_iam_role.argocd_sa_role[0].arn : null
+}
