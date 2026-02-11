@@ -100,14 +100,14 @@ data "aws_iam_policy_document" "fluentbit_policy" {
 #   ]
 # }
 
-resource "time_sleep" "karpenter_ready" {
-  depends_on = [
-    //module.karpenter_controller,
-    kubectl_manifest.karpenter_nodepool,
-    kubectl_manifest.karpenter_node_class
-  ]
-  create_duration = "30s"
-}
+# resource "time_sleep" "karpenter_ready" {
+#   depends_on = [
+#     //module.karpenter_controller,
+#     kubectl_manifest.karpenter_nodepool,
+#     kubectl_manifest.karpenter_node_class
+#   ]
+#   create_duration = "30s"
+# }
 
 # Stage 2: EKS addons only (runs after Karpenter controller to enable compute-dependent addons)
 module "eks_addons" {
@@ -176,9 +176,9 @@ module "eks_addons" {
     }
   }
 
-  depends_on = [
-    time_sleep.karpenter_ready
-  ]
+  # depends_on = [
+  #   time_sleep.karpenter_ready
+  # ]
 }
 
 # Stage 3: All other addons (runs after Karpenter nodepool/ec2nodeclass provide compute)
