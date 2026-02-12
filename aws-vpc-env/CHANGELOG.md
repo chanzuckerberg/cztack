@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.7.0](https://github.com/chanzuckerberg/cztack/compare/aws-vpc-env-v4.6.0...aws-vpc-env-v4.7.0) (2026-02-12)
+
+
+### Features
+
+* add aws-vpc-env module for VPC provisioning ([#818](https://github.com/chanzuckerberg/cztack/issues/818)) ([d5c8d3c](https://github.com/chanzuckerberg/cztack/commit/d5c8d3cbfe224c510c7123e23ba7740773e467ce))
+
 ## [4.6.0](https://github.com/chanzuckerberg/shared-infra/compare/aws-env-v4.5.0...aws-env-v4.6.0) (2025-09-25)
 
 
