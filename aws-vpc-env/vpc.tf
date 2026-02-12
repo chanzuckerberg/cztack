@@ -1,14 +1,10 @@
 locals {
-  name = substr("${var.project}-${var.env}${var.vpc_name_suffix}", 0, 63)
+  name = substr("${var.tags.project}-${var.tags.env}${var.vpc_name_suffix}", 0, 63)
 
-  tags = {
+  tags = merge(var.tags, {
     managedBy = "terraform"
     Name      = local.name
-    project   = var.project
-    env       = var.env
-    owner     = var.owner
-    service   = var.service
-  }
+  })
 
   vpc_base_tags = { for k, v in local.tags : k => v if k != "Name" }
 
@@ -114,39 +110,8 @@ module "vpc" {
 
 resource "aws_default_security_group" "default" {
   vpc_id = module.vpc.vpc_id
-  tags = {
+  tags = merge(var.tags, {
     managedBy = "terraform"
     Name      = "${local.name}-default"
-    project   = var.project
-    env       = var.env
-    owner     = var.owner
-    service   = var.service
-  }
+  })
 }
-
-locals {
-
-  # We have to spell these out because there is no map-over-list function in terraform interpolations.
-  # And we have to do the '0 +' thing in order to coerce the values into integers.
-  # address_bits = join("", [
-  # format("%08b", 0 + local.address_list[0]),
-  # format("%08b", 0 + local.address_list[1])]
-  # )
-
-  # prefix_8_bits  = join("", [format("%08b", 10)])
-  # prefix_12_bits = join("",[format("%08b", 172), format("%08b", 16)])
-  # prefix_16_bits = join("", [format("%08b", 192), format("%08b", 168)])
-
-  # vpc_cidr_valid = "${
-  #   (substr(local.address_bits, 0, 8) == local.prefix_8_bits && local.prefix >= 8) ||
-  #   (substr(local.address_bits, 0, 12) == substr(local.prefix_12_bits, 0, 12) && local.prefix >= 12) ||
-  #   (substr(local.address_bits, 0, 16) == local.prefix_16_bits && local.prefix >= 16)
-  # }"
-}
-
-# # inspired by https://github.com/hashicorp/terraform/issues/2847#issuecomment-343622460
-# resource "null_resource" "is-vpc-cidr-valid" {
-#   count =  local.vpc_cidr_valid ? 0 : 1
-
-#   "ERROR: Use only a private vpc cidr block (10.0.0.0/8, 172.16.0.0/12 or 192.168.0.0/16)" = true
-# }

@@ -1,5 +1,5 @@
 locals {
-  vpc_flow_logs_cloudwatch_group_name = substr("${var.project}-${var.env}-${var.service}-vpc-flow-logs", 0, 63)
+  vpc_flow_logs_cloudwatch_group_name = substr("${var.tags.project}-${var.tags.env}-${var.tags.service}-vpc-flow-logs", 0, 63)
 
   // HACK(el): Adding this here and not as a variable since fogg source_modules
   //           will override defaults
@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "vpc_flow_logs" {
-  name               = substr("${var.project}-${var.env}-${var.service}-flow-logs", 0, 63)
+  name               = substr("${var.tags.project}-${var.tags.env}-${var.tags.service}-flow-logs", 0, 63)
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   tags               = local.tags
 }

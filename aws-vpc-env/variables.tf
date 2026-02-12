@@ -1,5 +1,5 @@
 variable "vpc_name_suffix" {
-  description = "Suffix to append to the VPC name, like `-$${var.service}`, defaults to blank for backwards compatibility"
+  description = "Suffix to append to the VPC name, like `-$${var.tags.service}`, defaults to blank for backwards compatibility"
   type        = string
   default     = ""
 }
@@ -67,4 +67,14 @@ variable "vpc_endpoints" {
     region  = optional(string)
   }))
   default = []
+}
+
+variable "tags" {
+  description = "Tags to apply to the resources."
+  type = object({
+    project = string
+    env     = string
+    service = string
+    owner   = string
+  })
 }
