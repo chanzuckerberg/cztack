@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.109.0](https://github.com/chanzuckerberg/cztack/compare/v0.108.0...v0.109.0) (2026-02-12)
+
+
+### Features
+
+* add aws-vpc-env module for VPC provisioning ([#818](https://github.com/chanzuckerberg/cztack/issues/818)) ([d5c8d3c](https://github.com/chanzuckerberg/cztack/commit/d5c8d3cbfe224c510c7123e23ba7740773e467ce))
+
 ## [0.108.0](https://github.com/chanzuckerberg/cztack/compare/v0.107.0...v0.108.0) (2026-02-10)
 
 
