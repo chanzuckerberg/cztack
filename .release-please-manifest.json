@@ -4,6 +4,7 @@
   "aws-aurora": "0.2.0",
   "aws-aurora-mysql": "0.1.0",
   "aws-aurora-postgres": "0.2.0",
+  "aws-vpc-env": "4.6.0",
   "aws-cloudfront-domain-redirect": "0.1.1",
   "aws-cloudfront-logs-bucket": "0.1.1",
   "aws-cloudwatch-log-group": "0.1.1",
