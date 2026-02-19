@@ -35,79 +35,79 @@ data "aws_iam_policy_document" "fluentbit_policy" {
 # Let eks-blueprints-addons module handle Karpenter node IAM role automatically
 
 # Stage 1: Karpenter controller only (runs first to provide compute)
-module "karpenter_controller" {
-  source  = "aws-ia/eks-blueprints-addons/aws"
-  version = "1.22.0"
+# module "karpenter_controller" {
+#   source  = "aws-ia/eks-blueprints-addons/aws"
+#   version = "1.22.0"
 
-  tags = var.tags
+#   tags = var.tags
 
-  cluster_name      = module.cluster.cluster_name
-  cluster_endpoint  = module.cluster.cluster_endpoint
-  oidc_provider_arn = module.cluster.oidc_provider_arn
-  cluster_version   = module.cluster.cluster_version
+#   cluster_name      = module.cluster.cluster_name
+#   cluster_endpoint  = module.cluster.cluster_endpoint
+#   oidc_provider_arn = module.cluster.oidc_provider_arn
+#   cluster_version   = module.cluster.cluster_version
 
-  # Only Karpenter controller in this stage
-  enable_karpenter                  = var.addons.enable_karpenter
-  karpenter_enable_spot_termination = true
-  karpenter = merge(var.addons.karpenter_config, {
-    repository_username = data.aws_ecrpublic_authorization_token.token.user_name
-    repository_password = data.aws_ecrpublic_authorization_token.token.password
-    set = [
-      {
-        name  = "settings.featureGates.spotToSpotConsolidation"
-        value = "true"
-      },
-      {
-        name  = "settings.featureGates.driftEnabled"
-        value = "true"
-      },
-      {
-        name  = "controller.resources.requests.cpu"
-        value = "1"
-      },
-      {
-        name  = "controller.resources.requests.memory"
-        value = "4Gi"
-      },
-      {
-        name  = "controller.resources.limits.cpu"
-        value = "2"
-      },
-      {
-        name  = "controller.resources.limits.memory"
-        value = "4Gi"
-      },
-      {
-        name  = "webhook.enabled"
-        value = "false"
-      },
-      {
-        name  = "dnsPolicy"
-        value = "Default"
-      },
-    ]
-  })
+#   # Only Karpenter controller in this stage
+#   enable_karpenter                  = var.addons.enable_karpenter
+#   karpenter_enable_spot_termination = true
+#   karpenter = merge(var.addons.karpenter_config, {
+#     repository_username = data.aws_ecrpublic_authorization_token.token.user_name
+#     repository_password = data.aws_ecrpublic_authorization_token.token.password
+#     set = [
+#       {
+#         name  = "settings.featureGates.spotToSpotConsolidation"
+#         value = "true"
+#       },
+#       {
+#         name  = "settings.featureGates.driftEnabled"
+#         value = "true"
+#       },
+#       {
+#         name  = "controller.resources.requests.cpu"
+#         value = "1"
+#       },
+#       {
+#         name  = "controller.resources.requests.memory"
+#         value = "4Gi"
+#       },
+#       {
+#         name  = "controller.resources.limits.cpu"
+#         value = "2"
+#       },
+#       {
+#         name  = "controller.resources.limits.memory"
+#         value = "4Gi"
+#       },
+#       {
+#         name  = "webhook.enabled"
+#         value = "false"
+#       },
+#       {
+#         name  = "dnsPolicy"
+#         value = "Default"
+#       },
+#     ]
+#   })
 
-  karpenter_node = {
-    create_iam_role       = false
-    iam_role_name         = aws_iam_role.karpenter_node.name
-    iam_role_arn          = aws_iam_role.karpenter_node.arn
-    instance_profile_name = aws_iam_instance_profile.karpenter_node.name
-  }
+#   karpenter_node = {
+#     create_iam_role       = false
+#     iam_role_name         = aws_iam_role.karpenter_node.name
+#     iam_role_arn          = aws_iam_role.karpenter_node.arn
+#     instance_profile_name = aws_iam_instance_profile.karpenter_node.name
+#   }
 
-  depends_on = [
-    time_sleep.fargate_ready
-  ]
-}
+#   depends_on = [
+#     time_sleep.fargate_ready
+#   ]
+# }
 
-resource "time_sleep" "karpenter_ready" {
-  depends_on = [
-    module.karpenter_controller,
-    kubectl_manifest.karpenter_nodepool,
-    kubectl_manifest.karpenter_node_class
-  ]
-  create_duration = "30s"
-}
+# resource "time_sleep" "karpenter_ready" {
+#   depends_on = [
+#     //module.karpenter_controller,
+#     kubectl_manifest.karpenter_nodepool,
+#     kubectl_manifest.karpenter_node_class
+#   ]
+#   create_duration = "30s"
+# }
 
 # Stage 2: EKS addons only (runs after Karpenter controller to enable compute-dependent addons)
 module "eks_addons" {
@@ -176,9 +176,9 @@ module "eks_addons" {
     }
   }
 
-  depends_on = [
-    time_sleep.karpenter_ready
-  ]
+  # depends_on = [
+  #   time_sleep.karpenter_ready
+  # ]
 }
 
 # Stage 3: All other addons (runs after Karpenter nodepool/ec2nodeclass provide compute)
