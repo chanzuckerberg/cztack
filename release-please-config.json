@@ -46,6 +46,10 @@
       "package-name": "aws-aurora-postgres",
       "release-type": "terraform-module"
     },
+    "aws-vpc-env": {
+      "package-name": "aws-vpc-env",
+      "release-type": "terraform-module"
+    },
     "aws-cloudfront-domain-redirect": {
       "package-name": "aws-cloudfront-domain-redirect",
       "release-type": "terraform-module"
