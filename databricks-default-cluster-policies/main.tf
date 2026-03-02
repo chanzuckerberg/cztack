@@ -91,12 +91,12 @@ module "single_node_cpu_cluster_policy" {
     },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "aws_attributes.availability" : {
@@ -158,12 +158,12 @@ module "multi_node_cpu_cluster_policy" {
     },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "aws_attributes.availability" : {
@@ -216,7 +216,7 @@ module "multi_node_cpu_job_cluster_policy" {
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
@@ -249,12 +249,12 @@ module "single_node_cpu_job_cluster_policy" {
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8]+[idn]*\.[0-9]{0,2}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "aws_attributes.availability" : {
