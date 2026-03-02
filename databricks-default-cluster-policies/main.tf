@@ -50,6 +50,22 @@ locals {
     "aws_attributes.zone_id" : {
       "type" : "unlimited",
       "hidden" : false
+    },
+    # Allow EBS
+    "enable_elastic_disk": {
+      "type": "unlimited",
+      "defaultValue": true,
+      "hidden" : false
+    },
+    # Allow users to set availability type to on-demand or spot
+    "aws_attributes.availability" : {
+      "type" : "allowlist",
+      "values" : [
+        "ON_DEMAND",
+        "SPOT_WITH_FALLBACK",
+        "SPOT"
+      ],
+      "hidden" : false
     }
   }
 }
@@ -85,6 +101,10 @@ module "single_node_cpu_cluster_policy" {
   policy_name             = "${var.policy_name_prefix}Single Node CPU Compute"
   policy_family_id        = local.default_policy_family_ids["personal_compute"]
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, local.personal_instance_pools, {
+    "is_single_node" : {
+      "type" : "fixed",
+      "value" : true
+    },
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
@@ -97,37 +117,6 @@ module "single_node_cpu_cluster_policy" {
     "node_type_id" : {
       "type" : "regex",
       "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
-      "hidden" : false
-    },
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    },
-    "aws_attributes.ebs_volume_count" : {
-      "type" : "range",
-      "minValue" : 0,
-      "maxValue" : 28,
-      "defaultValue" : 0,
-      "hidden" : false
-    },
-    "aws_attributes.ebs_volume_size" : {
-      "type" : "range",
-      "minValue" : 0,
-      "maxValue" : 1024,
-      "defaultValue" : 0,
-      "hidden" : false
-    },
-    "aws_attributes.ebs_volume_type" : {
-      "type" : "allowlist",
-      "values" : [
-        "None",
-        "GENERAL_PURPOSE_SSD",
-      ],
       "hidden" : false
     },
     "runtime_engine" : {
@@ -152,6 +141,11 @@ module "multi_node_cpu_cluster_policy" {
       "defaultValue" : 10,
       "maxValue" : 2000
     },
+    "autoscale.min_workers" : {
+      "type" : "range",
+      "defaultValue" : 1,
+      "minValue" : 1
+    },
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
@@ -164,35 +158,6 @@ module "multi_node_cpu_cluster_policy" {
     "node_type_id" : {
       "type" : "regex",
       "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
-      "hidden" : false
-    },
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    },
-    "aws_attributes.ebs_volume_count" : {
-      "type" : "range",
-      "minValue" : 0,
-      "maxValue" : 28,
-      "hidden" : false
-    },
-    "aws_attributes.ebs_volume_size" : {
-      "type" : "range",
-      "minValue" : 0,
-      "maxValue" : 1024,
-      "hidden" : false
-    },
-    "aws_attributes.ebs_volume_type" : {
-      "type" : "allowlist",
-      "values" : [
-        "None",
-        "GENERAL_PURPOSE_SSD",
-      ],
       "hidden" : false
     },
     "runtime_engine" : {
@@ -210,10 +175,20 @@ module "multi_node_cpu_job_cluster_policy" {
 
   databricks_host         = var.databricks_host
   databricks_workspace_id = var.databricks_workspace_id
-  policy_name             = "${var.policy_name_prefix}CPU Job"
+  policy_name             = "${var.policy_name_prefix}Multi Node CPU Job"
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
+    "autoscale.max_workers" : {
+      "type" : "range",
+      "defaultValue" : 10,
+      "maxValue" : 2000
+    },
+    "autoscale.min_workers" : {
+      "type" : "range",
+      "defaultValue" : 1,
+      "minValue" : 1
+    },
     "driver_node_type_id" : {
       "type" : "regex",
       "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
@@ -224,15 +199,6 @@ module "multi_node_cpu_job_cluster_policy" {
       "pattern" : "([rcizm]+[3-8`]+[dn]*\\.[0-32]{0,1}xlarge)",
       "hidden" : false
     },
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    }
   })
 
   grantees = ["${var.policy_name_prefix}Multi Node CPU Job"]
@@ -247,6 +213,10 @@ module "single_node_cpu_job_cluster_policy" {
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
+    "is_single_node" : {
+      "type" : "fixed",
+      "value" : true
+    },
     "driver_node_type_id" : {
       "type" : "regex",
       "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
@@ -257,20 +227,6 @@ module "single_node_cpu_job_cluster_policy" {
       "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    }
-    "spark_conf.spark.databricks.cluster.profile" : {
-      "type" : "unlimited",
-      "defaultValue" : "singleNode",
-      "hidden" : false
-    }
   })
 
   grantees = ["${var.policy_name_prefix}Single Node CPU Job"]
@@ -288,15 +244,13 @@ module "multi_node_gpu_cluster_policy" {
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "autoscale.max_workers" : {
       "type" : "range",
-      "minValue" : 1,
-      "maxValue" : 10,
-      "defaultValue" : 2
+      "defaultValue" : 10,
+      "maxValue" : 1000
     },
     "autoscale.min_workers" : {
       "type" : "range",
-      "minValue" : 1,
-      "maxValue" : 1000,
-      "defaultValue" : 1
+      "defaultValue" : 1,
+      "minValue" : 1
     },
     "autotermination_minutes" : {
       "type" : "fixed",
@@ -312,15 +266,6 @@ module "multi_node_gpu_cluster_policy" {
       "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
       "hidden" : false
     },
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    }
   })
   grantees = ["${var.policy_name_prefix}Multi Node GPU Compute"]
 }
@@ -336,7 +281,11 @@ module "single_node_gpu_policy" {
     "autotermination_minutes" : {
       "type" : "fixed",
       "value" : 120
-    }
+    },
+    "is_single_node" : {
+      "type" : "fixed",
+      "value" : true
+    },
     "driver_node_type_id" : {
       "type" : "regex",
       "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
@@ -347,20 +296,6 @@ module "single_node_gpu_policy" {
       "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
       "hidden" : false
     },
-    "spark_conf.spark.databricks.cluster.profile" : {
-      "type" : "unlimited",
-      "defaultValue" : "singleNode",
-      "hidden" : false
-    }
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    }
   })
   grantees = ["${var.policy_name_prefix}Single Node GPU Compute"]
 }
@@ -374,6 +309,16 @@ module "multi_node_gpu_job_cluster_policy" {
   policy_family_id        = local.default_policy_family_ids["job_compute"]
 
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
+    "autoscale.max_workers" : {
+      "type" : "range",
+      "defaultValue" : 10,
+      "maxValue" : 1000
+    },
+    "autoscale.min_workers" : {
+      "type" : "range",
+      "defaultValue" : 1,
+      "minValue" : 1
+    },
     "driver_node_type_id" : {
       "type" : "regex",
       "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
@@ -384,15 +329,6 @@ module "multi_node_gpu_job_cluster_policy" {
       "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
       "hidden" : false
     },
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    }
   })
 
   grantees = ["${var.policy_name_prefix}Multi Node GPU Job"]
@@ -417,20 +353,10 @@ module "single_node_gpu_job_cluster_policy" {
       "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
       "hidden" : false
     },
-    "spark_conf.spark.databricks.cluster.profile" : {
-      "type" : "unlimited",
-      "defaultValue" : "singleNode",
-      "hidden" : false
-    }
-    "aws_attributes.availability" : {
-      "type" : "allowlist",
-      "values" : [
-        "ON_DEMAND",
-        "SPOT_WITH_FALLBACK",
-        "SPOT"
-      ],
-      "hidden" : false
-    }
+    "is_single_node" : {
+      "type" : "fixed",
+      "value" : true
+    },
   })
 
   grantees = ["${var.policy_name_prefix}Single Node GPU Job"]
