@@ -245,7 +245,7 @@ module "multi_node_gpu_cluster_policy" {
     "autoscale.max_workers" : {
       "type" : "range",
       "defaultValue" : 10,
-      "maxValue" : 1000
+      "maxValue" : 200
     },
     "autoscale.min_workers" : {
       "type" : "range",
@@ -312,7 +312,7 @@ module "multi_node_gpu_job_cluster_policy" {
     "autoscale.max_workers" : {
       "type" : "range",
       "defaultValue" : 10,
-      "maxValue" : 1000
+      "maxValue" : 200
     },
     "autoscale.min_workers" : {
       "type" : "range",
