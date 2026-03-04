@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/chanzuckerberg/cztack/compare/databricks-default-cluster-policies-v0.1.1...databricks-default-cluster-policies-v0.2.0) (2026-03-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* ADI-50 - set up new dbx default compute policies ([#820](https://github.com/chanzuckerberg/cztack/issues/820))
+
+### Features
+
+* ADI-50 - set up new dbx default compute policies ([#820](https://github.com/chanzuckerberg/cztack/issues/820)) ([f38991b](https://github.com/chanzuckerberg/cztack/commit/f38991b0cf80e2adccc4baacbacfe105e492be95))
+
 ## [0.1.1](https://github.com/chanzuckerberg/cztack/compare/databricks-default-cluster-policies-v0.1.0...databricks-default-cluster-policies-v0.1.1) (2026-01-13)
 
 
