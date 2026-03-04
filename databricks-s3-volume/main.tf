@@ -104,7 +104,7 @@ resource "databricks_storage_credential" "this" {
   }
 
   comment   = "Managed by Terraform - access for ${each.key}"
-  read_only = var.read_only_volume
+  read_only = each.key == local.dbx_resource_storage_config["VOLUME"]["bucket_name"] ? var.read_only_volume : false
 }
 
 # upstream external location sometimes takes a moment to register
@@ -129,7 +129,7 @@ resource "databricks_external_location" "this" {
   url             = each.value
   credential_name = databricks_storage_credential.this[each.key].name
   comment         = "Managed by Terraform - access for ${each.key}"
-  read_only       = var.read_only_volume
+  read_only       = each.key == local.dbx_resource_storage_config["VOLUME"]["bucket_name"] ? var.read_only_volume : false
 }
 
 # New catalog, schema, and volume
