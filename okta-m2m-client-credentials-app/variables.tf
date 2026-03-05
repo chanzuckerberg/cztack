@@ -47,6 +47,7 @@ variable "additional_client_whitelist" {
   type = map(object({
     app_id               = string
     grant_type_whitelist = optional(list(string), ["client_credentials"])
+    scope_whitelist      = optional(list(string), ["*"])
   }))
   default = {}
 }

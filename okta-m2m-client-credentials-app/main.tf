@@ -51,10 +51,6 @@ resource "okta_app_oauth" "app" {
     e   = local.jwks.e
     n   = local.jwks.n
   }
-
-  lifecycle {
-    ignore_changes = [groups_claim]
-  }
 }
 
 resource "okta_auth_server" "auth_server" {
@@ -125,7 +121,7 @@ resource "okta_auth_server_policy_rule" "additional" {
   policy_id            = okta_auth_server_policy.additional[each.key].id
   name                 = "${each.key} policy rule"
   priority             = 1
-  scope_whitelist      = [for scope in okta_auth_server_scope.scopes : scope.name]
+  scope_whitelist      = each.value.scope_whitelist
   grant_type_whitelist = each.value.grant_type_whitelist
   group_whitelist      = ["EVERYONE"]
 }
