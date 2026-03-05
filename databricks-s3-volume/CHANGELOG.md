@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.3...databricks-s3-volume-v0.1.4) (2026-03-05)
+
+
+### Bug Fixes
+
+* updating catalog storage cred with read_only = false ([#822](https://github.com/chanzuckerberg/cztack/issues/822)) ([f606455](https://github.com/chanzuckerberg/cztack/commit/f6064550767c7cd9a9c8b71b18d7cc9fcc01037b))
+
 ## [0.1.3](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.2...databricks-s3-volume-v0.1.3) (2026-01-13)
 
 
