@@ -41,3 +41,12 @@ variable "create_kms_key" {
   type        = bool
   default     = true
 }
+
+variable "additional_client_whitelist" {
+  description = "Additional Okta app clients, each receiving its own auth server policy and policy rule."
+  type = map(object({
+    app_id               = string
+    grant_type_whitelist = optional(list(string), ["client_credentials"])
+  }))
+  default = {}
+}
