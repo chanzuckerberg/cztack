@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.111.0](https://github.com/chanzuckerberg/cztack/compare/v0.110.1...v0.111.0) (2026-03-05)
+
+
+### Features
+
+* allow for multiple clients to be added to authz servers ([#824](https://github.com/chanzuckerberg/cztack/issues/824)) ([66775d5](https://github.com/chanzuckerberg/cztack/commit/66775d5eb28f6c549d71d2d51d4c85e12c03b00c))
+
 ## [0.110.1](https://github.com/chanzuckerberg/cztack/compare/v0.110.0...v0.110.1) (2026-03-05)
 
 
