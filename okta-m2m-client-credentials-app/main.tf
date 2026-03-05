@@ -51,6 +51,10 @@ resource "okta_app_oauth" "app" {
     e   = local.jwks.e
     n   = local.jwks.n
   }
+
+  lifecycle {
+    ignore_changes = [groups_claim]
+  }
 }
 
 resource "okta_auth_server" "auth_server" {
