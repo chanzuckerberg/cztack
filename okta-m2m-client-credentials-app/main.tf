@@ -103,3 +103,25 @@ resource "okta_auth_server_policy_rule" "rule" {
   grant_type_whitelist = ["client_credentials"]
   group_whitelist      = ["EVERYONE"]
 }
+
+resource "okta_auth_server_policy" "additional" {
+  for_each = var.additional_client_whitelist
+
+  auth_server_id   = okta_auth_server.auth_server.id
+  priority         = 2 + index(keys(var.additional_client_whitelist), each.key)
+  name             = each.key
+  description      = "Allow ${each.key} access to this application."
+  client_whitelist = [each.value.app_id]
+}
+
+resource "okta_auth_server_policy_rule" "additional" {
+  for_each = var.additional_client_whitelist
+
+  auth_server_id       = okta_auth_server.auth_server.id
+  policy_id            = okta_auth_server_policy.additional[each.key].id
+  name                 = "${each.key} policy rule"
+  priority             = 1
+  scope_whitelist      = each.value.scope_whitelist
+  grant_type_whitelist = each.value.grant_type_whitelist
+  group_whitelist      = ["EVERYONE"]
+}
