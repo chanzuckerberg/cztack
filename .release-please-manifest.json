@@ -68,7 +68,7 @@
   "databricks-workspace-e2": "0.2.2",
   "github-webhooks-to-s3": "0.1.0",
   "kms-okta-app": "0.1.0",
-  "okta-m2m-client-credentials-app": "0.2.0",
+  "okta-m2m-client-credentials-app": "0.2.1",
   "snowflake-account-grant-all": "0.1.1",
   "snowflake-database-grant-all": "0.1.1",
   "snowflake-external-table-grant-all": "0.1.0",
@@ -92,5 +92,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.111.0"
+  ".": "0.111.1"
 }

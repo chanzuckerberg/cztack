@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.111.1](https://github.com/chanzuckerberg/cztack/compare/v0.111.0...v0.111.1) (2026-03-11)
+
+
+### Misc
+
+* add kms key to the module output ([#827](https://github.com/chanzuckerberg/cztack/issues/827)) ([9a4039a](https://github.com/chanzuckerberg/cztack/commit/9a4039a779b63286b4ce4adb8e2c84f003980cc7))
+
 ## [0.111.0](https://github.com/chanzuckerberg/cztack/compare/v0.110.1...v0.111.0) (2026-03-05)
 
 
