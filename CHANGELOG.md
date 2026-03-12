@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.111.3](https://github.com/chanzuckerberg/cztack/compare/v0.111.2...v0.111.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* Upgrade EFS CSI driver to fix taint removal race condition ([#830](https://github.com/chanzuckerberg/cztack/issues/830)) ([3a3bb32](https://github.com/chanzuckerberg/cztack/commit/3a3bb321e4b21630212e68404edb01a28b3ca589))
+
 ## [0.111.2](https://github.com/chanzuckerberg/cztack/compare/v0.111.1...v0.111.2) (2026-03-12)
 
 
