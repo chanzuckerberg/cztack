@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.8.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.0...aws-eks-cluster-v8.8.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* create EC2 Spot service-linked role for Karpenter ([#826](https://github.com/chanzuckerberg/cztack/issues/826)) ([047b731](https://github.com/chanzuckerberg/cztack/commit/047b7312a326dcf3360b00e385f54bec0a992d2f))
+
 ## [8.8.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.7.0...aws-eks-cluster-v8.8.0) (2026-02-10)
 
 
