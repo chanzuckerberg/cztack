@@ -1,3 +1,12 @@
+data "aws_iam_roles" "spot_slr" {
+  path_prefix = "/aws-service-role/spot.amazonaws.com/"
+}
+
+resource "aws_iam_service_linked_role" "spot" {
+  count            = length(data.aws_iam_roles.spot_slr.arns) == 0 ? 1 : 0
+  aws_service_name = "spot.amazonaws.com"
+}
+
 locals {
   default_nodepool_spec = {
     "disruption" = {
@@ -117,7 +126,8 @@ resource "kubectl_manifest" "karpenter_nodepool" {
   })
   force_new = true
   depends_on = [
-    module.karpenter_controller
+    module.karpenter_controller,
+    aws_iam_service_linked_role.spot,
   ]
   lifecycle {
     create_before_destroy = true
