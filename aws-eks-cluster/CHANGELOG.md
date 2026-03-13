@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.8.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.1...aws-eks-cluster-v8.8.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* Upgrade EFS CSI driver to fix taint removal race condition ([#830](https://github.com/chanzuckerberg/cztack/issues/830)) ([3a3bb32](https://github.com/chanzuckerberg/cztack/commit/3a3bb321e4b21630212e68404edb01a28b3ca589))
+
 ## [8.8.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.0...aws-eks-cluster-v8.8.1) (2026-03-12)
 
 
