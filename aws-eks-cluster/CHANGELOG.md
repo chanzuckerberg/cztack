@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.8.3](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.2...aws-eks-cluster-v8.8.3) (2026-03-13)
+
+
+### Bug Fixes
+
+* unconditional Spot SLR to prevent destroy loop ([#832](https://github.com/chanzuckerberg/cztack/issues/832)) ([2b90f66](https://github.com/chanzuckerberg/cztack/commit/2b90f66898db6615650b64a48881bb9aeb76cb2f))
+
 ## [8.8.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.1...aws-eks-cluster-v8.8.2) (2026-03-12)
 
 
