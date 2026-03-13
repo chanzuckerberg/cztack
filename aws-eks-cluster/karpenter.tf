@@ -2,8 +2,18 @@ data "aws_iam_roles" "spot_slr" {
   path_prefix = "/aws-service-role/spot.amazonaws.com/"
 }
 
+moved {
+  from = aws_iam_service_linked_role.spot[0]
+  to   = aws_iam_service_linked_role.spot
+}
+
+import {
+  for_each = length(data.aws_iam_roles.spot_slr.arns) > 0 ? toset(["this"]) : toset([])
+  to       = aws_iam_service_linked_role.spot
+  id       = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/spot.amazonaws.com/AWSServiceRoleForEC2Spot"
+}
+
 resource "aws_iam_service_linked_role" "spot" {
-  count            = length(data.aws_iam_roles.spot_slr.arns) == 0 ? 1 : 0
   aws_service_name = "spot.amazonaws.com"
 }
 
