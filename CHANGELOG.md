@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.111.4](https://github.com/chanzuckerberg/cztack/compare/v0.111.3...v0.111.4) (2026-03-13)
+
+
+### Bug Fixes
+
+* unconditional Spot SLR to prevent destroy loop ([#832](https://github.com/chanzuckerberg/cztack/issues/832)) ([2b90f66](https://github.com/chanzuckerberg/cztack/commit/2b90f66898db6615650b64a48881bb9aeb76cb2f))
+
 ## [0.111.3](https://github.com/chanzuckerberg/cztack/compare/v0.111.2...v0.111.3) (2026-03-12)
 
 
