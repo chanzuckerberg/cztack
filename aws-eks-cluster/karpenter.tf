@@ -1,19 +1,25 @@
+removed {
+  from = aws_iam_service_linked_role.spot
+
+  lifecycle {
+    destroy = false
+  }
+}
+
 data "aws_iam_roles" "spot_slr" {
   path_prefix = "/aws-service-role/spot.amazonaws.com/"
 }
 
-moved {
-  from = aws_iam_service_linked_role.spot[0]
-  to   = aws_iam_service_linked_role.spot
+resource "terraform_data" "spot_slr_needed" {
+  input = length(data.aws_iam_roles.spot_slr.arns) == 0
+
+  lifecycle {
+    ignore_changes = [input]
+  }
 }
 
-import {
-  for_each = length(data.aws_iam_roles.spot_slr.arns) > 0 ? toset(["this"]) : toset([])
-  to       = aws_iam_service_linked_role.spot
-  id       = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/spot.amazonaws.com/AWSServiceRoleForEC2Spot"
-}
-
-resource "aws_iam_service_linked_role" "spot" {
+resource "aws_iam_service_linked_role" "ec2_spot" {
+  count            = terraform_data.spot_slr_needed.output ? 1 : 0
   aws_service_name = "spot.amazonaws.com"
 }
 
@@ -137,7 +143,7 @@ resource "kubectl_manifest" "karpenter_nodepool" {
   force_new = true
   depends_on = [
     module.karpenter_controller,
-    aws_iam_service_linked_role.spot,
+    aws_iam_service_linked_role.ec2_spot,
   ]
   lifecycle {
     create_before_destroy = true
