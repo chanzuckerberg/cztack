@@ -10,17 +10,11 @@ data "aws_iam_roles" "spot_slr" {
   path_prefix = "/aws-service-role/spot.amazonaws.com/"
 }
 
-resource "terraform_data" "spot_slr_needed" {
-  input = length(data.aws_iam_roles.spot_slr.arns) == 0
-
-  lifecycle {
-    ignore_changes = [input]
+check "spot_slr_exists" {
+  assert {
+    condition     = length(data.aws_iam_roles.spot_slr.arns) > 0
+    error_message = "AWSServiceRoleForEC2Spot does not exist. Create it with: aws iam create-service-linked-role --aws-service-name spot.amazonaws.com"
   }
-}
-
-resource "aws_iam_service_linked_role" "ec2_spot" {
-  count            = terraform_data.spot_slr_needed.output ? 1 : 0
-  aws_service_name = "spot.amazonaws.com"
 }
 
 locals {
@@ -143,7 +137,6 @@ resource "kubectl_manifest" "karpenter_nodepool" {
   force_new = true
   depends_on = [
     module.karpenter_controller,
-    aws_iam_service_linked_role.ec2_spot,
   ]
   lifecycle {
     create_before_destroy = true
