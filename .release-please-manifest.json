@@ -92,5 +92,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.111.4"
+  ".": "0.111.5"
 }
