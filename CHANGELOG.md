@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.111.4](https://github.com/chanzuckerberg/cztack/compare/v0.111.3...v0.111.4) (2026-03-13)
+
+
+### Bug Fixes
+
+* unconditional Spot SLR to prevent destroy loop ([#832](https://github.com/chanzuckerberg/cztack/issues/832)) ([2b90f66](https://github.com/chanzuckerberg/cztack/commit/2b90f66898db6615650b64a48881bb9aeb76cb2f))
+
+## [0.111.3](https://github.com/chanzuckerberg/cztack/compare/v0.111.2...v0.111.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* Upgrade EFS CSI driver to fix taint removal race condition ([#830](https://github.com/chanzuckerberg/cztack/issues/830)) ([3a3bb32](https://github.com/chanzuckerberg/cztack/commit/3a3bb321e4b21630212e68404edb01a28b3ca589))
+
+## [0.111.2](https://github.com/chanzuckerberg/cztack/compare/v0.111.1...v0.111.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* create EC2 Spot service-linked role for Karpenter ([#826](https://github.com/chanzuckerberg/cztack/issues/826)) ([047b731](https://github.com/chanzuckerberg/cztack/commit/047b7312a326dcf3360b00e385f54bec0a992d2f))
+
+## [0.111.1](https://github.com/chanzuckerberg/cztack/compare/v0.111.0...v0.111.1) (2026-03-11)
+
+
+### Misc
+
+* add kms key to the module output ([#827](https://github.com/chanzuckerberg/cztack/issues/827)) ([9a4039a](https://github.com/chanzuckerberg/cztack/commit/9a4039a779b63286b4ce4adb8e2c84f003980cc7))
+
 ## [0.111.0](https://github.com/chanzuckerberg/cztack/compare/v0.110.1...v0.111.0) (2026-03-05)
 
 

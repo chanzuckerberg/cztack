@@ -209,7 +209,10 @@ module "other_addons" {
   enable_fargate_fluentbit              = var.addons.enable_fargate_fluentbit
   enable_ingress_nginx                  = var.addons.enable_ingress_nginx
   enable_kube_prometheus_stack          = var.addons.enable_kube_prometheus_stack // conflicts with rancher monitoring (prometheus-operator)
-  enable_aws_efs_csi_driver             = var.addons.enable_aws_efs_csi_driver
+  enable_aws_efs_csi_driver = var.addons.enable_aws_efs_csi_driver
+  aws_efs_csi_driver = {
+    chart_version = "3.1.2"
+  }
 
   cert_manager_route53_hosted_zone_arns = var.addons.cert_manager_route53_hosted_zone_arns
   cert_manager                          = var.addons.cert_manager_config
