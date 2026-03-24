@@ -196,7 +196,7 @@ module "multi_node_cpu_job_cluster_policy" {
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([rcizm]+[3-8`]+[dn]*\\.[0-32]{0,1}xlarge)",
+      "pattern" : "([rcizm]+[3-8]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
   })
@@ -258,12 +258,12 @@ module "multi_node_gpu_cluster_policy" {
     },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
   })
@@ -288,12 +288,12 @@ module "single_node_gpu_policy" {
     },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
   })
@@ -321,12 +321,12 @@ module "multi_node_gpu_job_cluster_policy" {
     },
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
   })
@@ -345,12 +345,12 @@ module "single_node_gpu_job_cluster_policy" {
   policy_overrides = merge(local.logging_override, local.addtnl_global_overrides, {
     "driver_node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "node_type_id" : {
       "type" : "regex",
-      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-48]{0,1}xlarge)",
+      "pattern" : "([gp]+[2-6]+[idn]*\\.[0-9]{0,2}xlarge)",
       "hidden" : false
     },
     "is_single_node" : {
