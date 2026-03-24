@@ -125,11 +125,13 @@ resource "databricks_external_location" "this" {
     module.databricks_bucket,
   ]
 
-  name            = databricks_storage_credential.this[each.key].name
-  url             = each.value
-  credential_name = databricks_storage_credential.this[each.key].name
-  comment         = "Managed by Terraform - access for ${each.key}"
-  read_only       = each.key == local.dbx_resource_storage_config["VOLUME"]["bucket_name"] ? var.read_only_volume : false
+  name               = databricks_storage_credential.this[each.key].name
+  url                = each.value
+  credential_name    = databricks_storage_credential.this[each.key].name
+  comment            = "Managed by Terraform - access for ${each.key}"
+  read_only          = each.key == local.dbx_resource_storage_config["VOLUME"]["bucket_name"] ? var.read_only_volume : false
+  enable_file_events = var.enable_file_events
+  force_update       = var.force_update
 }
 
 # New catalog, schema, and volume

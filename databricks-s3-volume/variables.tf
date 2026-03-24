@@ -211,6 +211,18 @@ variable "read_only_volume" {
   default     = false
 }
 
+variable "enable_file_events" {
+  description = "(Optional) Flag to enable file events on the external locations"
+  type        = bool
+  default     = false
+}
+
+variable "force_update" {
+  description = "(Optional) Flag to force update the external locations"
+  type        = bool
+  default     = false
+}
+
 variable "override_unity_aws_role_name" {
   description = "(Optional) Override the default Unity Catalog AWS IAM role name used when creating storage credentials"
   type        = string
