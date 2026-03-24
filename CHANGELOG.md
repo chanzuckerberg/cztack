@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.111.5](https://github.com/chanzuckerberg/cztack/compare/v0.111.4...v0.111.5) (2026-03-24)
+
+
+### Bug Fixes
+
+* dbx default cluster compute policies regex for machines ([#836](https://github.com/chanzuckerberg/cztack/issues/836)) ([3f4ec1b](https://github.com/chanzuckerberg/cztack/commit/3f4ec1bfec75a874ac5cd4b0c2da177e0cb5bef6))
+
+
+### Misc
+
+* **deps:** bump google.golang.org/grpc from 1.56.3 to 1.79.3 ([#834](https://github.com/chanzuckerberg/cztack/issues/834)) ([bcdac3d](https://github.com/chanzuckerberg/cztack/commit/bcdac3d944aeaf6035d1fef484e324ebd69cfd2b))
+
 ## [0.111.4](https://github.com/chanzuckerberg/cztack/compare/v0.111.3...v0.111.4) (2026-03-13)
 
 
