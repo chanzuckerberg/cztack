@@ -131,7 +131,6 @@ resource "databricks_external_location" "this" {
   comment            = "Managed by Terraform - access for ${each.key}"
   read_only          = each.key == local.dbx_resource_storage_config["VOLUME"]["bucket_name"] ? var.read_only_volume : false
   enable_file_events = var.enable_file_events
-  force_update       = var.force_update
 }
 
 # New catalog, schema, and volume
