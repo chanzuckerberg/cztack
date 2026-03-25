@@ -40,7 +40,7 @@ resource "databricks_mws_credentials" "databricks" {
 resource "databricks_mws_workspaces" "databricks" {
   account_id               = var.databricks_external_id
   workspace_name           = local.name
-  deployment_name          = var.set_deployment_name ? (var.deployment_name != null ? var.deployment_name : local.name)
+  deployment_name          = var.set_deployment_name ? (var.deployment_name != null ? var.deployment_name : local.name) : null
   aws_region               = data.aws_region.current.name
   credentials_id           = databricks_mws_credentials.databricks.credentials_id
   storage_configuration_id = databricks_mws_storage_configurations.databricks.storage_configuration_id
