@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.112.0](https://github.com/chanzuckerberg/cztack/compare/v0.111.5...v0.112.0) (2026-03-26)
+
+
+### Features
+
+* added enable_file_events flag ([#837](https://github.com/chanzuckerberg/cztack/issues/837)) ([e4753f6](https://github.com/chanzuckerberg/cztack/commit/e4753f6d89b8a67d41d8d6412e58a42487dc5b32))
+
 ## [0.111.5](https://github.com/chanzuckerberg/cztack/compare/v0.111.4...v0.111.5) (2026-03-24)
 
 
