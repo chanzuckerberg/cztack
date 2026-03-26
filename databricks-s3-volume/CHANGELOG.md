@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.4...databricks-s3-volume-v0.2.0) (2026-03-26)
+
+
+### Features
+
+* added enable_file_events flag ([#837](https://github.com/chanzuckerberg/cztack/issues/837)) ([e4753f6](https://github.com/chanzuckerberg/cztack/commit/e4753f6d89b8a67d41d8d6412e58a42487dc5b32))
+
 ## [0.1.4](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.3...databricks-s3-volume-v0.1.4) (2026-03-05)
 
 
