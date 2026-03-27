@@ -1,18 +1,36 @@
+version: "2"
 run:
-  timeout: 5m
   tests: true
-issues:
-  max-same-issues: 0
-
 linters:
   enable:
-    - gofmt
-    - whitespace
-    - unparam
     - forbidigo
     - gocritic
-
+    - unparam
+    - whitespace
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+issues:
+  max-same-issues: 0
 output:
   formats:
-    - format: tab
+    tab:
+      path: stdout
   show-stats: true
+formatters:
+  enable:
+    - gofmt
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

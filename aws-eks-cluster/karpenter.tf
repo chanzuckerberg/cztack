@@ -1,3 +1,7 @@
+resource "aws_iam_service_linked_role" "ec2_spot" {
+  aws_service_name = "spot.amazonaws.com"
+}
+
 locals {
   default_nodepool_spec = {
     "disruption" = {
@@ -117,7 +121,8 @@ resource "kubectl_manifest" "karpenter_nodepool" {
   })
   force_new = true
   depends_on = [
-    module.karpenter_controller
+    module.karpenter_controller,
+    aws_iam_service_linked_role.ec2_spot,
   ]
   lifecycle {
     create_before_destroy = true
