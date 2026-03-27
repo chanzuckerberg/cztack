@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/chanzuckerberg/cztack/compare/databricks-workspace-e2-v0.2.2...databricks-workspace-e2-v0.2.3) (2026-03-27)
+
+
+### Bug Fixes
+
+* ADI-101 - make deployment_name var in dbx workspace configurable ([#838](https://github.com/chanzuckerberg/cztack/issues/838)) ([4e18435](https://github.com/chanzuckerberg/cztack/commit/4e1843510bec09f0c39e311d3387bba84c83c9ff))
+
 ## [0.2.2](https://github.com/chanzuckerberg/cztack/compare/databricks-workspace-e2-v0.2.1...databricks-workspace-e2-v0.2.2) (2026-01-13)
 
 
