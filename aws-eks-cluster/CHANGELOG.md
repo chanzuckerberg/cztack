@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.9.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.3...aws-eks-cluster-v8.9.0) (2026-03-27)
+
+
+### Features
+
+* expose ESO IAM role arn from aws-eks-cluster module ([#841](https://github.com/chanzuckerberg/cztack/issues/841)) ([abc94d0](https://github.com/chanzuckerberg/cztack/commit/abc94d0f09f77a59d8bef20d48754f521cecbc97))
+
 ## [8.8.3](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.2...aws-eks-cluster-v8.8.3) (2026-03-13)
 
 

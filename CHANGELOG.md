@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.113.0](https://github.com/chanzuckerberg/cztack/compare/v0.112.0...v0.113.0) (2026-03-27)
+
+
+### Features
+
+* expose ESO IAM role arn from aws-eks-cluster module ([#841](https://github.com/chanzuckerberg/cztack/issues/841)) ([abc94d0](https://github.com/chanzuckerberg/cztack/commit/abc94d0f09f77a59d8bef20d48754f521cecbc97))
+
 ## [0.112.0](https://github.com/chanzuckerberg/cztack/compare/v0.111.5...v0.112.0) (2026-03-26)
 
 
