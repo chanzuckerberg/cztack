@@ -92,3 +92,8 @@ output "argocd_root_role_arn" {
   description = "ARN of the ArgoCD service account IAM role"
   value       = var.addons.enable_argocd ? aws_iam_role.argocd_sa_role[0].arn : null
 }
+
+output "external_secrets_role_arn" {
+  description = "ARN of the IAM role used by the External Secrets Operator service account"
+  value       = var.addons.enable_external_secrets ? module.other_addons.external_secrets.iam_role_arn : null
+}
