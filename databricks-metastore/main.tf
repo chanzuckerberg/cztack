@@ -31,16 +31,6 @@ resource "databricks_grants" "admin" {
   }
 }
 
-resource "databricks_grants" "poweruser" {
-  for_each  = toset(var.powerusers)
-  provider  = databricks.workspace
-  metastore = databricks_metastore.this.id
-  grant {
-    principal  = each.value
-    privileges = ["CREATE_CATALOG", "CREATE_SHARE"]
-  }
-}
-
 resource "databricks_metastore_data_access" "metastore_data_access" {
   provider     = databricks.workspace
   depends_on   = [databricks_metastore.this]
@@ -48,14 +38,4 @@ resource "databricks_metastore_data_access" "metastore_data_access" {
   name         = aws_iam_role.metastore_access.name
   aws_iam_role { role_arn = aws_iam_role.metastore_access.arn }
   is_default = true
-}
-
-resource "databricks_catalog" "sandbox" {
-  provider     = databricks.workspace
-  metastore_id = databricks_metastore.this.id
-  name         = "sandbox"
-  comment      = "this catalog is managed by terraform"
-  properties = {
-    purpose = "testing"
-  }
 }
