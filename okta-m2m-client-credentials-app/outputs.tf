@@ -11,3 +11,8 @@ output "app" {
     client_id = okta_app_oauth.app.client_id
   }
 }
+
+output "kms_key_arn" {
+  description = "The ARN of the KMS key used for signing"
+  value       = var.create_kms_key ? aws_kms_key.service_user[0].arn : null
+}

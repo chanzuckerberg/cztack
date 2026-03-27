@@ -1,5 +1,33 @@
 # Changelog
 
+## [8.9.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.3...aws-eks-cluster-v8.9.0) (2026-03-27)
+
+
+### Features
+
+* expose ESO IAM role arn from aws-eks-cluster module ([#841](https://github.com/chanzuckerberg/cztack/issues/841)) ([abc94d0](https://github.com/chanzuckerberg/cztack/commit/abc94d0f09f77a59d8bef20d48754f521cecbc97))
+
+## [8.8.3](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.2...aws-eks-cluster-v8.8.3) (2026-03-13)
+
+
+### Bug Fixes
+
+* unconditional Spot SLR to prevent destroy loop ([#832](https://github.com/chanzuckerberg/cztack/issues/832)) ([2b90f66](https://github.com/chanzuckerberg/cztack/commit/2b90f66898db6615650b64a48881bb9aeb76cb2f))
+
+## [8.8.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.1...aws-eks-cluster-v8.8.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* Upgrade EFS CSI driver to fix taint removal race condition ([#830](https://github.com/chanzuckerberg/cztack/issues/830)) ([3a3bb32](https://github.com/chanzuckerberg/cztack/commit/3a3bb321e4b21630212e68404edb01a28b3ca589))
+
+## [8.8.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.0...aws-eks-cluster-v8.8.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* create EC2 Spot service-linked role for Karpenter ([#826](https://github.com/chanzuckerberg/cztack/issues/826)) ([047b731](https://github.com/chanzuckerberg/cztack/commit/047b7312a326dcf3360b00e385f54bec0a992d2f))
+
 ## [8.8.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.7.0...aws-eks-cluster-v8.8.0) (2026-02-10)
 
 
