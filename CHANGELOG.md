@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.113.1](https://github.com/chanzuckerberg/cztack/compare/v0.113.0...v0.113.1) (2026-03-27)
+
+
+### Bug Fixes
+
+* ADI-101 - make deployment_name var in dbx workspace configurable ([#838](https://github.com/chanzuckerberg/cztack/issues/838)) ([4e18435](https://github.com/chanzuckerberg/cztack/commit/4e1843510bec09f0c39e311d3387bba84c83c9ff))
+* remove cruft from metastore module ([#840](https://github.com/chanzuckerberg/cztack/issues/840)) ([da5bfe5](https://github.com/chanzuckerberg/cztack/commit/da5bfe59f4650fbd259b64777fa773f4fdb042db))
+
 ## [0.113.0](https://github.com/chanzuckerberg/cztack/compare/v0.112.0...v0.113.0) (2026-03-27)
 
 
