@@ -74,3 +74,15 @@ variable "workspace_admins" {
   default     = []
   description = "List of principal IDs to be added to the workspace admins group."
 }
+
+variable "deployment_name" {
+  type        = string
+  default     = null
+  description = "Deployment name for the workspace. If not set, the workspace name will be used. Require set_deployment_name to be true."
+}
+
+variable "set_deployment_name" {
+  type        = bool
+  default     = true
+  description = "Whether to set deployment_name on the workspace. If true, deployment_name will be set to the workspace name."
+}
