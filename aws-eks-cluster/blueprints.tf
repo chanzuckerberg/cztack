@@ -11,6 +11,15 @@ locals {
   exclude_list = distinct(concat(local.default_exclude_list, var.addons.fluentbit_exclude_paths))
 }
 
+data "aws_iam_policy_document" "karpenter_odcr" {
+  count = local.karpenter_odcr_enabled ? 1 : 0
+
+  statement {
+    actions   = ["ec2:DescribeCapacityReservations"]
+    resources = ["*"]
+  }
+}
+
 data "aws_ecrpublic_authorization_token" "token" {
   provider = aws.us-east-1
 }
@@ -52,40 +61,52 @@ module "karpenter_controller" {
   karpenter = merge(var.addons.karpenter_config, {
     repository_username = data.aws_ecrpublic_authorization_token.token.user_name
     repository_password = data.aws_ecrpublic_authorization_token.token.password
-    set = [
-      {
-        name  = "settings.featureGates.spotToSpotConsolidation"
-        value = "true"
-      },
-      {
-        name  = "settings.featureGates.driftEnabled"
-        value = "true"
-      },
-      {
-        name  = "controller.resources.requests.cpu"
-        value = "1"
-      },
-      {
-        name  = "controller.resources.requests.memory"
-        value = "4Gi"
-      },
-      {
-        name  = "controller.resources.limits.cpu"
-        value = "2"
-      },
-      {
-        name  = "controller.resources.limits.memory"
-        value = "4Gi"
-      },
-      {
-        name  = "webhook.enabled"
-        value = "false"
-      },
-      {
-        name  = "dnsPolicy"
-        value = "Default"
-      },
-    ]
+    source_policy_documents = concat(
+      try(var.addons.karpenter_config.source_policy_documents, []),
+      local.karpenter_odcr_enabled ? [data.aws_iam_policy_document.karpenter_odcr[0].json] : []
+    )
+    set = concat(
+      [
+        {
+          name  = "settings.featureGates.spotToSpotConsolidation"
+          value = "true"
+        },
+        {
+          name  = "settings.featureGates.driftEnabled"
+          value = "true"
+        },
+        {
+          name  = "controller.resources.requests.cpu"
+          value = "1"
+        },
+        {
+          name  = "controller.resources.requests.memory"
+          value = "4Gi"
+        },
+        {
+          name  = "controller.resources.limits.cpu"
+          value = "2"
+        },
+        {
+          name  = "controller.resources.limits.memory"
+          value = "4Gi"
+        },
+        {
+          name  = "webhook.enabled"
+          value = "false"
+        },
+        {
+          name  = "dnsPolicy"
+          value = "Default"
+        },
+      ],
+      local.karpenter_odcr_enabled ? [
+        {
+          name  = "settings.featureGates.reservedCapacity"
+          value = "true"
+        }
+      ] : []
+    )
   })
 
   karpenter_node = {
@@ -104,7 +125,8 @@ resource "time_sleep" "karpenter_ready" {
   depends_on = [
     module.karpenter_controller,
     kubectl_manifest.karpenter_nodepool,
-    kubectl_manifest.karpenter_node_class
+    kubectl_manifest.karpenter_node_class,
+    kubectl_manifest.karpenter_node_class_capacity_reservation,
   ]
   create_duration = "30s"
 }
@@ -209,7 +231,7 @@ module "other_addons" {
   enable_fargate_fluentbit              = var.addons.enable_fargate_fluentbit
   enable_ingress_nginx                  = var.addons.enable_ingress_nginx
   enable_kube_prometheus_stack          = var.addons.enable_kube_prometheus_stack // conflicts with rancher monitoring (prometheus-operator)
-  enable_aws_efs_csi_driver = var.addons.enable_aws_efs_csi_driver
+  enable_aws_efs_csi_driver             = var.addons.enable_aws_efs_csi_driver
   aws_efs_csi_driver = {
     chart_version = "3.1.2"
   }

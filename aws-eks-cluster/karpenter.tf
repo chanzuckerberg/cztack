@@ -3,6 +3,39 @@ resource "aws_iam_service_linked_role" "ec2_spot" {
 }
 
 locals {
+  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.karpenter_capacity_reservation_selector_terms, null) != null && length(var.addons.karpenter_capacity_reservation_selector_terms) > 0
+
+  karpenter_capacity_reservation_ec2_node_class_name = try(var.addons.karpenter_capacity_reservation_ec2_node_class_name, "odcr")
+
+  karpenter_ec2_node_class_spec = {
+    "amiFamily" = "AL2023"
+    "amiSelectorTerms" = [
+      { "alias" : "al2023@latest" }
+    ]
+    "kubelet" = {
+      "systemReserved" : {
+        "cpu"    = "100m"
+        "memory" = "100Mi"
+      }
+      "podsPerCore" = 14
+    }
+    "blockDeviceMappings" = [
+      {
+        "deviceName" = "/dev/xvda"
+        "ebs" = {
+          "deleteOnTermination" = true
+          "encrypted"           = true
+          "volumeSize"          = "${var.docker_storage_size}Gi"
+          "volumeType"          = "gp3"
+        }
+      },
+    ]
+    "role"                       = aws_iam_role.karpenter_node.name
+    "securityGroupSelectorTerms" = [{ tags = local.karpenter_discovery }, { tags = local.karpenter_discovery_per_cluster }]
+    "subnetSelectorTerms"        = [{ tags = local.karpenter_discovery }, { tags = local.karpenter_discovery_per_cluster }]
+    "tags"                       = merge(var.tags, { "managedBy" = "karpenter" })
+  }
+
   default_nodepool_spec = {
     "disruption" = {
       "consolidationPolicy" = "WhenEmptyOrUnderutilized"
@@ -91,7 +124,7 @@ locals {
     }
   }
 
-  custom_nodepool_spec     = try(var.addons.karpenter_nodepool_spec, null)
+  custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 }
 
@@ -137,34 +170,30 @@ resource "kubectl_manifest" "karpenter_node_class" {
     "metadata" = {
       "name" = "default"
     }
-    "spec" = {
-      "amiFamily" = "AL2023"
-      "amiSelectorTerms" = [
-        { "alias" : "al2023@latest" }
-      ]
-      "kubelet" = {
-        "systemReserved" : {
-          "cpu"    = "100m"
-          "memory" = "100Mi"
-        }
-        "podsPerCore" = 14
-      }
-      "blockDeviceMappings" = [
-        {
-          "deviceName" = "/dev/xvda"
-          "ebs" = {
-            "deleteOnTermination" = true
-            "encrypted"           = true
-            "volumeSize"          = "${var.docker_storage_size}Gi"
-            "volumeType"          = "gp3"
-          }
-        },
-      ]
-      "role"                       = aws_iam_role.karpenter_node.name
-      "securityGroupSelectorTerms" = [{ tags = local.karpenter_discovery }, { tags = local.karpenter_discovery_per_cluster }]
-      "subnetSelectorTerms"        = [{ tags = local.karpenter_discovery }, { tags = local.karpenter_discovery_per_cluster }]
-      "tags"                       = merge(var.tags, { "managedBy" = "karpenter" })
+    "spec" = local.karpenter_ec2_node_class_spec
+  })
+  depends_on = [
+    module.karpenter_controller
+  ]
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "kubectl_manifest" "karpenter_node_class_capacity_reservation" {
+  count = local.karpenter_odcr_enabled ? 1 : 0
+  yaml_body = yamlencode({
+    "apiVersion" = "karpenter.k8s.aws/v1"
+    "kind"       = "EC2NodeClass"
+    "metadata" = {
+      "name" = local.karpenter_capacity_reservation_ec2_node_class_name
     }
+    "spec" = merge(
+      local.karpenter_ec2_node_class_spec,
+      {
+        "capacityReservationSelectorTerms" = var.addons.karpenter_capacity_reservation_selector_terms
+      }
+    )
   })
   depends_on = [
     module.karpenter_controller
