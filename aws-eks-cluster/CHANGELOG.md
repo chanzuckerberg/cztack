@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.10.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.9.0...aws-eks-cluster-v8.10.0) (2026-04-03)
+
+
+### Features
+
+* Add karpenter support for capacity reservations ([#844](https://github.com/chanzuckerberg/cztack/issues/844)) ([b492695](https://github.com/chanzuckerberg/cztack/commit/b492695bc61d3d3834cdab27006153929c7cce88))
+
 ## [8.9.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.8.3...aws-eks-cluster-v8.9.0) (2026-03-27)
 
 

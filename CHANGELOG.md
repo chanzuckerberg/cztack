@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.114.0](https://github.com/chanzuckerberg/cztack/compare/v0.113.1...v0.114.0) (2026-04-03)
+
+
+### Features
+
+* Add karpenter support for capacity reservations ([#844](https://github.com/chanzuckerberg/cztack/issues/844)) ([b492695](https://github.com/chanzuckerberg/cztack/commit/b492695bc61d3d3834cdab27006153929c7cce88))
+
+
+### Misc
+
+* **deps:** bump github.com/go-jose/go-jose/v4 from 4.1.3 to 4.1.4 ([#845](https://github.com/chanzuckerberg/cztack/issues/845)) ([7bf8200](https://github.com/chanzuckerberg/cztack/commit/7bf8200b93dd39ed18b383c611e0defe479bde44))
+
 ## [0.113.1](https://github.com/chanzuckerberg/cztack/compare/v0.113.0...v0.113.1) (2026-03-27)
 
 
