@@ -3,7 +3,7 @@ resource "aws_iam_service_linked_role" "ec2_spot" {
 }
 
 locals {
-  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.karpenter_capacity_reservation_selector_terms, null) != null && length(var.addons.karpenter_capacity_reservation_selector_terms) > 0
+  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.karpenter_capacity_reservation_selector_terms, null) != null
 
   karpenter_capacity_reservation_ec2_node_class_name = try(var.addons.karpenter_capacity_reservation_ec2_node_class_name, "odcr")
 
@@ -124,7 +124,7 @@ locals {
     }
   }
 
-  custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
+  custom_nodepool_spec     = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 }
 
