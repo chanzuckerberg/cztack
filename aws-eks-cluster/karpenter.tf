@@ -3,9 +3,9 @@ resource "aws_iam_service_linked_role" "ec2_spot" {
 }
 
 locals {
-  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.karpenter_capacity_reservation_selector_terms, null) != null
+  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.karpenter_capacity_reservation, null) != null
 
-  karpenter_capacity_reservation_ec2_node_class_name = try(var.addons.karpenter_capacity_reservation_ec2_node_class_name, "odcr")
+  karpenter_capacity_reservation_ec2_node_class_name = try(var.addons.karpenter_capacity_reservation.ec2_node_class_name, "odcr")
 
   karpenter_ec2_node_class_spec = {
     "amiFamily" = "AL2023"
@@ -191,7 +191,7 @@ resource "kubectl_manifest" "karpenter_node_class_capacity_reservation" {
     "spec" = merge(
       local.karpenter_ec2_node_class_spec,
       {
-        "capacityReservationSelectorTerms" = var.addons.karpenter_capacity_reservation_selector_terms
+        "capacityReservationSelectorTerms" = var.addons.karpenter_capacity_reservation.selector_terms
       }
     )
   })

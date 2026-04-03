@@ -238,9 +238,11 @@ variable "addons" {
     karpenter_config = optional(any, {
       chart_version = "1.6.1"
     })
-    karpenter_nodepool_spec                            = optional(any, null)
-    karpenter_capacity_reservation_selector_terms      = optional(list(any), null)
-    karpenter_capacity_reservation_ec2_node_class_name = optional(string, "odcr")
+    karpenter_nodepool_spec = optional(any, null)
+    karpenter_capacity_reservation = optional(object({
+      ec2_node_class_name = optional(string, "odcr")
+      selector_terms      = list(any)
+    }), null)
     external_dns_config = optional(object({
       chart_version = optional(string, "1.18.0")
       image_tag     = optional(string, "v0.19.0")
