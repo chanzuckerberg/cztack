@@ -3,7 +3,7 @@ resource "aws_iam_service_linked_role" "ec2_spot" {
 }
 
 locals {
-  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.karpenter_capacity_reservation, null) != null
+  karpenter_odcr_enabled = var.addons.enable_karpenter && try(var.addons.enable_karpenter_capacity_reservation, false)
 
   karpenter_capacity_reservation_ec2_node_class_name = try(var.addons.karpenter_capacity_reservation.ec2_node_class_name, "odcr")
 
