@@ -8,7 +8,7 @@ jobs:
     runs-on: ARM64
     steps:
       - name: Generate token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v3
         id: generate_token
         with:
           app-id: ${{ secrets.GH_ACTIONS_HELPER_APP_ID }}
