@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.115.0](https://github.com/chanzuckerberg/cztack/compare/v0.114.0...v0.115.0) (2026-04-07)
+
+
+### Features
+
+* add secretsmanager resource policy permissions ([#849](https://github.com/chanzuckerberg/cztack/issues/849)) ([5441e62](https://github.com/chanzuckerberg/cztack/commit/5441e62155edab33a68eba95c98466c3be6d2c68))
+
+
+### Misc
+
+* upgrade GitHub Actions to Node.js 24 ([#847](https://github.com/chanzuckerberg/cztack/issues/847)) ([d539f15](https://github.com/chanzuckerberg/cztack/commit/d539f15c77968c6e4349cb2a953e12085b6d6c7a))
+
 ## [0.114.0](https://github.com/chanzuckerberg/cztack/compare/v0.113.1...v0.114.0) (2026-04-03)
 
 

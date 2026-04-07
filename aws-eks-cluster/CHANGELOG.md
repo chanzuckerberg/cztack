@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.11.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.10.0...aws-eks-cluster-v8.11.0) (2026-04-07)
+
+
+### Features
+
+* add secretsmanager resource policy permissions ([#849](https://github.com/chanzuckerberg/cztack/issues/849)) ([5441e62](https://github.com/chanzuckerberg/cztack/commit/5441e62155edab33a68eba95c98466c3be6d2c68))
+
 ## [8.10.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.9.0...aws-eks-cluster-v8.10.0) (2026-04-03)
 
 
