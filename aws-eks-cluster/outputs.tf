@@ -89,8 +89,13 @@ output "argocd_root_role_name" {
 }
 
 output "argocd_root_role_arn" {
-  description = "ARN of the ArgoCD service account IAM role"
+  description = "ARN of the ArgoCD root service account IAM role"
   value       = var.addons.enable_argocd ? aws_iam_role.argocd_sa_role[0].arn : null
+}
+
+output "argocd_child_role_arn" {
+  description = "ARN of the ArgoCD child service account IAM role"
+  value       = var.addons.enable_argocd ? aws_iam_role.child_assume_role.arn : null
 }
 
 output "external_secrets_role_arn" {
