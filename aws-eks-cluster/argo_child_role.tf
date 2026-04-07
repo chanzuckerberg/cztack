@@ -38,7 +38,10 @@ data "aws_iam_policy_document" "secrets_manager_rw" {
       "secretsmanager:CreateSecret",
       "secretsmanager:TagResource",
       "secretsmanager:UpdateSecret",
-      "secretsmanager:DeleteSecret"
+      "secretsmanager:DeleteSecret",
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:GetResourcePolicy",
+      "secretsmanager:PutResourcePolicy",
     ]
     resources = ["arn:aws:secretsmanager:*:${data.aws_caller_identity.current.account_id}:secret:/argus/*"]
   }
