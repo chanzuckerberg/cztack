@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.116.0](https://github.com/chanzuckerberg/cztack/compare/v0.115.0...v0.116.0) (2026-04-07)
+
+
+### Features
+
+* add argo child role arn to outputs ([#850](https://github.com/chanzuckerberg/cztack/issues/850)) ([d6d2109](https://github.com/chanzuckerberg/cztack/commit/d6d2109a940d9d0e7b899b71c544f0fb32543029))
+
 ## [0.115.0](https://github.com/chanzuckerberg/cztack/compare/v0.114.0...v0.115.0) (2026-04-07)
 
 

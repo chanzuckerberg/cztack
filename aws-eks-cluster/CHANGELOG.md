@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.12.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.11.0...aws-eks-cluster-v8.12.0) (2026-04-07)
+
+
+### Features
+
+* add argo child role arn to outputs ([#850](https://github.com/chanzuckerberg/cztack/issues/850)) ([d6d2109](https://github.com/chanzuckerberg/cztack/commit/d6d2109a940d9d0e7b899b71c544f0fb32543029))
+
 ## [8.11.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.10.0...aws-eks-cluster-v8.11.0) (2026-04-07)
 
 
