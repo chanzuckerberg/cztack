@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.13.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.12.0...aws-eks-cluster-v8.13.0) (2026-04-22)
+
+
+### Features
+
+* upgrade ESO version ([#860](https://github.com/chanzuckerberg/cztack/issues/860)) ([e55df5a](https://github.com/chanzuckerberg/cztack/commit/e55df5a87db17ba3231a7e4d45dbc04cac4020b5))
+
 ## [8.12.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.11.0...aws-eks-cluster-v8.12.0) (2026-04-07)
 
 
