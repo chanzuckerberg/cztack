@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.118.0](https://github.com/chanzuckerberg/cztack/compare/v0.117.0...v0.118.0) (2026-04-22)
+
+
+### Features
+
+* upgrade ESO api version in cluster secret stores ([#861](https://github.com/chanzuckerberg/cztack/issues/861)) ([0aa7205](https://github.com/chanzuckerberg/cztack/commit/0aa72054888be91fbbf0786866b7e6e8a005e5b9))
+
 ## [0.117.0](https://github.com/chanzuckerberg/cztack/compare/v0.116.0...v0.117.0) (2026-04-22)
 
 
