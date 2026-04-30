@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.118.0](https://github.com/chanzuckerberg/cztack/compare/v0.117.0...v0.118.0) (2026-04-22)
+
+
+### Features
+
+* upgrade ESO api version in cluster secret stores ([#861](https://github.com/chanzuckerberg/cztack/issues/861)) ([0aa7205](https://github.com/chanzuckerberg/cztack/commit/0aa72054888be91fbbf0786866b7e6e8a005e5b9))
+
+## [0.117.0](https://github.com/chanzuckerberg/cztack/compare/v0.116.0...v0.117.0) (2026-04-22)
+
+
+### Features
+
+* upgrade ESO version ([#860](https://github.com/chanzuckerberg/cztack/issues/860)) ([e55df5a](https://github.com/chanzuckerberg/cztack/commit/e55df5a87db17ba3231a7e4d45dbc04cac4020b5))
+
+
+### Bug Fixes
+
+* address Dependabot security alerts ([#856](https://github.com/chanzuckerberg/cztack/issues/856)) ([ba86942](https://github.com/chanzuckerberg/cztack/commit/ba8694231032f39756b43b2a7ee99e90ee2afa1e))
+* bump moby/spdystream and remove orphan snowflake go.sum ([#859](https://github.com/chanzuckerberg/cztack/issues/859)) ([24bc4e2](https://github.com/chanzuckerberg/cztack/commit/24bc4e2ef9450e97684e810509bdf16e25f3d711)), closes [#83](https://github.com/chanzuckerberg/cztack/issues/83)
+
+
+### Misc
+
+* **deps:** bump github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream ([#852](https://github.com/chanzuckerberg/cztack/issues/852)) ([1b4ac98](https://github.com/chanzuckerberg/cztack/commit/1b4ac98873126a174c86141eb82434870abae3e2))
+* **deps:** bump github.com/hashicorp/go-getter from 1.7.9 to 1.8.6 ([#857](https://github.com/chanzuckerberg/cztack/issues/857)) ([3a03ba9](https://github.com/chanzuckerberg/cztack/commit/3a03ba957c5302890ac60c1b2337bef6e1190f09))
+* **deps:** bump go.opentelemetry.io/otel/sdk from 1.40.0 to 1.43.0 ([#854](https://github.com/chanzuckerberg/cztack/issues/854)) ([f35744d](https://github.com/chanzuckerberg/cztack/commit/f35744d72efdb9a1c527975e23ebcd888f2e778a))
+
 ## [0.116.0](https://github.com/chanzuckerberg/cztack/compare/v0.115.0...v0.116.0) (2026-04-07)
 
 
