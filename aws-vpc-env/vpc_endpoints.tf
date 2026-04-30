@@ -2,6 +2,10 @@
 # is described in this document - https://docs.aws.amazon.com/prescriptive-guidance/latest/integrate-third-party-services/architecture-1.html.
 # Only https traffic is allowed to the VPC endpoints.
 
+data "aws_subnet" "private" {
+  for_each = toset(module.vpc.private_subnets)
+  id       = each.value
+}
 
 locals {
   enabled_vpc_endpoints = {
@@ -9,6 +13,11 @@ locals {
       region = try(endpoint.region, "us-west-2")
     })
     if endpoint.enabled
+  }
+
+  # Map from subnet ID to its AZ ID (e.g. "use1-az1")
+  private_subnet_az_ids = {
+    for subnet_id, subnet in data.aws_subnet.private : subnet_id => subnet.availability_zone_id
   }
 }
 
@@ -38,11 +47,14 @@ resource "aws_security_group" "vpc_endpoint" {
 }
 
 resource "aws_vpc_endpoint" "vpc_endpoints" {
-  for_each           = local.enabled_vpc_endpoints
-  vpc_id             = module.vpc.vpc_id
-  service_name       = each.value.service
-  vpc_endpoint_type  = "Interface"
-  subnet_ids         = module.vpc.private_subnets
+  for_each          = local.enabled_vpc_endpoints
+  vpc_id            = module.vpc.vpc_id
+  service_name      = each.value.service
+  vpc_endpoint_type = "Interface"
+  subnet_ids = length(each.value.supported_az_ids) > 0 ? [
+    for subnet_id in module.vpc.private_subnets :
+    subnet_id if contains(each.value.supported_az_ids, local.private_subnet_az_ids[subnet_id])
+  ] : module.vpc.private_subnets
   security_group_ids = [aws_security_group.vpc_endpoint[each.key].id]
   service_region     = each.value.region
 
