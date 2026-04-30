@@ -60,11 +60,12 @@ variable "skip_az_checks" {
 }
 
 variable "vpc_endpoints" {
-  description = "List of VPC endpoints to create"
+  description = "List of VPC endpoints to create. Set supported_az_ids to restrict which AZs the endpoint is placed in (required for cross-region endpoints that don't support all local AZs)."
   type = list(object({
-    enabled = bool
-    service = string
-    region  = optional(string)
+    enabled          = bool
+    service          = string
+    region           = optional(string)
+    supported_az_ids = optional(list(string), [])
   }))
   default = []
 }
