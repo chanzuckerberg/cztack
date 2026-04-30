@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.119.1](https://github.com/chanzuckerberg/cztack/compare/v0.119.0...v0.119.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* **aws-vpc-env:** filter VPC endpoint subnets by supported AZ IDs ([#865](https://github.com/chanzuckerberg/cztack/issues/865)) ([b7ace01](https://github.com/chanzuckerberg/cztack/commit/b7ace010ffef4a5446b63694c3e309631aeeb3fb))
+
 ## [0.119.0](https://github.com/chanzuckerberg/cztack/compare/v0.118.0...v0.119.0) (2026-04-30)
 
 
