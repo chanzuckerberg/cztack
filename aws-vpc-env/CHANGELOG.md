@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/chanzuckerberg/cztack/compare/aws-vpc-env-v4.7.0...aws-vpc-env-v4.8.0) (2026-04-30)
+
+
+### Features
+
+* **aws-vpc-env:** add S3 Gateway VPC endpoint by default ([#863](https://github.com/chanzuckerberg/cztack/issues/863)) ([446bd71](https://github.com/chanzuckerberg/cztack/commit/446bd71f339a30bcc2ed79ccf6253e2dd9875414))
+
 ## [4.7.0](https://github.com/chanzuckerberg/cztack/compare/aws-vpc-env-v4.6.0...aws-vpc-env-v4.7.0) (2026-02-12)
 
 
