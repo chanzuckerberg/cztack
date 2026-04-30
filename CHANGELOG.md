@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.119.0](https://github.com/chanzuckerberg/cztack/compare/v0.118.0...v0.119.0) (2026-04-30)
+
+
+### Features
+
+* **aws-vpc-env:** add S3 Gateway VPC endpoint by default ([#863](https://github.com/chanzuckerberg/cztack/issues/863)) ([446bd71](https://github.com/chanzuckerberg/cztack/commit/446bd71f339a30bcc2ed79ccf6253e2dd9875414))
+
 ## [0.118.0](https://github.com/chanzuckerberg/cztack/compare/v0.117.0...v0.118.0) (2026-04-22)
 
 
