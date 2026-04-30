@@ -69,6 +69,18 @@ variable "vpc_endpoints" {
   default = []
 }
 
+variable "enable_s3_gateway_endpoint" {
+  description = "Create a free S3 Gateway VPC endpoint on private and database route tables. Eliminates NAT gateway data processing charges for same-region S3 traffic."
+  type        = bool
+  default     = true
+}
+
+variable "enable_dynamodb_gateway_endpoint" {
+  description = "Create a free DynamoDB Gateway VPC endpoint on private and database route tables. Eliminates NAT gateway data processing charges for same-region DynamoDB traffic."
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "Tags to apply to the resources."
   type = object({

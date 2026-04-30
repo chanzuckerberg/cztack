@@ -147,3 +147,13 @@ output "vpc_endpoints" {
     }
   }
 }
+
+output "s3_gateway_endpoint_id" {
+  description = "ID of the S3 Gateway VPC endpoint, if created."
+  value       = try(aws_vpc_endpoint.s3_gateway[0].id, null)
+}
+
+output "dynamodb_gateway_endpoint_id" {
+  description = "ID of the DynamoDB Gateway VPC endpoint, if created."
+  value       = try(aws_vpc_endpoint.dynamodb_gateway[0].id, null)
+}
