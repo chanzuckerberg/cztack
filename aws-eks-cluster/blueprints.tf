@@ -99,6 +99,18 @@ module "karpenter_controller" {
           name  = "dnsPolicy"
           value = "Default"
         },
+        {
+          name  = "service.annotations.prometheus\\.io/scrape"
+          value = "true"
+        },
+        {
+          name  = "service.annotations.prometheus\\.io/port"
+          value = "8080"
+        },
+        {
+          name  = "service.annotations.prometheus\\.io/path"
+          value = "/metrics"
+        },
       ],
       local.karpenter_odcr_enabled ? [
         {
