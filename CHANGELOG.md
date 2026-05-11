@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.120.0](https://github.com/chanzuckerberg/cztack/compare/v0.119.1...v0.120.0) (2026-05-11)
+
+
+### Features
+
+* Allow karpenter metric collection ([#868](https://github.com/chanzuckerberg/cztack/issues/868)) ([99d03cc](https://github.com/chanzuckerberg/cztack/commit/99d03cc40adb2748f52bf2f7ebe21a207b04dea3))
+
+
+### Misc
+
+* **deps:** bump github.com/apache/thrift from 0.22.0 to 0.23.0 ([#867](https://github.com/chanzuckerberg/cztack/issues/867)) ([7917ec9](https://github.com/chanzuckerberg/cztack/commit/7917ec9c9eedeba16ce7d9750031e019e69dae88))
+
 ## [0.119.1](https://github.com/chanzuckerberg/cztack/compare/v0.119.0...v0.119.1) (2026-04-30)
 
 
