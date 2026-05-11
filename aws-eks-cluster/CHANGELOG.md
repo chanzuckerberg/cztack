@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.15.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.14.0...aws-eks-cluster-v8.15.0) (2026-05-11)
+
+
+### Features
+
+* Allow karpenter metric collection ([#868](https://github.com/chanzuckerberg/cztack/issues/868)) ([99d03cc](https://github.com/chanzuckerberg/cztack/commit/99d03cc40adb2748f52bf2f7ebe21a207b04dea3))
+
 ## [8.14.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.13.0...aws-eks-cluster-v8.14.0) (2026-04-22)
 
 
