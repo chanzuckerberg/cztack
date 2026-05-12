@@ -102,14 +102,17 @@ module "karpenter_controller" {
         {
           name  = "service.annotations.prometheus\\.io/scrape"
           value = "true"
+          type  = "string"
         },
         {
           name  = "service.annotations.prometheus\\.io/port"
           value = "8080"
+          type  = "string"
         },
         {
           name  = "service.annotations.prometheus\\.io/path"
           value = "/metrics"
+          type  = "string"
         },
       ],
       local.karpenter_odcr_enabled ? [
