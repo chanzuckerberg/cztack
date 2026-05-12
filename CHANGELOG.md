@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.120.1](https://github.com/chanzuckerberg/cztack/compare/v0.120.0...v0.120.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* Fix auto-typing of karpenter metrics annotations ([#870](https://github.com/chanzuckerberg/cztack/issues/870)) ([056ed4e](https://github.com/chanzuckerberg/cztack/commit/056ed4e79e99285c4866eae6809d991ff822f90e))
+
 ## [0.120.0](https://github.com/chanzuckerberg/cztack/compare/v0.119.1...v0.120.0) (2026-05-11)
 
 
