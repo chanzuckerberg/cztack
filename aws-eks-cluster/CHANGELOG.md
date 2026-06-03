@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.16.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.15.1...aws-eks-cluster-v8.16.0) (2026-06-03)
+
+
+### Features
+
+* Enable gateway-httproute source in external-dns on sibling-repo clusters ([#874](https://github.com/chanzuckerberg/cztack/issues/874)) ([7bd6a45](https://github.com/chanzuckerberg/cztack/commit/7bd6a45b1368ddd8cf0fb92ce57fb6512ddd81d3))
+
 ## [8.15.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.15.0...aws-eks-cluster-v8.15.1) (2026-05-12)
 
 
@@ -1238,4 +1245,3 @@
 * Add more ephemeral storage for EKSv2 ([#5826](https://github.com/chanzuckerberg/shared-infra/issues/5826)) ([522fca5](https://github.com/chanzuckerberg/shared-infra/commit/522fca5141bfd6fd08e968215d62bfda28fed029))
 * Fix autoscaling in EKS v2 ([#5805](https://github.com/chanzuckerberg/shared-infra/issues/5805)) ([df11ce1](https://github.com/chanzuckerberg/shared-infra/commit/df11ce180fe7bf3a450370e3c4043a4a4ecf3e68))
 * Upgrade cluster autoscaler for EKS 1.22 ([#5814](https://github.com/chanzuckerberg/shared-infra/issues/5814)) ([544afc3](https://github.com/chanzuckerberg/shared-infra/commit/544afc3155e2ada5aaa46607ca75203cbd813afe))
-
