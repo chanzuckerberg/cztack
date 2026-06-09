@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.122.0](https://github.com/chanzuckerberg/cztack/compare/v0.121.0...v0.122.0) (2026-06-09)
+
+
+### Features
+
+* Enable external dns metric scraping ([#873](https://github.com/chanzuckerberg/cztack/issues/873)) ([5e6d7ee](https://github.com/chanzuckerberg/cztack/commit/5e6d7eea218a4ca8419471ce608d56029d474f51))
+
+
+### Misc
+
+* **deps:** bump github.com/gruntwork-io/terratest ([#872](https://github.com/chanzuckerberg/cztack/issues/872)) ([1bb17f2](https://github.com/chanzuckerberg/cztack/commit/1bb17f2c108726c62a0bf5592b75402ba6c1d681))
+
 ## [0.121.0](https://github.com/chanzuckerberg/cztack/compare/v0.120.1...v0.121.0) (2026-06-03)
 
 
