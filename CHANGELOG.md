@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.121.0](https://github.com/chanzuckerberg/cztack/compare/v0.120.1...v0.121.0) (2026-06-03)
+
+
+### Features
+
+* Enable gateway-httproute source in external-dns on sibling-repo clusters ([#874](https://github.com/chanzuckerberg/cztack/issues/874)) ([7bd6a45](https://github.com/chanzuckerberg/cztack/commit/7bd6a45b1368ddd8cf0fb92ce57fb6512ddd81d3))
+
 ## [0.120.1](https://github.com/chanzuckerberg/cztack/compare/v0.120.0...v0.120.1) (2026-05-12)
 
 
