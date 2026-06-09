@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.17.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.16.0...aws-eks-cluster-v8.17.0) (2026-06-09)
+
+
+### Features
+
+* Enable external dns metric scraping ([#873](https://github.com/chanzuckerberg/cztack/issues/873)) ([5e6d7ee](https://github.com/chanzuckerberg/cztack/commit/5e6d7eea218a4ca8419471ce608d56029d474f51))
+
 ## [8.16.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.15.1...aws-eks-cluster-v8.16.0) (2026-06-03)
 
 
