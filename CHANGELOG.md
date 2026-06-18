@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.122.1](https://github.com/chanzuckerberg/cztack/compare/v0.122.0...v0.122.1) (2026-06-18)
+
+
+### Bug Fixes
+
+* relax databricks provider pin in databricks-catalog-external-location to &gt;= 1.49.1 ([#882](https://github.com/chanzuckerberg/cztack/issues/882)) ([7b46912](https://github.com/chanzuckerberg/cztack/commit/7b46912895cf1dab23a5efb46c982c88ef154b22))
+
 ## [0.122.0](https://github.com/chanzuckerberg/cztack/compare/v0.121.0...v0.122.0) (2026-06-18)
 
 
