@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.17.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.16.0...aws-eks-cluster-v8.17.0) (2026-06-18)
+
+
+### Features
+
+* Enable external dns metric scraping ([#873](https://github.com/chanzuckerberg/cztack/issues/873)) ([5e6d7ee](https://github.com/chanzuckerberg/cztack/commit/5e6d7eea218a4ca8419471ce608d56029d474f51))
+* pin cert-manager addon to v1.20.2 in aws-eks-cluster ([#878](https://github.com/chanzuckerberg/cztack/issues/878)) ([6e0a0ab](https://github.com/chanzuckerberg/cztack/commit/6e0a0ab27382e5293308f0934edd31e0e06333dc))
+
 ## [8.16.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.15.1...aws-eks-cluster-v8.16.0) (2026-06-03)
 
 
