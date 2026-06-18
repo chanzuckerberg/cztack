@@ -239,7 +239,7 @@ variable "addons" {
     karpenter_config = optional(any, {
       chart_version = "1.6.1"
     })
-    karpenter_nodepool_spec = optional(any, null)
+    karpenter_nodepool_spec               = optional(any, null)
     enable_karpenter_capacity_reservation = optional(bool, false)
     karpenter_capacity_reservation = optional(object({
       ec2_node_class_name = optional(string, "odcr")
@@ -252,7 +252,9 @@ variable "addons" {
       sources       = optional(list(string), ["service", "ingress", "gateway-httproute"])
     }), {})
     cert_manager_route53_hosted_zone_arns = optional(list(string), ["arn:aws:route53:::hostedzone/*"])
-    cert_manager_config                   = optional(any, {})
+    cert_manager_config = optional(any, {
+      chart_version = "v1.20.2"
+    })
   })
   default = {}
 }
