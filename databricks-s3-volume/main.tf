@@ -131,6 +131,24 @@ resource "databricks_external_location" "this" {
   comment            = "Managed by Terraform - access for ${each.key}"
   read_only          = each.key == local.dbx_resource_storage_config["VOLUME"]["bucket_name"] ? var.read_only_volume : false
   enable_file_events = var.enable_file_events
+
+  # enable_file_events requires a file_event_queue block. Use a user-provided
+  # SQS queue when a URL is supplied, otherwise let Databricks manage the queue.
+  dynamic "file_event_queue" {
+    for_each = var.enable_file_events ? [1] : []
+    content {
+      dynamic "provided_sqs" {
+        for_each = var.file_event_queue_url != null ? [1] : []
+        content {
+          queue_url = var.file_event_queue_url
+        }
+      }
+      dynamic "managed_sqs" {
+        for_each = var.file_event_queue_url == null ? [1] : []
+        content {}
+      }
+    }
+  }
 }
 
 # New catalog, schema, and volume
