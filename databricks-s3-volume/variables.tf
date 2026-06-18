@@ -217,6 +217,12 @@ variable "enable_file_events" {
   default     = false
 }
 
+variable "file_event_queue_url" {
+  description = "(Optional) URL of an existing SQS queue to use for file events on the external locations. If set (and enable_file_events is true), a user-provided SQS queue is used; otherwise a Databricks-managed SQS queue is created."
+  type        = string
+  default     = null
+}
+
 variable "override_unity_aws_role_name" {
   description = "(Optional) Override the default Unity Catalog AWS IAM role name used when creating storage credentials"
   type        = string
