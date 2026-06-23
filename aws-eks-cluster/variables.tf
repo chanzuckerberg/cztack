@@ -240,6 +240,7 @@ variable "addons" {
       chart_version = "1.6.1"
     })
     karpenter_nodepool_spec               = optional(any, null)
+    karpenter_ami_selector_terms          = optional(list(any), [{ alias = "al2023@latest" }])
     enable_karpenter_capacity_reservation = optional(bool, false)
     karpenter_capacity_reservation = optional(object({
       ec2_node_class_name = optional(string, "odcr")

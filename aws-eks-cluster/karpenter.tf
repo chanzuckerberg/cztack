@@ -8,10 +8,8 @@ locals {
   karpenter_capacity_reservation_ec2_node_class_name = try(var.addons.karpenter_capacity_reservation.ec2_node_class_name, "odcr")
 
   karpenter_ec2_node_class_spec = {
-    "amiFamily" = "AL2023"
-    "amiSelectorTerms" = [
-      { "alias" : "al2023@latest" }
-    ]
+    "amiFamily"        = "AL2023"
+    "amiSelectorTerms" = var.addons.karpenter_ami_selector_terms
     "kubelet" = {
       "systemReserved" : {
         "cpu"    = "100m"
@@ -124,7 +122,7 @@ locals {
     }
   }
 
-  custom_nodepool_spec     = try(var.addons.karpenter_nodepool_spec, null)
+  custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 }
 
