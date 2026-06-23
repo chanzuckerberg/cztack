@@ -15,7 +15,7 @@
   "aws-ecs-job-fargate": "0.1.0",
   "aws-ecs-service": "0.1.0",
   "aws-ecs-service-fargate": "0.1.0",
-  "aws-eks-cluster": "8.16.0",
+  "aws-eks-cluster": "8.17.0",
   "aws-efs-volume": "0.1.1",
   "aws-iam-ecs-task-role": "0.1.0",
   "aws-iam-group-assume-role": "0.1.0",
@@ -58,12 +58,12 @@
   "aws-ssm-params": "0.1.0",
   "aws-ssm-params-writer": "0.1.0",
   "bless-ca": "0.1.0",
-  "databricks-catalog-external-location": "0.2.2",
+  "databricks-catalog-external-location": "0.2.3",
   "databricks-cluster-log-permissions": "0.1.0",
   "databricks-cluster-policy": "0.1.0",
   "databricks-default-cluster-policies": "0.2.1",
   "databricks-metastore": "0.1.1",
-  "databricks-s3-volume": "0.2.0",
+  "databricks-s3-volume": "0.3.0",
   "databricks-s3-volume-existing-catalog": "0.1.0",
   "databricks-workspace-e2": "0.2.3",
   "github-webhooks-to-s3": "0.1.0",
@@ -92,5 +92,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.121.0"
+  ".": "0.122.1"
 }

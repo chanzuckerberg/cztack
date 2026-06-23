@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.2.0...databricks-s3-volume-v0.3.0) (2026-06-18)
+
+
+### Features
+
+* ADI-165 Enabled file events on dbx external location ([#880](https://github.com/chanzuckerberg/cztack/issues/880)) ([79c6212](https://github.com/chanzuckerberg/cztack/commit/79c6212a003728c87294e24ac730a6a40f8ca768))
+
 ## [0.2.0](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.1.4...databricks-s3-volume-v0.2.0) (2026-03-26)
 
 

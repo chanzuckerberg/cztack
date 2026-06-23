@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.122.1](https://github.com/chanzuckerberg/cztack/compare/v0.122.0...v0.122.1) (2026-06-18)
+
+
+### Bug Fixes
+
+* relax databricks provider pin in databricks-catalog-external-location to &gt;= 1.49.1 ([#882](https://github.com/chanzuckerberg/cztack/issues/882)) ([7b46912](https://github.com/chanzuckerberg/cztack/commit/7b46912895cf1dab23a5efb46c982c88ef154b22))
+
+## [0.122.0](https://github.com/chanzuckerberg/cztack/compare/v0.121.0...v0.122.0) (2026-06-18)
+
+
+### Features
+
+* ADI-165 Enabled file events on dbx external location ([#880](https://github.com/chanzuckerberg/cztack/issues/880)) ([79c6212](https://github.com/chanzuckerberg/cztack/commit/79c6212a003728c87294e24ac730a6a40f8ca768))
+* Enable external dns metric scraping ([#873](https://github.com/chanzuckerberg/cztack/issues/873)) ([5e6d7ee](https://github.com/chanzuckerberg/cztack/commit/5e6d7eea218a4ca8419471ce608d56029d474f51))
+* pin cert-manager addon to v1.20.2 in aws-eks-cluster ([#878](https://github.com/chanzuckerberg/cztack/issues/878)) ([6e0a0ab](https://github.com/chanzuckerberg/cztack/commit/6e0a0ab27382e5293308f0934edd31e0e06333dc))
+
+
+### Bug Fixes
+
+* **deps:** pin terratest to v0.41.12 to restore lint ([#881](https://github.com/chanzuckerberg/cztack/issues/881)) ([09fd6f9](https://github.com/chanzuckerberg/cztack/commit/09fd6f9a4735d5dec81d9ee4e5537e92cee756cf))
+
+
+### Misc
+
+* **deps:** bump github.com/gruntwork-io/terratest ([#872](https://github.com/chanzuckerberg/cztack/issues/872)) ([1bb17f2](https://github.com/chanzuckerberg/cztack/commit/1bb17f2c108726c62a0bf5592b75402ba6c1d681))
+
 ## [0.121.0](https://github.com/chanzuckerberg/cztack/compare/v0.120.1...v0.121.0) (2026-06-03)
 
 
