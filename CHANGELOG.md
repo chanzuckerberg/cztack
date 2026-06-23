@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.123.0](https://github.com/chanzuckerberg/cztack/compare/v0.122.1...v0.123.0) (2026-06-23)
+
+
+### Features
+
+* expose karpenter_ami_selector_terms on default EC2NodeClass ([#885](https://github.com/chanzuckerberg/cztack/issues/885)) ([335db49](https://github.com/chanzuckerberg/cztack/commit/335db491405dc4f95998d2f1a378f6cae58e3104))
+
+
+### Misc
+
+* **deps:** bump github.com/sirupsen/logrus from 1.9.3 to 1.9.4 ([#884](https://github.com/chanzuckerberg/cztack/issues/884)) ([c332d5e](https://github.com/chanzuckerberg/cztack/commit/c332d5e89e0eaa10f6c8af05b788fa934f7a2fa1))
+
 ## [0.122.1](https://github.com/chanzuckerberg/cztack/compare/v0.122.0...v0.122.1) (2026-06-18)
 
 

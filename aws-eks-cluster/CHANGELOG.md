@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.18.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.17.0...aws-eks-cluster-v8.18.0) (2026-06-23)
+
+
+### Features
+
+* expose karpenter_ami_selector_terms on default EC2NodeClass ([#885](https://github.com/chanzuckerberg/cztack/issues/885)) ([335db49](https://github.com/chanzuckerberg/cztack/commit/335db491405dc4f95998d2f1a378f6cae58e3104))
+
 ## [8.17.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.16.0...aws-eks-cluster-v8.17.0) (2026-06-18)
 
 
