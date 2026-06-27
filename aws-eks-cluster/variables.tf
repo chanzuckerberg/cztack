@@ -251,6 +251,9 @@ variable "addons" {
       image_tag     = optional(string, "v0.19.0")
       policy        = optional(string, "upsert-only")
       sources       = optional(list(string), ["service", "ingress", "gateway-httproute"])
+      # Publish DNS for HTTPRoutes attached to a Gateway API ListenerSet (vanity
+      # domains). Requires external-dns image_tag >= v0.21.0; leave false on older tags.
+      gateway_listener_sets = optional(bool, false)
     }), {})
     cert_manager_route53_hosted_zone_arns = optional(list(string), ["arn:aws:route53:::hostedzone/*"])
     cert_manager_config = optional(any, {

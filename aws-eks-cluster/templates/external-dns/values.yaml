@@ -20,6 +20,9 @@ extraArgs:
   - '--aws-batch-change-size=1000'
   - '--aws-zones-cache-duration=120s'
   - '--metrics-address=:7979'
+  %{~ if gatewayListenerSets ~}
+  - '--gateway-listener-sets'
+  %{~ endif ~}
 podAnnotations:
   prometheus.io/scrape: 'true'
   prometheus.io/port: '7979'
