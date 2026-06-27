@@ -247,8 +247,8 @@ variable "addons" {
       selector_terms      = list(any)
     }), null)
     external_dns_config = optional(object({
-      chart_version = optional(string, "1.18.0")
-      image_tag     = optional(string, "v0.19.0")
+      chart_version = optional(string, "1.21.1")
+      image_tag     = optional(string, "v0.21.0")
       policy        = optional(string, "upsert-only")
       sources       = optional(list(string), ["service", "ingress", "gateway-httproute"])
     }), {})
