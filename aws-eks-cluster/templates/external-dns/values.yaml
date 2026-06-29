@@ -21,6 +21,16 @@ extraArgs:
   - '--aws-zones-cache-duration=120s'
   - '--metrics-address=:7979'
   - '--gateway-listener-sets'
+rbac:
+  additionalPermissions:
+    - apiGroups:
+        - gateway.networking.k8s.io
+      resources:
+        - listenersets
+      verbs:
+        - get
+        - list
+        - watch
 podAnnotations:
   prometheus.io/scrape: 'true'
   prometheus.io/port: '7979'
