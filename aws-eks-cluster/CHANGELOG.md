@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.19.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.18.0...aws-eks-cluster-v8.19.0) (2026-06-29)
+
+
+### Features
+
+* **aws-eks-cluster:** enable external-dns gateway-listener-sets by default ([#887](https://github.com/chanzuckerberg/cztack/issues/887)) ([fa570ac](https://github.com/chanzuckerberg/cztack/commit/fa570acd6f572ce4a899e9db3cbc7f7371363fd3))
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** grant external-dns RBAC to read ListenerSets ([#890](https://github.com/chanzuckerberg/cztack/issues/890)) ([be193d8](https://github.com/chanzuckerberg/cztack/commit/be193d8658ca2952165a2868cc45ee9ee3bf183c))
+
 ## [8.18.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.17.0...aws-eks-cluster-v8.18.0) (2026-06-23)
 
 
