@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.124.1](https://github.com/chanzuckerberg/cztack/compare/v0.124.0...v0.124.1) (2026-07-16)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** bump aws-efs-csi-driver chart to 3.4.1 for startup-taint removal fix ([#893](https://github.com/chanzuckerberg/cztack/issues/893)) ([681e0ac](https://github.com/chanzuckerberg/cztack/commit/681e0acde05e50a97d38338eaa46d911c618bf60))
+
+
+### Misc
+
+* **deps:** bump golang.org/x/crypto from 0.51.0 to 0.52.0 ([#892](https://github.com/chanzuckerberg/cztack/issues/892)) ([cb31c41](https://github.com/chanzuckerberg/cztack/commit/cb31c41231377ff3dd54210d8f298e29b735b9fa))
+* **deps:** bump golang.org/x/net from 0.52.0 to 0.55.0 ([#891](https://github.com/chanzuckerberg/cztack/issues/891)) ([3a11c9d](https://github.com/chanzuckerberg/cztack/commit/3a11c9d403dc21f164c23dfc480e16e807c18e97))
+
 ## [0.124.0](https://github.com/chanzuckerberg/cztack/compare/v0.123.0...v0.124.0) (2026-06-29)
 
 

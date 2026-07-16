@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.19.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.19.0...aws-eks-cluster-v8.19.1) (2026-07-16)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** bump aws-efs-csi-driver chart to 3.4.1 for startup-taint removal fix ([#893](https://github.com/chanzuckerberg/cztack/issues/893)) ([681e0ac](https://github.com/chanzuckerberg/cztack/commit/681e0acde05e50a97d38338eaa46d911c618bf60))
+
 ## [8.19.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.18.0...aws-eks-cluster-v8.19.0) (2026-06-29)
 
 
