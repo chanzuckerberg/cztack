@@ -226,6 +226,10 @@
       "package-name": "aws-s3-account-public-access-block",
       "release-type": "terraform-module"
     },
+    "aws-s3-cdn": {
+      "package-name": "aws-s3-cdn",
+      "release-type": "terraform-module"
+    },
     "aws-s3-private-bucket": {
       "package-name": "aws-s3-private-bucket",
       "release-type": "terraform-module"

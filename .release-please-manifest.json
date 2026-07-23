@@ -50,6 +50,7 @@
   "aws-redis-node": "0.1.1",
   "aws-redis-replication-group": "0.1.1",
   "aws-s3-account-public-access-block": "0.1.1",
+  "aws-s3-cdn": "0.0.0",
   "aws-s3-private-bucket": "0.1.1",
   "aws-s3-public-bucket": "0.1.1",
   "aws-single-page-static-site": "0.1.0",
