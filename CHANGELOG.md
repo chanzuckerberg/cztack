@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.125.1](https://github.com/chanzuckerberg/cztack/compare/v0.125.0...v0.125.1) (2026-07-23)
+
+
+### Bug Fixes
+
+* each cluster needs its own service linked role ([#897](https://github.com/chanzuckerberg/cztack/issues/897)) ([fc7a338](https://github.com/chanzuckerberg/cztack/commit/fc7a3383612d59ed0c825beb026917c37fe67f04))
+
 ## [0.125.0](https://github.com/chanzuckerberg/cztack/compare/v0.124.1...v0.125.0) (2026-07-23)
 
 

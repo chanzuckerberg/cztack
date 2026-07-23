@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.20.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.20.0...aws-eks-cluster-v8.20.1) (2026-07-23)
+
+
+### Bug Fixes
+
+* each cluster needs its own service linked role ([#897](https://github.com/chanzuckerberg/cztack/issues/897)) ([fc7a338](https://github.com/chanzuckerberg/cztack/commit/fc7a3383612d59ed0c825beb026917c37fe67f04))
+
 ## [8.20.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.19.1...aws-eks-cluster-v8.20.0) (2026-07-23)
 
 
