@@ -1,6 +1,16 @@
+# AWSServiceRoleForEC2Spot is account-global: only one may exist per account and it
+# does not accept a custom suffix. When several clusters share an account, exactly one
+# should own the role. Set create_ec2_spot_service_linked_role = false on the others.
 resource "aws_iam_service_linked_role" "ec2_spot" {
-  custom_suffix    = "${var.cluster_name}-${var.tags.project}-${var.tags.env}-${var.tags.service}"
+  count            = var.create_ec2_spot_service_linked_role ? 1 : 0
   aws_service_name = "spot.amazonaws.com"
+}
+
+# Existing clusters manage the role at the unindexed address. Adopt it into the
+# counted address so enabling the toggle does not destroy and recreate the role.
+moved {
+  from = aws_iam_service_linked_role.ec2_spot
+  to   = aws_iam_service_linked_role.ec2_spot[0]
 }
 
 locals {

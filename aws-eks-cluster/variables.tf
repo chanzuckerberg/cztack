@@ -334,3 +334,9 @@ variable "aws_org_id" {
   description = "The org ID this cluster will be in. May be used in assume roles and pathfinding."
   default     = "o-56v5gp5fcu"
 }
+
+variable "create_ec2_spot_service_linked_role" {
+  type        = bool
+  description = "Whether to create the account-global AWSServiceRoleForEC2Spot service-linked role. Only one may exist per account, so set this to false on additional clusters that share an account with a cluster that already owns the role."
+  default     = true
+}
