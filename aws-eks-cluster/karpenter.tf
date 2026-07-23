@@ -1,4 +1,5 @@
 resource "aws_iam_service_linked_role" "ec2_spot" {
+  custom_suffix    = "${var.cluster_name}-${var.tags.project}-${var.tags.env}-${var.tags.service}"
   aws_service_name = "spot.amazonaws.com"
 }
 
