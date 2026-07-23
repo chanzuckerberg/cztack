@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.125.0](https://github.com/chanzuckerberg/cztack/compare/v0.124.1...v0.125.0) (2026-07-23)
+
+
+### Features
+
+* **aws-eks-cluster:** opt-in cilium startup taint on the default NodePool ([#895](https://github.com/chanzuckerberg/cztack/issues/895)) ([d5380c8](https://github.com/chanzuckerberg/cztack/commit/d5380c8a016b6f11ca5ae19c6dd2491745559b2c))
+
 ## [0.124.1](https://github.com/chanzuckerberg/cztack/compare/v0.124.0...v0.124.1) (2026-07-16)
 
 
