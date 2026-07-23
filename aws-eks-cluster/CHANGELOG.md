@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.20.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.20.1...aws-eks-cluster-v8.20.2) (2026-07-23)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** make EC2 Spot service-linked role opt-out per cluster ([#899](https://github.com/chanzuckerberg/cztack/issues/899)) ([aa456ab](https://github.com/chanzuckerberg/cztack/commit/aa456ab277ff3c45933abae8f42add6d27afaff3))
+
 ## [8.20.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.20.0...aws-eks-cluster-v8.20.1) (2026-07-23)
 
 
