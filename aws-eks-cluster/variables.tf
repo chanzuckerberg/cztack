@@ -196,7 +196,7 @@ variable "placement_group_strategy" {
 }
 
 variable "addons" {
-  description = "Map of addon definitions to create"
+  description = "Map of addon definitions to create. karpenter_declare_cilium_startup_taint adds node.cilium.io/agent-not-ready (NoSchedule) to the NodePool startupTaints so Karpenter's scheduling simulation waits for the cilium agent instead of double-provisioning; it merges into the effective spec, so it also applies on top of a karpenter_nodepool_spec override (overwriting any startupTaints the override defines). Enabling it changes the NodePool spec hash and therefore replaces the NodePool: every node on the pool drains in parallel (PDBs honored only until terminationGracePeriod). Opt in per cluster as a planned change."
   type = object({
     enable_guardduty                    = optional(bool, false)
     enable_aws_load_balancer_controller = optional(bool, true)
@@ -239,9 +239,10 @@ variable "addons" {
     karpenter_config = optional(any, {
       chart_version = "1.6.1"
     })
-    karpenter_nodepool_spec               = optional(any, null)
-    karpenter_ami_selector_terms          = optional(list(any), [{ alias = "al2023@latest" }])
-    enable_karpenter_capacity_reservation = optional(bool, false)
+    karpenter_nodepool_spec                = optional(any, null)
+    karpenter_declare_cilium_startup_taint = optional(bool, false)
+    karpenter_ami_selector_terms           = optional(list(any), [{ alias = "al2023@latest" }])
+    enable_karpenter_capacity_reservation  = optional(bool, false)
     karpenter_capacity_reservation = optional(object({
       ec2_node_class_name = optional(string, "odcr")
       selector_terms      = list(any)

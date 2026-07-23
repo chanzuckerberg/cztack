@@ -124,6 +124,22 @@ locals {
 
   custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
+
+  cilium_startup_taints = [
+    {
+      "key"    = "node.cilium.io/agent-not-ready"
+      "effect" = "NoSchedule"
+    }
+  ]
+  final_nodepool_spec = merge(local.effective_nodepool_spec, {
+    "template" = merge(local.effective_nodepool_spec.template, {
+      "spec" = merge(
+        local.effective_nodepool_spec.template.spec,
+        { for k, v in { "startupTaints" = local.cilium_startup_taints } : k => v
+        if try(var.addons.karpenter_declare_cilium_startup_taint, false) }
+      )
+    })
+  })
 }
 
 resource "random_id" "node_pool_name" {
@@ -131,7 +147,7 @@ resource "random_id" "node_pool_name" {
   prefix      = "nodepool-"
   keepers = {
     # Regenerate nodepool definition every time spec changes
-    version = yamlencode(local.effective_nodepool_spec)
+    version = yamlencode(local.final_nodepool_spec)
   }
   lifecycle {
     create_before_destroy = true
@@ -148,7 +164,7 @@ resource "kubectl_manifest" "karpenter_nodepool" {
     "metadata" = {
       "name" = random_id.node_pool_name.hex
     }
-    "spec" = local.effective_nodepool_spec
+    "spec" = local.final_nodepool_spec
   })
   force_new = true
   depends_on = [
