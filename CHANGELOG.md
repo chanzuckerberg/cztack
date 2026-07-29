@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.126.0](https://github.com/chanzuckerberg/cztack/compare/v0.125.2...v0.126.0) (2026-07-29)
+
+
+### Features
+
+* allow new Github OIDC subject format ([#902](https://github.com/chanzuckerberg/cztack/issues/902)) ([51a65f2](https://github.com/chanzuckerberg/cztack/commit/51a65f2cb65afe9a1768fd00a3ea136c0b8356a8))
+
 ## [0.125.2](https://github.com/chanzuckerberg/cztack/compare/v0.125.1...v0.125.2) (2026-07-23)
 
 
