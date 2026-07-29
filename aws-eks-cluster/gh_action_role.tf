@@ -3,6 +3,9 @@ locals {
   role_name = "gh_actions_${local.namespace}"
 }
 
+// This role's trust policy comes from the submodule below. release-please versions
+// each module directory independently and does not follow relative-path deps, so a
+// submodule fix only reaches aws-eks-cluster consumers once this module is released.
 module "gh_actions_role" {
   count  = length(var.authorized_github_repos) + length(var.authorized_aws_accounts) == 0 ? 0 : 1
   source = "../aws-iam-role-github-action"
