@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.21.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.20.2...aws-eks-cluster-v8.21.0) (2026-07-29)
+
+
+### Features
+
+* **aws-eks-cluster:** pick up immutable GitHub OIDC subject claims ([#904](https://github.com/chanzuckerberg/cztack/issues/904)) ([8de2382](https://github.com/chanzuckerberg/cztack/commit/8de238285238c52ad84ba6defcad6a37028e76e4))
+
 ## [8.20.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.20.1...aws-eks-cluster-v8.20.2) (2026-07-23)
 
 

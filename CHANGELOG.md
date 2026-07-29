@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.127.0](https://github.com/chanzuckerberg/cztack/compare/v0.126.0...v0.127.0) (2026-07-29)
+
+
+### Features
+
+* **aws-eks-cluster:** pick up immutable GitHub OIDC subject claims ([#904](https://github.com/chanzuckerberg/cztack/issues/904)) ([8de2382](https://github.com/chanzuckerberg/cztack/commit/8de238285238c52ad84ba6defcad6a37028e76e4))
+
 ## [0.126.0](https://github.com/chanzuckerberg/cztack/compare/v0.125.2...v0.126.0) (2026-07-29)
 
 
