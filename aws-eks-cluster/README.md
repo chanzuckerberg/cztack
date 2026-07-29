@@ -1,3 +1,23 @@
+# AWS EKS Cluster
+
+## GitHub Actions role and OIDC subject claims
+
+When `authorized_github_repos` is set, this module creates a `gh_actions_*` role via
+[`aws-iam-role-github-action`](../aws-iam-role-github-action), granting the listed repos ECR push and
+`eks:DescribeCluster` access.
+
+That role's trust policy accepts both OIDC subject claim formats GitHub issues:
+
+| Format | Example |
+|------|---------|
+| Legacy (name only) | `repo:octo-org/octo-repo:ref:refs/heads/main` |
+| [Immutable](https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims) (name plus IDs) | `repo:octo-org@123456/octo-repo@456789:ref:refs/heads/main` |
+
+Repos created, renamed, or transferred after 2026-07-15 get the immutable format; everything else keeps
+the legacy one. The two are not interchangeable, so both are matched. Note that an org-wide entry such as
+`{ chanzuckerberg = ["*"] }` covers new repos in that org under either format, but only from
+`aws-eks-cluster` v8.20.3 onward — earlier versions match the legacy format alone.
+
 <!-- START -->
 ## Requirements
 
