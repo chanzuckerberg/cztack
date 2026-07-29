@@ -34,10 +34,30 @@ data "aws_iam_policy_document" "assume_role" {
       condition {
         test     = "StringLike"
         variable = "${local.idp}:sub"
-        values = formatlist(
-          "repo:%s/%s:*",
-          statement.key,
-          statement.value,
+
+        // GitHub mints subject claims in two shapes and they are not
+        // interchangeable: the immutable format inserts @OWNER-ID ahead of the "/",
+        // so a legacy pattern can never match an immutable subject. Match both, or a
+        // repo that switches formats loses access. Repos created, renamed, or
+        // transferred after 2026-07-15 use the immutable format; older repos keep
+        // the legacy one until they opt in.
+        // https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims
+        //
+        // The owner and repo IDs are wildcarded since callers authorize repos by
+        // name, which keeps this module's trust model unchanged across the switch.
+        // Neither pattern matches the other's format, so listing both grants no
+        // access beyond the named org and repos.
+        values = concat(
+          formatlist(
+            "repo:%s/%s:*",
+            statement.key,
+            statement.value,
+          ),
+          formatlist(
+            "repo:%s@*/%s@*:*",
+            statement.key,
+            statement.value,
+          ),
         )
       }
     }

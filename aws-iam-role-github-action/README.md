@@ -18,6 +18,19 @@ Where `role-to-assume` is the ARN of the role this module creates.
 
 NOTE: this module doesn't manage the role's permissions. Users of this module should handle these separately with an eye towards CI/CD least privilege.
 
+## OIDC subject claim formats
+
+GitHub issues the token's `sub` claim in one of two formats:
+
+| Format | Example |
+|------|---------|
+| Legacy (name only) | `repo:octo-org/octo-repo:ref:refs/heads/main` |
+| [Immutable](https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims) (name plus IDs) | `repo:octo-org@123456/octo-repo@456789:ref:refs/heads/main` |
+
+Repos created, renamed, or transferred after 2026-07-15 use the immutable format, as do repos that opt in through the org or repo OIDC settings. Everything else keeps the legacy format. The two are not interchangeable — the immutable format inserts `@OWNER-ID` ahead of the `/`, so a trust policy written for one format rejects the other.
+
+This module's trust policy accepts both, so a repo switching formats keeps its access without a Terraform change. You still authorize repos by name; the owner and repo IDs are wildcarded.
+
 
 <!-- START -->
 ## Requirements
