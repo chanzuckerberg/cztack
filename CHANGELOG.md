@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.128.0](https://github.com/chanzuckerberg/cztack/compare/v0.127.0...v0.128.0) (2026-08-07)
+
+
+### Features
+
+* **aws-iam-role-github-action:** support granular OIDC claim conditions on trust policy ([#908](https://github.com/chanzuckerberg/cztack/issues/908)) ([192e342](https://github.com/chanzuckerberg/cztack/commit/192e342aee9b8ead082eb088e46632a64a8763f4))
+* retrigger release-please after GitHub outage ([#909](https://github.com/chanzuckerberg/cztack/issues/909)) ([6d7457e](https://github.com/chanzuckerberg/cztack/commit/6d7457e201acf30c559327ee43c2e1752ca48a42))
+
+
+### Misc
+
+* **deps:** bump google.golang.org/grpc from 1.80.0 to 1.82.1 ([#901](https://github.com/chanzuckerberg/cztack/issues/901)) ([8cb0229](https://github.com/chanzuckerberg/cztack/commit/8cb0229eac33d3dc863b04ffb342959911fc6900))
+
 ## [0.127.0](https://github.com/chanzuckerberg/cztack/compare/v0.126.0...v0.127.0) (2026-07-29)
 
 
