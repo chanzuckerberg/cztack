@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.128.1](https://github.com/chanzuckerberg/cztack/compare/v0.128.0...v0.128.1) (2026-08-11)
+
+
+### Bug Fixes
+
+* ADI-236 - bucket acc status param changed ([#911](https://github.com/chanzuckerberg/cztack/issues/911)) ([6f07bb3](https://github.com/chanzuckerberg/cztack/commit/6f07bb38b8e83765f3dceada036169a20af5ce56))
+
 ## [0.128.0](https://github.com/chanzuckerberg/cztack/compare/v0.127.0...v0.128.0) (2026-08-07)
 
 
