@@ -237,7 +237,7 @@ variable "addons" {
       })
     }), {})
     karpenter_config = optional(any, {
-      chart_version = "1.6.1"
+      chart_version = "1.9.2"
     })
     karpenter_nodepool_spec                = optional(any, null)
     karpenter_declare_cilium_startup_taint = optional(bool, false)
