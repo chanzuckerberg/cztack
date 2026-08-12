@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.129.0](https://github.com/chanzuckerberg/cztack/compare/v0.128.1...v0.129.0) (2026-08-12)
+
+
+### Features
+
+* karpenter 1.9.2 with lockstep CRD management for Kubernetes 1.35 ([#910](https://github.com/chanzuckerberg/cztack/issues/910)) ([4c49cc6](https://github.com/chanzuckerberg/cztack/commit/4c49cc6d8bfe953a56213ac848351060d2043bd7))
+
 ## [0.128.1](https://github.com/chanzuckerberg/cztack/compare/v0.128.0...v0.128.1) (2026-08-11)
 
 

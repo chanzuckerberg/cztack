@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.22.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.21.0...aws-eks-cluster-v8.22.0) (2026-08-12)
+
+
+### Features
+
+* karpenter 1.9.2 with lockstep CRD management for Kubernetes 1.35 ([#910](https://github.com/chanzuckerberg/cztack/issues/910)) ([4c49cc6](https://github.com/chanzuckerberg/cztack/commit/4c49cc6d8bfe953a56213ac848351060d2043bd7))
+
 ## [8.21.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.20.2...aws-eks-cluster-v8.21.0) (2026-07-29)
 
 
