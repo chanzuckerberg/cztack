@@ -153,6 +153,17 @@ locals {
   })
 }
 
+resource "helm_release" "karpenter_crd" {
+  count = var.addons.enable_karpenter ? 1 : 0
+
+  name             = "karpenter-crd"
+  repository       = "oci://public.ecr.aws/karpenter"
+  chart            = "karpenter-crd"
+  version          = try(var.addons.karpenter_config.chart_version, "0.37.0")
+  namespace        = try(var.addons.karpenter_config.namespace, "karpenter")
+  create_namespace = true
+}
+
 resource "random_id" "node_pool_name" {
   byte_length = 4
   prefix      = "nodepool-"

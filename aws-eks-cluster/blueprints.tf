@@ -132,7 +132,8 @@ module "karpenter_controller" {
   }
 
   depends_on = [
-    time_sleep.fargate_ready
+    time_sleep.fargate_ready,
+    helm_release.karpenter_crd
   ]
 }
 
