@@ -227,3 +227,20 @@ resource "kubectl_manifest" "karpenter_node_class_capacity_reservation" {
     create_before_destroy = true
   }
 }
+
+data "aws_iam_policy_document" "karpenter_list_instance_profiles" {
+  count = var.addons.enable_karpenter ? 1 : 0
+
+  statement {
+    actions   = ["iam:ListInstanceProfiles"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_role_policy" "karpenter_list_instance_profiles" {
+  count = var.addons.enable_karpenter ? 1 : 0
+
+  name   = "karpenter-list-instance-profiles"
+  role   = module.karpenter_controller.karpenter.iam_role_name
+  policy = data.aws_iam_policy_document.karpenter_list_instance_profiles[0].json
+}
