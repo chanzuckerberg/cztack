@@ -153,6 +153,17 @@ locals {
   })
 }
 
+resource "helm_release" "karpenter_crd" {
+  count = var.addons.enable_karpenter ? 1 : 0
+
+  name             = "karpenter-crd"
+  repository       = "oci://public.ecr.aws/karpenter"
+  chart            = "karpenter-crd"
+  version          = local.karpenter_chart_version
+  namespace        = try(var.addons.karpenter_config.namespace, "karpenter")
+  create_namespace = true
+}
+
 resource "random_id" "node_pool_name" {
   byte_length = 4
   prefix      = "nodepool-"
@@ -226,4 +237,21 @@ resource "kubectl_manifest" "karpenter_node_class_capacity_reservation" {
   lifecycle {
     create_before_destroy = true
   }
+}
+
+data "aws_iam_policy_document" "karpenter_list_instance_profiles" {
+  count = var.addons.enable_karpenter ? 1 : 0
+
+  statement {
+    actions   = ["iam:ListInstanceProfiles"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_role_policy" "karpenter_list_instance_profiles" {
+  count = var.addons.enable_karpenter ? 1 : 0
+
+  name   = "karpenter-list-instance-profiles"
+  role   = module.karpenter_controller.karpenter.iam_role_name
+  policy = data.aws_iam_policy_document.karpenter_list_instance_profiles[0].json
 }
