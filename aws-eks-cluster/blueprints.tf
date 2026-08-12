@@ -9,6 +9,8 @@ locals {
     "/var/log/containers/scraper-collector*"
   ]
   exclude_list = distinct(concat(local.default_exclude_list, var.addons.fluentbit_exclude_paths))
+
+  karpenter_chart_version = try(var.addons.karpenter_config.chart_version, "1.9.2")
 }
 
 data "aws_iam_policy_document" "karpenter_odcr" {
@@ -59,6 +61,7 @@ module "karpenter_controller" {
   enable_karpenter                  = var.addons.enable_karpenter
   karpenter_enable_spot_termination = true
   karpenter = merge(var.addons.karpenter_config, {
+    chart_version       = local.karpenter_chart_version
     repository_username = data.aws_ecrpublic_authorization_token.token.user_name
     repository_password = data.aws_ecrpublic_authorization_token.token.password
     source_policy_documents = concat(
