@@ -58,8 +58,6 @@ resource "aws_s3_bucket" "bucket" {
     }
   }
 
-  acceleration_status = var.transfer_acceleration ? "Enabled" : "Suspended"
-
   # dynamic block used instead of simply assigning a variable b/c lifecycle_rule is configuration block
   dynamic "lifecycle_rule" {
     for_each = var.lifecycle_rules
@@ -120,6 +118,13 @@ resource "aws_s3_bucket" "bucket" {
   }
 
   tags = local.tags
+}
+
+resource "aws_s3_bucket_accelerate_configuration" "bucket" {
+  count = var.transfer_acceleration ? 1 : 0
+
+  bucket = aws_s3_bucket.bucket.id
+  status = "Enabled"
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket" {
