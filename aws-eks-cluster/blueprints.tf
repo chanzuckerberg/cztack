@@ -174,17 +174,7 @@ module "eks_addons" {
         most_recent       = true
         resolve_conflicts = "OVERWRITE"
       },
-      local.declare_cilium_startup_taint ? {
-        configuration_values = jsonencode({
-          tolerations = concat(
-            [
-              { key = "CriticalAddonsOnly", operator = "Exists" },
-              { key = "node-role.kubernetes.io/control-plane", effect = "NoSchedule" },
-            ],
-            local.cilium_startup_taint_tolerations
-          )
-        })
-      } : {}
+      local.declare_cilium_startup_taint ? { configuration_values = local.cilium_addon_configuration_values["coredns"] } : {}
     )
 
     kube-proxy = {
@@ -223,19 +213,7 @@ module "eks_addons" {
         most_recent              = true
         service_account_role_arn = aws_iam_role.ebs_csi.arn
       },
-      local.declare_cilium_startup_taint ? {
-        configuration_values = jsonencode({
-          controller = {
-            tolerations = concat(
-              [
-                { key = "CriticalAddonsOnly", operator = "Exists" },
-                { operator = "Exists", effect = "NoExecute", tolerationSeconds = 300 },
-              ],
-              local.cilium_startup_taint_tolerations
-            )
-          }
-        })
-      } : {}
+      local.declare_cilium_startup_taint ? { configuration_values = local.cilium_addon_configuration_values["aws-ebs-csi-driver"] } : {}
     )
 
     aws-mountpoint-s3-csi-driver = merge(
@@ -244,13 +222,7 @@ module "eks_addons" {
         most_recent              = true
         service_account_role_arn = aws_iam_role.s3_csi.arn
       },
-      local.declare_cilium_startup_taint ? {
-        configuration_values = jsonencode({
-          controller = {
-            tolerations = local.cilium_startup_taint_tolerations
-          }
-        })
-      } : {}
+      local.declare_cilium_startup_taint ? { configuration_values = local.cilium_addon_configuration_values["aws-mountpoint-s3-csi-driver"] } : {}
     )
   }
 
@@ -275,12 +247,20 @@ module "other_addons" {
   enable_argocd = var.addons.enable_argocd
   argocd        = var.addons.argocd_config
 
-  enable_aws_cloudwatch_metrics         = var.addons.enable_aws_cloudwatch_metrics
-  enable_aws_load_balancer_controller   = var.addons.enable_aws_load_balancer_controller
-  enable_metrics_server                 = var.addons.enable_metrics_server
-  enable_cert_manager                   = var.addons.enable_cert_manager
-  enable_external_secrets               = var.addons.enable_external_secrets
-  external_secrets                      = var.addons.external_secrets_config
+  enable_aws_cloudwatch_metrics       = var.addons.enable_aws_cloudwatch_metrics
+  enable_aws_load_balancer_controller = var.addons.enable_aws_load_balancer_controller
+  enable_metrics_server               = var.addons.enable_metrics_server
+  enable_cert_manager                 = var.addons.enable_cert_manager
+  enable_external_secrets             = var.addons.enable_external_secrets
+  external_secrets = merge(
+    var.addons.external_secrets_config,
+    local.declare_cilium_startup_taint ? {
+      values = concat(
+        try(var.addons.external_secrets_config.values, []),
+        [yamlencode({ global = { tolerations = local.cilium_startup_taint_tolerations } })]
+      )
+    } : {}
+  )
   external_secrets_secrets_manager_arns = var.addons.external_secrets_secrets_manager_arns
   external_secrets_ssm_parameter_arns   = []
   external_secrets_kms_key_arns         = []

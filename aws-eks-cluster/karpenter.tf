@@ -136,7 +136,7 @@ locals {
   custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 
-  declare_cilium_startup_taint = try(var.addons.karpenter_declare_cilium_startup_taint, false)
+  declare_cilium_startup_taint = var.addons.karpenter_declare_cilium_startup_taint
 
   cilium_startup_taints = [
     {
@@ -151,12 +151,41 @@ locals {
       effect   = t.effect
     }
   ]
+  critical_addons_only_toleration = { key = "CriticalAddonsOnly", operator = "Exists" }
+
+  cilium_addon_configuration_values = {
+    coredns = jsonencode({
+      tolerations = concat(
+        [
+          local.critical_addons_only_toleration,
+          { key = "node-role.kubernetes.io/control-plane", effect = "NoSchedule" },
+        ],
+        local.cilium_startup_taint_tolerations
+      )
+    })
+    "aws-ebs-csi-driver" = jsonencode({
+      controller = {
+        tolerations = concat(
+          [
+            local.critical_addons_only_toleration,
+            { operator = "Exists", effect = "NoExecute", tolerationSeconds = 300 },
+          ],
+          local.cilium_startup_taint_tolerations
+        )
+      }
+    })
+    "aws-mountpoint-s3-csi-driver" = jsonencode({
+      controller = {
+        tolerations = local.cilium_startup_taint_tolerations
+      }
+    })
+  }
+
   final_nodepool_spec = merge(local.effective_nodepool_spec, {
     "template" = merge(local.effective_nodepool_spec.template, {
       "spec" = merge(
         local.effective_nodepool_spec.template.spec,
-        { for k, v in { "startupTaints" = local.cilium_startup_taints } : k => v
-        if local.declare_cilium_startup_taint }
+        local.declare_cilium_startup_taint ? { "startupTaints" = local.cilium_startup_taints } : {}
       )
     })
   })
