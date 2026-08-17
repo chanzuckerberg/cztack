@@ -136,10 +136,19 @@ locals {
   custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 
+  declare_cilium_startup_taint = try(var.addons.karpenter_declare_cilium_startup_taint, false)
+
   cilium_startup_taints = [
     {
       "key"    = "node.cilium.io/agent-not-ready"
       "effect" = "NoSchedule"
+    }
+  ]
+  cilium_startup_taint_tolerations = [
+    for t in local.cilium_startup_taints : {
+      key      = t.key
+      operator = "Exists"
+      effect   = t.effect
     }
   ]
   final_nodepool_spec = merge(local.effective_nodepool_spec, {
@@ -147,7 +156,7 @@ locals {
       "spec" = merge(
         local.effective_nodepool_spec.template.spec,
         { for k, v in { "startupTaints" = local.cilium_startup_taints } : k => v
-        if try(var.addons.karpenter_declare_cilium_startup_taint, false) }
+        if local.declare_cilium_startup_taint }
       )
     })
   })

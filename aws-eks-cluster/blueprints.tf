@@ -169,10 +169,23 @@ module "eks_addons" {
       most_recent       = true
     }
 
-    coredns = {
-      most_recent       = true
-      resolve_conflicts = "OVERWRITE"
-    }
+    coredns = merge(
+      {
+        most_recent       = true
+        resolve_conflicts = "OVERWRITE"
+      },
+      local.declare_cilium_startup_taint ? {
+        configuration_values = jsonencode({
+          tolerations = concat(
+            [
+              { key = "CriticalAddonsOnly", operator = "Exists" },
+              { key = "node-role.kubernetes.io/control-plane", effect = "NoSchedule" },
+            ],
+            local.cilium_startup_taint_tolerations
+          )
+        })
+      } : {}
+    )
 
     kube-proxy = {
       most_recent       = true
@@ -204,17 +217,41 @@ module "eks_addons" {
       })
     }
 
-    aws-ebs-csi-driver = {
-      resolve_conflicts        = "OVERWRITE"
-      most_recent              = true
-      service_account_role_arn = aws_iam_role.ebs_csi.arn
-    }
+    aws-ebs-csi-driver = merge(
+      {
+        resolve_conflicts        = "OVERWRITE"
+        most_recent              = true
+        service_account_role_arn = aws_iam_role.ebs_csi.arn
+      },
+      local.declare_cilium_startup_taint ? {
+        configuration_values = jsonencode({
+          controller = {
+            tolerations = concat(
+              [
+                { key = "CriticalAddonsOnly", operator = "Exists" },
+                { operator = "Exists", effect = "NoExecute", tolerationSeconds = 300 },
+              ],
+              local.cilium_startup_taint_tolerations
+            )
+          }
+        })
+      } : {}
+    )
 
-    aws-mountpoint-s3-csi-driver = {
-      resolve_conflicts        = "OVERWRITE"
-      most_recent              = true
-      service_account_role_arn = aws_iam_role.s3_csi.arn
-    }
+    aws-mountpoint-s3-csi-driver = merge(
+      {
+        resolve_conflicts        = "OVERWRITE"
+        most_recent              = true
+        service_account_role_arn = aws_iam_role.s3_csi.arn
+      },
+      local.declare_cilium_startup_taint ? {
+        configuration_values = jsonencode({
+          controller = {
+            tolerations = local.cilium_startup_taint_tolerations
+          }
+        })
+      } : {}
+    )
   }
 
   depends_on = [
