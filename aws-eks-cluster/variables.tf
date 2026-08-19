@@ -87,6 +87,12 @@ variable "tags" {
   description = "Typically fogg's var.tags"
 }
 
+variable "cluster_tags" {
+  type        = map(string)
+  default     = {}
+  description = "Additional tags applied only to the EKS cluster itself, e.g. GuardDutyManaged=false to opt the cluster out of GuardDuty agent auto-management"
+}
+
 // https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
 // https://github.com/awslabs/amazon-eks-ami/releases
 variable "ami_release_version" {
