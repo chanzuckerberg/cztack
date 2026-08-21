@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.130.0](https://github.com/chanzuckerberg/cztack/compare/v0.129.0...v0.130.0) (2026-08-21)
+
+
+### Features
+
+* tag clusters GuardDutyManaged from enable_guardduty to control agent auto-management ([#916](https://github.com/chanzuckerberg/cztack/issues/916)) ([453ee31](https://github.com/chanzuckerberg/cztack/commit/453ee31416b134a6a3d794df27a8c8ddd6d287d6))
+
 ## [0.129.0](https://github.com/chanzuckerberg/cztack/compare/v0.128.1...v0.129.0) (2026-08-12)
 
 
