@@ -154,6 +154,8 @@ module "cluster" {
 
   tags = merge(var.tags, local.karpenter_discovery, local.karpenter_discovery_per_cluster)
 
+  cluster_tags = { GuardDutyManaged = var.addons.enable_guardduty ? "true" : "false" }
+
   cluster_name              = local.cluster_name
   cluster_version           = local.cluster_version
   vpc_id                    = var.vpc_id
