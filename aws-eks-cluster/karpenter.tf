@@ -202,37 +202,34 @@ resource "helm_release" "karpenter_crd" {
   create_namespace = true
 }
 
-resource "random_id" "node_pool_name" {
-  byte_length = 4
-  prefix      = "nodepool-"
-  keepers = {
-    # Regenerate nodepool definition every time spec changes
-    version = yamlencode(local.final_nodepool_spec)
-  }
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-
-resource "kubectl_manifest" "karpenter_nodepool" {
+resource "kubectl_manifest" "karpenter_default_nodepool" {
   count = var.addons.enable_karpenter && var.addons.enable_default_karpenter_nodepool ? 1 : 0
 
   yaml_body = yamlencode({
     "apiVersion" = "karpenter.sh/v1"
     "kind"       = "NodePool"
     "metadata" = {
-      "name" = random_id.node_pool_name.hex
+      "name" = "default"
     }
     "spec" = local.final_nodepool_spec
   })
-  force_new = true
+
+  server_side_apply = true
+  force_conflicts   = true
+
+  ignore_fields = [
+    "metadata.labels",
+    "metadata.annotations",
+    "spec",
+  ]
+
   depends_on = [
     module.karpenter_controller,
     aws_iam_service_linked_role.ec2_spot,
   ]
+
   lifecycle {
-    create_before_destroy = true
+    ignore_changes = [yaml_body]
   }
 }
 
@@ -246,11 +243,22 @@ resource "kubectl_manifest" "karpenter_node_class" {
     }
     "spec" = local.karpenter_ec2_node_class_spec
   })
+
+  server_side_apply = true
+  force_conflicts   = true
+
+  ignore_fields = [
+    "metadata.labels",
+    "metadata.annotations",
+    "spec",
+  ]
+
   depends_on = [
     module.karpenter_controller
   ]
+
   lifecycle {
-    create_before_destroy = true
+    ignore_changes = [yaml_body]
   }
 }
 
