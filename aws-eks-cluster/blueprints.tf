@@ -144,6 +144,7 @@ resource "time_sleep" "karpenter_ready" {
   depends_on = [
     module.karpenter_controller,
     kubectl_manifest.karpenter_default_nodepool,
+    kubectl_manifest.karpenter_nodepool,
     kubectl_manifest.karpenter_node_class,
     kubectl_manifest.karpenter_node_class_capacity_reservation,
   ]

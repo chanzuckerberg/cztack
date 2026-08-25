@@ -202,6 +202,34 @@ resource "helm_release" "karpenter_crd" {
   create_namespace = true
 }
 
+resource "random_id" "node_pool_name" {
+  byte_length = 4
+  prefix      = "nodepool-"
+  keepers = {
+    version = yamlencode(local.final_nodepool_spec)
+  }
+  lifecycle {
+    ignore_changes = [keepers]
+  }
+}
+
+resource "kubectl_manifest" "karpenter_nodepool" {
+  count = var.addons.enable_karpenter && var.addons.enable_default_karpenter_nodepool && var.addons.karpenter_legacy_nodepool ? 1 : 0
+
+  yaml_body = yamlencode({
+    "apiVersion" = "karpenter.sh/v1"
+    "kind"       = "NodePool"
+    "metadata" = {
+      "name" = random_id.node_pool_name.hex
+    }
+    "spec" = merge(local.final_nodepool_spec, { "limits" = { "cpu" = "0" } })
+  })
+  depends_on = [
+    module.karpenter_controller,
+    aws_iam_service_linked_role.ec2_spot,
+  ]
+}
+
 resource "kubectl_manifest" "karpenter_default_nodepool" {
   count = var.addons.enable_karpenter && var.addons.enable_default_karpenter_nodepool ? 1 : 0
 
