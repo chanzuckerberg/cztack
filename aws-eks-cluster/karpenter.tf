@@ -136,18 +136,56 @@ locals {
   custom_nodepool_spec    = try(var.addons.karpenter_nodepool_spec, null)
   effective_nodepool_spec = local.custom_nodepool_spec != null ? local.custom_nodepool_spec : local.default_nodepool_spec
 
+  declare_cilium_startup_taint = var.addons.karpenter_declare_cilium_startup_taint
+
   cilium_startup_taints = [
     {
       "key"    = "node.cilium.io/agent-not-ready"
       "effect" = "NoSchedule"
     }
   ]
+  cilium_startup_taint_tolerations = [
+    for t in local.cilium_startup_taints : {
+      key      = t.key
+      operator = "Exists"
+      effect   = t.effect
+    }
+  ]
+  critical_addons_only_toleration = { key = "CriticalAddonsOnly", operator = "Exists" }
+
+  cilium_addon_configuration_values = {
+    coredns = jsonencode({
+      tolerations = concat(
+        [
+          local.critical_addons_only_toleration,
+          { key = "node-role.kubernetes.io/control-plane", effect = "NoSchedule" },
+        ],
+        local.cilium_startup_taint_tolerations
+      )
+    })
+    "aws-ebs-csi-driver" = jsonencode({
+      controller = {
+        tolerations = concat(
+          [
+            local.critical_addons_only_toleration,
+            { operator = "Exists", effect = "NoExecute", tolerationSeconds = 300 },
+          ],
+          local.cilium_startup_taint_tolerations
+        )
+      }
+    })
+    "aws-mountpoint-s3-csi-driver" = jsonencode({
+      controller = {
+        tolerations = local.cilium_startup_taint_tolerations
+      }
+    })
+  }
+
   final_nodepool_spec = merge(local.effective_nodepool_spec, {
     "template" = merge(local.effective_nodepool_spec.template, {
       "spec" = merge(
         local.effective_nodepool_spec.template.spec,
-        { for k, v in { "startupTaints" = local.cilium_startup_taints } : k => v
-        if try(var.addons.karpenter_declare_cilium_startup_taint, false) }
+        local.declare_cilium_startup_taint ? { "startupTaints" = local.cilium_startup_taints } : {}
       )
     })
   })
@@ -168,17 +206,15 @@ resource "random_id" "node_pool_name" {
   byte_length = 4
   prefix      = "nodepool-"
   keepers = {
-    # Regenerate nodepool definition every time spec changes
     version = yamlencode(local.final_nodepool_spec)
   }
   lifecycle {
-    create_before_destroy = true
+    ignore_changes = [keepers]
   }
 }
 
-
 resource "kubectl_manifest" "karpenter_nodepool" {
-  count = var.addons.enable_karpenter && var.addons.enable_default_karpenter_nodepool ? 1 : 0
+  count = var.addons.enable_karpenter && var.addons.enable_default_karpenter_nodepool && var.addons.karpenter_legacy_nodepool ? 1 : 0
 
   yaml_body = yamlencode({
     "apiVersion" = "karpenter.sh/v1"
@@ -186,15 +222,42 @@ resource "kubectl_manifest" "karpenter_nodepool" {
     "metadata" = {
       "name" = random_id.node_pool_name.hex
     }
-    "spec" = local.final_nodepool_spec
+    "spec" = merge(local.final_nodepool_spec, { "limits" = { "cpu" = "0" } })
   })
-  force_new = true
   depends_on = [
     module.karpenter_controller,
     aws_iam_service_linked_role.ec2_spot,
   ]
+}
+
+resource "kubectl_manifest" "karpenter_default_nodepool" {
+  count = var.addons.enable_karpenter && var.addons.enable_default_karpenter_nodepool ? 1 : 0
+
+  yaml_body = yamlencode({
+    "apiVersion" = "karpenter.sh/v1"
+    "kind"       = "NodePool"
+    "metadata" = {
+      "name" = "default"
+    }
+    "spec" = local.final_nodepool_spec
+  })
+
+  server_side_apply = true
+  force_conflicts   = true
+
+  ignore_fields = [
+    "metadata.labels",
+    "metadata.annotations",
+    "spec",
+  ]
+
+  depends_on = [
+    module.karpenter_controller,
+    aws_iam_service_linked_role.ec2_spot,
+  ]
+
   lifecycle {
-    create_before_destroy = true
+    ignore_changes = [yaml_body]
   }
 }
 
@@ -208,11 +271,22 @@ resource "kubectl_manifest" "karpenter_node_class" {
     }
     "spec" = local.karpenter_ec2_node_class_spec
   })
+
+  server_side_apply = true
+  force_conflicts   = true
+
+  ignore_fields = [
+    "metadata.labels",
+    "metadata.annotations",
+    "spec",
+  ]
+
   depends_on = [
     module.karpenter_controller
   ]
+
   lifecycle {
-    create_before_destroy = true
+    ignore_changes = [yaml_body]
   }
 }
 
