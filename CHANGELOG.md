@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.131.0](https://github.com/chanzuckerberg/cztack/compare/v0.130.0...v0.131.0) (2026-08-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrading replaces the hash-named default NodePool with a stable "default" NodePool one time (every node on the old pool drains in parallel), and the default NodePool/EC2NodeClass become creation-time-only in Terraform; pre-enable the ArgoCD karpenter-default-nodepool app before upgrading so the new pool exists before the drain.
+
+### Bug Fixes
+
+* tolerate the cilium startup taint in Deployment-backed EKS addons ([#914](https://github.com/chanzuckerberg/cztack/issues/914)) ([d2da350](https://github.com/chanzuckerberg/cztack/commit/d2da350527e10458a34881d9fea435324f8da0ca))
+
 ## [0.130.0](https://github.com/chanzuckerberg/cztack/compare/v0.129.0...v0.130.0) (2026-08-21)
 
 
