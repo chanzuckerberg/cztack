@@ -3,7 +3,6 @@
   "commit-search-depth": 1,
   "pull-request-title-pattern": "chore${scope}: release${component} ${version}",
   "bump-minor-pre-major": true,
-  "monorepo-tags": true,
   "prerelease": false,
   "changelog-sections": [
     {
