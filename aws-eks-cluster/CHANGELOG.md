@@ -5,7 +5,7 @@
 
 ### ⚠ BREAKING CHANGES
 
-* upgrading replaces the hash-named default NodePool with a stable "default" NodePool one time (every node on the old pool drains in parallel), and the default NodePool/EC2NodeClass become creation-time-only in Terraform; pre-enable the ArgoCD karpenter-default-nodepool app before upgrading so the new pool exists before the drain.
+* the default NodePool/EC2NodeClass become creation-time-only in Terraform and are owned by ArgoCD after creation; upgrading creates the stable "default" NodePool and freezes provisioning on the legacy hash-named pool in place (limits.cpu=0, no node drained) — capacity migrates via normal expireAfter rotation and consolidation, and the emptied legacy pool is removed by setting karpenter_legacy_nodepool = false.
 
 ### Bug Fixes
 
