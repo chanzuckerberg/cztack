@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.0.0...aws-eks-cluster-v9.0.1) (2026-09-01)
+
+
+### Misc
+
+* **aws-eks-cluster:** correct v9.0.0 breaking-change notes to the shipped zero-drain behavior ([#920](https://github.com/chanzuckerberg/cztack/issues/920)) ([d3aaf85](https://github.com/chanzuckerberg/cztack/commit/d3aaf858f04f2b8091fc2907e27ca1347a796781))
+
 ## [9.0.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v8.23.0...aws-eks-cluster-v9.0.0) (2026-08-26)
 
 
