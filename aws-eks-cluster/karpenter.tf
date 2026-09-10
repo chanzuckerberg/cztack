@@ -181,14 +181,7 @@ locals {
     })
   }
 
-  final_nodepool_spec = merge(local.effective_nodepool_spec, {
-    "template" = merge(local.effective_nodepool_spec.template, {
-      "spec" = merge(
-        local.effective_nodepool_spec.template.spec,
-        local.declare_cilium_startup_taint ? { "startupTaints" = local.cilium_startup_taints } : {}
-      )
-    })
-  })
+  final_nodepool_spec = local.effective_nodepool_spec
 }
 
 resource "helm_release" "karpenter_crd" {
