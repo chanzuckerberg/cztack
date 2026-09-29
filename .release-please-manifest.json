@@ -48,7 +48,7 @@
   "aws-params-secrets-setup": "0.1.1",
   "aws-params-writer": "0.1.0",
   "aws-redis-node": "0.1.1",
-  "aws-redis-replication-group": "0.1.1",
+  "aws-redis-replication-group": "0.2.0",
   "aws-s3-account-public-access-block": "0.1.1",
   "aws-s3-private-bucket": "0.1.2",
   "aws-s3-public-bucket": "0.1.1",
@@ -92,5 +92,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.131.1"
+  ".": "0.132.0"
 }
