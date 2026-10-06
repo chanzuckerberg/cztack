@@ -274,7 +274,20 @@ module "other_addons" {
   }
 
   cert_manager_route53_hosted_zone_arns = var.addons.cert_manager_route53_hosted_zone_arns
-  cert_manager                          = var.addons.cert_manager_config
+  cert_manager = merge(
+    var.addons.cert_manager_config,
+    local.declare_cilium_startup_taint ? {
+      values = concat(
+        try(var.addons.cert_manager_config.values, []),
+        [yamlencode({
+          tolerations     = local.cilium_startup_taint_tolerations
+          webhook         = { tolerations = local.cilium_startup_taint_tolerations }
+          cainjector      = { tolerations = local.cilium_startup_taint_tolerations }
+          startupapicheck = { tolerations = local.cilium_startup_taint_tolerations }
+        })]
+      )
+    } : {}
+  )
   aws_load_balancer_controller = {
     values = [yamlencode({
       clusterSecretsPermissions = {

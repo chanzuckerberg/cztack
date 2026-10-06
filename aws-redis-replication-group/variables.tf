@@ -103,3 +103,15 @@ variable "auth_token" {
   description = "Token for accessing the elasticache cluster"
   sensitive   = true
 }
+
+variable "automatic_failover_enabled" {
+  type        = bool
+  description = "Whether a read replica is automatically promoted if the primary fails. Requires number_cache_clusters >= 2."
+  default     = false
+}
+
+variable "multi_az_enabled" {
+  type        = bool
+  description = "Whether to enable Multi-AZ support for the replication group. Requires automatic_failover_enabled = true."
+  default     = false
+}

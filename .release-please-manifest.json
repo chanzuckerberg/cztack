@@ -15,7 +15,7 @@
   "aws-ecs-job-fargate": "0.1.0",
   "aws-ecs-service": "0.1.0",
   "aws-ecs-service-fargate": "0.1.0",
-  "aws-eks-cluster": "9.0.0",
+  "aws-eks-cluster": "9.0.1",
   "aws-efs-volume": "0.1.1",
   "aws-iam-ecs-task-role": "0.1.0",
   "aws-iam-group-assume-role": "0.1.0",
@@ -48,7 +48,7 @@
   "aws-params-secrets-setup": "0.1.1",
   "aws-params-writer": "0.1.0",
   "aws-redis-node": "0.1.1",
-  "aws-redis-replication-group": "0.1.1",
+  "aws-redis-replication-group": "0.2.0",
   "aws-s3-account-public-access-block": "0.1.1",
   "aws-s3-private-bucket": "0.1.2",
   "aws-s3-public-bucket": "0.1.1",
@@ -92,5 +92,5 @@
   "snowflake-view-grant-all": "0.1.1",
   "snowflake-warehouse-grant-all": "0.1.1",
   "tfe-management": "3.2.4",
-  ".": "0.131.0"
+  ".": "0.132.0"
 }

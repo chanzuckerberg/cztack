@@ -58,5 +58,18 @@ resource "aws_elasticache_replication_group" "default" {
   transit_encryption_enabled  = var.transit_encryption_enabled
   preferred_cache_cluster_azs = var.preferred_cache_cluster_azs
   auth_token                  = var.auth_token
+  automatic_failover_enabled  = var.automatic_failover_enabled
+  multi_az_enabled            = var.multi_az_enabled
   tags                        = var.tags
+
+  lifecycle {
+    precondition {
+      condition     = !var.multi_az_enabled || var.automatic_failover_enabled
+      error_message = "multi_az_enabled requires automatic_failover_enabled."
+    }
+    precondition {
+      condition     = !var.automatic_failover_enabled || var.number_cache_clusters >= 2
+      error_message = "automatic_failover_enabled requires number_cache_clusters >= 2."
+    }
+  }
 }

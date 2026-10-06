@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.132.0](https://github.com/chanzuckerberg/cztack/compare/v0.131.1...v0.132.0) (2026-09-29)
+
+
+### Features
+
+* **aws-redis-replication-group:** expose automatic_failover_enabled and multi_az_enabled ([b2b739c](https://github.com/chanzuckerberg/cztack/commit/b2b739c30b7102ccfe7db9f79b1c55dd5aa9d1a3))
+
+## [0.131.1](https://github.com/chanzuckerberg/cztack/compare/v0.131.0...v0.131.1) (2026-09-10)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** drop cilium startup taint from the bootstrap NodePool ([#926](https://github.com/chanzuckerberg/cztack/issues/926)) ([44f3bb5](https://github.com/chanzuckerberg/cztack/commit/44f3bb53bbb4104f8d0300c3faa8cb1fb0ba5cb7))
+
+
+### Misc
+
+* **aws-eks-cluster:** correct v9.0.0 breaking-change notes to the shipped zero-drain behavior ([#920](https://github.com/chanzuckerberg/cztack/issues/920)) ([d3aaf85](https://github.com/chanzuckerberg/cztack/commit/d3aaf858f04f2b8091fc2907e27ca1347a796781))
+* **deps:** bump github.com/Snowflake-Labs/terraform-provider-snowflake ([#889](https://github.com/chanzuckerberg/cztack/issues/889)) ([52fc695](https://github.com/chanzuckerberg/cztack/commit/52fc695626d665b095fca8f90be490851a7a1b67))
+* enable floating_tags for release-please-semvar ([#921](https://github.com/chanzuckerberg/cztack/issues/921)) ([200ec5c](https://github.com/chanzuckerberg/cztack/commit/200ec5c8c721564563e1b08ac98c10d4d2901100))
+
 ## [0.131.0](https://github.com/chanzuckerberg/cztack/compare/v0.130.0...v0.131.0) (2026-08-26)
 
 
