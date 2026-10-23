@@ -335,6 +335,12 @@ variable "aws_org_id" {
   default     = "o-56v5gp5fcu"
 }
 
+variable "argo_root_principal_org_ids" {
+  type        = list(string)
+  description = "AWS Organization IDs the Argo CD account may belong to, for the argo root role's sts:AssumeRole condition on argo_child roles. Defaults to [aws_org_id]. While the account moves between organizations, list both IDs so Argo CD keeps reaching its clusters."
+  default     = []
+}
+
 variable "create_ec2_spot_service_linked_role" {
   type        = bool
   description = "Whether to create the account-global AWSServiceRoleForEC2Spot service-linked role. Only one may exist per account, so set this to false on additional clusters that share an account with a cluster that already owns the role."
