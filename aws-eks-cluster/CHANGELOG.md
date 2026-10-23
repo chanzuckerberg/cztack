@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.2](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.0.1...aws-eks-cluster-v9.0.2) (2026-10-23)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** let the argo root role allow more than one AWS Organization ID ([#931](https://github.com/chanzuckerberg/cztack/issues/931)) ([45e5eb8](https://github.com/chanzuckerberg/cztack/commit/45e5eb8089718dfb8d9165ad8848bee8707b7f96))
+
 ## [9.0.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.0.0...aws-eks-cluster-v9.0.1) (2026-09-10)
 
 
