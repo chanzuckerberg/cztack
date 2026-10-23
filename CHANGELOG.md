@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.132.1](https://github.com/chanzuckerberg/cztack/compare/v0.132.0...v0.132.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** let the argo root role allow more than one AWS Organization ID ([#931](https://github.com/chanzuckerberg/cztack/issues/931)) ([45e5eb8](https://github.com/chanzuckerberg/cztack/commit/45e5eb8089718dfb8d9165ad8848bee8707b7f96))
+
 ## [0.132.0](https://github.com/chanzuckerberg/cztack/compare/v0.131.1...v0.132.0) (2026-09-29)
 
 
