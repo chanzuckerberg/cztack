@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "assume_role_to_argo_child" {
     condition {
       test     = "StringEquals"
       variable = "aws:PrincipalOrgID"
-      values   = [var.aws_org_id]
+      values   = length(var.argo_root_principal_org_ids) > 0 ? var.argo_root_principal_org_ids : [var.aws_org_id]
     }
   }
 }
