@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.132.2](https://github.com/chanzuckerberg/cztack/compare/v0.132.1...v0.132.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **aws-eks-cluster:** grant the Karpenter controller the EC2 describe permissions Karpenter 1.11 and later require ([#933](https://github.com/chanzuckerberg/cztack/issues/933)) ([7a61dd4](https://github.com/chanzuckerberg/cztack/commit/7a61dd4c49f7ea044bf25950c0021cb27cd93a98))
+
 ## [0.132.1](https://github.com/chanzuckerberg/cztack/compare/v0.132.0...v0.132.1) (2026-10-23)
 
 
