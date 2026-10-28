@@ -313,6 +313,14 @@ data "aws_iam_policy_document" "karpenter_list_instance_profiles" {
     actions   = ["iam:ListInstanceProfiles"]
     resources = ["*"]
   }
+
+  statement {
+    actions = [
+      "ec2:DescribeInstanceStatus",
+      "ec2:DescribePlacementGroups",
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role_policy" "karpenter_list_instance_profiles" {
