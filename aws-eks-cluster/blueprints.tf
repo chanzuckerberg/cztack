@@ -10,7 +10,7 @@ locals {
   ]
   exclude_list = distinct(concat(local.default_exclude_list, var.addons.fluentbit_exclude_paths))
 
-  karpenter_chart_version = try(var.addons.karpenter_config.chart_version, "1.9.2")
+  karpenter_chart_version = try(var.addons.karpenter_config.chart_version, "1.14.3")
 }
 
 data "aws_iam_policy_document" "karpenter_odcr" {
