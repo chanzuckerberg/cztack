@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.133.0](https://github.com/chanzuckerberg/cztack/compare/v0.132.2...v0.133.0) (2026-10-29)
+
+
+### Features
+
+* **aws-eks-cluster:** default Karpenter to 1.14.3 for Kubernetes 1.36 ([#935](https://github.com/chanzuckerberg/cztack/issues/935)) ([f7d6e71](https://github.com/chanzuckerberg/cztack/commit/f7d6e71844ae6501fcc6d0f9c1b130107dd4ac62))
+
 ## [0.132.2](https://github.com/chanzuckerberg/cztack/compare/v0.132.1...v0.132.2) (2026-10-28)
 
 
