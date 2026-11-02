@@ -196,17 +196,29 @@ resource "databricks_external_location" "external_locations" {
   comment         = "Managed by Terraform"
 }
 
+locals {
+  external_location_grants = concat(
+    [for group in distinct(var.all_privileges_groups) : { principal = group, privileges = ["ALL_PRIVILEGES"] }],
+    var.external_location_extra_grants,
+  )
+}
+
 resource "databricks_grants" "databricks_external_location_grants" {
-  count             = (length(var.all_privileges_groups) > 0) ? 1 : 0
+  count             = (length(local.external_location_grants) > 0) ? 1 : 0
   provider          = databricks.workspace
   external_location = databricks_external_location.external_locations.id
   dynamic "grant" {
-    for_each = toset(var.all_privileges_groups)
+    for_each = local.external_location_grants
     content {
-      principal = grant.value
-      privileges = [
-        "ALL_PRIVILEGES",
-      ]
+      principal  = grant.value.principal
+      privileges = grant.value.privileges
+    }
+  }
+
+  lifecycle {
+    precondition {
+      condition     = length(local.external_location_grants) == length(distinct([for g in local.external_location_grants : g.principal]))
+      error_message = "The external location has more than one grant for the same principal; principals in external_location_extra_grants must not repeat or appear in all_privileges_groups."
     }
   }
 }
