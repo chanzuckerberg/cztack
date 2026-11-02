@@ -1,64 +1,197 @@
+module "tiers" {
+  source = "../databricks-uc-privilege-tiers"
+}
+
 locals {
-  # Only set the grant principals if the catalog and/or schema doesn't already exist
-  catalog_manage_grant_principals = var.create_catalog ? concat(
-    [var.owner_id], var.catalog_manage_grant_principals
-  ) : []
-  catalog_all_grant_principals = var.create_catalog ? concat(
-    [var.owner_id], var.catalog_all_grant_principals
-  ) : []
-  catalog_r_grant_principals     = var.create_catalog ? var.catalog_r_grant_principals : []
-  catalog_rw_grant_principals    = var.create_catalog ? var.catalog_rw_grant_principals : []
-  catalog_usage_grant_principals = var.create_catalog ? var.catalog_usage_grant_principals : []
+  tiers = module.tiers.tiers
 
-  schema_manage_grant_principals = var.create_schema ? concat(
-    [var.owner_id], var.schema_manage_grant_principals
-  ) : []
-  schema_all_grant_principals = var.create_schema ? concat(
-    [var.owner_id], var.schema_all_grant_principals
-  ) : []
-  schema_r_grant_principals     = var.create_schema ? var.schema_r_grant_principals : []
-  schema_rw_grant_principals    = var.create_schema ? var.schema_rw_grant_principals : []
-  schema_usage_grant_principals = var.create_schema ? var.schema_usage_grant_principals : []
+  # Only set the members if the catalog and/or schema doesn't already exist
+  catalog_mng_members = var.create_catalog ? concat([var.owner_id], var.catalog_mng_members) : []
+  catalog_all_members = var.create_catalog ? concat([var.owner_id], var.catalog_all_members) : []
+  catalog_r_members   = var.create_catalog ? var.catalog_r_members : []
+  catalog_rw_members  = var.create_catalog ? var.catalog_rw_members : []
+  catalog_crt_members = var.create_catalog ? var.catalog_crt_members : []
+  catalog_usg_members = var.create_catalog ? var.catalog_usg_members : []
 
-  group_types = ["all", "manage", "read", "write", "use"]
+  schema_mng_members = var.create_schema ? concat([var.owner_id], var.schema_mng_members) : []
+  schema_all_members = var.create_schema ? concat([var.owner_id], var.schema_all_members) : []
+  schema_r_members   = var.create_schema ? var.schema_r_members : []
+  schema_rw_members  = var.create_schema ? var.schema_rw_members : []
+  schema_usg_members = var.create_schema ? var.schema_usg_members : []
+
+  catalog_extra_groups = var.create_catalog ? var.catalog_extra_groups : {}
+  schema_extra_groups  = var.create_schema ? var.schema_extra_groups : {}
+
+  catalog_extra_group_members = merge([
+    for key, group in local.catalog_extra_groups : { for member in group.members : "${key}/${member}" => { key = key, member = member } }
+  ]...)
+  schema_extra_group_members = merge([
+    for key, group in local.schema_extra_groups : { for member in group.members : "${key}/${member}" => { key = key, member = member } }
+  ]...)
+  volume_extra_group_members = merge([
+    for key, group in var.volume_extra_groups : { for member in group.members : "${key}/${member}" => { key = key, member = member } }
+  ]...)
+
+  # Catalog grants are authoritative; one databricks_grants holds them all.
+  catalog_grants = concat(
+    [for code, group in databricks_group.catalog : { principal = group.display_name, privileges = local.tiers[code].catalog }],
+    [for key, group in databricks_group.catalog_extra : { principal = group.display_name, privileges = var.catalog_extra_groups[key].privileges }],
+    var.create_catalog ? var.catalog_extra_grants : [],
+  )
+
+  # Schema and Volume grants are additive, keyed by principal. Repeated
+  # principals are merged.
+  schema_extra_grants = {
+    for principal, privileges in merge(
+      { for key, group in databricks_group.schema_extra : group.display_name => [var.schema_extra_groups[key].privileges] },
+      { for g in(var.create_schema ? var.schema_extra_grants : []) : g.principal => g.privileges... },
+    ) : principal => distinct(flatten(privileges))
+  }
+  volume_extra_grants = {
+    for principal, privileges in merge(
+      { for key, group in databricks_group.volume_extra : group.display_name => [var.volume_extra_groups[key].privileges] },
+      { for g in var.volume_extra_grants : g.principal => g.privileges... },
+    ) : principal => distinct(flatten(privileges))
+  }
 }
 
 # groups
 resource "databricks_group" "catalog" {
   depends_on = [databricks_catalog.volume[0]]
-  for_each   = toset(var.create_catalog ? local.group_types : [])
+  for_each   = toset(var.create_catalog ? module.tiers.levels.catalog : [])
   provider   = databricks.mws
 
-  display_name = "${local.catalog_name}_${each.value}"
+  display_name = "${local.catalog_name}_${local.tiers[each.value].suffix}"
 }
 
 resource "databricks_group" "schema" {
   depends_on = [databricks_schema.volume[0]]
-  for_each   = toset(var.create_schema ? local.group_types : [])
+  for_each   = toset(var.create_schema ? module.tiers.levels.schema : [])
   provider   = databricks.mws
 
-  display_name = "${local.catalog_name}_${local.schema_name}_${each.value}"
+  display_name = "${local.catalog_name}_${local.schema_name}_${local.tiers[each.value].suffix}"
 }
 
 resource "databricks_group" "volume" {
-  for_each = toset(local.group_types)
+  for_each = toset(module.tiers.levels.volume)
   provider = databricks.mws
 
-  display_name = "${local.catalog_name}_${local.schema_name}_${databricks_volume.volume.name}_${each.value}"
+  display_name = "${local.catalog_name}_${local.schema_name}_${databricks_volume.volume.name}_${local.tiers[each.value].suffix}"
+}
+
+resource "databricks_group" "catalog_extra" {
+  depends_on = [databricks_catalog.volume]
+  for_each   = local.catalog_extra_groups
+  provider   = databricks.mws
+
+  display_name = "${local.catalog_name}_${each.key}"
+
+  lifecycle {
+    precondition {
+      condition     = !contains(module.tiers.reserved_names, each.key)
+      error_message = "catalog_extra_groups key \"${each.key}\" is a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
+    }
+  }
+}
+
+resource "databricks_group" "schema_extra" {
+  depends_on = [databricks_schema.volume]
+  for_each   = local.schema_extra_groups
+  provider   = databricks.mws
+
+  display_name = "${local.catalog_name}_${local.schema_name}_${each.key}"
+
+  lifecycle {
+    precondition {
+      condition     = !contains(module.tiers.reserved_names, each.key)
+      error_message = "schema_extra_groups key \"${each.key}\" is a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
+    }
+  }
+}
+
+resource "databricks_group" "volume_extra" {
+  for_each = var.volume_extra_groups
+  provider = databricks.mws
+
+  display_name = "${local.catalog_name}_${local.schema_name}_${databricks_volume.volume.name}_${each.key}"
+
+  lifecycle {
+    precondition {
+      condition     = !contains(module.tiers.reserved_names, each.key)
+      error_message = "volume_extra_groups key \"${each.key}\" is a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
+    }
+  }
+}
+
+moved {
+  from = databricks_group.catalog["manage"]
+  to   = databricks_group.catalog["mng"]
+}
+
+moved {
+  from = databricks_group.catalog["read"]
+  to   = databricks_group.catalog["r"]
+}
+
+moved {
+  from = databricks_group.catalog["write"]
+  to   = databricks_group.catalog["rw"]
+}
+
+moved {
+  from = databricks_group.catalog["use"]
+  to   = databricks_group.catalog["usg"]
+}
+
+moved {
+  from = databricks_group.schema["manage"]
+  to   = databricks_group.schema["mng"]
+}
+
+moved {
+  from = databricks_group.schema["read"]
+  to   = databricks_group.schema["r"]
+}
+
+moved {
+  from = databricks_group.schema["write"]
+  to   = databricks_group.schema["rw"]
+}
+
+moved {
+  from = databricks_group.schema["use"]
+  to   = databricks_group.schema["usg"]
+}
+
+moved {
+  from = databricks_group.volume["manage"]
+  to   = databricks_group.volume["mng"]
+}
+
+moved {
+  from = databricks_group.volume["read"]
+  to   = databricks_group.volume["r"]
+}
+
+moved {
+  from = databricks_group.volume["write"]
+  to   = databricks_group.volume["rw"]
 }
 
 # group memberships
+# Kept as one resource per tier: they're keyed by member ID, so merging them
+# would need a moved block per member to avoid removing and re-adding members.
 resource "databricks_group_member" "catalog_manage" {
   provider = databricks.mws
-  for_each = toset(local.catalog_manage_grant_principals)
+  for_each = toset(local.catalog_mng_members)
 
-  group_id  = databricks_group.catalog["manage"].id
+  group_id  = databricks_group.catalog["mng"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "catalog_all" {
   provider = databricks.mws
-  for_each = toset(local.catalog_all_grant_principals)
+  for_each = toset(local.catalog_all_members)
 
   group_id  = databricks_group.catalog["all"].id
   member_id = each.value
@@ -66,31 +199,47 @@ resource "databricks_group_member" "catalog_all" {
 
 resource "databricks_group_member" "catalog_r" {
   provider = databricks.mws
-  for_each = toset(local.catalog_r_grant_principals)
+  for_each = toset(local.catalog_r_members)
 
-  group_id  = databricks_group.catalog["read"].id
+  group_id  = databricks_group.catalog["r"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "catalog_rw" {
   provider = databricks.mws
-  for_each = toset(local.catalog_rw_grant_principals)
+  for_each = toset(local.catalog_rw_members)
 
-  group_id  = databricks_group.catalog["write"].id
+  group_id  = databricks_group.catalog["rw"].id
+  member_id = each.value
+}
+
+resource "databricks_group_member" "catalog_crt" {
+  provider = databricks.mws
+  for_each = toset(local.catalog_crt_members)
+
+  group_id  = databricks_group.catalog["crt"].id
+  member_id = each.value
+}
+
+resource "databricks_group_member" "catalog_use" {
+  provider = databricks.mws
+  for_each = toset(local.catalog_usg_members)
+
+  group_id  = databricks_group.catalog["usg"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "schema_manage" {
   provider = databricks.mws
-  for_each = toset(local.schema_manage_grant_principals)
+  for_each = toset(local.schema_mng_members)
 
-  group_id  = databricks_group.schema["manage"].id
+  group_id  = databricks_group.schema["mng"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "schema_all" {
   provider = databricks.mws
-  for_each = toset(local.schema_all_grant_principals)
+  for_each = toset(local.schema_all_members)
 
   group_id  = databricks_group.schema["all"].id
   member_id = each.value
@@ -98,31 +247,39 @@ resource "databricks_group_member" "schema_all" {
 
 resource "databricks_group_member" "schema_r" {
   provider = databricks.mws
-  for_each = toset(local.schema_r_grant_principals)
+  for_each = toset(local.schema_r_members)
 
-  group_id  = databricks_group.schema["read"].id
+  group_id  = databricks_group.schema["r"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "schema_rw" {
   provider = databricks.mws
-  for_each = toset(local.schema_rw_grant_principals)
+  for_each = toset(local.schema_rw_members)
 
-  group_id  = databricks_group.schema["write"].id
+  group_id  = databricks_group.schema["rw"].id
+  member_id = each.value
+}
+
+resource "databricks_group_member" "schema_use" {
+  provider = databricks.mws
+  for_each = toset(local.schema_usg_members)
+
+  group_id  = databricks_group.schema["usg"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "volume_manage" {
   provider = databricks.mws
-  for_each = toset(var.volume_manage_grant_principals)
+  for_each = toset(var.volume_mng_members)
 
-  group_id  = databricks_group.volume["manage"].id
+  group_id  = databricks_group.volume["mng"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "volume_all" {
   provider = databricks.mws
-  for_each = toset(var.volume_all_grant_principals)
+  for_each = toset(var.volume_all_members)
 
   group_id  = databricks_group.volume["all"].id
   member_id = each.value
@@ -130,177 +287,201 @@ resource "databricks_group_member" "volume_all" {
 
 resource "databricks_group_member" "volume_r" {
   provider = databricks.mws
-  for_each = toset(var.volume_r_grant_principals)
+  for_each = toset(var.volume_r_members)
 
-  group_id  = databricks_group.volume["read"].id
+  group_id  = databricks_group.volume["r"].id
   member_id = each.value
 }
 
 resource "databricks_group_member" "volume_rw" {
   provider = databricks.mws
-  for_each = toset(var.volume_rw_grant_principals)
+  for_each = toset(var.volume_rw_members)
 
-  group_id  = databricks_group.volume["write"].id
+  group_id  = databricks_group.volume["rw"].id
   member_id = each.value
 }
 
+resource "databricks_group_member" "catalog_extra" {
+  provider = databricks.mws
+  for_each = local.catalog_extra_group_members
+
+  group_id  = databricks_group.catalog_extra[each.value.key].id
+  member_id = each.value.member
+}
+
+resource "databricks_group_member" "schema_extra" {
+  provider = databricks.mws
+  for_each = local.schema_extra_group_members
+
+  group_id  = databricks_group.schema_extra[each.value.key].id
+  member_id = each.value.member
+}
+
+resource "databricks_group_member" "volume_extra" {
+  provider = databricks.mws
+  for_each = local.volume_extra_group_members
+
+  group_id  = databricks_group.volume_extra[each.value.key].id
+  member_id = each.value.member
+}
+
 # catalog grants #############################
-resource "databricks_grant" "catalog_all" {
+# NOTE: Authoritative. Catalog grants set outside of this module will be revoked.
+resource "databricks_grants" "catalog" {
   count      = var.create_catalog ? 1 : 0
   provider   = databricks.workspace
-  depends_on = [databricks_catalog.volume[0]]
+  depends_on = [databricks_catalog.volume]
 
-  catalog    = local.catalog_name
-  principal  = databricks_group.catalog["all"].display_name
-  privileges = ["ALL_PRIVILEGES"]
+  catalog = local.catalog_name
+
+  dynamic "grant" {
+    for_each = local.catalog_grants
+    content {
+      principal  = grant.value.principal
+      privileges = grant.value.privileges
+    }
+  }
+
+  lifecycle {
+    precondition {
+      condition     = length(local.catalog_grants) == length(distinct([for g in local.catalog_grants : g.principal]))
+      error_message = "The catalog has more than one grant for the same principal; merge the privileges into one catalog_extra_grants entry."
+    }
+  }
 }
 
-resource "databricks_grant" "catalog_manage" {
-  count      = var.create_catalog ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_catalog.volume[0]]
-
-  catalog    = local.catalog_name
-  principal  = databricks_group.catalog["manage"].display_name
-  privileges = ["ALL_PRIVILEGES", "MANAGE"]
+# The per-tier catalog grants are replaced by databricks_grants.catalog. Forget
+# them instead of destroying them, so no privilege is revoked during the switch.
+removed {
+  from = databricks_grant.catalog_all
+  lifecycle {
+    destroy = false
+  }
 }
 
-resource "databricks_grant" "catalog_read" {
-  count      = var.create_catalog ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_catalog.volume[0]]
-
-  catalog   = local.catalog_name
-  principal = databricks_group.catalog["read"].display_name
-  privileges = [
-    "USE_CATALOG",
-    "USE_SCHEMA",
-    "SELECT",
-    "BROWSE",
-  ]
+removed {
+  from = databricks_grant.catalog_manage
+  lifecycle {
+    destroy = false
+  }
 }
 
-resource "databricks_grant" "catalog_write" {
-  count      = var.create_catalog ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_catalog.volume[0]]
-
-  catalog   = local.catalog_name
-  principal = databricks_group.catalog["write"].display_name
-  privileges = [
-    "USE_CATALOG",
-    "USE_SCHEMA",
-    "SELECT",
-    "CREATE_TABLE",
-    "CREATE_SCHEMA",
-    "MODIFY",
-    "BROWSE",
-  ]
+removed {
+  from = databricks_grant.catalog_read
+  lifecycle {
+    destroy = false
+  }
 }
 
-resource "databricks_grant" "catalog_use" {
-  count      = var.create_catalog ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_catalog.volume[0]]
+removed {
+  from = databricks_grant.catalog_write
+  lifecycle {
+    destroy = false
+  }
+}
 
-  catalog    = local.catalog_name
-  principal  = databricks_group.catalog["use"].display_name
-  privileges = ["USE_CATALOG"]
+removed {
+  from = databricks_grant.catalog_use
+  lifecycle {
+    destroy = false
+  }
 }
 
 # schema grants
-resource "databricks_grant" "schema_all" {
-  count      = var.create_schema ? 1 : 0
+resource "databricks_grant" "schema" {
+  for_each   = databricks_group.schema
   provider   = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
 
   schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["all"].display_name
-  privileges = ["ALL_PRIVILEGES"]
+  principal  = each.value.display_name
+  privileges = local.tiers[each.key].schema
 }
 
-resource "databricks_grant" "schema_manage" {
-  count      = var.create_schema ? 1 : 0
+resource "databricks_grant" "schema_extra" {
+  for_each   = local.schema_extra_grants
   provider   = databricks.workspace
   depends_on = [databricks_schema.volume[0]]
 
   schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["manage"].display_name
-  privileges = ["ALL_PRIVILEGES", "MANAGE"]
+  principal  = each.key
+  privileges = each.value
+
+  lifecycle {
+    precondition {
+      condition     = !contains([for group in databricks_group.schema : group.display_name], each.key)
+      error_message = "schema_extra_grants principal \"${each.key}\" is one of this module's schema groups; use schema_<code>_members instead."
+    }
+  }
 }
 
-resource "databricks_grant" "schema_r" {
-  count      = var.create_schema ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_schema.volume[0]]
-
-  schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["read"].display_name
-  privileges = ["USE_SCHEMA", "SELECT", "EXECUTE"]
+moved {
+  from = databricks_grant.schema_all[0]
+  to   = databricks_grant.schema["all"]
 }
 
-resource "databricks_grant" "schema_rw" {
-  count      = var.create_schema ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_schema.volume[0]]
-
-  schema    = "${local.catalog_name}.${local.schema_name}"
-  principal = databricks_group.schema["write"].display_name
-  privileges = [
-    "USE_SCHEMA",
-    "SELECT",
-    "EXECUTE",
-    "REFRESH",
-    "APPLY_TAG",
-    "CREATE_FUNCTION",
-    "CREATE_TABLE",
-    "CREATE_VOLUME",
-    "CREATE_MATERIALIZED_VIEW",
-  ]
+moved {
+  from = databricks_grant.schema_manage[0]
+  to   = databricks_grant.schema["mng"]
 }
 
-resource "databricks_grant" "schema_use" {
-  count      = var.create_schema ? 1 : 0
-  provider   = databricks.workspace
-  depends_on = [databricks_schema.volume[0]]
+moved {
+  from = databricks_grant.schema_r[0]
+  to   = databricks_grant.schema["r"]
+}
 
-  schema     = "${local.catalog_name}.${local.schema_name}"
-  principal  = databricks_group.schema["use"].display_name
-  privileges = ["USE_SCHEMA"]
+moved {
+  from = databricks_grant.schema_rw[0]
+  to   = databricks_grant.schema["rw"]
+}
+
+moved {
+  from = databricks_grant.schema_use[0]
+  to   = databricks_grant.schema["usg"]
 }
 
 # volume grants
-resource "databricks_grant" "volume_all" {
+resource "databricks_grant" "volume" {
+  for_each = databricks_group.volume
   provider = databricks.workspace
 
   volume     = databricks_volume.volume.id
-  principal  = databricks_group.volume["all"].display_name
-  privileges = ["ALL_PRIVILEGES"]
+  principal  = each.value.display_name
+  privileges = local.tiers[each.key].volume
 }
 
-resource "databricks_grant" "volume_manage" {
+resource "databricks_grant" "volume_extra" {
+  for_each = local.volume_extra_grants
   provider = databricks.workspace
 
   volume     = databricks_volume.volume.id
-  principal  = databricks_group.volume["manage"].display_name
-  privileges = ["ALL_PRIVILEGES", "MANAGE"]
+  principal  = each.key
+  privileges = each.value
+
+  lifecycle {
+    precondition {
+      condition     = !contains([for group in databricks_group.volume : group.display_name], each.key)
+      error_message = "volume_extra_grants principal \"${each.key}\" is one of this module's volume groups; use volume_<code>_members instead."
+    }
+  }
 }
 
-resource "databricks_grant" "volume_r" {
-  provider = databricks.workspace
-
-  volume     = databricks_volume.volume.id
-  principal  = databricks_group.volume["read"].display_name
-  privileges = ["READ_VOLUME"]
+moved {
+  from = databricks_grant.volume_all
+  to   = databricks_grant.volume["all"]
 }
 
-resource "databricks_grant" "volume_rw" {
-  provider = databricks.workspace
+moved {
+  from = databricks_grant.volume_manage
+  to   = databricks_grant.volume["mng"]
+}
 
-  volume    = databricks_volume.volume.id
-  principal = databricks_group.volume["write"].display_name
-  privileges = [
-    "READ_VOLUME",
-    "WRITE_VOLUME",
-  ]
+moved {
+  from = databricks_grant.volume_r
+  to   = databricks_grant.volume["r"]
+}
+
+moved {
+  from = databricks_grant.volume_rw
+  to   = databricks_grant.volume["rw"]
 }

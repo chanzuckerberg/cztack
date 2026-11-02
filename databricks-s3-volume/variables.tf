@@ -91,88 +91,163 @@ variable "bucket_object_ownership" {
   }
 }
 
-variable "catalog_manage_grant_principals" {
-  description = "(Optional) Databricks groups to grant MANAGE permission to on the catalog."
+variable "catalog_mng_members" {
+  description = "(Optional) Member IDs to add to the catalog's _manage group (ALL_PRIVILEGES, MANAGE). Owner is included"
   type        = list(string)
   default     = []
 }
 
-variable "catalog_all_grant_principals" {
-  description = "(Optional) Databricks groups to grant all-privileges permission to on the catalog. Owner is included"
+variable "catalog_all_members" {
+  description = "(Optional) Member IDs to add to the catalog's _all group (ALL_PRIVILEGES). Owner is included"
   type        = list(string)
   default     = []
 }
 
-variable "catalog_r_grant_principals" {
-  description = "(Optional) Databricks groups to grant read-only permissions to on the catalog"
+variable "catalog_r_members" {
+  description = "(Optional) Member IDs to add to the catalog's _read group"
   type        = list(string)
   default     = []
 }
 
-variable "catalog_rw_grant_principals" {
-  description = "(Optional) Databricks groups to grant read/write permissions to on the catalog"
+variable "catalog_rw_members" {
+  description = "(Optional) Member IDs to add to the catalog's _write group"
   type        = list(string)
   default     = []
 }
 
-variable "catalog_usage_grant_principals" {
-  description = "(Optional) Databricks groups to grant usage permission to on the catalog"
+variable "catalog_crt_members" {
+  description = "(Optional) Member IDs to add to the catalog's _create group (USE_CATALOG, CREATE_SCHEMA)"
   type        = list(string)
   default     = []
 }
 
-variable "schema_manage_grant_principals" {
-  description = "(Optional) Databricks groups to grant MANAGE permission to on the schema. Owner is included"
+variable "catalog_usg_members" {
+  description = "(Optional) Member IDs to add to the catalog's _use group (USE_CATALOG)"
   type        = list(string)
   default     = []
 }
 
-variable "schema_all_grant_principals" {
-  description = "(Optional) Databricks groups to grant all-privileges permission to on the schema. Owner is included"
+variable "schema_mng_members" {
+  description = "(Optional) Member IDs to add to the schema's _manage group (ALL_PRIVILEGES, MANAGE). Owner is included"
   type        = list(string)
   default     = []
 }
 
-variable "schema_r_grant_principals" {
-  description = "(Optional) Databricks groups to grant read-only permissions to on the schema"
+variable "schema_all_members" {
+  description = "(Optional) Member IDs to add to the schema's _all group (ALL_PRIVILEGES). Owner is included"
   type        = list(string)
   default     = []
 }
 
-variable "schema_rw_grant_principals" {
-  description = "(Optional) Databricks groups to grant read/write permissions to on the schema"
+variable "schema_r_members" {
+  description = "(Optional) Member IDs to add to the schema's _read group"
   type        = list(string)
   default     = []
 }
 
-variable "schema_usage_grant_principals" {
-  description = "(Optional) Databricks groups to grant usage permission to on the schema"
+variable "schema_rw_members" {
+  description = "(Optional) Member IDs to add to the schema's _write group"
   type        = list(string)
   default     = []
 }
 
-variable "volume_manage_grant_principals" {
-  description = "(Optional) Databricks groups to grant MANAGE permission to on the volume. Owner is included"
+variable "schema_usg_members" {
+  description = "(Optional) Member IDs to add to the schema's _use group (USE_SCHEMA)"
   type        = list(string)
   default     = []
 }
 
-variable "volume_all_grant_principals" {
-  description = "(Optional) Databricks groups to grant all-privileges permission to on the volume. Owner is included"
+variable "volume_mng_members" {
+  description = "(Optional) Member IDs to add to the volume's _manage group (ALL_PRIVILEGES, MANAGE)"
   type        = list(string)
   default     = []
 }
 
-variable "volume_r_grant_principals" {
-  description = "(Optional) Databricks groups to grant read-only permissions to on the volume"
+variable "volume_all_members" {
+  description = "(Optional) Member IDs to add to the volume's _all group (ALL_PRIVILEGES)"
   type        = list(string)
   default     = []
 }
 
-variable "volume_rw_grant_principals" {
-  description = "(Optional) Databricks groups to grant read/write permissions to on the volume"
+variable "volume_r_members" {
+  description = "(Optional) Member IDs to add to the volume's _read group (READ_VOLUME)"
   type        = list(string)
   default     = []
+}
+
+variable "volume_rw_members" {
+  description = "(Optional) Member IDs to add to the volume's _write group (READ_VOLUME, WRITE_VOLUME)"
+  type        = list(string)
+  default     = []
+}
+
+variable "catalog_extra_groups" {
+  description = "(Optional) Additional `<catalog>_<key>` groups, with their catalog privileges and member IDs. Only used when create_catalog is true. Keys can't be a tier code or suffix"
+  type = map(object({
+    privileges = list(string)
+    members    = optional(list(string), [])
+  }))
+  default = {}
+
+  validation {
+    condition     = alltrue([for key in keys(var.catalog_extra_groups) : can(regex("^[a-z0-9_]+$", key))])
+    error_message = "catalog_extra_groups keys must contain only lowercase letters, digits, and underscores."
+  }
+}
+
+variable "schema_extra_groups" {
+  description = "(Optional) Additional `<catalog>_<schema>_<key>` groups, with their schema privileges and member IDs. Only used when create_schema is true. Keys can't be a tier code or suffix"
+  type = map(object({
+    privileges = list(string)
+    members    = optional(list(string), [])
+  }))
+  default = {}
+
+  validation {
+    condition     = alltrue([for key in keys(var.schema_extra_groups) : can(regex("^[a-z0-9_]+$", key))])
+    error_message = "schema_extra_groups keys must contain only lowercase letters, digits, and underscores."
+  }
+}
+
+variable "volume_extra_groups" {
+  description = "(Optional) Additional `<catalog>_<schema>_<volume>_<key>` groups, with their volume privileges and member IDs. Keys can't be a tier code or suffix"
+  type = map(object({
+    privileges = list(string)
+    members    = optional(list(string), [])
+  }))
+  default = {}
+
+  validation {
+    condition     = alltrue([for key in keys(var.volume_extra_groups) : can(regex("^[a-z0-9_]+$", key))])
+    error_message = "volume_extra_groups keys must contain only lowercase letters, digits, and underscores."
+  }
+}
+
+variable "catalog_extra_grants" {
+  description = "(Optional) Catalog grants for existing principals, by name (group name, user email, or service principal application ID). Only used when create_catalog is true; catalog grants are authoritative"
+  type = list(object({
+    principal  = string
+    privileges = list(string)
+  }))
+  default = []
+}
+
+variable "schema_extra_grants" {
+  description = "(Optional) Schema grants for existing principals, by name (group name, user email, or service principal application ID). Only used when create_schema is true"
+  type = list(object({
+    principal  = string
+    privileges = list(string)
+  }))
+  default = []
+}
+
+variable "volume_extra_grants" {
+  description = "(Optional) Volume grants for existing principals, by name (group name, user email, or service principal application ID)"
+  type = list(object({
+    principal  = string
+    privileges = list(string)
+  }))
+  default = []
 }
 
 variable "additional_rw_bucket_grant_arns" {
