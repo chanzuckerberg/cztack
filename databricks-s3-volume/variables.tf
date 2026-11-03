@@ -181,48 +181,6 @@ variable "volume_rw_members" {
   default     = []
 }
 
-variable "catalog_extra_groups" {
-  description = "(Optional) Additional `<catalog>_<key>` groups, with their catalog privileges and member IDs. Only used when create_catalog is true. Keys can't be a tier code or suffix"
-  type = map(object({
-    privileges = list(string)
-    members    = optional(list(string), [])
-  }))
-  default = {}
-
-  validation {
-    condition     = alltrue([for key in keys(var.catalog_extra_groups) : can(regex("^[a-z0-9_]+$", key))])
-    error_message = "catalog_extra_groups keys must contain only lowercase letters, digits, and underscores."
-  }
-}
-
-variable "schema_extra_groups" {
-  description = "(Optional) Additional `<catalog>_<schema>_<key>` groups, with their schema privileges and member IDs. Only used when create_schema is true. Keys can't be a tier code or suffix"
-  type = map(object({
-    privileges = list(string)
-    members    = optional(list(string), [])
-  }))
-  default = {}
-
-  validation {
-    condition     = alltrue([for key in keys(var.schema_extra_groups) : can(regex("^[a-z0-9_]+$", key))])
-    error_message = "schema_extra_groups keys must contain only lowercase letters, digits, and underscores."
-  }
-}
-
-variable "volume_extra_groups" {
-  description = "(Optional) Additional `<catalog>_<schema>_<volume>_<key>` groups, with their volume privileges and member IDs. Keys can't be a tier code or suffix"
-  type = map(object({
-    privileges = list(string)
-    members    = optional(list(string), [])
-  }))
-  default = {}
-
-  validation {
-    condition     = alltrue([for key in keys(var.volume_extra_groups) : can(regex("^[a-z0-9_]+$", key))])
-    error_message = "volume_extra_groups keys must contain only lowercase letters, digits, and underscores."
-  }
-}
-
 variable "catalog_extra_grants" {
   description = "(Optional) Catalog grants for existing principals, by name (group name, user email, or service principal application ID). Only used when create_catalog is true; catalog grants are authoritative"
   type = list(object({

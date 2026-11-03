@@ -19,39 +19,19 @@ locals {
   schema_rw_members  = var.create_schema ? var.schema_rw_members : []
   schema_usg_members = var.create_schema ? var.schema_usg_members : []
 
-  catalog_extra_groups = var.create_catalog ? var.catalog_extra_groups : {}
-  schema_extra_groups  = var.create_schema ? var.schema_extra_groups : {}
-
-  catalog_extra_group_members = merge([
-    for key, group in local.catalog_extra_groups : { for member in group.members : "${key}/${member}" => { key = key, member = member } }
-  ]...)
-  schema_extra_group_members = merge([
-    for key, group in local.schema_extra_groups : { for member in group.members : "${key}/${member}" => { key = key, member = member } }
-  ]...)
-  volume_extra_group_members = merge([
-    for key, group in var.volume_extra_groups : { for member in group.members : "${key}/${member}" => { key = key, member = member } }
-  ]...)
-
   # Catalog grants are authoritative; one databricks_grants holds them all.
   catalog_grants = concat(
     [for code, group in databricks_group.catalog : { principal = group.display_name, privileges = local.tiers[code].catalog }],
-    [for key, group in databricks_group.catalog_extra : { principal = group.display_name, privileges = var.catalog_extra_groups[key].privileges }],
     var.create_catalog ? var.catalog_extra_grants : [],
   )
 
   # Schema and Volume grants are additive, keyed by principal. Repeated
   # principals are merged.
   schema_extra_grants = {
-    for principal, privileges in merge(
-      { for key, group in databricks_group.schema_extra : group.display_name => [var.schema_extra_groups[key].privileges] },
-      { for g in(var.create_schema ? var.schema_extra_grants : []) : g.principal => g.privileges... },
-    ) : principal => distinct(flatten(privileges))
+    for g in(var.create_schema ? var.schema_extra_grants : []) : g.principal => g.privileges...
   }
   volume_extra_grants = {
-    for principal, privileges in merge(
-      { for key, group in databricks_group.volume_extra : group.display_name => [var.volume_extra_groups[key].privileges] },
-      { for g in var.volume_extra_grants : g.principal => g.privileges... },
-    ) : principal => distinct(flatten(privileges))
+    for g in var.volume_extra_grants : g.principal => g.privileges...
   }
 }
 
@@ -77,50 +57,6 @@ resource "databricks_group" "volume" {
   provider = databricks.mws
 
   display_name = "${local.catalog_name}_${local.schema_name}_${databricks_volume.volume.name}_${local.tiers[each.value].suffix}"
-}
-
-resource "databricks_group" "catalog_extra" {
-  depends_on = [databricks_catalog.volume]
-  for_each   = local.catalog_extra_groups
-  provider   = databricks.mws
-
-  display_name = "${local.catalog_name}_${each.key}"
-
-  lifecycle {
-    precondition {
-      condition     = !contains(module.tiers.reserved_names, each.key)
-      error_message = "catalog_extra_groups key \"${each.key}\" is a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
-    }
-  }
-}
-
-resource "databricks_group" "schema_extra" {
-  depends_on = [databricks_schema.volume]
-  for_each   = local.schema_extra_groups
-  provider   = databricks.mws
-
-  display_name = "${local.catalog_name}_${local.schema_name}_${each.key}"
-
-  lifecycle {
-    precondition {
-      condition     = !contains(module.tiers.reserved_names, each.key)
-      error_message = "schema_extra_groups key \"${each.key}\" is a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
-    }
-  }
-}
-
-resource "databricks_group" "volume_extra" {
-  for_each = var.volume_extra_groups
-  provider = databricks.mws
-
-  display_name = "${local.catalog_name}_${local.schema_name}_${databricks_volume.volume.name}_${each.key}"
-
-  lifecycle {
-    precondition {
-      condition     = !contains(module.tiers.reserved_names, each.key)
-      error_message = "volume_extra_groups key \"${each.key}\" is a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
-    }
-  }
 }
 
 moved {
@@ -301,30 +237,6 @@ resource "databricks_group_member" "volume_rw" {
   member_id = each.value
 }
 
-resource "databricks_group_member" "catalog_extra" {
-  provider = databricks.mws
-  for_each = local.catalog_extra_group_members
-
-  group_id  = databricks_group.catalog_extra[each.value.key].id
-  member_id = each.value.member
-}
-
-resource "databricks_group_member" "schema_extra" {
-  provider = databricks.mws
-  for_each = local.schema_extra_group_members
-
-  group_id  = databricks_group.schema_extra[each.value.key].id
-  member_id = each.value.member
-}
-
-resource "databricks_group_member" "volume_extra" {
-  provider = databricks.mws
-  for_each = local.volume_extra_group_members
-
-  group_id  = databricks_group.volume_extra[each.value.key].id
-  member_id = each.value.member
-}
-
 # catalog grants #############################
 # NOTE: Authoritative. Catalog grants set outside of this module will be revoked.
 resource "databricks_grants" "catalog" {
@@ -405,7 +317,7 @@ resource "databricks_grant" "schema_extra" {
 
   schema     = "${local.catalog_name}.${local.schema_name}"
   principal  = each.key
-  privileges = each.value
+  privileges = distinct(flatten(each.value))
 
   lifecycle {
     precondition {
@@ -456,7 +368,7 @@ resource "databricks_grant" "volume_extra" {
 
   volume     = databricks_volume.volume.id
   principal  = each.key
-  privileges = each.value
+  privileges = distinct(flatten(each.value))
 
   lifecycle {
     precondition {

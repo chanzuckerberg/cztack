@@ -15,13 +15,10 @@ are member IDs added to those groups. The owner is always added to the catalog
 and schema `all` and `mng` groups. The `catalog_groups`, `schema_groups` and
 `volume_groups` outputs map codes to group names.
 
-For needs the tiers don't cover, each level has:
-
-- `<level>_extra_groups`: more groups with your own privileges and member IDs.
-  Keys can't be a tier code or suffix.
-- `<level>_extra_grants`: grants to principals that already exist, by name
-  (group name, user email, or service principal application ID). Repeated
-  principals are merged.
+For needs the tiers don't cover, each level has `<level>_extra_grants`: grants
+to principals that already exist, such as a group you create in your own
+Terraform, by name (group name, user email, or service principal application
+ID). Repeated principals are merged.
 
 ## Upgrading to 0.4.0
 
@@ -95,26 +92,20 @@ Behavior changes to review in the first plan:
 | [databricks_grant.volume_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/grant) | resource |
 | [databricks_grants.catalog](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/grants) | resource |
 | [databricks_group.catalog](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
-| [databricks_group.catalog_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
 | [databricks_group.schema](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
-| [databricks_group.schema_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
 | [databricks_group.volume](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
-| [databricks_group.volume_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group) | resource |
 | [databricks_group_member.catalog_all](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.catalog_crt](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
-| [databricks_group_member.catalog_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.catalog_manage](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.catalog_r](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.catalog_rw](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.catalog_use](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.schema_all](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
-| [databricks_group_member.schema_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.schema_manage](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.schema_r](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.schema_rw](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.schema_use](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.volume_all](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
-| [databricks_group_member.volume_extra](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.volume_manage](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.volume_r](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
 | [databricks_group_member.volume_rw](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/group_member) | resource |
@@ -137,7 +128,6 @@ Behavior changes to review in the first plan:
 | <a name="input_catalog_bucket_name"></a> [catalog\_bucket\_name](#input\_catalog\_bucket\_name) | (Optional) Override storage root of catalog instead of using bucket name | `string` | `null` | no |
 | <a name="input_catalog_crt_members"></a> [catalog\_crt\_members](#input\_catalog\_crt\_members) | (Optional) Member IDs to add to the catalog's \_create group (USE\_CATALOG, CREATE\_SCHEMA) | `list(string)` | `[]` | no |
 | <a name="input_catalog_extra_grants"></a> [catalog\_extra\_grants](#input\_catalog\_extra\_grants) | (Optional) Catalog grants for existing principals, by name (group name, user email, or service principal application ID). Only used when create\_catalog is true; catalog grants are authoritative | <pre>list(object({<br/>    principal  = string<br/>    privileges = list(string)<br/>  }))</pre> | `[]` | no |
-| <a name="input_catalog_extra_groups"></a> [catalog\_extra\_groups](#input\_catalog\_extra\_groups) | (Optional) Additional `<catalog>_<key>` groups, with their catalog privileges and member IDs. Only used when create\_catalog is true. Keys can't be a tier code or suffix | <pre>map(object({<br/>    privileges = list(string)<br/>    members    = optional(list(string), [])<br/>  }))</pre> | `{}` | no |
 | <a name="input_catalog_mng_members"></a> [catalog\_mng\_members](#input\_catalog\_mng\_members) | (Optional) Member IDs to add to the catalog's \_manage group (ALL\_PRIVILEGES, MANAGE). Owner is included | `list(string)` | `[]` | no |
 | <a name="input_catalog_name"></a> [catalog\_name](#input\_catalog\_name) | Name of the Databricks existing catalog to add the volume to | `string` | n/a | yes |
 | <a name="input_catalog_r_members"></a> [catalog\_r\_members](#input\_catalog\_r\_members) | (Optional) Member IDs to add to the catalog's \_read group | `list(string)` | `[]` | no |
@@ -159,7 +149,6 @@ Behavior changes to review in the first plan:
 | <a name="input_read_only_volume"></a> [read\_only\_volume](#input\_read\_only\_volume) | (Optional) Flag to set volume as read-only | `bool` | `false` | no |
 | <a name="input_schema_all_members"></a> [schema\_all\_members](#input\_schema\_all\_members) | (Optional) Member IDs to add to the schema's \_all group (ALL\_PRIVILEGES). Owner is included | `list(string)` | `[]` | no |
 | <a name="input_schema_extra_grants"></a> [schema\_extra\_grants](#input\_schema\_extra\_grants) | (Optional) Schema grants for existing principals, by name (group name, user email, or service principal application ID). Only used when create\_schema is true | <pre>list(object({<br/>    principal  = string<br/>    privileges = list(string)<br/>  }))</pre> | `[]` | no |
-| <a name="input_schema_extra_groups"></a> [schema\_extra\_groups](#input\_schema\_extra\_groups) | (Optional) Additional `<catalog>_<schema>_<key>` groups, with their schema privileges and member IDs. Only used when create\_schema is true. Keys can't be a tier code or suffix | <pre>map(object({<br/>    privileges = list(string)<br/>    members    = optional(list(string), [])<br/>  }))</pre> | `{}` | no |
 | <a name="input_schema_mng_members"></a> [schema\_mng\_members](#input\_schema\_mng\_members) | (Optional) Member IDs to add to the schema's \_manage group (ALL\_PRIVILEGES, MANAGE). Owner is included | `list(string)` | `[]` | no |
 | <a name="input_schema_name"></a> [schema\_name](#input\_schema\_name) | Name of the Databricks schema to add the volume to | `string` | n/a | yes |
 | <a name="input_schema_r_members"></a> [schema\_r\_members](#input\_schema\_r\_members) | (Optional) Member IDs to add to the schema's \_read group | `list(string)` | `[]` | no |
@@ -170,7 +159,6 @@ Behavior changes to review in the first plan:
 | <a name="input_volume_bucket_name"></a> [volume\_bucket\_name](#input\_volume\_bucket\_name) | (Optional) Name of S3 bucket to use for Databricks volume. NOTE: if provided, you will need to update the bucket policy whereever it is defined to allow Databricks access | `string` | `null` | no |
 | <a name="input_volume_comment"></a> [volume\_comment](#input\_volume\_comment) | (Optional) Comment to add to the Databricks volume | `string` | `"Managed by Terraform - this is a default volume for the Databricks workspace"` | no |
 | <a name="input_volume_extra_grants"></a> [volume\_extra\_grants](#input\_volume\_extra\_grants) | (Optional) Volume grants for existing principals, by name (group name, user email, or service principal application ID) | <pre>list(object({<br/>    principal  = string<br/>    privileges = list(string)<br/>  }))</pre> | `[]` | no |
-| <a name="input_volume_extra_groups"></a> [volume\_extra\_groups](#input\_volume\_extra\_groups) | (Optional) Additional `<catalog>_<schema>_<volume>_<key>` groups, with their volume privileges and member IDs. Keys can't be a tier code or suffix | <pre>map(object({<br/>    privileges = list(string)<br/>    members    = optional(list(string), [])<br/>  }))</pre> | `{}` | no |
 | <a name="input_volume_mng_members"></a> [volume\_mng\_members](#input\_volume\_mng\_members) | (Optional) Member IDs to add to the volume's \_manage group (ALL\_PRIVILEGES, MANAGE) | `list(string)` | `[]` | no |
 | <a name="input_volume_name"></a> [volume\_name](#input\_volume\_name) | Name of the Databricks volume to create | `string` | n/a | yes |
 | <a name="input_volume_r_members"></a> [volume\_r\_members](#input\_volume\_r\_members) | (Optional) Member IDs to add to the volume's \_read group (READ\_VOLUME) | `list(string)` | `[]` | no |
@@ -183,13 +171,13 @@ Behavior changes to review in the first plan:
 
 | Name | Description |
 |------|-------------|
-| <a name="output_catalog_groups"></a> [catalog\_groups](#output\_catalog\_groups) | Catalog group names keyed by tier code or catalog\_extra\_groups key. Empty unless create\_catalog is true |
+| <a name="output_catalog_groups"></a> [catalog\_groups](#output\_catalog\_groups) | Catalog group names keyed by tier code. Empty unless create\_catalog is true |
 | <a name="output_catalog_name"></a> [catalog\_name](#output\_catalog\_name) | n/a |
 | <a name="output_dbx_unity_aws_role_arns"></a> [dbx\_unity\_aws\_role\_arns](#output\_dbx\_unity\_aws\_role\_arns) | n/a |
-| <a name="output_schema_groups"></a> [schema\_groups](#output\_schema\_groups) | Schema group names keyed by tier code or schema\_extra\_groups key. Empty unless create\_schema is true |
+| <a name="output_schema_groups"></a> [schema\_groups](#output\_schema\_groups) | Schema group names keyed by tier code. Empty unless create\_schema is true |
 | <a name="output_schema_name"></a> [schema\_name](#output\_schema\_name) | n/a |
 | <a name="output_volume_bucket_name"></a> [volume\_bucket\_name](#output\_volume\_bucket\_name) | n/a |
-| <a name="output_volume_groups"></a> [volume\_groups](#output\_volume\_groups) | Volume group names keyed by tier code or volume\_extra\_groups key |
+| <a name="output_volume_groups"></a> [volume\_groups](#output\_volume\_groups) | Volume group names keyed by tier code |
 | <a name="output_volume_name"></a> [volume\_name](#output\_volume\_name) | n/a |
 | <a name="output_volume_path"></a> [volume\_path](#output\_volume\_path) | n/a |
 <!-- END -->

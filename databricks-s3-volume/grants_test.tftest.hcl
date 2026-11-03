@@ -107,24 +107,19 @@ run "catalog_grants_are_authoritative" {
 
   variables {
     catalog_extra_grants = [{ principal = "account users", privileges = ["BROWSE"] }]
-    catalog_extra_groups = { ingest = { privileges = ["USE_CATALOG"], members = ["ingest-id"] } }
   }
 
   assert {
     condition = toset([for g in databricks_grants.catalog[0].grant : g.principal]) == toset([
-      "cat_use", "cat_read", "cat_write", "cat_create", "cat_all", "cat_manage", "cat_ingest", "account users",
+      "cat_use", "cat_read", "cat_write", "cat_create", "cat_all", "cat_manage", "account users",
     ])
-    error_message = "Catalog grants must cover every tier, extra group and extra grant"
+    error_message = "Catalog grants must cover every tier and extra grant"
   }
   assert {
     condition = toset(one([
       for g in databricks_grants.catalog[0].grant : g.privileges if g.principal == "cat_create"
     ])) == toset(["USE_CATALOG", "CREATE_SCHEMA"])
     error_message = "_create must grant only USE_CATALOG and CREATE_SCHEMA"
-  }
-  assert {
-    condition     = keys(databricks_group_member.catalog_extra) == ["ingest/ingest-id"]
-    error_message = "catalog_extra_groups members must be added"
   }
 }
 
@@ -186,16 +181,6 @@ run "existing_catalog_and_schema" {
     condition     = length(databricks_grant.volume) == 4
     error_message = "Volume grants must still be created"
   }
-}
-
-run "rejects_reserved_extra_group_key" {
-  command = plan
-
-  variables {
-    volume_extra_groups = { read = { privileges = ["READ_VOLUME"] } }
-  }
-
-  expect_failures = [databricks_group.volume_extra]
 }
 
 run "rejects_extra_grant_to_builtin_group" {
