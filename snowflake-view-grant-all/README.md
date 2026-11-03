@@ -1,15 +1,21 @@
+# DEPRECATED
+
+This module is deprecated and is no longer maintained. It uses the legacy `snowflake_*_grant` resources, which were removed in v1.0.0 of the [Snowflake Terraform provider](https://github.com/Snowflake-Labs/terraform-provider-snowflake), so it is pinned to provider versions `< 1.0.0`.
+
+New code should use the provider's `snowflake_grant_privileges_to_account_role` / `snowflake_grant_privileges_to_database_role` resources directly. See the provider's [migration guide](https://github.com/Snowflake-Labs/terraform-provider-snowflake/blob/main/MIGRATION_GUIDE.md).
+
 <!-- START -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 0.20.0 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 0.20.0, < 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 0.20.0 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 0.20.0, < 1.0.0 |
 
 ## Modules
 
