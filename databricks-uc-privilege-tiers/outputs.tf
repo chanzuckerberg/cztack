@@ -7,8 +7,3 @@ output "levels" {
   description = "Short codes of the tiers that exist at each level, keyed by level."
   value       = local.levels
 }
-
-output "reserved_names" {
-  description = "All tier codes and group suffixes. Custom group keys must not use these."
-  value       = local.reserved_names
-}

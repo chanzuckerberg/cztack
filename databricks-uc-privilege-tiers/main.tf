@@ -59,6 +59,4 @@ locals {
       for code, tier in local.tiers : code if tier[level] != null
     ]
   }
-
-  reserved_names = distinct(concat(keys(local.tiers), [for tier in local.tiers : tier.suffix]))
 }

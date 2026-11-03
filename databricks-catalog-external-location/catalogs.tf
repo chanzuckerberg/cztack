@@ -18,35 +18,19 @@ module "tiers" {
 locals {
   # three representations of the same information for easier access later
   flattened_catalog_groups = flatten([
-    for catalog in var.catalogs : concat(
-      [
-        for code in module.tiers.levels.catalog : {
-          catalog       = catalog.name
-          key           = code
-          builtin       = true
-          group_name    = "${catalog.name}_${module.tiers.tiers[code].suffix}"
-          group_members = catalog["${code}_members"]
-          privileges    = module.tiers.tiers[code].catalog
-        }
-      ],
-      [
-        for key, group in catalog.extra_groups : {
-          catalog       = catalog.name
-          key           = key
-          builtin       = false
-          group_name    = "${catalog.name}_${key}"
-          group_members = group.members
-          privileges    = group.privileges
-        }
-      ],
-    )
+    for catalog in var.catalogs : [
+      for code in module.tiers.levels.catalog : {
+        catalog       = catalog.name
+        code          = code
+        group_name    = "${catalog.name}_${module.tiers.tiers[code].suffix}"
+        group_members = catalog["${code}_members"]
+        privileges    = module.tiers.tiers[code].catalog
+      }
+    ]
   ])
-  # Grouped so that name collisions reach the preconditions below instead of
-  # failing with a generic duplicate-key error.
-  catalog_groups = { for group in local.flattened_catalog_groups : group.group_name => group... }
-  catalog_group_map = { for catalog in var.catalogs : catalog.name => merge([
-    for group in local.flattened_catalog_groups : { (group.key) = group.group_name } if group.catalog == catalog.name
-  ]...) }
+  catalog_group_map = { for catalog in var.catalogs : catalog.name => {
+    for group in local.flattened_catalog_groups : group.code => group.group_name if group.catalog == catalog.name
+  } }
   flattened_catalog_group_memberships = toset(flatten([
     for group in local.flattened_catalog_groups : [
       for member in group.group_members : {
@@ -69,19 +53,8 @@ locals {
 
 resource "databricks_group" "catalog_groups" {
   provider     = databricks.mws
-  for_each     = local.catalog_groups
-  display_name = each.key
-
-  lifecycle {
-    precondition {
-      condition     = alltrue([for g in each.value : g.builtin || !contains(module.tiers.reserved_names, g.key)])
-      error_message = "extra_groups keys must not be a built-in tier code or suffix (${join(", ", module.tiers.reserved_names)})."
-    }
-    precondition {
-      condition     = length(each.value) == 1
-      error_message = "Group name \"${each.key}\" is produced more than once, by catalogs ${join(", ", distinct([for g in each.value : g.catalog]))}; rename the extra_groups key."
-    }
-  }
+  for_each     = toset([for group in local.flattened_catalog_groups : group.group_name])
+  display_name = each.value
 }
 
 # NOTE: Authoritative membership management for catalog groups. Permissions set out outside of this will be overwritten.

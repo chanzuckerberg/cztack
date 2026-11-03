@@ -56,6 +56,5 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_levels"></a> [levels](#output\_levels) | Short codes of the tiers that exist at each level, keyed by level. |
-| <a name="output_reserved_names"></a> [reserved\_names](#output\_reserved\_names) | All tier codes and group suffixes. Custom group keys must not use these. |
 | <a name="output_tiers"></a> [tiers](#output\_tiers) | Privilege tiers keyed by short code. Each tier has a group name `suffix` and a privilege list per level (`catalog`, `schema`, `volume`); null means the tier doesn't exist at that level. |
 <!-- END -->

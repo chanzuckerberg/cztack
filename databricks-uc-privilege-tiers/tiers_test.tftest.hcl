@@ -35,12 +35,3 @@ run "privileges" {
     error_message = "crt must grant only USE_CATALOG and CREATE_SCHEMA"
   }
 }
-
-run "reserved_names" {
-  command = plan
-
-  assert {
-    condition     = alltrue([for n in ["usg", "use", "r", "read", "rw", "write", "crt", "create", "all", "mng", "manage"] : contains(output.reserved_names, n)])
-    error_message = "reserved_names must include every code and suffix"
-  }
-}

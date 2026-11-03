@@ -24,11 +24,9 @@ The `catalog_groups` output maps each catalog to its group names by code.
 
 For needs the tiers don't cover:
 
-- `extra_groups` creates `<catalog>_<key>` groups with your own privileges and
-  members. Keys can't be a tier code or suffix.
-- `extra_grants` grants privileges to principals that already exist. `principal`
-  is a name (group name, user email, or service principal application ID), not a
-  member ID.
+- `extra_grants` grants catalog privileges to principals that already exist,
+  such as a group you create in your own Terraform. `principal` is a name (group
+  name, user email, or service principal application ID), not a member ID.
 - `external_location_extra_grants` does the same on the external location.
 
 ## Example
@@ -138,7 +136,7 @@ Behavior changes to review in the first plan:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_all_privileges_groups"></a> [all\_privileges\_groups](#input\_all\_privileges\_groups) | List of group names to grant access to | `list(string)` | n/a | yes |
-| <a name="input_catalogs"></a> [catalogs](#input\_catalogs) | List of catalogs to create with their cooresponding attributes.<br/><br/>`<code>_members` (usg, r, rw, crt, all, mng) are member IDs added to the catalog's built-in tier groups.<br/>`extra_groups` creates additional `<catalog>_<key>` groups with the given privileges and member IDs.<br/>`extra_grants` grants privileges to existing principals by name.<br/>Catalog grants are authoritative: anything not listed here is revoked. | <pre>list(<br/>    object({<br/>      name                           = string<br/>      isolation_mode                 = optional(string, "ISOLATED")<br/>      enable_predictive_optimization = optional(string, "INHERIT")<br/>      owner                          = string<br/>      catalog_prefix                 = optional(string, "")<br/><br/>      usg_members = optional(list(string), [])<br/>      r_members   = optional(list(string), [])<br/>      rw_members  = optional(list(string), [])<br/>      crt_members = optional(list(string), [])<br/>      all_members = optional(list(string), [])<br/>      mng_members = optional(list(string), [])<br/><br/>      extra_groups = optional(map(object({<br/>        privileges = list(string)<br/>        members    = optional(list(string), [])<br/>      })), {})<br/>      extra_grants = optional(list(object({<br/>        principal  = string<br/>        privileges = list(string)<br/>      })), [])<br/><br/>      # Renamed in 0.3.0. Kept only so the validation below can reject them;<br/>      # without them Terraform silently drops the old attributes and every<br/>      # membership is removed.<br/>      all_privileges_members    = optional(list(string))<br/>      manage_privileges_members = optional(list(string))<br/>      read_privileges_members   = optional(list(string))<br/>      write_privileges_members  = optional(list(string))<br/>      use_privileges_members    = optional(list(string))<br/>  }))</pre> | n/a | yes |
+| <a name="input_catalogs"></a> [catalogs](#input\_catalogs) | List of catalogs to create with their cooresponding attributes.<br/><br/>`<code>_members` (usg, r, rw, crt, all, mng) are member IDs added to the catalog's built-in tier groups.<br/>`extra_grants` grants privileges to existing principals by name, for example a group created by the caller.<br/>Catalog grants are authoritative: anything not listed here is revoked. | <pre>list(<br/>    object({<br/>      name                           = string<br/>      isolation_mode                 = optional(string, "ISOLATED")<br/>      enable_predictive_optimization = optional(string, "INHERIT")<br/>      owner                          = string<br/>      catalog_prefix                 = optional(string, "")<br/><br/>      usg_members = optional(list(string), [])<br/>      r_members   = optional(list(string), [])<br/>      rw_members  = optional(list(string), [])<br/>      crt_members = optional(list(string), [])<br/>      all_members = optional(list(string), [])<br/>      mng_members = optional(list(string), [])<br/><br/>      extra_grants = optional(list(object({<br/>        principal  = string<br/>        privileges = list(string)<br/>      })), [])<br/><br/>      # Renamed in 0.3.0. Kept only so the validation below can reject them;<br/>      # without them Terraform silently drops the old attributes and every<br/>      # membership is removed.<br/>      all_privileges_members    = optional(list(string))<br/>      manage_privileges_members = optional(list(string))<br/>      read_privileges_members   = optional(list(string))<br/>      write_privileges_members  = optional(list(string))<br/>      use_privileges_members    = optional(list(string))<br/>  }))</pre> | n/a | yes |
 | <a name="input_databricks_external_id"></a> [databricks\_external\_id](#input\_databricks\_external\_id) | ID of the databricks external location | `string` | n/a | yes |
 | <a name="input_external_location_extra_grants"></a> [external\_location\_extra\_grants](#input\_external\_location\_extra\_grants) | (Optional) Grants on the external location for existing principals, in addition to `all_privileges_groups`.<br/>`principal` is a principal name (group name, user email, or service principal application ID), not a member ID.<br/>For example, grant a job's service principal CREATE\_EXTERNAL\_VOLUME to let it create external Volumes. | <pre>list(object({<br/>    principal  = string<br/>    privileges = list(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_external_location_name"></a> [external\_location\_name](#input\_external\_location\_name) | Name of the external location | `string` | n/a | yes |
@@ -150,7 +148,7 @@ Behavior changes to review in the first plan:
 
 | Name | Description |
 |------|-------------|
-| <a name="output_catalog_groups"></a> [catalog\_groups](#output\_catalog\_groups) | Group names keyed by catalog name, then by tier code (usg, r, rw, crt, all, mng) or extra\_groups key |
+| <a name="output_catalog_groups"></a> [catalog\_groups](#output\_catalog\_groups) | Group names keyed by catalog name, then by tier code (usg, r, rw, crt, all, mng) |
 | <a name="output_catalogs"></a> [catalogs](#output\_catalogs) | Map of created Databricks catalogs, keyed by catalog name |
 | <a name="output_external_location"></a> [external\_location](#output\_external\_location) | The Databricks external location |
 <!-- END -->

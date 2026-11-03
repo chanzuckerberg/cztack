@@ -99,7 +99,7 @@ run "catalog_grants" {
   }
 }
 
-run "extra_groups_and_grants" {
+run "extra_grants" {
   command = plan
 
   variables {
@@ -107,11 +107,8 @@ run "extra_groups_and_grants" {
       {
         name  = "lobster_prod"
         owner = "deploy-sp-app-id"
-        extra_groups = {
-          ingest = { privileges = ["USE_CATALOG", "USE_SCHEMA", "READ_VOLUME"], members = ["ingest-id"] }
-        }
         extra_grants = [
-          { principal = "account users", privileges = ["BROWSE"] },
+          { principal = "lobster_ingest", privileges = ["USE_CATALOG", "USE_SCHEMA", "READ_VOLUME"] },
         ]
       },
     ]
@@ -121,26 +118,14 @@ run "extra_groups_and_grants" {
   }
 
   assert {
-    condition     = contains(keys(databricks_group.catalog_groups), "lobster_prod_ingest")
-    error_message = "extra_groups must create <catalog>_<key>"
-  }
-  assert {
-    condition     = output.catalog_groups["lobster_prod"]["ingest"] == "lobster_prod_ingest"
-    error_message = "catalog_groups must include extra groups by key"
-  }
-  assert {
-    condition     = contains(keys(databricks_group_member.catalog_group_memberships), "lobster_prod_ingest_ingest-id")
-    error_message = "extra_groups members must be added"
-  }
-  assert {
     condition = toset(one([
-      for g in databricks_grants.grants["lobster_prod"].grant : g.privileges if g.principal == "lobster_prod_ingest"
+      for g in databricks_grants.grants["lobster_prod"].grant : g.privileges if g.principal == "lobster_ingest"
     ])) == toset(["USE_CATALOG", "USE_SCHEMA", "READ_VOLUME"])
-    error_message = "extra_groups privileges must be granted"
+    error_message = "extra_grants must be merged into the catalog grants"
   }
   assert {
-    condition     = length([for g in databricks_grants.grants["lobster_prod"].grant : g if g.principal == "account users"]) == 1
-    error_message = "extra_grants must be merged into the catalog grants"
+    condition     = length(databricks_grants.grants["lobster_prod"].grant) == 7
+    error_message = "Catalog grants must be the six tiers plus extra_grants"
   }
   assert {
     condition = toset([for g in databricks_grants.databricks_external_location_grants[0].grant : g.principal]) == toset([
@@ -181,39 +166,6 @@ run "rejects_renamed_attributes" {
   }
 
   expect_failures = [var.catalogs]
-}
-
-run "rejects_reserved_extra_group_key" {
-  command = plan
-
-  variables {
-    catalogs = [
-      {
-        name         = "lobster_prod"
-        owner        = "deploy-sp-app-id"
-        extra_groups = { rw = { privileges = ["SELECT"] } }
-      },
-    ]
-  }
-
-  expect_failures = [databricks_group.catalog_groups]
-}
-
-run "rejects_group_name_collision_across_catalogs" {
-  command = plan
-
-  variables {
-    catalogs = [
-      { name = "lobster_prod", owner = "deploy-sp-app-id" },
-      {
-        name         = "lobster"
-        owner        = "deploy-sp-app-id"
-        extra_groups = { prod_read = { privileges = ["SELECT"] } }
-      },
-    ]
-  }
-
-  expect_failures = [databricks_group.catalog_groups]
 }
 
 run "rejects_duplicate_grant_principal" {

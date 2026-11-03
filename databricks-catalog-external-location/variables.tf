@@ -54,8 +54,7 @@ variable "catalogs" {
     List of catalogs to create with their cooresponding attributes.
 
     `<code>_members` (usg, r, rw, crt, all, mng) are member IDs added to the catalog's built-in tier groups.
-    `extra_groups` creates additional `<catalog>_<key>` groups with the given privileges and member IDs.
-    `extra_grants` grants privileges to existing principals by name.
+    `extra_grants` grants privileges to existing principals by name, for example a group created by the caller.
     Catalog grants are authoritative: anything not listed here is revoked.
   EOT
   type = list(
@@ -73,10 +72,6 @@ variable "catalogs" {
       all_members = optional(list(string), [])
       mng_members = optional(list(string), [])
 
-      extra_groups = optional(map(object({
-        privileges = list(string)
-        members    = optional(list(string), [])
-      })), {})
       extra_grants = optional(list(object({
         principal  = string
         privileges = list(string)
@@ -112,12 +107,5 @@ variable "catalogs" {
         write_privileges_members  -> rw_members (rw no longer grants CREATE_SCHEMA; add crt_members for that)
         use_privileges_members    -> usg_members
     EOT
-  }
-
-  validation {
-    condition = alltrue([
-      for c in var.catalogs : alltrue([for key in keys(c.extra_groups) : can(regex("^[a-z0-9_]+$", key))])
-    ])
-    error_message = "extra_groups keys must contain only lowercase letters, digits, and underscores."
   }
 }
