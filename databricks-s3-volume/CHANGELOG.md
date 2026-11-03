@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.3.0...databricks-s3-volume-v0.4.0) (2026-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* requires Terraform >= 1.7. Inputs are renamed from <level>_<tier>_grant_principals to <level>_<code>_members (manage -> mng, usage -> usg). With create_catalog = true, catalog-level grants not configured in the module are revoked. Catalog rw no longer grants CREATE_SCHEMA; use catalog_crt_members. Catalog and schema r and rw grant more privileges, including Volume privileges inherited by every Volume inside. See the module README.
+
+### Features
+
+* shared Unity Catalog privilege tiers in databricks-s3-volume ([#940](https://github.com/chanzuckerberg/cztack/issues/940)) ([f5f881c](https://github.com/chanzuckerberg/cztack/commit/f5f881cf2e29548a67b4d730004a64b14c681b69))
+
 ## [0.3.0](https://github.com/chanzuckerberg/cztack/compare/databricks-s3-volume-v0.2.0...databricks-s3-volume-v0.3.0) (2026-06-18)
 
 

@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.134.0](https://github.com/chanzuckerberg/cztack/compare/v0.133.0...v0.134.0) (2026-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* requires Terraform >= 1.7. Inputs are renamed from <level>_<tier>_grant_principals to <level>_<code>_members (manage -> mng, usage -> usg). With create_catalog = true, catalog-level grants not configured in the module are revoked. Catalog rw no longer grants CREATE_SCHEMA; use catalog_crt_members. Catalog and schema r and rw grant more privileges, including Volume privileges inherited by every Volume inside. See the module README.
+* catalog member attributes are renamed to tier codes (all_privileges_members -> all_members, manage_privileges_members -> mng_members, read_privileges_members -> r_members, write_privileges_members -> rw_members, use_privileges_members -> usg_members); the old names fail validation. catalog_groups keys change to all, mng, r, rw, usg, crt. Members of rw who create schemas must also be added to crt_members. Catalog-level r and rw grant more privileges, inherited by every schema and Volume in the catalog. See the module README.
+
+### Features
+
+* shared Unity Catalog privilege tiers in databricks-catalog-external-location ([#939](https://github.com/chanzuckerberg/cztack/issues/939)) ([0d9c894](https://github.com/chanzuckerberg/cztack/commit/0d9c8941a6ded353f836736c93a3be533c7245ed))
+* shared Unity Catalog privilege tiers in databricks-s3-volume ([#940](https://github.com/chanzuckerberg/cztack/issues/940)) ([f5f881c](https://github.com/chanzuckerberg/cztack/commit/f5f881cf2e29548a67b4d730004a64b14c681b69))
+
+
+### Bug Fixes
+
+* AID-105 - fix cztack CI/CD by removing script that has deprecated imports ([#944](https://github.com/chanzuckerberg/cztack/issues/944)) ([3255c7b](https://github.com/chanzuckerberg/cztack/commit/3255c7bb623063436eaa39d82a6045be685c6eb1))
+* mark databricks-s3-volume-existing-catalog obsolete ([#941](https://github.com/chanzuckerberg/cztack/issues/941)) ([7cf8ab5](https://github.com/chanzuckerberg/cztack/commit/7cf8ab5bbdcb0f5af1367b929c026cc93a560d54))
+
 ## [0.133.0](https://github.com/chanzuckerberg/cztack/compare/v0.132.2...v0.133.0) (2026-10-29)
 
 
