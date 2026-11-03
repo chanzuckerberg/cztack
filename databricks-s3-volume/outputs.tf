@@ -21,3 +21,18 @@ output "schema_name" {
 output "volume_name" {
   value = local.volume_name
 }
+
+output "catalog_groups" {
+  description = "Catalog group names keyed by tier code. Empty unless create_catalog is true"
+  value       = { for code, group in databricks_group.catalog : code => group.display_name }
+}
+
+output "schema_groups" {
+  description = "Schema group names keyed by tier code. Empty unless create_schema is true"
+  value       = { for code, group in databricks_group.schema : code => group.display_name }
+}
+
+output "volume_groups" {
+  description = "Volume group names keyed by tier code"
+  value       = { for code, group in databricks_group.volume : code => group.display_name }
+}
