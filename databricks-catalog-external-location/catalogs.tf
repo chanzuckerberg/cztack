@@ -11,32 +11,44 @@ resource "databricks_catalog" "catalog" {
   depends_on = [databricks_external_location.external_locations]
 }
 
+module "tiers" {
+  source = "../databricks-uc-privilege-tiers"
+}
+
 locals {
-  group_types = ["all", "manage", "read", "write", "use"]
   # three representations of the same information for easier access later
-  flattened_catalog_groups = toset(flatten([
-    for idx, catalog in var.catalogs : [
-      for group_type in local.group_types : {
+  flattened_catalog_groups = flatten([
+    for catalog in var.catalogs : [
+      for code in module.tiers.levels.catalog : {
         catalog       = catalog.name
-        group_type    = group_type
-        group_name    = "${catalog.name}_${group_type}"
-        group_members = lookup(catalog, "${group_type}_privileges_members", [])
+        code          = code
+        group_name    = "${catalog.name}_${module.tiers.tiers[code].suffix}"
+        group_members = catalog["${code}_members"]
+        privileges    = module.tiers.tiers[code].catalog
       }
     ]
-  ]))
-  catalog_group_map = { for idx, catalog in var.catalogs : catalog.name => {
-    for group_type in local.group_types : group_type => "${catalog.name}_${group_type}"
+  ])
+  catalog_group_map = { for catalog in var.catalogs : catalog.name => {
+    for group in local.flattened_catalog_groups : group.code => group.group_name if group.catalog == catalog.name
   } }
   flattened_catalog_group_memberships = toset(flatten([
     for group in local.flattened_catalog_groups : [
       for member in group.group_members : {
-        catalog    = group.catalog
-        group_type = group.group_type
         group_name = group.group_name
         member     = member
       }
-    ] if length(group.group_members) > 0
+    ]
   ]))
+
+  catalog_grants = { for catalog in var.catalogs : catalog.name => concat(
+    [
+      for group in local.flattened_catalog_groups : {
+        principal  = group.group_name
+        privileges = group.privileges
+      } if group.catalog == catalog.name
+    ],
+    catalog.extra_grants,
+  ) }
 }
 
 resource "databricks_group" "catalog_groups" {
@@ -48,7 +60,7 @@ resource "databricks_group" "catalog_groups" {
 # NOTE: Authoritative membership management for catalog groups. Permissions set out outside of this will be overwritten.
 resource "databricks_grants" "grants" {
   provider = databricks.workspace
-  for_each = local.catalog_group_map
+  for_each = local.catalog_grants
   catalog  = each.key
 
   depends_on = [
@@ -56,51 +68,20 @@ resource "databricks_grants" "grants" {
     databricks_group.catalog_groups
   ]
 
-  grant {
-    principal = each.value["manage"]
-    privileges = [
-      "ALL_PRIVILEGES",
-      "MANAGE",
-    ]
+  dynamic "grant" {
+    for_each = each.value
+    content {
+      principal  = grant.value.principal
+      privileges = grant.value.privileges
+    }
   }
 
-  grant {
-    principal = each.value["all"]
-    privileges = [
-      "ALL_PRIVILEGES",
-    ]
+  lifecycle {
+    precondition {
+      condition     = length(each.value) == length(distinct([for g in each.value : g.principal]))
+      error_message = "Catalog \"${each.key}\" has more than one grant for the same principal; merge the privileges into one extra_grants entry."
+    }
   }
-
-  grant {
-    principal = each.value["write"]
-    privileges = [
-      "USE_CATALOG",
-      "USE_SCHEMA",
-      "SELECT",
-      "CREATE_TABLE",
-      "CREATE_SCHEMA",
-      "MODIFY",
-      "BROWSE",
-    ]
-  }
-
-  grant {
-    principal = each.value["read"]
-    privileges = [
-      "USE_CATALOG",
-      "USE_SCHEMA",
-      "SELECT",
-      "BROWSE",
-    ]
-  }
-
-  grant {
-    principal = each.value["use"]
-    privileges = [
-      "USE_CATALOG",
-    ]
-  }
-
 }
 
 resource "databricks_group_member" "catalog_group_memberships" {

@@ -286,6 +286,10 @@
       "package-name": "databricks-s3-volume-existing-catalog",
       "release-type": "terraform-module"
     },
+    "databricks-uc-privilege-tiers": {
+      "package-name": "databricks-uc-privilege-tiers",
+      "release-type": "terraform-module"
+    },
     "databricks-workspace-e2": {
       "package-name": "databricks-workspace-e2",
       "release-type": "terraform-module"

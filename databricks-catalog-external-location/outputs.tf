@@ -4,7 +4,7 @@ output "catalogs" {
 }
 
 output "catalog_groups" {
-  description = "Map of created Databricks catalog groups, keyed by catalog name"
+  description = "Group names keyed by catalog name, then by tier code (usg, r, rw, crt, all, mng)"
   value       = local.catalog_group_map
 }
 
