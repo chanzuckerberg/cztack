@@ -255,6 +255,12 @@ module "other_addons" {
   enable_external_secrets             = var.addons.enable_external_secrets
   external_secrets = merge(
     var.addons.external_secrets_config,
+    {
+      source_policy_documents = concat(
+        try(var.addons.external_secrets_config.source_policy_documents, []),
+        var.addons.external_secrets_source_policy_documents,
+      )
+    },
     local.declare_cilium_startup_taint ? {
       values = concat(
         try(var.addons.external_secrets_config.values, []),
