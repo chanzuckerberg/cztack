@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.1.0...aws-eks-cluster-v9.2.0) (2026-11-06)
+
+
+### Features
+
+* **eks:** accept Argo child secrets policy documents ([#945](https://github.com/chanzuckerberg/cztack/issues/945)) ([606a94a](https://github.com/chanzuckerberg/cztack/commit/606a94aab06cef56a9b0c05f03ca87540114aa36))
+
 ## [9.1.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.0.3...aws-eks-cluster-v9.1.0) (2026-10-29)
 
 
