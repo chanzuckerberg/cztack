@@ -227,9 +227,8 @@ variable "addons" {
       namespace            = "external-secrets",
       wait                 = true
     })
-    external_secrets_secrets_manager_arns    = optional(list(string), ["arn:aws:secretsmanager:*:*:secret:/argus/*"])
-    external_secrets_source_policy_documents = optional(list(string), [])
-    argocd_config                            = optional(any, {})
+    external_secrets_secrets_manager_arns = optional(list(string), ["arn:aws:secretsmanager:*:*:secret:/argus/*"])
+    argocd_config                         = optional(any, {})
     argocd_child_config = optional(object({
       enabled                          = optional(bool, true)
       secrets_manager_policy_documents = optional(list(string))
