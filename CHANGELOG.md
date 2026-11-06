@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.135.0](https://github.com/chanzuckerberg/cztack/compare/v0.134.0...v0.135.0) (2026-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* requires Terraform >= 1.7. Inputs are renamed from <level>_<tier>_grant_principals to <level>_<code>_members (manage -> mng, usage -> usg). With create_catalog = true, catalog-level grants not configured in the module are revoked. Catalog rw no longer grants CREATE_SCHEMA; use catalog_crt_members. Catalog and schema r and rw grant more privileges, including Volume privileges inherited by every Volume inside. See the module README.
+* catalog member attributes are renamed to tier codes (all_privileges_members -> all_members, manage_privileges_members -> mng_members, read_privileges_members -> r_members, write_privileges_members -> rw_members, use_privileges_members -> usg_members); the old names fail validation. catalog_groups keys change to all, mng, r, rw, usg, crt. Members of rw who create schemas must also be added to crt_members. Catalog-level r and rw grant more privileges, inherited by every schema and Volume in the catalog. See the module README.
+
+### Features
+
+* **aws-eks-cluster:** default Karpenter to 1.14.3 for Kubernetes 1.36 ([#935](https://github.com/chanzuckerberg/cztack/issues/935)) ([f7d6e71](https://github.com/chanzuckerberg/cztack/commit/f7d6e71844ae6501fcc6d0f9c1b130107dd4ac62))
+* **eks:** accept Argo child secrets policy documents ([#945](https://github.com/chanzuckerberg/cztack/issues/945)) ([606a94a](https://github.com/chanzuckerberg/cztack/commit/606a94aab06cef56a9b0c05f03ca87540114aa36))
+* shared Unity Catalog privilege tiers in databricks-catalog-external-location ([#939](https://github.com/chanzuckerberg/cztack/issues/939)) ([0d9c894](https://github.com/chanzuckerberg/cztack/commit/0d9c8941a6ded353f836736c93a3be533c7245ed))
+* shared Unity Catalog privilege tiers in databricks-s3-volume ([#940](https://github.com/chanzuckerberg/cztack/issues/940)) ([f5f881c](https://github.com/chanzuckerberg/cztack/commit/f5f881cf2e29548a67b4d730004a64b14c681b69))
+
+
+### Bug Fixes
+
+* AID-105 - fix cztack CI/CD by removing script that has deprecated imports ([#944](https://github.com/chanzuckerberg/cztack/issues/944)) ([3255c7b](https://github.com/chanzuckerberg/cztack/commit/3255c7bb623063436eaa39d82a6045be685c6eb1))
+* **aws-eks-cluster:** grant the Karpenter controller the EC2 describe permissions Karpenter 1.11 and later require ([#933](https://github.com/chanzuckerberg/cztack/issues/933)) ([7a61dd4](https://github.com/chanzuckerberg/cztack/commit/7a61dd4c49f7ea044bf25950c0021cb27cd93a98))
+* mark databricks-s3-volume-existing-catalog obsolete ([#941](https://github.com/chanzuckerberg/cztack/issues/941)) ([7cf8ab5](https://github.com/chanzuckerberg/cztack/commit/7cf8ab5bbdcb0f5af1367b929c026cc93a560d54))
+
+
+### Misc
+
+* release main ([#934](https://github.com/chanzuckerberg/cztack/issues/934)) ([3589263](https://github.com/chanzuckerberg/cztack/commit/358926359f99e6ba429849cdebcd8eb66462f30e))
+* release main ([#936](https://github.com/chanzuckerberg/cztack/issues/936)) ([653a2a6](https://github.com/chanzuckerberg/cztack/commit/653a2a68d95aa7dcbea1cbc8aee3e05529f71db8))
+* release main ([#943](https://github.com/chanzuckerberg/cztack/issues/943)) ([7efb4b1](https://github.com/chanzuckerberg/cztack/commit/7efb4b12afe1b96a49d2c2125e8112c36b9c34f1))
+
 ## [0.134.0](https://github.com/chanzuckerberg/cztack/compare/v0.133.0...v0.134.0) (2026-11-03)
 
 
