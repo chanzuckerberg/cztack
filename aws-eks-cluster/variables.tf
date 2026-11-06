@@ -230,7 +230,8 @@ variable "addons" {
     external_secrets_secrets_manager_arns = optional(list(string), ["arn:aws:secretsmanager:*:*:secret:/argus/*"])
     argocd_config                         = optional(any, {})
     argocd_child_config = optional(object({
-      enabled = optional(bool, true)
+      enabled                          = optional(bool, true)
+      secrets_manager_policy_documents = optional(list(string))
       root_argo_aws_account_id_to_role = optional(map(string), {
         "533267185808" = "argo_root_core_platform_infra_prod_eks",
         "471112759938" = "argo_root_core_platform_infra_dev_eks",

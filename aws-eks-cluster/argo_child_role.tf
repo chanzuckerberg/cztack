@@ -57,8 +57,14 @@ data "aws_iam_policy_document" "secrets_manager_rw" {
   }
 }
 
+data "aws_iam_policy_document" "child_secrets_manager" {
+  source_policy_documents = var.addons.argocd_child_config.secrets_manager_policy_documents == null ? [
+    data.aws_iam_policy_document.secrets_manager_rw.json,
+  ] : var.addons.argocd_child_config.secrets_manager_policy_documents
+}
+
 resource "aws_iam_role_policy" "child_secrets_rw" {
   role        = aws_iam_role.child_assume_role.name
   name_prefix = "secrets_rw_${local.namespace}"
-  policy      = data.aws_iam_policy_document.secrets_manager_rw.json
+  policy      = data.aws_iam_policy_document.child_secrets_manager.json
 }
