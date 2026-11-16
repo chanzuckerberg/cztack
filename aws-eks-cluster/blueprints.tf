@@ -11,6 +11,15 @@ locals {
   exclude_list = distinct(concat(local.default_exclude_list, var.addons.fluentbit_exclude_paths))
 
   karpenter_chart_version = try(var.addons.karpenter_config.chart_version, "1.14.3")
+  external_secrets_config = merge(
+    {
+      chart_version        = "0.16.2"
+      service_account_name = "external-secrets-sa"
+      namespace            = "external-secrets"
+      wait                 = true
+    },
+    var.addons.external_secrets_config,
+  )
 }
 
 data "aws_iam_policy_document" "karpenter_odcr" {
@@ -254,10 +263,10 @@ module "other_addons" {
   enable_cert_manager                 = var.addons.enable_cert_manager
   enable_external_secrets             = var.addons.enable_external_secrets
   external_secrets = merge(
-    var.addons.external_secrets_config,
+    local.external_secrets_config,
     local.declare_cilium_startup_taint ? {
       values = concat(
-        try(var.addons.external_secrets_config.values, []),
+        try(local.external_secrets_config.values, []),
         [yamlencode({ global = { tolerations = local.cilium_startup_taint_tolerations } })]
       )
     } : {}

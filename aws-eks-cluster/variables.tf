@@ -221,12 +221,7 @@ variable "addons" {
       retention       = 7
       use_name_prefix = false
     })
-    external_secrets_config = optional(any, {
-      chart_version        = "0.16.2"
-      service_account_name = "external-secrets-sa",
-      namespace            = "external-secrets",
-      wait                 = true
-    })
+    external_secrets_config               = optional(any, {})
     external_secrets_secrets_manager_arns = optional(list(string), ["arn:aws:secretsmanager:*:*:secret:/argus/*"])
     argocd_config                         = optional(any, {})
     argocd_child_config = optional(object({
