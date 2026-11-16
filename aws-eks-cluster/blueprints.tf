@@ -257,7 +257,7 @@ module "other_addons" {
     var.addons.external_secrets_config,
     local.declare_cilium_startup_taint ? {
       values = concat(
-        try(var.addons.external_secrets_config.values, []),
+        var.addons.external_secrets_config.values,
         [yamlencode({ global = { tolerations = local.cilium_startup_taint_tolerations } })]
       )
     } : {}
