@@ -9,8 +9,8 @@ resource "kubectl_manifest" "eso_cluster_secret_store" {
       # sync their stack, env and cluster-wide secrets from the us-west-2 region.
       cluster_secret_store_name : "aws-secretsmanager",
       aws_region : "us-west-2",
-      service_account_name : local.external_secrets_config.service_account_name,
-      service_account_namespace : local.external_secrets_config.namespace,
+      service_account_name : var.addons.external_secrets_config.service_account_name,
+      service_account_namespace : var.addons.external_secrets_config.namespace,
     }
   )
 
@@ -29,8 +29,8 @@ resource "kubectl_manifest" "eso_cluster_secret_store_us_east_1" {
       # Additional secret store for the clusters deployed into us-east-1 region, primarily used by AI/ML team
       cluster_secret_store_name : "aws-secretsmanager-us-east-1",
       aws_region : "us-east-1",
-      service_account_name : local.external_secrets_config.service_account_name,
-      service_account_namespace : local.external_secrets_config.namespace,
+      service_account_name : var.addons.external_secrets_config.service_account_name,
+      service_account_namespace : var.addons.external_secrets_config.namespace,
     }
   )
 
