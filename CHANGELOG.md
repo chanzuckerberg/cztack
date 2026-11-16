@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.135.1](https://github.com/chanzuckerberg/cztack/compare/v0.135.0...v0.135.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* **eks:** preserve External Secrets config defaults ([#950](https://github.com/chanzuckerberg/cztack/issues/950)) ([485e2d1](https://github.com/chanzuckerberg/cztack/commit/485e2d13bb71c63b985795c334c7303d76fa9b34))
+
 ## [0.135.0](https://github.com/chanzuckerberg/cztack/compare/v0.134.0...v0.135.0) (2026-11-06)
 
 
