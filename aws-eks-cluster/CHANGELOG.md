@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.2.0...aws-eks-cluster-v9.2.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* **eks:** preserve External Secrets config defaults ([#950](https://github.com/chanzuckerberg/cztack/issues/950)) ([485e2d1](https://github.com/chanzuckerberg/cztack/commit/485e2d13bb71c63b985795c334c7303d76fa9b34))
+
 ## [9.2.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.1.0...aws-eks-cluster-v9.2.0) (2026-11-06)
 
 
