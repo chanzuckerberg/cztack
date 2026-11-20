@@ -19,6 +19,20 @@ resource "aws_vpc_endpoint" "s3_gateway" {
   tags = local.tags
 }
 
+resource "aws_vpc_endpoint" "s3express_gateway" {
+  count             = var.enable_s3express_gateway_endpoint ? 1 : 0
+  vpc_id            = module.vpc.vpc_id
+  service_name      = "com.amazonaws.${data.aws_region.current.name}.s3express"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids = concat(
+    module.vpc.private_route_table_ids,
+    module.vpc.public_route_table_ids,
+    module.vpc.database_route_table_ids,
+  )
+
+  tags = local.tags
+}
+
 resource "aws_vpc_endpoint" "dynamodb_gateway" {
   count             = var.enable_dynamodb_gateway_endpoint ? 1 : 0
   vpc_id            = module.vpc.vpc_id

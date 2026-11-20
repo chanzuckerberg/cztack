@@ -76,6 +76,12 @@ variable "enable_s3_gateway_endpoint" {
   default     = true
 }
 
+variable "enable_s3express_gateway_endpoint" {
+  description = "Create a free S3 Express Gateway VPC endpoint. Eliminates NAT gateway data processing charges for same-region S3 Express traffic."
+  type        = bool
+  default     = true
+}
+
 variable "enable_dynamodb_gateway_endpoint" {
   description = "Create a free DynamoDB Gateway VPC endpoint on private and database route tables. Eliminates NAT gateway data processing charges for same-region DynamoDB traffic."
   type        = bool
