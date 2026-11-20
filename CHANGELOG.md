@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.135.2](https://github.com/chanzuckerberg/cztack/compare/v0.135.1...v0.135.2) (2026-11-20)
+
+
+### Misc
+
+* **deps:** bump github.com/hashicorp/go-getter from 1.7.0 to 1.8.6 ([#952](https://github.com/chanzuckerberg/cztack/issues/952)) ([8affa84](https://github.com/chanzuckerberg/cztack/commit/8affa84f15696c0d96062ad3c556afa77da968c0))
+
 ## [0.135.1](https://github.com/chanzuckerberg/cztack/compare/v0.135.0...v0.135.1) (2026-11-16)
 
 
