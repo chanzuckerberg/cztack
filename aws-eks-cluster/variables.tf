@@ -350,3 +350,9 @@ variable "create_ec2_spot_service_linked_role" {
   description = "Whether to create the account-global AWSServiceRoleForEC2Spot service-linked role. Only one may exist per account, so set this to false on additional clusters that share an account with a cluster that already owns the role."
   default     = true
 }
+
+variable "enable_secrets_kms_key_rotation" {
+  type        = bool
+  description = "Whether to turn on AWS KMS automatic key rotation (yearly) for the KMS key that encrypts Kubernetes Secrets. Turning it on or off updates the key in place: the key ARN stays the same and KMS keeps earlier key material, so existing Secrets still decrypt."
+  default     = false
+}
