@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.135.3](https://github.com/chanzuckerberg/cztack/compare/v0.135.2...v0.135.3) (2026-11-20)
+
+
+### Bug Fixes
+
+* bump go-jose, klauspost/compress and grpc for Dependabot alerts ([#954](https://github.com/chanzuckerberg/cztack/issues/954)) ([80f5ec3](https://github.com/chanzuckerberg/cztack/commit/80f5ec379cff95dbbcb86fa40e18c41b532ec8c3))
+
+
+### Misc
+
+* **deps:** bump google.golang.org/grpc from 1.83.1 to 1.83.2 ([#956](https://github.com/chanzuckerberg/cztack/issues/956)) ([f1677c0](https://github.com/chanzuckerberg/cztack/commit/f1677c09df474b060a0d0235b6b6dd1c6da1272e))
+
 ## [0.135.2](https://github.com/chanzuckerberg/cztack/compare/v0.135.1...v0.135.2) (2026-11-20)
 
 
