@@ -128,7 +128,8 @@ locals {
 }
 
 resource "aws_kms_key" "secrets" {
-  description = "Key used to encrypt Kubernetes secrets for ${local.cluster_name}"
+  description         = "Key used to encrypt Kubernetes secrets for ${local.cluster_name}"
+  enable_key_rotation = var.enable_secrets_kms_key_rotation
 }
 
 data "aws_iam_policy_document" "secrets" {
