@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.3.0](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.2.1...aws-eks-cluster-v9.3.0) (2026-11-23)
+
+
+### Features
+
+* **aws-eks-cluster:** add opt-in rotation for the Secrets KMS key ([#957](https://github.com/chanzuckerberg/cztack/issues/957)) ([52f9d51](https://github.com/chanzuckerberg/cztack/commit/52f9d51a13bfa31da288002bbbe8989c9b51091c))
+
 ## [9.2.1](https://github.com/chanzuckerberg/cztack/compare/aws-eks-cluster-v9.2.0...aws-eks-cluster-v9.2.1) (2026-11-16)
 
 
