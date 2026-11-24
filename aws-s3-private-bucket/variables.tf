@@ -42,28 +42,9 @@ variable "abort_incomplete_multipart_upload_days" {
 }
 
 variable "lifecycle_rules" {
-  description = "List of maps containing configuration of object lifecycle management."
+  description = "Deprecated: lifecycle configuration is managed outside Terraform by the Nautilus S3 lifecycle management service, so new buckets get no rule from this module. List of maps containing configuration of object lifecycle management; pass rules only to keep managing an existing bucket's lifecycle in Terraform."
   type        = any
-  default = [
-    {
-      enabled = true
-
-      expiration = {
-        expired_object_delete_marker = true
-      }
-
-      noncurrent_version_transition = {
-        days          = 30
-        storage_class = "STANDARD_IA"
-      }
-
-      noncurrent_version_expiration = {
-        days = 365
-      }
-      # if abort_incomplete_multipart_upload_days is not specified in the rule, it will use var.abort_incomplete_multipart_upload_days for general cases
-      abort_incomplete_multipart_upload_days = 7
-    }
-  ]
+  default     = []
 }
 
 variable "cors_rules" {

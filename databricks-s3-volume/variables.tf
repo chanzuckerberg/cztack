@@ -272,3 +272,8 @@ variable "tags" {
     managedBy : string
   })
 }
+variable "lifecycle_rules" {
+  description = "Lifecycle rules for the buckets this module creates, passed to aws-s3-private-bucket. Defaults to none: the Nautilus S3 lifecycle management service manages lifecycle configuration."
+  type        = any
+  default     = []
+}
