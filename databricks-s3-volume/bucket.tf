@@ -114,4 +114,5 @@ module "databricks_bucket" {
   service          = var.tags["service"]
   owner            = var.tags["owner"]
   object_ownership = var.bucket_object_ownership
+  lifecycle_rules  = var.lifecycle_rules
 }
